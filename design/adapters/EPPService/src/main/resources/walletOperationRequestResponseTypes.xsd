@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletOperationRequestResponseTypes.xsd"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
+
+	<simpleType name="WalletOperationType">
+		<restriction base="string">
+			<enumeration value="createWallet" />
+			<enumeration value="addPaymentOption" />
+			<enumeration value="updatePaymentOption" />
+			<enumeration value="getWalletInfo" />
+			<enumeration value="removePaymentOption" />
+			<enumeration value="getPaypalToken" />
+			<enumeration value="addFromTransaction" />
+			<enumeration value="queryChannelPolicy" />
+			<enumeration value="validatePaymentOption" />
+			<enumeration value="checkNegativeList" />
+			<enumeration value="removeWallet" />
+		</restriction>
+	</simpleType>
+</schema>

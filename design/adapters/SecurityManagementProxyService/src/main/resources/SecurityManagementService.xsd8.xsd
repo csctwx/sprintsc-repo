@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/validateAccountPin/v1/validateAccountPin.xsd" targetNamespace="http://integration.sprint.com/interfaces/validateAccountPin/v1/validateAccountPin.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	
+<!--09/28/2010 Judy Kauffmann      1.0         Created New                                                                                                                GBL11.2   PJ004564-->
+	
+<!--11/22/2010  Judy Kauffmann 1.1  Removed action type indicator, changed response tag names.                                              GBL11.2 PJ004564-->
+	
+<!--12/10/2010  Judy Kauffmann  1.2  Corrected namespace to validateAccountPin/v1/validateAccountPin.xsd'                  GBL11.2  PJ004564-->
+	
+<!--01/24/2011  Judy Kauffmann   1.3  CS#443370  Changed taxId and ssn to OPTIONALl,removed individualLiableInd to resolve CSM issue.  GBL: 11.2  PJ004564-->
+	
+<!--05/10/2012  Ishita Biswas  1.4  Enahnced API for preapid brands (Virgin Mobile, Assurance Wireless and Boost)          GBL12.3  PJ007442-->
+	
+<xs:element name="validateAccountPin" type="tns:ValidateAccountPinType"/>
+	
+<xs:element name="validateAccountPinResponse" type="tns:ValidateAccountPinResponseType"/>
+	
+<xs:complexType name="ValidateAccountPinType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:InfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing customer information utilized in PIN validation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pin">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal Identification Number
+For postpaid, the length requirement is 6-10.
+For Boost, the length requirement is 4.
+For Virgin Mobile/Assurance Wireless, the length requirement is 6. Errors in pin length will be returned by the rules engine.
+</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:PersonalIdentificationNumberType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ValidateAccountPinResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="validationResultsList" type="tns:ValidationErrorListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure for validation error information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InfoType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number
+--Required for update PIN for existing account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="birthDate" type="tns:BirthDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date of Birth 
+--New accounts only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ssn" type="tns:SocialSecurityNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Social Security Number
+--New accounts only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax Identification Number --New accounts only.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:TaxIdentificationNumberType">
+						
+<xs:maxLength value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This represents the type of account.
+For Virgin Mobile customers, the accountType is ‘I’ and the accountSubType is ‘U’.
+For Assurance Wireless customers, the accountType is ‘I’ and the accountSubType is ‘K’.
+For Boost customers, the accountType is ‘I’ and the accountSubType is ‘C’.
+The API will assume a request for PIN validation of a postpaid account if this field is left blank.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account SubType code further categorizes the Billing Account within the context of the assigned Billing Account Type code used primarily for customer segmentation in General Ledger reporting and collection treatment.
+For Virgin Mobile customers, the accountType is ‘I’ and the accountSubType is ‘U’.
+For Assurance Wireless customers, the accountType is ‘I’ and the accountSubType is ‘K’.
+For Boost customers, the accountType is ‘I’ and the accountSubType is ‘C’.
+The API will assume a request for PIN validation of a postpaid account if this field is left blank.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ValidationErrorInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="resultCode" type="tns:ErrorMessageIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Result Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resultDescription" type="tns:ErrorMessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Result Text Description.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ValidationErrorListType">
+		
+<xs:sequence>
+			
+<xs:element name="validationResultsInfo" type="tns:ValidationErrorInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing error codes and error descriptions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BirthDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Birth Date contains the calendar month, day and year on which an Individual  was born.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Error Message Identifier uniquely identifies a specific error message from the system that encountered the error.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Error Message Text is a textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SocialSecurityNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Social Security number (SSN) is a 9-digit number issued to citizens, permanent residents, and temporary (working) residents under section 205(c)(2) of the Social Security Act, codified as 42 U.S.C.§ 405(c)(2). The number is issued to an individual by the Social Security Administration, an agency of the U.S. Federal Government. Its primary purpose is to track individuals for taxation purposes. In recent years the SSN has become a de facto national identification number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Identification Number is a Business Identification number issued by the Federal Government for tax purposes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account typeof the BILLING_QACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceShippingList/v1/queryReferenceShippingList.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceShippingList/v1/queryReferenceShippingList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                                                               Rel                    SR# -->
+	
+<!--09/21/2011   Tracy Turner           1.0 initial version                                                      				GBL12.1		      PJ004940-->
+	
+<!--03/11/2014	Suresh Gundu 	1.1	PJ012070.004	Added shippingZipCode	element to the request.	-->	
+	
+<xs:element name="queryReferenceShippingList" type="tns:QueryReferenceShippingListRequestType"/>
+	
+<xs:element name="queryReferenceShippingListResponse" type="tns:QueryReferenceShippingListResponseType"/>
+	
+<xs:complexType name="QueryReferenceShippingListRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="salesChannel" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingZipCode" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:minLength value="5"/>
+						
+<xs:maxLength value="5"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceShippingListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="shippingInfoList" type="tns:ShippingListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of reference shipping information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="shippingType" type="tns:ShippingVendorMethodCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Numeric code representing the unique shipping type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingVendor" type="tns:ShippingVendorShortNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Short description of the shipping vendor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingMethod">
+				
+<xs:annotation>
+					
+<xs:documentation>Name of the shipping method (short description).</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ShipmentMethodDescriptionType">
+						
+<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="shippingMethodDescription" type="tns:ShipmentMethodDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Long description of the shipping method.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingChargesInfoList" type="tns:ShippingChargesListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of shipping charges available for the shipping type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingListType">
+		
+<xs:sequence>
+			
+<xs:element name="shippingInfo" type="tns:ShippingInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Reference shipping information pertaining to the sale channel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingChargesInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="handsetQty" type="tns:TotalShippedQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of handsets being shipped.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingChargeAmount" type="tns:ChargeAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Charge amount for the shipping type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingCode" type="tns:ShipmentMethodCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Numeric code representing the unique shipping charge/type/method combination</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accessoryOnlyInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Accessories only indicator.  If true, only accessories can be shipped using this shipping type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingChargesListType">
+		
+<xs:sequence>
+			
+<xs:element name="shippingChargesInfo" type="tns:ShippingChargesInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Shipping charge information pertaining to the shipping type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="10"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShipmentMethodCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.
+
+Possible types:
+"Next Day Air"</xs:documentation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingVendorShortNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Vendor Short Name is the ecare short version of shipping vendor name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TotalShippedQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Total Shipped Quantity holds the number of items from this Order Item that have been shipped.                                                                  
+
+Total Shipped Quantity should be less than or equal to orderITemQuantity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="ShipmentMethodDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipment Method Description is common language text describing the method of shipping (ex."Next Day Air")</xs:documentation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="240"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingVendorMethodCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Vendor Method Code identifies the combination of vendor and method used to ship a package.
+Example:
+5 - UPS Ground
+</xs:documentation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

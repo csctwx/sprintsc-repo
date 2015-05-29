@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://integration.sprint.com/eai/services/SubscriberManagementService/v1/SubscriberManagementService.wsdl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/SubscriberManagementService/v1/SubscriberManagementService.wsdl">
+  <wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:schema>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd3.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd15.xsd" namespace="http://integration.sprint.com/interfaces/cancelSubscriber/v1/cancelSubscriber.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/createAndActivateSubscriber/v1/createAndActivateSubscriber.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/createSubscriberCharge/v1/createSubscriberCharge.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/manageSubscriberServices/v1/manageSubscriberServices.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd17.xsd" namespace="http://integration.sprint.com/interfaces/preAuthorizeOrder/v1/preAuthorizeOrder.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd16.xsd" namespace="http://integration.sprint.com/interfaces/releaseSubscriber/v1/releaseSubscriber.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd13.xsd" namespace="http://integration.sprint.com/interfaces/restoreSubscriber/v1/restoreSubscriber.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd14.xsd" namespace="http://integration.sprint.com/interfaces/submitEquipmentPurchaseOrder/v1/submitEquipmentPurchaseOrder.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/submitOrder/v1/submitOrder.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/suspendSubscriber/v1/suspendSubscriber.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/swapCsa/v1/swapCsa.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/swapSubscriberEquipment/v1/swapSubscriberEquipment.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/updateSubscriberDetails/v1/updateSubscriberDetails.xsd"/>
+      <xsd:import schemaLocation="SubscriberManagementService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/validateSubscriberList/v1/validateSubscriberList.xsd"/>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="cancelSubscriber">
+    <wsdl:part name="cancelSubscriber" element="xsns:cancelSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/cancelSubscriber/v1/cancelSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="cancelSubscriberResponse">
+    <wsdl:part name="cancelSubscriberResponse" element="xsns:cancelSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/cancelSubscriber/v1/cancelSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="createAndActivateSubscriber">
+    <wsdl:part name="createAndActivateSubscriber" element="xsns:createAndActivateSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/createAndActivateSubscriber/v1/createAndActivateSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="createAndActivateSubscriberResponse">
+    <wsdl:part name="createAndActivateSubscriberResponse" element="xsns:createAndActivateSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createAndActivateSubscriber/v1/createAndActivateSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="createSubscriberCharge">
+    <wsdl:part name="createSubscriberCharge" element="xsns:createSubscriberCharge" xmlns:xsns="http://integration.sprint.com/interfaces/createSubscriberCharge/v1/createSubscriberCharge.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="createSubscriberChargeResponse">
+    <wsdl:part name="createSubscriberChargeResponse" element="xsns:createSubscriberChargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createSubscriberCharge/v1/createSubscriberCharge.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="faultMessage">
+    <wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="manageSubscriberServices">
+    <wsdl:part name="parameters" element="xsns:manageSubscriberServices" xmlns:xsns="http://integration.sprint.com/interfaces/manageSubscriberServices/v1/manageSubscriberServices.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="manageSubscriberServicesResponse">
+    <wsdl:part name="parameters" element="xsns:manageSubscriberServicesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/manageSubscriberServices/v1/manageSubscriberServices.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="preAuthorizeOrder">
+    <wsdl:part name="preAuthorizeOrder" element="xsns:preAuthorizeOrder" xmlns:xsns="http://integration.sprint.com/interfaces/preAuthorizeOrder/v1/preAuthorizeOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="preAuthorizeOrderResponse">
+    <wsdl:part name="preAuthorizeOrderResponse" element="xsns:preAuthorizeOrderResponse" xmlns:xsns="http://integration.sprint.com/interfaces/preAuthorizeOrder/v1/preAuthorizeOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="releaseSubscriber">
+    <wsdl:part name="releaseSubscriber" element="xsns:releaseSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/releaseSubscriber/v1/releaseSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="releaseSubscriberResponse">
+    <wsdl:part name="releaseSubscriberResponse" element="xsns:releaseSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/releaseSubscriber/v1/releaseSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="restoreSubscriber">
+    <wsdl:part name="restoreSubscriber" element="xsns:restoreSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/restoreSubscriber/v1/restoreSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="restoreSubscriberResponse">
+    <wsdl:part name="restoreSubscriberResponse" element="xsns:restoreSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/restoreSubscriber/v1/restoreSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitEquipmentPurchaseOrderRequest">
+    <wsdl:part name="SubmitEquipmentPurchaseOrderRequest" element="xsns:submitEquipmentPurchaseOrder" xmlns:xsns="http://integration.sprint.com/interfaces/submitEquipmentPurchaseOrder/v1/submitEquipmentPurchaseOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitEquipmentPurchaseOrderResponse">
+    <wsdl:part name="SubmitEquipmentPurchaseOrderResponse" element="xsns:submitEquipmentPurchaseOrderResponse" xmlns:xsns="http://integration.sprint.com/interfaces/submitEquipmentPurchaseOrder/v1/submitEquipmentPurchaseOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="submitOrder_faultMsg">
+    <wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitOrderRequest">
+    <wsdl:part name="SubmitOrderRequest" element="xsns:submitOrder" xmlns:xsns="http://integration.sprint.com/interfaces/submitOrder/v1/submitOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="SubmitOrderResponse">
+    <wsdl:part name="SubmitOrderResponse" element="xsns:submitOrderResponse" xmlns:xsns="http://integration.sprint.com/interfaces/submitOrder/v1/submitOrder.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="suspendSubscriber">
+    <wsdl:part name="suspendSubscriber" element="xsns:suspendSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/suspendSubscriber/v1/suspendSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="suspendSubscriberResponse">
+    <wsdl:part name="suspendSubscriberResponse" element="xsns:suspendSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/suspendSubscriber/v1/suspendSubscriber.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="swapCsa">
+    <wsdl:part name="swapCsa" element="xsns:swapCsa" xmlns:xsns="http://integration.sprint.com/interfaces/swapCsa/v1/swapCsa.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="swapCsaResponse">
+    <wsdl:part name="swapCsaResponse" element="xsns:swapCsaResponse" xmlns:xsns="http://integration.sprint.com/interfaces/swapCsa/v1/swapCsa.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="swapSubscriberEquipment">
+    <wsdl:part name="parameters" element="xsns:swapSubscriberEquipment" xmlns:xsns="http://integration.sprint.com/interfaces/swapSubscriberEquipment/v1/swapSubscriberEquipment.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="swapSubscriberEquipmentResponse">
+    <wsdl:part name="parameters" element="xsns:swapSubscriberEquipmentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/swapSubscriberEquipment/v1/swapSubscriberEquipment.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="updateSubscriberDetails">
+    <wsdl:part name="parameters" element="xsns:updateSubscriberDetails" xmlns:xsns="http://integration.sprint.com/interfaces/updateSubscriberDetails/v1/updateSubscriberDetails.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="updateSubscriberDetailsResponse">
+    <wsdl:part name="parameters" element="xsns:updateSubscriberDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateSubscriberDetails/v1/updateSubscriberDetails.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="validateSubscriberList">
+    <wsdl:part name="validateSubscriberList" element="xsns:validateSubscriberList" xmlns:xsns="http://integration.sprint.com/interfaces/validateSubscriberList/v1/validateSubscriberList.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="validateSubscriberListResponse">
+    <wsdl:part name="validateSubscriberListResponse" element="xsns:validateSubscriberListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/validateSubscriberList/v1/validateSubscriberList.xsd"/>
+  </wsdl:message>
+  <wsdl:message name="wsMessageHeader">
+    <wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+  </wsdl:message>
+  <wsdl:portType name="SubscriberManagementServicePortType">
+    <wsdl:operation name="CancelSubscriber">
+      <wsdl:input name="CancelSubscriberRequest" message="ns0:cancelSubscriber"/>
+      <wsdl:output name="CancelSubscriberResponse" message="ns0:cancelSubscriberResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAndActivateSubscriber">
+      <wsdl:input name="CreateAndActivateSubscriberRequest" message="ns0:createAndActivateSubscriber"/>
+      <wsdl:output name="CreateAndActivateSubscriberResponse" message="ns0:createAndActivateSubscriberResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubscriberCharge">
+      <wsdl:input name="CreateSubscriberChargeRequest" message="ns0:createSubscriberCharge"/>
+      <wsdl:output name="CreateSubscriberChargeResponse" message="ns0:createSubscriberChargeResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ManageSubscriberServices">
+      <wsdl:input name="ManageSubscriberServicesRequest" message="ns0:manageSubscriberServices"/>
+      <wsdl:output name="ManageSubscriberServicesResponse" message="ns0:manageSubscriberServicesResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="PreAuthorizeOrder">
+      <wsdl:input name="PreAuthorizeOrderRequest" message="ns0:preAuthorizeOrder"/>
+      <wsdl:output name="PreAuthorizeOrderResponse" message="ns0:preAuthorizeOrderResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ReleaseSubscriber">
+      <wsdl:input name="ReleaseSubscriberRequest" message="ns0:releaseSubscriber"/>
+      <wsdl:output name="ReleaseSubscriberResponse" message="ns0:releaseSubscriberResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreSubscriber">
+      <wsdl:input name="RestoreSubscriberRequest" message="ns0:restoreSubscriber"/>
+      <wsdl:output name="RestoreSubscriberResponse" message="ns0:restoreSubscriberResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEquipmentPurchaseOrder">
+      <wsdl:input name="SubmitEquipmentPurchaseOrderRequest" message="ns0:SubmitEquipmentPurchaseOrderRequest"/>
+      <wsdl:output name="SubmitEquipmentPurchaseOrderResponse" message="ns0:SubmitEquipmentPurchaseOrderResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOrder">
+      <wsdl:input name="SubmitOrderRequest" message="ns0:SubmitOrderRequest"/>
+      <wsdl:output name="SubmitOrderResponse" message="ns0:SubmitOrderResponse"/>
+      <wsdl:fault name="fault" message="ns0:submitOrder_faultMsg"/>
+    </wsdl:operation>
+    <wsdl:operation name="SuspendSubscriber">
+      <wsdl:input name="SuspendSubscriberRequest" message="ns0:suspendSubscriber"/>
+      <wsdl:output name="SuspendSubscriberResponse" message="ns0:suspendSubscriberResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SwapCsa">
+      <wsdl:input name="SwapCsaRequest" message="ns0:swapCsa"/>
+      <wsdl:output name="SwapCsaResponse" message="ns0:swapCsaResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="SwapSubscriberEquipment">
+      <wsdl:input name="SwapSubscriberEquipmentRequest" message="ns0:swapSubscriberEquipment"/>
+      <wsdl:output name="SwapSubscriberEquipmentResponse" message="ns0:swapSubscriberEquipmentResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubscriberDetails">
+      <wsdl:input name="UpdateSubscriberDetailsRequest" message="ns0:updateSubscriberDetails"/>
+      <wsdl:output name="UpdateSubscriberDetailsResponse" message="ns0:updateSubscriberDetailsResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSubscriberList">
+      <wsdl:input name="ValidateSubscriberListRequest" message="ns0:validateSubscriberList"/>
+      <wsdl:output name="ValidateSubscriberListResponse" message="ns0:validateSubscriberListResponse"/>
+      <wsdl:fault name="fault" message="ns0:faultMessage"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SubscriberManagementServiceSOAPBinding" type="ns0:SubscriberManagementServicePortType">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="CancelSubscriber">
+      <soap11:operation soapAction="CancelSubscriber" style="document"/>
+      <wsdl:input name="CancelSubscriberRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CancelSubscriberResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateAndActivateSubscriber">
+      <soap11:operation soapAction="CreateAndActivateSubscriber" style="document"/>
+      <wsdl:input name="CreateAndActivateSubscriberRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateAndActivateSubscriberResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateSubscriberCharge">
+      <soap11:operation soapAction="CreateSubscriberCharge" style="document"/>
+      <wsdl:input name="CreateSubscriberChargeRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateSubscriberChargeResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ManageSubscriberServices">
+      <soap11:operation soapAction="manageSubscriberServices" style="document"/>
+      <wsdl:input name="ManageSubscriberServicesRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ManageSubscriberServicesResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PreAuthorizeOrder">
+      <soap11:operation soapAction="preAuthorizeOrder" style="document"/>
+      <wsdl:input name="PreAuthorizeOrderRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PreAuthorizeOrderResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ReleaseSubscriber">
+      <soap11:operation soapAction="ReleaseSubscriber" style="document"/>
+      <wsdl:input name="ReleaseSubscriberRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ReleaseSubscriberResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="RestoreSubscriber">
+      <soap11:operation soapAction="RestoreSubscriber" style="document"/>
+      <wsdl:input name="RestoreSubscriberRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RestoreSubscriberResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitEquipmentPurchaseOrder">
+      <soap11:operation soapAction="SubmitEquipmentPurchaseOrder" style="document"/>
+      <wsdl:input name="SubmitEquipmentPurchaseOrderRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SubmitEquipmentPurchaseOrderResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOrder">
+      <soap11:operation soapAction="submitOrder" style="document"/>
+      <wsdl:input name="SubmitOrderRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SubmitOrderResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SuspendSubscriber">
+      <soap11:operation soapAction="SuspendSubscriber" style="document"/>
+      <wsdl:input name="SuspendSubscriberRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SuspendSubscriberResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SwapCsa">
+      <soap11:operation soapAction="SwapCsa" style="document"/>
+      <wsdl:input name="SwapCsaRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SwapCsaResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SwapSubscriberEquipment">
+      <soap11:operation soapAction="swapSubscriberEquipment" style="document"/>
+      <wsdl:input name="SwapSubscriberEquipmentRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SwapSubscriberEquipmentResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSubscriberDetails">
+      <soap11:operation soapAction="updateSubscriberDetails" style="document"/>
+      <wsdl:input name="UpdateSubscriberDetailsRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateSubscriberDetailsResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateSubscriberList">
+      <soap11:operation soapAction="ValidateSubscriberList" style="document"/>
+      <wsdl:input name="ValidateSubscriberListRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ValidateSubscriberListResponse">
+        <soap11:body use="literal"/>
+        <soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="fault">
+        <soap11:fault name="fault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SubscriberManagementService">
+    <wsdl:port name="SubscriberManagementServicePortType" binding="ns0:SubscriberManagementServiceSOAPBinding">
+      <soap11:address location="http://144.226.135.45:80/services/SubscriberManagementService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

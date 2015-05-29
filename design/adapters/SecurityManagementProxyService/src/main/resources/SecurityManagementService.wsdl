@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/SecurityManagementService/v1/SecurityManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/SecurityManagementService/v1/SecurityManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="SecurityManagementService.xsd14.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd13.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/authenticateUserLogin/v1/authenticateUserLogin.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/isUserAuthorized/v1/isUserAuthorized.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/queryDetailedUserProfileByUsername/v1/queryDetailedUserProfileByUsername.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryNaiPasswordInfo/v1/queryNaiPasswordInfo.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryUserProfileInfoByPtn/v1/queryUserProfileInfoByPtn.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/resendSecurityInfo/v1/resendSecurityInfo.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/updateEmailPassword/v1/updateEmailPassword.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/updateNaiPasswordInfo/v1/updateNaiPasswordInfo.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/updateVoiceMailPasscode/v1/updateVoiceMailPasscode.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/validateAccountPin/v1/validateAccountPin.xsd"/>
+<xsd:import schemaLocation="SecurityManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/validateAtlasLogin/v1/validateAtlasLogin.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="authenticateUserLogin">
+<wsdl:part name="parameter" element="xsns:authenticateUserLogin" xmlns:xsns="http://integration.sprint.com/interfaces/authenticateUserLogin/v1/authenticateUserLogin.xsd"/></wsdl:message>
+<wsdl:message name="authenticateUserLoginResponse">
+<wsdl:part name="parameter" element="xsns:authenticateUserLoginResponse" xmlns:xsns="http://integration.sprint.com/interfaces/authenticateUserLogin/v1/authenticateUserLogin.xsd"/></wsdl:message>
+<wsdl:message name="isUserAuthorized">
+<wsdl:part name="parameter" element="xsns:isUserAuthorized" xmlns:xsns="http://integration.sprint.com/interfaces/isUserAuthorized/v1/isUserAuthorized.xsd"/></wsdl:message>
+<wsdl:message name="isUserAuthorizedResponse">
+<wsdl:part name="parameter" element="xsns:isUserAuthorizedResponse" xmlns:xsns="http://integration.sprint.com/interfaces/isUserAuthorized/v1/isUserAuthorized.xsd"/></wsdl:message>
+<wsdl:message name="queryDetailedUserProfileByUsername">
+<wsdl:part name="parameter" element="xsns:queryDetailedUserProfileByUsername" xmlns:xsns="http://integration.sprint.com/interfaces/queryDetailedUserProfileByUsername/v1/queryDetailedUserProfileByUsername.xsd"/></wsdl:message>
+<wsdl:message name="queryDetailedUserProfileByUsernameResponse">
+<wsdl:part name="parameter" element="xsns:queryDetailedUserProfileByUsernameResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryDetailedUserProfileByUsername/v1/queryDetailedUserProfileByUsername.xsd"/></wsdl:message>
+<wsdl:message name="queryNaiPasswordInfo">
+<wsdl:part name="parameter" element="xsns:queryNaiPasswordInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryNaiPasswordInfo/v1/queryNaiPasswordInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryNaiPasswordInfoResponse">
+<wsdl:part name="parameter" element="xsns:queryNaiPasswordInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryNaiPasswordInfo/v1/queryNaiPasswordInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryUserProfileInfoByPtn">
+<wsdl:part name="parameter" element="xsns:queryUserProfileInfoByPtn" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserProfileInfoByPtn/v1/queryUserProfileInfoByPtn.xsd"/></wsdl:message>
+<wsdl:message name="queryUserProfileInfoByPtnResponse">
+<wsdl:part name="parameter" element="xsns:queryUserProfileInfoByPtnResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserProfileInfoByPtn/v1/queryUserProfileInfoByPtn.xsd"/></wsdl:message>
+<wsdl:message name="resendSecurityInfo">
+<wsdl:part name="parameter" element="xsns:resendSecurityInfo" xmlns:xsns="http://integration.sprint.com/interfaces/resendSecurityInfo/v1/resendSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="resendSecurityInfoResponse">
+<wsdl:part name="parameter" element="xsns:resendSecurityInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/resendSecurityInfo/v1/resendSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="SoapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="updateEmailPassword">
+<wsdl:part name="parameter" element="xsns:updateEmailPassword" xmlns:xsns="http://integration.sprint.com/interfaces/updateEmailPassword/v1/updateEmailPassword.xsd"/></wsdl:message>
+<wsdl:message name="updateEmailPasswordResponse">
+<wsdl:part name="parameter" element="xsns:updateEmailPasswordResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateEmailPassword/v1/updateEmailPassword.xsd"/></wsdl:message>
+<wsdl:message name="updateNaiPasswordInfo">
+<wsdl:part name="parameter" element="xsns:updateNaiPasswordInfo" xmlns:xsns="http://integration.sprint.com/interfaces/updateNaiPasswordInfo/v1/updateNaiPasswordInfo.xsd"/></wsdl:message>
+<wsdl:message name="updateNaiPasswordInfoResponse">
+<wsdl:part name="parameter" element="xsns:updateNaiPasswordInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateNaiPasswordInfo/v1/updateNaiPasswordInfo.xsd"/></wsdl:message>
+<wsdl:message name="updateVoiceMailPasscodeRequest">
+<wsdl:part name="parameter" element="xsns:updateVoiceMailPasscode" xmlns:xsns="http://integration.sprint.com/interfaces/updateVoiceMailPasscode/v1/updateVoiceMailPasscode.xsd"/></wsdl:message>
+<wsdl:message name="updateVoiceMailPasscodeResponse">
+<wsdl:part name="parameter" element="xsns:updateVoiceMailPasscodeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateVoiceMailPasscode/v1/updateVoiceMailPasscode.xsd"/></wsdl:message>
+<wsdl:message name="validateAccountPin">
+<wsdl:part name="parameter" element="xsns:validateAccountPin" xmlns:xsns="http://integration.sprint.com/interfaces/validateAccountPin/v1/validateAccountPin.xsd"/></wsdl:message>
+<wsdl:message name="validateAccountPinResponse">
+<wsdl:part name="parameter" element="xsns:validateAccountPinResponse" xmlns:xsns="http://integration.sprint.com/interfaces/validateAccountPin/v1/validateAccountPin.xsd"/></wsdl:message>
+<wsdl:message name="validateAtlasLogin">
+<wsdl:part name="parameter" element="xsns:validateAtlasLogin" xmlns:xsns="http://integration.sprint.com/interfaces/validateAtlasLogin/v1/validateAtlasLogin.xsd"/></wsdl:message>
+<wsdl:message name="validateAtlasLoginResponse">
+<wsdl:part name="parameter" element="xsns:validateAtlasLoginResponse" xmlns:xsns="http://integration.sprint.com/interfaces/validateAtlasLogin/v1/validateAtlasLogin.xsd"/></wsdl:message>
+<wsdl:message name="WSMessageHeader">
+<wsdl:part name="header" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="SecurityManagementServicePortType">
+<wsdl:operation name="AuthenticateUserLogin">
+<wsdl:input name="AuthenticateUserLoginRequest" message="ns0:authenticateUserLogin"/>
+<wsdl:output name="AuthenticateUserLoginResponse" message="ns0:authenticateUserLoginResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="IsUserAuthorized">
+<wsdl:input name="IsUserAuthorizedRequest" message="ns0:isUserAuthorized"/>
+<wsdl:output name="IsUserAuthorizedResponse" message="ns0:isUserAuthorizedResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="QueryDetailedUserProfileByUsername">
+<wsdl:input name="QueryDetailedUserProfileByUsernameRequest" message="ns0:queryDetailedUserProfileByUsername"/>
+<wsdl:output name="QueryDetailedUserProfileByUsernameResponse" message="ns0:queryDetailedUserProfileByUsernameResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="QueryNaiPasswordInfo">
+<wsdl:input name="QueryNaiPasswordInfoRequest" message="ns0:queryNaiPasswordInfo"/>
+<wsdl:output name="QueryNaiPasswordInfoResponse" message="ns0:queryNaiPasswordInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="QueryUserProfileInfoByPtn">
+<wsdl:input name="QueryUserProfileInfoByPtnRequest" message="ns0:queryUserProfileInfoByPtn"/>
+<wsdl:output name="QueryUserProfileInfoByPtnResponse" message="ns0:queryUserProfileInfoByPtnResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="ResendSecurityInfo">
+<wsdl:input name="ResendSecurityInfoRequest" message="ns0:resendSecurityInfo"/>
+<wsdl:output name="ResendSecurityInfoResponse" message="ns0:resendSecurityInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateEmailPassword">
+<wsdl:input name="UpdateEmailPasswordRequest" message="ns0:updateEmailPassword"/>
+<wsdl:output name="UpdateEmailPasswordResponse" message="ns0:updateEmailPasswordResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateNaiPasswordInfo">
+<wsdl:input name="UpdateNaiPasswordInfoRequest" message="ns0:updateNaiPasswordInfo"/>
+<wsdl:output name="UpdateNaiPasswordInfoResponse" message="ns0:updateNaiPasswordInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateVoiceMailPasscode">
+<wsdl:input name="UpdateVoiceMailPasscodeRequest" message="ns0:updateVoiceMailPasscodeRequest"/>
+<wsdl:output name="UpdateVoiceMailPasscodeResponse" message="ns0:updateVoiceMailPasscodeResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="validateAccountPin">
+<wsdl:input name="validateAccountPinRequest" message="ns0:validateAccountPin"/>
+<wsdl:output name="validateAccountPinResponse" message="ns0:validateAccountPinResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation>
+<wsdl:operation name="ValidateAtlasLogin">
+<wsdl:input name="ValidateAtlasLoginRequest" message="ns0:validateAtlasLogin"/>
+<wsdl:output name="ValidateAtlasLoginResponse" message="ns0:validateAtlasLoginResponse"/>
+<wsdl:fault name="fault" message="ns0:SoapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="SecurityManagementServiceBinding" type="ns0:SecurityManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="AuthenticateUserLogin">
+<soap11:operation soapAction="AuthenticateUserLogin" style="document"/>
+<wsdl:input name="AuthenticateUserLoginRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="AuthenticateUserLoginResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="IsUserAuthorized">
+<soap11:operation soapAction="IsUserAuthorized" style="document"/>
+<wsdl:input name="IsUserAuthorizedRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="IsUserAuthorizedResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryDetailedUserProfileByUsername">
+<soap11:operation soapAction="QueryDetailedUserProfileByUsername" style="document"/>
+<wsdl:input name="QueryDetailedUserProfileByUsernameRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="QueryDetailedUserProfileByUsernameResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryNaiPasswordInfo">
+<soap11:operation soapAction="QueryNaiPasswordInfo" style="document"/>
+<wsdl:input name="QueryNaiPasswordInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="QueryNaiPasswordInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryUserProfileInfoByPtn">
+<soap11:operation soapAction="QueryUserProfileInfoByPtn" style="document"/>
+<wsdl:input name="QueryUserProfileInfoByPtnRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="QueryUserProfileInfoByPtnResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ResendSecurityInfo">
+<soap11:operation soapAction="ResendSecurityInfo" style="document"/>
+<wsdl:input name="ResendSecurityInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="ResendSecurityInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateEmailPassword">
+<soap11:operation soapAction="UpdateEmailPassword" style="document"/>
+<wsdl:input name="UpdateEmailPasswordRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateEmailPasswordResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateNaiPasswordInfo">
+<soap11:operation soapAction="UpdateNaiPasswordInfo" style="document"/>
+<wsdl:input name="UpdateNaiPasswordInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateNaiPasswordInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateVoiceMailPasscode">
+<soap11:operation soapAction="urn:#updateVoiceMailPasscode" style="document"/>
+<wsdl:input name="UpdateVoiceMailPasscodeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateVoiceMailPasscodeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="validateAccountPin">
+<soap11:operation soapAction="ValidateAccountPin" style="document"/>
+<wsdl:input name="validateAccountPinRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="validateAccountPinResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ValidateAtlasLogin">
+<soap11:operation soapAction="ValidateAtlasLogin" style="document"/>
+<wsdl:input name="ValidateAtlasLoginRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:input>
+<wsdl:output name="ValidateAtlasLoginResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WSMessageHeader" part="header" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="SecurityManagementService">
+<wsdl:port name="SecurityManagementServicePortType" binding="ns0:SecurityManagementServiceBinding">
+<soap11:address location="http://144.226.135.45:80/services/SecurityManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

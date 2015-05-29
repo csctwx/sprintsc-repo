@@ -1,0 +1,2064 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 rel. 2 (x64) (http://www.altova.com) by Adon Powell (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/validateAccountInfo/v1/validateAccountInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/validateAccountInfo/v1/validateAccountInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.10">
+	<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	<!--08/10/2011    Aline Kawakami           0.1         Created first version of validationAccountInfo API                                       GBL11.4           PJ4940 Chapter 16            -->
+	<!--08/20/2012    Tracy Turner         1.0       Updated wrapper schema to match backend application schema changes           GBL12.3 PJ007526       -->
+	<!--06/11/2013    Azenith Benig         1.1     Updated wrapper schema to match backend application schema changes (cont)         GBL13.3 PJ007526       -->
+	<!--09/04/2013    Phani Varanasi      1.2     Updated wrapper schema and pointed CallingAppInfo to common XSD         		GBL13.3 		PJ007526   -->
+	<!--10/16/2013    Phani Varanasi      1.3     Modified to remove BigDecimal reference 			         		GBL13.3 		PJ007526   -->
+	<!--01/16/2014    Ishita Biswas 	     1.4     Removed callingAppInfo reference                                                                                          MID14.2.1     PJ007526   -->
+	<!--01/16/2014    Ishita Biswas 	     1.5     Removed import of ovmeks-common xsd                                                                                 MID14.2.1     PJ007526   -->
+	<!--02/01/2014    Ishita Biswas 	     1.6    Applied EAI xsd standards, removed enumerations, removed iDEN fields                                MID14.2.1     PJ007526   -->
+	<!--02/10/2014    Ishita Biswas 	     1.7    Removed  installment billing and  student loan related fields                                                     MID14.2.1     PJ007526   -->
+	<!--02/13/2014    Adon Powell           1.7    Standardize                                                                                                                               MID14.2.1     PJ007526   -->
+	<!--02/11/2014    Ishita Biswas 	     1.8    Corrected the examples in the simpleType definitions                                                              MID14.2.1     PJ007526   -->
+	<!--11/03/2014    Sujatha Gunapalan 1.9  Added new rebateplanlist and elements rebatePlanCode, rebatePlanDesc, contractTerm        MID 15.1.1 PJ012336 Epic 89 SMSP -->
+	<!--12/03/2014    Tracy Turner          1.10  Added new optional element checkLoanEligibilityInd to the request, add subscriberinfo structure: loanExistInd, leaseExistInd, studentLineInd, framilyId, loanInfo, giveBackInd  MID 15.1.1  PJ012336-->
+	<!--12/03/2014    Adon Powell           1.10   Standardize                                                                                                                                MID 15.1.1   PJ012336-->
+	<!---->
+	<xs:element name="validateAccountInfo" type="tns:ValidateAccountInfoRequestType"/>
+	<xs:element name="validateAccountInfoResponse" type="tns:ValidateAccountInfoResponseType"/>
+	<!---->
+	<xs:complexType name="ValidateAccountInfoRequestType">
+		<xs:sequence>
+			<xs:element name="accountInfo" type="tns:AccountInfoType">
+				<xs:annotation>
+					<xs:documentation>This structure contains customer’s  account information required as searchCriteria for this API</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="singleSubscriberInd" type="tns:FetchInformationFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This flag indicates rather API should return only associated subscriber data in the response. This flag is used in conjunction with reference-ptn, sim, meid fields. (under accountInfo structure)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="authenticationInfo" type="tns:AuthenticationInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This structure contains information for authenticating the customer’s credentials</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestedDeviceList" type="tns:RequestedDeviceListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For customers requesting the available pricing for  select phone models. Returns up to 5 modelIds.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="returnBogxInd" type="tns:FetchInformationFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This flag indicates rather Bogx info should be returned or not in the response.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="upgradeDeviceInfo" type="tns:UpgradeDeviceInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information about the upgrade device (when applicable) If this is provided along with subscriber identifier OVM will validate if there is a need for plan change with the device swap</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchRebateInfoInd" type="tns:FetchInformationFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates 'true' if the rebate plan info to be fetched in the reponse</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="checkLoanEligibilityInd" type="tns:ProcessRequiredFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if check loan eligibility needs to be performed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateAccountInfoResponseType">
+		<xs:sequence>
+			<xs:element name="accountStatus" type="tns:BillingAccountStatusCodeType">
+				<xs:annotation>
+					<xs:documentation>Status of account, valid values include: ACTIVE, TENTATIVE, CLOSED, CANCELLED, and SUSPENDED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountStatusDate" type="tns:BillingAccountStatusEffectiveFromDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date that the account status last changed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ban" type="tns:AccountNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Sprint Nextel account number.
+Pattern: \d{1,10}</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="numberOfHandsetsApproved" type="tns:AllowedHandsetQuantityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of handsets approved on the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountSubscribertInfo" type="tns:AccountSubscriberInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains Account Information details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingNameInfo" type="tns:BillingNameInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains Customer’s billing name details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAddressInfo" type="tns:BillingAddressType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountBalance" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account Balance
+For Boost vendor only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentDueDate" type="tns:PaymentDueDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment Due Date
+For Boost vendor only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="balanceExpirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Balance Expiration Date
+For Boost vendor only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="advancePaymentInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if 
+For Boost vendor only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccountInfoType">
+		<xs:choice>
+			<xs:element name="ban" type="tns:BillingAccountNumberType">
+				<xs:annotation>
+					<xs:documentation>The Billing Account Number.  Required if the referenceMdn is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>Sprint-Nextel cell phone number of the customer.  Required if the accountNumber is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:SubscriberDeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>Customer’s handset ESN number from their CDMA device. Required if the accountNumber, referenceMdn, or simId is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="macId" type="tns:MediumAccessControlAddressType">
+				<xs:annotation>
+					<xs:documentation>Customer’s handset MAC-ID number from their Airave device. Required if the accountNumber, referenceMdn, meidId or simId is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="iccId" type="tns:UniversalIntegratedCircuitCardIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Integrated Circuit Card Identifier is a unique identifier of the smart card used in mobile terminals in CDMA networks.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="AccountSubscriberInfoType">
+		<xs:sequence>
+			<xs:element name="currentNumberOfSubscribers" type="tns:SubscriberCountType">
+				<xs:annotation>
+					<xs:documentation>Number of subscribers on the associated account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberList" type="tns:SubscriberListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains subscriber information details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowedLoanCount" type="tns:LoanCountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the allowed loans on the given account (Max allowed - Open loans). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="studentLineMaxLimit" type="tns:LineQuantityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>maximum Student line allowed in the account. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loanEligibilityInd" type="tns:EligibilityFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates loan eligibility of the account </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddOnSocInfoType">
+		<xs:sequence>
+			<xs:element name="optionName" type="tns:OptionNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer friendly name of the associated feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="optionCode" type="tns:OptionCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Service offer code representing the add on option.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="optionPrice" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Option price</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddOnSocListType">
+		<xs:sequence>
+			<!-- addOnSocInfo needs to be an exact match for queryAvailablePlansResponse.addOnSocList.addOnSocInfo, they point to the same OVM common structure / fields-->
+			<xs:element name="addOnSocInfo" type="tns:AddOnSocInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>contains add on soc (options) details for each subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AuthenticationInfoType">
+		<xs:sequence>
+			<xs:element name="secPin" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer’s security pin number. Optionally used in conjunction with reference-ptn, sim, meid to return only associated subscriber data in the response.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:PersonalIdentificationNumberType">
+						<xs:minLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="secAnswer" type="tns:SecurityAnswerType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer’s security answer. Optionally provided if response is shown before customer has been authenticated and doesn’t know PIN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerIdentificationInfo" type="tns:CustomerIdentificationInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This structure contains customer’s  SSN or TAX ID information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer’s billing last name on account can be optionally provided</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:LastNameType">
+						<xs:minLength value="2"/>
+						<xs:maxLength value="50"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="serviceAreaZipInfo" type="tns:ServiceAreaZipInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer’s billing zip code on account can be optionally provided in order to provide rebate eligibility online in conjunction with phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillingAddressType">
+		<xs:sequence>
+			<xs:element name="streetAddress1" type="tns:PostalAddressLine1Type"/>
+			<xs:element name="streetAddress2" type="tns:PostalAddressLine2Type" minOccurs="0"/>
+			<xs:element name="city" type="tns:CityNameType"/>
+			<xs:element name="stateCode" type="tns:UspsStateAbbreviationType"/>
+			<xs:element name="zipCode" type="tns:UspsPostalCodeType">
+				<xs:annotation>
+					<xs:documentation>Zip code of service area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip4Code" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zip extension code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillingNameInfoType">
+		<xs:sequence>
+			<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First customer’s name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastBusinessName" type="tns:LastNameType">
+				<xs:annotation>
+					<xs:documentation>Last business name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalTitle" type="tns:AdditionalTitleType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer’s additional title. Example: Mr, Mrs, Ms</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BundleInfoType">
+		<xs:sequence>
+			<xs:element name="bundleType" type="tns:PrimarySecondaryTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates the type of bundle the associated price plan is: primary or secondary. Values: P, S</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bundleGroupList" type="tns:BundleGroupListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List of bundle group numbers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BundleGroupInfoType">
+		<xs:sequence>
+			<xs:element name="bundleGroupNumber" type="tns:BundleIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Indicates which group or groups the bundle price plan is associated with.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BundleGroupListType">
+		<xs:sequence>
+			<xs:element name="bundleGroupInfo" type="tns:BundleGroupInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurrentEligibilityInfoType">
+		<xs:sequence>
+			<xs:element name="eligibilityDescription" type="tns:EligibilityStatementDescriptionType">
+				<xs:annotation>
+					<xs:documentation>Describes current eligibility if eligible = true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurrentEligibilityListType">
+		<xs:sequence>
+			<xs:element name="currentEligibilityInfo" type="tns:CurrentEligibilityInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that provides eligibility description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerIdentificationInfoType">
+		<xs:choice>
+			<xs:element name="ssn" type="tns:SsnLast4DigitsType">
+				<xs:annotation>
+					<xs:documentation>This is the customer’s last four digits of their ssn if they are a consumer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="federalTaxId" type="tns:TaxIdentificationNumberLast4DigitsType">
+				<xs:annotation>
+					<xs:documentation>This is the customer’s last four digits of their tax id if they are a business.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="DataAllowanceInfoType">
+		<xs:sequence>
+			<xs:element name="dataAllowanceType" type="tns:AllowanceTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Type of allowance</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataAllowance" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Subscriber allowance quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DataAllowanceListType">
+		<xs:sequence>
+			<xs:element name="dataAllowanceInfo" type="tns:DataAllowanceInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Data Allowance Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DevicePricingInfoType">
+		<xs:sequence>
+			<xs:element name="itemId" type="tns:ModelNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Model identifier of the  device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modelPrice" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Device price</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractTerm" type="tns:NumberOfContractMonthsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contract commitment required for associated model price</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DevicePricingListType">
+		<xs:sequence>
+			<xs:element name="subscriberDevicePricingInfo" type="tns:DevicePricingInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that provides Device Pricing details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EligibleTierInfoType">
+		<xs:sequence>
+			<xs:element name="eligibleTierDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date that subscriber becomes eligible for associated tier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleTierLevel" type="tns:TierLevelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies subscriber tier level for commissioning purposes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EligibleTierListType">
+		<xs:sequence>
+			<xs:element name="eligibleTierInfo" type="tns:EligibleTierInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that describes eligible Tier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EquipmentGroupInfoType">
+		<xs:sequence>
+			<xs:element name="groupDescription" type="tns:BuyOneGetManyEquipmentGroupDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Group Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="groupId" type="tns:BuyOneGetManyEquipmentGroupIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Group ID (will return if a group is defined and not just a unique item)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemList" type="tns:ItemInfoListType">
+				<xs:annotation>
+					<xs:documentation>List of item information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="action" type="tns:BuyOneGetManyActionTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>B - Buy; G - Get </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quantity" type="tns:OfferItemQuantityType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of items to purchase </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerLineCode" type="tns:OfferLineItemIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The offer line code </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="price">
+				<xs:annotation>
+					<xs:documentation>Net BOGX Price </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:PriceAmountType">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="additionalDiscount" type="tns:DiscountAmountType">
+				<xs:annotation>
+					<xs:documentation>The additional discount defined in EQUIPMENT_OFFER_PRICING table </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commitmentTerm" type="tns:CommitmentPeriodMonthQuantityType">
+				<xs:annotation>
+					<xs:documentation>Commitment term in months. Zero for no commitment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subGroup" type="tns:EquipmentSubGroupCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A sub group is a pairing of multiple entries in the EQP_OFFER_PRICING table which are part of a logical group within a Flexible Mix and Match offer.  Each item or group in the sub group can have a different price. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subGroupQuantity" type="tns:EquipmentSubgroupItemCountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment sub group quantity </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buyPrice">
+				<xs:annotation>
+					<xs:documentation>The buy price is price+additionalDiscount</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:PriceAmountType">
+						<xs:totalDigits value="9"/>
+						<xs:fractionDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EquipmentGroupListType">
+		<xs:sequence>
+			<xs:element name="equipmentGroupInfo" type="tns:EquipmentGroupInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>BOGX equipment group information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FutureDatedInfoType">
+		<xs:sequence>
+			<xs:element name="pendingFutureDatedSoc" type="tns:ServiceOrderCodeTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of SOC</xs:documentation>
+				</xs:annotation>
+				<!-- Tag to indicate whether the subscriber has Future Dated SOCs pending-->
+			</xs:element>
+			<xs:element name="futureDatedSocName" type="tns:ServiceOrderDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Future plan’s name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="futureDatedSocCode" type="tns:ServiceOrderDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Future plan’s code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FutureDatedListType">
+		<xs:sequence>
+			<xs:element name="futureDatedSocInfo" type="tns:FutureDatedInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Future Dated Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemInfoType">
+		<xs:sequence>
+			<xs:element name="itemId" type="tns:EquipmentItemIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Item ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemDescription" type="tns:EquipmentItemDescriptionType">
+				<xs:annotation>
+					<xs:documentation>Item Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="srp" type="tns:ItemRetailPriceType">
+				<xs:annotation>
+					<xs:documentation>Suggested Retail price</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemInfoListType">
+		<xs:sequence>
+			<xs:element name="itemInfo" type="tns:ItemInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Item Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RequestedDeviceInfoType">
+		<xs:sequence>
+			<xs:element name="itemId" type="tns:ModelNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Model identifier of the  device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RequestedDeviceListType">
+		<xs:sequence>
+			<xs:element name="requestedDeviceInfo" type="tns:RequestedDeviceInfoType" minOccurs="0" maxOccurs="5">
+				<xs:annotation>
+					<xs:documentation>Requested Device Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceDiscountInfoType">
+		<xs:choice>
+			<xs:element name="planDiscountInfo">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:PlanDiscountInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="optionDiscountInfo">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:OptionDiscountInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ServiceDiscountListType">
+		<xs:sequence>
+			<xs:element name="serviceDiscountInfo" type="tns:ServiceDiscountInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that contains subscriber’s eligible discount details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RebateBogxPlanInfoType">
+		<xs:sequence>
+			<xs:element name="offerCode" type="tns:OfferCodeType">
+				<xs:annotation>
+					<xs:documentation>BOGX offer ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerDescription" type="tns:OfferDescriptionType">
+				<xs:annotation>
+					<xs:documentation>BOGX offer Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				<xs:annotation>
+					<xs:documentation>Offer effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Offer expiration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="buyQuantity" type="tns:OfferItemQuantityType">
+				<xs:annotation>
+					<xs:documentation>Deduction of the number of times the BAN already purchased a buy item of the offer from the offer limit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="getQuantity" type="tns:OfferItemQuantityType">
+				<xs:annotation>
+					<xs:documentation>Deduction of the number of times the BAN already purchased a get item of the offer from the offer limit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerEquipmentType" type="tns:OfferEquipmentTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Type of equipment. H – Offer will contain Handsets only. A – Offer will contain Accessories only. M – Offer will contain Handsets/Accessories</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ignoreUfpInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>true – ignore UFP 
+false – do not ignore UFP
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="limit" type="tns:ThresholdLimitQuantityType">
+				<xs:annotation>
+					<xs:documentation>How many times the BAN is allowed to take the offer (the offer limit minus the number of times the BAN already purchased the offer)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipmentGroupList" type="tns:EquipmentGroupListType">
+				<xs:annotation>
+					<xs:documentation>List of BOGX equipment group information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="flexibleMixMatchInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>true - compare price of the buy item is greater than get item in the bogx offer           false -price comparision is not needed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RebateBogxInfoType">
+		<xs:sequence>
+			<xs:element name="rebateBogxInfo" type="tns:RebateBogxPlanInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that contains information of Rebate BOGX Plans.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RebateBogxListType">
+		<xs:sequence>
+			<xs:element name="rebateBogxPlanInfo" type="tns:RebateBogxPlanInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Structure that contains information of Rebate BOGX Plans.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceAreaZipInfoType">
+		<xs:sequence>
+			<xs:element name="zipCode" type="tns:UspsPostalCodeType">
+				<xs:annotation>
+					<xs:documentation>Zip code of service area.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip4Code" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Zip extension code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberInfoType">
+		<xs:sequence>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanCode" type="tns:PricePlanCodeType">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s price plan code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanName" type="tns:PricePlanNameType">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s price plan name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanPrice" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s price plan monthly recurring charge</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planType" type="tns:SpecialProgramTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies whether subscriber’s current price plan is a family plan (fam) or an individual plan (ind)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="legacyFamilyPlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the plan is a legacy family plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hasFuturePlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the account has a future dated price plan associated with it</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bundleInfo" type="tns:BundleInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bundling information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ltsRank" type="tns:LinesToShareRankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For certain family plans, the subscriber’s rank indicates the MRC price point</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sharingGroupId" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="familyGroup" type="tns:LinesToShareGroupIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Distinguishes unique family share groups within an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialType" type="tns:DeviceSerialNumberTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s current device serial type. Valid values
+E = CDMA Handset 
+D = Handset Kit for Dual Mode
+K = IDEN Handset Kit (model #)
+S = Stand-Alone SIM
+M = Stand-Alone Handset (only for handsets which need SIM but dont have as part of this SKU)
+I = IMEI Handset (no need for SIM)
+N = Serialized Accessory (other than SIMs)
+Note: EAI lists a different set of values:
+A – MAC ID
+E – ESN
+I – IMEI
+M – MSN
+S – SIM
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Any ESN/MEID activated on a subscriber. ESN/MEID can be either decimal or hexadecimal format</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:DeviceSerialNumberType">
+						<xs:maxLength value="18"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="iccId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Any ICCID activated on a subscriber. </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="itemId">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s device sku</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:StockKeepingUnitType">
+						<xs:maxLength value="15"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="phoneName" type="tns:ModelNameType">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s device name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdnStatus" type="tns:SubscriberResourceStatusCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates subscriber’s status, valid values include: ACTIVE, CANCELLED, RESERVED, and SUSPENDED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdnStatusDate" type="tns:SubscriptionStatusChangeDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates last change in subscriber’s status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdnPortOutInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether subscriber’s has pending port out flag on the subscription</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="initialActivationDate" type="tns:NetworkAccessActivationFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Initial activation date of associated subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="emailAddress" type="tns:EmailAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s email address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multiVbsSocInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true indicates the subscriber is eligible for multiple services in service-discount structure, false indicates the subscriber is eligible for one service in service-discount structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceDiscountList" type="tns:ServiceDiscountListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains subscriber’s eligible discount details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractStartDate" type="tns:ContractEffectiveDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s applicable contract starting date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractEndDate" type="tns:ContractEndDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s applicable contract ending date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="handsetActivationDate" type="tns:NetworkAccessActivationFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber’s currently active device activation date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="upgradeInfo" type="tns:UpgradeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains upgrade information details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planChangeRequiredInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If brand-type selected in the Credit Check Request does not match subscriber’s current device then value will = true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="existingCommittedOrderInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates that associated subscriber has another active transaction (true) that must be completed before performing another transaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addOnSocList" type="tns:AddOnSocListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains add on soc (options) details for each subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataAllowancesList" type="tns:DataAllowanceListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List of 0 to many data allowances</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleCheckErrorInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Returned when rebateEligibility API was called and had error calling it returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rebateBogxList" type="tns:RebateBogxInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains rebate bogx details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="futureDatedSocList" type="tns:FutureDatedListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List of 0 to many future dated features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="musMilestoneLevel" type="tns:MonthlyUnlimitedShrinkageMilestoneLevelIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Milestone Level is the means by which (a) MUS plans are identified (milestone level not NULL), and (b) comparable discounted shrinkage plans are aligned to ensure proper plan presentation during activation and plan changes. Higher milestone levels represent greater savings. Entry level plans have a milestone level of 0 and maximum benefit plans have milestone level of 99.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loanExistInd" type="tns:ConditionFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if  loan exist on the subscriber. If exist, it will be set to true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="leaseExistInd" type="tns:ConditionFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if  lease exists on the subscriber. If exists, it will be set to true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="studentLineInd" type="tns:StudentFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if the subscriber is a student </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="framilyId" type="tns:GroupIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates Framily Group Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loanInfo" type="tns:LoanInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates loan infomation if subscriber have open loans </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="giveBackInd" type="tns:GiveBackEligibleFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the subscriber who has loan is qualified/required to do give back for upgrade. True if the customer is qualified for Give Back else will be set to false </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberListType">
+		<xs:sequence>
+			<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Structure that contains subscriber information details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpgradeDeviceInfoType">
+		<xs:choice>
+			<xs:element name="deviceSerialNumber" type="tns:SubscriberDeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>Customer’s handset ESN number from their CDMA device. Required if the accountNumber, referenceMdn, or simId is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="macId" type="tns:MediumAccessControlAddressType">
+				<xs:annotation>
+					<xs:documentation>Customer’s handset MAC-ID number from their Airave device. Required if the accountNumber, referenceMdn, meidId or simId is not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemId" type="tns:ModelNumberType">
+				<xs:annotation>
+					<xs:documentation>Model identifier of the  device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="UpgradeInfoType">
+		<xs:sequence>
+			<xs:element name="eligibleInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>This flag indicates if Subscriber is currently eligible for a discounted device upgrade (true) or if Subscriber is currently ineligible (false)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleDate" type="tns:UpgradeEligibilityDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If subscriber is ineligible, the date when they will become eligible, if eligible date in the past if they are fully eligible or date in the future when they will become fully eligible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibilityCode" type="tns:EligibilityStatusCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provided if subscriber is eligible, unique value that describes eligibility</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentTier" type="tns:TierLevelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies currently eligible subscribers tier level for commissioning purposes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleTierList" type="tns:EligibleTierListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that describes eligible Tier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentEligibilityList" type="tns:CurrentEligibilityListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that provides eligibility description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberDevicePricingList" type="tns:DevicePricingListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that provides Device Pricing details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rebatePlanInfoList" type="tns:RebatePlanInfoListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List Structure that provides rebate information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlanDiscountInfoType">
+		<xs:sequence>
+			<xs:element name="discountPlanId" type="tns:PricePlanCodeType">
+				<xs:annotation>
+					<xs:documentation>Discounted price plan code that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discountPlanName" type="tns:PricePlanNameType">
+				<xs:annotation>
+					<xs:documentation>Name of discounted price plan that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discountMonthlyPrice" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Monthly recurring charge of discounted price plan that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OptionDiscountInfoType">
+		<xs:sequence>
+			<xs:element name="discountOptionId" type="tns:OptionIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Discounted feature code that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discountOptionName" type="tns:OptionNameType">
+				<xs:annotation>
+					<xs:documentation>Name of discounted feature that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="discountOptionPrice" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Monthly recurring charge of discounted feature that associated subscriber is eligible for</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="AccountNumberType">
+		<xs:annotation>
+			<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+			<xs:pattern value="\d{1,10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdditionalTitleType">
+		<xs:annotation>
+			<xs:documentation>Additional Title holds additional info on a person's name.  Examples: Mr, Mrs, Ms.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AllowanceTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Allowance Type Code designates a type of allowance of units that would be set up for a user, espically in the case of a hybrid sharing group.
+Valid Values Include:
+Sprint Data,
+Sprint Data Roaming...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AllowedHandsetQuantityType">
+		<xs:annotation>
+			<xs:documentation>Allowed Handset Quantity is the total number of handsets allowed for purchase. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="AssociateIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BalanceAmountType">
+		<xs:annotation>
+			<xs:documentation>Balance Amount is a the dollar value associated to an account at a point in time.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumberType">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Code holds the current state of the Billing Account in the Ensemble system
+					Valid values:
+					ACTIVE 
+					TENTATIVE 
+					CLOSED 
+					CANCELLED 
+					SUSPENDED
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusEffectiveFromDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Effective From Date Time holds the first calendar day and time of day that the status was assigned to the Billing Account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BrandCodeType">
+		<xs:annotation>
+			<xs:documentation>Brand Code indicates which brand the subscriber belongs to. Possible brands represented include;  Sprint, Nextel, Boost, Virgin Mobile, and Clearwire</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BundleIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Bundle Identifier uniquely designates a combination of multiple products for customer acquisition through a single offer and for an aggregate price. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="BuyOneGetManyActionTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Buy One Get Many Action Type Code designates the action taken on the Buy One Get Many(BOGX) equipment.
+Valid Values:
+B - Buy,
+G - Get</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BuyOneGetManyEquipmentGroupDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Buy One Get Many Equipment Group Description is a natural language description of the Buy One Get Many(BOGX) Equipment Group. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BuyOneGetManyEquipmentGroupIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Buy One Get ManyEquipment Group Identifier uniquely identifies a group of Buy One Get Many(BOGX) equipment. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CityNameType">
+		<xs:annotation>
+			<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommitmentPeriodMonthQuantityType">
+		<xs:annotation>
+			<xs:documentation>Commitment Period Month Quantity represents the number of months committed to in the Service Agreement (SUBSCRIPTION). </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContractEffectiveDateType">
+		<xs:annotation>
+			<xs:documentation>Contract Effective Date is the first date on which the contract is valid.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ContractEndDateType">
+		<xs:annotation>
+			<xs:documentation>Contract End Date is the last date on which a contract is effective.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number Type Code designates a device type: IMEI(I), MSN(M), SIM(S), Kit (K), or ESN (E) for CDMA platform.
+Valid values:
+I - IMEI
+M - MSN
+S - SIM
+K - Kit
+E - ESN
+A - Airave (macId)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DiscountAmountType">
+		<xs:annotation>
+			<xs:documentation>Discount Amount holds the monetary amount by which the the price charged for a GOOD or SERVICE is decreased.  A percent decrease in the price charged may only be applicable to specific Account Types, Promotions, Products, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="9"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromDateType">
+		<xs:annotation>
+			<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EligibilityStatementDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Eligibility Statement Description is text descrbing the employment eligibility.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EligibilityStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Eligibility status code indicates if eligibilty reqirements are met.
+Values:
+Y - Eligible
+N - Not eligible
+U - Undetermined</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddressStringType">
+		<xs:annotation>
+			<xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentItemDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Equipment Item Description is text describing an item of equipment.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentItemIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Equipment Item Identiifer is the item identifier of the equipment to be ordered should be authorized according to the dealer’s sales channel.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSubGroupCodeType">
+		<xs:annotation>
+			<xs:documentation>Equipment Subgroup Code designates a logical group of equipment items that are related to an offer. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSubgroupItemCountType">
+		<xs:annotation>
+			<xs:documentation>Equipment Subgroup Item Count is number of eqipment items in a sub group and is used to determine the customers eligibility for an offer. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureSupportedFlagType">
+		<xs:annotation>
+			<xs:documentation>Feature Supported Flag is a boolean indicator of whether the related feature is supported. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="FetchInformationFlagType">
+		<xs:annotation>
+			<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="FirstNameType">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ItemRetailPriceType">
+		<xs:annotation>
+			<xs:documentation>Item Retail Price is the numerical monetary value of a good, service or asset that is charged to the customer on a sales order.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:fractionDigits value="2"/>
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastNameType">
+		<xs:annotation>
+			<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			<xs:documentation>alias: Surname</xs:documentation>
+			<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LinesToShareGroupIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Lines To Share Group Identifier uniquely identifies a Lines To Share Group within a Billing Account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="LinesToShareRankType">
+		<xs:annotation>
+			<xs:documentation>Lines To Share Rank is the Current rank of associated subscriber within the family plan they are in.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="MediumAccessControlAddressType">
+		<xs:annotation>
+			<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+			<xs:documentation>alias: MAC ID</xs:documentation>
+			<xs:documentation>alias: Media Access Control Identifcation</xs:documentation>
+			<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileEquipmentIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Mobile Equipment IDentifier (MEID) is a globally unique number for a physical piece of mobile station equipment. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.   
+
+This is the 18 character decimal representation.</xs:documentation>
+			<xs:documentation>A Mobile Equipment IDentifier (MEID) is a globally unique number for a physical piece of mobile station equipment. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="10"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ModelNameType">
+		<xs:annotation>
+			<xs:documentation>Model Name holds the Manufacturer's name for the class or model of  PRODUCT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ModelNumberType">
+		<xs:annotation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MonthlyRecurringChargeType">
+		<xs:annotation>
+			<xs:documentation>Monthly Recurring Charge holds the base dollar amount billed to the Customer every month for a service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="MonthlyUnlimitedShrinkageMilestoneLevelIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Monthly Unlimited Shrinkage (MUS) Milestone Level Identifier uniquely identifies the milestone level that a participant achieves by accumulating on time or Good Payment Units.
+Valid Values Include:
+0,
+1,
+2...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessActivationFromDateType">
+		<xs:annotation>
+			<xs:documentation>Network Access Activiated From Date holds the first calendar day the set of implemented components were active on the network.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfContractMonthsType">
+		<xs:annotation>
+			<xs:documentation>Number Of Contract Months is the number of months the Customer must commit to to receive Rate plans, Rebates, Discount, etc. under a contract.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="OfferCodeType">
+		<xs:annotation>
+			<xs:documentation>Offer Code designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Offer Description is a descripton of an offer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferItemQuantityType">
+		<xs:annotation>
+			<xs:documentation>Offer Item Quantity is the number of items associated to an offer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferEquipmentTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Offer Equipment Type Code indicates what type of equipment is associate to a specific offer.
+Valid Values:
+H – Offer will contain Handsets only
+A – Offer will contain Accessories only
+M – Offer will contain Handsets/Accessories</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferLineItemIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Offer Line Item Identifier uniquely identifies a line item of a particular offer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OptionCodeType">
+		<xs:annotation>
+			<xs:documentation>Option Code designates a specific option on a plan. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+		<!--The RequiredStringMax10 type is used for required fields, so the parser will catch missing fields.  The maximum size is 10.-->
+	</xs:simpleType>
+	<xs:simpleType name="OptionIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Option Identifier uniquely identifies an option on a plan. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+		<!--The RequiredStringMax10 type is used for required fields, so the parser will catch missing fields.  The maximum size is 10.-->
+	</xs:simpleType>
+	<xs:simpleType name="OptionNameType">
+		<xs:annotation>
+			<xs:documentation>Option Name is a common name for an option on a plan.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Order Identifier uniquely identifies an order.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentDueDateType">
+		<xs:annotation>
+			<xs:documentation>Payment Due Date is the date on which payment is due or it is considered to be late. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="PersonalIdentificationNumberType">
+		<xs:annotation>
+			<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalAddressLine1Type">
+		<xs:annotation>
+			<xs:documentation>Postal Address Line 1 is the first instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalAddressLine2Type">
+		<xs:annotation>
+			<xs:documentation>Postal Address Line 2  is the second instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalCodeStringType">
+		<xs:annotation>
+			<xs:documentation>Postal Code String is the string representation of a USPS Postal Code with optional extension.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PriceAmountType">
+		<xs:annotation>
+			<xs:documentation>Price Amount contains the dollar amount of the price component.  Either Price Amount or Percent will contain a value but not both for a given Price Component Indentifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="PricePlanCodeType">
+		<xs:annotation>
+			<xs:documentation>Price Plan Code is a designator of a specific price plan.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PricePlanNameType">
+		<xs:annotation>
+			<xs:documentation>Price Plan Name is the common name for a specific price plan.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PrimarySecondaryTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Primary Secondary Type Code Type indicates whether the associated item is primary or secondary.
+Valid values:
+P - Primary,
+S - Secondary,
+B - Both...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RetailStoreIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.&#13;
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SecurityAnswerType">
+		<xs:annotation>
+			<xs:documentation>Security Answer holds the answer to the Security Question identified by Security Question Identifier.  This value must be supplied by the system user in response to the Security Question before they are allowed to proceed.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCodeType">
+		<xs:annotation>
+			<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCodeTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Service Order Code Type Code identifies the various types of Service Order Codes.  Valid values include (not exclusive list):
+B - Buy One Get One SOC
+I - 
+P - Price Plan
+M - Reduced Price Plan
+S - Reduced SOC
+R - Regular SOC
+O - Optional SOC</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialProgramTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Special Program Type Code identifies the Plan as a special type or plan.
+				Valid values:
+				fam = family plan
+				dly = daily unlimited plan
+				ind = individual
+				all = all plans
+				mbp = monthly bucket plan/unlimited
+				pgo = pay as you go
+		</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StockKeepingUnitType">
+		<xs:annotation>
+			<xs:documentation>Stock Keeping Unit represents the Sprint Inventory Stock Keeping Unit (SKU).  Stock Keeping Unit identifies a group of PRODUCT instances.  It could identify a handset Model and Model Number, a Kit or an accessory. Previously length = 18.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberCountType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Count is the number of subscribers associated to the BAN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentityModuleIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identify Module (SIM) Identifier identifies the ''smart'' card installed or inserted into a IDEN mobile telephone containing all subscriber-related data. This facilitates a telephone call from any valid mobile telephone since the subscriber data is used to complete the call rather than the telephone internal serial number.
+
+Length 15 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberResourceStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Resource Status Code is a single character code that represents the status of a subsciber resource.
+				Possible values:
+				ACTIVE
+				CANCELLED
+				RESERVED
+				SUSPENDED
+			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionStatusChangeDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Subscription Status Change Date Time holds the calendar year, month, day and time of day when the last change to the SUBSCRIPTION's status occurred.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="SsnLast4DigitsType">
+		<xs:annotation>
+			<xs:documentation>Social Security Number Last 4 Digits  holds tha last 4 digits of the Customer's Social Securiy Number. Used to authenticate the Customer when they or someone on their behalf accesses CJV Web Services.</xs:documentation>
+			<xs:documentation>Social Security Number Last 4 Digits  holds tha last 4 digits of the Customer's Social Securiy Number. Used to authenticate the Customer when they or someone on their behalf accesses CJV Web Services.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxIdentificationNumberLast4DigitsType">
+		<xs:annotation>
+			<xs:documentation>Tax Identification Number Last 4 Digits holds the last four digits of a Business Identification number issued by the Federal Government for tax purposes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:pattern value="\d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ThresholdLimitQuantityType">
+		<xs:annotation>
+			<xs:documentation>Threshold Limit Quantity is a predetermined point that must be exceeded to begin producing a given effect or result or to elicit a response</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TierLevelType">
+		<xs:annotation>
+			<xs:documentation>Tier Level is the numeric levle for tiered plans.  This field applies only to Fair and Flexible and Legacy Nextel Fair Plans.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="UnitOfMeasureValueType">
+		<xs:annotation>
+			<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UniversalIntegratedCircuitCardIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Universal Integrated Circuit Card Identifier is a unique identifier embedded in the smart card used in mobile terminals in CDMA, GSM and UMTS networks.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpgradeEligibilityDateType">
+		<xs:annotation>
+			<xs:documentation>Upgrade Eligibility Date is the calendar date on which a piece of equipment is eligible for an upgrade.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="UspsStateAbbreviationType">
+		<xs:annotation>
+			<xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+			<xs:pattern value="[A-Z]{2}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VendorCodeType">
+		<xs:annotation>
+			<xs:documentation>Vendor Code in combination with the PIN uniquely differentiates the system
+(channel) calling Order Verification Management (Best Buy, Walmart, RMS, 
+boostmobile, SOTS, OAR’s, BSPs, Telespree, etc). Each partner has its own 
+unique vendor code and pin combination.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberDeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Device Serial Number is the Equipment Id – IMEI or Simcard Id or MSN or ESN of any subscriber under the BAN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="18"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCodeExtensionType">
+		<xs:annotation>
+			<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCodeType">
+		<xs:annotation>
+			<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--   Added 12/3/2014-->
+	<xs:complexType name="RebatePlanInfoType">
+		<xs:sequence>
+			<xs:element name="rebatePlanCode" type="tns:OfferCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates rebate plan code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rebatePlanDesc" type="tns:OfferDescriptionType">
+				<xs:annotation>
+					<xs:documentation>Indicates rebate plan description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractTerm" type="tns:NumberOfContractMonthsType">
+				<xs:annotation>
+					<xs:documentation>Indicates contract term</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RebatePlanInfoListType">
+		<xs:sequence>
+			<xs:element name="rebatePlanInfo" type="tns:RebatePlanInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Rebate Plan Info Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LoanInfoType">
+		<xs:sequence>
+			<xs:element name="loanModelType" default="S">
+				<xs:annotation>
+					<xs:documentation>IB model type-Sprint Model/PartnerModel </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:LoanAssignmentModelCodeType">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="loanSequenceNumber" type="tns:LoanIdentifierIntType">
+				<xs:annotation>
+					<xs:documentation>Indicates the loan sequence number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="esnMeidHex" type="tns:DeviceSerialNumberHexType">
+				<xs:annotation>
+					<xs:documentation>Serial Number / ESN Hex value of IB Device </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemDescription" type="tns:DeviceItemDescriptionType">
+				<xs:annotation>
+					<xs:documentation>Indicates IB phone model description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="loanNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the loan number.  Loan Identifier uniquely identifies a loan and is assigned by the originator of the loan.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:LoanIdentifierType">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ConditionFlagType">
+		<xs:annotation>
+			<xs:documentation>Condition Flag is a boolean that indicates the presense of the related condition. 
+Valid Values: 
+true - condition exists, 
+false - condition does not exist</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceItemDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Device Item Description is text describing an item of device.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+			<xs:minLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberHexType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EligibilityFlagType">
+		<xs:annotation>
+			<xs:documentation>Eligibility Flag is a boolean flag to indicate if the account/party is eligible for a particular action or treatment.
+value values
+True - Eligible
+False - Not Eligible</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="GiveBackEligibleFlagType">
+		<xs:annotation>
+			<xs:documentation>Give Back Eligible Flag indicates if the subscriber or device is eligible for give back for upgrade.
+Valid Values: 
+True - eligible for give back for upgrade, 
+False - NOT eligible for give back for upgrade</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="GroupIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Group Identifier uniquely identifes a grouping of objects or parties.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="LoanCountType">
+		<xs:annotation>
+			<xs:documentation>Loan Count is the total count of all open loans on the related account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="LineQuantityType">
+		<xs:annotation>
+			<xs:documentation>Line Quantity is the number of lines (phone lines) being referenced within the given context.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="LoanIdentifierIntType">
+		<xs:annotation>
+			<xs:documentation>Loan Identifier uniquely identifies a loan and is assigned by the originator of the loan.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoanIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Loan Identifier uniquely identifies a loan and is assigned by the originator of the loan.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoanAssignmentModelCodeType">
+		<xs:annotation>
+			<xs:documentation>Loan Assignment Model Code indicates what loan assigment model the loan follows.
+Example Values:
+Sprint,
+Partner</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProcessRequiredFlagType">
+		<xs:annotation>
+			<xs:documentation>Process Required Flag indicates whether or not a particular additional process or applicatin progam interface is required.
+Valid Values:
+True = the process or api is required
+False = the process or api is not required</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="StudentFlagType">
+		<xs:annotation>
+			<xs:documentation>Student Flag indicates whether or not the related record is student related.
+Valid Values:
+True - Student related, 
+False - Not Student related</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<!---->
+	<!---->
+</xs:schema>

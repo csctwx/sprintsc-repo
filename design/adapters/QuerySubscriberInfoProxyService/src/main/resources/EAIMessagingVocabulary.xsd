@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (http://www.altova.com) by Jocelen C Silva (IBM BRASIL INDUSTRIA MAQUINAS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--E2057 Messaging Vocabulary-->
+	<!-- Date              Author                    Version     Change                                                                      Rel                  SR# -->
+	<!--09/19/2014  Jocelen Silva      2.9      Changed SocOfferInfo.offerDesc and SocOfferInfo.offerDesc changed to optional     GBL14.3                 ALM#821981-->
+	<xs:complexType name="BanInfo">
+		<xs:choice>
+			<xs:element name="banId" type="CustomerAccountNumber"/>
+			<xs:element name="subsId" type="SubscriptionId"/>
+			<xs:element name="ptn" type="MdnString"/>
+			<xs:element name="equipmentId" type="DeviceSerialNbr"/>
+			<xs:element name="ufmi" type="UfmiString"/>
+			<xs:element name="ip" type="ElectronicAddressString"/>
+			<xs:element name="nai" type="NetworkAccessIdentifierString"/>
+			<xs:element name="imsi" type="MobileStationIdentificationNumber"/>
+			<xs:element name="hppttId" type="HighPerformancePushToTalkIdString"/>
+			<xs:element name="msoInfo" type="MsoInfo"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="MsoInfo">
+		<xs:sequence>
+			<xs:element name="msoId" type="MsoId"/>
+			<xs:element name="msoAccountNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocOfferInfo">
+		<xs:sequence>
+			<xs:element name="offerId" type="xs:integer"/>
+			<xs:element name="offerDesc" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberCountInfo">
+		<xs:sequence minOccurs="0">
+			<xs:element name="totalCount" type="xs:integer"/>
+			<xs:element name="activeCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="reservedCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="suspendedCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="cancelledCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="idenReservedCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="idenActiveCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="idenCancelledCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="idenSuspendedCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="cdmaReservedCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="cdmaActiveCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="cdmaCancelledCount" type="xs:integer" minOccurs="0"/>
+			<xs:element name="cdmaSuspendedCount" type="xs:integer" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AccountCode">
+		<xs:annotation>
+			<xs:documentation>Account Code is used to allocate processing costs back to the department for whom the processing was done.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="AccountStatusCode">
+		<xs:annotation>
+			<xs:documentation>Account Status Code is used to indicate the status of the account. Valid values are:
+P2K:
+A - Active
+F - Final
+N - Non Paid Disconnect
+W - Write Off
+Ensemble:
+O – Open
+S – Suspended
+T – Tentative
+N – Canceled
+C – Closed
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApplRef">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountType">
+		<xs:annotation>
+			<xs:documentation>Billing System Code is used to specify which Billing System is responsible for providing billing for the specified MDN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingSystemCode">
+		<xs:annotation>
+			<xs:documentation>Billing System Code is used to specify which Billing System is responsible for providing billing for the specified MDN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="P2K"/>
+			<xs:enumeration value="ENS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerAccountNumber">
+		<xs:annotation>
+			<xs:documentation>Customer Account Number uniquely identifies an Account that represents ongoing business relationship .</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerPreferredLanguage">
+		<xs:annotation>
+			<xs:documentation>Customer preferred language for communication.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DealerCode">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNbr">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ElectronicAddressString">
+		<xs:annotation>
+			<xs:documentation>ElectronicAddressString represents the character string of the electronic address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureSequenceNumber">
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIdString">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier contains the concatenation of a user ID and a domain.The user ID can be 15 chars maximum and the domain can be 24 chars maximum so a total of 40 characters including ‘@’.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		<xs:annotation>
+			<xs:documentation>International Mobile Subscriber Identity holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MdnString">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is a dialable 10-digit NANP directory number assigned to address a wireless service subscriber.  The MDN is the access number for the subscriber's access service.  It is also used BILLING.
+
+The MDN is meant to be changeable, as the ownership of the device may change hands, the owner may change telephone numbers, or the owner may change cities.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileStationIdentificationNumber">
+		<xs:restriction>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:length value="10"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MsoAccountNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MsoId">
+		<xs:restriction base="xs:string">
+			<xs:length value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkIndicatorCode">
+		<xs:annotation>
+			<xs:documentation>Network Indicator Code specifies the network being used.  I -> iDEN; C -> CDMA; B -> Both</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecurringCharge">
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	<xs:simpleType name="SocAdditionalDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocLevelCode">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocLongDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="800"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocSequenceNumber">
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="SocType">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionId">
+		<xs:annotation>
+			<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionTypeCode">
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TierDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UfmiString">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member ID is a concatenation of the Urban Area Id, Fleet Id, and Member Id that represent an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCd">
+		<xs:annotation>
+			<xs:documentation>USPSPostalCd contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="mmdate">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="[0-1][0-9][0-3][0-9][1-9][0-9][0-9][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="YYYYMMDD">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="[1-9][0-9][0-9][0-9][0-1][0-9][0-3][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MMDDYYYY">
+		<xs:restriction base="xs:string">
+			<xs:length value="8"/>
+			<xs:pattern value="[0-1][0-9][0-3][0-9][1-9][0-9][0-9][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="YYYYMMDDHHMMSS">
+		<xs:restriction base="xs:string">
+			<xs:length value="14"/>
+			<xs:pattern value="[1-9][0-9][0-9][0-9][0-1][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MMDDYYYYHHMMSS">
+		<xs:restriction base="xs:string">
+			<xs:length value="14"/>
+			<xs:pattern value="[0-1][0-9][0-3][0-9][1-9][0-9][0-9][0-9][0-2][0-9][0-5][0-9][0-5][0-9]"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

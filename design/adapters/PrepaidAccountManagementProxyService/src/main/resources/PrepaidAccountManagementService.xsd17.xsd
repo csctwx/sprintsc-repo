@@ -1,0 +1,1787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/rechargeAccountByVoucher/v1/rechargeAccountByVoucher.xsd" targetNamespace="http://integration.sprint.com/interfaces/rechargeAccountByVoucher/v1/rechargeAccountByVoucher.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                      Version    Change                                                                                                					 Rel                   SR# -->
+	
+<!--07/28/2012    Tracy Turner             1.0       Initial Draft, non-standard                                           														GBL12.3             PJ007445-->
+	
+<!--07/30/2012  Steve Heichelheim     1.0      Added MVM standards and simple types                   															GBL12.3             PJ007445-->
+	
+<!--08/1/2012  Tracy Turner   1.1      Added pinNumber, csrId, selectCriteria, serialNumber, uniqueValue and voucherType to request             GBL12.3             PJ007445-->
+	
+<!--08/24/2012    Tracy Turner             1.1      changed userId to required                                     GBL12.3             PJ007445-->
+	
+<xs:element name="rechargeAccountByVoucher" type="tns:RechargeAccountByVoucherRequestType"/>
+	
+<xs:element name="rechargeAccountByVoucherResponse" type="tns:RechargeAccountByVoucherResponseType"/>
+	
+<xs:complexType name="RechargeAccountByVoucherRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber primary resource information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="channelInfo" type="tns:ChannelInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeVoucherMethodInfo" type="tns:RechargeVoucherMethodInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge voucher method information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bucketIdentityInfo" type="tns:BucketIdentityInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bucket identity information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeAccountByVoucherResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="accumulationAmountsInfo" type="tns:AccumulationAmountInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Accumulation Amounts Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeAmountsInfo" type="tns:RechargeAmountInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Amounts Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeBalanceExpirationInfo" type="tns:RechargeBalanceExpirationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Balance Expiration Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeBucketInfo" type="tns:RechargeBucketInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Bucket Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeDatesInfo" type="tns:RechargeDateInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Dates Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeIdentityInfo" type="tns:RechargeIdentityInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Identity Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeLogInfo" type="tns:RechargeLogInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Log Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeStatusInfo" type="tns:RechargeStatusInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Status Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeSubscriberInfo" type="tns:RechargeSubscriberInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Subscriber Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeTypeInfo" type="tns:RechargeTypeInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Type Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccumulationAmountInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="additionalBonusAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional Bonus Amount is the monetary amount of the Additional Bonus.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="createChargeAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Create Charge Amount is the monetary amount to Create the Charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="debitAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Debit Amount is the monetary amount of the Debit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="installmentAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Installment Amount is the monetary  amount of the Installment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="loanAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Loan Amount is the monetary amount of the Loan.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reduceAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Reduce Amount is the monetary amount of the Reduction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="regularBonusAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Regular Bonus Amount is the montetary amount of the regular bonus.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BucketIdentityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="bucketId" type="tns:BucketIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bucket Id uniquely identifes a specific instance of a Bucket.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ChannelInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="referenceId" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="locationCode" type="tns:LocationTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Location Code is used to indicate a type of Location.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="merchantId" type="tns:MerchantIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="preauthorizationRequestId" type="tns:PreauthorizationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Preauthorization Id uniquely identifies a specific instance of a Preauthorization.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="retailerId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+(Examples: 001859, 1165, 0649)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tspTransactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance, it is the TSP internal transaction ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="credentialsInfo" type="tns:CredentialsInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Security credentials for the front-end provider.  Specific to each front-end, supplied by the billing system.   </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CredentialsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="userName" type="tns:UserNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Front-end provider name (provided by billing system)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="password" type="tns:PasswordType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Front-end provider password (provided by billing system)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeVoucherMethodInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="coverDebitInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Cover Debit Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csrId" type="tns:CustomerServiceRepresentativeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Client Services Representative ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pinNumber" type="tns:PersonalIdentificationNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher personal identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="selectCriteria" type="tns:MessageTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Select criteria</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialNumber" type="tns:VoucherSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Serial Number is a unique number that identifies a particular instance of a Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="uniqueValue" type="tns:SequenceNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique Value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherType" type="tns:VoucherTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of Voucher</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentSourceId" type="tns:PaymentSourceIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Payment Source Identifier uniquely identifies the PARTY who submitted the Payment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentSourceType" type="tns:PaymentSourceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Payment Source Type Code identifies the type of PARTY that submitted the Payment.
+Values:
+D – Direct Debit
+C – Credit Card
+O – Online
+R – RPM
+I – Interval
+H – OC_Charge
+B – Billing
+A - AR</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeDate" type="tns:RechargeDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Date contains the date when the Recharge should occur.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeAmountInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="inputAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Input Amount is the montary amount of the Input.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inputCurrency" type="tns:CurrencyCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="olcAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>OLC Amount is the monetary amount of the OLC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="olcBalance" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>OLC Balance is the monetary amount of the OLC Balance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="olcNewBalance" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>OLC New Balance is the monetary amount of the new OLC Balance after the recharge occurs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeChannelAmount" type="tns:MonetaryAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Channel Amount is the monetary amount of the Recharge Channel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeBalanceExpirationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="balanceExpirationDateCalculated" type="tns:ExpirationDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Balance Exp Date Calculated contains the calendar date which has been calculated as the date when the Balance will expire.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeNumberOfDays" type="tns:RechargeNumberOfDaysType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Number of Days indicates the number of days that the Recharge will be valid.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeBucketInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="balanceExpirationDate" type="tns:ExpirationDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Balance Expiration Date contains the calendar date on which this balance expires.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="billingAccountNumber" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="billingArrangement" type="tns:BillingArrangementType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Arrangement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bucketId" type="tns:BucketIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bucket ID identifies a unique instance of a Bucket.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="crmExternalId" type="tns:CrmExternalIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CRM External ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currency" type="tns:CurrencyCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerId" type="tns:CustomerIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cancellationDate" type="tns:CancellationDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Cancellation Date holds the calendar date of the Recharge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pcn" type="tns:PaymentChannelIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PCN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pcnName" type="tns:PaymentChannelNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PCN Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeDateInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="logicalDate" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Logical Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="processDate" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Process Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeReferenceDate" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Reference Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeRequestDate" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Request Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeIdentityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="bucketKey" type="tns:BucketKeyType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bucket Key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="periodKey" type="tns:PeriodKeyType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Period Key holds a value that uniquely identifies an instance of a Period.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeId" type="tns:RechargeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Id uniquely identifies this specific Recharge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeLogInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="cdMainId" type="tns:ChannelDetailsMainIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel Main ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cdUniqueId" type="tns:ChannelDetailsUniqueIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel Unique ID holds a value which uniquely identifies a specific instance of a Channel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cdValues" type="tns:ChannelDetailsValuesType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Cd Values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="clientTimeStamp" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Client Time Stamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentComment" type="tns:RemarkTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Adjustment Comment contains textual information that relates to the Adjustment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csrId" type="tns:CustomerServiceRepresentativeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CSR ID uniquely identifies a specific Customer Service Representative.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="merchantId" type="tns:MerchantIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentCardAcknowledgement" type="tns:PaymentCardAcknowledgementCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CC Acknowledgement  contains the Paymentech acknowledgement code from the offline credit card settlement response file.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentCardAuthorizationNumber" type="tns:PaymentCardAcknowledgementNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Payment Card Acknnowledgment Number contains a unique authorization number generated by the Paymentech online credit card settlement system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeToSumInd" type="tns:RechargeToSumIndicatorType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge to Summary Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="retailerId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+(Examples: 001859, 1165, 0649)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tspTransactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance it is the identifier assigned by the TSP application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="alternateTransactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance it is the identifier assigned by the VST.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="radTimeStamp" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Rad Time Stamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rmdMainId" type="tns:RechargeMethodIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Method Identifer identifies the Recharge Method.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rmdValues" type="tns:RechargeMethodValuesType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Method Values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rplTimeStamp" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>RPL Time Stamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberIdValues" type="tns:SubsriberIdentifierValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sub Id Values</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeStatusInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="cancelRechargeType" type="tns:CancelRechargeTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Cancel Recharge Type identifies the type of Recharge. Valid values are:
+
+'F' - Force
+'R' - Request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="channelDetailsCancelRefId" type="tns:ChannelCancelReferenceIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel Cancel Reference ID uniquely identifies an instance of a Channel details cancel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastStatusUpdate" type="tns:LastUpdatedDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Last Status Update contains the calendar date and time when the Status was last updated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeStatus" type="tns:RechargeStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Status Code identifies the current state of the recharge. Valid values are:
+'V' - Valid
+'C' - Cancelled
+'S' - Suspend
+'R' - Restored
+'I' - Internal
+'P' - Pending</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="releaseRechargeId" type="tns:ReleaseRechargeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Release Recharge Identifer uniquely identifes an instance of a Release Recharge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="releaseRechargeType" type="tns:ReleaseRechargeTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Release Recharge Type identifies the type of release recharge. Valid values are:
+
+'N' - None
+'M' - Main Recharge
+'P' - Part of Recharge</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeSubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" minOccurs="0"/>
+			
+<xs:element name="subscriberBrand" type="tns:SubscriberBrandIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Brand uniquely identifies an instance of Subscriber Brand.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberNumber" type="tns:SubscriberIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RechargeTypeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="channelCode" type="tns:ChannelCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel Code. Valid values are:
+VP
+VB
+VR
+VI
+VS
+Ol
+CS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="methodCode" type="tns:RechargeMethodCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Method Code identifies the method used for the Recharge. Valid values are:
+VOT
+VRA
+VASP
+VARC
+VMRC
+VLBE
+PCRC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="methodGroup" type="tns:RechargeMethodGroupIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Method Group Identifier uniquely identifes a grouping of Recharge Methods.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="methodType" type="tns:RechargeMethodTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies the Recharge Method
+Values:
+IN – Increase
+NN – None
+RD - Reduce</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeType" type="tns:RechargeTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Type identifes the type of Recharge being performed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="splitRechargeSequence" type="tns:SequenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Split Recharge Sequence is used to identify a specific portion of a Recharge when it is divided into multiple parts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>North American Numbering Plan (NANP) Telecom Number, is the 10 digit telephone number comprised of the NPA Number, the NXX Number and the Phone Line Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalIdentityInfo" type="tns:PartyOtherIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains additional identificaiton details for TSPs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingArrangementType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Arrangement</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BucketIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Bucket Identifier uniquely identifes a specific instance of a Bucket. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BucketKeyType">
+		
+<xs:annotation>
+			
+<xs:documentation>Bucket Key</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CancellationDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Cancellation Date Time represents the calendar day and time of day on which a cancellation was made. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CancelRechargeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Cancel Recharge Type Code identifies the type of Recharge. Valid values are:
+
+'F' - Force
+'R' - Request</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChannelCancelReferenceIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Channel Cancel Reference Identifier uniquely identifies an instance of a Channel details cancel.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChannelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Channel Code. Valid values are:
+
+VP
+VB
+VR
+VI
+VS
+Ol
+CS</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChannelDetailsMainIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Channel Details (CD) Main ID</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChannelDetailsUniqueIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Channel Details (CD) Unique ID</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChannelDetailsValuesType">
+		
+<xs:annotation>
+			
+<xs:documentation>Channel Details (CD) Values</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="400"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CrmExternalIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>CRM External ID</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CurrencyCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerServiceRepresentativeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Service Representative Identifier uniquely identifies a specific Customer Service Representative.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date is the calendar date and time on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date Time holds the last calendar Date and Time of day an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastUpdatedDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Update Date is the date and time of the last update to an object. 
+
+Last Update Date Time is used in conjunction with the Last Update Numeric Stamp to uniquely identify a specific update iteration.
+
+Typically Last Update Date Time and Last Update Numeric Stamp would be used in a psuedo-conversational approach to updates.  A record is read into local storage and the lock on the source record is released.  When the updated record is written back to the database where the source Record ID equals the Update Record ID, Source Last Update Date Time equals the original Update Last Update Date Time and Source Last Update Numeric Stamp equals the original Update Last Update Numeric Stamp.
+
+Both Last UPdate Date Time and Last Update Numeric Stamp are incremented in the update.</xs:documentation>
+			
+<xs:documentation>Last Updated Date Time is the date and time that an update was most recently made on a particular item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LocationTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Location Type Code is used to indicate a type of Location.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MerchantIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation> Message Text represents a natural language communication of information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MonetaryAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Monetary Amount represents a number of currency units or units of money. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordType">
+		
+<xs:annotation>
+			
+<xs:documentation>Password holds the text string specified by a PARTY as credential to be used with a Login Userid to uniquely identify them to a system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyOtherIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Other Identifier is a system generated value used in combination with the Party Identifier and Party Identification Type Code to uniquely identify an instance of PARTY IDENTIFICATION.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardAcknowledgementCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Acknowledgement Code contains the Paymentech acknowleldgement code from the offline credit card settlement response file.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardAcknowledgementNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Acknnowledgment Number contains a unique authorization number generated by the Paymentech online credit card settlement system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Channel Identifier uniquely identifies a Payment Channel in the customer service management system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentChannelNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Channel Name is the common language name used to designate a payment channel in the cusomer sevice management system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentSourceIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Source Identifier uniquely identifies the PARTY who submitted the Payment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="240"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentSourceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Source Type Code identifies the type source from which the payment originated.
+Valid Values Include:
+O – Online,
+D – Direct Debit,
+L – Lock Box,
+P – Deposit,
+V – View Star,
+A - Recurring Direct Debit Checking,
+N - Dummy for Partners...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PeriodKeyType">
+		
+<xs:annotation>
+			
+<xs:documentation>PeriodKey</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PreauthorizationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Preauthorization Identifier uniquely identifies a specific instance of a Preauthorization.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Date Time is the date and time of day on which a recharge was or will be made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Identifier uniquely identifies a specific Recharge occurance.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Method Code identifies the method used for the Recharge. Valid values are:
+
+VOT
+VRA
+VASP
+VARC
+VMRC
+VLBE
+PCRC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodGroupIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Method Group Identifier uniquely identifes a grouping of Recharge Methods.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Method Identifer identifies the Recharge Method.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Method Type Code designates the type of activity that is represented by the recharge event (for instance: increase adjustment, RC to be reduced from balance, RC to be reduced from credit card)
+Example Values:
+RT - Returning credit card recharge
+VC - Voucher recharge
+AV - Activation Voucher
+RD - Reduce adjustment
+CRC - Credit Card RC
+BRC - Prepaid balance RC
+LBC - Low Balance Recharge
+CA - Cash recharge
+ZB - Zero balance
+IN - Increase adjustment
+CB - Cancel Balance
+AN - Left Balance Amount Negative
+AP - Left Balance Amount Positive
+BN - Bank recharge that can be cancelled
+CC - Credit card recharge that can be cancelled
+CE - Change cycle adjust negative recharge
+CN - Cancel recharge
+CP - Change cycle adjust positive recharge
+CQ - Cheque recharge that can be cancelled
+CS - Cancel Split recharge
+ED - Set Expiration Date by a specific date
+EN - Set exp date by num of days
+IB - Initial balance (Activation)
+IE - Internal Set Balance Expiration Date
+IP - Initial Balance recharge method (Preactivation)
+IR - Increase RC balance
+RP - Returning recharge (by pin) that can be cancelled
+SV - Split voucher recharge that can be cancelled
+US - Recharge according the usage
+  - Space
+IBA - Increase batch adjustment Method
+RBA - Reduce batch adjustment Method
+LN - Loan Recharge Method
+TB - Trigger Bank recharge from AR
+TC - Trigger Credit Card recharge from AR
+TP - Trigger Recharge by PIN
+VRW - VIP Reward
+Default migrated event - Default migrated event
+PRW - Adjustment for promotion award
+RCS - RC Success
+RCF - RC Failure
+DMRW - Daily/Monthly Reward
+RRW - Replenishment Reward</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodValuesType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Method Values</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="400"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeNumberOfDaysType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Number of Days</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Status Code identifies the current state of the recharge. Valid values are:
+
+'V' - Valid
+'C' - Cancelled
+'S' - Suspend
+'R' - Restored
+'I' - Internal
+'P' - Pending</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeToSumIndicatorType">
+		
+<xs:annotation>
+			
+<xs:documentation>Indicates if the recharge amount was added in RPL9_RCG_ACC_AMT table by the recharge summary job.
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Type Code identifies the type of Recharge.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="R"/>
+			
+<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ReleaseRechargeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Release Recharge Identifer uniquely identifes an instance of a Release Recharge.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ReleaseRechargeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Release Recharge Type Code identifies the type of release recharge.
+Valid Values:
+N - None
+M - Main Recharge
+P - Part of Recharge</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RemarkTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Remark Text is a NOTE containing textual comment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RetailStoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number String is a string representation sequential number assigned to an individual item in a list used to identifiy that item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberBrandIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Brand Identifier uniquely identifers a specific instance of a Subcriber Brand.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubsriberIdentifierValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier Value is the value associated with the subscriber. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Identifier is a unique string that identifies a Request attempt. 
+The TransactionID provides a recovery mechanism for time-outs known as idempotency. If you receive a time-out  in response to a Request, the Request can be resent with the same TransactionID.  If the service had successfully processed a previous Request (with the same TransactionID), the previous Response will be returned.  
+If the server has not seen this TransactionID before, it will process the Request and return the Response.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Name is an identifier of the identity associated with a party role which is the public part of a paired identity assertion.  User Name consists of all of the characters preceding the @ sign in a URL identifying a member of the specified Domain. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="45"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Serial Number is a unique number that identifies a particular instance of a Voucher.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Type Code designates the type of the voucher being issued.
+Valid Values Include:
+Recharge
+Activation
+PIN Dispense</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

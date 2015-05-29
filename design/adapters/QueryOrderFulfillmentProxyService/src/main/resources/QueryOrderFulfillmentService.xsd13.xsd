@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:repiod="http://integration.sprint.com/v2/public/interfaces/ReplyToInventoryOrderDetails.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cdm="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" targetNamespace="http://integration.sprint.com/v2/public/interfaces/ReplyToInventoryOrderDetails.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.01">
+	
+<xs:import namespace="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" schemaLocation="QueryOrderFulfillmentService.xsd14.xsd"/>
+	
+<!--Added mediumAccessControlAddress to ShipmentItemType- LCR - 9/26/2007-->
+	
+<!--Changed max occurrence of emailAddress from 1 to 2 - LCR - 9/26/2007-->
+	
+<!--Made all elements optional within InventoryOrderDetailsReplyType - LCR - 12/19/2007-->
+	
+<xs:element name="ReplyToInventoryOrderDetails">
+		
+<xs:annotation>
+			
+<xs:documentation>RequestInventoryOrderDetails obtains order details for an existing inventory order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:complexType>
+			
+<xs:sequence>
+				
+<xs:element ref="repiod:inventoryOrderDetailsReply"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+<xs:element name="contactTelecomNumber" type="cdm:NanpTelecomNumberType"/>
+	
+<xs:element name="emailAddress" type="repiod:EmailAddressType"/>
+	
+<xs:element name="handsetAssignmentNote" type="repiod:HandsetAssignmentNoteType">
+		
+<xs:annotation>
+			
+<xs:documentation>The handset assignment note provides a place to enter free form text for the 'Alias'.  The Alias is an alternate method of identifying a MDN.  For example, when a customer has a shipment of more than one phone, this field will help the customer identify which individual will get which phone and which MDN.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="inventoryOrderDetailsReply" type="repiod:InventoryOrderDetailsReplyType"/>
+	
+<xs:element name="itemPrice" type="repiod:ItemPriceType"/>
+	
+<xs:element name="orderItem" type="repiod:OrderItemType"/>
+	
+<xs:element name="postalAddress" type="repiod:PostalAddressType"/>
+	
+<xs:element name="price" type="repiod:PriceType"/>
+	
+<xs:element name="shipmentItem" type="repiod:ShipmentItemType"/>
+	
+<xs:complexType name="EmailAddressType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:emailAddressString"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="HandsetAssignmentNoteType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:noteText"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InventoryOrderDetailsReplyType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:salesChannelId" minOccurs="0"/>
+			
+<xs:element ref="cdm:orderEntryDate" minOccurs="0"/>
+			
+<xs:element ref="cdm:partyNameString" minOccurs="0"/>
+			
+<xs:element ref="cdm:formattedPostalAddressLines" minOccurs="0"/>
+			
+<xs:element ref="cdm:cityName" minOccurs="0"/>
+			
+<xs:element ref="cdm:uspsStateAbbreviation" minOccurs="0"/>
+			
+<xs:element ref="cdm:uspsPostalCd" minOccurs="0"/>
+			
+<xs:element ref="cdm:uspsPostalCdExtension" minOccurs="0"/>
+			
+<xs:element ref="repiod:contactTelecomNumber" minOccurs="0"/>
+			
+<xs:element ref="cdm:phoneExtension" minOccurs="0"/>
+			
+<xs:element ref="cdm:orderCancelDate" minOccurs="0"/>
+			
+<xs:element ref="cdm:completeShipmentRequiredFlag" minOccurs="0"/>
+			
+<xs:element ref="cdm:instruction" minOccurs="0" maxOccurs="40"/>
+			
+<xs:element ref="repiod:orderItem" minOccurs="0" maxOccurs="unbounded"/>
+			
+<xs:element ref="cdm:errorMessageProcessing" minOccurs="0" maxOccurs="unbounded"/>
+			
+<xs:element ref="cdm:orderStatusCode" minOccurs="0"/>
+			
+<xs:element ref="repiod:emailAddress" minOccurs="0" maxOccurs="2"/>
+			
+<xs:element ref="cdm:enterpriseLoginId" minOccurs="0"/>
+			
+<xs:element ref="cdm:partyOtherIdentifierId" minOccurs="0"/>
+			
+<xs:element ref="cdm:customerPurchaseOrderNumber" minOccurs="0"/>
+			
+<xs:element ref="cdm:inTransitDays" minOccurs="0"/>
+			
+<xs:element ref="cdm:billingSystemOrderNumber" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ItemPriceType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:subscriptionId"/>
+			
+<xs:element ref="repiod:price" minOccurs="0" maxOccurs="unbounded"/>
+			
+<xs:element ref="cdm:productDescription"/>
+			
+<xs:element ref="cdm:mobileDirectoryNumber" minOccurs="0"/>
+			
+<xs:element ref="cdm:cdmaNetworkDevice" minOccurs="0"/>
+			
+<xs:element ref="cdm:idenNetworkDevice" minOccurs="0"/>
+			
+<xs:element ref="cdm:oneTimeKeypadSubisidyLockCode" minOccurs="0"/>
+			
+<xs:element ref="cdm:billingSystemOrderNumber" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderItemType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:orderLineItemNumber"/>
+			
+<xs:element ref="cdm:stockKeepingUnit"/>
+			
+<xs:element ref="cdm:orderItemStatusCd"/>
+			
+<xs:element ref="cdm:orderItemQuantity"/>
+			
+<xs:element ref="cdm:backorderedQuantity" minOccurs="0"/>
+			
+<xs:element ref="cdm:orderItemCancelQuantity" minOccurs="0"/>
+			
+<xs:element ref="cdm:allocatedQuantity" minOccurs="0"/>
+			
+<xs:element ref="cdm:totalShippedQuantity" minOccurs="0"/>
+			
+<xs:element ref="cdm:shipProvisionedCode"/>
+			
+<xs:element ref="cdm:orderItemReturnReasonCode" minOccurs="0"/>
+			
+<xs:element ref="repiod:shipmentItem" minOccurs="0" maxOccurs="unbounded"/>
+			
+<xs:element ref="cdm:instruction" minOccurs="0" maxOccurs="40"/>
+			
+<xs:element ref="cdm:enterpriseLoginId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PostalAddressType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:postalAddressLine1"/>
+			
+<xs:element ref="cdm:postalAddressLine2" minOccurs="0"/>
+			
+<xs:element ref="cdm:postalAddressLine3" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PriceType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:priceAmount"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShipmentItemType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:actualShipDate" minOccurs="0"/>
+			
+<xs:element ref="cdm:shipmentTrackingNumber" minOccurs="0"/>
+			
+<xs:element ref="cdm:cdmaNetworkDevice" minOccurs="0"/>
+			
+<xs:element ref="cdm:idenNetworkDevice" minOccurs="0"/>
+			
+<xs:element ref="cdm:mediumAccessControlAddress" minOccurs="0"/>
+			
+<xs:element ref="cdm:iccId" minOccurs="0"/>
+			
+<xs:element ref="cdm:warehouseFacilityId" minOccurs="0"/>
+			
+<xs:element ref="cdm:urbanFleetMemberId" minOccurs="0"/>
+			
+<xs:element ref="repiod:handsetAssignmentNote" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<context:component-scan base-package="com.ericsson.cac.sprint.eai.sync" />
+	<context:component-scan base-package="com.ericsson.cac.sprint.eai.sync.common" />
+	<context:annotation-config/>
+
+	<!-- Defining Endpoints for MSDP API -->
+	<bean id="managementApi"
+		class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface"
+			value="com.drutt.ws.msdp.media.management.v3.MediaManagementApi" />
+		<property name="namespaceUri" value="http://ws.drutt.com/msdp/media/management/v3" />
+		<property name="serviceName" value="MediaManagementService" />
+		<property name="wsdlDocumentUrl" value="classpath:mngapi-v3.wsdl" />
+		<property name="endpointAddress" value="${managementApi.endpoint}" />
+		<property name="handlerResolver" ref="defaultHandlerResolver"></property>
+		<property name="username" value="${msdp.api.userName}"/>
+    	<property name="password" value="${msdp.api.password}"/>
+	</bean>
+	<bean id="mediaQueryApi"
+		class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+		<property name="serviceInterface"
+			value="com.drutt.ws.msdp.media.search.v2.IndexerSearchApi" />
+		<property name="namespaceUri" value="http://ws.drutt.com/msdp/media/search/v2" />
+		<property name="serviceName" value="IndexerSearchService" />
+		<property name="wsdlDocumentUrl" value="classpath:search-v2.1.wsdl" />
+		<property name="endpointAddress" value="${indexerSearch.endpoint}" />
+		<property name="handlerResolver" ref="defaultHandlerResolver"></property>
+	</bean>
+
+	<bean id="indexerSearchClient" class="com.ericsson.cac.sprint.eai.sync.client.IndexerSearchClientImpl">
+		<property name="indexerSearchService" ref="mediaQueryApi" />
+	</bean>
+	
+	<!-- <bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>application.properties</value>
+		</property>
+	</bean> -->
+	
+	 <bean name="configurations" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:application.properties</value>
+		</property>
+	</bean>
+
+	<bean id="defaultHandlerResolver"
+		class="com.ericsson.cac.sprint.eai.sync.common.DefaultHandlerResolver">
+		<property name="handlerList">
+			<list>
+				<bean class="com.ericsson.cac.sprint.eai.sync.common.LoggingHandler" />
+			</list>
+		</property>
+	</bean>
+
+	<import resource="classpath:spring-OrderFulfillmentProxyService.xml" />
+
+</beans>

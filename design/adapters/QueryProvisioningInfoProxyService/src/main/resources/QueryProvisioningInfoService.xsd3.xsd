@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryProgrammingInstructions/v1/queryProgrammingInstructions.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryProgrammingInstructions/v1/queryProgrammingInstructions.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	
+<!-- Date              Author                        Change                                                                               Rel                    SR# -->
+	
+<!--09/21/2011   Tracy Turner           1.0 initial version                                                      				GBL12.1		      PJ004940-->
+	
+<!--09/21/2011   Steve Heichelheim  1.0 added MVM standards and simple types                                                                    GBL12.1        PJ004940-->
+	
+<!--10/12/2011   Tracy Turner           1.1 Renamed instructionInfoType field to instructionInfo                                                   				GBL12.1		      PJ004940-->
+	
+<!--07/24/2011  Steve Heichelheim   1.2  Added prepaid instructions to response.  Re-appllied standards to instruction info    GBL12.3  PJ007217-->
+	
+<xs:element name="queryProgrammingInstructions" type="tns:QueryProgrammingInstructionsRequestType"/>
+	
+<xs:element name="queryProgrammingInstructionsResponse" type="tns:QueryProgrammingInstructionsResponseType"/>
+	
+<xs:complexType name="QueryProgrammingInstructionsRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" type="tns:ModelNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The item id or the SKU number of the item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="brandCode" type="tns:BrandCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>A 3 byte code denoting which brand the subscriber belongs to.
+‘BST’ - Boost 
+‘VMU’ – Virgin Mobile
+‘ASW’ – Assurance Wireless
+'SPR' - PostPaid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryProgrammingInstructionsResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" type="tns:ModelNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The item id or the SKU number of the item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:choice>
+				
+<xs:element name="instructionInfoList" type="tns:InstructionListType">
+					
+<xs:annotation>
+						
+<xs:documentation>List of programming instructions for the specified device returned for BST and SPR brands</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="prepaidInstructionInfo">
+					
+<xs:annotation>
+						
+<xs:documentation>List of programming instructions for the specified device returned for VMU and ASW brands</xs:documentation>
+					</xs:annotation>
+					
+<xs:complexType>
+						
+<xs:sequence>
+							
+<xs:element name="programmingInstructionsEng" type="tns:InstructionTextType">
+								
+<xs:annotation>
+									
+<xs:documentation>Programming instructions in English</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							
+<xs:element name="portProgrammingInstructionsEng" type="tns:InstructionTextType">
+								
+<xs:annotation>
+									
+<xs:documentation>Programming instructions for ported in MDN in English</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							
+<xs:element name="programmingInstructionsSpn" type="tns:InstructionTextType" minOccurs="0">
+								
+<xs:annotation>
+									
+<xs:documentation>Programming instructions in Spanish</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							
+<xs:element name="portProgrammingInstructionsSpn" type="tns:InstructionTextType" minOccurs="0">
+								
+<xs:annotation>
+									
+<xs:documentation>Programming instructions for ported in MDN in Spanish</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InstructionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="sequenceNumber" type="tns:InstructionSequenceNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The sequence number uniquely identifies each line of programming instructions relating to a specific device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="oneTimeKeypadSubsidyLockText" type="tns:InstructionTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>One line of instructions for programming device using the One Time Keypad Subsidy Lock.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="masterSubsidyLockText" type="tns:InstructionTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>One line of instructions for programming device using the Master Subsidy Lock (MSL).  MSL is a six-digit code used by CDMA phones as a way to program the phone.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InstructionListType">
+		
+<xs:sequence>
+			
+<xs:element name="InstructionInfo" type="tns:InstructionInfoType" maxOccurs="99">
+				
+<xs:annotation>
+					
+<xs:documentation>Programming instruction information about the item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidInstructionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="programmingInstructionsEng" type="tns:InstructionTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Programming instructions in English</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portProgrammingInstructionsEng" type="tns:InstructionTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Programming instructions for ported in MDN in English</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="programmingInstructionsSpn" type="tns:InstructionTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Programming instructions in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portProgrammingInstructionsSpn" type="tns:InstructionTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Programming instructions for ported in MDN in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="BrandCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Brand Code indicates which brand the subscriber belongs to. Possible brands represented include;  Sprint, Nextel, Boost, Virgin Mobile, and Clearwire</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InstructionSequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Instruction Sequence Number holds a number identifying the Instruction Text's ordinal position within a set of Instruction Text instances.  Instruction Sequence Number will increment with each occurrence of Instruction Text.  The instruction Sequence Number value is unique within the context of a set of Instuctions.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InstructionTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Instruction Text  holds the textual content of the instruction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

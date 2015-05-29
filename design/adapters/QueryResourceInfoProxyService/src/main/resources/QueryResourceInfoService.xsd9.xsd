@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryResourceHistoryByDevice/v1/queryResourceHistoryByDevice.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryResourceHistoryByDevice/v1/queryResourceHistoryByDevice.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:element name="queryResourceHistoryByDevice" type="tns:QueryResourceHistoryByDevice"/>
+	
+<xs:element name="queryResourceHistoryByDeviceResponse" type="tns:QueryResourceHistoryByDeviceResponse"/>
+	
+<!---->
+	
+<xs:complexType name="QueryResourceHistoryByDevice">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:Info"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="Info">
+		
+<xs:sequence>
+			
+<xs:element name="deviceSerialNumber" type="tns:EquipmentSerialNumberString">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.
+
+Equipment Serial Number is one of the following:
+
+Electronic Serial Number (ESN);
+
+Mobile Equipment IDentifier (MEID);
+
+International Mobile Equipment Identfier (IMEI);
+
+Subscriber Identify Module (SIM);
+
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceType" type="tns:ResourceTypeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Resource Type for which the Device history is being requested.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="EquipmentSerialNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier will contain one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfie (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>EquipmentSerialNumberType is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ResourceTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Resource Type for which the Device history is being requested.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="QueryResourceHistoryByDeviceResponse">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberList" type="tns:SubscriberList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberList">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfo" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfo">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceEffectiveDate" type="tns:EquipmentSerialNumberEffectiveFromDate">
+				
+<xs:annotation>
+					
+<xs:documentation>Device Effective From Date holds the first calendar day the ESN, MEID, or other equipment serial number of a device becomes active.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceExpirationDate" type="tns:EquipmentSerialNumberExpirationDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Device Expiration Date holds the last calendar Date the specific ESN, MEID, IMEI, etc is valid or in force.  After this date the Equipment Serial Number is no longer valid or in force.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceList" type="tns:ResourceList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="AccountNumberInt">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:AccountNumberInt"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberEffectiveFromDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number Effective From Date holds the first calendar day the ESN, MEID, or other equipment serial number of a device becomes active.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberExpirationDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number Expiration Date holds the last calendar Date the specific ESN, MEID, IMEI, etc is valid or in force.  After this date the Equipment Serial Number is no longer valid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:SubscriptionIdentifier"/>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="ResourceList">
+		
+<xs:sequence>
+			
+<xs:element name="resourceInfo" type="tns:ResourceInfo" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResourceInfo">
+		
+<xs:sequence>
+			
+<xs:element name="resourceType" type="tns:ResourceTypeCode">
+				
+<xs:annotation>
+					
+<xs:documentation>The resource type for which the history is required</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceNumber" type="tns:ResourceNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>The serial number of the resource. If the resource type is ‘P’ then the serialNumber will be populated with the PTN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityString">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceEffectiveDate" type="tns:EquipmentSerialNumberEffectiveFromDate">
+				
+<xs:annotation>
+					
+<xs:documentation>The effective date of the resource on the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceExpirationDate" type="tns:EquipmentSerialNumberExpirationDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The expiration date of the resource on the subscriber.
+Field is not populated if the resource is still active.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="associationEffectiveDate" type="tns:AssociationEffectiveDate">
+				
+<xs:annotation>
+					
+<xs:documentation>The effective date of the resource device association for the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="associationExpirationDate" type="tns:AssociationExpirationDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The expiration date of the resource device association. Field is not populated if the resource and the device are still active.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="AssociationEffectiveDate">
+		
+<xs:annotation>
+			
+<xs:documentation>The effective date of the resource device association for the subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AssociationExpirationDate">
+		
+<xs:annotation>
+			
+<xs:documentation>The expiration date of the resource device association. Field is not populated if the resource and the device are still active.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ResourceNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>The serial number of the resource. If the resource type is ‘P’ then the serialNumber will be populated with the PTN</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

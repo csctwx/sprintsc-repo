@@ -1,0 +1,1718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceSocList/v1/queryReferenceSocList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceSocList/v1/queryReferenceSocList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.0">
+	
+<!-- Date              Author                      Version   Change                                                                               Rel                    SR# -->
+	
+<!-- Change Log 
+       10/10/2008 - Added csa and subMarketCode for E3783.13.
+-->
+	
+<!--04/28/2009    Steve Heichelheim      2.0 added CorporationInfo structure                             GBL09.3.0.0         E4439-->
+	
+<!--06/21/2011    Dweepant Bakshi      3.0  Added in etfInfo( itemId and contractMonths in request, deviceTierCode, deviceTierDesc in response )                           GBL11.3 PJ005290-->
+	
+<!--06/21/2011  Steve Heichelheim      3.0  Updated Documentation,  applied simple types to new elements                                                         GBL11.3 PJ005290-->
+	
+<!--10/5/2011  Tracy Turner    			4.0  Updated Documentation,  removed enumeration restriction from specialInd, socLevelCode, ffPlanType & ltsGroup            GBL11.4 PJ004940  CS#499254-->
+	
+<xs:element name="queryReferenceSocList" type="tns:QueryReferenceSocListRequest"/>
+	
+<xs:element name="queryReferenceSocListResponse" type="tns:QueryReferenceSocListResponse"/>
+	
+<xs:complexType name="QueryReferenceSocListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="socList" type="tns:SocListResponse" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceSocListRequest">
+		
+<xs:sequence>
+			
+<xs:element name="socList" type="tns:SocList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AreaInfo">
+		
+<xs:choice>
+			
+<xs:element name="subMarketCode" type="tns:SubMarketCode">
+				
+<xs:annotation>
+					
+<xs:documentation>A code that uniquely identifies an particular geographic area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaId">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="AttributeInfo">
+		
+<xs:sequence>
+			
+<xs:element name="attribCode" type="tns:ServiceOrderAttributeValue">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc Attribute</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AttributeList">
+		
+<xs:sequence>
+			
+<xs:element name="attributeInfo" type="tns:AttributeInfo" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Attribute Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CorporationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="corpId" type="tns:CorporationIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Corporation Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Type Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Subtype Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Indicator
+Values:
+C – CDMA
+I  -  iDEN   ( I is also used for PowerSource or dual mode phones)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EtfInformation">
+		
+<xs:sequence>
+			
+<xs:element name="fetchEtfInfo" type="tns:FetchInformationFlag">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to indicate a request to fetch ETF Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contractStartDate" type="tns:ContractStartDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date from which the contract is effective</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areaInfo" type="tns:AreaInfo" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Choice of csa or subMarket to further identify a particular geographic area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="corporationInfo" type="tns:CorporationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional fields for fetching EtfInfo when a Corporate early termination fee may exist. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:ModelNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If sent in the input, ETF based on itemId will be sent in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contractMonths" type="tns:CommitmentPeriodMonthQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If sent in the input, contractEndDate and contractTotalMonths will be calculated using this value </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EtfInformationResponse">
+		
+<xs:sequence>
+			
+<xs:element name="contractStartDate" type="tns:ContractStartDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contract Effective Date for the input PP/SOC </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contractEndDate" type="tns:ContractEndDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contract End Date for the input PP/SOC
+Or based on itemId in the input</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contractTotalMonths" type="tns:CommitmentPeriodMonthQuantity" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total number of months for the input PP/SOC 
+Or based on itemId in the input</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfPolicyEffectiveDate" type="tns:EffectiveFromDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date in which the Pro-Rated ETF policy is effective for the inputPP/ SOC.
+Device Tier effective Date if etf based on itemId in the input</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfMethod" type="tns:EarlyTerminationFeeMethodCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Method used for calculating the early termination fee.
+Values:
+F (flat)
+P (pro-rated)
+C (contractual)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfAmount" type="tns:EarlyContractTerminationFee" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ETF Amount
+This value is the Monthly ETF Fee for early termination if pro-rated.  The Monthly ETF Fee is defined for contracts that were committed after the pro-rated ETF policy effective date based on the input PP/SOC Or based on itemId sent in the request  If etfMethod is F – Flat or C – Contractual, this value is the ETF Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfMaxAmount" type="tns:EarlyContractTerminationFee" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The maximum early termination fee that a subscriber can pay due to an earlier commitment termination based on the input PP/SOC or based on itemId sent in the request.
+Will not be returned if etfMethod = F or C</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfMinAmount" type="tns:EarlyContractTerminationFee" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The minimum early termination fee that a subscriber can pay due to an earlier commitment termination based on the input PP/SOC or based on itemId sent in the request.
+Will not be returned if etfMethod = F or C</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceTierCode" type="tns:DeviceEarlyTerminationFeeTierCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Tier code from ETF_TIER_DEFINITION for the input itemId</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceTierDesc" type="tns:DeviceEarlyTerminationFeeTierDescriptionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfo">
+		
+<xs:sequence>
+			
+<xs:element name="featureCode" type="tns:FeatureCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureDesc" type="tns:FeatureDescription">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Description.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishFeatureDesc" type="tns:FeatureDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>FEATURE.SPANISH_FTR_DESC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="oneTimeChargeInd" type="tns:NonRecurringChargeFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>show whether this is AC/UC/OC/RC type of feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalChargeInd" type="tns:AdditionalChargeFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>show whether this is AC/UC/OC/RC type of feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageChargeInd" type="tns:UsageChargeFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>show whether this is AC/UC/OC/RC type of feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringChargeInd" type="tns:MonthlyRecurringChargeFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>show whether this is AC/UC/OC/RC type of feature</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureList">
+		
+<xs:sequence>
+			
+<xs:element name="featureInfo" type="tns:FeatureInfo" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LtsRcInfo">
+		
+<xs:sequence>
+			
+<xs:element name="fromRank" type="tns:RankSequenceNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC_RC_RANK.FROM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="toRank" type="tns:RankSequenceNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC_RC_RANK.TO</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringCharge" type="tns:MonthlyRecurringCharge">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC_RC_RANK.RC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LtsRcList">
+		
+<xs:sequence>
+			
+<xs:element name="maxSubscribersAllowed" type="tns:MaximuSubscriberCount">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.LTS_MAX_SUB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ltsRecurringChargeInfo" type="tns:LtsRcInfo" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>LTS Recurring Charge Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MultiTierList">
+		
+<xs:sequence>
+			
+<xs:element name="tierInfo" type="tns:TierInfo" maxOccurs="5">
+				
+<xs:annotation>
+					
+<xs:documentation>Tier Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RateCard">
+		
+<xs:sequence>
+			
+<xs:element name="includedUnits" type="tns:UnitOfMeasureValue">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of units included in the tiered plan's base bucket.  For example, a "Fair and Flexible 800 Anytime" plan would have an includedUnits value of 800.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tierInfo" type="tns:TierInfoResponse" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>List of tier definitions for the plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfo">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Service Order Code - ensemble</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Service Order Code - ensemble</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socDesc" type="tns:ServiceOrderDescription">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.SOC_DESCRIPTION
+socCode description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishSocDesc" type="tns:ServiceOrderDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.SPANISH_SOC_DESC 
+socCode description in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hierarchyCode" type="tns:HierarchyAssociationCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.HIERARCHY_CODE
+
+H- Hierarchy
+N- Not Hierarchy
+B - Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socLevelCode" type="tns:ServiceOrderLevelCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>B - Ban Level C - MDN Level P - Product Level R - Resource Level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socProductClass" type="tns:ServiceOrderProductClass" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC Product class
+This contains a code for the product
+Example: Value ‘ARC’ indicates it’s a Airave Coverage SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cellularSupport" type="tns:ServiceOrderFeatureFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not this SOC has cellular features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispatchSupport" type="tns:ServiceOrderFeatureFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not this SOC has dispatch features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="packetDataSupport" type="tns:ServiceOrderFeatureFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not this SOC has packet data features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="riscInd" type="tns:RevenueImpactingFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not this is a RISC SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ffPlanType" type="tns:PlanTypeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>derived from SOC.FF_PLAN_TYPE and SOC.SHARE_TYPE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="m2hoType" type="tns:Mobile2HomeOfficeTypeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>M2H/O type, if the Soc is a M2H/O (Mobile to Home - Office)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc level network Indicator
+I  -  iDEN
+C – CDMA
+B - Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planTypeDesc" type="tns:PlanTypeDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Plan type  description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishPlanTypeDesc" type="tns:PlanTypeDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Plan type  description in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="addlPlanTypeDesc" type="tns:PlanTypeAdditionalText" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishAddlPlanTypeDesc" type="tns:PlanTypeAdditionalText" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional description in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="longDesc" type="tns:PlanTypeLongDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Long description of the plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishLongDesc" type="tns:PlanTypeLongDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Long description of the plan in Spanish</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="specialInd" type="tns:BoostVipFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the SOC is a Boost VIP SOC
+V- Indicates that the VIP SOC is entitled to a Loyalty Reward + Anniversary Reward 
+L - Indicates that the VIP SOC is entitled to Loyalty Reward only </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringCharge" type="tns:MonthlyRecurringCharge">
+				
+<xs:annotation>
+					
+<xs:documentation>The monthly recurring charge for the soc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="minimumMonths" type="tns:MinimumNoMonths" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.MINIMUM_NO_MONTHS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureList" type="tns:FeatureList">
+				
+<xs:annotation>
+					
+<xs:documentation>get from RATED_FEATURE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="multiTierPlanInd" type="tns:MultiTierPlanFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>FEATURE.FM_TYPE = 'B' and 'U' ? </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="multiTierList" type="tns:MultiTierList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>if multiTierPlanInd = true populate this structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ltsGroup" type="tns:LinesToSharePlanGroupTypeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC.LTS_GROUP_ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ltsRecurringChargeList" type="tns:LtsRcList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains Lts plan information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rateCard" type="tns:RateCard" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains tiered plan information for all tiered plans other than "Fair Plans"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="attributeList" type="tns:AttributeList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of  attributeInfo structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringChargeTaxExcludeInd" type="tns:TaxExemptFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether the Recurring Charge (RC) includes tax or not.
+true: indicates tax is excluded
+false: indicates tax is included</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="freeMonthEligibilityInd" type="tns:FreeMonthEligibilityFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the SOC is eligible for first free month</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="onetimeCharge" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>One time Charge amount </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prePaidPolicySetCode" type="tns:PrepaidPlanPolicySetCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Prepaid Plan Policy Set Code for a SOC. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prePaidPolicySetDesc" type="tns:PrepaidPlanPolicySetDescrption" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Prepaid Plan Policy Set Description  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="autoReplenishmentInd" type="tns:AutoReplenishmentFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is to identify whether the price plan offers auto-replenishment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfInfo" type="tns:EtfInformationResponse" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains contract and ETF  information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocList">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfo" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>1 to 20 socInfo records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="etfInfo" type="tns:EtfInformation" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains contract and ETF  information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoResponse" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc List information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TierInfo">
+		
+<xs:sequence>
+			
+<xs:element name="tierNumber" type="tns:TierNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Tier number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringCharge" type="tns:MonthlyRecurringCharge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The recurring charge amount applicable for this tier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TierInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="tierLevel" type="tns:TierLevel">
+				
+<xs:annotation>
+					
+<xs:documentation>Tier level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tierDesc" type="tns:TierDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Tier description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="spanishTierDesc" type="tns:TierDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PP_RC_RATE.SPANISH_TIER_DESC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fromUnits" type="tns:TierLimitUnits">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of units defining the lower limit (inclusive) of the tier.
+Note: The rate card represents "Additional Anytime Minutes". So, this value will be returned after subtracting the includedUnits.  For example, a tier representing 801 - 900 total minutes used in an F F 800 Anytime Minutes plan will return 1 in this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="toUnits" type="tns:TierLimitUnits" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of units defining the upper limit (inclusive) of the tier.  This field will not be provided for the final tier (since there is no upper bound for usage in that case).
+Note: The rate card represents "Additional Anytime Minutes". So, this value will be returned after subtracting the includedUnits.  For example, a tier representing 801 - 900 total minutes used in an F F 800 Anytime Minutes plan will return 100 in this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recurringCharge" type="tns:MonthlyRecurringCharge">
+				
+<xs:annotation>
+					
+<xs:documentation>The recurring charge amount applicable for this tier.
+Note: The value returned here is in addition to any amount specifed in the recurringCharge of the enclosing structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="overageRate" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The overage rate for units consumed in this tier.  This field will only be provided for the last tier.
+Note: The overageRate applies on top of the recurringCharge for the base plan and tier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="AdditionalChargeFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Additional Charge Flag indicates if the associated charge is an additional charge.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AutoReplenishmentFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Auto Replenishment flag is a boolean indicator of whether a SOC is a candidate for auto replenishment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account typeof the BILLING_QACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BoostVipFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Boost VIP Flag Indicates if the SOC is a Boost VIP SOC.
+Values: V – Loyalty Reward + Anniversary Reward, L- Loyalty Reward only, N - None, B - Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Charge">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommitmentPeriodMonthQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>The subscription agreement commitment represent the number of months committed to on the subscription.
+It is represented in number of months.
+Positive integer between 0 (included) and 99 (included).
+A zero value indicates that no commitment period will be applied to the subscriber regardless of the Price Plan and SOCs (products) ordered.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommitmentPeriodMonthQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>The subscription agreement commitment represent the number of months committed to on the subscription.
+It is represented in number of months.
+Positive integer between 0 (included) and 99 (included).
+A zero value indicates that no commitment period will be applied to the subscriber regardless of the Price Plan and SOCs (products) ordered.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaId">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContractEndDate">
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContractStartDate">
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CorporationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Corporation Identifer uniquely identifies a corporate entity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EarlyContractTerminationFee">
+		
+<xs:annotation>
+			
+<xs:documentation>Early Contract Termination Fee is the amount a Customer will owe if a contract or agreement is canceled before the fulfillment date.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EarlyTerminationFeeMethodCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Early Termination Fee Method Code indicates whether a termination fee is flat or prorated.
+Values:
+F - Flat
+P - Prorated</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureCode">
+		
+<xs:annotation>
+			
+<xs:documentation>The code of the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Description is a description of the feature.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FreeMonthEligibilityFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Free Month Eligibility Flag indicates if a soc is eleigible for the first month free.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HierarchyAssociationCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Hierarchy Association Code inicates how a BAN associated to the hierarchy.
+Values
+H - In a hierarchy
+N - Not in a hierarchy
+B - Both in a hierarchy AND not in a hierarchy
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="H">
+				
+<xs:annotation>
+					
+<xs:documentation>In a hierarchy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="N">
+				
+<xs:annotation>
+					
+<xs:documentation>Not in a hierarchy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="B">
+				
+<xs:annotation>
+					
+<xs:documentation>Both in a hierarchy AND not in a hierarchy</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LinesToSharePlanGroupTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Lines To Share Plan Group Type Code designates a plan group type.
+Values:
+A - Anytime
+N - Night and Weekend
+M - Mobile to Mobile
+R - Roaming
+F - Fair and Flex
+D - Call Credit
+X - Other</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+				
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MaximuSubscriberCount">
+		
+<xs:annotation>
+			
+<xs:documentation>Maximum Subscriber Count is the maximum number of subscribers for the associated account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MinimumNoMonths">
+		
+<xs:annotation>
+			
+<xs:documentation>Minimum No Months is the Minimum number of months for a contract term.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Mobile2HomeOfficeTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile 2 Home Office Type Code identifies if the Soc is a M2H/O (Mobile to Home - Office)
+Values:
+H - M2H (Mobile to Home)
+O - M2O (Mobile to office)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="H">
+				
+<xs:annotation>
+					
+<xs:documentation>M2H (Mobile to Home)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="O">
+				
+<xs:annotation>
+					
+<xs:documentation>M2O (Mobile to office)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MonthlyRecurringCharge">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Monthly Recurring Charge holds the base dollar amount billed to the Customer every month for a service.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:Charge">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MonthlyRecurringChargeFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Monthly Recurring Charge Flag indicates if the associated charge is recurring.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MultiTierPlanFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Multi Tier Plan Flag identifies whether a SOC has a feature that has  supports multiple tiers (for fair price plans).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.
+Values:
+I - iDEN
+C - CDMA
+B - Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="I">
+				
+<xs:annotation>
+					
+<xs:documentation>iDEN</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="B">
+				
+<xs:annotation>
+					
+<xs:documentation>Both (iDEN and CDMA)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="C">
+				
+<xs:annotation>
+					
+<xs:documentation>CDMA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The network type code identifies which network the subscriber is associated to.
+Possible values:
+C - CDMA
+I - IDEN</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="I"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NonRecurringChargeFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Non Recurring Charge Flag indicates if the associated charge is one-time.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanTypeAdditionalText">
+		
+<xs:annotation>
+			
+<xs:documentation>Plan Type Additional Description is additional text associated to a plan type.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Plan Type Code identifies what type of plan/soc it is.
+Values:
+P – Fair and Flexible Family Primary
+A – Fair and Flexible Family Add-on
+I – Fair and Flexible Individual
+S – Sharing Primay
+T – Sharing Add-on
+L – LTS SOC
+H -- Hybrid
+R - Regular</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanTypeDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Plan Type Description is a description of a plan type.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanTypeLongDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Plan Type Long Description is a long, more detailed description of a plan type.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="800"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrepaidPlanPolicySetCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Prepaid Plan Policy Set Code designates a prepaid plan policy for a SOC.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrepaidPlanPolicySetDescrption">
+		
+<xs:annotation>
+			
+<xs:documentation>Prepaid Plan Policy Set Description is descriptive text associated to a Prepaid Plan Policy Set Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RankSequenceNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Rank Sequence Number is an integer that assigns a rank to an item within a group of items.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RevenueImpactingFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Revenue Impacting Flag is a boolean indicator of whether the associated  SOC is revenue impacting.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderAttributeValue">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Attribute Value is an attribute related to a SOC. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description is a description of the product defined by a service order code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderFeatureFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Feature Flag is a boolean indicator of whether the associated feature exists for the SOC.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderLevelCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Level Code indicates whether the Price Plan or the SOC is at a MDN level, at a BAN level or at a Product Level.
+Values:
+B - Ban Level
+C - MDN Level
+P - Product Level
+R - Resource Level</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+				
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderProductClass">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Product Class contains a code for the product
+Example: Value ‘ARC’ indicates it’s a Airave Coverage SOC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Submarket is a geographic, economic, or specialized subdivision of a market.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxExemptFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Exempt Flag indicates whether an associated charge is exempt from tax charges.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Tier Description is text that describes a tier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierLevel">
+		
+<xs:annotation>
+			
+<xs:documentation>Tier Level designates the level at which a tier is (1-99).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierLimitUnits">
+		
+<xs:annotation>
+			
+<xs:documentation>Tier Limit Units is the number of units defining a tier boundary.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Tier Number designates a specific tier for the fair rate plans.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValue">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageChargeFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Charge Flag indicates if the associated charge is usage-based.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="DeviceEarlyTerminationFeeTierCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Early Termination Fee Tier Code uniquely identifies a tier in which the Early Termination Fee (ETF) would be charged based upon which device is being purchased and the life of the contract.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceEarlyTerminationFeeTierDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Early Termination Fee Tier Description describes a tier in which the Early Termination Fee (ETF) would be charged based upon which device is being purchased and the life of the contract.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

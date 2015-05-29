@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryConsentedCustomerInfo/v1/queryConsentedCustomerInfo.xsd" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="http://integration.sprint.com/interfaces/queryConsentedCustomerInfo/v1/queryConsentedCustomerInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1" vc:minVersion="1.1">
+	
+<!-- Date                 Author                      Version     Change                                                                                        Rel                          SR# -->
+	
+<!--08/22/2013      Vijay Ainapurapu       1.0             Initial Draft                                                                                                                  PJ012703-->
+	
+<!--08/22/2013      Adon Powell              1.0             Standardize / Add Simple Types                                                                                PJ012703-->
+	
+<!--08/22/2013      Adon Powell              1.0             ban changed to int9, creditclass enums removed                                                     PJ012703-->
+	
+<!--08/25/2013      Vijay Ainapurapu       1.1             Updated draft                                                                                                            PJ012703-->
+	
+<!--08/25/2013      Adon Powell              1.1             standardize                                                                                                               PJ012703-->
+	
+<!---->
+	
+<xs:element name="queryConsentedCustomerInfo" type="tns:QueryConsentedCustomerInfoType">
+		
+<xs:annotation>
+			
+<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryConsentedCustomerInfoResponse" type="tns:QueryConsentedCustomerInfoResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryConsentedCustomerInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:InfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing input  information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryConsentedCustomerInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number of the Customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountActivationDate" type="tns:ActivationDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The date the account was activated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activeSubscriberCount" type="tns:ActiveSubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of active Subscribers currently under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nameInfo" type="tns:NameInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the Subscriber’s name information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberActivationDate" type="tns:ActivationDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The date the subscription, for the MDN passed in the request, was activated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberUpgradeEligibilityInd" type="tns:UpgradeEligibleFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that states if the subscriber is currently eligible for an upgrade(T/F)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditClassification" type="tns:CreditClassCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint’s classification of the Customer’s credit class (PRIME/SUBPRIME)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentlyPastDueInd" type="tns:PastDueFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that shows if the Account is currently past due (T/F)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pastDueWithin1YearInd" type="tns:ConditionFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that shows if the Account was past due anytime during the past 1 year(T/F)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="invoiceList" type="tns:InvoiceListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of invoiceInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NameInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First Name of the Account holder</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="middleName" type="tns:MiddleNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Middle Name of the Account holder</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:LastNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Last Name of the Account holder</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InvoiceListType">
+		
+<xs:sequence>
+			
+<xs:element name="invoiceInfo" type="tns:InvoiceInfoType" maxOccurs="12">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing invoice information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InvoiceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="billDate" type="tns:InvoiceDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Bill date – when the bill was produced, this is printed on the paper invoice.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pastDue" type="tns:PastDueBalanceAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The amount that was past due as of that date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     Shared SimpleTypes-->
+	
+<xs:simpleType name="ActiveSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Active Subscriber Count is the current number of subscribers for a given account or group of accounts.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ActivationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activation Date holds the calendar month, day and year Network access is given to a MDN, NAI or piece of equipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConditionFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Condition Flag is a boolean that indicates the presense of the related condition. 
+Valid Values: 
+true - condition exists, 
+false - condition does not exist</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Code identifies the Customer's level of financial responsibility.   
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required deposit and the amount of the deposit, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InvoiceDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Invoice Date is the date on which the invoice is produced.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			
+<xs:documentation>alias: Surname</xs:documentation>
+			
+<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MiddleNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PastDueBalanceAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Past Due Balance Amount represents the balance that is outstanding after the designated due date. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="14"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PastDueFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Past Due Flag is a boolean indicator of whether the account or balance is past due.
+Valid Values: 
+true - Past Due, 
+false - Not Past Due</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UpgradeEligibleFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Upgrade Eligible Flag is a boolean indicator of whether the device, customer or plan is ineligible for an upgrade.
+Valid Values:
+true - the device, customer or plan is eligible, 
+false - the device, customer or plan is NOT eligible</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<!---->
+	
+<!---->
+</xs:schema>

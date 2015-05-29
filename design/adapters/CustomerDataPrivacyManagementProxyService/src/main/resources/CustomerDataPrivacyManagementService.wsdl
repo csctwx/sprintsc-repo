@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/CustomerDataPrivacyManagementService/v1/CustomerDataPrivacyManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/CustomerDataPrivacyManagementService/v1/CustomerDataPrivacyManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd4.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd5.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryOptInfo/v1/queryOptInfo.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryUserPermission/v1/queryUserPermission.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/queryUserPreferencesInfo/v2/queryUserPreferencesInfoV2.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/updateOptInfo/v1/updateOptInfo.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/updateUserPermission/v1/updateUserPermission.xsd"/>
+<xsd:import schemaLocation="CustomerDataPrivacyManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/updateUserPreferencesInfo/v2/updateUserPreferencesInfoV2.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="QueryOptInfoRequest">
+<wsdl:part name="QueryOptInfoRequest" element="xsns:queryOptInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryOptInfo/v1/queryOptInfo.xsd"/></wsdl:message>
+<wsdl:message name="QueryOptInfoResponse">
+<wsdl:part name="QueryOptInfoResponse" element="xsns:queryOptInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryOptInfo/v1/queryOptInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryUserPermission">
+<wsdl:part name="parameter" element="xsns:queryUserPermission" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserPermission/v1/queryUserPermission.xsd"/></wsdl:message>
+<wsdl:message name="queryUserPermissionResponse">
+<wsdl:part name="parameter" element="xsns:queryUserPermissionResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserPermission/v1/queryUserPermission.xsd"/></wsdl:message>
+<wsdl:message name="QueryUserPreferencesInfoV2Request">
+<wsdl:part name="QueryUserPreferencesInfoV2Request" element="xsns:queryUserPreferencesInfoV2" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserPreferencesInfo/v2/queryUserPreferencesInfoV2.xsd"/></wsdl:message>
+<wsdl:message name="QueryUserPreferencesInfoV2Response">
+<wsdl:part name="QueryUserPreferencesInfoResponseV2" element="xsns:queryUserPreferencesInfoV2Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryUserPreferencesInfo/v2/queryUserPreferencesInfoV2.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="UpdateOptInfoRequest">
+<wsdl:part name="UpdateOptInfoRequest" element="xsns:updateOptInfo" xmlns:xsns="http://integration.sprint.com/interfaces/updateOptInfo/v1/updateOptInfo.xsd"/></wsdl:message>
+<wsdl:message name="UpdateOptInfoResponse">
+<wsdl:part name="UpdateOptInfoResponse" element="xsns:updateOptInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateOptInfo/v1/updateOptInfo.xsd"/></wsdl:message>
+<wsdl:message name="updateUserPermission">
+<wsdl:part name="parameter" element="xsns:updateUserPermission" xmlns:xsns="http://integration.sprint.com/interfaces/updateUserPermission/v1/updateUserPermission.xsd"/></wsdl:message>
+<wsdl:message name="updateUserPermissionResponse">
+<wsdl:part name="parameter" element="xsns:updateUserPermissionResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateUserPermission/v1/updateUserPermission.xsd"/></wsdl:message>
+<wsdl:message name="UpdateUserPreferencesInfoV2Request">
+<wsdl:part name="UpdateUserPreferencesInfoRequestV2" element="xsns:updateUserPreferencesInfoV2" xmlns:xsns="http://integration.sprint.com/interfaces/updateUserPreferencesInfo/v2/updateUserPreferencesInfoV2.xsd"/></wsdl:message>
+<wsdl:message name="UpdateUserPreferencesInfoV2Response">
+<wsdl:part name="UpdateUserPreferencesInfoV2Response" element="xsns:updateUserPreferencesInfoV2Response" xmlns:xsns="http://integration.sprint.com/interfaces/updateUserPreferencesInfo/v2/updateUserPreferencesInfoV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeaderV2">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="CustomerDataPrivacyManagementServicePortType">
+<wsdl:operation name="QueryOptInfo">
+<wsdl:input name="QueryOptInfoRequest" message="ns0:QueryOptInfoRequest"/>
+<wsdl:output name="QueryOptInfoResponse" message="ns0:QueryOptInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryUserPermission">
+<wsdl:input name="QueryUserPermissionRequest" message="ns0:queryUserPermission"/>
+<wsdl:output name="QueryUserPermissionResponse" message="ns0:queryUserPermissionResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryUserPreferencesInfoV2">
+<wsdl:input name="QueryUserPreferencesInfoV2Request" message="ns0:QueryUserPreferencesInfoV2Request"/>
+<wsdl:output name="QueryUserPreferencesInfoV2Response" message="ns0:QueryUserPreferencesInfoV2Response"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateOptInfo">
+<wsdl:input name="UpdateOptInfoRequest" message="ns0:UpdateOptInfoRequest"/>
+<wsdl:output name="UpdateOptInfoResponse" message="ns0:UpdateOptInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateUserPermission">
+<wsdl:input name="UpdateUserPermissionRequest" message="ns0:updateUserPermission"/>
+<wsdl:output name="UpdateUserPermissionResponse" message="ns0:updateUserPermissionResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateUserPreferencesInfoV2">
+<wsdl:input name="UpdateUserPreferencesInfoV2Request" message="ns0:UpdateUserPreferencesInfoV2Request"/>
+<wsdl:output name="UpdateUserPreferencesInfoV2Response" message="ns0:UpdateUserPreferencesInfoV2Response"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="CustomerDataPrivacyManagementServiceSOAPBinding" type="ns0:CustomerDataPrivacyManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryOptInfo">
+<soap11:operation soapAction="QueryOptInfo" style="document"/>
+<wsdl:input name="QueryOptInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryOptInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryUserPermission">
+<soap11:operation soapAction="QueryUserPermission" style="document"/>
+<wsdl:input name="QueryUserPermissionRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryUserPermissionResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryUserPreferencesInfoV2">
+<soap11:operation soapAction="QueryUserPreferencesInfoV2" style="document"/>
+<wsdl:input name="QueryUserPreferencesInfoV2Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryUserPreferencesInfoV2Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateOptInfo">
+<soap11:operation soapAction="UpdateOptInfo" style="document"/>
+<wsdl:input name="UpdateOptInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateOptInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateUserPermission">
+<soap11:operation soapAction="UpdateUserPermission" style="document"/>
+<wsdl:input name="UpdateUserPermissionRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateUserPermissionResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateUserPreferencesInfoV2">
+<soap11:operation soapAction="UpdateUserPreferencesInfoV2" style="document"/>
+<wsdl:input name="UpdateUserPreferencesInfoV2Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateUserPreferencesInfoV2Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="CustomerDataPrivacyManagementService">
+<wsdl:port name="CustomerDataPrivacyManagementServicePortType" binding="ns0:CustomerDataPrivacyManagementServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/CustomerDataPrivacyManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

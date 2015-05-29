@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryUserPermission/v1/queryUserPermission.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryUserPermission/v1/queryUserPermission.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	
+<!-- Date              Author                         Version     Change                                                                                               Rel                          SR# -->
+	
+<!--01/27/2010    A. Fernandes            1.0             Initial Draft                                                                                        GBL10.4                  PJ002221-->
+	
+<!--03/31/2010  Steve Heichelheim      1.0            Applied MVM standards and simple types                                        GBL10.4                  PJ002221-->
+	
+<!--06/23/2010  Steve Heichelheim      1.1          renamed elements, removed elements, added userIdType                GBL10.4                  PJ002221-->
+	
+<!--06/23/2010  Steve Heichelheim      1.2          Added a permissionList structure                                                      MID12.1            PJ007376 PJ007331-->
+	
+<!--04/13/2012  Amber Peppers           1.3         Added a minLength of 4 to permissionType                                        MID12.1            PJ007376 PJ007331-->
+	
+<xs:element name="queryUserPermission" type="tns:QueryUserPermissionType"/>
+	
+<xs:element name="queryUserPermissionResponse" type="tns:QueryUserPermissionResponseType"/>
+	
+<xs:complexType name="QueryUserPermissionType">
+		
+<xs:sequence>
+			
+<xs:element name="userInfo" type="tns:UserInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the user for each the permission/consent is being veirified.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="permissionType">
+				
+<xs:annotation>
+					
+<xs:documentation>This element holds the action been verified on CDPM. </xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:TransactionTypeCodeType">
+						
+<xs:minLength value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="permissionList" type="tns:PermissionListType">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure holds 1 to many permissionInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="authenticationInfo" type="tns:AuthenticationInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the authentication in CDPM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryUserPermissionResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="permissionResultList" type="tns:PermissionResultListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AssertionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="requestorType">
+				
+<xs:annotation>
+					
+<xs:documentation>The type requestor id.
+Sample Values
+MDN
+NAI
+PTT NAI
+SUBSCRIPTION
+ADMIN DOMAIN
+CORPORATE CUSTOMER ADMIN
+THIRD PARTY APPLICATION</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UserIdentifierTypeCodeType">
+						
+<xs:maxLength value="24"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AuthenticationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="requestorId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requestor’s unique
+identifier. Example:  MDN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="realm" type="tns:ControlListLoginIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Authoritative authenticating system. The system that validated the subject id.
+Possible values:
+ESS
+SITEMINDER
+SWSS
+EKS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="roleList" type="tns:RoleListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sequence of 1 to many Authentication_Roles records.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="assertions" type="tns:AssertionInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional information
+about the requestor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PermissionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="permissionId" type="tns:ProtectedResourceIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the
+resource/permission to which the
+user has requested
+access to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="permissionOwnerId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The permission owner ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="permissionOwnerType" type="tns:UserIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of permission owner.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PermissionListType">
+		
+<xs:sequence>
+			
+<xs:element name="permissionInfo" type="tns:PermissionInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the  resourceId/permission that is being verified.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PermissionResultInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="decision" type="tns:PermissionDecisionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Authorization decision. Possible values: Permit, Deny, Indeterminate, NotApplicable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="permissionId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The identifier of requested resource/permission</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="permissionOwnerId" type="tns:UserIdentifierType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PermissionResultListType">
+		
+<xs:sequence>
+			
+<xs:element name="permissionResult" type="tns:PermissionResultInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RoleListType">
+		
+<xs:sequence>
+			
+<xs:element name="roleInfo" type="tns:RoleInfoType" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RoleInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="role" type="tns:ControlListRoleTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Can take one of the following values:
+AccountHolder          
+Subscriber             
+ThirdPartyApplication
+ApplicationProvider    
+TrustedBusinessPartner
+DataMiner              
+TroubleShooter         
+DatabaseAdministrator  
+InternalApplication    
+LawEnforcement         
+EnterpriseCustomer     
+TPA                    
+TelecomMgrAdmin        
+TelecomMgr             
+CustomerCareAdvocate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UserInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="userId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Id of the user for each the permission/consent is being verified.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userIdType" type="tns:ControlListLoginIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The type information of user Id.
+possible value is:
+-	devicenumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple types-->
+	
+<xs:simpleType name="ControlListLoginIdentifierTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Control List Login Identifier Type Code designates a type of Login Identifier of a voice control block list.
+Sample values:
+MDN
+NAI
+AD
+ESS
+PTT_NAI
+TELCO_MANAGER
+TPA</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ControlListRoleTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Control List Role Type Code designates a type of role a party assumes when performing action on a voice control block list.
+Sample values:
+AccountHolder          
+Subscriber             
+ThirdPartyApplication
+ApplicationProvider    
+TrustedBusinessPartner
+DataMiner              
+TroubleShooter         
+DatabaseAdministrator  
+InternalApplication    
+LawEnforcement         
+EnterpriseCustomer     
+TPA                    
+TelecomMgrAdmin        
+TelecomMgr             
+CustomerCareAdvocate</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="22"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PermissionDecisionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Permission Decision Type Code designates a decision made on a specific permission request.
+Possible values include:
+Permit
+Deny
+Indeterminate
+NotApplicable</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProtectedResourceIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Protected Resource Identifier uniquely identifies a resource that is being protected.  The associated resource could be a file, link, directory, folder, database object, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier Type Code designates a specific type of user identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

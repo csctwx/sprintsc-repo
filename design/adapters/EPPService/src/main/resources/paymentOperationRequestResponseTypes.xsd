@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentOperationRequestResponseTypes.xsd"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema">
+
+	<simpleType name="PaymentOperationType">
+		<restriction base="string">
+			<enumeration value="authAndCapturePayment" />
+			<enumeration value="authorizePayment" />
+			<enumeration value="capturePayment" />
+			<enumeration value="refundPayment" />
+			<enumeration value="cancelAuthorizePayment" />
+			<enumeration value="generatePreOrderToken" />
+			<enumeration value="tokenLookUp" />
+			<enumeration value="getPaymentList" />
+			<enumeration value="getPaymentDetails" />
+			<enumeration value="prepaidRechargePayment" />
+		</restriction>
+	</simpleType>
+
+</schema>

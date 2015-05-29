@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/checkSubscriberUfpEligibility/v1/checkSubscriberUfpEligibility.xsd" targetNamespace="http://integration.sprint.com/interfaces/checkSubscriberUfpEligibility/v1/checkSubscriberUfpEligibility.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	<!--08/10/2011    Aline Kawakami           1.0         Created first version of checkSubscriberUfpEligibility API                                       GBL11.4           PJ4940 Chapter 16            -->
+	<!--08/16/2011   Steve Heichelheim     1.0       Added MVM standards and simple types                                            GBL11.4           PJ4940 Chapter 16            -->
+	<!--09/28/2011   Steve Heichelheim     1.0       Added callingApplicationInfo and zipCode to request                   GBL11.4           PJ4940 Chapter 16            -->
+	<xs:element name="checkSubscriberUfpEligibility" type="tns:CheckSubscriberUfpEligibilityRequestType">
+		<xs:annotation>
+			<xs:documentation>UFP - Upgrade Frequency Program</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="checkSubscriberUfpEligibilityResponse" type="tns:CheckSubscriberUfpEligibilityResponseType"/>
+	<xs:complexType name="CheckSubscriberUfpEligibilityRequestType">
+		<xs:sequence>
+			<xs:element name="callingApplicationInfo" type="tns:CallingApplicationInfoRequestType">
+				<xs:annotation>
+					<xs:documentation>Calling Application Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipCode" type="tns:PostalCodeStringType">
+				<xs:annotation>
+					<xs:documentation>Customer’s billing zip code on account must be provided in order to provide rebate eligibility online in conjunction with phone number, which will be used as part of customer authentication.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>MDN will be the required field used as searchCriteria by this API. MDN is the customer’s phone number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CheckSubscriberUfpEligibilityResponseType">
+		<xs:sequence>
+			<xs:element name="eligibleInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>This flag indicates if Subscriber is currently eligible for a discounted device upgrade (true) or if Subscriber is currently ineligible (false)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleDate" type="tns:UpgradeEligibilityDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If subscriber is ineligible, the date when they will become eligible, if eligible date in the past if they are fully eligible or date in the future when they will become fully eligible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibilityCode" type="tns:RebateEligibilityCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provided if subscriber is eligible, unique value that describes eligibility</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingApplicationInfoRequestType">
+		<xs:sequence>
+			<xs:element name="pin" type="tns:PasswordPinType">
+				<xs:annotation>
+					<xs:documentation>Calling application PIN, required for first validation required by OVM. Mapped to OVM header field pin.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vendorCode" type="tns:VendorCodeType">
+				<xs:annotation>
+					<xs:documentation>Calling application Vendor Code, required for first validation required by OVM. Mapped to OVM header field vendor-code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberInfoResponseType">
+		<xs:sequence>
+			<xs:element name="upgradeInfo" type="tns:UpgradeInfoResponseType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure that contains upgrade information and Ufp eligibility result</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpgradeInfoResponseType">
+		<xs:sequence>
+			<xs:element name="eligibleInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>This flag indicates if Subscriber is currently eligible for a discounted device upgrade (true) or if Subscriber is currently ineligible (false)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleDate" type="tns:UpgradeEligibilityDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If subscriber is ineligible, the date when they will become eligible, if eligible date in the past if they are fully eligible or date in the future when they will become fully eligible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibilityCode" type="tns:RebateEligibilityCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provided if subscriber is eligible, unique value that describes eligibility</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PasswordPinType">
+		<xs:annotation>
+			<xs:documentation>Password PIN holds the string characters designated as a Password into a system or Customer Account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalCodeStringType">
+		<xs:annotation>
+			<xs:documentation>Postal Code String is the string representation of a USPS Postal Code with optional extension.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="5"/>
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RebateEligibilityCodeType">
+		<xs:annotation>
+			<xs:documentation>Rebate Eligilibility Code identifies the Rebate Term allowing the rebate to the Customer.
+Valid Values Include:
+2RLOF2 - $150 for 23+ mo upgrade 2yr contract.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UpgradeEligibilityDateType">
+		<xs:annotation>
+			<xs:documentation>Upgrade Eligibility Date is the calendar date on which a piece of equipment is eligible for an upgrade.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="VendorCodeType">
+		<xs:annotation>
+			<xs:documentation>Vendor Code in combination with the PIN uniquely differentiates the system
+(channel) calling Order Verification Management (Best Buy, Walmart, RMS, 
+boostmobile, SOTS, OAR’s, BSPs, Telespree, etc). Each partner has its own 
+unique vendor code and pin combination.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!---->
+</xs:schema>

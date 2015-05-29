@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QueryAccountInfoService/v1/QueryAccountInfoService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QueryAccountInfoService/v1/QueryAccountInfoService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd14.xsd" namespace="http://integration.sprint.com/common/ErrorDetails.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd15.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd12.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v1"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd13.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountBasicInfo/v1/queryAccountBasicInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountCreditInfo/v1/queryAccountCreditInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountIdentityInfo/v1/queryAccountIdentityInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd18.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountPoolingList/v1/queryAccountPoolingList.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountSecurityInfo/v1/queryAccountSecurityInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountServices/v1/queryAccountServices.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd17.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountSharingGroupDetails/v1/queryAccountSharingGroupDetails.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd16.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountSharingGroupList/v1/queryAccountSharingGroupList.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountSubscriberList/v2/queryAccountSubscriberListV2.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/queryAffinityInfo/v1/queryAffinityInfo.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryBundledSubscriberList/v1/queryBundledSubscriberList.xsd"/>
+<xsd:import schemaLocation="QueryAccountInfoService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/searchAccountList/v1/searchAccountList.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryAccountBasicInfo">
+<wsdl:part name="parameters" element="xsns:queryAccountBasicInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountBasicInfo/v1/queryAccountBasicInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountBasicInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountBasicInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountBasicInfo/v1/queryAccountBasicInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountCreditInfo">
+<wsdl:part name="parameters" element="xsns:queryAccountCreditInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountCreditInfo/v1/queryAccountCreditInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountCreditInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountCreditInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountCreditInfo/v1/queryAccountCreditInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountDetailInfoRequest">
+<wsdl:part name="queryAccountDetailInfoRequest" element="xsns:queryAccountDetailInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountDetailInfoResponse">
+<wsdl:part name="queryAccountDetailInfoResponse" element="xsns:queryAccountDetailInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountIdentityInfo">
+<wsdl:part name="parameters" element="xsns:queryAccountIdentityInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountIdentityInfo/v1/queryAccountIdentityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountIdentityInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountIdentityInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountIdentityInfo/v1/queryAccountIdentityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountPoolingList">
+<wsdl:part name="parameters" element="xsns:queryAccountPoolingList" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountPoolingList/v1/queryAccountPoolingList.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountPoolingListResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountPoolingListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountPoolingList/v1/queryAccountPoolingList.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSecurityInfo">
+<wsdl:part name="parameters" element="xsns:queryAccountSecurityInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSecurityInfo/v1/queryAccountSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSecurityInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountSecurityInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSecurityInfo/v1/queryAccountSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountServices">
+<wsdl:part name="parameters" element="xsns:queryAccountServices" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountServices/v1/queryAccountServices.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountServicesResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountServicesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountServices/v1/queryAccountServices.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSharingGroupDetails">
+<wsdl:part name="parameters" element="xsns:queryAccountSharingGroupDetails" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSharingGroupDetails/v1/queryAccountSharingGroupDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSharingGroupDetailsResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountSharingGroupDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSharingGroupDetails/v1/queryAccountSharingGroupDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSharingGroupList">
+<wsdl:part name="parameters" element="xsns:queryAccountSharingGroupList" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSharingGroupList/v1/queryAccountSharingGroupList.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSharingGroupListResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountSharingGroupListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSharingGroupList/v1/queryAccountSharingGroupList.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSubscriberListV2">
+<wsdl:part name="parameters" element="xsns:queryAccountSubscriberListV2" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSubscriberList/v2/queryAccountSubscriberListV2.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountSubscriberListV2Response">
+<wsdl:part name="parameters" element="xsns:queryAccountSubscriberListV2Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountSubscriberList/v2/queryAccountSubscriberListV2.xsd"/></wsdl:message>
+<wsdl:message name="queryAffinityInfo">
+<wsdl:part name="parameters" element="xsns:queryAffinityInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryAffinityInfo/v1/queryAffinityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryAffinityInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryAffinityInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAffinityInfo/v1/queryAffinityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryBundledSubscriberList">
+<wsdl:part name="parameters" element="xsns:queryBundledSubscriberList" xmlns:xsns="http://integration.sprint.com/interfaces/queryBundledSubscriberList/v1/queryBundledSubscriberList.xsd"/></wsdl:message>
+<wsdl:message name="queryBundledSubscriberListResponse">
+<wsdl:part name="parameters" element="xsns:queryBundledSubscriberListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryBundledSubscriberList/v1/queryBundledSubscriberList.xsd"/></wsdl:message>
+<wsdl:message name="searchAccountList">
+<wsdl:part name="parameters" element="xsns:searchAccountList" xmlns:xsns="http://integration.sprint.com/interfaces/searchAccountList/v1/searchAccountList.xsd"/></wsdl:message>
+<wsdl:message name="searchAccountListResponse">
+<wsdl:part name="parameters" element="xsns:searchAccountListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/searchAccountList/v1/searchAccountList.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetails.xsd"/></wsdl:message>
+<wsdl:message name="soapFaultv2">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v1"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryAccountInfoPortType">
+<wsdl:operation name="QueryAccountBasicInfo">
+<wsdl:input name="QueryAccountBasicInfoRequest" message="ns0:queryAccountBasicInfo"/>
+<wsdl:output name="QueryAccountBasicInfoResponse" message="ns0:queryAccountBasicInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountCreditInfo">
+<wsdl:input name="QueryAccountCreditInfoRequest" message="ns0:queryAccountCreditInfo"/>
+<wsdl:output name="QueryAccountCreditInfoResponse" message="ns0:queryAccountCreditInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountDetailInfo">
+<wsdl:input name="QueryAccountDetailInfoRequest" message="ns0:queryAccountDetailInfoRequest"/>
+<wsdl:output name="QueryAccountDetailInfoResponse" message="ns0:queryAccountDetailInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryAccountIdentityInfo">
+<wsdl:input name="QueryAccountIdentityInfoRequest" message="ns0:queryAccountIdentityInfo"/>
+<wsdl:output name="QueryAccountIdentityInfoResponse" message="ns0:queryAccountIdentityInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountPoolingList">
+<wsdl:input name="QueryAccountPoolingListRequest" message="ns0:queryAccountPoolingList"/>
+<wsdl:output name="QueryAccountPoolingListResponse" message="ns0:queryAccountPoolingListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountSecurityInfo">
+<wsdl:input name="QueryAccountSecurityInfoRequest" message="ns0:queryAccountSecurityInfo"/>
+<wsdl:output name="QueryAccountSecurityInfoResponse" message="ns0:queryAccountSecurityInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountServices">
+<wsdl:input name="QueryAccountServicesRequest" message="ns0:queryAccountServices"/>
+<wsdl:output name="QueryAccountServicesResponse" message="ns0:queryAccountServicesResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountSharingGroupDetails">
+<wsdl:input name="QueryAccountSharingGroupDetailsRequest" message="ns0:queryAccountSharingGroupDetails"/>
+<wsdl:output name="QueryAccountSharingGroupDetailsResponse" message="ns0:queryAccountSharingGroupDetailsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountSharingGroupList">
+<wsdl:input name="QueryAccountSharingGroupListRequest" message="ns0:queryAccountSharingGroupList"/>
+<wsdl:output name="QueryAccountSharingGroupListResponse" message="ns0:queryAccountSharingGroupListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountSubscriberListV2">
+<wsdl:input name="QueryAccountSubscriberListV2Request" message="ns0:queryAccountSubscriberListV2"/>
+<wsdl:output name="QueryAccountSubscriberListV2Response" message="ns0:queryAccountSubscriberListV2Response"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAffinityInfo">
+<wsdl:input name="QueryAffinityInfoRequest" message="ns0:queryAffinityInfo"/>
+<wsdl:output name="QueryAffinityInfoResponse" message="ns0:queryAffinityInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryBundledSubscriberList">
+<wsdl:input name="QueryBundledSubscriberListRequest" message="ns0:queryBundledSubscriberList"/>
+<wsdl:output name="QueryBundledSubscriberListResponse" message="ns0:queryBundledSubscriberListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="SearchAccountList">
+<wsdl:input name="SearchAccountListRequest" message="ns0:searchAccountList"/>
+<wsdl:output name="SearchAccountListResponse" message="ns0:searchAccountListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryAccountInfoSOAPBinding" type="ns0:QueryAccountInfoPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryAccountBasicInfo">
+<soap11:operation soapAction="QueryAccountBasicInfo" style="document"/>
+<wsdl:input name="QueryAccountBasicInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountBasicInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountCreditInfo">
+<soap11:operation soapAction="QueryAccountCreditInfo" style="document"/>
+<wsdl:input name="QueryAccountCreditInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountCreditInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountDetailInfo">
+<soap11:operation soapAction="QueryAccountDetailInfo" style="document"/>
+<wsdl:input name="QueryAccountDetailInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountDetailInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountIdentityInfo">
+<soap11:operation soapAction="QueryAccountIdentityInfo" style="document"/>
+<wsdl:input name="QueryAccountIdentityInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountIdentityInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountPoolingList">
+<soap11:operation soapAction="QueryAccountPoolingList" style="document"/>
+<wsdl:input name="QueryAccountPoolingListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountPoolingListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountSecurityInfo">
+<soap11:operation soapAction="QueryAccountSecurityInfo" style="document"/>
+<wsdl:input name="QueryAccountSecurityInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountSecurityInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountServices">
+<soap11:operation soapAction="QueryAccountServices" style="document"/>
+<wsdl:input name="QueryAccountServicesRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountServicesResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountSharingGroupDetails">
+<soap11:operation soapAction="QueryAccountSharingGroupDetails" style="document"/>
+<wsdl:input name="QueryAccountSharingGroupDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountSharingGroupDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountSharingGroupList">
+<soap11:operation soapAction="QueryAccountSharingGroupList" style="document"/>
+<wsdl:input name="QueryAccountSharingGroupListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountSharingGroupListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountSubscriberListV2">
+<soap11:operation soapAction="QueryAccountSubscriberListV2" style="document"/>
+<wsdl:input name="QueryAccountSubscriberListV2Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountSubscriberListV2Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAffinityInfo">
+<soap11:operation soapAction="QueryAffinityInfo" style="document"/>
+<wsdl:input name="QueryAffinityInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAffinityInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryBundledSubscriberList">
+<soap11:operation soapAction="QueryBundledSubscriberList" style="document"/>
+<wsdl:input name="QueryBundledSubscriberListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryBundledSubscriberListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SearchAccountList">
+<soap11:operation soapAction="SearchAccountList" style="document"/>
+<wsdl:input name="SearchAccountListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SearchAccountListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryAccountInfoService">
+<wsdl:port name="QueryAccountInfoPortType" binding="ns0:QueryAccountInfoSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryAccountInfoService"/></wsdl:port></wsdl:service></wsdl:definitions>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/removePrepaidEnrollmentInfo/v1/removePrepaidEnrollmentInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/removePrepaidEnrollmentInfo/v1/removePrepaidEnrollmentInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!--Date              Author                         Version     Change                                                                                               Rel                          SR# -->
+	<!--1/17/2012     Amber Peppers            1.0            Initial Draft                                                                                           MID 12.1              PJ006243-->
+	<!--1/19/2012   Steve Heichelheim         1.0        Added MVM standards and simple types                                               MID12.1    PJ006243-->
+	<xs:element name="removePrepaidEnrollmentInfo" type="tns:RemovePrepaidEnrollmentInfoRequestType"/>
+	<xs:element name="removePrepaidEnrollmentInfoResponse" type="tns:RemovePrepaidEnrollmentInfoResponseType"/>
+	<xs:complexType name="RemovePrepaidEnrollmentInfoRequestType">
+		<xs:sequence>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>Personal Telephone Number – mobile number of the signer on the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="retailerId" type="tns:RetailStoreIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Unique ID for retail store</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RemovePrepaidEnrollmentInfoResponseType">
+		<xs:sequence>
+			<xs:element name="message" type="tns:ConfirmMessageTextType">
+				<xs:annotation>
+					<xs:documentation>Indication of success</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ConfirmMessageTextType">
+		<xs:annotation>
+			<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RetailStoreIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.&#13;
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

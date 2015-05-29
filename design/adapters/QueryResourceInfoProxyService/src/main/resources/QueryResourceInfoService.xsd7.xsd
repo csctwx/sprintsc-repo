@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:include schemaLocation="QueryResourceInfoService.xsd15.xsd"/>
+	
+<xs:element name="querySubscriberHppttDomainList" type="tns:QuerySubscriberHppttDomainListRequest"/>
+	
+<xs:element name="querySubscriberHppttDomainListResponse" type="tns:QuerySubscriberHppttDomainListResponse"/>
+	
+<xs:complexType name="QuerySubscriberHppttDomainListRequest">
+		
+<xs:sequence>
+			
+<xs:element name="subInfo">
+				
+<xs:complexType>
+					
+<xs:choice>
+						
+<xs:element name="subsId" type="SubscriptionId"/>
+						
+<xs:element name="ptn" type="MdnString"/>
+						
+<xs:element name="equipmentId" type="DeviceSerialNbr"/>
+						
+<xs:element name="ufmi" type="UfmiString"/>
+						
+<xs:element name="ip" type="ElectronicAddressString"/>
+						
+<xs:element name="nai" type="tns:NetworkAccessIdentifier"/>
+						
+<xs:element name="imsi" type="InternationalMobileSubscriberIdentityString"/>
+						
+<xs:element name="hppttId" type="HighPerformancePushToTalkIdString"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberHppttDomainListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="hppttDomainList">
+				
+<xs:complexType>
+					
+<xs:sequence minOccurs="0">
+						
+<xs:element name="domainRestrictionCode">
+							
+<xs:annotation>
+								
+<xs:documentation>R - Restricted
+U - Unrestricted
+P - Partially Restricted</xs:documentation>
+							</xs:annotation>
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="allDomainsEffectiveDate" type="xs:date" minOccurs="0"/>
+						
+<xs:element name="allDomainsExpirationDate" type="xs:date" minOccurs="0"/>
+						
+<xs:element name="hppttDomainInfo" maxOccurs="600">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="domainCode">
+										
+<xs:simpleType>
+											
+<xs:restriction base="xs:string">
+												
+<xs:length value="2"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									
+<xs:element name="domainName">
+										
+<xs:simpleType>
+											
+<xs:restriction base="xs:string">
+												
+<xs:maxLength value="25"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									
+<xs:element name="internationalInd" type="xs:boolean"/>
+									
+<xs:element name="restrictedInd" type="xs:boolean"/>
+									
+<xs:element name="domainDescription">
+										
+<xs:simpleType>
+											
+<xs:restriction base="xs:string">
+												
+<xs:maxLength value="64"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									
+<xs:element name="restrictionNumber">
+										
+<xs:simpleType>
+											
+<xs:restriction base="xs:integer">
+												
+<xs:totalDigits value="3"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									
+<xs:element name="domainEffectiveDate" type="xs:date" minOccurs="0"/>
+									
+<xs:element name="domainExpirationDate" type="xs:date" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInformation">
+		
+<xs:choice>
+			
+<xs:element name="subscriptionId" type="tns:SubscriptionID">
+				
+<xs:annotation>
+					
+<xs:documentation>SubscriptionIdentifier uniquely identifies an instance of SUBSCRIPTION .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mobileDirectoryNumber" type="tns:MobileDirectoryNumberString"/>
+			
+<xs:element name="urbanFleetMemberId" type="tns:UrbanFleetMemberId"/>
+			
+<xs:element name="deviceSerialNumber" type="tns:SubscriberDeviceSerialNumber"/>
+			
+<xs:element name="internetProtocolAddressString" type="tns:InternetProtocolAddressString"/>
+			
+<xs:element name="internationalMobileSubscriberIdentityString" type="InternationalMobileSubscriberIdentityString"/>
+			
+<xs:element name="networkAccessIdentifierString" type="tns:SubscriberNetworkAccessIdentifier"/>
+			
+<xs:element name="additionalImsInfo" type="InternationalMobileSubscriberIdentityString"/>
+			
+<xs:element name="highPerformancePusthToTalkIdString" type="tns:HighPerformancePushToTalkIDString"/>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="UrbanFleetMemberId">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member ID is an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="urbanAreaId" type="tns:UrbanAreaID">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Area ID identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. The format of the UFMI number is: Urban Area Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fleetId" type="tns:FleetID">
+				
+<xs:annotation>
+					
+<xs:documentation>Fleet Id is the second element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="memberId" type="tns:MemberID">
+				
+<xs:annotation>
+					
+<xs:documentation>Member Id is the third element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="FleetID">
+		
+<xs:annotation>
+			
+<xs:documentation>Fleet Identifier is the second element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDString">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="ElectronicAddressString">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemberID">
+		
+<xs:annotation>
+			
+<xs:documentation>Member Identifier is the third element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberDeviceSerialNumber">
+		
+<xs:restriction base="DeviceSerialNbr">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberNetworkAccessIdentifier">
+		
+<xs:restriction base="tns:NetworkAccessIdentifier"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionID">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:SubscriptionIdentifier"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifier">
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanAreaID">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Area Identifier identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. The format of the UFMI number is: Urban Area Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+</xs:schema>

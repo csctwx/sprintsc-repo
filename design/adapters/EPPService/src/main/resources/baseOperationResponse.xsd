@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationResponse.xsd"
+    xmlns:paymentCommonTypes="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd"
+    targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationResponse.xsd">
+    
+    <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd" schemaLocation="paymentCommonTypes.xsd"/>
+    
+    <simpleType name="CardBrandConstants" final="restriction">
+        <restriction base="string">
+            <enumeration value="AMEX" />
+            <enumeration value="MASTERCARD" />
+            <enumeration value="VISA" />
+            <enumeration value="DISCOVER" />
+            <enumeration value="DISCOVERDINERS" />
+        </restriction>
+    </simpleType>
+    
+    <simpleType name="TransactionTypeConstants" final="restriction">
+        <restriction base="string">
+		    <enumeration value="Charge" />
+		    <enumeration value="Refund" />
+		    <enumeration value="Chargeback" />
+		    <enumeration value="Verification" />
+		    <enumeration value="VerificationReversal" />
+		    <enumeration value="ConditionalDeposit" />
+        </restriction>
+    </simpleType>
+
+    <simpleType name="PaymentOptionMethodConstants" final="restriction">
+        <restriction base="string">
+            <enumeration value="CARD"/>
+            <enumeration value="ACH"/>
+            <enumeration value="PAYPAL"/>
+        </restriction>
+    </simpleType>
+    
+    <simpleType name="PaymentMethodSubTypeConstants" final="restriction">
+        <restriction base="string">
+            <enumeration value="CREDIT" />
+            <enumeration value="DEBIT" />
+            <enumeration value="SAVINGS" />
+            <enumeration value="CHECKING" />
+            <enumeration value="PAYPAL" />
+        </restriction>
+    </simpleType>
+    
+    <simpleType name="TransactionStateConstants" final="restriction">
+        <restriction base="string">
+            <enumeration value="AUTHORIZED" />
+            <enumeration value="CAPTURED" />
+            <enumeration value="DENIED" />
+            <enumeration value="SETTLED" />
+			<enumeration value="SETTLEMENT_DENIED" />
+			<enumeration value="SETTLEMENT_PENDING" />                                                                                                                
+        </restriction>
+    </simpleType>
+    	<complexType name="Response">
+		<sequence>
+			<element name="responseCode">
+				<annotation>
+					<documentation>A code that represents the outcome of the operation on a particular system/subsystem</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="responseMessage">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="512"/>
+                    </restriction>
+                </simpleType>
+            </element>
+			<element name="applicationId" minOccurs="0">
+				<annotation>
+					<documentation>Unique ID of a module/application/subsystem. An EPP identifier assigned to each system/subsystem.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="responseDescription" minOccurs="0" type="string"/>
+			<element name="sequenceNo" minOccurs="0">
+				<annotation>
+					<documentation>A sequence no. to help understand order of completion of calls. The sequence of calls can change based on a business flow and subsystems involved. Wallet clients should not depend on sequence no. to determine response from a subsystem. Must rely on application ID to identify subsystem/system.</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="2"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+
+    
+     <complexType name="RuleInfo">
+        <sequence>
+			<element name="ruleIdentifier">
+				<annotation>
+					<documentation>Rule ID of the failed rule</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+            <element name="reasonCode" minOccurs="0">
+                <annotation>
+                    <documentation>Rule ID of the failed rule</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="reasonDescription" minOccurs="0">
+                <annotation>
+                    <documentation>Rule ID of the failed rule</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+
+        </sequence>
+    </complexType>
+    
+    <complexType name="BusinessRuleResponses">
+        <sequence>
+            <element name="businessRule" type="tns:RuleInfo" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="NestedResponses">
+        <sequence>
+            <element name="response" type="tns:Response" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="Responses">
+        <sequence>
+            <element name="response" type="tns:Response"/>
+            <element name="nestedResponses" type="tns:NestedResponses" minOccurs="0"/>
+            <element name="informationalRuleResponses" type="tns:BusinessRuleResponses" minOccurs="0"/>
+            <element name="businessRuleFailure" type="tns:RuleInfo" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    
+    <complexType name="AmountsType">
+        <annotation>
+            <documentation>Describes the details of a transaction amount.</documentation>
+        </annotation>
+        <sequence>
+            <element name="amount">
+                <annotation>
+                    <documentation>The charged amount.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <minInclusive value="0.00" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="convenienceFee" minOccurs="0">
+                <annotation>
+                    <documentation>Any fee associated with the use of the card for a transaction.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <minInclusive value="0.00" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="tax" minOccurs="0">
+                <annotation>
+                    <documentation>The tax applied to the Amount.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <minInclusive value="0.00" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="totalAmount">
+                <annotation>
+                    <documentation>The sum of amount,convenienceFee and tax.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <minInclusive value="0.00" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="currencyCode" type="string">
+                <annotation>
+                    <documentation>IThe currency mnemonic using the SO-4217, three-character format. For example, the ISO-4217
+                        currency code for US
+                        Dollars is USD.
+                    </documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    
+    <complexType name="PaymentBaseResponse">
+        <sequence>
+            <element name="responses" type="tns:Responses">
+                <annotation>
+                    <documentation>Contains Response Code and message
+                    </documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    
+    <complexType name="PaymentOperationResponse">
+        <complexContent>
+            <extension base="tns:PaymentBaseResponse">
+                <sequence>
+                    <element name="banInfo" type="paymentCommonTypes:BanInfoAC" minOccurs="0"/>
+                </sequence>
+            </extension>
+        </complexContent>
+    </complexType>
+    
+    <complexType name="PaymentResponseBO">
+        <sequence>
+            <element name="requestId" minOccurs="0">
+                <annotation>
+                    <documentation>Unique id from request</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="referenceId" minOccurs="0">
+                <annotation>
+                    <documentation>Unique reference Id from request</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="duplicate" type="paymentCommonTypes:BooleanType" >
+                <annotation>
+                    <documentation>False  for a new request, True  for idempotent request.</documentation>
+                </annotation>
+            </element>
+			<element name="isZeroedOut" type="paymentCommonTypes:BooleanType" minOccurs="0">
+				<annotation>
+					<documentation>Flag will be returned only for refund. if refund is Zeroed out, it will return true, else false</documentation>
+				</annotation>
+			</element>
+            <element name="paymentResponseDetails" type="tns:PaymentResponseDetailsBO" />
+        </sequence>
+    </complexType>
+    <complexType name="PaymentAllocationResponseInfoList">
+        <sequence>
+            <element name="paymentAllocationResponseInfo" maxOccurs="unbounded">
+                <complexType>
+                    <sequence>
+                        <element name="loanNumber">
+                            <simpleType>
+                                <restriction base="integer">
+                                    <totalDigits value="9"/>
+                                </restriction>
+                            </simpleType>
+                        </element>
+                        <element name="allocationType" minOccurs="0">
+                            <simpleType>
+                                <restriction base="string">
+                                    <maxLength value="1"/>
+                                </restriction>
+                            </simpleType>
+                        </element>
+                        <element name="amount">
+                            <simpleType>
+                                <restriction base="decimal">
+                                    <totalDigits value="9"/>
+                                    <fractionDigits value="2" />
+                                </restriction>
+                            </simpleType>
+                        </element>
+                    </sequence>
+                </complexType>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="PaymentResponseDetailsBO">
+        <sequence>
+            <element name="paymentId" >
+                <annotation>
+                    <documentation>
+                        Unique Id for a payment. Can be used in other
+                        transaction, for releasePayment.
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                    <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="billingConfirmationId" minOccurs="0">
+                <annotation>
+                    <documentation>Confirmation number from Amdocs Billing</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                    <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="directDebitVoucher" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="paymentAllocationResponseInfoList" type="tns:PaymentAllocationResponseInfoList" minOccurs="0" />
+            <element name="externalId" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36" />
+					</restriction>
+				</simpleType>
+			</element>
+            <element name="amounts" type="paymentCommonTypes:AmountInfo" />
+            <element name="paymentNetwork" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        The network which the card payment was
+                        processed.
+                    </documentation>
+                </annotation>
+                 <simpleType>
+                    <restriction base="string">
+                    <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="acquirerAuthCode"  minOccurs="0">
+                <annotation>
+                    <documentation>Authorization Verification Code returned by Acquirer</documentation>
+                </annotation>
+                 <simpleType>
+                    <restriction base="string">
+                    <maxLength value="36"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="paymentOptionToken"  minOccurs="0">
+                <annotation>
+                    <documentation>The existing token for given payment option</documentation>
+                </annotation>
+                 <simpleType>
+                    <restriction base="string">
+                    <maxLength value="16"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+    
+</schema>

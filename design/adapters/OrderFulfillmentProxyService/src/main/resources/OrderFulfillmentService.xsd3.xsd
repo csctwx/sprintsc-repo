@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/submitFulfillmentOrder/v1/submitFulfillmentOrder.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/submitFulfillmentOrder/v1/submitFulfillmentOrder.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	
+<!--06/25/2012  Steve Heichelheim  1.0     Initial version.  Added MVM standards and simple types                                             GBL12.3 PJ007448 -->
+	
+<!--10/18/2012  Priscilla Carvalho  1.1     CS#563094 Changed contactPhoneNumber to Optional                                              GBL12.3 PJ007448 -->
+	
+<!--11/02/2012  Ranganayaki R  1.2   CS#565786 Changed the Fulfillment order number and Order status code to optional         GBL12.3 PJ007448 -->
+	
+<xs:element name="submitFulfillmentOrder" type="tns:SubmitFulfillmentOrderRequestType">
+		
+<xs:annotation>
+			
+<xs:documentation>submitFulfillmentOrder will enable Sprint's systems to create fulfillment order in the Brightpoint Order Management System real time.  Both sales only and return turn orders will be created using this interface.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="submitFulfillmentOrderResponse" type="tns:SubmitFulfillmentOrderResponseType"/>
+	
+<xs:complexType name="SubmitFulfillmentOrderRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="orderInfo" type="tns:OrderInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation> Structure containing order information
+				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingInfo" type="tns:ShippingInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> Structure containg shipping address info and shipping instruction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderLineList" type="tns:OrderLineItemListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of Order Line Items</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubmitFulfillmentOrderResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="fulfillmentorderNumber" type="tns:FulfillmentOrderNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> BrightPoint Order Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatusCode" type="tns:OrderStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Status Code
+O - Open
+I - Interim
+S - Summary –Final job completion</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<!--<xs:choice>-->
+				
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier (MEID) in hexadecimal format.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="rmaOrderNumber" type="tns:RmaOrderNumberType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation> Identifies the RMA number or returns number given back to customer. Applicable for return orders</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="backOrderInfoList" type="tns:BackOrderListType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation> Provides back ordered items in a particular order</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			
+<!--</xs:choice>-->
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderNumber" type="tns:FastOrderKeyIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>FAST OrderNumber uniquely identifies an instance of the ORDER</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderTypeCode" type="tns:OrderTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Type Code identifies the order as one of the following: Sales Order,ReturnOrder,Exchange order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderSubTypeIndicator" type="tns:OrderTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Type Code identifies the order as one of the following: Sales Order,ReturnOrder,Exchange order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderEntryDate" type="tns:OrderEntryDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Entry Date holds the date the Order was entered in the system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelId" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates channel thru which the order is placed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderLineItemInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineItemId" type="tns:OrderLineItemNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Uniquely identifies each distinct 'order line'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderLineTypeCode" type="tns:OrderTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Line Type code identifies the type of the order at order line level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:StockKeepingUnitType">
+				
+<xs:annotation>
+					
+<xs:documentation> Device SKU</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemQuantity" type="tns:OrderItemQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of Items</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="returnInfo" type="tns:ReturnInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing return info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderLineItemListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineItem" type="tns:OrderLineItemInfoType" minOccurs="0" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Line Item Details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="partyNameString" type="tns:PartyNameStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Party Name String holds all of the individual name components FirstName,MiddleName,LastName Concatenated String</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingAddress" type="tns:ShippingAddressType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing address information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingType" type="tns:ShipmentMethodCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested shipping type  requested by the Customer other than the default shipping in the Order Management System.  If not specified, the Order Management System will determine the shipping type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingProvisionedCd" type="tns:ShipProvisionedCodeType" default="U" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Handset shipped provisioned or shipped unprovisioned. Values P = Ship Provisioned, U= Ship unProvisioned W = Port-In Order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="completeShipmentRequiredFlag" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CompleteShipmentReqdflag identifies an order where entire list of ordered </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="intransitDays" type="tns:EstimatedTransitDaysType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Intransit days holds the number of days to add to the shipment date to derive the estimated delivery date </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingInstruction" type="tns:ShippingInstructionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> Structure for shippping instruction information
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingAddressType">
+		
+<xs:sequence>
+			
+<xs:element name="addressLine1" type="tns:PrimaryAddressLineType">
+				
+<xs:annotation>
+					
+<xs:documentation>Postal AddressLine1 of the address </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="addressLine2" type="tns:SecondaryAddressLineType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Postal AddressLine2 of the address </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="city" type="tns:CityNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>City Name </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="state" type="tns:UspsStateAbbreviationType">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS State Abbreviation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Postal Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCodeExtension" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> USPS Postal code extension</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactPhoneNumber" type="tns:ContactPhoneNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing customer Contact phone no.info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ShippingInstructionType">
+		
+<xs:sequence>
+			
+<xs:element name="ShippingInstructionTypeCode" type="tns:ShippingInstructionTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Acknowledgement, INV - Invoice, PIK - Pick List Instruction, SHP - Shipping Instruction Message, PAK - Packing Slip</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="instructionText" type="tns:ShippingInstructionsTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Instruction text holds the textual content of the instruction
+				</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ContactPhoneNumberType">
+		
+<xs:sequence>
+			
+<xs:element name="PhoneNumber" type="tns:PhoneNumberType"/>
+			
+<xs:element name="PhoneExtension" type="tns:PhoneNumberExtensionType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BackOrderListType">
+		
+<xs:sequence>
+			
+<xs:element name="backOrderInfo" type="tns:BackOrderInfoType" minOccurs="0" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation> Provides back ordered items in a particular order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BackOrderInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineItemNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Order line item number</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:OrderLineItemNumberType">
+						
+<xs:totalDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:StockKeepingUnitType">
+				
+<xs:annotation>
+					
+<xs:documentation> Device SKU</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderItemQuantity" type="tns:OrderItemQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>orderItemQuantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ReturnInfoType">
+		
+<xs:choice>
+			
+<xs:element name="rmaOrderNumber" type="tns:RmaOrderNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Return Order Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:StockKeepingUnitType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> Device SKU</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Serial number of the returned equipment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="returnReasonCode" type="tns:RmaReasonCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Reason for the return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CityNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EstimatedTransitDaysType">
+		
+<xs:annotation>
+			
+<xs:documentation>Estimated Transit Days represents the estimated number of days from order placement to delivery and is used in planning shipments to the retail stores.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FastOrderKeyIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fast Order Key Identifier is an order identifier provided by FAST Fulfillment and Activation Service Tool.  FAST is a browser-based order processing system designed to service, fulfill, and activate phone and accessory orders generated by various Nextel sales channels. The queue-based workflow allows users in different areas of the country to simultaneously process customer orders that are in different stages of the fulfillment and activation lifecycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FulfillmentOrderNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fulfillment Order Number uniquely identifies an instance of a fulfillment order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderEntryDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Entry Date holds the date the Order was entered into the system.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderItemQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Item Quantity holds the total number of units of the specified Product ID ordered in the ORDER ITEM instance.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderLineItemNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Type Code identifies the ORDER as one of the following: 
+RG - Regular
+RM - RMA</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Status Code identifies the current state of the Order.
+Values for Regular Orders:
+0  Future
+1  Backorder
+2  Allocated
+3  Pick Ticket Printed
+4  Pick Verified 
+6  Shipped
+C  Cancelled / Closed
+
+Values for RMA Orders:
+0  Authorized
+1  Received</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyNameStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Name String holds all of the Individual Name components, Last Name, Middle Name and First Name concatenated into a single string.  Used in those interfaces where Individual Names are not passed as components or an Organization name when the transaction does not require name components.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number Extension holds an additional sequence of digits that used in conjunction with a phone number uniquely identifies a phone in a PBX or other office phone system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrimaryAddressLineType">
+		
+<xs:annotation>
+			
+<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+
+For a street address, Primary Address Line holds the concatenation of the street components of the address.
+For a Post Office Box address, Primary Address Line holds the P.O. Box information.
+For a Rural address, Primary Address Line holds the Rural number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RmaOrderNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Return Merchandise Authorization Order Number is the Order Number assigned to the RMA kit. Valid only if the order in question has been issued an RMA kit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RmaReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>RMA Reason Code contains the reason why the return kit is requested. Valid only if the order in question has been issued an RMA kit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecondaryAddressLineType">
+		
+<xs:annotation>
+			
+<xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShipmentMethodCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.
+
+Possible types:
+"Next Day Air"</xs:documentation>
+			
+<xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingInstructionsTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Instructions Text is a free text field which holds any special instructions for shipping. Relevant when the shippingMethod is 'shipping'.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingInstructionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Instruction Type Code Type categorizes a shippng instruction.
+Valid Values:
+PIK - Pick List Instructions or Messages, 
+PAK - Packing Slip Instructions or Messages, 
+ACK - Acknowledgement Instruction or Message, 
+INV - Invoice Instruction or Message</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShipProvisionedCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Ship Provisioned Code identifies the handset as shipped provisioned or shipped unprovisioned. 
+
+Values:
+'P' =&gt; Ship Provisioned
+'W' =&gt; Port In
+Blank =&gt; Ship Unprovisioned</xs:documentation>
+			
+<xs:documentation>Ship Provisioned Code identifies the handset as shipped provisioned or shipped unprovisioned. 
+
+Values:
+'P' =&gt; Ship Provisioned
+'W' =&gt; Port In
+Blank =&gt; Ship Unprovisioned</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StockKeepingUnitType">
+		
+<xs:annotation>
+			
+<xs:documentation>Stock Keeping Unit represents the Sprint Inventory Stock Keeping Unit (SKU).  Stock Keeping Unit identifies a group of PRODUCT instances.  It could identify a handset Model and Model Number, a Kit or an accessory. Previously length = 18.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsStateAbbreviationType">
+		
+<xs:annotation>
+			
+<xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

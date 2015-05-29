@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://api.dc.amdocs.com/SensitiveDetails/"
+  targetNamespace="http://api.dc.amdocs.com/SensitiveDetails/" elementFormDefault="qualified">
+
+  <element name="CardSensitiveDetails">
+    <annotation>
+      <documentation>Contains sensitive card information for a consumer's card payment account.</documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="NameOnCard" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Name of the account holder as it's printed on the card. This field is optional both when
+              creating and updating an account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="FirstName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>First name of card holder. This field is optional both when creating and updating an account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="MiddleName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Middle name of the card holder. This field is optional both when creating and updating an
+              account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="LastName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Last name of the card holder. This field is optional both when creating and updating an
+              account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="CardNumber" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Card number as it's printed on the card. This field is mandatory when creating a payment
+              account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="ExpirationDate" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Expiration date as printed on the card, using a MM/yy format. The expiration date is
+              mandatory when creating a payment account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="BillingAddress" type="tns:BillingAddressType" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Billing address associated with the payment account card. This field is optional both when
+              creating and updating a payment account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="CardVerificationCode" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Card verification code or card verification value (CVV). This field is optional when both
+              creating and updating a card
+              payment account. However, when creating an anonymous, single-pay payment
+              account, this will be required.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Track1" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Track 1 data of a card magnetic stripe. This field is optional and can be present during a
+              card-present transaction.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="Track2" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Track 2 data of a card magnetic stripe. This field is optional and can be present during a
+              card-present transaction.
+            </documentation>
+          </annotation>
+        </element>        
+      </sequence>
+    </complexType>
+  </element>
+
+  <complexType name="BillingAddressType">
+    <annotation>
+      <documentation>Billing address information associated with the consumer's payment account.</documentation>
+    </annotation>
+    <sequence>
+      <element name="AddressLine1" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>Address line 1 for the billing address. For example this might be a physical street address.
+            This field is optional when both creating and updating a payment account billing address.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="AddressLine2" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>Address line 2 for the billing address. For example, this might be a suite or apartment number.
+            This field is optional when both creating and updating a payment account billing address.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="City" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>The city associated with address line 1 and address line 2 of the consumer's billing address.
+            This field is optional when both creating and updating a payment account billing address.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="State" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>The state in which the billing address city is located. This field is optional when both
+            creating and updating a payment account billing address.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="Country" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>The country code in which the billing address is located, using a 2- or 3-letter ISO-3166
+            formatted country code. This field is optional when both creating and updating a payment account billing
+            address.
+          </documentation>
+        </annotation>
+      </element>
+      <element name="ZipCode" type="string" maxOccurs="1" minOccurs="0">
+        <annotation>
+          <documentation>The zip code associated with the payment account card. This field is optional when creating or
+            updating a payment account billing address.
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+
+  <element name="ACHSensitiveDetails">
+    <complexType>
+      <annotation>
+        <documentation>This complexType describes account holder information for ACH-related payment accounts.
+        </documentation>
+      </annotation>
+      <sequence>
+        <element name="AccountHolderName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Name of the account holder as it's listed on the bank account. This field is mandatory when
+              creating an ACH payment account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="FirstName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>First name of the account holder. This field is mandatory when creating an ACH payment
+              account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="MiddleName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Middle name of the account holder. This field is optional when creating or updating an
+              existing ACH payment account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="LastName" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Last name of the account holder. This field is mandatory when creating an ACH payment
+              account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="RoutingNumber" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Routing number of the bank account used for the ACH payment account. This field is mandatory
+              when creating an ACH payment account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="AccountNumber" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Bank account number of the account used for the ACH payment account. This field is mandatory
+              when creating an ACH payment account, but optional when updating an existing account.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="DateOfBirth" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Date of birth of consumer holding the ACH payment account. This field should be in MM/dd/yyyy
+              format.
+            </documentation>
+          </annotation>
+        </element>
+        <element name="SSNLastFourDigits" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Last four digits of social security number associated to the ACH payment account.</documentation>
+          </annotation>
+        </element>
+        <element name="DriverLicenseId" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Driver license identifier of consumer holding ACH payment account.</documentation>
+          </annotation>
+        </element>
+        <element name="ConsumerAddress" type="tns:BillingAddressType" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>ConsumerAddress associated with the ACH payment account.</documentation>
+          </annotation>
+        </element>
+        <element name="PhoneNumber" type="string" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>Phone number of consumer holding ACH payment account.</documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+
+  <element name="PayPalSensitiveDetails">
+    <annotation>
+      <documentation>Contains sensitive information for a consumer's PayPal account.</documentation>
+    </annotation>
+    <complexType>
+      <sequence>
+        <element name="ConsumerAddress" type="tns:BillingAddressType" maxOccurs="1" minOccurs="0">
+          <annotation>
+            <documentation>ConsumerAddress associated with the consumer having the PayPal payment account.
+            </documentation>
+          </annotation>
+        </element>
+      </sequence>
+    </complexType>
+  </element>
+
+</schema>

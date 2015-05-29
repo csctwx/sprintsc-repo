@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryLocationInfo/v1/queryLocationInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryLocationInfo/v1/queryLocationInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                    Rel     Change                                                                           SR/Ticket#  -->
+	
+<!--06/20/2011  Steve Heichelheim   1.0       Added MVM standards and simple types                  GBL13.3  PJ008288-->
+	
+<xs:element name="queryLocationInfo" type="tns:QueryLocationInfoRequestType"/>
+	
+<xs:element name="queryLocationInfoResponse" type="tns:QueryLocationInfoResponseType"/>
+	
+<xs:complexType name="QueryLocationInfoRequestType">
+		
+<xs:annotation>
+			
+<xs:documentation>This API provides the ability to request a CSA for an address from an external system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="longitude" type="tns:LongitudeNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Longitude of search result</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="latitude" type="tns:LatitudeNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Latitude of search result</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryLocationInfoResponseType">
+		
+<xs:annotation>
+			
+<xs:documentation>This API provides the ability to request a CSA for an address from an external system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="city" type="tns:CityNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>City name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="state" type="tns:UspsStateAbbreviationType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>State abbreviation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zip" type="tns:PostalCodeInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure holding the zip code 5+4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CSA located at input address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="backendResponseInfo" type="tns:BackendResponseInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure holding the backend response code and error message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BackendResponseInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="backendResponseCode" type="tns:ExceptionConditionCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Examples of codes for success:
+0 (success)
+1 (unable to reverse geocode)
+ 
+Examples of error codes:
+101 (invalid input data)
+102 (system exception occured)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="backendErrorMessage" type="tns:ErrorMessageTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Examples (not a finite list)
+System error occurred</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PostalCodeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="uspsPostalCode" type="tns:UspsPostalCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Postal code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="uspsPostalCodeExtension" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Postal Code extension (Plus 4)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="CityNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="49"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Error Message Text is a textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionConditionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+Example Values:
+0 - Successful completion, 
+4 - Successful completion, but with a warning as to some unusual circumstance, 
+8 - Error, request was not processed successfully, 
+12 - Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LatitudeNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Latitude Number is expressed as a floating point number in the range -90.0000 to +90.0000, using decimal degrees (as opposed to minutes and seconds).  Positive values indicate locations north of and on the equator.  Negative values indicate locations south of the equator.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="17"/>
+			
+<xs:fractionDigits value="14"/>
+			
+<xs:maxInclusive value="90"/>
+			
+<xs:minInclusive value="-90"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LongitudeNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Longitude Number is expressed as a floating point number in the range -180.0000 to +180.0000, using decimal degrees (as opposed to minutes and seconds).  Positive values indicate locations east of and on the prime meridian (Greenwich).  Negative values indicate locations west of the prime meridian.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="17"/>
+			
+<xs:fractionDigits value="14"/>
+			
+<xs:maxInclusive value="180"/>
+			
+<xs:minInclusive value="-180"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsStateAbbreviationType">
+		
+<xs:annotation>
+			
+<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

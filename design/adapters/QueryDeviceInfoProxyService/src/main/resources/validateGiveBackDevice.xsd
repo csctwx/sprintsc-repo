@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 (x64) (http://www.altova.com) by LEE VAN AALSBURG (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/validateGiveBackDevice/v1/validateGiveBackDevice.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/validateGiveBackDevice/v1/validateGiveBackDevice.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                   Version     Change                                                                                                      Rel                    SR#                -->
+	<!--06/16/2014   Subha Kannan      1.0             Initial Version                          MID 14.3.0           PJ012336 EPIC 04 CR007 -->
+	<!--07/03/2014   Kathy Zhao            1.0           Standardization-->
+	<!--07/14/2014   Subha Kannan       1.0          Added new element itemId in the response MID 14.3.0           PJ012336 EPIC 04 CR007 -->
+	<!--07/14/2014   Kathy Zhao            1.0           Standardization-->
+	<!--08/01/2014   Subha Kannan       1.1           Corrected the typo susbcriberId to subscriberId  in the request-->
+	<!---->
+	<xs:element name="validateGiveBackDevice" type="tns:ValidateGiveBackDeviceRequestType"/>
+	<xs:element name="validateGiveBackDeviceResponse" type="tns:ValidateGiveBackDeviceResponseType"/>
+	<xs:complexType name="ValidateGiveBackDeviceRequestType">
+		<xs:sequence>
+			<xs:element name="deviceInfo" type="tns:DeviceInfoType">
+				<xs:annotation>
+					<xs:documentation>Structure containing choice of esnMeidHex, esnMeidDec or macId </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberInfo" type="tns:SubscriberInfoType">
+				<xs:annotation>
+					<xs:documentation>Subscriber Identification info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateGiveBackDeviceResponseType">
+		<xs:sequence>
+			<xs:element name="validGiveBackDeviceInd" type="tns:ValidationResultTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Result of Give Back validation check, indicates whether Give Back should be processed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="itemId" type="tns:EquipmentItemIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Indicates the itemId (SKU) for the serialnumber provided in the request.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceInfoType">
+		<xs:sequence>
+			<xs:element name="serialNumber">
+				<xs:annotation>
+					<xs:documentation>A valid product serial number. This must consist only of alpha-numeric characters and be at least 5 characters in length</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:EquipmentSerialNumberStringType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberInfoType">
+		<xs:choice>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>Indicates mdn of the subscriber who is validationg for give back</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Indicates subscriberId  of the subscriber who is validating the device for give back</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<!---->
+	<xs:simpleType name="EquipmentSerialNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  &#13;
+&#13;
+Network Device Identifier will contain one of the following: &#13;
+Electronic Serial Number (ESN); &#13;
+Mobile Equipment IDentifier (MEID);&#13;
+International Mobile Equipment Identfie (IMEI);&#13;
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentItemIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Equipment Item Identiifer is the item identifier of the equipment to be ordered should be authorized according to the dealer’s sales channel.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ValidationResultTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Validation Result Type Code indicates if the validation attempt was successful.
+Valid Values:
+Passed - validation successful/passed
+Failed - validation unsuccessful/failed</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

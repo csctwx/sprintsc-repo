@@ -1,0 +1,406 @@
+<xs:schema targetNamespace="http://ws.drutt.com/msdp/media/management/v3" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://ws.drutt.com/msdp/media/management/v3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xmime="http://www.w3.org/2005/05/xmlmime" version="3.0">
+
+  <xs:element name="WSException" type="tns:WSException"/>
+  <xs:element name="createAssets" type="tns:writeAssets"/>
+  <xs:element name="createAssetsResponse" type="tns:assetsResponse"/>
+  <xs:element name="createGroups" type="tns:writeGroups"/>
+  <xs:element name="createGroupsResponse" type="tns:groupsResponse"/>
+  <xs:element name="createItems" type="tns:writeItems"/>
+  <xs:element name="createItemsResponse" type="tns:itemsResponse"/>
+  <xs:element name="createCategories" type="tns:writeCategories"/>
+  <xs:element name="createCategoriesResponse" type="tns:categoriesResponse"/>
+  <xs:element name="deleteAssets" type="tns:deleteAssets"/>
+  <xs:element name="deleteAssetsResponse" type="tns:emptyResponse"/>
+  <xs:element name="deleteGroups" type="tns:deleteGroups"/>
+  <xs:element name="deleteGroupsResponse" type="tns:emptyResponse"/>
+  <xs:element name="deleteItems" type="tns:deleteItems"/>
+  <xs:element name="deleteItemsResponse" type="tns:emptyResponse"/>
+  <xs:element name="deleteCategories" type="tns:deleteCategories"/>
+  <xs:element name="deleteCategoriesResponse" type="tns:emptyResponse"/>
+  <xs:element name="getAssetsByAssetId" type="tns:getAssetsByAssetId"/>
+  <xs:element name="getAssetsByExternalAssetId" type="tns:getAssetsByExternalAssetId"/>
+  <xs:element name="getAssetsByIdKey" type="tns:getAssetsByIdKey"/>
+  <xs:element name="getAssetsResponse" type="tns:assetsResponse"/>
+  <xs:element name="getCategoriesByCategoryId" type="tns:getCategoriesByCategoryId"/>
+  <xs:element name="getCategoriesByIdKey" type="tns:getCategoriesByIdKey"/>
+  <xs:element name="getCategoriesResponse" type="tns:categoriesResponse"/>
+  <xs:element name="searchItems" type="tns:searchItems"/>
+  <xs:element name="searchItemsResponse" type="tns:searchItemsResponse"/>
+  <xs:element name="updateAssets" type="tns:writeAssets"/>
+  <xs:element name="updateAssetsResponse" type="tns:assetsResponse"/>
+  <xs:element name="updateGroups" type="tns:writeGroups"/>
+  <xs:element name="updateGroupsResponse" type="tns:groupsResponse"/>
+  <xs:element name="updateItems" type="tns:writeItems"/>
+  <xs:element name="updateItemsResponse" type="tns:itemsResponse"/>
+  <xs:element name="updateCategories" type="tns:writeCategories"/>
+  <xs:element name="updateCategoriesResponse" type="tns:categoriesResponse"/>
+
+  <xs:complexType name="WSException">
+    <xs:sequence>
+      <xs:element name="errorCode" type="xs:int"/>
+      <xs:element name="message" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="writeAsset">
+    <xs:complexContent>
+      <xs:extension base="tns:baseAsset">
+        <xs:sequence>
+          <xs:element name="category" minOccurs="0" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:attribute name="id"/>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="group" type="tns:writeGroup" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="created" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="modified" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="rules" type="tns:rules" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="writeAssets">
+    <xs:sequence>
+      <xs:element name="asset" type="tns:writeAsset" maxOccurs="unbounded"/>
+      <xs:element name="requireValid" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="assetsResponse">
+    <xs:sequence>
+      <xs:element name="asset" type="tns:asset" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="writeGroup">
+    <xs:complexContent>
+      <xs:extension base="tns:baseGroup">
+        <xs:sequence>
+          <xs:element name="item" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="writeGroups">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string"/>
+      <xs:element name="group" type="tns:writeGroup" maxOccurs="unbounded"/>
+      <xs:element name="requireValid" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="groupsResponse">
+    <xs:sequence>
+      <xs:element name="group" type="tns:group" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="writeItems">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string"/>
+      <xs:element name="groupId" type="xs:string"/>
+      <xs:element name="item" type="tns:item" maxOccurs="unbounded"/>
+      <xs:element name="requireValid" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="itemsResponse">
+    <xs:sequence>
+      <xs:element name="item" type="tns:item" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="writeCategory">
+    <xs:complexContent>
+      <xs:extension base="tns:baseCategory"/>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="writeCategories">
+    <xs:sequence>
+      <xs:element name="category" type="tns:writeCategory" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="categoriesResponse">
+    <xs:sequence>
+      <xs:element name="category" type="tns:category" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteAssets">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteGroups">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string"/>
+      <xs:element name="groupId" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteItems">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string"/>
+      <xs:element name="groupId" type="xs:string"/>
+      <xs:element name="itemId" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteCategories">
+    <xs:sequence>
+      <xs:element name="categoryId" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="emptyResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getAssetsByAssetId">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string" maxOccurs="unbounded"/>
+      <xs:element name="includeItems" type="tns:includeItems" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAssetsByExternalAssetId">
+    <xs:sequence>
+      <xs:element name="providerId" type="xs:string" minOccurs="0"/>
+      <xs:element name="externalAssetId" type="xs:string" maxOccurs="unbounded"/>
+      <xs:element name="includeItems" type="tns:includeItems" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getAssetsByIdKey">
+    <xs:sequence>
+      <xs:element name="startId" type="xs:long"/>
+      <xs:element name="maxRows" type="xs:int" minOccurs="0"/>
+      <xs:element name="includeItems" type="tns:includeItems" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="includeItems">
+    <xs:sequence>
+      <xs:element name="nbrItems" type="xs:int"/>
+      <xs:element name="sort" type="tns:sortItem"/>
+      <xs:element name="groupId" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="sortItem">
+    <xs:sequence>
+      <xs:element name="field" type="xs:string"/>
+      <xs:element name="order" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCategoriesByCategoryId">
+    <xs:sequence>
+      <xs:element name="categoryId" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getCategoriesByIdKey">
+    <xs:sequence>
+      <xs:element name="startId" type="xs:long"/>
+      <xs:element name="maxRows" type="xs:int" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchItems">
+    <xs:sequence>
+      <xs:element name="assetId" type="xs:string"/>
+      <xs:element name="groupId" type="xs:string"/>
+      <xs:element name="filename" type="xs:string" minOccurs="0"/>
+      <xs:element name="device" type="xs:string" minOccurs="0"/>
+      <xs:element name="paginationInfo" type="tns:paginationInfo" minOccurs="0"/>
+      <xs:element name="sortItem" type="tns:sortItem" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="searchItemsResponse">
+    <xs:sequence>
+      <xs:element name="paginationResult" type="tns:paginationResult"/>
+      <xs:element name="item" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="paginationInfo">
+    <xs:sequence>
+      <xs:element name="fromItem" type="xs:int"/>
+      <xs:element name="maxItems" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="paginationResult">
+    <xs:sequence>
+      <xs:element name="lastItem" type="xs:int"/>
+      <xs:element name="nbrIems" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="metaAssociated" abstract="true">
+    <xs:sequence>
+      <xs:element name="meta" type="tns:meta" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="meta">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string"/>
+      <xs:element name="value" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="baseAsset">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="assetId" type="xs:string" minOccurs="0"/>
+          <xs:element name="deployed" type="xs:boolean"/>
+          <xs:element name="ownerAssetId" type="xs:string" minOccurs="0"/>
+          <xs:element name="providerId" type="xs:string"/>
+          <xs:element name="serviceId" type="xs:string" minOccurs="0"/>
+          <xs:element name="type" type="xs:string"/>
+          <xs:element name="startTime" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="validUntil" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="asset">
+    <xs:complexContent>
+      <xs:extension base="tns:baseAsset">
+        <xs:sequence>
+          <xs:element name="idKey" type="xs:long"/>
+          <xs:element name="complete" type="xs:boolean"/>
+          <xs:element name="created" type="xs:dateTime"/>
+          <xs:element name="modified" type="xs:dateTime"/>
+          <xs:element name="group" type="tns:group" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="category" type="tns:category" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="rules" type="tns:rules" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseRule">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="name" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="rule">
+    <xs:complexContent>
+      <xs:extension base="tns:baseRule">
+        <xs:sequence>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="rules">
+    <xs:sequence>
+      <xs:element name="allOf" type="tns:rule" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="anyOf" type="tns:rule" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="noneOf" type="tns:rule" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="baseGroup">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="groupId" type="xs:string"/>
+          <xs:element name="premiumResourceType" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="group">
+    <xs:complexContent>
+      <xs:extension base="tns:baseGroup">
+        <xs:sequence>
+          <xs:element name="idKey" type="xs:long"/>
+          <xs:element name="totalItems" type="xs:int"/>
+          <xs:element name="item" type="tns:item" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseItem">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="itemId" type="xs:string" minOccurs="0"/>
+          <xs:element name="contentType" type="xs:string" minOccurs="0"/>
+          <xs:element name="filename" type="xs:string" minOccurs="0"/>
+          <xs:element name="isExternallyHosted" type="xs:boolean"/>
+          <xs:choice>
+            <xs:element name="uri" type="xs:string"/>
+            <xs:element name="content" type="xs:base64Binary" xmime:expectedContentTypes="application/octet-stream"/>
+          </xs:choice>
+          <xs:element name="type" type="xs:string" minOccurs="0"/>
+          <xs:element name="refItem" type="xs:string" minOccurs="0"/>
+          <xs:element name="idKey" type="xs:long" minOccurs="0"/>
+          <xs:element name="size" type="xs:long" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="remove" type="xs:boolean" default="false" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:complexContent>
+      <xs:extension base="tns:baseItem">
+        <xs:sequence>
+          <xs:element name="device" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element name="subItem" type="tns:subItem" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="subItem">
+    <xs:complexContent>
+      <xs:extension base="tns:baseItem">
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="baseCategory">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="categoryId" type="xs:string" minOccurs="0"/>
+          <xs:element name="name" type="xs:string" minOccurs="1"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="category">
+    <xs:complexContent>
+      <xs:extension base="tns:baseCategory">
+        <xs:sequence>
+          <xs:element name="idKey" type="xs:long"/>
+          <xs:element name="created" type="xs:dateTime"/>
+          <xs:element name="modified" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryBundledSubscriberList/v1/queryBundledSubscriberList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryBundledSubscriberList/v1/queryBundledSubscriberList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1">
+	
+<!-- Date              Author                         Version     Change                                                                                                                                Rel                          SR# -->
+	
+<!--02/24/2010  Steve Heichelheim         1.0           Applied MVM standards and simple types                                                                            GBL10.3                 PJ003010-->
+	
+<!--11/05/2010  Suneel Pathipati             2.0           Removed secondaryFeatureList and added bundledFeatureList                                         GBL11.1                  PJ004452 CS# 429970-->
+	
+<!--02/13/2012  Ibrahim ElKhatib             2.1           Removed enumeration from DeviceSerialNumberTypeCodeType (element serialType)       GBL12.2 PJ006784-->
+	
+<xs:element name="queryBundledSubscriberList" type="tns:QueryBundledSubscriberListType"/>
+	
+<xs:element name="queryBundledSubscriberListResponse" type="tns:QueryBundledSubscriberListResponseType"/>
+	
+<xs:complexType name="QueryBundledSubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing BAN identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bundledSubscriberList" type="tns:BundledSubscriberListRequestType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryBundledSubscriberListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="bundledSubscriberList" type="tns:BundledSubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing an array of bundledSubscriberInfo structures and the primary and secondary threshold values.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledPrimaryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="primarySoc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Primary SOC identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="primarySocCount">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of non canceled Primary SOC count on the BAN.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:SubscriberCountType">
+						
+<xs:totalDigits value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="primarySocType" type="tns:ServiceOrderCodeTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC Type. Indicates whether SOC is Price Plan or Regular Add ON.
+P – Price Plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="primarySubscriberList" type="tns:PrimarySubscriberListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing list of subscriber’s with non expired Primary SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bundledFeatureList" type="tns:FeatureListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing an array of features on the primary SOC used in defining bundle relationship with secondary SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledSecondaryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="secondarySoc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondarySocType" type="tns:ServiceOrderCodeTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC Type. Indicates whether SOC is Price Plan or Regular Add ON.
+P – Price Plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondarySubscriberLimitPerSoc" type="tns:MaximumSubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Max Secondary Bundled Subscriber Limit defined for the SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalSecondaryLimit" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>number of primary SOCs * secoondary subscriber limit per SOC (this is based on all active and future dated primary plans)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usedSecondaryCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>number of subscribers with non expired Secondary SOC under the BAN. (includes active and future dated secondary plans)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="remainingSecondaryLimit" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>totalSecondaryLimit - usedSecondary Count. (based on active and future dated secondary and primary plans)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondarySubscriberList" type="tns:SecondarySubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing list of subscriber’s with non expired Secondary SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledSecondaryListType">
+		
+<xs:sequence>
+			
+<xs:element name="bundledSecondaryInfo" type="tns:BundledSecondaryInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing bundled secondary SOC and Subscriber’s information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledSubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="bundledPrimaryInfo" type="tns:BundledPrimaryInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing bundled primary SOCs and subscriber’s information.
+This structure will be returned only if BAN has bundled subscribers and ban subscriber count has not exceeded max bundle sub limit defined in PARAM_VALUES table in Ensemble. (PARAM_CODE = MAX_BUN_SUB_LIMIT)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bundledSecondaryList" type="tns:BundledSecondaryListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing bundled secondary SOCs and subscriber’s corresponding to the primary SOC.
+Data for this sub method will be returned only if BAN has subscribers with non expired Secondary Bundle SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledSubscriberListRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="fetchBundledSubscriberList" type="tns:FetchInformationFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to request bundled subscriber list.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BundledSubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="maxBundleSubscriberLimit" type="tns:MaximumSubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field returns the Max Bundle Subscriber Limit. If non canceled Subscriber Count under the BAN is greater than this limit then Cross Sub Rules will not be applied on the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxBundleSubscriberThresholdReachedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>If this field is set to true, then bundledSubscriberInfo structure will not returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxSecondarySubscriberLimit" type="tns:MaximumSubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>The max secondary subscriber limit for a Bundled Secondary Plan. SEC_SUB_LIMIT value on a Bundled Secondary Plan cannot be greater than this value. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="bundledSubscriberInfo" type="tns:BundledSubscriberInfoType" minOccurs="0" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing bundled primary and secondary subscriber’s information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>For CDMA platform, this field will be populated with ESN. Accepts hexadecimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialType" type="tns:DeviceSerialNumberTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number Type classifies Equipment serial numbers as one of the following:  ESN, MEID, IMEI, SIM, or MSN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="feature" type="tns:FeatureCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Cross Sub Feature, returned only if Cross Sub Rules are defined at FEATURE level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureListType">
+		
+<xs:sequence>
+			
+<xs:element name="featureInfo" type="tns:FeatureInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing bundled secondary feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrimarySubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="primarySubscriberInfo" type="tns:SubscriberInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing Subscriber identifier and Primary SOC effective and expiration dates on the Subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Device Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="device" type="tns:DeviceType">
+				
+<xs:annotation>
+					
+<xs:documentation>For CDMA platform, this field will be populated with ESN. Accepts hexadecimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member Identifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Network Access Identifier (e.g. username@domain) where domain should be of the form str1.str2. No validation will be done on input value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat Push-To-Talk technology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SecondarySubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="secondarySubscriberInfo" type="tns:SubscriberInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing Subscriber identifier and Secondary SOC effective and expiration dates on the Subscription.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socEffectiveDate" type="tns:ServiceOrderEffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Date of the SOC on Subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socExpirationDate" type="tns:ServiceOrderExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration Date of the SOC on Subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number Type Code designates a device type: IMEI(I), MSN(M), SIM(S), Kit (K), or ESN (E) for CDMA platform.
+Valid values:
+I - IMEI
+M - MSN
+S - SIM
+E - ESN
+A - macId
+U - LTE Removable UICC
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The code of the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MaximumSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Maximum Subscriber Count is the maximum number of subscribers for the associated account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code Type Code identifies the various types of Service Order Codes.  Valid values include (not exclusive list):
+B - Buy One Get One SOC
+I - 
+P - Price Plan
+M - Reduced Price Plan
+S - Reduced SOC
+R - Regular SOC
+O - Optional SOC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderEffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>The date which something goes into effect or becomes active.</xs:documentation>
+			
+<xs:documentation>Service Order Effective Date holds the calendar day when a service order becomes active.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+			
+<xs:documentation>Service Order Effective Date holds the calendar day when a service order becomes active.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>The date which the SOC expires or becomes inactive.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Count is the number of subscribers associated to the BAN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAvailableNpaCsa/v1/queryAvailableNpaCsa.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAvailableNpaCsa/v1/queryAvailableNpaCsa.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	
+<!-- Change Log 
+       2009/05/01 - David Fultz - Created - PJ001556 - Aug '09
+-->
+	
+<!--2009/06/09    Steve Heichelheim  1.0  Applied MVM standards                                               PJ001556       Aug 09-->
+	
+<!--2010/07/12     Judy Kauffmann 2.0  Added max npa and max csa fields                             GBL10.5    PJ003505  -->
+	
+<xs:element name="queryAvailableNpaCsa" type="tns:QueryAvailableNpaCsaType"/>
+	
+<xs:element name="queryAvailableNpaCsaResponse" type="tns:QueryAvailableNpaCsaResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryAvailableNpaCsaType">
+		
+<xs:sequence>
+			
+<xs:element name="npaCsaQueryInfo" type="tns:NpaCsaQueryInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Provides the information from which to derive the NPA/CSAs
+
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reservationId" type="tns:NumberManagementReservationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates the request is for MDNs with a Reservation id. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blackListCode" type="tns:BlackListCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates which blacklist to use for excluding CSAs
+Values:
+BC – Boost CDMA
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="minimumAvailableMdnCount" type="tns:RowCountNumberType" default="1" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates minimum required available numbers needed.
+Default: 1 (if not sent)
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxNpaCount" type="tns:RowCountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Allows a front end to specify the maximum number of NPAs to return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxCsaCount" type="tns:RowCountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Allows a front end to specify the maximum number of CSAs to return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAvailableNpaCsaResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="npaCsaInfoList" type="tns:NpaCsaInfoListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Provides list of NPA/CSAs that meet query criteria</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaCsaQueryInfoType">
+		
+<xs:choice>
+			
+<xs:element name="refNpaNxxInfo" type="tns:RefNpaNxxInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains reference NPA-NXX from which to derive the NPA/CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Zip Code from which to derive the NPA/CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="RefNpaNxxInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="tns:NpaNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested NPA.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nxx" type="tns:NxxNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested NXX</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaCsaInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="tns:NpaNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>NPA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csaInfoList" type="tns:CsaInfoListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains CSA information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaCsaInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="npaCsaInfo" type="tns:NpaCsaInfoType" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csaDescription" type="tns:CommunicationServiceAreaDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Text description of the CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hca" type="tns:HomeCallingAreaType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Home Calling Area assigned to the CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnsAvailable" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Count of total MDNs available for the given NPA/CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="csaInfo" type="tns:CsaInfoType" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="CommunicationServiceAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Description describes a CSA.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HomeCallingAreaType">
+		
+<xs:annotation>
+			
+<xs:documentation>The HCA, called "home calling area", is where all of the calls made on a wireless device are free.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NpaNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberManagementReservationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Management Reservation Identifier uniquely identifies a Mobile Directory Number (MDN) or group of MDNs set aside for activiation by a store or for a business customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NxxNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="BlackListCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Black List Code designates a specific blacklist upon which the API will base its filter.  
+Possible Values Include:
+BC - Boost CDMA</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+			
+<xs:enumeration value="BC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

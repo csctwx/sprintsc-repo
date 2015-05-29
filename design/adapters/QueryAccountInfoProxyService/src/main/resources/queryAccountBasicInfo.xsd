@@ -1,0 +1,2908 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.4 U (http://www.xmlspy.com) by Sprint Employee (Sprint) -->
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (http://www.altova.com) by Adon Powell (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountBasicInfo/v1/queryAccountBasicInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountBasicInfo/v1/queryAccountBasicInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="6.2">
+	<!-- Date              Author                   Version     Change                                                                                                      Rel                    SR# -->
+	<!--2/23/2009      Jennifer Carlton         1.3        Rolled back 13 fieldname changes.                                                          SAP09.6.0.0      CS# 310269-->
+	<!--3/13/2009      Jennifer Carlton           1.4       rollforward r10 change of PrePayInd to string.  Updated aslInd annotation.   GBL09.2.0.0     CS# 313819-->
+	<!--3/13/2009      Jennifer Carlton           1.4       Changed nameType and lastBusinessName to optional under otherNameInfo  GBL09.2.0.0     CS# 313819-->
+	<!--5/11/2009      Dweepant Bakshi        1.5       changed type of BillingAccountStatusEffectiveFromDate to 'xs:date' to reduce indirection    GBL09.2.0.0             CS#319842-->
+	<!--5/14/2009      Lynn Reddick               1.5      Added TinNumber simple type                                                                                                   CS#320421-->
+	<!--5/15/2009      Dweepant Bakshi        1.5      Changed 'name' to Optional and reversed order of shippingAddressInfo & subscriberCountInfo                                                               CS#319488-->
+	<!--6/08/2009      Steve Heichelheim       1.6      Changed carePhone, cdmaCarePhone and generalCarePhone to maxlen15                    CS#323286-->
+	<!--08/13/2009    Steve Heichelheim       1.7      removed multi-layered simple types to point directly to base types                                CS#333416-->
+	<!--09/28/2009    Beatriz Ferreira           1.8      Added splitBillInd to BasicInfo structure under queryAccountBasicInfoResponse type     GBL10.1-->
+	<!--10/06/2009    Beatriz Ferreira           1.8      Apply simple type to splitBillInd                                                                         GBL10.1    PJ000150-->
+	<!--10/08/2009    Steve Heichelheim       1.8     Added fetchSplitBillInfo to reqest, SplitBillInfoType to response                       GBL10.1        PJ000150-->
+	<!--10/08/2009    Steve Heichelheim       1.8     splitBillCode element required and added N enumeration                                  GBL10.1        PJ000150-->
+	<!--02/28/2010    Ibrahim ElKhatib           1.9     Renamed airaveDeviceStatus to macIdStatus                                                   GBL10.3       PJ002114-->
+	<!--03/31/2010    Ibrahim ElKhatib           2.0     Updated the annotation of serialNumber and serialType in Device                   GBL10.3       PJ002114 CS # 378485-->
+	<!--04/08/2010    Judy Kauffmann        2.0        Updated to synch PJ002114 3/31 baseline with PJ002395.  Added securityGroup to request and response and simple type of 
+SecurityGroupIdType.  PJ002395 NDA project-->
+	<!--04/27/2010    Travis Theel               2.0     Added debtAge field to basicInfo for PJ003904                                                 GBL10.4       PJ003904  -->
+	<!--07/02/2010    Suneel Pathipati         3.0     Added hasDacInd under basicInfo for PJ002207                                                GBL10.5       PJ002207-->
+	<!--07/02/2010    Suneel Pathipati         3.0     added simple type for hasDacInd.  unable to apply MVM standards         GBL10.5       PJ002207-->
+	<!--07/21/2010    Steve Heichelheim    3.1     changed legacyAccountNumber to AccountNumberType integer 10                  GBL 10.3 Prod Fix roll fwd SC#9260842, CS#400924-->
+	<!--06/07/2011    Tracy Turner	       	4.0     added optional UAI fetch flag on request, optoinalUAI List, otherBlockInd and otherBlockMessage to response        GBL11.3      PJ004940-->
+	<!--10/26/2011   Dweepant Bakshi      5.0     added optional collectionWaiverCode response field under basicInfo(expanded basic info)        GBL12.1      PJ006577-->
+	<!--12/21/2011    Tracy Turner	       	5.1     added optional UAI fetch structure on request   CS512514 PJ004940-->
+	<!--12/29/2011    Jocelen Silva                     5.2     Changed hotlineType to optional                          CS#513235   PJ004940-->
+	<!--8/25/2012    	Tracy Turner      6.0   added optional personalization attributes fetch on request, structure to response   GBL12.3		PJ007215-->
+	<!--04/01/2014	Suresh Gundu	6.1	Added doNotSellInd to the otherInfo structure of the Response. 	MID14.2.3	PJ012070.004-->
+	<!--05/13/2014	Suresh Gundu	6.2	Added delinquencyDate to the basicInfo structure of the Response. 	GBL 14.2	PJ008907 (CR 4)-->
+	<!--05/17/2014    Adon Powell              6.2     standardize, add eventdatetype                                                                    GBL 14.2	PJ008907 (CR 4)-->
+	<!---->
+	<xs:element name="queryAccountBasicInfo" type="tns:QueryAccountBasicInfo"/>
+	<xs:element name="queryAccountBasicInfoResponse" type="tns:QueryAccountBasicInfoResponse"/>
+	<!---->
+	<xs:complexType name="QueryAccountBasicInfo">
+		<xs:sequence>
+			<xs:element name="info" type="tns:SearchCriteria"/>
+			<xs:element name="basicInfo" type="tns:FetchBasicInfoType" minOccurs="0"/>
+			<xs:element name="fetchBillingAddressInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the billing address of the BAN should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchBillingNameInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the BAN’s billing name information should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchHeaderInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the BAN’s essential information (attributes typically set at BAN initiation/creation) should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchLockBoxInfo" type="tns:FetchInformationFlag" minOccurs="0"/>
+			<xs:element name="fetchMailingAddressInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the BAN’s Mailing address information should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchOtherInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the OtherInfo should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchOtherNameInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether the BAN’s non-mandatory information  should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchSubscriberCountInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether the number of Subscribers should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchShippingAddressInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the BANs Shipping address information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchSplitBillInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the Split Bill code whould be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchSecurityGroupInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether to return corporate security group id.
+Note: Restricted for use by 5DN only.  NDA project PJ002395.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uaiInfo" type="tns:FetchUaiInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Search criteria for UAI information.  Populate if UAI information should be returned.  Restricted for use by front-ends authorized for real-time data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchPersonalizationAttributeInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not the BANs personalized marketing attributes should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryAccountBasicInfoResponse">
+		<xs:sequence>
+			<xs:element name="basicInfo" type="tns:BasicInfo" minOccurs="0"/>
+			<xs:element name="billingAddressInfo" type="tns:AddressInfo" minOccurs="0"/>
+			<xs:element name="billingNameInfo" type="tns:BillingNameInfo" minOccurs="0"/>
+			<xs:element name="headerInfo" type="tns:HeaderInfo" minOccurs="0"/>
+			<xs:element name="lockBoxInfo" type="tns:LockBoxInfo" minOccurs="0"/>
+			<xs:element name="mailingAddressInfo" type="tns:AddressInfo" minOccurs="0"/>
+			<xs:element name="otherInfo" type="tns:OtherInfo" minOccurs="0"/>
+			<xs:element name="otherNameInfo" type="tns:OtherNameInfo" minOccurs="0"/>
+			<xs:element name="shippingAddressInfo" type="tns:AddressInfo" minOccurs="0"/>
+			<xs:element name="splitBillInfo" type="tns:SplitBillInfoType" minOccurs="0"/>
+			<xs:element name="subscriberCountInfo" type="tns:SubscriberCountInfo" minOccurs="0"/>
+			<xs:element name="securityGroupInfo" type="tns:SecurityGroupInfoType" minOccurs="0"/>
+			<xs:element name="uaiList" type="tns:UaiListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A list of UaiInfo records can be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="personalizationAttributeInfo" type="tns:PersonalizationAttributeInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>0 to 1 can be returned.  Will only return if the fetchPersonlizationAttributeInfo was set to tue.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="AddressInfo">
+		<xs:sequence>
+			<xs:element name="type" type="tns:AddressTypeCode">
+				<xs:annotation>
+					<xs:documentation>Address Type Code differentiates an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetNumber" type="tns:StreetNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="line1" type="tns:PostalAddressLine" minOccurs="0"/>
+			<xs:element name="line2" type="tns:PostalAddressLine" minOccurs="0"/>
+			<xs:element name="ruralRoute" type="tns:RuralRouteControlNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rural Route Control Number holds the rural road or highway identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ruralNumber" type="tns:RuralRouteBoxNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pobNumber" type="tns:PostOfficeBoxNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetName" type="tns:StreetName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Street Name is the USPS Postal Address component holding the name of a street.  For example in,"123 Main Street","Main"would reside in Street Name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetDirection" type="tns:StreetDirection" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing before or after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetType" type="tns:StreetSuffix" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Street Suffix is the USPS Postal Address component holding the trailing part of the street name.  For example in,"123 Main Street","Street"would reside in Street Suffix.  Other values might be Cir, Vlvd, Rd, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="trailingDirection" type="tns:TrailingDirection" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="apartment" type="tns:ApartmentNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Apartment Number is the USPS Postal Address component holding the identifier of the apartment within the context of a bilding's postal address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="apartmentType" type="tns:ApartmentDesignator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attention" type="tns:AttentionTextEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="tns:CityNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="state" type="tns:UspsStateAbbreviation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="country" type="tns:Iso3CharCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipCode" type="tns:UspsPostalCd" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zip4Code" type="tns:UspsPostalCodeExtension" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="geoCode" type="tns:GeographicCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isGeoCodeOverridden" type="tns:GeoCodeManualOverrideFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag to indicate if  geo code was Manually Overridden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:AddressEffectiveFromDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contains the effective date of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BasicInfo">
+		<xs:sequence>
+			<xs:element name="ban" type="tns:BillingAccountNumberEns">
+				<xs:annotation>
+					<xs:documentation>'Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountType" type="tns:BillingAccountTypeCodeEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for Customer segmentation in General Ledger reporting and Collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCode">
+				<xs:annotation>
+					<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountStatus" type="tns:BillingAccountStatusCodeEns">
+				<xs:annotation>
+					<xs:documentation>The account status.  
+
+Values:
+A - Active
+F - Final
+N - Non-paid disconnect
+W - Write-off</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isDelinquent" type="tns:InCollectionFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>In Collection Indicator identifies the BILLING ACCOUNT as an account in collections.
+
+Values:
+T => TRUE, the account is in Collections 
+F=> FALSE the account is NOT in collections</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="delinquencyDate" type="tns:EventDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date when the account moved to Delinquent status. This will be sent only if the above element (isDelinquent) is true.
+
+This is different from the debtAge element, which is calculated based on when the invoice was generated
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prePayInd" type="tns:PrePaidTypeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PrePayInd indicates the Customer is required to pay for service in advance.
+
+Valid Values:
+Y - Indicates the account is a pre-paid account.
+N – Not a pre-paid account.
+S - SIM Pre-paid account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prepaidBrandCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Code that indicates whether the subscriber belongs to the Sprint Brand or the Boost Brand.  Values are:
+BST => Boost
+SPR => Sprint</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:BrandCode">
+						<xs:maxLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="accountStatusChangeDate" type="tns:BillingAccountStatusEffectiveFromDate">
+				<xs:annotation>
+					<xs:documentation>Billing Account Status Effective From Date holds the first calendar day the status was assigned to the Billing Account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountStatusChangeRsnCode" type="tns:BillingAccountStatusChangeReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Account Status Change Reason Code identifies the reason for the activity that modified the Billing Account's status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="defaultCsa" type="tns:CommunicationServiceAreaId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="defaultNetworkInd" type="tns:NetworkIndicatorCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Network Indicator Code specifies the network being used.  
+
+Values:
+I -> iDEN; 
+C -> CDMA; 
+B -> Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="largeBanInfo" type="tns:LargeBanInfo"/>
+			<xs:element name="legacyAccountNumber" type="tns:AccountNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipCode" type="tns:UspsPostalCd" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalDue" type="tns:TotalPaymentDue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Total Due amount (A/R balance) – this includes the last invoice balance and current charges and current adjustments.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastPaymentDate" type="tns:LastPaymentReceivedDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Last Payment Date – if a payment has been received.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentAmount" type="tns:PaymentAmount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment amount is the amount of an invoice's charges for which payments have been applied.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentBalance" type="tns:CurrentBalance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current Balance as shown on front end screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agingBalance1" type="tns:AgingBalance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aging Balance (1-30) days as shown on Collection screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agingBalance2" type="tns:AgingBalance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aging Balance (31-60) days as shown on Collection screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agingBalance3" type="tns:AgingBalance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aging Balance (61-90) days as shown on Collection screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agingBalance4" type="tns:AgingBalance" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Aging Balance (91+) days as shown on Collection screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dealerCode" type="tns:DealerIdentifierEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subMarket" type="tns:SubMarketCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Submarket is a geographic, economic, or specialized subdivision of a market.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billCycle" type="tns:BillingCycleCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Cycle Code uniquely identifies the group of Billing Accounts batched together for load balancing in the billing process of the billing System the Billing Account is assigned to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pinInd" type="tns:PinSecurityFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>pin Indicator is a boolean flag that indicates if the security pin in set for this customer or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="passCode" type="tns:BillingAcctPassword" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field is deprecated and should not be used. Other apis should be used to retrieve CPNI data
+
+Billing Account Password contains the system access password the Account Holder or the External  Account Administrator used to gain entry into the system  in order to make changes to the Billing Account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="tns:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Start Date holds the calendar day an activity, undertaking or participation begins.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryMethod" type="tns:BillDeliveryPreferenceCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bill Delivery Preference Code identifies the Customers preference regarding how they wan the the Bill delivered.  This could be either: a paper invoice sent via postal mail, PDF file sent via e-mail or transmitted via fax.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryFax" type="tns:FaxNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fax number for invoice delivery</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryEmail" type="tns:ElectronicAddressString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Email address for invoice delivery</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryNoEmail" type="tns:DeliveryNoEmailReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>No email reason for delivery (BILLING_ACCOUNT.BILL_EMAIL_REASON)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="languageCode" type="tns:LanguagePreferenceCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Language Preference Code identifies a language preference.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherLanguage" type="tns:LanguagePreferenceName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Language Preference Name contains the text specifying a preferred language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="returnMailInd" type="tns:ReturnMailIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Return Mail Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockInd" type="tns:BlockedIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if the account has been blocked (blacklisted) or not
+Values: Y or N</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountValue" type="tns:AccountValue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aslInd" type="tns:AccountSpendingLimitIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account Spending Limit Indicator is a binary expression that determines if the account is a spending limit account or not.  
+
+Values:
+True => ASL Account
+False => Not an ASL Account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aslLastActivity" type="tns:AccountSpendingLimitLastActivityCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ASL Last activity code (e.g., S – SMS, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adminMdn" type="tns:PhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of administrator.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adminName" type="tns:UserName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>User name of Admin PTN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cycleStartDate" type="tns:BillingCyclePeriodStartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current bill cycle start date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cycleCloseDate" type="tns:BillingCycleEndDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current bill cycle close date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ivrNegative" type="tns:IvrNegativeFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating if the Ban is in negative list – for IVR only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicity" type="tns:EthnicOriginCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code that classifies or divides people into populations or groups on the basis of various sets of characteristics and beliefs about common ancestry. The most widely used categories are based on visible traits (especially skin color, cranial or facial features and hair texture), and self-identification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicitySubRegion" type="tns:EthnicOriginSubRegionCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ban ethnicity sub region</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicityOrigin" type="tns:Iso3CharCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ban ethnicity country</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commitMonths" type="tns:NumberOfCommitmentMonths" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of commitment months.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commitStartDate" type="tns:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The commitment starts date for the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commitEndDate" type="tns:EndDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The commitment end date for the subscriber based on the price plan of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ssn" type="tns:SocialSecurityNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field is deprecated and should not be used. Other apis should be used to retrieve CPNI data
+
+Social Security number (SSN) is a 9-digit number issued to citizens, permanent residents, and temporary (working) residents under section 205(c)(2) of the Social Security Act, codified as 42 U.S.C.§ 405(c)(2). The number is issued to an individual by the Social Security Administration, an agency of the U.S. Federal Government. Its primary purpose is to track individuals for taxation purposes. In recent years the SSN has become a de facto national identification number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxId" type="tns:FederalEmployerIdentificationNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Federal Employer Identification Number (FEIN) is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to business entities operating in the United States for the purposes of identification. When the number is used for identification rather than employment tax reporting, it is usually referred to as a TIN, and when used for the purposes of reporting employment taxes, it is usually referred to as an FEIN or EIN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activeSubscriberCount" type="tns:NumberOfActiveSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of subscribers associated with the account that have a status of ‘Active’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ivrSubAllowance" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>IVR Sub allowance indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subNetworkInd" type="tns:NetworkIndicatorCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber Network indicator 
+if the input is ban Id and has multiple subscribers do not return this tag. For other inputs we will return this tag with the network indicator of that specific subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tclInd" type="tns:TemporarySpendingLimitIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>To indicate if the BAN has a TCL (Temporary Credit Limit) or not.
+Note: If this field is 'true', the aslInd will be set to 'false'.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suppressBillCode" type="tns:SuppressBillCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bill Suppression Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tinNumber" type="tns:TinNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Federal Employer Identification Number (FEIN) is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to business entities operating in the United States for the purposes of identification. When the number is used for identification rather than employment tax reporting, it is usually referred to as a TIN, and when used for the purposes of reporting employment taxes, it is usually referred to as an FEIN or EIN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="macIdStatus" type="tns:AirraveDeviceStatusCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A - Active, I - Inactive, B - Both, N - None</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerChurnRiskScore" type="tns:CustomerChurnRiskScore" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates customer's likelihood of switching carriers. The higher the score the higher is the possibility of switching. Customers with high churn routing score will be routed to a special call queue called advantage queue</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerValueScore" type="tns:CustomerValueScoreRating" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the level of MRC service margin Sprint Nextel gets from a given customer. The higher the MRC amount the higher is the Value Score. 
+Customers with high Value Score will be routed to a special call queue called advantage queue.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="debtAge" type="tns:DebtAgeTotalDays" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Calculated total days.  Represents number of days debt has been past due.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hasDacInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>will be set to true, if ban has at least one DAC as child and fetchExpandedBasicInfo in request is set to true.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="collectionWaiverCode" type="tns:CollectionWaiverCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This attribute indicates whether an account must be waived from automatic collection treatment. 
+This attribute is used both for permanent waiving of an account from automatic collection treatment and for temporary waiving. The temporary waiving is obtained by delaying the date of the next collection step. In this case, the Waiver indicator indicates that such a modification was made. 
+
+The valid values for this attribute are:
+N - Automatic collection treatment can be performed(Not Waived)
+
+P - The account is permanently waived from automatic collection treatment; this value is set manually.
+D - The account's collection treatment was delayed. 
+K - The account is temporarily waived from the automatic collection treatment;  this value is set automatically when a partial payment arrangement is set for the account(Open Payment Arrangement)
+C – Manually restored during suspension (It is not in use for the last several years)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BillingNameInfo">
+		<xs:sequence>
+			<xs:element name="nameType" type="tns:OrganizationPersonIndicator">
+				<xs:annotation>
+					<xs:documentation>Organization Person Indicator identifies the PARTY as either a Organization or an Individual.
+Valid Values:  
+
+'D' = Double (Business / Organization name)
+
+'P' = Private (Individual) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="businessNameInfo" type="tns:BusinessNameInfo" minOccurs="0"/>
+			<xs:element name="individualNameInfo" type="tns:IndividualNameInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BusinessNameInfo">
+		<xs:sequence>
+			<xs:element name="businessName" type="tns:OrganizationName">
+				<xs:annotation>
+					<xs:documentation>ORGANIZATION NAME is a type of PARTY NAME representing the name of an ORGANIZATION.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalLine" type="tns:TitleEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Additional Title holds additional trailing honorifics attached to a person's name.  For example:"Sr.Vice President","Director","PHD.", etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Device">
+		<xs:sequence>
+			<xs:element name="serialNumber" type="tns:EquipmentSerialNumberString">
+				<xs:annotation>
+					<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.
+
+Equipment Serial Number is one of the following:
+
+Electronic Serial Number (ESN);
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfier (IMEI);
+Subscriber Identify Module (SIM);
+Manufacturer Serial Number (MSN);
+Media Access Control Identifier (MAC ID).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialType" type="tns:EquipmentSerialNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment Serial Number Type classifies Equipment serial numbers as one of the following:  E - ESN/MEID, I - IMEI, S - SIM, M - MSN, A - MAC ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FetchBasicInfoType">
+		<xs:sequence>
+			<xs:element name="fetchBasicInfo" type="tns:FetchInformationFlag">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not Basic Account information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fetchExpandedBasicInfo" type="tns:FetchInformationFlag" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FetchUaiInfoType">
+		<xs:sequence>
+			<xs:element name="fetchUaiInfo" type="tns:FetchInformationFlagType">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not Urgent Account information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveUaiInd" type="tns:FetchInformationFlagType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether the Urgent Account Information to be returned should be limited to the effective notes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HeaderInfo">
+		<xs:sequence>
+			<xs:element name="dealerCode" type="tns:DealerIdentifierEns">
+				<xs:annotation>
+					<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subMarket" type="tns:SubMarketCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Submarket is a geographic, economic, or specialized subdivision of a market.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nodeId" type="tns:HierarchyNodeIdentifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hierarchy Node Identifier uniquely identfies a Node in the Customer Hierarchy.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="parentId" type="tns:HierarchyNodeIdentifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hierarchy Node Identifier uniquely identfies a Node in the Customer Hierarchy.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="businessEntity" type="tns:SprintBusinessEntityIdentifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Sprint Business Entity Identifier is the PARTY Identifier of an internal Sprint  Business Entity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billCycle" type="tns:BillingCycleCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Cycle Code uniquely identifies the group of Billing Accounts batched together for load balancing in the billing process of the billing System the Billing Account is assigned to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isEquipmentBan" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag that indicates if this BAN is an equipment only BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="longDistanceCarrier" type="tns:InterexchangeCarrierId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>LDC (Long Distance Carrier)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxExemptionProfile" type="tns:TaxExemptionNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A number assigned by the IRS indicating that an organization is exempt from federal income taxation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="passCode" type="tns:BillingAcctPassword" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Password of the billing account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suppressBillCode" type="tns:SuppressBillCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bill Suppression Code </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="specialInstruction" type="tns:SpecialInstructionText" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Text of special instructions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="marketingSource" type="tns:MarketingSource" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Marketing source.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="tns:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Start Date holds the calendar day an activity, undertaking or participation begins.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryMethod" type="tns:BillDeliveryPreferenceCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bill Delivery Preference Code identifies the Customers preference regarding how they wan the the Bill delivered.  This could be either: a paper invoice sent via postal mail, PDF file sent via e-mail or transmitted via fax.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryFax" type="tns:FaxNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A fax (short for facsimile and sometimes called telecopying) is the telephonic transmission of scanned-in printed material (text or images), usually to a telephone number associated with a printer or other output device. The original document is scanned with a fax machine, which treats the contents (text or images) as a single fixed graphic image, converting it into a bitmap. In this digital form, the information is transmitted as electrical signals through the telephone system. The receiving fax machine reconverts the coded image and prints a paper copy of the document</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryEmail" type="tns:ElectronicAddressString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deliveryNoEmail" type="tns:DeliveryNoEmailReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>No email reason for delivery </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="languageCode" type="tns:LanguagePreferenceCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Preferred language code for BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherLanguage" type="tns:LanguagePreferenceName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If language Code is ‘other’, specify the other language here</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="returnMailInd" type="tns:ReturnMailIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Return Mail Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountValue" type="tns:AccountValue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aslInd" type="tns:AccountSpendingLimitIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the Ban is an ASL Account, set this indicator to ‘true’.
+Note for TCL Accounts: If the tclInd is 'true', this field will be set to 'false'.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aslLastActivity" type="tns:AccountSpendingLimitLastActivityCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ASL Last activity code (e.g., S – SMS, etc.).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adminMdn" type="tns:PhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PTN number of administrator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adminName" type="tns:UserName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>User name of Admin PTN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portOutFreezeInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the Ban has been frozen for port out requests </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pendPortActivityInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if there are any pending port-in or port -out activity on any of the subscription attached to the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="netDueTerms" type="tns:NetDueTerms" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If Ban belongs to a corporate (having corpId), the net due terms of corporate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cycleStartDate" type="tns:BillingCyclePeriodStartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current bill cycle start date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cycleCloseDate" type="tns:BillingCycleEndDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Current bill cycle close date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ivrNegative" type="tns:IvrNegativeFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Flag indicating if the Ban is in negative list – for IVR only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicity" type="tns:EthnicOriginCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A code that classifies or divides people into populations or groups on the basis of various sets of characteristics and beliefs about common ancestry. The most widely used categories are based on visible traits (especially skin color, cranial or facial features and hair texture), and self-identification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicitySubRegion" type="tns:EthnicOriginSubRegionCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>BAN ethnicity sub region.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ethnicityOrigin" type="tns:Iso3CharCountryCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>BAN ethnicity country</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditClass" type="tns:CreditClassCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Credit class assigned to Ban</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditClassDesc" type="tns:CreditClassDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Description of Credit Class</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hotlineType" type="tns:HotlineTypeCode" block="restriction" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>B- Ban Hotlining, S- Subscriber Hotlining , N– No Hotlining</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billLanguageCode" type="tns:LanguagePreferenceCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Preferred language Code for the Monthly Invoice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hotlineRsnCode" type="tns:HotlineReasonCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First hotline soc attached to any subscriber of the ban</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatedBan" type="tns:BillingAccountNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If it is an equipment only BAN, this is the related BAN id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rootId" type="tns:CorporateBillingAccountNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parent (root) Corporation Id (if part of a Business corporate Hierarchy)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="rootName" type="tns:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parent (root) Corporation Name (if part of a Business corporate Hierarchy)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="majorAccount" type="tns:MajorAccountNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Major Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="majorAccountName" type="tns:OrganizationName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Major Account Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tclHotlineType" type="tns:HotlineTypeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>TCL Hotline Type. Will be applicable ONLY when the ‘tclInd’ is ‘true’.
+Note : Due to performance issues and no Front end  using, it this element will not be returned in R3
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billAdvanceArrearInd" type="tns:BillAdvanceArrearCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>BAN level advance/arrear billing indicator. This indicator is defined at account type/sub type level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adjustmentBlockDate" type="tns:AdjustmentBlockDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Supports the blocking BAN adjustments to a BAN for specific accounts on a ad hoc basis for a configurable time period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="puertoRicoInd" type="tns:BinaryExpression">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the account is a Puerto Rico account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tclRestrictExpInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if the BAN’s TCL credit class will be restricted from being changed to a NON TCL credit class by the automatic AR process.
+This field will only be returned if tclInd is 'true'
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockInd" type="tns:BlockedIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if the account has been blocked (blacklisted) or not.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="affiliateBanCsaInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the BAN level CSA is in Affiliate territory or not.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tclInd" type="tns:TemporarySpendingLimitIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>To indicate if the BAN has a TCL (Temporary Credit Limit) or not.
+Note: If this field is 'true', the aslInd will be set to 'false'.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherBlockInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="otherBlockMessage" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="300"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IndividualNameInfo">
+		<xs:sequence>
+			<xs:element name="firstName" type="tns:FirstNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First Name or"Given Name"is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="tns:MiddleNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" type="tns:LastNameEns">
+				<xs:annotation>
+					<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="tns:TitleEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Title is an honorific bestowed to an Individual.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generation" type="tns:NameSuffix" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Name Suffix holds any affix that may occurr at the end of the name of an INDIVIDUAL designating a dignity, honor, distinction, or preeminence attached to the INDIVIDUAL by virtue of rank, office, precedent, privilege, attainment, or lands.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalLine" type="tns:TitleEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Additional Title holds additional trailing honorifics attached to a person's name.  For example:"Sr.Vice President","Director","PHD.", etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LargeBanInfo">
+		<xs:sequence>
+			<xs:element name="largeBanInd" type="tns:LargeAccountIndicator">
+				<xs:annotation>
+					<xs:documentation>Indicator that determines if this account is a large account or not.  It is used by the on-line applications to determine if an account is considered large.
+
+Values:
+True = 1 - Large Account 
+False = 0 - Not a large account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockSubCreationInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true when the maximum subscriber count of the BAN crossed/reached the threshold, thereby preventing any more subscribers being added to the BAN. Will not be returned if largeBanInd is ‘false’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockSharingInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true when the subscriber count of the BAN crosses/reaches the threshold, thereby preventing the BAN from being considered for regular sharing rate plans. Will not be returned if largeBanInd is ‘false’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockPoolingInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true when the subscriber count of the BAN crosses the max large pool threshold, thereby preventing the BAN from being considered for pooling rates. Will not be returned if largeBanInd is ‘false’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockCrossBanInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true when the total subscriber count of  all the BANs under a hierarchy cross the max large cross threshold, thereby preventing the hierarchy from being considered for cross-BAN pooling plans. Will not be returned if largeBanInd is ‘false’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billLargeBanInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true when the subscriber count of the BAN crosses the min bill large ban threshold and is now considered a Large BAN for the billing run. Will not be returned if largeBanInd is ‘false’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LockBoxInfo">
+		<xs:sequence>
+			<xs:element name="name" type="tns:OrganizationName" minOccurs="0"/>
+			<xs:element name="carePhone" type="tns:ContactPhoneNumberTextType" minOccurs="0"/>
+			<xs:element name="cdmaCarePhone" type="tns:ContactPhoneNumberTextType" minOccurs="0"/>
+			<xs:element name="generalCarePhone" type="tns:ContactPhoneNumberTextType" minOccurs="0"/>
+			<xs:element name="addressLine1" type="tns:PrimaryAddressLine" minOccurs="0"/>
+			<xs:element name="city" type="tns:CityNameEns" minOccurs="0"/>
+			<xs:element name="state" type="tns:UspsStateAbbreviation" minOccurs="0"/>
+			<xs:element name="zipCode" type="tns:UspsPostalCd" minOccurs="0"/>
+			<xs:element name="zip4Code" type="tns:UspsPostalCodeExtension" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameInfo">
+		<xs:sequence>
+			<xs:element name="nameType" type="tns:OrganizationPersonIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Organization Person Indicator identifies the PARTY as either a Organization or an Individual.
+
+Valid Values:
+
+'D' = Double (Business / Organization name)
+
+'P' = Private (Individual) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="tns:FirstNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First Name or"Given Name"is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="tns:MiddleNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastBusinessName" type="tns:LastNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="tns:TitleEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Title is an honorific bestowed to an Individual.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generation" type="tns:NameSuffix" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Name Suffix holds any affix that may occurr at the end of the name of an INDIVIDUAL designating a dignity, honor, distinction, or preeminence attached to the INDIVIDUAL by virtue of rank, office, precedent, privilege, attainment, or lands.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalLine" type="tns:TitleEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'Title is an honorific bestowed to an Individual.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OtherInfo">
+		<xs:sequence>
+			<xs:element name="homeNumber" type="tns:HomePhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Home Phone Number holds the telephone number given by a PARTY as the phone number that should be used to contact their residence.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="workNumber" type="tns:WorkPhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Work Phone Number holds the telephone number given by a PARTY as the phone number that should be used to contact their place of employment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="workNumberExt" type="tns:PhoneNumberExtension" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone Number Extension holds an additional sequence of digits that used in conjunction with a phone number uniquely identifies a phone in a PBX or other office phone system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherNumberType" type="tns:OtherPhoneTypeCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherNumber" type="tns:PhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherNumberExt" type="tns:PhoneNumberExtension" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone Number Extension holds an additional sequence of digits that used in conjunction with a phone number uniquely identifies a phone in a PBX or other office phone system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commMethod" type="tns:ContactMethodCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Method for contacting (email, phone, letter)
+E – Email
+F – Fax
+L -- Letter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commFax" type="tns:FaxNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>'A fax (short for facsimile and sometimes called telecopying) is the telephonic transmission of scanned-in printed material (text or images), usually to a telephone number associated with a printer or other output device. The original document is scanned with a fax machine, which treats the contents (text or images) as a single fixed graphic image, converting it into a bitmap. In this digital form, the information is transmitted as electrical signals through the telephone system. The receiving fax machine reconverts the coded image and prints a paper copy of the document.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commEmail" type="tns:ElectronicAddressString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactNumber" type="tns:PhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contact Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string submitted by a Party has a Phone Number to use when contacting them.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactNumberExt" type="tns:PhoneNumberExtension" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone Number Extension holds an additional sequence of digits that used in conjunction with a phone number uniquely identifies a phone in a PBX or other office phone system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contactEmail" type="tns:ElectronicAddressString" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="driverLicNumber" type="tns:DriverLicenseNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Driver License Number uniquely identifies a document evidencing a grant  of a permission to operate a motor vehicle by competent authority.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="driverLicState" type="tns:DriverLicenseStateCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A Driver's License State Code is the set of characters that are selected from a State or Protectorate name and specified by the state's driver license bureau to represent the name of a State or US Protectorate.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="driverLicExpiry" type="tns:DriverLicenseExpirationDateEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Driver’s License Expiration Date is the date that the license is due to expire.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="birthDate" type="tns:BirthDateEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Birth Date contains the calendar month, day and year on which an Individual  was born.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ssn" type="tns:SocialSecurityNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field is deprecated and should not be used. Other apis should be used to retrieve CPNI data
+
+Social Security number (SSN) is a 9-digit number issued to citizens, permanent residents, and temporary (working) residents under section 205(c)(2) of the Social Security Act, codified as 42 U.S.C.§ 405(c)(2). The number is issued to an individual by the Social Security Administration, an agency of the U.S. Federal Government. Its primary purpose is to track individuals for taxation purposes. In recent years the SSN has become a de facto national identification number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sicCode" type="tns:StandardIndustrialClassificationCodeInt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Standard Industrial Classification Code uniquely identifies a classification within the Standard Industrial Classification (abbreviated 'SIC').
+
+The SIC is a United States government system for classifying industries by a four-digit code. Established in the 1930s, it is being supplanted by the six-digit North American Industry Classification System, which was released in 1997; however certain government departments and agencies, such as the U.S. Securities and Exchange Commission (SEC), still use the SIC codes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dunsNumber" type="tns:DunsNumberInt" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data Universal Numbering System Number is a unique nine-digit  number that uniquely identifies each physical location of a business in the Dun and Bradstreet, Data Universal Numbering System (DUNS).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="establishDate" type="tns:StartDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Start Date of Business</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="costCenter" type="tns:CostCenter" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Cost Center represents the internal Sprint organization supporting the CUSTOMER.Cost Center are organizational entities that add to the cost of the organization, but only indirectly add to the profit of the company. Examples include Research and Development, Marketing and Customer service.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="poNumber" type="tns:PurchaseOrderNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Purchase Order Number uniquely identifies an instance of Purchase Order.  A Purchase Order is a commercial document used to request someone to supply something in return for payment.  Additionally a Purchase Order provides specifications and quantities.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxId" type="tns:FederalEmployerIdentificationNumberEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Federal Employer Identification Number (FEIN) is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to business entities operating in the United States for the purposes of identification. When the number is used for identification rather than employment tax reporting, it is usually referred to as a TIN, and when used for the purposes of reporting employment taxes, it is usually referred to as an FEIN or EIN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="specialBillingInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If specialized billing is enabled for this Ban</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="employer" type="tns:EmployerName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Employer Name holds the name of the ORGANIZATION employing the INDIVIDUAL.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="jobPosition" type="tns:PositionName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Position Name is the name of a job slot in an enterprise that can be occupied by more than one INDIVIDUAL over time.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hireDate" type="tns:EmploymentStartDateEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Employment Start Date is the first calendar day the Person was hired to fill a position by the Employer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="overrideRemitAddress" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If remit addess need to be over-ridden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="overrideCcareNumber" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If custmercare number need to be overridden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sendCourtesyStmnts" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If courtesy statements need to be sent to other addresses</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sharedMinCredit" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If ban level shared minutes credit need to be given</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pageBreakDacInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If page break for DAC on invoice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pageBreakSubscriberInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If page break for subscribers on invoice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="clinSuppressInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If clin suppress indicator is set</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="summaryBillInd" type="tns:SummaryBillProductionIndicator" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Summary Bill Production Indicator identifies whether a Summary Bill or a General Bill should be produced for the Billing Account.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="scanGroup" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If the BAN has been authorized to use scangroups or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billFormatType" type="tns:BillFormatTypeCodeEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Bill Format Type Code specifies either a Business or Consumer format for the BILLING ACCOUNT's BILLs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isWriteOff" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>AR Write Off Indicator (W: Write-off, R: Regular)
+If W true else false</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="doNotSellInd" type="tns:BinaryExpression" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if further sale is allowed on an account or not. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OtherNameInfo">
+		<xs:sequence>
+			<xs:element name="firstAuthName" type="tns:NameInfo" minOccurs="0"/>
+			<xs:element name="secondAuthName" type="tns:NameInfo" minOccurs="0"/>
+			<xs:element name="contactName" type="tns:NameInfo" minOccurs="0"/>
+			<xs:element name="creditName" type="tns:NameInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PersonalizationAttributeInfoType">
+		<xs:sequence>
+			<xs:element name="accountLevelChurnScore" type="tns:ChurnProbabilityRatingType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account level churn score.  Current valid values: 0,1,5, 10</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="marketTreatmentValue" type="tns:TreatmentTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The market treatment value for the account.  Current valid values: -1, 0, 1, 5, 10</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="consumerSegment" type="tns:MarketSegmentNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Short description of the consumer segmentation assigned to the account (e.g. Golden Years, Professional Boomers, Value Seeking Family)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchCriteria">
+		<xs:choice>
+			<xs:element name="ban" type="tns:BillingAccountNumberEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberId" type="tns:SubscriptionIdentifierEns">
+				<xs:annotation>
+					<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberString">
+				<xs:annotation>
+					<xs:documentation>'Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmi">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:UrbanFleetMemberIdentifierString">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="device" type="tns:Device"/>
+			<xs:element name="ipAddress">
+				<xs:annotation>
+					<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:InternetProtocolAddressString">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="imsi">
+				<xs:annotation>
+					<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:InternationalMobileSubscriberIdentityString">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="nai">
+				<xs:annotation>
+					<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. 
+
+The standard syntax is"user@realm". </xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:NetworkAccessIdentifierString">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="hppttId">
+				<xs:annotation>
+					<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk technology. The HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:HighPerformancePushToTalkIDString">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SecurityGroupInfoType">
+		<xs:sequence>
+			<xs:element name="securityGroupId" type="tns:SecurityGroupIdType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SplitBillInfoType">
+		<xs:sequence>
+			<xs:element name="splitBillCode" type="tns:SubscriberSplitBillCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the Account is part of a Split Billing Relationship or not. 
+P - Primary
+S - Secondary
+B - Both
+N - Not Found</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberCountInfo">
+		<xs:sequence>
+			<xs:element name="totalCount" type="tns:NumberOfSubscriptions">
+				<xs:annotation>
+					<xs:documentation>Total number of subscribers (including reserved, active, suspended, and cancelled) associated with the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activeCount" type="tns:NumberOfActiveSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of subscribers associated with the BAN that has a status of ‘Active’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reservedCount" type="tns:NumberOfReservedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of subscribers associated with the BAN that has a status of ‘Reserved’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suspendedCount" type="tns:NumberOfSuspendedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of subscribers associated with the BAN that has a status of ‘Suspended’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cancelledCount" type="tns:NumberOfCancelledSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of subscribers associated with the BAN that has a status of ‘Cancelled’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idenReservedCount" type="tns:NumberOfReservedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of iDEN subscribers associated with the BAN that has a status of ‘Reserved’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idenActiveCount" type="tns:NumberOfActiveSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of iDEN subscribers associated with the BAN that has a status of ‘Active’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idenCancelledCount" type="tns:NumberOfCancelledSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of iDEN subscribers associated with the BAN that has a status of ‘Cancelled’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="idenSuspendedCount" type="tns:NumberOfSuspendedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of iDEN subscribers associated with the BAN that has a status of ‘Suspended’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cdmaReservedCount" type="tns:NumberOfReservedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of CDMA subscribers associated with the BAN that has a status of ‘Reserved’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cdmaActiveCount" type="tns:NumberOfActiveSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of CDMA subscribers associated with the BAN that has a status of ‘Active’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cdmaCancelledCount" type="tns:NumberOfCancelledSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of CDMA subscribers associated with the BAN that has a status of ‘Cancelled’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cdmaSuspendedCount" type="tns:NumberOfSuspendedSubscriptions" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Count of CDMA subscribers associated with the BAN that has a status of ‘Suspended’. Will be returned only for a Large BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UaiInfoType">
+		<xs:sequence>
+			<xs:element name="id" type="tns:NoteIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Id of the Urgent Account Information Note.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="tns:NoteTitleTextType">
+				<xs:annotation>
+					<xs:documentation>Title of the UAI Note</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				<xs:annotation>
+					<xs:documentation>Effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Expiration date.  Note with no expiry date is always effective beginning with the effective date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="text" type="tns:NoteTextType">
+				<xs:annotation>
+					<xs:documentation>Text of the UAI note</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="userId" type="tns:UserIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>ID of the user that last saved the note</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lockInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the note can be updated only by authorized users.
+Values:
+true – can only be updated by authorized users.
+false – update not restricted to authorized users.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UaiListType">
+		<xs:sequence>
+			<xs:element name="effectiveUaiCount" type="tns:RowCountNumberType">
+				<xs:annotation>
+					<xs:documentation>The count of effective Urgent Account Information notes on the BAN. Future-dated Urgent Account Information notes will be included in this count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="uaiInfo" type="tns:UaiInfoType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Urgent Account Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="AccountNumberType">
+		<xs:annotation>
+			<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountSpendingLimitIndicator">
+		<xs:annotation>
+			<xs:documentation>Account Spending Limit Indicator indicates whether the account is a spending limit account or not.  
+
+Values:
+True => ASL Account
+False => Not an ASL Account</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="AccountSpendingLimitLastActivityCode">
+		<xs:annotation>
+			<xs:documentation>ASL Last activity code (e.g., S – SMS, etc.).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AccountValue">
+		<xs:annotation>
+			<xs:documentation>Account value</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressEffectiveFromDate">
+		<xs:annotation>
+			<xs:documentation>Contains the effective date of the address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="AddressTypeCode">
+		<xs:annotation>
+			<xs:documentation>Address Type Code distinguishes an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdjustmentBlockDate">
+		<xs:annotation>
+			<xs:documentation>Supports the blocking BAN adjustments to a BAN for specific accounts on a ad hoc basis for a configurable time period</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="AgingBalance">
+		<xs:annotation>
+			<xs:documentation>Aging Balance carries the customer's unpaid balance for a specified time period.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AirraveDeviceStatusCode">
+		<xs:annotation>
+			<xs:documentation>The status of the macId Device</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="A"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApartmentDesignator">
+		<xs:annotation>
+			<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApartmentNumber">
+		<xs:annotation>
+			<xs:documentation>Apartment Number is an Address Component that contains the identifier of the apartment within the context of a bilding's postal address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AttentionTextEns">
+		<xs:annotation>
+			<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillAdvanceArrearCode">
+		<xs:annotation>
+			<xs:documentation>BAN level advance/arrear billing indicator. This indicator is defined at account type/sub type level.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillDeliveryPreferenceCode">
+		<xs:annotation>
+			<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+			<xs:documentation>TODO: Need enumeration values.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumberEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAcctPassword">
+		<xs:annotation>
+			<xs:documentation>Password holds the string of characters a PARTY designated as a credential into a system, network or Customer Account.  Password is something only the PARTY knows and the authenticator can confirm.  Also see OTP and Secret Q&amp;A. </xs:documentation>
+			<xs:documentation>Billing Account Password contains the system access password the Account Holder or the External  Account Administrator used to gain entry into the system  in order to make changes to the Billing Account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusCodeEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Code Ens holds the current state of the Billing Account in the Ensemble system
+Valid states:
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="O">
+				<xs:annotation>
+					<xs:documentation>open (active)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="C">
+				<xs:annotation>
+					<xs:documentation>cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="S">
+				<xs:annotation>
+					<xs:documentation>suspended</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="T">
+				<xs:annotation>
+					<xs:documentation>tentative</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="N">
+				<xs:annotation>
+					<xs:documentation>closed</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusChangeReasonCode">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Change Reason Code identifies the reason for the activity that modified the Billing Account's status.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusEffectiveFromDate">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Effective From Date holds the first calendar day the status was assigned to the Billing Account.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountSubTypeCode">
+		<xs:annotation>
+			<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+			<xs:documentation>Ensemble Documentation is inadequate.  &#13;
+TODO: Get better description.&#13;
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountTypeCodeEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+			<xs:documentation>Ensemble Documentation is inadequate.  &#13;
+TODO: Get better description.&#13;
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingCycleCode">
+		<xs:annotation>
+			<xs:documentation>Billing Cycle Code uniquely identifies the group of Billing Accounts batched together for load balancing in the billing process of the billing System the Billing Account is assigned to.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingCycleEndDate">
+		<xs:annotation>
+			<xs:documentation>Billing Cycle End Date holds the current cycle end date for a given account number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillingCyclePeriodStartDate">
+		<xs:annotation>
+			<xs:documentation>Billing Cycle Period Start Date contains the first calendar month, day and year of a Billing Period that would appear on the Invoice.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillFormatTypeCodeEns">
+		<xs:annotation>
+			<xs:documentation>Bill Format Type Code specifies either a Business or Consumer format for the BILLING ACCOUNT's BILLs.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpression">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BirthDateEns">
+		<xs:annotation>
+			<xs:documentation>Birth Date contains the calendar month, day and year on which an Individual  was born.</xs:documentation>
+			<xs:documentation>Birth Date contains the calendar month, day and year on which an Individual  was born.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="BlockedIndicator">
+		<xs:annotation>
+			<xs:documentation>Indicates if the account has been blocked (blacklisted) or not
+Values: Y or N</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BrandCode">
+		<xs:annotation>
+			<xs:documentation>The Brand Code is a 3 byte code denoting which brand the pre-paid subscriber belongs to&#13;
+Valid values:&#13;
+‘BST - Boost&#13;
+‘SPR’ – Sprint&#13;
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ChurnProbabilityRatingType">
+		<xs:annotation>
+			<xs:documentation>Churn Probability Rating contains a value from 1-5 derived from the Customer Value Segment conversion of the column DECILE in the table MKIS.SUBS_CUST_SCORE_HIST. When the value is sent through EI the number is changed to:
+1-2 Low propensity to churn, 
+3 - Medium propensity to churn, 
+4-5 High propensity to churn.</xs:documentation>
+			<xs:documentation>Churn Probability Rating contains a value from 1-5 derived from the Customer Value Segment conversion of the column DECILE in the table MKIS.SUBS_CUST_SCORE_HIST. When the value is sent through EI the number is changed to:
+1-2 Low propensity to churn, 
+3 - Medium propensity to churn, 
+4-5 High propensity to churn.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="CityNameEns">
+		<xs:annotation>
+			<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CollectionWaiverCodeType">
+		<xs:annotation>
+			<xs:documentation>Collection Waiver Code indicates whether an account must be waived from automatic collection treatment.  It is used both for permanent waiving of an account from automatic collection treatment and for temporary waiving. The temporary waiving is obtained by delaying the date of the next collection step. In this case, the Waiver indicator indicates that such a modification was made.
+Valid Values include:
+N - Automatic collection treatment can be performed(Not Waived),
+P - The account is permanently waived from automatic collection treatment,
+D - The account's collection treatment was delayed,
+K - The account is temporarily waived from the automatic collection treatment(Open Payment Arrangement),
+C - Manually restored during suspensionl...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CommunicationServiceAreaId">
+		<xs:annotation>
+			<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactMethodCode">
+		<xs:annotation>
+			<xs:documentation>Method for contacting (email, phone, letter)
+E – Email
+F – Fax
+L -- Letter
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="E"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="L"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactPhoneNumberTextType">
+		<xs:annotation>
+			<xs:documentation>North American Numbering Plan (NANP) Telecom Number, is the 10 digit telephone number comprised of the NPA Number, the NXX Number and the Phone Line Number</xs:documentation>
+			<xs:documentation>Contact Phone Number Text is a formatted text entry of a contact phone number including 4 digit extension including dashes and a space between telephone number and extension.&#13;
+Format  XXX-XXX-XXXX XXXX</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CorporateBillingAccountNumberEns">
+		<xs:annotation>
+			<xs:documentation>Corporate Billing Account Number is the Account Number used to bundle various sub-Account into to produce a corporate level Bill.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CostCenter">
+		<xs:annotation>
+			<xs:documentation>Cost Center represents the internal Sprint organization supporting the CUSTOMER.Cost Center are organizational entities that add to the cost of the organization, but only indirectly add to the profit of the company. Examples include Research and Development, Marketing and Customer service.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreditClassCode">
+		<xs:annotation>
+			<xs:documentation>"Credit Class Code identifies the Customer's level of financial responsibility.   
+
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required depsoit and the amount of the deposit, ec.."</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreditClassDescription">
+		<xs:annotation>
+			<xs:documentation>The description of the Credit Class provided.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CurrentBalance">
+		<xs:annotation>
+			<xs:documentation>Current balance as displayed to front end GUI.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerChurnRiskScore">
+		<xs:annotation>
+			<xs:documentation>Indicates customer's likelihood of switching carriers. The higher the score the higher is the possibility of switching. Customers with high churn routing score will be routed to a special call queue called advantage queue</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CustomerValueScoreRating">
+		<xs:annotation>
+			<xs:documentation>Customer Value Score Rating contains a value from 5 - 1 derived from the Customer Value Segment conversion of the column REVNU_SCORE_DECILE from MKIS.SUBS_CUST_SCORE_HIST. When the value is sent through EI the number is changed: 5 - 5$, 1-1$.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DealerIdentifierEns">
+		<xs:annotation>
+			<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DebtAgeTotalDays">
+		<xs:annotation>
+			<xs:documentation>DEPRECATE: Use DebtAgeDayCountType -- Calculated as number of days.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeliveryNoEmailReasonCode">
+		<xs:annotation>
+			<xs:documentation>No email reason for delivery </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DriverLicenseExpirationDateEns">
+		<xs:annotation>
+			<xs:documentation>The Driver’s License Expiration Date holds the last calendar Date a Driver License is valid in the specified State jurisdiciton.  After this date the Driver LIcense is no longer valid. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="DriverLicenseNumber">
+		<xs:annotation>
+			<xs:documentation>License Number uniquely identifies a document, plate, or tag evidencing a grant  of a permission by competent authority to engage in a business or occupation or in an activity otherwise unlawful. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DriverLicenseStateCode">
+		<xs:annotation>
+			<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="DunsNumberInt">
+		<xs:annotation>
+			<xs:documentation>Data Universal Numbering System Number is a unique nine-digit  number that uniquely identifies each physical location of a business in the Dunn and Bradstreet Data Universal Numbering System (DUNS).</xs:documentation>
+			<xs:documentation>alias: DUNS Number</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromDateType">
+		<xs:annotation>
+			<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ElectronicAddressString">
+		<xs:annotation>
+			<xs:documentation>ElectronicAddressString represents the character string of the electronic address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmployerName">
+		<xs:annotation>
+			<xs:documentation>ORGANIZATION NAME is a type of PARTY NAME representing the name of an ORGANIZATION.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmploymentStartDateEns">
+		<xs:annotation>
+			<xs:documentation>Employment Start Date start date holds the hire date or the date an INDIVIDUAL began work for an Employer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EndDate">
+		<xs:annotation>
+			<xs:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.&#13;
+&#13;
+Elements declared to be of type date must follow this form:  &#13;
+CCYY-MM-DD&#13;
+range for CC is: 00-99&#13;
+range for YY is: 00-99&#13;
+range for MM is: 01-12&#13;
+range for DD is: &#13;
+01-28 if month is 2&#13;
+01-29 if month is 2 and the gYear is a leap gYear&#13;
+01-30 if month is 4, 6, 9, or 11&#13;
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12&#13;
+&#13;
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSerialNumberString">
+		<xs:annotation>
+			<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  &#13;
+&#13;
+Network Device Identifier will contain one of the following: &#13;
+Electronic Serial Number (ESN); &#13;
+Mobile Equipment IDentifier (MEID);&#13;
+International Mobile Equipment Identfie (IMEI);&#13;
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>EquipmentSerialNumberType is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EthnicOriginCode">
+		<xs:annotation>
+			<xs:documentation>A code that classifies or divides people into populations or groups on the basis of various sets of characteristics and beliefs about common ancestry. The most widely used categories are based on visible traits (especially skin color, cranial or facial features and hair texture), and self-identification.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EthnicOriginSubRegionCode">
+		<xs:annotation>
+			<xs:documentation>A code that further divides an ethnic origin into sub regions.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EventDateType">
+		<xs:annotation>
+			<xs:documentation>Event Date is the calendar date on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="FaxNumber">
+		<xs:annotation>
+			<xs:documentation>A fax (short for facsimile and sometimes called telecopying) is the telephonic transmission of scanned-in printed material (text or images), usually to a telephone number associated with a printer or other output device. The original document is scanned with a fax machine, which treats the contents (text or images) as a single fixed graphic image, converting it into a bitmap. In this digital form, the information is transmitted as electrical signals through the telephone system. The receiving fax machine reconverts the coded image and prints a paper copy of the document.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FederalEmployerIdentificationNumberEns">
+		<xs:annotation>
+			<xs:documentation>Federal Employer Identification Number (FEIN) is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to business entities operating in the United States for the purposes of identification. When the number is used for identification rather than employment tax reporting, it is usually referred to as a TIN, and when used for the purposes of reporting employment taxes, it is usually referred to as an FEIN or EIN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FetchInformationFlag">
+		<xs:annotation>
+			<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="FetchInformationFlagType">
+		<xs:annotation>
+			<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="FirstNameEns">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+			<xs:documentation>alias: Given Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GeoCodeManualOverrideFlag">
+		<xs:annotation>
+			<xs:documentation>Flag to indicate if  geo code was Manually Overridden</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="GeographicCodeType">
+		<xs:annotation>
+			<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+			<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HierarchyNodeIdentifier">
+		<xs:annotation>
+			<xs:documentation>Hierarchy Node Identifier uniquely identfies a Node in the Customer Hierarchy.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIDString">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HomePhoneNumber">
+		<xs:annotation>
+			<xs:documentation>Home Phone Number holds the telephone number given by a Party as the phone number that should be used to contact their residence.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HotlineReasonCode">
+		<xs:annotation>
+			<xs:documentation>First hotline soc attached to any subscriber of the account</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HotlineTypeCode">
+		<xs:annotation>
+			<xs:documentation>Account level Hotline type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InCollectionFlag">
+		<xs:annotation>
+			<xs:documentation>In Collection Flag is a boolean indicator of whether the account is in collections.
+true - the account is in collections
+false - the account is not in collections</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="InterexchangeCarrierId">
+		<xs:annotation>
+			<xs:documentation>Identifies an Interexchange Carrier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		<xs:annotation>
+			<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressString">
+		<xs:annotation>
+			<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Iso3CharCountryCode">
+		<xs:annotation>
+			<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IvrNegativeFlag">
+		<xs:annotation>
+			<xs:documentation>Flag indicating if the Ban is in negative list – for IVR only.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="LanguagePreferenceCode">
+		<xs:annotation>
+			<xs:documentation>Language Preference Code identifies a language preference.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LanguagePreferenceName">
+		<xs:annotation>
+			<xs:documentation>Language Preference Name contains the text specifying a preferred language.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LargeAccountIndicator">
+		<xs:annotation>
+			<xs:documentation>Indicator that determines if this account is a large account or not.  It is used by the on-line applications to determine if an account is considered large.
+
+Values:
+True = 1 - Large Account 
+False = 0 - Not a large account</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="LastNameEns">
+		<xs:annotation>
+			<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			<xs:documentation>alias: Surname </xs:documentation>
+			<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastPaymentReceivedDate">
+		<xs:annotation>
+			<xs:documentation>Identifies the date the most recent payment was received.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="MajorAccountNumberEns">
+		<xs:annotation>
+			<xs:documentation>Major Account Number is a anumber associated with the reseller liable account for Ensemble customers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MarketingSource">
+		<xs:annotation>
+			<xs:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.
+
+For example:
+(1) An identifier is information that uniquely identifies a party 
+(2) An identifier is a signifier for an identity ; it is one or more data items that distinguishes a party from other parties. Examples of identifiers: name, id-number, username, IP-address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MarketSegmentNameType">
+		<xs:annotation>
+			<xs:documentation>Market Segment Name is the common name of a distinct subset or segment of a market that behave in the same way or have similar needs. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MiddleNameEns">
+		<xs:annotation>
+			<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberString">
+		<xs:annotation>
+			<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NameSuffix">
+		<xs:annotation>
+			<xs:documentation>Name Suffix holds any affix that may occurr at the end of the name of an INDIVIDUAL designating a dignity, honor, distinction, or preeminence attached to the INDIVIDUAL by virtue of rank, office, precedent, privilege, attainment, or lands.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetDueTerms">
+		<xs:annotation>
+			<xs:documentation>If Ban belons to a corporate (having corpId), the net due terms of corporate</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NoteIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Note Identifier uniquely identifies an instance of NOTE.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NoteTextType">
+		<xs:annotation>
+			<xs:documentation>Note Text is the body of the text in the NOTE.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfActiveSubscriptions">
+		<xs:annotation>
+			<xs:documentation>Count of subscribers associated with the account that have a status of ‘Active’.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfCancelledSubscriptions">
+		<xs:annotation>
+			<xs:documentation>Count of subscribers associated with the account that have a status of ‘Cancelled’.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfCommitmentMonths">
+		<xs:annotation>
+			<xs:documentation>The number of commitment months.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfReservedSubscriptions">
+		<xs:annotation>
+			<xs:documentation>Count of subscribers associated with the account that have a status of ‘Reserved’.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfSubscriptions">
+		<xs:annotation>
+			<xs:documentation>Total number of subscribers (including reserved, active, suspended, and cancelled) associated with the account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfSuspendedSubscriptions">
+		<xs:annotation>
+			<xs:documentation>Count of subscribers associated with the account that have a status of ‘Suspended’.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkIndicatorCode">
+		<xs:annotation>
+			<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+			<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NoteTitleTextType">
+		<xs:annotation>
+			<xs:documentation>Note Title Text is the title line of a note.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrganizationName">
+		<xs:annotation>
+			<xs:documentation>Organization Name is a label  applied to those instances of PARTY of type  ORGANIZATION.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrganizationPersonIndicator">
+		<xs:annotation>
+			<xs:documentation>Organization Person Indicator identifies the PARTY as either a Organization or an Individual.
+Valid Values:  
+
+'D' = Double (Business / Organization name)
+
+'P' = Private (Individual) </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="D"/>
+			<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OtherPhoneTypeCode">
+		<xs:annotation>
+			<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+			<xs:documentation>NOTE: Maxlength = 15</xs:documentation>
+			<xs:documentation>TODO: Need to identify the enumeration values.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PaymentAmount">
+		<xs:annotation>
+			<xs:documentation>Payment amount is the amount of an invoice's charges for which payments have been applied.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumber">
+		<xs:annotation>
+			<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumberExtension">
+		<xs:annotation>
+			<xs:documentation>Phone Number Extension holds an additional sequence of digits that used in conjunction with a phone number uniquely identifies a phone in a PBX or other office phone system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PinSecurityFlag">
+		<xs:annotation>
+			<xs:documentation>Pin Security Flag indicates account is set up on the new pin based security architecture.
+True - account is set up on the new pin based security architecture.
+False - account still on the legacy security architecture.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="PositionName">
+		<xs:annotation>
+			<xs:documentation>Position Name is tha name of a job slot in the Sprint enterprise that can be occupied by more than one INDIVIDUAL over time.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalAddressLine">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostOfficeBoxNumber">
+		<xs:annotation>
+			<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PrePaidTypeCode">
+		<xs:annotation>
+			<xs:documentation>PrePaidTypeCode indicates the Customer is required to pay for service in advance.
+
+Valid Values:
+Y - Indicates the account is a pre-paid account.
+N – Not a pre-paid account.
+S - SIM Pre-paid account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PrimaryAddressLine">
+		<xs:annotation>
+			<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+
+For a street address, Primary Address Line holds the concatenation of the street components of the address.
+For a Post Office Box address, Primary Address Line holds the P.O. Box information.
+For a Rural address, Primary Address Line holds the Rural number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PurchaseOrderNumber">
+		<xs:annotation>
+			<xs:documentation>Purchase Order Number is a type of Order NUmber used to identify an instance of a PURCHASE ORDER.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ReturnMailIndicator">
+		<xs:annotation>
+			<xs:documentation>Return Mail Indicator</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RowCountNumberType">
+		<xs:annotation>
+			<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RuralRouteBoxNumber">
+		<xs:annotation>
+			<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RuralRouteControlNumber">
+		<xs:annotation>
+			<xs:documentation>Rural Route Control Number holds the rural road or highway control number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocialSecurityNumberEns">
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SpecialInstructionText">
+		<xs:annotation>
+			<xs:documentation>Text of special instructions.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SprintBusinessEntityIdentifier">
+		<xs:annotation>
+			<xs:documentation>TODO: Find out what values appear in this.  Does each Reseller have a unique 3 character identrifier?</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StandardIndustrialClassificationCodeInt">
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StartDate">
+		<xs:annotation>
+			<xs:documentation>Start Date holds the calendar day an activity, undertaking or participation begins.</xs:documentation>
+			<xs:documentation>Case Start Date contains the calendar day the CASE began.  For example, in a Collection Case this would be the calendar day the Billing Account was put into Collections.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="SecurityGroupIdType">
+		<xs:annotation>
+			<xs:documentation>DEPRECATED: use SecurityGroupIdentifierType -- Identified security group users which may access account information</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SecurityGroupIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Security Group Identifier designates a group users which may access account information under the same security priveleges.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetDirection">
+		<xs:annotation>
+			<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing before or after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetName">
+		<xs:annotation>
+			<xs:documentation>Street Name is a USPS Postal Address component that holds the name of a street.  For example in, "123 Main Street", "Main" would reside in Street Name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetNumber">
+		<xs:annotation>
+			<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetSuffix">
+		<xs:annotation>
+			<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.  Other values might be Cir, Vlvd, Rd, etc.</xs:documentation>
+			<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubMarketCode">
+		<xs:annotation>
+			<xs:documentation>Market Segment represents a distinct subset or segment of a market that behave in the same way or have similar needs.  Because each segment is fairly homogeneous in their needs and attitudes, they are likely to respond similarly to a given marketing strategy. That is, they are likely to have similar feelings and ideas about a marketing mix comprised of a given product or service, sold at a given price, distributed in a certain way and promoted in a certain way.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberSplitBillCodeType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Split Bill Code is an indicator of a split Bill Subscriber.
+Values:
+P - Primary subscriber on the split bill
+S - Secondary subscriber on the split bill</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionIdentifierEns">
+		<xs:annotation>
+			<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SummaryBillProductionIndicator">
+		<xs:annotation>
+			<xs:documentation>Summary Bill Production Indicator identifies whether a Summary Bill or a General Bill should be produced for the Billing Account.
+</xs:documentation>
+			<xs:documentation>TODO: Verify the following enumeration values are correct.  
+
+True = Summary Bill invoicing option
+False= General Invoice invoicing option</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="SuppressBillCode">
+		<xs:annotation>
+			<xs:documentation>DEPRECATED: use BillSuppressionCodeType -- Bill Suppression Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxExemptionNumber">
+		<xs:annotation>
+			<xs:documentation>A number assigned by the IRS indicating that an organization is exempt from federal income taxation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TemporarySpendingLimitIndicator">
+		<xs:annotation>
+			<xs:documentation>Temporary Spending Limit Yes No Indicator identifies Credit Class instances that have spending limit which is temporary in nature.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="TinNumber">
+		<xs:annotation>
+			<xs:documentation>Tax Identification Number (TIN) is a unique nine-digit number assigned by the Internal Revenue Service (IRS) to business entities operating in the United States for the purposes of identification. When the number is used for identification rather than employment tax reporting, it is usually referred to as a TIN, and when used for the purposes of reporting employment taxes, it is usually referred to as an FEIN or EIN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TitleEns">
+		<xs:annotation>
+			<xs:documentation>alias: Honorific</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TotalPaymentDue">
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="11"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TrailingDirection">
+		<xs:annotation>
+			<xs:documentation>Trailing Direction is a USPS POstal Address component that holds the compass direction that sometimes appears at the end of a street address.  For example in, "123 Main Street East", "East" would reside in Trailing Direction.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TreatmentTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Treatment Type Code is the treatment that will be performed on an account. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserIdentifierType">
+		<xs:annotation>
+			<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserName">
+		<xs:annotation>
+			<xs:documentation>User Name consists of all of the characters preceding the @ sign in a URL.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCd">
+		<xs:annotation>
+			<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCodeExtension">
+		<xs:annotation>
+			<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsStateAbbreviation">
+		<xs:annotation>
+			<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WorkPhoneNumber">
+		<xs:annotation>
+			<xs:documentation>Work Phone Number holds the telephone number given by a Party as the phone number that should be used to contact their place of employment.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

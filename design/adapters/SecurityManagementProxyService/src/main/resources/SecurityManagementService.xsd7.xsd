@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/authenticateUserLogin/v1/authenticateUserLogin.xsd" targetNamespace="http://integration.sprint.com/interfaces/authenticateUserLogin/v1/authenticateUserLogin.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	
+<!-- Date              Author                   Version     Change                                                                                                      Rel                    SR# -->
+	
+<!--07/28/2010   Steve Heichelheim 1.0              initial version added MVM standards and simple types                            GBL10.5           PJ002638 - CR#3786-->
+	
+<!--08/10/2010   Ibrahim ElKhatib      1.1             - Added fetchDetailInfo to the request.                                                     GBL10.5           PJ002638 - CR#3863-->
+	
+<!--                                                                      - Added detailInfo to accountInfo in the response. Removed primaryBanInfo-->
+	
+<!--                                                                      - Renamed banList as accountList, banInfo as accountInfo, banId as ban and dacId as dac.-->
+	
+<!--08/23/2010   Ibrahim ElKhatib      1.1             Corrected a typo with emailAddress                                                         GBL10.5           PJ002638 - CS # 410564-->
+	
+<!--08/26/2010   Ibrahim ElKhatib      1.2             - Changed accountStatus from required to optional.                                 GBL10.5           PJ002638 - CS # 411650-->
+	
+<!--                                                                      - Removed enumeration from the  BillingAccountStatusCodeEns (accountStatus element)-->
+	
+<!--09/09/2010   Ibrahim ElKhatib      1.3             - Changed subscriberInfo and contents from Required to Optional           GBL10.5           PJ002638 - CS # 414998 -->
+	
+<!--                                                                      - Changed accountList from Required to Optional -->
+	
+<!--                                                                      -  Removed nillable="true" from: -->
+	
+<!--                                                                         UspsPostalCodeType (element zipCode), NickNameType (element accountNickName), BillingAccountNumberType (element ban), -->
+	
+<!--                                                                         DepartmentAccountCodeType (element dac), ModelNumberType (element deviceModelNumber), -->
+	
+<!--                                                                         NetworkTypeCodeType (element networkInd), MobileDirectoryNumberStringType (element mdn)-->
+	
+<xs:element name="authenticateUserLogin" type="tns:AuthenticateUserLoginType"/>
+	
+<xs:element name="authenticateUserLoginResponse" type="tns:AuthenticateUserLoginResponseType"/>
+	
+<xs:complexType name="AuthenticateUserLoginType">
+		
+<xs:sequence>
+			
+<xs:element name="userName" type="tns:UserNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>The customer’s  user name on the Sprint.com website profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="password" type="tns:PasswordStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>The customer’s password on the Sprint.com website profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The customer’s account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchDetailInfo" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether the additional information should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AuthenticateUserLoginResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="userName" type="tns:UserNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>The customer’s  user name on the Sprint.com website profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountList" type="tns:BanListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Array of banInfo structures which holds the information for each account that the logged user is allowed to view.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="profileRoleList" type="tns:ProfileRoleListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of roleId </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains phone related information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="emailAddress" type="tns:EmailAddressStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Email address on the profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First name on the profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:LastNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Last name on the profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digits USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BanInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountNickName" type="tns:NickNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The account nick name in the profile chosen by the user</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dac" type="tns:DepartmentAccountCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Department Account Code Identifier
+Department Account Code (DAC) is used within the context of a business customer hierarchy as way to group Billing Account Numbers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="primaryInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the account is the primary</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="roleId" type="tns:AccountRoleIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The logging user role as it relates to the account.
+1 = Generic User
+2 = Device User
+4 = Service Admin
+5 = Account Holder
+8 = Wireless Manager
+14 = Account Authorized
+roleId = 0 Not applicable when banInfo is returned part of primaryBanInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="viewAccountInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>A user’s setting indicates if the account is viewable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="detailInfo" type="tns:DetailInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BanListType">
+		
+<xs:sequence>
+			
+<xs:element name="accountInfo" type="tns:BanInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>banInfo structure holds the information for each account that the logged user is allowed to view.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DetailInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountStatus" type="tns:BillingAccountStatusCodeEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Status
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProfileRoleListType">
+		
+<xs:sequence>
+			
+<xs:element name="roleId" type="tns:AccountRoleIdentifierType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Array of the logging user roles:
+1 = Generic User
+2 = Device User
+4 = Service Admin
+5 = Account Holder
+8 = Wireless Manager
+14 = Account Authorized</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceModelNumber" type="tns:ModelNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Device Model Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscribers’ network Indicator -CDMA or iDEN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber’s MDN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountStatusCodeEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Status Code Ens holds the current state of the Billing Account in the Ensemble system
+Valid states:
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DepartmentAccountCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Department Account Code (DAC) is used within the context of a business customer hierarchy as way to group Billing Account Numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="256"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileEquipmentIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Equipment Identifier String is the string representation of an equipment identification number, similar to a serial numberi, used to identify a wireless network access device.</xs:documentation>
+			
+<xs:documentation>International Mobile Equipment Identfier is a wireless telecommunications term. An equipment identification number, similar to a serial numberi, used to identify a wireless network access device.
+
+Length 15 characters.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			
+<xs:documentation>alias: Surname</xs:documentation>
+			
+<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The network type code identifies which network the subscriber is associated to.
+Possible values:
+C - CDMA
+I - IDEN</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="I"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NickNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>NickName is effectively a what the INDIVIDUAL whats to be "know as" or "goes by". Example; Jon is nickname, where Jonathan is first name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Password String holds the string characters a party designated as a Password into a system or Customer Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Name is an identifier of the identity associated with a party role which is the public part of a paired identity assertion.  User Name consists of all of the characters preceding the @ sign in a URL identifying a member of the specified Domain. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="AccountRoleIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Role Identifier uniquely identifies the user role as it relates to the account.
+Valid Values:
+1 - Generic User
+2 - Device User
+4 - Service Admin
+5 - Account Holder
+8 - Wireless Manager
+14 - Account Authorized
+0 - Not applicable when banInfo is returned part of primaryBanInfo</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

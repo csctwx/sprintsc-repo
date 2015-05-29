@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/TaxCalculationService/v1/TaxCalculationService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/TaxCalculationService/v1/TaxCalculationService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="TaxCalculationService.xsd3.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="TaxCalculationService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="TaxCalculationService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/calculatePrepaidInvoiceTax/v1/calculatePrepaidInvoiceTax.xsd"/>
+<xsd:import schemaLocation="TaxCalculationService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="calculatePrepaidInvoiceTax">
+<wsdl:part name="parameters" element="xsns:calculatePrepaidInvoiceTax" xmlns:xsns="http://integration.sprint.com/interfaces/calculatePrepaidInvoiceTax/v1/calculatePrepaidInvoiceTax.xsd"/></wsdl:message>
+<wsdl:message name="calculatePrepaidInvoiceTaxResponse">
+<wsdl:part name="parameters" element="xsns:calculatePrepaidInvoiceTaxResponse" xmlns:xsns="http://integration.sprint.com/interfaces/calculatePrepaidInvoiceTax/v1/calculatePrepaidInvoiceTax.xsd"/></wsdl:message>
+<wsdl:message name="faultmessage2">
+<wsdl:part name="fault2" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="managePrepaidInvoiceTax">
+<wsdl:part name="parameters" element="xsns:managePrepaidInvoiceTax" xmlns:xsns="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd"/></wsdl:message>
+<wsdl:message name="managePrepaidInvoiceTaxResponse">
+<wsdl:part name="parameters" element="xsns:managePrepaidInvoiceTaxResponse" xmlns:xsns="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="TaxCalculationServicePortType">
+<wsdl:operation name="CalculatePrepaidInvoiceTax">
+<wsdl:input name="CalculatePrepaidInvoiceTaxRequest" message="ns0:calculatePrepaidInvoiceTax"/>
+<wsdl:output name="CalculatePrepaidInvoiceTaxResponse" message="ns0:calculatePrepaidInvoiceTaxResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation>
+<wsdl:operation name="ManagePrepaidInvoiceTax">
+<wsdl:input name="ManagePrepaidInvoiceTaxRequest" message="ns0:managePrepaidInvoiceTax"/>
+<wsdl:output name="ManagePrepaidInvoiceTaxResponse" message="ns0:managePrepaidInvoiceTaxResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="TaxCalculationServiceBinding" type="ns0:TaxCalculationServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="CalculatePrepaidInvoiceTax">
+<soap11:operation soapAction="CalculatePrepaidInvoiceTax" style="document"/>
+<wsdl:input name="CalculatePrepaidInvoiceTaxRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CalculatePrepaidInvoiceTaxResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ManagePrepaidInvoiceTax">
+<soap11:operation soapAction="ManagePrepaidInvoiceTax" style="document"/>
+<wsdl:input name="ManagePrepaidInvoiceTaxRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ManagePrepaidInvoiceTaxResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="TaxCalculationService">
+<wsdl:port name="TaxCalculationServicePortType" binding="ns0:TaxCalculationServiceBinding">
+<soap11:address location="http://144.226.135.45:80/services/TaxCalculationService"/></wsdl:port></wsdl:service></wsdl:definitions>

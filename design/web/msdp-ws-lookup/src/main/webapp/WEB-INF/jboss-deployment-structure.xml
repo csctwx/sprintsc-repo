@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-deployment-structure>
+	<deployment>
+		<dependencies>
+			<module name="org.apache.cxf" />
+			<module name="org.apache.commons.logging" />
+			<module name="org.springframework.spring" />
+		</dependencies>
+	</deployment>
+</jboss-deployment-structure>

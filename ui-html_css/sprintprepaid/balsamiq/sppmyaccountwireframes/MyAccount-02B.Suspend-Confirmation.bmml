@@ -1,0 +1,523 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1405" measuredH="1373" mockupW="1394" mockupH="1347">
+  <controls>
+    <control controlID="878" controlTypeID="com.balsamiq.mockups::Canvas" x="11" y="28" w="365" h="645" measuredW="100" measuredH="70" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13816528</color>
+      </controlProperties>
+    </control>
+    <control controlID="879" controlTypeID="__group__" x="11" y="26" w="364" h="35" measuredW="364" measuredH="35" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="0" w="360" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="879"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="4" y="6" w="360" h="29" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="879">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="322" y="9" w="34" h="-1" measuredW="34" measuredH="22" zOrder="2" locked="false" isInGroup="879">
+          <controlProperties>
+            <size>14</size>
+            <text>15%3A30</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Icon" x="257" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="3" locked="false" isInGroup="879">
+          <controlProperties>
+            <icon>WirelessIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Icon" x="291" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="4" locked="false" isInGroup="879">
+          <controlProperties>
+            <icon>CellBarsIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Icon" x="14" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="5" locked="false" isInGroup="879">
+          <controlProperties>
+            <icon>GMailIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="880" controlTypeID="__group__" x="12" y="58" w="363" h="51" measuredW="363" measuredH="51" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="3" y="0" w="360" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="880"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="3" y="3" w="359" h="43" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="880">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Icon" x="11" y="12" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="5" locked="false" isInGroup="880">
+          <controlProperties>
+            <color>16777215</color>
+            <icon>ListIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="126" y="13" w="149" h="-1" measuredW="86" measuredH="24" zOrder="2" locked="false" isInGroup="880">
+          <controlProperties>
+            <align>left</align>
+            <bold>false</bold>
+            <color>0</color>
+            <size>16</size>
+            <text>My%20Account</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::HRule" x="2" y="41" w="360" h="-1" measuredW="100" measuredH="10" zOrder="3" locked="false" isInGroup="880">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+            <stroke>dotted</stroke>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="3" w="43" h="43" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="880">
+          <controlProperties>
+            <color>0</color>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Icon" x="325" y="7" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="6" locked="false" isInGroup="880">
+          <controlProperties>
+            <icon>ExportIcon%7Cmedium</icon>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Image" x="54" y="7" w="33" h="36" measuredW="400" measuredH="499" zOrder="7" locked="false" isInGroup="880">
+          <controlProperties>
+            <src>./assets/Sprint_Prepaid_Logo_FullColor%2520-%2520Copy.jpg</src>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="74" y="26" w="43" h="-1" measuredW="31" measuredH="17" zOrder="8" locked="false" isInGroup="880">
+          <controlProperties>
+            <align>left</align>
+            <bold>false</bold>
+            <color>0</color>
+            <size>9</size>
+            <text>prepaid</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="881" controlTypeID="com.balsamiq.mockups::Canvas" x="19" y="121" w="348" h="407" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="882" controlTypeID="com.balsamiq.mockups::Canvas" x="19" y="121" w="348" h="41" measuredW="100" measuredH="70" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16769280</borderColor>
+        <color>16769280</color>
+      </controlProperties>
+    </control>
+    <control controlID="883" controlTypeID="com.balsamiq.mockups::Label" x="19" y="127" w="348" h="-1" measuredW="320" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>20</size>
+        <text>Your%20Account%20has%20been%20Suspended</text>
+      </controlProperties>
+    </control>
+    <control controlID="884" controlTypeID="com.balsamiq.mockups::Paragraph" x="27" y="170" w="332" h="60" measuredW="275" measuredH="80" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>14</size>
+        <text>You%20have%20successfully%20suspended%20your%20account.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="887" controlTypeID="com.balsamiq.mockups::Canvas" x="27" y="375" w="332" h="130" measuredW="100" measuredH="70" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <color>10999299</color>
+      </controlProperties>
+    </control>
+    <control controlID="888" controlTypeID="com.balsamiq.mockups::Icon" x="48" y="390" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <icon>CheckMarkIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="891" controlTypeID="com.balsamiq.mockups::Paragraph" x="36" y="429" w="314" h="69" measuredW="275" measuredH="80" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22198.6005859375%2C403%2C263.64453125%2C417%22%20href%3D%22click%20here%22%20alt%3D%22Click%20Here%22%20id%3D%22891%22/%3E</map>
+        <size>14</size>
+        <text>Good%20news%21%20You%27re%20insured%21%20%5BClick%20Here%5D%28click%20here%29%20to%20file%20a%20claim%20with%20eSecuritel.%20You%20can%20also%20call%20844-534-3097%20from%206am%20to%2011pm%20CST%3B%207%20days%20a%20week.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="892" controlTypeID="com.balsamiq.mockups::Label" x="80" y="392" w="270" h="-1" measuredW="243" measuredH="28" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>20</size>
+        <text>You%20have%20Phone%20Insurance%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="894" controlTypeID="__group__" x="27" y="701" w="332" h="158" measuredW="332" measuredH="158" zOrder="14" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="332" h="158" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="894">
+          <controlProperties>
+            <borderColor>16777215</borderColor>
+            <color>16769280</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="26" y="10" w="280" h="-1" measuredW="263" measuredH="28" zOrder="1" locked="false" isInGroup="894">
+          <controlProperties>
+            <align>center</align>
+            <size>20</size>
+            <text>Don%27t%20have%20Phone%20Insurance%3F</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="14" y="42" w="310" h="83" measuredW="275" measuredH="80" zOrder="2" locked="false" isInGroup="894">
+          <controlProperties>
+            <align>left</align>
+            <size>13</size>
+            <text>Not%20a%20problem%21%20Once%20you%20suspend%20your%20account%2C%20you%27ll%20have%2060%20days%20to%20find%20your%20phone%20or%20replace%20it%20with%20a%20new%20one.%20Otherwise%20you%27ll%20lose%20your%20number%20and%20any%20balance%20left%20in%20your%20account.%20If%20you%20have%20questions%20call%20Customer%20Care%20at%20855-639-4644..%20</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="15" y="125" w="308" h="-1" measuredW="222" measuredH="21" zOrder="3" locked="false" isInGroup="894">
+          <controlProperties>
+            <align>left</align>
+            <size>13</size>
+            <text>Please%20note%20if%20you%20have%20already%20paid...</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="899" controlTypeID="com.balsamiq.mockups::Canvas" x="403" y="245" w="1000" h="474" measuredW="100" measuredH="70" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>13816528</color>
+      </controlProperties>
+    </control>
+    <control controlID="900" controlTypeID="com.balsamiq.mockups::VRule" x="732" y="35" w="-1" h="706" measuredW="10" measuredH="100" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="901" controlTypeID="com.balsamiq.mockups::VRule" x="1063" y="35" w="-1" h="713" measuredW="10" measuredH="100" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="904" controlTypeID="com.balsamiq.mockups::VRule" x="400" y="26" w="-1" h="701" measuredW="10" measuredH="100" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="905" controlTypeID="com.balsamiq.mockups::HRule" x="400" y="26" w="1000" h="-1" measuredW="100" measuredH="10" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="906" controlTypeID="com.balsamiq.mockups::VRule" x="1395" y="26" w="-1" h="701" measuredW="10" measuredH="100" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="908" controlTypeID="__group__" x="437" y="153" w="331" h="79" measuredW="331" measuredH="79" zOrder="22" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="291" h="-1" measuredW="267" measuredH="36" zOrder="0" locked="false" isInGroup="908">
+          <controlProperties>
+            <bold>true</bold>
+            <size>28</size>
+            <text>Good%20Morning%20Steve</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Link" x="0" y="34" w="-1" h="-1" measuredW="116" measuredH="22" zOrder="1" locked="false" isInGroup="908">
+          <controlProperties>
+            <size>16</size>
+            <text>%28123%29%20456-7890</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Label" x="0" y="57" w="331" h="-1" measuredW="195" measuredH="22" zOrder="2" locked="false" isInGroup="908">
+          <controlProperties>
+            <align>left</align>
+            <bold>false</bold>
+            <size>14</size>
+            <text>Base%20Plan%3A%20%3CBase%20Plan%20Name%3E</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="922" controlTypeID="com.balsamiq.mockups::Canvas" x="515" y="347" w="743" h="258" measuredW="100" measuredH="70" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+      </controlProperties>
+    </control>
+    <control controlID="923" controlTypeID="com.balsamiq.mockups::Canvas" x="515" y="347" w="743" h="41" measuredW="100" measuredH="70" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16769280</borderColor>
+        <color>16769280</color>
+      </controlProperties>
+    </control>
+    <control controlID="924" controlTypeID="com.balsamiq.mockups::Label" x="515" y="353" w="743" h="-1" measuredW="320" measuredH="28" zOrder="25" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>20</size>
+        <text>Your%20Account%20has%20been%20Suspended</text>
+      </controlProperties>
+    </control>
+    <control controlID="928" controlTypeID="com.balsamiq.mockups::Canvas" x="924" y="398" w="327" h="187" measuredW="100" measuredH="70" zOrder="27" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>16777215</borderColor>
+        <color>10999299</color>
+      </controlProperties>
+    </control>
+    <control controlID="929" controlTypeID="com.balsamiq.mockups::Icon" x="945" y="420" w="-1" h="-1" measuredW="32" measuredH="32" zOrder="28" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16777215</color>
+        <icon>CheckMarkIcon%7Cmedium</icon>
+      </controlProperties>
+    </control>
+    <control controlID="930" controlTypeID="com.balsamiq.mockups::Paragraph" x="939" y="465" w="297" h="99" measuredW="275" measuredH="80" zOrder="29" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>left</align>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221101.6005859375%2C439%2C1166.64453125%2C453%22%20href%3D%22click%20here%22%20alt%3D%22Click%20Here%22%20id%3D%22930%22/%3E</map>
+        <size>14</size>
+        <text>Good%20news%21%20You%27re%20insured%21%20%5BClick%20Here%5D%28click%20here%29%20to%20file%20a%20claim%20with%20eSecuritel.%20You%20can%20also%20call%20844-534-3097%20from%206am%20to%2011pm%20CST%3B%207%20days%20a%20week.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="931" controlTypeID="com.balsamiq.mockups::Label" x="977" y="422" w="266" h="-1" measuredW="243" measuredH="28" zOrder="30" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>20</size>
+        <text>You%20have%20Phone%20Insurance%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="936" controlTypeID="__group__" x="39" y="200" w="299" h="45" measuredW="299" measuredH="45" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-G0.GenericSuccess%26bm%3BMyAccount-G0.GenericSuccess.bmml%26bm%3BMyAccount-G0.GenericSuccess.bmml%26bm%3BMyAccount-G0.GenericSuccess.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2228%2C174%2C327%2C219%22%20href%3D%22MyAccount-G0.GenericSuccess.bmml%22%20alt%3D%22MyAccount-G0.GenericSuccess%22%20id%3D%22936%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="299" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="936">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="299" h="-1" measuredW="216" measuredH="22" zOrder="1" locked="false" isInGroup="936">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20made%20a%20mistake%2C%20Unsuspend%20me%21</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="937" controlTypeID="__group__" x="39" y="255" w="299" h="45" measuredW="299" measuredH="45" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-16C.ESNSwap-iPhone%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2228%2C229%2C327%2C274%22%20href%3D%22MyAccount-16C.ESNSwap-iPhone.bmml%22%20alt%3D%22MyAccount-16C.ESNSwap-iPhone%22%20id%3D%22937%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="299" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="937">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="299" h="-1" measuredW="218" measuredH="22" zOrder="1" locked="false" isInGroup="937">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20have%20another%20phone%2C%20Swap%20Phone</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="938" controlTypeID="__group__" x="39" y="314" w="299" h="45" measuredW="299" measuredH="45" zOrder="16" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="299" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="938">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="299" h="-1" measuredW="196" measuredH="22" zOrder="1" locked="false" isInGroup="938">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20want%20to%20shop%20for%20a%20new%20phone</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="939" controlTypeID="__group__" x="540" y="426" w="365" h="45" measuredW="365" measuredH="45" zOrder="26" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-G0.GenericSuccess%26bm%3BMyAccount-G0.GenericSuccess.bmml%26bm%3BMyAccount-G0.GenericSuccess.bmml%26bm%3BMyAccount-G0.GenericSuccess.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22529%2C400%2C894%2C445%22%20href%3D%22MyAccount-G0.GenericSuccess.bmml%22%20alt%3D%22MyAccount-G0.GenericSuccess%22%20id%3D%22939%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="365" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="939">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="365" h="-1" measuredW="216" measuredH="22" zOrder="1" locked="false" isInGroup="939">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20made%20a%20mistake%2C%20Unsuspend%20me%21</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="940" controlTypeID="__group__" x="540" y="481" w="365" h="45" measuredW="365" measuredH="45" zOrder="31" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-16C.ESNSwap-iPhone%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml%26bm%3BMyAccount-16C.ESNSwap-iPhone.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22529%2C455%2C894%2C500%22%20href%3D%22MyAccount-16C.ESNSwap-iPhone.bmml%22%20alt%3D%22MyAccount-16C.ESNSwap-iPhone%22%20id%3D%22940%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="365" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="940">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="365" h="-1" measuredW="218" measuredH="22" zOrder="1" locked="false" isInGroup="940">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20have%20another%20phone%2C%20Swap%20Phone</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="941" controlTypeID="__group__" x="540" y="540" w="365" h="45" measuredW="365" measuredH="45" zOrder="32" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="365" h="45" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="941">
+          <controlProperties>
+            <borderColor>0</borderColor>
+            <color>16777215</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="11" w="365" h="-1" measuredW="196" measuredH="22" zOrder="1" locked="false" isInGroup="941">
+          <controlProperties>
+            <align>center</align>
+            <color>0</color>
+            <size>14</size>
+            <text>I%20want%20to%20shop%20for%20a%20new%20phone</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="942" controlTypeID="com.balsamiq.mockups::StickyNote" x="11" y="1192" w="234" h="181" measuredW="109" measuredH="123" zOrder="33" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>12</size>
+        <text>Colours%20based%20on%20Sprint%20Style%20Guide%0AYellow%23%20ffe100%0ABlack%23%20000000%0AWhite%23%20FFFFF%0ALight%20Grey%23%20D2D2D0%0ADark%20Grey%23%204C4A43%0ARedish%20%23F75822%0ABlue%20%2304C5CC%0AGreen%20%23A7D603</text>
+      </controlProperties>
+    </control>
+    <control controlID="943" controlTypeID="__group__" x="768" y="663" w="248" h="38" measuredW="248" measuredH="38" zOrder="18" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::LinkBar" x="1" y="0" w="-1" h="-1" measuredW="247" measuredH="19" zOrder="0" locked="false" isInGroup="943">
+          <controlProperties>
+            <text>About%20us%2CLegal%2CPrivacy%2CAd%20choices</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="17" w="248" h="-1" measuredW="247" measuredH="21" zOrder="1" locked="false" isInGroup="943">
+          <controlProperties>
+            <text>%AE%202014%20Sprint%20prepaid.%20All%20rights%20reserved</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="944" controlTypeID="com.balsamiq.mockups::Paragraph" x="556" y="398" w="332" h="28" measuredW="275" measuredH="80" zOrder="34" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <size>14</size>
+        <text>You%20have%20successfully%20suspended%20your%20account.%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="945" controlTypeID="__group__" x="409" y="35" w="993" h="87" measuredW="993" measuredH="87" zOrder="35" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="145" y="28" w="848" h="45" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="945">
+          <controlProperties>
+            <shape>roundRect</shape>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::LinkBar" x="685" y="0" w="-1" h="-1" measuredW="295" measuredH="19" zOrder="1" locked="false" isInGroup="945">
+          <controlProperties>
+            <color>6710886</color>
+            <text>Activate%2C%20Refill%2C%20Coverage%20Maps%2C%20Find%20a%20Store</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="0" y="14" w="134" h="73" measuredW="1141" measuredH="707" zOrder="2" locked="false" isInGroup="945">
+          <controlProperties>
+            <src>../../../../../Google%2520Drive/Working%2520Documents/Customers%2520RNAM/Speed/MSDP%2520Project/Design/SW%2520Release%25201%2520UI%2520Design/MyAccount/Mobile/v3/assets/Sprint_Prepaid_Logo_FullColor.jpg</src>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::VRule" x="258" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="3" locked="false" isInGroup="945">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="175" y="40" w="-1" h="-1" measuredW="61" measuredH="22" zOrder="4" locked="false" isInGroup="945">
+          <controlProperties>
+            <size>14</size>
+            <text>My%20Sprint</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="291" y="40" w="-1" h="-1" measuredW="32" measuredH="22" zOrder="5" locked="false" isInGroup="945">
+          <controlProperties>
+            <size>14</size>
+            <text>Shop</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::VRule" x="348" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="6" locked="false" isInGroup="945">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="376" y="39" w="-1" h="-1" measuredW="36" measuredH="22" zOrder="7" locked="false" isInGroup="945">
+          <controlProperties>
+            <size>14</size>
+            <text>Plans</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::VRule" x="429" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="8" locked="false" isInGroup="945">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="457" y="40" w="-1" h="-1" measuredW="51" measuredH="22" zOrder="9" locked="false" isInGroup="945">
+          <controlProperties>
+            <size>14</size>
+            <text>Support</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::VRule" x="526" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="10" locked="false" isInGroup="945">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="__group__" x="872" y="37" w="104" h="28" measuredW="104" measuredH="28" zOrder="11" locked="false" isInGroup="945">
+          <controlProperties>
+            <href>MyAccount-01.Login%26bm%3BMyAccount-01.Login.bmml%26bm%3BMyAccount-01.Login.bmml%26bm%3BMyAccount-01.Login.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221270%2C46%2C1374%2C74%22%20href%3D%22MyAccount-01.Login.bmml%22%20alt%3D%22MyAccount-01.Login%22%20id%3D%2213%22/%3E</map>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="104" h="28" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="13">
+              <controlProperties>
+                <borderColor>0</borderColor>
+                <color>16769280</color>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="9" y="3" w="88" h="-1" measuredW="49" measuredH="21" zOrder="1" locked="false" isInGroup="13">
+              <controlProperties>
+                <align>center</align>
+                <color>0</color>
+                <size>13</size>
+                <text>Log%20Out</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>

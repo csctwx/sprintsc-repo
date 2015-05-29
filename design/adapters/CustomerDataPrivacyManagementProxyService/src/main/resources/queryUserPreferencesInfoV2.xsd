@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryUserPreferencesInfo/v2/queryUserPreferencesInfoV2.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryUserPreferencesInfo/v2/queryUserPreferencesInfoV2.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	<!--07/23/2009 Pramodh Narayan                Created XSD                                                                                                             SDC         Rel B E4637-->
+	<!--07/24/2009 Steve Heichelheim  1.0         Applied simple types and MVM standards                                                               SDC         Rel B E4637-->
+	<!--07/26/2009 Steve Heichelheim  1.1         renamed from updateWebControlInfo to updateUserPreferencesInfo                     SDC         Rel B E4637-->
+	<!--07/26/2009 Steve Heichelheim  1.1         added assertionList level and roleInfo level                                                             SDC         Rel B E4637-->
+	<!--09/23/2009 Pramodh Narayan 1.2         passwordChangeInd, wmlRememberInd, passwordChangedEmailAddress, webControlInd  are all set as optional in response                                                            SDC         Rel B E4637-->
+	<!--05/20/2013 Steve Heichelheim   1.3       Changed userPreferenceInfo to userPreferenceList. Added userIdentitiyInfo   GBL13.3    PJ008600-->
+	<xs:element name="queryUserPreferencesInfoV2" type="tns:QueryUserPreferencesInfoV2Type"/>
+	<xs:element name="queryUserPreferencesInfoV2Response" type="tns:QueryUserPreferencesInfoV2ResponseType"/>
+	<xs:complexType name="QueryUserPreferencesInfoV2Type">
+		<xs:annotation>
+			<xs:documentation>This is the parent element for getting the web control preference for a subscriber. This value is stored in CDPM.  This lets the subscriber to either browse within the "walled garden" or the "open" internet on their wireless device browser.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="userIdentityInfo" type="tns:UserIdentityInfoType">
+				<xs:annotation>
+					<xs:documentation>This element holds the ownerId and ownerType elements for which the preferences information are retrieved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="authentication" type="tns:AuthenticationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Data for Security and Privacy. Sequence of 0 to 1 GETUSRPRF_Security_Authenication record.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="userPreferenceList" type="tns:UserPreferenceListType">
+				<xs:annotation>
+					<xs:documentation>List of preference info structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryUserPreferencesInfoV2ResponseType">
+		<xs:sequence>
+			<xs:element name="userPreferenceList" type="tns:UserPreferenceListResponseType">
+				<xs:annotation>
+					<xs:documentation>User Preference List</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssertionInfoType">
+		<xs:annotation>
+			<xs:documentation>Takes in either a Assertion Name or a value. Either assertionName or assertionValue or both is required.	</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="assertionName" type="tns:ActiveDirectoryAssertionNameType">
+				<xs:annotation>
+					<xs:documentation>Additional info provided to evaluate privacy  policy
+
+Condition:
+Assertion Name is required if Assertion Value is not provided.
+Both Assertion Name and Assertion Value may be provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="assertionValue" type="tns:ActiveDirectoryAssertionValueType">
+				<xs:annotation>
+					<xs:documentation>Additional info provided to evaluate privacy  policy
+
+Condition:
+Assertion Value is required if Assertion Name is not provided.
+Both Assertion Name and Assertion Value may be provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AssertionListType">
+		<xs:sequence>
+			<xs:element name="assertionInfo" type="tns:AssertionInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Assertion Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AuthenticationType">
+		<xs:sequence>
+			<xs:element name="loginId" type="tns:LoginUserIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Login Id could be MDN, NAI and telecom Manager Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="role" type="tns:RoleNameType">
+				<xs:annotation>
+					<xs:documentation>Can take one of the following values:
+AccountHolder          
+Subscriber             
+ThirdPartyApplication, 
+ApplicationProvider    
+TrustedBusinessPartner,
+DataMiner              
+TroubleShooter         
+DatabaseAdministrator  
+InternalApplication    
+LawEnforcement         
+EnterpriseCustomer     
+TPA                    
+TelecomMgrAdmin        
+TelecomMgr             
+CustomerCareAdvocate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="assertionList" type="tns:AssertionListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Takes in either a Assertion Name or a value. Either assertionName or assertionValue or both is required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreferenceValueInfoType">
+		<xs:sequence>
+			<xs:element name="value" type="tns:UserPreferenceValueType">
+				<xs:annotation>
+					<xs:documentation>Preference value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreferenceValueListType">
+		<xs:sequence>
+			<xs:element name="preferenceValueInfo" type="tns:PreferenceValueInfoType" maxOccurs="1000">
+				<xs:annotation>
+					<xs:documentation>Preference Value  Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserIdentityInfoType">
+		<xs:sequence>
+			<xs:element name="ownerId" type="tns:LoginUserIdentifierType">
+				<xs:annotation>
+					<xs:documentation>List owner identifier. 
+This element can contain mdn, nai, Subscription Id, Account Id, Domain Admin Id, Corporate Customer Admin Id and Third Party Application Id.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ownerType" type="tns:UserIdentifierTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>List Owner Type:
+Possible Values:
+MDN
+NAI
+SUBSCRIPTION
+ACCOUNT
+ADMIN DOMAIN
+CORPORATE CUSTOMER ADMIN
+THIRD PARTY APPLICATION
+WIMAX_NAI
+PAM_NAI
+LTE_IMSI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserPreferenceInfoType">
+		<xs:sequence>
+			<xs:element name="contextName" type="tns:UserPreferenceContextNameType">
+				<xs:annotation>
+					<xs:documentation>The context in which the
+preference is applied to. The
+default value if not set is
+common</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preferenceName" type="tns:UserPreferenceNameType">
+				<xs:annotation>
+					<xs:documentation>The name of the preference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserPreferenceListType">
+		<xs:sequence>
+			<xs:element name="preferenceInfo" type="tns:UserPreferenceInfoType" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>User preference information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserPreferenceInfoResponseType">
+		<xs:sequence>
+			<xs:element name="contextName" type="tns:UserPreferenceContextNameType">
+				<xs:annotation>
+					<xs:documentation>The context in which the
+preference is applied to. The
+default value if not set is
+common</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preferenceName" type="tns:UserPreferenceNameType">
+				<xs:annotation>
+					<xs:documentation>The name of the preference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preferenceValueList" type="tns:PreferenceValueListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An array of values this
+preference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserPreferenceListResponseType">
+		<xs:sequence>
+			<xs:element name="preferenceInfo" type="tns:UserPreferenceInfoResponseType" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>Preference Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ActiveDirectoryAssertionNameType">
+		<xs:annotation>
+			<xs:documentation>Active Directory Assertion Name is used to name a value of additional info provided to evaluate privacy policy.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ActiveDirectoryAssertionValueType">
+		<xs:annotation>
+			<xs:documentation>Active Directory Assertion Value is yhe value of additional info provided to evaluate privacy policy.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddressStringType">
+		<xs:annotation>
+			<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LoginUserIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Login User Identifier holds the system login userid assigned to a PARTY.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RoleNameType">
+		<xs:annotation>
+			<xs:documentation>Role Name is the name of a role that a party assumes or is assigned such as accountHolder, Subscriber, ThirdPartyApplication, ApplicationProvider, TrustedBusinessPartner, DataMiner, TroubleShooter, DtabaseAdministrator, InternalApplication, LawEnforcement, EnterpriseCustomer, TPA, TelecomMgrAdmin, TelecomMgr, CustomerCareAdvocate etc.			</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="22"/>
+			<xs:enumeration value="AccountHolder"/>
+			<xs:enumeration value="Subscriber"/>
+			<xs:enumeration value="ThirdPartyApplication"/>
+			<xs:enumeration value="ApplicationProvider"/>
+			<xs:enumeration value="TrustedBusinessPartner"/>
+			<xs:enumeration value="DataMiner"/>
+			<xs:enumeration value="TroubleShooter"/>
+			<xs:enumeration value="DatabaseAdministrator"/>
+			<xs:enumeration value="InternalApplication"/>
+			<xs:enumeration value="LawEnforcement"/>
+			<xs:enumeration value="EnterpriseCustomer"/>
+			<xs:enumeration value="TPA"/>
+			<xs:enumeration value="TelecomMgrAdmin"/>
+			<xs:enumeration value="TelecomMgr"/>
+			<xs:enumeration value="CustomerCareAdvocate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserIdentifierTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>User Identifier Type Code designates a specific type of user identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+			<xs:enumeration value="MDN"/>
+			<xs:enumeration value="NAI"/>
+			<xs:enumeration value="SUBSCRIPTION"/>
+			<xs:enumeration value="ACCOUNT"/>
+			<xs:enumeration value="ADMIN DOMAIN"/>
+			<xs:enumeration value="CORPORATE CUSTOMER ADMIN"/>
+			<xs:enumeration value="THIRD PARTY APPLICATION"/>
+			<xs:enumeration value="WIMAX_NAI"/>
+			<xs:enumeration value="PAM_NAI"/>
+			<xs:enumeration value="LTE_IMSI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserPreferenceContextNameType">
+		<xs:annotation>
+			<xs:documentation>User Preference Context Name designates the context that the user preference is used in.  This is arbitrarily defined by the user.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserPreferenceNameType">
+		<xs:annotation>
+			<xs:documentation>User Preference Name is a common name for the user preference.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserPreferenceValueType">
+		<xs:annotation>
+			<xs:documentation>User Preference Value is one of the possible values of the preference defined by the user.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WebControlOptInTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Web Control Opt In Type Code indicates wheter a customer opts in for a "Web Control" meaning access is limited to Sprint sanctioned (internal) content only. If opted in, requests for websites and multimedia not hosted or linked to by Sprint will be denied. 
+Valid values:
+R - Restricted, Opted in. Restricted to Sprint Walled Garden web sites.
+O - Open Access, Opted out.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="R"/>
+			<xs:enumeration value="O"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!---->
+	<!---->
+</xs:schema>

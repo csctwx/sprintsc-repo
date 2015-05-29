@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceSocGroupingInfo/v1/queryReferenceSocGroupingInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceSocGroupingInfo/v1/queryReferenceSocGroupingInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--08/03/2011   Jocelen Silva                 1.0         Initial Draft                                                                                           GBL11.4          PJ004940-->
+	
+<!--08/30/2011  Steve Heichelheim      1.0       added MVM standards and simple types                                                GBL11.4          PJ004940-->
+	
+<xs:element name="queryReferenceSocGroupingInfo" type="tns:QueryReferenceSocGroupingInfoRequestType"/>
+	
+<xs:element name="queryReferenceSocGroupingInfoResponse" type="tns:QueryReferenceSocGroupingInfoResponseType"/>
+	
+<xs:complexType name="QueryReferenceSocGroupingInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="salesChannel" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales channel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="groupType" type="tns:ServiceOrderCodeGroupTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc group type
+P – Price Plan Group
+S – SOC Group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockInfo" type="tns:BlockInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Block information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceSocGroupingInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="groupList" type="tns:GroupListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of groupInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BlockInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="blockNumber" type="tns:BlockNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Group block number which will select the nth block of groups.  
+Max Value= 20</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockSize" type="tns:BlockSizeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Block Size dictates how many rows of data are fetched during the current call.
+Min Value=50 Max Value=200</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="GroupInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="groupId" type="tns:ServiceOrderCodeGroupIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc group id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannel" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales Channel
+If the group is applicable for all the sales channels, a wildcard "*" will be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="groupDesc" type="tns:ServiceOrderCodeGroupDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc group description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="groupType" type="tns:ServiceOrderCodeGroupTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc group type
+P – Price Plan Group
+S – SOC Group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Group effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Group expiration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="multipleSelectionInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicate if multiple services from this group can be selected. 
+For Price Plan groups, this indicator should always be “false”.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="priority" type="tns:PriorityLevelType">
+				
+<xs:annotation>
+					
+<xs:documentation>Group and the sale channel associated priority</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="primarySubGroup" type="tns:PrimarySubGroupType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Primary Sub Group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondarySubGroup" type="tns:SecondarySubGroupType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Secondary Sub Group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="GroupListType">
+		
+<xs:sequence>
+			
+<xs:element name="groupInfo" type="tns:GroupInfoType" maxOccurs="200">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing group information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentBlock" type="tns:BlockNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Current Block  (Should be equal to the value specified in the blockNumber field of the request structure)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalBlocks" type="tns:BlockNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total available blocks of groupId rounded to the next whole number.
+Returned when the requested blockNumber not populated or blockNumber is 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrimarySubGroupType">
+		
+<xs:sequence>
+			
+<xs:element name="socList" type="tns:SocListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of Price Plan/ Additional Services</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecondarySubGroupType">
+		
+<xs:sequence>
+			
+<xs:element name="socList" type="tns:SocListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of Price Plan/ Additional Services</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditClass" type="tns:CreditClassCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Class
+If a Price Plan/SOC is applicable for all the credit classes, a wildcard “*” will be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="priority" type="tns:PriorityLevelType">
+				
+<xs:annotation>
+					
+<xs:documentation>Group, credit class and Price Plan/SOC associated priority</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListType">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan/ Additional Services information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BlockNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Block number which will select the nth block of a group of blocks.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BlockSizeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Block Size dictates how many rows of data are fetched during the current call</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Code identifies the Customer's level of financial responsibility.   
+
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required deposit and the amount of the deposit, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PriorityLevelType">
+		
+<xs:annotation>
+			
+<xs:documentation>Priority Level is a unique number that a party assigns to each item in a list of items to designate the importance of each item compared to all other items in the list. The lower the number the higher the importance.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="ServiceOrderCodeGroupDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code Group Description is common language describing a group of service order codes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="160"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeGroupIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code Group Identifier uniquely identifies a group of service order codes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeGroupTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code Group Type Code designates whether a group of Service Order Codes (SOCs) are a SOC group or a price plan group.
+Valid Values:
+P - Price Plan Group
+S - SOC Group</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="P"/>
+			
+<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

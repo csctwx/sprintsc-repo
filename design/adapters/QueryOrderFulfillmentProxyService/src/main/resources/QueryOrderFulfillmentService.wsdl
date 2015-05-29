@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/public/interfaces/QueryOrderFulfillmentService/v1" targetNamespace="http://integration.sprint.com/public/interfaces/QueryOrderFulfillmentService/v1">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd4.xsd" namespace="http://integration.sprint.com/common/ErrorDetails.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v1"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd3.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/checkEquipmentInventoryAvailability/v1/checkEquipmentInventoryAvailability.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/queryAccountOrders/v1/queryAccountOrders.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/QueryInventoryOrderDetails/v1/QueryInventoryOrderDetails.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryOrderInfo/v1/queryOrderInfo.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryOrderList/v1/queryOrderList.xsd"/>
+<xsd:import schemaLocation="QueryOrderFulfillmentService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/queryOrderStatus/v1/queryOrderStatus.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="checkEquipmentInventoryAvailability">
+<wsdl:part name="parameters" element="xsns:checkEquipmentInventoryAvailability" xmlns:xsns="http://integration.sprint.com/interfaces/checkEquipmentInventoryAvailability/v1/checkEquipmentInventoryAvailability.xsd"/></wsdl:message>
+<wsdl:message name="checkEquipmentInventoryAvailabilityResponse">
+<wsdl:part name="parameters" element="xsns:checkEquipmentInventoryAvailabilityResponse" xmlns:xsns="http://integration.sprint.com/interfaces/checkEquipmentInventoryAvailability/v1/checkEquipmentInventoryAvailability.xsd"/></wsdl:message>
+<wsdl:message name="faultmessage">
+<wsdl:part name="parameters" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetails.xsd"/></wsdl:message>
+<wsdl:message name="faultmessage2">
+<wsdl:part name="parameters" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="Header">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v1"/></wsdl:message>
+<wsdl:message name="Header2">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:message name="queryAccountOrders">
+<wsdl:part name="parameters" element="xsns:queryAccountOrders" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountOrders/v1/queryAccountOrders.xsd"/></wsdl:message>
+<wsdl:message name="queryAccountOrdersResponse">
+<wsdl:part name="parameters" element="xsns:queryAccountOrdersResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAccountOrders/v1/queryAccountOrders.xsd"/></wsdl:message>
+<wsdl:message name="queryInventoryOrderDetails">
+<wsdl:part name="order" element="xsns:queryInventoryOrderDetails" xmlns:xsns="http://integration.sprint.com/interfaces/QueryInventoryOrderDetails/v1/QueryInventoryOrderDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryInventoryOrderDetailsResponse">
+<wsdl:part name="Response" element="xsns:queryInventoryOrderDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/QueryInventoryOrderDetails/v1/QueryInventoryOrderDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderInfo">
+<wsdl:part name="parameters" element="xsns:queryOrderInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderInfo/v1/queryOrderInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryOrderInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderInfo/v1/queryOrderInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderList">
+<wsdl:part name="parameters" element="xsns:queryOrderList" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderList/v1/queryOrderList.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderListResponse">
+<wsdl:part name="parameters" element="xsns:queryOrderListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderList/v1/queryOrderList.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderStatus">
+<wsdl:part name="parameters" element="xsns:queryOrderStatus" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderStatus/v1/queryOrderStatus.xsd"/></wsdl:message>
+<wsdl:message name="queryOrderStatusResponse">
+<wsdl:part name="parameters" element="xsns:queryOrderStatusResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryOrderStatus/v1/queryOrderStatus.xsd"/></wsdl:message>
+<wsdl:portType name="QueryOrderFulfillmentPortType">
+<wsdl:operation name="CheckEquipmentInventoryAvailability">
+<wsdl:input name="CheckEquipmentInventoryAvailabilityRequest" message="ns0:checkEquipmentInventoryAvailability"/>
+<wsdl:output name="CheckEquipmentInventoryAvailabilityResponse" message="ns0:checkEquipmentInventoryAvailabilityResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation>
+<wsdl:operation name="QueryAccountOrders">
+<wsdl:input name="QueryAccountOrdersRequest" message="ns0:queryAccountOrders"/>
+<wsdl:output name="QueryAccountOrdersResponse" message="ns0:queryAccountOrdersResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation>
+<wsdl:operation name="QueryInventoryOrderDetails">
+<wsdl:input name="QueryInventoryOrderDetailsRequest" message="ns0:queryInventoryOrderDetails"/>
+<wsdl:output name="QueryInventoryOrderDetailsResponse" message="ns0:queryInventoryOrderDetailsResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryOrderInfo">
+<wsdl:input name="QueryOrderInfoRequest" message="ns0:queryOrderInfo"/>
+<wsdl:output name="QueryOrderInfoResponse" message="ns0:queryOrderInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation>
+<wsdl:operation name="QueryOrderList">
+<wsdl:input name="QueryOrderListRequest" message="ns0:queryOrderList"/>
+<wsdl:output name="QueryOrderListResponse" message="ns0:queryOrderListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation>
+<wsdl:operation name="QueryOrderStatus">
+<wsdl:input name="QueryOrderStatusRequest" message="ns0:queryOrderStatus"/>
+<wsdl:output name="QueryOrderStatusResponse" message="ns0:queryOrderStatusResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryOrderFulfillmentBinding" type="ns0:QueryOrderFulfillmentPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="CheckEquipmentInventoryAvailability">
+<soap11:operation soapAction="CheckEquipmentInventoryAvailability" style="document"/>
+<wsdl:input name="CheckEquipmentInventoryAvailabilityRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CheckEquipmentInventoryAvailabilityResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAccountOrders">
+<soap11:operation soapAction="QueryAccountOrders" style="document"/>
+<wsdl:input name="QueryAccountOrdersRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAccountOrdersResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryInventoryOrderDetails">
+<soap11:operation soapAction="QueryInventoryOrderDetails" style="document"/>
+<wsdl:input name="QueryInventoryOrderDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryInventoryOrderDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryOrderInfo">
+<soap11:operation soapAction="QueryOrderInfo" style="document"/>
+<wsdl:input name="QueryOrderInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryOrderInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryOrderList">
+<soap11:operation soapAction="QueryOrderList" style="document"/>
+<wsdl:input name="QueryOrderListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryOrderListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryOrderStatus">
+<soap11:operation soapAction="QueryOrderStatus" style="document"/>
+<wsdl:input name="QueryOrderStatusRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryOrderStatusResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:Header2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryOrderFulfillmentService">
+<wsdl:port name="QueryOrderFulfillmentPort" binding="ns0:QueryOrderFulfillmentBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryOrderFulfillmentService"/></wsdl:port></wsdl:service></wsdl:definitions>

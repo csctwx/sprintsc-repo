@@ -1,0 +1,14 @@
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>2.0</jsp-version>
+  <short-name>Example TLD</short-name>
+  <tag>
+    <name>invokeAdaptrOp</name>
+    <tag-class>com.ericsson.cac.sprint.loginuc.HelloTag</tag-class>
+    <!--<body-content>empty</body-content>-->
+    <body-content>scriptless</body-content>
+    <attribute>
+		<name>mdn</name>
+    </attribute>
+  </tag>
+</taglib>

@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAvailableNpaNxx/v1/queryAvailableNpaNxx.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAvailableNpaNxx/v1/queryAvailableNpaNxx.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	
+<!-- Date               Author                         Version    Change                                                                               Rel           SR# -->
+	
+<!-- 11/10/2009    Jocelen Silva                1.1           Changed NXX in the request to optional                            GBL10.2    PJ001210-->
+	
+<!-- +                                                                          Added maxNpaNxxCount to the request-->
+	
+<!-- +                                                                          Moved zipCode to the referenceNpaNxx structure in response -->
+	
+<!-- +                                                                          Added validNxxInd in the response-->
+	
+<!-- 11/16/2009 Steve Heichelheim  1.1          applied MVM simple types                                                           GBL10.2    PJ001210-->
+	
+<!--12/22/2009 Jocelen Silva         1.1   Moved fleetInfo to the npaNxxInfo structure                                       GBL10.2 PJ001210-->
+	
+<!-- 12/11/2009 Dweepant Bakshi  2.0          added zipCodeInfo struct, postPaidNetworkInd in request added note that rateCenter will be returned for postpaid iden also GBL 10.3 PJ002207          -->
+	
+<!-- 03/05/2010 Dweepant Bakshi  2.0         Made nxx in response optional in response, removed newNpaNxxInfo struct in  response GBL 10.3 PJ002207          -->
+	
+<!-- 03/18/2010 Dweepant Bakshi  2.0         Moved 'csa' input field inside choice GBL 10.3 PJ002207          -->
+	
+<!-- 04/01/2010 Dweepant Bakshi  2.0         included newNpaNxxInfo structure back in schema, modified annotation for nxx in response CS#379153 GBL 10.3 PJ002207          -->
+	
+<xs:element name="queryAvailableNpaNxx" type="tns:QueryAvailableNpaNxxType"/>
+	
+<xs:element name="queryAvailableNpaNxxResponse" type="tns:QueryAvailableNpaNxxResponseType"/>
+	
+<xs:complexType name="QueryAvailableNpaNxxType">
+		
+<xs:sequence>
+			
+<xs:element name="fleetInfo" type="tns:FleetInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates request for postpaid iDEN based on fleetInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:choice minOccurs="0">
+				
+<xs:element name="csa" type="tns:CommunicationServiceAreaID" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>Indicates request for postpaid CDMA / Hybrid</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="zipCodeInfo" type="tns:ZipCodeInfoType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>Indicates request for
+postpaid CDMA/IDEN</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="referenceNpaNxxInfo" type="tns:ReferenceNpaNxxInfoType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>Indicates request for Boost iDEN
+or PostPaid IDEN/CDMA.
+1. set postPaidNetworkInd to 'C' for CDMA and 'I' for IDEN when requesting for PostPaid. If not provided default is Boost iDEN
+2. DO NOTset postPaidNetworkInd for Boost</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			
+<xs:element name="reservationId" type="tns:NumberManagementReservationIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Made optional in R5</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberLocation" type="tns:NumberLocationCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Required for Postpaid iDEN if fleetInfo is sent</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="minAvailableMdnCount" type="tns:RowCountNumber" default="1" minOccurs="0"/>
+			
+<xs:element name="maxNpaCount" type="tns:RowCountNumber" minOccurs="0"/>
+			
+<xs:element name="maxNxxPerNpaCount" type="tns:RowCountNumber" minOccurs="0"/>
+			
+<xs:element name="maxNpaNxxCount" type="tns:RowCountNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates maximum number of npaNxxInfo records returned in the npaNxxList structure.
+
+Aplies only to Boost Iden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAvailableNpaNxxResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="npaNxxList" type="tns:NpaNxxListType" minOccurs="0"/>
+			
+<xs:element name="validNxxInd" type="tns:ValidNpaNxxFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the NXX received in the request is valid (Boost IDEN)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FleetInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="urbanId" type="tns:UrbanAreaID"/>
+			
+<xs:element name="fleetId" type="tns:FleetId"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NewNpaNxxInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="newNpa" type="tns:NpaNumber"/>
+			
+<xs:element name="newNxx" type="tns:NxxNumber"/>
+			
+<xs:element name="pdpEffectiveDate" type="tns:PermissiveDialingPeriodBeginDate"/>
+			
+<xs:element name="pdpExpirationDate" type="tns:PermissiveDialingPeriodEndDate"/>
+			
+<xs:element name="splitCutDate" type="tns:NpaSplitCutDate"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NewNpaNxxListType">
+		
+<xs:sequence>
+			
+<xs:element name="newNpaNxxInfo" type="tns:NewNpaNxxInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaNxxInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="tns:NpaNumber"/>
+			
+<xs:element name="nxx" type="tns:NxxNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>will be returned for Postpaid CDMA only if reservationid is sent in the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:USPSPostalCd" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Activation ZIP code for the reference NPA-NXX (Boost iDEN)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rateCenter" type="tns:RateCenterType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The rate center in which the block belongs to.
+Returned only for Boost iDEN or Postpaid IDEN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fleetInfo" type="tns:FleetInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Preferred UF for the reference NPA-NXX (Boost iDEN)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="newNpaNxxList" type="tns:NewNpaNxxListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Applies only to postpaid CDMA requests when reservationId is sent in request.  Provides new NPA-NXX info in an NPA split scenario.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nearestCity" type="tns:NearestCity" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>nearest city</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaNxxListType">
+		
+<xs:sequence>
+			
+<xs:element name="npaNxxInfo" type="tns:NpaNxxInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ReferenceNpaNxxInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="tns:NpaNumber"/>
+			
+<xs:element name="nxx" type="tns:NxxNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Required for Postpaid CDMA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="postPaidNetworkInd" type="tns:NetworkIndicatorCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>C - CDMA
+I - IDEN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ZipCodeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="zipCode" type="tns:USPSPostalCd"/>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>C-CDMA
+I- IDEN
+By Default - CDMA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="CommunicationServiceAreaID">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FleetId">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is a concatenation of the Urban Area Id, Fleet Id, and Member Id that represent an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+			
+<xs:documentation>Fleet Identifier is the second element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xs:documentation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA</xs:documentation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NearestCity">
+		
+<xs:annotation>
+			
+<xs:documentation>nearest city to NPA NXX</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NpaNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NpaSplitCutDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Npa Split Cut Date is the date up to which the customer may be given the choice between the old and new NPA-NXX.  Once this date arrives, the old NPA-NXX can no longer be used in PTN requests.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NxxNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberLocationCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberManagementReservationIdentifier">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PermissiveDialingPeriodBeginDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Permissive Dialing Period Begin Date is the first date that permissive dialing is allowed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PermissiveDialingPeriodEndDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Permissive Dialing Period End Date is the last date that permissive dialing is allowed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RateCenterType">
+		
+<xs:annotation>
+			
+<xs:documentation>Rate Center is a company designated geographic location assigned vertical and horizontal coordinates between which airline mileages are determined for the charging of private lines.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumber">
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanAreaID">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is a concatenation of the Urban Area Id, Fleet Id, and Member Id that represent an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+			
+<xs:documentation>Urban Area Identifier identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. The format of the UFMI number is: Urban Area Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="USPSPostalCd">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="ValidNpaNxxFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Valid Npa Nxx Flag is a boolean indicator of whether the associated NPA-NXX combination is valid.
+Valid Values:
+true - the associated NPA-NXX combination is valid
+false - the associated NPA-NXX combination is NOT valid
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

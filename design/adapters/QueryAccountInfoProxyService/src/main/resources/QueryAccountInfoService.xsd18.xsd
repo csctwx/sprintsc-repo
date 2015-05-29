@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountPoolingList/v1/queryAccountPoolingList.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountPoolingList/v1/queryAccountPoolingList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	
+<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--08/15/2011    Steve Heichelheim    1.0            Initial Version - Added MVM standards and simple types                   GBl11.4         PJ004940-->
+	
+<!--09/21/2011    Steve Heichelheim    1.0            renamed the XSD and changed groupId, sharingGroupId simple types           GBl11.4         PJ004940-->
+	
+<!--10/24/2011    Jocelen Silva            1.1             Update voicePoolList and dataPoolList to optional, change totalVoiceMinutes to required GBL11.4 CS#504269 -->
+	
+<!--11/08/2011   Steve Heichelheim     1.2       Added minLen = 1 to BillingAccountNumberType and ServiceOrderCodeType    GBL11.4   PJ004940   CS#507431-->
+	
+<xs:element name="queryAccountPoolingList" type="tns:QueryAccountPoolingListRequestType"/>
+	
+<xs:element name="queryAccountPoolingListResponse" type="tns:QueryAccountPoolingListResponseType"/>
+	
+<xs:complexType name="QueryAccountPoolingListRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nextBillCycle" type="tns:BillingCycleStartDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Next Bill Cycle Start Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Added , removed or modified subscribers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voicePoolInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicate if voice pool information will be returned in the response.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dataPoolInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicate if data pool information will be returned in the response.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAccountPoolingListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="voicePoolList" type="tns:VoicePoolListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing Voice Pool Info.
+An empty list will be returned, if none of the existing or added subscribers contain a Voice Pooling Plan.
+Note: Returned only if voicePoolInd is true </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dataPoolList" type="tns:DataPoolListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing  (3G,4G,3G-4G) data sharing Info
+An empty list will be returned, if none of the existing or added subscribers contain a Data Share Plan
+Note: Returned only if dataPoolInd is true</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceType" type="tns:AllowanceTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of allowance
+Sprint 3G Data
+Sprint 3G Data Roaming
+Sprint 4G Data
+Sprint 3G/4G Data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nextCycleGroupAllowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>The next bill cycle included units of allowance for the Hybrid group of the input subscriber in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="updatedGroupAllowance" type="tns:UnitOfMeasureValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The next bill cycle included units of allowance for the Hybrid group of the input subscriber in MB after subscriber updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceListType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceInfo" type="tns:AllowanceInfoType" maxOccurs="10">
+				
+<xs:annotation>
+					
+<xs:documentation>information for the hybrid sharing group soc of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DataPoolInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sharing group Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListResponseType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of active, suspended and reserved subscribers currently for the sharingGroupId</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberCount" type="tns:NumberOfSubscriptionsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber count for the sharing group Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="updatedDataPoolInfo" type="tns:UpdatedDataPoolInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voice Pool Information after subscriber updates
+Note: Returned only if susbcriberList is provided in the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceList" type="tns:AllowanceListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of allowanceInfo structure
+AllowanceList will contain allowance information for the hybrid sharing group soc of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DataPoolListType">
+		
+<xs:sequence>
+			
+<xs:element name="dataPoolInfo" type="tns:DataPoolInfoType" minOccurs="0" maxOccurs="200">
+				
+<xs:annotation>
+					
+<xs:documentation>Data Sharing Group Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="action" type="tns:ServiceOrderActionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Action 
+Possible values:
+A – Added
+R – Removed
+M – Modified (Price Plan Change)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanCode" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan Code </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoResponseType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber info details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber info details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdatedDataPoolInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListResponseType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of subscribers after updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberCount" type="tns:NumberOfSubscriptionsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber count for the Pool Id after updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdatedSocListType">
+		
+<xs:sequence>
+			
+<xs:element name="updateSocInfo" type="tns:UpdateSocInfoType" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdatedVoicePoolInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListResponseType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of subscribers after updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberCount" type="tns:NumberOfSubscriptionsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber count for the Pool Id after updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalVoiceMinutes" type="tns:MinutesIncludedQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Combined voice minutes for the Pool Id after updates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdateSocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="action">
+				
+<xs:annotation>
+					
+<xs:documentation>Add / Removal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="soc"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="VoicePoolInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="groupId" type="tns:PoolingGroupIdentiferType">
+				
+<xs:annotation>
+					
+<xs:documentation>Pool Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListResponseType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of active, suspended and reserved subscribers currently for the Pool Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberCount" type="tns:NumberOfSubscriptionsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber count for the Pool Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalVoiceMinutes" type="tns:MinutesIncludedQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Combined voice minutes for the Pool Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="updatedVoicePoolInfo" type="tns:UpdatedVoicePoolInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voice Pool Information after subscriber updates
+Note: Returned only if susbcriberList is provided in the request </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="VoicePoolListType">
+		
+<xs:sequence>
+			
+<xs:element name="voicePoolInfo" type="tns:VoicePoolInfoType" minOccurs="0" maxOccurs="200">
+				
+<xs:annotation>
+					
+<xs:documentation>Voice Pool Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AllowanceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Allowance Type Code designates a type of allowance of units that would be set up for a user, espically in the case of a hybrid sharing group.
+Valid Values Include:
+Sprint Data,
+Sprint Data Roaming...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleStartDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Start Date is the first date of the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LinesToShareGroupIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Lines To Share Group Identifier uniquely identifies a Lines To Share Group within a Billing Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MinutesIncludedQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Minutes Included Quantity is used to quantify the number of  minutes included in the associated plan or plan category.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberOfSubscriptionsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Of Subscriptions is the total count of subscribers (including reserved, active, suspended, and cancelled) associated with the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PoolingGroupIdentiferType">
+		
+<xs:annotation>
+			
+<xs:documentation>Pooling Group Identifier is used for pooling categories.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderActionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Action Type Code designates an action taken on a service or feature.
+Possible Values Include:
+A - Add,
+R - Remove...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="A"/>
+			
+<xs:enumeration value="R"/>
+			
+<xs:enumeration value="M"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

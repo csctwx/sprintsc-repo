@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/paymentOperationInnerRequestResponseTypes.xsd"
+  xmlns:baseOperationResponse="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationResponse.xsd"
+  xmlns:baseOperationRequest="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationRequest.xsd"
+  xmlns:paymentCommonTypes="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd"
+  targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentOperationInnerRequestResponseTypes.xsd">
+  
+  <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationResponse.xsd" schemaLocation="baseOperationResponse.xsd"/>
+  <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/baseOperationRequest.xsd" schemaLocation="baseOperationRequest.xsd"/>
+  <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd" schemaLocation="paymentCommonTypes.xsd"/>
+
+ <element name="banInfoAC">
+    <complexType>
+        <complexContent>
+            <extension base="paymentCommonTypes:BanInfoAC"/>
+        </complexContent>
+    </complexType>
+  </element>
+  
+  <element name="authAndCapturePaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+			  <element name="authAndCaptureInfo" type="baseOperationRequest:AuthAndCaptureInfo">
+			  	<annotation>
+			  		<documentation> AuthAndCaputre information</documentation>
+			  	</annotation>
+			  </element>
+		</sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  <element name="authAndCapturePaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="authAndCapturePaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+          <element name="paymentOptionValidationErrors" type="paymentCommonTypes:PaymentOptionValidationFailure" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="authorizePaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+          <element name="requestId">
+            <annotation>
+              <documentation>Unique RequestId per channel used in EPP for duplicate check</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="referenceId" minOccurs="0">
+            <annotation>
+              <documentation>Unique Id from channel</documentation>
+            </annotation>
+            <simpleType>
+							<restriction base="string"/>
+            </simpleType>
+          </element>
+          <element name="externalOrderId" minOccurs="0">
+		   <annotation>
+              <documentation>Id sent by channel, used for reporting purpose</documentation>
+            </annotation>
+		   <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+		  </element>
+		   <element name="transactionFor" type="baseOperationRequest:TransactionForConstants"/>
+	      <element name="additionalInformation" type="baseOperationRequest:AdditionalInfo" minOccurs="0"/>
+	      <element name="paymentRequestDetail" type="baseOperationRequest:PaymentRequestDetailBO"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="authorizePaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="authorizePaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+           <element name="paymentOptionValidationErrors" type="paymentCommonTypes:PaymentOptionValidationFailure" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="capturePaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+          <element name="referenceId" minOccurs="0">
+           <annotation>
+              <documentation>Unique Id from Channel</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="externalOrderId"  minOccurs="0">
+		   <annotation>
+              <documentation>Id sent by channel, used for reporting purpose</documentation>
+           </annotation>
+		   <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="isActivationPayment" type="paymentCommonTypes:BooleanType" default="false" minOccurs="0">
+              	<annotation>
+          			<documentation>Indicates whether it is a BAN activation flow where the BAN was not provided in the Auth API</documentation>
+        		</annotation>
+      	  </element>
+          <element name="additionalInformation" type="baseOperationRequest:AdditionalInfo" minOccurs="0"/>
+          <element name="paymentId"  minOccurs="0">
+		  	<annotation>
+              <documentation>Unique ID for a payment. Transaction, which is obtained from corresponding response of authorizePayment</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+		  </element>
+          <element name="sourceId" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        Identity of the channel this request is being
+                        sent across. Vendors can
+                        have multiple channels to access the
+                        system.
+                        (i.e., two vendors can have an IVR channel, but they are
+                        two different
+                        channels)
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="36" />
+                    </restriction>
+                </simpleType>
+          </element>
+          <element name="amountInfo" type="tns:CaptureAmountInfo" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="capturePaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="capturePaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="refundPaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+					<element name="requestId">
+            <annotation>
+              <documentation>Unique RequestId per channel used in EPP for duplicate check</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="referenceId" minOccurs="0">
+            <annotation>
+              <documentation>Unique Id from channel</documentation>
+            </annotation>
+           <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="paymentId"  minOccurs="0">
+		   <annotation>
+              <documentation>Unique ID for a payment. transaction, which is obtained from the corresponding response from authorizePayment</documentation>
+            </annotation>
+           <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+		  </element>
+					<element name="refundAmounts" type="paymentCommonTypes:AmountInfo"/>
+					<element name="reasonCode">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="reasonDescription" minOccurs="0">
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="256"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="refundAdditionalInfo" type="baseOperationRequest:RefundAdditionalInfo" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="refundPaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="refundPaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="cancelAuthorizePaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+          <element name="referenceId" minOccurs="0">
+            <annotation>
+              <documentation>Unique Id from channel</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="paymentId" minOccurs="0">
+		   <annotation>
+              <documentation>Unique ID for a payment. transaction, which is obtained from the corresponding response from authorizePayment.</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+			</element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="cancelAuthorizePaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="cancelAuthorizePaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="generatePreOrderTokenRequest">
+  <complexType>
+    <annotation>
+      <documentation>This is the request received from Channel for
+        generating token
+      </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+         	<element name="preOrderTokenRequest" type="tns:PreOrderTokenRequestBO"/>
+             <element name="generatePreOrderTokenAdditionalInfo" type="baseOperationRequest:GeneratePreOrderTokenAdditionalInfo" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <complexType name="PreOrderTokenRequestBO">
+    <sequence>
+			<element name="externalOrderId">
+   			<annotation>
+              <documentation>Id sent by channel, used for reporting purpose</documentation>
+            </annotation>
+		   <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+			</element>
+            <element name="consumerChoicePreference" type="baseOperationRequest:CardType" minOccurs="0">
+            	<annotation>
+                	<documentation>
+                    	The preference type in which the card need to be
+                        processed for pinless debit cards
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="tokenType" type="baseOperationRequest:TokenTypeConstants"/>
+    </sequence>
+  </complexType>
+  
+  <element name="generatePreOrderTokenResponse">
+  <complexType>
+    <annotation>
+      <documentation>This is the response sent along with generated
+        token
+      </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+					<element name="preOrderTokenResponse" type="tns:PreOrderTokenResponseBO" minOccurs="0"/>
+					<element name="paymentOptionValidationErrors" type="paymentCommonTypes:PaymentOptionValidationFailure" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <complexType name="PreOrderTokenResponseBO">
+    <sequence>
+			<element name="externalOrderId">
+         <annotation>
+              <documentation>Id sent by channel, used for reporting purpose</documentation>
+            </annotation>
+		   <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+      </element>
+			<element name="globalToken" minOccurs="0">
+        <annotation>
+          <documentation>The generated token</documentation>
+        </annotation>
+        <simpleType>
+              <restriction base="string">
+                <maxLength value="16"/>
+              </restriction>
+            </simpleType>
+      </element>
+			<element name="isDuplicate" type="paymentCommonTypes:BooleanType">
+        <annotation>
+          <documentation>It indicates duplicate request
+          </documentation>
+        </annotation>
+      </element>
+    </sequence>
+  </complexType>
+  
+  <element name="prepaidRechargePaymentRequest">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentOperationRequest">
+        <sequence>
+
+		   <element name="requestId">
+            <annotation>
+              <documentation>Unique RequestId per channel used in EPP for duplicate check</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+                <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+          <element name="referenceId" minOccurs="0">
+            <annotation>
+              <documentation>Unique Id from channel</documentation>
+            </annotation>
+            <simpleType>
+              <restriction base="string">
+               <maxLength value="36"/>
+              </restriction>
+            </simpleType>
+          </element>
+					<element name="amounts" type="paymentCommonTypes:AmountInfo"/>
+          <element name="additionalInformation" type="baseOperationRequest:AdditionalInfo" minOccurs="0"/>
+					<element name="prepaidData" type="tns:PrepaidDataBO"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="prepaidRechargePaymentResponse">
+  <complexType>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentOperationResponse">
+        <sequence>
+          <element name="prepaidRechargePaymentResponseDetail" type="baseOperationResponse:PaymentResponseBO" minOccurs="0"/>
+					<element name="prepaidRechargePaymentOptionInfo" type="tns:PrepaidRechargePaymentOptionInfo" minOccurs="0" maxOccurs="1"></element>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+
+  <complexType name="PrepaidRechargePaymentOptionInfo">
+     <sequence>
+        <element name="paymentMethod" type="baseOperationResponse:PaymentOptionMethodConstants"/>
+        <element name="paymentMethodSubType" type="baseOperationResponse:PaymentMethodSubTypeConstants"/>
+        <element name="cardBrand" type="baseOperationResponse:CardBrandConstants" minOccurs="0"/>
+			<element name="paymentAccountToken" minOccurs="0" type="string" />
+			<element name="paypalEmailId" minOccurs="0" type="string" />
+     </sequence>
+    </complexType>
+  
+  <complexType name="PrepaidDataBO">
+    <sequence>
+    	<element name="partnerCode" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="3" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="ptn" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="20" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="ratePlanCode" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="20" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="subscriberId" type="integer" minOccurs="0" />
+    	<element name="currency" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="3" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="channelCode" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="20" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="methodCode" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="20" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="requestDate" type="dateTime" minOccurs="0" />
+			<element name="networkIndicator" type="string" minOccurs="0"/>
+			<element name="subBrand" type="string" minOccurs="0"/>
+            <element name="premiumPlanId" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="36" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="isFirstRCInd" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="1" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+            <element name="rcDate" type="dateTime" minOccurs="0" />
+    	<element name="anniversaryDate" type="dateTime" minOccurs="0" />
+    	<element name="rcReason" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="36" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    	<element name="noOfAddons" type="short" minOccurs="0" />
+			<element name="addOnInfo" type="tns:AddOnInfoBO" minOccurs="0" maxOccurs="unbounded"/>
+    	<element name="barOnInd" minOccurs="0">
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="1" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+    </sequence>
+  </complexType>
+  
+  <complexType name="AddOnInfoBO">
+    <sequence>
+      <element name="socId" minOccurs="0">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="36"/>
+          </restriction>
+        </simpleType>	
+      </element>	
+      <element name="socDescription" minOccurs="0">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="256"/>
+          </restriction>
+        </simpleType>
+      </element>
+      <element name="rcAmount" type="decimal" minOccurs="0"/>
+      <element name="rcTaxAmount" type="decimal" minOccurs="0"/>
+      <element name="rcTaxData" minOccurs="0">
+        <simpleType>
+          <restriction base="string">
+            <maxLength value="256"/>
+          </restriction>
+        </simpleType>
+      </element>
+    </sequence>
+  </complexType>
+  
+  <element name="tokenLookUpRequest">
+  <complexType>
+    <annotation>
+      <documentation>This is the request received from Channel to search for the existing token
+      </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentBaseRequest">
+        <sequence>
+            <element name="tokenType" type="baseOperationRequest:TokenTypeConstants"/>
+        </sequence>
+        </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="tokenLookUpResponse">
+  <complexType>
+    <annotation>
+      <documentation>This is the response sent along with existing token
+      </documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentBaseResponse">
+        <sequence>
+					<element name="tokenDetails" type="tns:TokenDetails" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <complexType name="TokenDetails">
+    <sequence>
+			<element name="globalToken">
+        <annotation>
+          <documentation>The existing token fo the given car/ACH details</documentation>
+        </annotation>
+         <simpleType>
+          <restriction base="string">
+            <maxLength value="16"/>
+          </restriction>
+        </simpleType>
+      </element>
+
+    </sequence>
+  </complexType>
+    
+  <element name="getPaymentListRequest">
+   <complexType>
+    <annotation>
+      <documentation>This is the request received from Channel for searching payments, filtered by query parameters.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentBaseRequest">
+        <sequence>
+					<element name="actorChannel" minOccurs="0">
+        		<annotation>
+        			<documentation>
+        				Channel ID of the channel that performed the
+        				payment transaction
+        			</documentation>
+        		</annotation>
+        		<simpleType>
+        			<restriction base="string">
+								<maxLength value="36"/>
+        			</restriction>
+        		</simpleType>
+        	</element>
+					<element name="customerFilterInfo" type="tns:CustomerInfo" minOccurs="0"/>
+					<element name="transactionFilterInfo" type="tns:TransactionFilterInfo"/>
+                    <element name="pageInfo" type="tns:PageInfo" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="getPaymentListResponse">
+  <complexType>
+    <annotation>
+      <documentation>This is the get payment list response.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentBaseResponse">
+        <sequence>
+          <element name="paymentList" type="tns:PaymentListResponseBO" minOccurs="0" maxOccurs="unbounded"/>
+          <element name="pageInfo" type="tns:PageInfo" minOccurs="0"/>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="getPaymentDetailsRequest">
+  <complexType>
+    <annotation>
+      <documentation>This is the request received from Channel for retreiving transaction details.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationRequest:PaymentBaseRequest">
+        <sequence>
+          <choice>
+						<element name="eppId">
+              <annotation>
+                <documentation>The unique EPP generated ID for the payment</documentation>
+              </annotation>
+              <simpleType>
+                <restriction base="string">
+                  <maxLength value="36"/>
+                </restriction>
+              </simpleType>
+            </element>
+          </choice>
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <element name="getPaymentDetailsResponse">
+  <complexType>
+    <annotation>
+      <documentation>This is the get payment details response.</documentation>
+    </annotation>
+    <complexContent>
+      <extension base="baseOperationResponse:PaymentBaseResponse">
+        <sequence>
+          <element name="paymentDetailsResponse" type="tns:PaymentDetailsResponseBO" minOccurs="0" />
+        </sequence>
+      </extension>
+    </complexContent>
+  </complexType>
+  </element>
+  
+  <complexType name="PaymentDetailsResponseBO">
+    <annotation>
+      <documentation>Transaction details.</documentation>
+    </annotation>
+    <sequence>
+    	<element name="eppId">
+    		<simpleType>
+    			<restriction base="string">
+						<maxLength value="36"/>
+    			</restriction>
+    		</simpleType>
+    	</element>
+		<element name="customerInfo" type="tns:CustomerInfo"/>
+		<element name="transcationDetailsInfo" type="tns:TransactionDetailsInfo" maxOccurs="unbounded"/>
+    	<element name="paymentOptionInfo" type="tns:PaymentOptionInfo">
+    		<annotation>
+    			<documentation>Adjustment Reason</documentation>
+    		</annotation>
+    	</element>
+    	<element name="remainingAmount" type="tns:TransactionAmount">
+    		<annotation>
+    			<documentation>Merchant order number</documentation>
+    		</annotation>
+    	</element>
+    </sequence>
+  </complexType>
+  
+  <complexType name="PaymentListResponseBO">
+    <annotation>
+      <documentation>This is the list of payments.</documentation>
+    </annotation>
+    <sequence>
+			<element name="actorChannel">
+    		<annotation>
+    			<documentation>Unique Id from channel</documentation>
+    		</annotation>
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="36" />
+    			</restriction>
+    		</simpleType>
+    	</element>
+			<element name="customerInfo" type="tns:CustomerInfo" minOccurs="0"/>
+			<element name="transactionInfo" type="tns:TransactionInfo"/>
+			<element name="paymentOptionInfo" type="tns:PaymentOptionInfo" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  
+
+    <complexType name="CustomerInfo">
+		<sequence>
+			<element name="ban" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerBrand" minOccurs="0">
+				<annotation>
+					<documentation>
+						Customer brand of BAN (postpaid or prepaid)
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Prepaid" />
+						<enumeration value="Postpaid" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerSubBrand" type="baseOperationRequest:CustomerBrandConstants" minOccurs="0">
+				<annotation>
+					<documentation>
+						Customer sub brand BAN belongs to
+					</documentation>
+				</annotation>
+			</element>
+			<element name="paypalEmailId" type="baseOperationRequest:email" minOccurs="0"/>
+		</sequence>
+    </complexType>
+
+
+
+    <complexType name="TransactionFilterInfo">
+    	<sequence>
+			<element name="externalId" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="eppId" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionFor" type="baseOperationRequest:TransactionForConstants" minOccurs="0"/>
+			<element name="transactionStatus" type="paymentCommonTypes:StatusTypeConstants" minOccurs="0"/>
+			<element name="fromDate" type="dateTime"/>
+			<element name="toDate" type="dateTime"/>
+			<element name="paymentAccountToken" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<minLength value="16"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="amountFilterInfo" type="tns:AmountFilterInfo" minOccurs="0"/>
+			<element name="postableAmountInfo" type="tns:PostableAmoutInfo" minOccurs="0"/>
+    	</sequence>
+    </complexType>
+
+    <complexType name="AmountFilterInfo">
+    	<sequence>
+			<element name="fromAmount" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="toAmount" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="amountType" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<enumeration value="BASE"/>
+						<enumeration value="TOTAL"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="PostableAmoutInfo">
+    	<sequence>
+			<element name="isExcludeFullyPosted" type="paymentCommonTypes:BooleanType"/>
+			<element name="postableAmountFrom" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="postableAmountTo" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+
+    <complexType name="TransactionInfo">
+    	<sequence>
+			<element name="transactionDate" type="dateTime"/>
+			<element name="eppId">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="externalId" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionId">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionType" type="baseOperationResponse:TransactionTypeConstants"/>
+			<element name="transactionStatus" type="paymentCommonTypes:StatusTypeConstants"/>
+			<element name="transactionState" type="baseOperationResponse:TransactionStateConstants"/>
+			<element name="billingConfirmationId" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionAmount" type="tns:TransactionAmount"/>
+			<element name="postableAmount" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="acquirerAutorizationCode" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="failureInfo" type="tns:FailureInfo" minOccurs="0"/>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PaymentOptionInfo">
+    	<sequence>
+			<element name="paymentMethod" type="baseOperationResponse:PaymentOptionMethodConstants" />
+			<element name="paymentMethodSubType" type="baseOperationResponse:PaymentMethodSubTypeConstants"/>
+			<element name="cardBrand" type="baseOperationResponse:CardBrandConstants" minOccurs="0"/>
+			<element name="paymentType" type="baseOperationRequest:PaymentMethodConstants" minOccurs="0" />
+			<element name="lastFourDigitsOfCard" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="4"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="paymentAccountToken" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="16"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="routingNumber" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="9"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+    
+
+    <complexType name="TransactionAmount">
+    	<sequence>
+			<element name="amount">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="tax" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="totalAmount">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="currencyCode">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="3"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="FailureInfo">
+    	<sequence>
+			<element name="failureSource" type="baseOperationRequest:FailureOriginTypes"/>
+			<element name="failureReasonCode">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="256"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="failureReasonDescription" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="256"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="TransactionDetailsInfo">
+    	<sequence>
+			<element name="transactionDate" type="dateTime"/>
+			<element name="transactionId">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionType" type="baseOperationResponse:TransactionTypeConstants"/>
+			<element name="transactionStatus" type="paymentCommonTypes:StatusTypeConstants"/>
+			<element name="transactionState" type="baseOperationResponse:TransactionStateConstants"/>
+			<element name="actorChannel">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="actorId">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="transactionAmount" type="tns:TransactionAmount"/>
+			<element name="postableAmount" minOccurs="0">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="externalId" minOccurs="0">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="requestId">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="36"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="refundInfo" type="tns:RefundInfo" minOccurs="0"/>
+			<element name="chargebackInfo" type="tns:ChargebackInfo" minOccurs="0"/>
+			<element name="taxTransactionId" type="string" minOccurs="0"/>
+			<element name="failureInfo" type="tns:FailureInfo" minOccurs="0"/>
+			<element name="transactionFor" type="baseOperationRequest:TransactionForConstants" minOccurs="0">
+    		<annotation>
+    			<documentation>Transaction For</documentation>
+    		</annotation>
+    	    </element>
+    	    <element name="billingConfirmationId" minOccurs="0">
+    		<annotation>
+    			<documentation>
+    				Identity of the person authorizing the activity for
+    				this message. if this is a self care operation then
+    				the actorId = userId and can be omitted. (it will
+    				default to the userId)
+    			</documentation>
+    		</annotation>
+    		<simpleType>
+    			<restriction base="string">
+    				<maxLength value="36" />
+    			</restriction>
+    		</simpleType>
+    	    </element>
+            <element name="paymentMethodSubType" type="baseOperationResponse:PaymentMethodSubTypeConstants"/>
+    	</sequence>
+    </complexType>
+
+    <complexType name="RefundInfo">
+    	<sequence>
+			<element name="refundReasonCode">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="256"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+			<element name="refundReasonDescription">
+    			<simpleType>
+    				<restriction base="string">
+						<maxLength value="256"/>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ChargebackInfo">
+    	<sequence>
+			<element name="chargebackCode" type="string"/>
+			<element name="chargebackOriginalAmout">
+    			<simpleType>
+    				<restriction base="decimal">
+    					<fractionDigits value="2" />
+    					<minInclusive value="0" />
+    				</restriction>
+    			</simpleType>
+    		</element>
+    	</sequence>
+    </complexType>
+    <complexType name="PageInfo">
+        <sequence>
+            <element name="pageNumber" type="int"/>
+            <element name="pageSize" type="int" />
+            <element name="totalRows" type="int" minOccurs="0"/>
+            <element name="hasMoreRows" type="paymentCommonTypes:BooleanType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="CaptureAmountInfo">
+        <sequence>
+            <element name="totalAmount" >
+                <simpleType>
+                    <restriction base="decimal">
+                        <totalDigits value="9" />
+                        <fractionDigits value="2" />
+                        <minInclusive value="0" />
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="postableAmount" >
+                <annotation>
+                    <documentation>If non-zero, then this value is to be posted to billing system.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="decimal">
+                        <totalDigits value="9" />
+                        <fractionDigits value="2" />
+                        <minInclusive value="0" />
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+</schema>

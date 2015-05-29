@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/calculatePrepaidInvoiceTax/v1/calculatePrepaidInvoiceTax.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/calculatePrepaidInvoiceTax/v1/calculatePrepaidInvoiceTax.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.7">
+	
+<!--l-->
+	
+<!--08/01/2014    Cindy Pummill    1.0            Initial revision                                                                                                                                          GBL15.1         PJ012171-->
+	
+<!--08/06/2014   Kathy Zhao        1.0          Standardized          GBL15.1     PJ012171-->
+	
+<!--08/12/2014    Cindy Pummill    1.1           Updated TaxingAuthorityIdentifierType enum values, updated TaxTypeIdentifierType documentation and updated SurchargeTypeCodeType possible values		                                    GBL15.1         PJ012171-->
+	
+<!--08/12/2014   Kathy Zhao        1.1          Standardized          GBL15.1     PJ012171-->
+	
+<!--08/14/2014    Cindy Pummill    1.2          Updated LocationInfoType to add streetLine1 and streetLine 2 elements          GBL15.1         PJ012171-->
+	
+<!--08/14/2014    Adon Powell     1.2           standardize and replace taxtypecodetype with taxassessmentmethodcodetype          GBL15.1         PJ012171-->
+	
+<!--08/14/2014    Cindy Pummill    1.2          Updated TaxingAuthorityIdentifierType enumeration values and length.    GBL15.1         PJ012171-->
+	
+<!--08/14/2014    Adon Powell     1.2           standardize           GBL15.1         PJ012171-->
+	
+<!--08/14/2014    Adon Powell     1.2           removed extra values from definitions to reduce confusion GBL15.1         PJ012171-->
+	
+<!--08/15/2014    Cindy Pummill    1.3          Updated ban to reqd, invoiceNumber and quantity to optional. Removed categoryCode and serviceCode elements and geocodeInfo structure.  Removed InvoiceLineList and addressGeocodeInfo.   GBL15.1         PJ012171-->
+	
+<!--08/15/2014    Adon Powell     1.3           standardize           GBL15.1         PJ012171-->
+	
+<!--08/26/2014    Cindy Pummill    1.4          Updated ban to optional, updated name of productCode to productCategory and changed to optional.  Updated various response fields to optional and added one element, totalAmount.      GBL15.1         PJ012171-->
+	
+<!--08/27/2014    Adon Powell     1.4           standardize           GBL15.1         PJ012171-->
+	
+<!--08/27/2014    Adon Powell     1.4           set taxamount to optional per Cindy    GBL15.1         PJ012171-->
+	
+<!--08/29/2014    Cindy Pummill    1.5          Added productText in the request.      GBL15.1         PJ012171-->
+	
+<!--08/29/2014    Adon Powell     1.5          standardize    GBL15.1         PJ012171-->
+	
+<!--09/09/2014    Adon Powell     1.6          per Cindy, update lengths of locationInfo (city, county and state).  GBL15.1         PJ012171-->
+	
+<!--02/19/2015    Adon Powell     1.7          per Cindy, update total,fractional digits for taxableAmount and totalamount.  GBL15.1         PJ012171-->
+	
+<!---->
+	
+<xs:element name="calculatePrepaidInvoiceTax" type="tns:CalculatePrepaidInvoiceTaxRequestType"/>
+	
+<xs:element name="calculatePrepaidInvoiceTaxResponse" type="tns:CalculatePrepaidInvoiceTaxResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="CalculatePrepaidInvoiceTaxRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="invoiceLineInfo" type="tns:InvoiceLineInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Invoice item info for tax calculation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="addressInfo" type="tns:AddressInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Address or geocode information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CalculatePrepaidInvoiceTaxResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique id of the calculation transaction. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callingTransactionId" type="tns:TransactionIdentifierStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The callingTransactionId (Vendor ETSI)  that was sent in the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxDetailsRowCount" type="tns:RowCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of taxes returned in the taxRecordsList</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalTaxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total tax amount calculated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="governmentFeesAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The tax amount for the government taxes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="surchargesAmount" type="tns:SurchargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total amount of surcharges</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxRecordList" type="tns:TaxRecordListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The list of taxRecordInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="invoiceTaxRecordList" type="tns:InvoiceTaxRecordListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The list of invoiceTaxRecordInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalAmount" type="tns:TotalAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The sum of the taxable amount and the total tax.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AddressInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="acceptanceLocationInfo" type="tns:LocationInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>The locationInfo structure for the location where the order was accepted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="destinationLocationInfo" type="tns:LocationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The locationInfo structure for the location where the order was sent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originationLocationInfo" type="tns:LocationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The locationInfo structure for the location where the order originated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InvoiceLineInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="callingTransactionId" type="tns:TransactionIdentifierStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The transaction id from  the calling application.  The value will be stored in the backend system.
+For refunds, provide the transactionId from the previous calculatePrepaidInvoice tax call for the payment that is being refunded. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The billing account number for the customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerTypeCode" type="tns:CustomerTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of customer.  Will default to ‘R’ if not provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="exemptionClassCode" type="tns:TaxExemptionClassCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The exemption class code for the customer.  This will be used to determine exemptions for tax calculation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="invoiceLineNumber" type="tns:LineItemIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The line number of the invoice item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="invoiceDate" type="tns:InvoiceDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The date of the invoice or the current date if invoice date is not available.
+For refunds, provide the invoiceDate that was sent in the previous calculatePrepaidInvoice tax call for the payment that is being refunded.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="invoiceNumber" type="tns:InvoiceIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique invoice or order number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productCategory" type="tns:ProductCategoryCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The product category of  the line item.  The type of product for which the tax is to be calculated.  
+Always required except for refund scenario when the callingTransactionId is populated with the original transactionId and taxableAmount is negative.
+Values: 
+Service, 
+Equipment, 
+Repair, 
+Shipping
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productText" type="tns:ProductDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The product text further describes the product to help determine how the tax is calculated.  
+If the productCategory is set to ‘Service’ then the productText should include the soc code.
+If productText is populated, this value will be sent to the backend instead of the productCategory value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="quantity" type="tns:ItemQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of items for the line</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxableAmount" type="tns:TotalAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>The taxable dollar amount for the line.  This should be populated with a negative value for credit/refund amounts.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InvoiceTaxRecordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="taxedGeocode" type="tns:TaxAuthorityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The geocode where the tax was assessed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAuthority" type="tns:TaxingAuthorityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The taxing authority type. The possible types are federal, state, county or city.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxInvoiceDescription" type="tns:InvoiceCaption" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The text that will appear on the invoice for this tax or group of taxes </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The dollar amount of tax assessed for the line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="surchargeTaxInd" type="tns:SurchargeTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if record is for a surcharge or a tax</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InvoiceTaxRecordListType">
+		
+<xs:sequence>
+			
+<xs:element name="invoiceTaxRecordInfo" type="tns:InvoiceTaxRecordInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Infvoice tax record information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LocationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="geocode" type="tns:TaxAuthorityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique identifier for a taxing jurisdiction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetLine1" type="tns:PostalAddressLine1Type" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The street address line 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetLine2" type="tns:PostalAddressLine2Type" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The street address line 2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="city" type="tns:CityNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The city name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="county" type="tns:CountyNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The county name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="state" type="tns:UspsStateAbbreviationType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The state two character code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode4" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS postal code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TaxRecordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="taxedGeocode" type="tns:TaxAuthorityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The geocode where the tax was assessed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAuthority" type="tns:TaxingAuthorityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The taxing authority type. The possible types are federal, state, county or city.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxType" type="tns:TaxTypeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The code corresponding to the type of tax that was assessed.  
+Examples:  99 and 05 are sales tax
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxDescription" type="tns:TaxDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The generic tax description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxRate" type="tns:TaxRateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The rate or fee for the tax type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxCode" type="tns:TaxAssessmentMethodCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The code for how the tax is assessed.  This will indicate if the tax is a percentage, tier, fee or other values.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The dollar amount of tax assessed for the line item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="linkedTaxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The basis of other taxes used to compute the tax amount.  
+This will occur when a tax-on-tax occurs which is when the tax amount of another tax type or the same tax type may be factored into the calculation of a tax.  The value provided is the total amount of other taxes that were used in determining this tax. 
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="linesTaxed" type="tns:LineQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of lines that were taxed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TaxRecordListType">
+		
+<xs:sequence>
+			
+<xs:element name="taxRecordInfo" type="tns:TaxRecordInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax Record Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CityNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CountyNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>County Name is the appointed name for a land area of local government within a country that may be made up of both cities and towns within its area. Counties are administrative divisions of the state in which their boundaries are drawn. Where they exist, they are the intermediate tier of unitary state government, between the statewide tier and the immediately local government tier. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Type Code provides a mechanism for categorizing Customers within the context of various functionalities.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="R"/>
+			
+<xs:enumeration value="B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InvoiceDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Invoice Date is the date on which the invoice is produced.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InvoiceIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Invoice Identifer uniquely identifies an itemized bill of sale. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InvoiceCaption">
+		
+<xs:annotation>
+			
+<xs:documentation>Invoice Caption holds a line of text that appears on the Bill.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ItemQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Item Quantity is the number of referenced items.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LineItemIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Line Item Identifier uniquely identifies a line item of a particular invoice, sale, or bill.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LineQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Line Quantity is the number of lines (phone lines) being referenced within the given context.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PostalAddressLine1Type">
+		
+<xs:annotation>
+			
+<xs:documentation>Postal Address Line 1 is the first instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PostalAddressLine2Type">
+		
+<xs:annotation>
+			
+<xs:documentation>Postal Address Line 2  is the second instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductCategoryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Category Code is used for the categorization of products allowing grouping, selection, and pricing flexiblity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Description contains a brief textual description of the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SurchargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Surcharge Amount is the monetary amount of a surcharge.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SurchargeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Surcharge Type Code designates a specific type of surcharge. Examples are:
+S =Sprint Surcharge 
+G= Government Tax 
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="S"/>
+			
+<xs:enumeration value="G"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Amount is the monetary amount charged and collected on behalf of a government entity for taxes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAuthorityIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Authority Identifier is a sequence number unique identify a Taxing jurisdiction 
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAssessmentMethodCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Assessment Method Code designates  the categorization of how the tax is assessed.  
+Example Values: 
+percentage,  
+tier,  
+fee</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxExemptionClassCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Exemption Class Code is a code that denotes if an organization is exempt from certain types of taxes. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Description is the normal language description of the tax.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxRateType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Tax Rate is a rate expressed in decimal format and is applied to a charge to determine the amount of tax to be collected from the customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxTypeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Type Identifier designates a specific type of tax.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxingAuthorityIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Taxing Authority Identifier designates which level of taxing authority the tax is collected on behalf of.
+Possible Values:
+0 – Federal
+1 – State
+2 – County
+3 – City
+4 – Unincorporate county
+7 – County District
+9 – City District</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="0"/>
+			
+<xs:enumeration value="1"/>
+			
+<xs:enumeration value="2"/>
+			
+<xs:enumeration value="3"/>
+			
+<xs:enumeration value="4"/>
+			
+<xs:enumeration value="7"/>
+			
+<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TotalAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Total Amount is the sum of associated amounts.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Identifier uniquely identifies a logical unit of work in an interface.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Identifier is a unique string that identifies a transaction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsStateAbbreviationType">
+		
+<xs:annotation>
+			
+<xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!---->
+</xs:schema>

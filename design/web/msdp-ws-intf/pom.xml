@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ericsson.sprint.cac</groupId>
+  <artifactId>msdp-ws-intf</artifactId>
+  <name>Sprint Self-Care :: Command Service</name>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+							<wsdlDirectory>${basedir}/src/main/resources/commandservice</wsdlDirectory>
+                            <wsdlFiles>
+                                <wsdlFile>EsbCommandService.wsdl</wsdlFile>
+                            </wsdlFiles>
+							<bindingDirectory>${basedir}/src/main/resources/commandservice</bindingDirectory>
+							<bindingFiles>
+                                <bindingFile>esbCommandBinding.xml</bindingFile>
+                            </bindingFiles>
+							<packageName>com.ericsson.sprint.cac</packageName>
+                            <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                            <destDir>${basedir}/src/main/java</destDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>           
+        </plugins>
+    </build>
+    
+</project>

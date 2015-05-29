@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceStaticIpNgpInfo/v1/queryReferenceStaticIpNgpInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceStaticIpNgpInfo/v1/queryReferenceStaticIpNgpInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 24/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	    CS#325358 -->
+	
+<xs:element name="queryReferenceStaticIpNgpInfo" type="tns:QueryReferenceStaticIpNgpInfoRequest"/>
+	
+<xs:element name="queryReferenceStaticIpNgpInfoResponse" type="tns:QueryReferenceStaticIpNgpInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceStaticIpNgpInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="staticIpNgpList" type="tns:StaticIpNgpList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceStaticIpNgpInfoRequest"/>
+	
+<xs:complexType name="StaticIpNgpInfo">
+		
+<xs:sequence>
+			
+<xs:element name="ngp" type="tns:NumberGroup"/>
+			
+<xs:element name="ngpShortDesc" type="tns:NumberGroupShortDescription"/>
+			
+<xs:element name="ngpDesc" type="tns:NumberGroupDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="StaticIpNgpList">
+		
+<xs:sequence>
+			
+<xs:element name="staticIpNgpInfo" type="tns:StaticIpNgpInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="NumberGroup">
+		
+<xs:annotation>
+			
+<xs:documentation>The NGP (Number Group) is identified as CSA by the Ensemble billing system and groups ranges for a number of resources such as IPs, IMSIs, NPANXXs, and UFs . This grouping represents a geographical zone that includes specific ranges.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberGroupDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Group Description is a description of a specific number group (NGP).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberGroupShortDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Group Short Description is an abbreviated description of a specific number group (NGP).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,63 @@
+<header class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm" ng-controller="cartController as cartController" id="cartController">
+  <div class="container">
+    <div class="col-xs-3 col-md-2 linkHome hidden-xs hidden-sm">
+      <a href="{{pathMap._home._hash}}|Nav:Logo" alt="Sprint Prepaid">Home</a>
+    </div>
+    <div class="col-xs-9 col-md-10 pull-right">
+      <div class="navbar pull-left visible-md topnav">
+        <ul class="navbar-wrapper">
+          <li class="navbar-item"><a id="coverageMapLink" href="#" data-toggle="modal" data-target="#coverageMap">Coverage Map</a></li>
+          <li class="navbar-item"><a href="http://stores.prepaid.sprint.com?INTNAV=Nav:FindStore">Find a Store</a></li>
+        </ul>
+      </div>
+      <div class="navbar pull-right visible-md topnav">
+        <ul class="navbar-wrapper">
+          <li class="navbar-item"><a href="https://myaccount.prepaid.sprint.com/myaccount/topup.do">Refill</a></li>
+          <li class="navbar-item"><a href="http://support.sprint.com/support/?INTNAV=SPP:Support#!/?INTNAV=Nav:Support" target="_blank">Support</a></li>
+          <li class="navbar-item"><a href="https://origin1.myaccount.prepaid.sprint.com/activate/overview.jsp?INTNAV=:MyAcct:Activate" target="_blank">Activate</a></li>
+          <li class="navbar-item"><a href="https://myaccount.prepaid.sprint.com/myaccount/home.do">My Account</a></li>
+          <li class="navbar-item" ng-show="!appAccount.isLogin()"><a href="https://myaccount.prepaid.sprint.com/myaccount/home.do">Sign in</a></li>
+          <li class="navbar-item" ng-show="appAccount.isLogin()"><a href="https://myaccount.prepaid.sprint.com/login/logout.do">Sign out</a></li>
+        </ul>
+      </div>
+      <div class="visible-sm visible-xs greeting">
+        <button type="button" class="navbar-toggle opened" data-toggle="offcanvas" data-target=".navmenu">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>
+        <!--p class="greeting-name"><span>Good morning, </span>UserName</p>
+        <p class="greeting-number">PhoneNumber</p-->
+      </div>
+      <ul class="nav navmenu-nav nav-pills hidden-md hidden-lg">
+        <li><a href="{{pathMap._shop._hash}}|Nav:Shop">Shop</a></li>
+        <li><a href="{{pathMap._phones._hash}}|Nav:Shop:AllPhones">All Phones</a></li>
+        <li><a href="{{pathMap._phones._hash}}Android/|Nav:Shop:Android">Android Phones</a></li>
+        <li><a href="{{pathMap._phones._hash}}iPhone/|Nav:Shop:iPhone">iPhones</a></li>
+        <!--
+        <li><a href="{{pathMap._nextversion._hash}}">Accessories</a></li>
+        -->
+          <li><a href="{{pathMap._plan._hash}}|Nav:Plans:AllPlans">Shop Plans</a></li>
+          <li><a href="{{pathMap._additionalServices._hash}}|Nav:Plans:AdditionalServices">Additional Services</a></li>
+      </ul>
+      <ul class="nav navmenu-nav nav-pills hidden-xs hidden-sm">
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="{{pathMap._shop._hash}}|Nav:Shop">Shop <b class="caret"></b></a>
+          <ul class="dropdown-menu sub-menu">
+            <li data-toggle="collapse" data-target=".nav-collapse"><a href="{{pathMap._phones._hash}}|Nav:Shop:AllPhones">All Phones</a></li>
+            <li data-toggle="collapse" data-target=".nav-collapse"><a href="{{pathMap._phones._hash}}Android/|Nav:Shop:Android">Android Phones</a></li>
+            <li data-toggle="collapse" data-target=".nav-collapse"><a href="{{pathMap._phones._hash}}iPhone/|Nav:Shop:iPhone">iPhones</a></li>
+            <!--li><a href="{{pathMap._nextversion._hash}}">Accessories</a></li>
+            <li><a href="{{pathMap._nextversion._hash}}">Deals</a></li-->
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a class="dropdown-toggle" href="{{pathMap._plan._hash}}|Nav:Plans:AllPlans">Plans <b class="caret"></b></a>
+          <ul class="dropdown-menu sub-menu">
+            <li><a href="{{pathMap._plan._hash}}|Nav:Plans:AllPlans">Shop Plans</a></li>
+            <li><a href="{{pathMap._additionalServices._hash}}|Nav:Plans:AdditionalServices">Additional Services</a></li>
+          </ul>
+        </li>
+        <cart-room></cart-room>
+      </ul>
+    </div>
+  </div>
+</header>

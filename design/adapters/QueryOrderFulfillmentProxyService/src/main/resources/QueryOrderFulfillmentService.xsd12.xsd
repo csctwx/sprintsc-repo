@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:reqiod="http://integration.sprint.com/v2/public/interfaces/RequestInventoryOrderDetails.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:cdm="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" targetNamespace="http://integration.sprint.com/v2/public/interfaces/RequestInventoryOrderDetails.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:import namespace="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" schemaLocation="QueryOrderFulfillmentService.xsd14.xsd"/>
+	
+<xs:element name="RequestInventoryOrderDetails">
+		
+<xs:annotation>
+			
+<xs:documentation>RequestInventoryOrderDetails obtains order details for an existing inventory order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:complexType>
+			
+<xs:sequence>
+				
+<xs:element ref="reqiod:inventoryOrderDetailsRequest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+<xs:element name="inventoryOrderDetailsRequest" type="reqiod:InventoryOrderDetailsRequestType"/>
+	
+<xs:complexType name="InventoryOrderDetailsRequestType">
+		
+<xs:sequence>
+			
+<xs:element ref="cdm:orderNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

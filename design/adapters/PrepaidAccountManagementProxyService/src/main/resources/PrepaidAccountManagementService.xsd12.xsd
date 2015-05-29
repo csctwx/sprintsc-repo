@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/removeAutoRefillEnrollment/v1/removeAutoRefillEnrollment.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/removeAutoRefillEnrollment/v1/removeAutoRefillEnrollment.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date              Author                         Version     Change                                                                                               Rel                          SR# -->
+	
+<!--1/17/2012     Amber Peppers            1.0            Initial Draft                                                                                           MID 12.1              PJ006243-->
+	
+<!--1/19/2012   Steve Heichelheim         1.0        Added MVM standards and simple types                                               MID12.1    PJ006243-->
+	
+<xs:element name="removeAutoRefillEnrollment" type="tns:RemoveAutoRefillEnrollmentRequestType"/>
+	
+<xs:element name="removeAutoRefillEnrollmentResponse" type="tns:RemoveAutoRefillEnrollmentResponseType"/>
+	
+<xs:complexType name="RemoveAutoRefillEnrollmentRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal Telephone Number – mobile number of the signer on the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="retailerId">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID for retail store</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:RetailStoreIdentifierType">
+						
+<xs:maxLength value="128"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RemoveAutoRefillEnrollmentResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message">
+				
+<xs:annotation>
+					
+<xs:documentation>Indication of success</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="99"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ExceptionConditionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+Example Values:
+0 - Successful completion, 
+4 - Successful completion, but with a warning as to some unusual circumstance, 
+8 - Error, request was not processed successfully, 
+12 - Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionMessageType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Message contains text provided by the responding application providing user-comprehensible error feedback.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RetailStoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

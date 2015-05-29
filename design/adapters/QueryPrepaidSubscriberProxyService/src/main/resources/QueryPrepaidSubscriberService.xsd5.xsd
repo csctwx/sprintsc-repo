@@ -1,0 +1,1646 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryPrepaidUsageDetails/v1/queryPrepaidUsageDetails.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryPrepaidUsageDetails/v1/queryPrepaidUsageDetails.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.5">
+	
+<!-- Date              Author                             Version     	Change                   Rel                            SR# -->
+	
+<!--7/24/2012       Mitali Handoo                  Initial                     1.0                        GBL12.3         		 PJ007251-->
+	
+<!--7/27/2012  Ste1.0     Added MVM standards and simple types                     GBL12.3                       PJ007251-->
+	
+<!--8/23/2012       Mitali Handoo         Updated lower/upper cases for 'prepaid'      1.1                        GBL12.3         		 PJ007251-->
+	
+<!--9/12/2012       Mitali Handoo         Updated Datatype for mediaVolume, feeType	      1.2                        GBL12.3         		 PJ007251-->
+	
+<!--9/25/2012       Mitali Handoo         Updated serviceFilter datatype to 64 characters     1.3                        GBL12.3         		 PJ007251-->
+	
+<!--01/28/2013     Subha Kannan 	   Removed Enumeration on timeZone and updated max length to 3 for origincountryCode MID13.1   IM1565376 and IM1565355 -->
+	
+<!--09/25/2013   Steve Heichelheim    1.5  Added url, tollFreeNumber and taxAmount to PrePaidUsageDetailsHistoryInfo    MID14.1         PJ008720-->
+	
+<!--10/24/2013    Amber Peppers      1.5 (update) Add url, tollFreeNumber, shortCode, shortContentType, serviceId to the response       PJ008720-->
+	
+<xs:element name="queryPrepaidUsageDetails" type="tns:QueryPrepaidUsageDetailsRequestType"/>
+	
+<xs:element name="queryPrepaidUsageDetailsResponse" type="tns:QueryPrepaidUsageDetailsResponseType"/>
+	
+<xs:complexType name="QueryPrepaidUsageDetailsRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationCallingInfo" type="tns:ApplicationCallingInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>The prepaid Usage Details Request Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prepaidUsageDetailsRequestInfo" type="tns:PrepaidUsageDetailsRequestInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure contains calling application information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryPrepaidUsageDetailsResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="prepaidUsageDetailsHistoryInfoList" type="tns:PrepaidUsageDetailsHistoryListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction history of the sub, including usage and financial info for a prepaid subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="alternateAuthenticationDate" type="tns:EventDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Alternate Authentication suspend date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paginationResultInfo" type="tns:PaginationResultInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Return the pagination info of the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ApplicationCallingInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accessId" type="tns:ApplicationIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Calling application Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EventCategoryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="eventCategory" type="tns:ServiceCategoryNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>The event category.
+The valid values are defined in GENERIC_CODES.
+(GEN_TYPE will be SERVICE_CATEGORY)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EventCategoryListType">
+		
+<xs:sequence>
+			
+<xs:element name="EventCategoryInfo" type="tns:EventCategoryInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Event type category information (most of the time, it will have only one value)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MediaInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mediaType" type="tns:ContentMediaTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Media type that was used in an MMS event
+Valid Values :
+P - Picture
+A - Audio
+V - Video
+T - Text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mediaQuantity" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Media quantity that was used in an MMS event.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:RowCountNumberType">
+						
+<xs:totalDigits value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="mediaVolume" type="tns:MediaUnitOfMeasureValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Media volume that was used in an MMS event.
+Will be measured in Bytes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PaginationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="pageNumber" type="tns:PageNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested page number:
+Page number = 1 returns first page's data and total count
+Page number &gt; 1 return data of requested page but total count is not returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pageBufferSize" type="tns:PageBufferRowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested page buffer size. Maximum page buffer size is 600.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PaginationResultInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="moreRows" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indication of whether there are more rows to retrieve (1 – there are more rows to retrieve; 0 – no more rows to retrieve)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rowCount" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of usage detail records on the current page</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalCount" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Total number of usage detail records. Value will be 0 if:
+PaginationInfo.pageNumber &gt; 0 OR Total count = 0 
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidUsageDetailsHistoryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="prepaidUsageDetailsInfo" type="tns:PrepaidUsageDetailsInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction’s detailed information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eventCategoryList" type="tns:EventCategoryListType">
+				
+<xs:annotation>
+					
+<xs:documentation>The event’s Category list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eventStartTime" type="tns:EffectiveFromDateTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The event's start time.
+Will be in format:yyyymmddhhmmss</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callDirection" type="tns:CallDirectionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The direction of the call - incoming or outgoing.
+Incoming/Outgoing/empty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="calledNumber" type="tns:CalledNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number the call was made to.
+For incoming calls, ‘Incoming’ will be presented.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactionDescription" type="tns:TransactionDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The description of the transaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="chargeAmount" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The calculated total charge amount of the event.
+The chargeAmount will not be returned for non-monetary adjustments.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="remainingBalance" type="tns:BalanceAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The remaining balance amount that the customer has after processing the event.
+remainingBalance will not be returned for non-monetary adjustments</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeMethod" type="tns:RechargeMethodTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of activity that is represented by the recharge event (for instance: increase adjustment, RC to be reduced from balance, RC to be reduced from credit card) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeChannel" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The source application that initiated the recharge event</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ApplicationIdentifierType">
+						
+<xs:maxLength value="40"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="allowanceIndicator" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator whether the event consumed an allowance or not.
+Valid values are: true/false  if there is no value, the tag will not be sent
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="url" type="tns:UniformResourceLocatorType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The website address associated with the content provider.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tollFreeNumber" type="tns:PhoneNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The contact information associated with the content provider.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shortContentType" type="tns:SettlementTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Defines categories of on-line purchases and whether or not they are Sprint charges, third 3rd party tax inclusive charges, or third3rd party tax exclusive charges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shortCode" type="tns:PremiumShortMessageServiceProductIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>a five to nine digital numerical string for a premium SMS charge that identifies a premium SMS product. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceId" type="tns:SettlementTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Attribute that defines a content purchase as Sprint, Third3rd Party Tax Exclusive, or Third3rd Party Tax Inclusive in AmdocsAMDOCs. PSI and AMS calls this the feature code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidUsageDetailsHistoryListType">
+		
+<xs:sequence>
+			
+<xs:element name="prepaidUsageDetailsHistoryInfo" type="tns:PrepaidUsageDetailsHistoryInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction history of the sub, including usage and financial info for a prepaid subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidUsageDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="usageInfo" type="tns:UsageInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Usage information
+For VMU, will contain data and text overage charges</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactionChargeInfo" type="tns:TransactionChargeInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Charge information 
+For VMU, has only voice-related fields. For data/text charges, the eventProcessTime, feeType (where applicable), and airTimeChargeAmount are applicable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reboostInfo" type="tns:ReboostInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Re-boost Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mediaInfo" type="tns:MediaInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Media Information
+For VMU will not be populated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidUsageDetailsRequestInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="fromDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The time range for retrieving the account transactions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paginationInfo" type="tns:PaginationInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested pagination information </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ReboostInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="rechargeStatus" type="tns:RechargeStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Status
+Will return only if cancelled</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentMethodId" type="tns:PaymentCardLast4DigitsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Related to Recharge events. Displays the last four digits of the credit card number.
+For CC, displays the last four digits of the credit card used in the transaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentMethodType" type="tns:PaymentCardTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Card type
+AM - American Express
+DC - Diners Club
+DI - Discover Network
+MC - MasterCard 
+VS - Visa
+WP - Write-off Payment
+PL - PayPal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>'Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="equipmentId" type="tns:EquipmentSerialNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+Network Device Identifier will contain one of the following:
+Electronic Serial Number (ESN);
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfier (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. 
+
+The standard syntax is"user@realm". </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional IMSI of the subscriber to be updated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber's HPPTT ID. The ID will be constructed from username@domain, where the username will be a PTN or UFMI-based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionChargeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="eventProcessTime" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The event's GMT time
+In format : yyyyymmddhhmmss</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="chargedDuration" type="tns:CallDurationSecondsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The duration portion of the event that was charged (was not covered by free allowances). Measured in seconds.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="freeAllowedDuration" type="tns:CallDurationSecondsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The event's duration that is being allocated an allowance and, therefore, is not charged. Measured in seconds.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="feeType" type="tns:ChargeTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of daily fee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dailyFeeCharge" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Charge for events triggering a daily fee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="airTimeChargeAmount" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Charge for the air time of the call. 
+This field is applicable for VMU.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="internationalSurcharge" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional charge for international calls that contributes to the total charge of the event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalCharge" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total of additional charges that contributed to the total charge of the event (for example, charge for usage is greater than that defined in the offer)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="longDistanceSurcharge" type="tns:ChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Surcharge for Long Distance calls</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UsageInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="serviceType" type="tns:EventServiceTypeNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies the type of service that the event represents (such as Voice or Text messaging).
+For VMU, can be used to differentiate data or voice or SMS overage.
+See appendix for valid values.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceFilter" type="tns:EventServiceFilterStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A string that holds information about the type of rated event (for instance, if it is national/international, mobile to other/mobile, mobile originated/terminated call).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socDescription" type="tns:ServiceOrderDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="calledCountryCode" type="tns:CalledCountryNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Country code of the country dialed by the subscriber. For example:UK,USA,UY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ratedPeriod" type="tns:UsagePeriodTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The name of the period on which the event was rated in a period sensitive rate scheme.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="timeZone" type="tns:TimeZoneCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The time zone of the switch in which the call was captured </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="roundedDuration" type="tns:CallDurationSecondsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The rounded duration of the call according to the rounding factor and rounding method (up/down/math), which were defined as the PIT (pricing Item Type) parameters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="companyName" type="tns:CompanyNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Displays the name of the company associated with the transaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productId" type="tns:ProductIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Product ID of a Content event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productName" type="tns:ProductNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Product name of a Content event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productDescription" type="tns:ProductDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Product description of a Content event.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceDescription" type="tns:AllowanceTypeDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of the allowance the event consumed.
+Will be populated only for allowance based events</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="comment" type="tns:NoteTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A descriptive comment of a non-monetary adjustment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="uom" type="tns:UnitOfMeasureNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unit Of Measure - describes the type of event. A duration event will usually have 'seconds', a text messaging event will have 'occurrence'. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="unitsDeducted" type="tns:UnitOfMeasureValueType" minOccurs="0"/>
+			
+<xs:element name="originCountryCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The country code for the country from which the call was made.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:Iso3CharCountryCodeType">
+						
+<xs:maxLength value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="activityType" type="tns:ActivityCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of activity that was done by the customer in a Content event</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="homeLca" type="tns:LocalCallingAreaType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Registered local calling area of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callingLca" type="tns:LocalCallingAreaType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Local Calling Area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="destinationLca" type="tns:LocalCallingAreaType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>destination LCA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ActivityCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activity Code uniquely identifies a specific deed, action or function.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AllowanceTypeDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Allowance Type Description describes a type of allowance of units that would be set up for a user, espically in the case of a hybrid sharing group.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BalanceAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Balance Amount is a the dollar value associated to an account at a point in time.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallDirectionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Direction Identifier designates the direction of the call - incoming or outgoing. The value is passed from the event directly to the extract (1 or 2)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallDurationSecondsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Duration Seconds is how many seconds the call lasted</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CalledCountryNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Called Country Name shows to which country the call was placed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CalledNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Called Number is the destination number called (PTN, UFMI, etc). For outgoing calls, this field contains the number of the call recepient. For incoming cellular calls, this field contains the subsciriber's own PTN. For incoming dispatch calls, this field will not be populated.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge Type Code identifies a specific type of charge.(example RC OC USG etc.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CompanyNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Company Name is the common name for a company.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContentMediaTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Content Media Type Code designates a specific type of media content.
+Values:
+ALL - Default
+TRACK
+ALBUM
+RT
+RBT
+BUNDLE
+VOD
+WP
+GAMES
+APPLICATION
+AUDIOBOOK</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date holds the first calendar month, day, year, hour, minute, second and fraction of a second a Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier will contain one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfie (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date Time is the calendar date and time on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date is the calendar date on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventServiceFilterStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Service Filter String is a string that holds information about the type of rated event (for instance, if it is national/international, mobile to other/mobile, mobile originated/terminated call).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventServiceTypeNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Service Type Name is the name of the service associated to an event.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Code uniquely identifies the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="5"/>
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Iso3CharCountryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LocalCallingAreaType">
+		
+<xs:annotation>
+			
+<xs:documentation>Local Calling Area is the Geographic area in a service provider's market in which the service provider can charge local call rates or provide the service for free.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MediaUnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Media Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NoteTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Note Text is the body of the text in the NOTE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PageBufferRowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Page Buffer Row Count Number is the number of rows that will be buffered for a requested set of rows.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PageNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Page Number of the records being displayed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:short"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardLast4DigitsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Last 4 Digits is the last four digits of the payment card number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="21"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Type Code identifies the Credit/Debit Card provider.
+Examples:
+Visa
+MasterCard
+American Express </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PremiumShortMessageServiceProductIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Premium Short Message Service (SMS) Product Identifier uniquley identifies premium SMS product.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Description contains a brief textual description of the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Identifier is a code that uniquely idenfies and instance or group of items offered for sale to the Customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Name contains a common name for the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeMethodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Method Type Code designates the type of activity that is represented by the recharge event (for instance: increase adjustment, RC to be reduced from balance, RC to be reduced from credit card)
+Example Values:
+RT - Returning credit card recharge
+VC - Voucher recharge
+AV - Activation Voucher
+RD - Reduce adjustment
+CRC - Credit Card RC
+BRC - Prepaid balance RC
+LBC - Low Balance Recharge
+CA - Cash recharge
+ZB - Zero balance
+IN - Increase adjustment
+CB - Cancel Balance
+AN - Left Balance Amount Negative
+AP - Left Balance Amount Positive
+BN - Bank recharge that can be cancelled
+CC - Credit card recharge that can be cancelled
+CE - Change cycle adjust negative recharge
+CN - Cancel recharge
+CP - Change cycle adjust positive recharge
+CQ - Cheque recharge that can be cancelled
+CS - Cancel Split recharge
+ED - Set Expiration Date by a specific date
+EN - Set exp date by num of days
+IB - Initial balance (Activation)
+IE - Internal Set Balance Expiration Date
+IP - Initial Balance recharge method (Preactivation)
+IR - Increase RC balance
+RP - Returning recharge (by pin) that can be cancelled
+SV - Split voucher recharge that can be cancelled
+US - Recharge according the usage
+  - Space
+IBA - Increase batch adjustment Method
+RBA - Reduce batch adjustment Method
+LN - Loan Recharge Method
+TB - Trigger Bank recharge from AR
+TC - Trigger Credit Card recharge from AR
+TP - Trigger Recharge by PIN
+VRW - VIP Reward
+Default migrated event - Default migrated event
+PRW - Adjustment for promotion award
+RCS - RC Success
+RCF - RC Failure
+DMRW - Daily/Monthly Reward
+RRW - Replenishment Reward</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Status Code identifies the current state of the recharge. Valid values are:
+
+'V' - Valid
+'C' - Cancelled
+'S' - Suspend
+'R' - Restored
+'I' - Internal
+'P' - Pending</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceCategoryNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Cateogory Name is the common name corresponding to the Usage Category Code.
+C - Cellular Voice
+S - SMS
+D - Dispatch
+V - Vision Data
+P - 2G Data</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SettlementTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Settlement Type Code categorizes on-line purchases by whether or not they are Sprint charges, third 3rd party tax inclusive charges, or third3rd party tax exclusive charges.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Amount is the monetary amount charged and collected on behalf of a government entity for taxes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="6"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TimeZoneCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>A Time Zone Code is a 3 character string that represents a time zone.  Time zone provided by the external system. Example Values: ATL, EST, CST, MST, PST, ALA, HAW, EDT, CDT, MDT, PDT</xs:documentation>
+			
+<xs:documentation>see: http://www.nws.noaa.gov/mdl/forecast/graphics/common/time.html</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Description holds the textual description of the code value in Transaction Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="150"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniformResourceLocatorType">
+		
+<xs:annotation>
+			
+<xs:documentation>Uniform Resource Locator (URL, previously Universal Resource Locator) - usually pronounced by sounding out each letter but, in some quarters, pronounced"Earl"- is the unique address for a file that is accessible on the Internet. A common way to get to a Web site is to enter the URL of its home page file in your Web browser's address line. However, any file within that Web site can also be specified with a URL. Such a file might be any Web (HTML) page other than the home page, an image file, or a program such as a common gateway interface application or Java applet. The URL contains the name of the protocol to be used to access the file resource, a domain name that identifies a specific computer on the Internet, and a pathname, a hierarchical description that specifies the location of a file in that computer.On the Web (which uses the Hypertext Transfer Protocol, or HTTP), an example of a URL is:http://www.ietf.org/rfc/rfc2396.txtwhich specifies the use of a HTTP (Web browser) application, a unique computer named www.ietf.org, and the location of a text file or page to be accessed on that computer whose pathname is /rfc/rfc2396.txt.A URL for a particular image on a Web site might look like this:http://searchnetworking.techtarget.com/WhatIs/images/coaxla.gifA URL for a file meant to be downloaded using the File Transfer Protocol (FTP) would require that the"ftp"protocol be specified like this hypothetical URL:ftp://www.somecompany.com/whitepapers/widgets.psA URL is a type of URI (Uniform Resource Identifier, formerly called Universal Resource Identifier.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit of Measure Name is the word or words by which a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), is used as a standard of comparison for others of the same kind.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsagePeriodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Period Type Code identifes whether the usage occurred during Peak or Off Peak times. Valid values are: 'PP' - Peak 'OP' - Off Peak </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

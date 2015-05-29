@@ -1,0 +1,262 @@
+{
+	"responses": {
+		"response": [{
+			"@uuid": "07229ad1-0008-4a8e-9672-8c4c4472a135",
+			"@class": "",
+			"@name": "Section 19029",
+			"@code": "0",
+			"comparePhoneResponse": {
+				"comparePhoneList": {
+					"comparePhone": {
+						"id": {
+							"$": "samsung-galaxy-core-prime"
+						},
+						"generalFeatures": [{
+							"title": {
+								"$": "Android™ 4.4 (KitKat)"
+							},
+							"description": {
+								"$": "Android 4.4 improves on the simplicity and beauty of Android 4.0, with unparalled responsiveness, buttery graphics and silky transitions. "
+							},
+							"type": {
+								"$": "android"
+							}
+						},
+						{
+							"title": {
+								"$": "4.5\" Touchscreen Display"
+							},
+							"description": {
+								"$": "Experience photos, apps, web like never before on this large screen."
+							},
+							"type": {
+								"$": "touchscreen"
+							}
+						},
+						{
+							"title": {
+								"$": "5MP Rear-facing camera with zoom and video; 2MP front-facing camera"
+							},
+							"description": {
+								"$": "Your life, captured in pictures and video. Now share it."
+							},
+							"type": {
+								"$": "camera"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"type": {
+								"$": "wifi"
+							}
+						},
+						{
+							"title": {
+								"$": "Tri Mode 3G\/4G LTE\/Enhanced LTE"
+							},
+							"type": {
+								"$": "4g"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"description": {
+								"$": "This is hot! Your phone doubles as a personal portable hotspot and lets you connect to any Wi-Fi device. Additional fee required for hotspot functionality."
+							},
+							"type": {
+								"$": "mobilehotspot"
+							}
+						},
+						{
+							"title": {
+								"$": "Virtual"
+							},
+							"type": {
+								"$": "qwerty-keyboard"
+							}
+						},
+						{
+							"title": {
+								"$": "HTML"
+							},
+							"type": {
+								"$": "web-browser"
+							}
+						},
+						{
+							"title": {
+								"$": "Gmail®, MSN&®, Yahoo!®, Microsoft® Exchange Active Sync®"
+							},
+							"type": {
+								"$": "email"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"description": {
+								"$": "Interesting things happen when you least expect them. You can capture these unexpected moments with short video clips that you can view, store and send to friends and family.  "
+							},
+							"type": {
+								"$": "video"
+							}
+						},
+						{
+							"title": {
+								"$": "Android™ Music Player"
+							},
+							"type": {
+								"$": "music-player"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"type": {
+								"$": "gps"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"type": {
+								"$": "speakerphone"
+							}
+						},
+						{
+							"title": {
+								"$": "1GB RAM\/8GB ROM"
+							},
+							"type": {
+								"$": "memory"
+							}
+						},
+						{
+							"title": {
+								"$": "1.2 GHz Quad Core Processor"
+							},
+							"description": {
+								"$": "Do more of the things you love. The Qualcomm Snapdragon™ 400 processor gives you breathtaking speed, jaw-dropping graphics and long battery life."
+							},
+							"type": {
+								"$": "processor"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"type": {
+								"$": "calendar"
+							}
+						},
+						{
+							"title": {
+								"$": "true"
+							},
+							"description": {
+								"$": "Fast surfing, messaging, downloading—that's the power of 3G."
+							},
+							"type": {
+								"$": "3g"
+							}
+						}],
+						"technicalFeatures": {
+							"os": {
+								"$": "Android™ 4.4 Kit Kat"
+							},
+							"processor": {
+								"$": "1.2 GHz Quad-Core Qualcomm® Snapdragon™ Processor"
+							},
+							"memory": {
+								"$": "8GB ROM \/ 1GB RAM *MicroSD card slot supports up to 128GB (not included)"
+							},
+							"group": [{
+								"@id": "dimensions",
+								"order": {
+									"$": "1"
+								},
+								"specs": {
+									"spec": [{
+										"@order": "1",
+										"@type": "height",
+										"$": "5.15\""},{"@order":"2","@type":"depth","$":"0.35\""
+									},
+									{
+										"@order": "3",
+										"@type": "width",
+										"$": "2.67\""},{"@order":"4","@type":"weight","$":"4.58oz."},{"@order":"5","@type":"screen_size","$":"4.5\" Touchscreen Display"
+									}]
+								}
+							},
+							{
+								"@id": "battery",
+								"order": {
+									"$": "2"
+								},
+								"specs": {
+									"spec": [{
+										"@order": "2",
+										"@type": "talking_time",
+										"$": "Up to 19.5 hours"
+									},
+									{
+										"@order": "1",
+										"@type": "battery_type",
+										"$": "2100 mAH Lithium Ion Battery"
+									},
+									{
+										"@order": "3",
+										"@type": "removable",
+										"$": "Yes"
+									}]
+								}
+							},
+							{
+								"@id": "whats_included",
+								"order": {
+									"$": "3"
+								},
+								"specs": {
+									"spec": [{
+										"@order": "1",
+										"@type": "regular",
+										"$": "Galaxy Core Prime™ Handset"
+									},
+									{
+										"@order": "2",
+										"@type": "regular",
+										"$": "2100 mAH Lithium Ion Battery"
+									},
+									{
+										"@order": "3",
+										"@type": "regular",
+										"$": "USB Cable & Charger"
+									},
+									{
+										"@order": "4",
+										"@type": "regular",
+										"$": "Printed Materials"
+									}]
+								}
+							}]
+						}
+					}
+				},
+				"status": {
+					"$": "0"
+				},
+				"description": {
+					"$": "SUCCESS"
+				}
+			}
+		}]
+	}
+}

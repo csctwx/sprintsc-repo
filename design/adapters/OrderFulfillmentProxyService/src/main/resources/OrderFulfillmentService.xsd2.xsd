@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryEquipmentAvailability/v1/queryEquipmentAvailability.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryEquipmentAvailability/v1/queryEquipmentAvailability.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--sou-->
+	
+<!--8/2/2012   Ace Cineus                1.0           Initial Draft                                                                                             GBL 12.3           PJ0007448-->
+	
+<!--8/13/2012  Steve Heichelheim   1.0     Added MVM standards and simple types                                                    GBL 12.3           PJ0007448-->
+	
+<xs:element name="queryEquipmentAvailability" type="tns:QueryEquipmentAvailabilityRequestType"/>
+	
+<xs:element name="queryEquipmentAvailabilityResponse" type="tns:QueryEquipmentAvailabilityResponseType"/>
+	
+<xs:complexType name="QueryEquipmentAvailabilityRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="callingApplicationInfo" type="tns:CallingApplicationInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure provide calling application informatiom</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="equipmentAvailabilityList" type="tns:EquipmentListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing inventoryAvailabilityInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryEquipmentAvailabilityResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="equipmentAvailabilityList" type="tns:EquipmentAvailablilityListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the inventoryAvailabilityInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CallingApplicationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="vendorCode" type="tns:VendorCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Combination of vendorCode and pin is used to differentiate the calling system (channel). 
+
+Valid Values:
+‘VU’ = Virgin Mobile </xs:documentation>
+				</xs:annotation>
+				
+<!--Vendor code is a 2 letter code.-->
+			</xs:element>
+			
+<xs:element name="salesChannel" type="tns:SalesChannelIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Channel identifier. Indicates which sales channel the order originated from </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EquipmentAvailablilityIntoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderSubTypeCode" type="tns:OrderSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>A three digit code that identifies the order Sub type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="modelId" type="tns:ModelNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique value to identify the type of equipment being shipped by the manufacturer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="availableForSaleInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether the item is still available for sale.
+Will be "true" if it is available for sale. Will be "false" if it is NOT available for sale.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="brandCode" type="tns:BrandCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The brand code associated with the device 
+
+Valid Values:
+VMU= Virgin Mobile
+ASW= Assurance Wireless </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="preOrderInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that determines if the device is available for pre order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EquipmentAvailablilityListType">
+		
+<xs:sequence>
+			
+<xs:element name="equipmentAvailabilityInfo" type="tns:EquipmentAvailablilityIntoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing information about the availability of the device. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EquipmentIntoType">
+		
+<xs:sequence>
+			
+<xs:element name="brandCode" type="tns:BrandCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The brand code associated with the device 
+
+Valid Values:
+VMU= Virgin Mobile
+ASW= Assurance Wireless </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="modelId" type="tns:ModelNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique value to identify the type of equipment being shipped by the manufacturer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EquipmentListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderSubTypeCode" type="tns:OrderSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>A three digit code that identifies the order Sub type.
+Valid values:
+EQP: Sales Order - New equipment order
+PRE: Pre-Sale; PreOrder</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="equipmentAvailablilityInfo" type="tns:EquipmentIntoType" minOccurs="0" maxOccurs="25">
+				
+<xs:annotation>
+					
+<xs:documentation>structure containing information about device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BrandCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Brand Code indicates which brand the subscriber belongs to. Possible brands represented include;  Sprint, Nextel, Boost, Virgin Mobile, and Clearwire</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Sub Type Code further categorized the type of Order.
+Valid Values:
+PRE,
+LSR,
+SON,
+PRX,
+PRK,
+EXR,
+PER,
+WSO</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VendorCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Vendor Code in combination with the PIN uniquely differentiates the system
+(channel) calling Order Verification Management (Best Buy, Walmart, RMS, 
+boostmobile, SOTS, OAR’s, BSPs, Telespree, etc). Each partner has its own 
+unique vendor code and pin combination.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

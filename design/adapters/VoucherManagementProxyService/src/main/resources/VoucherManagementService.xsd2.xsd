@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/manageVoucher/v1/manageVoucher.xsd" targetNamespace="http://integration.sprint.com/interfaces/manageVoucher/v1/manageVoucher.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	
+<!-- Date              Author                      Version    Change                                                                                                                                       Rel                   SR# -->
+	
+<!--06/12/2012   Tracy Turner                 1.0         Initial Draft                                                                                                                                 GBL12.3          PJ007445-->
+	
+<!--06/12/2012   Steve Heichelheim         1.0        Added MVM standards and simple types                                                                                 GBL12.3          PJ007445-->
+	
+<!--07/24/2012   Tracy Turner                 1.1         Added optional retailerCredentialInfo structure to request                                                       GBL12.3          PJ007445-->
+	
+<!--10/6/2012     Tracy Turner                 1.2        Updated lengths for manufacturerCode to 20 and voucherType to 12                                     GBL12.3          PJ007445-->
+	
+<!--10/9/2012     LaRonna Tisdale           1.3         Updated lengths for manufactureCode back to 4 and voucherType back to 6 and changed voucherExpirationDate to Optional     GBL12.3          PJ007445-->
+	
+<!--10/11/2012     Tracy Turner        1.4         CS#XX Temporary workaround: Changed simple datatype for the date fields in the response to string.    PJ007445-->
+	
+<!--10/16/2012     Ranganayaki Rajagopal        1.5         Changed the annotation for VoucherStatusCodeType-->
+	
+<!--12/17/2013     Ted Burbidge                         1.6        Added optional field brandCode to request                                                            GBL14.1          PJ009308  CR002A-->
+	
+<xs:element name="manageVoucher" type="tns:ManageVoucherRequestType"/>
+	
+<xs:element name="manageVoucherResponse" type="tns:ManageVoucherResponseType"/>
+	
+<xs:complexType name="ManageVoucherRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="retailerCredentialInfo" type="tns:RetailerCredentialInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Retailer Credential Information (not applicable to non-retail channels)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherIdentifierInfo" type="tns:VoucherIdentifierInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Identifier Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="actionType" type="tns:TransactionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The action that the front-end wants to perform on the voucher.  Current valid values include: Search,Cancel,Redeem,Update</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherStatus" type="tns:VoucherStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Status Code holds the current state of the Voucher.
+hot (H)
+cold (C)
+associated (A) 
+void (V)
+non-existent. (N) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherExpirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration Date holds the last calendar date an object, relationship, privilege, etc. is valid or in force.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="brandCode" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="3"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ManageVoucherResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="voucherInfo" type="tns:VoucherInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RetailerCredentialInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="storeNumber" type="tns:StoreIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Store Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="retailerId" type="tns:MerchantIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Retailer Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="digest" type="tns:AuthenticationKeyType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>An authentication key, called a "digest", is assigned as a password for each retailer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="VoucherInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="voucherType" type="tns:VoucherTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Type differentiates the various  subtypes of a Voucher.Following are valid values
+					RECH
+					UNIV
+					VMU
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Status Date holds the calendar day that the Status became effective.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialNumber" type="tns:VoucherIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Serial Number is a unique number that identifies a particular instance of a Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pinNumber" type="tns:PersonalIdentificationNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher personal identification number (PIN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherStatus" type="tns:VoucherStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Status Code holds the current state of the Voucher.
+- hot (H)
+- cold (C)
+- associated (A) 
+- void (V)
+- non-existent. (N) 
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherValue" type="tns:VoucherAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Status Code holds the current value of the Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manufacturerCode" type="tns:ManufacturerPartyIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Manufacturer Party Identifier colds a value that uniquely identifies the Manufacturer of the specified PRODUCT. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="loadDate" type="tns:SystemEntryDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Load Date holds the calendar date the Voucher was entered into a system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherExpirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force. VMU voucher doesn't have expiration date until it has been activated (turned HOT) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> Dealer Identitifer holds a value that uniquely identifies an instance of Dealer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="retailerId" type="tns:RetailStoreIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>ID of the retailer for which the voucher has been created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="VoucherIdentifierInfoType">
+		
+<xs:choice>
+			
+<xs:element name="pinNumber" type="tns:PersonalIdentificationNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher personal identification number (PIN) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialNumber" type="tns:VoucherIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Serial Number is a unique number that identifies a particular instance of a Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="VoucherSelectCriteriaInfo">
+		
+<xs:sequence>
+			
+<xs:element name="uniqueVoucherId" type="tns:DocumentIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique Voucher ID holds a value that uniquely identifies an instance of a Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manufacturerCode" type="tns:ManufacturerPartyIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Manufacturer Party Identifier colds a value that uniquely identifies the Manufacturer of the specified PRODUCT.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation> Dealer Identitifer holds a value that uniquely identifies an instance of Dealer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="loadFileName" type="tns:FileNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher load file name .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="loadDate" type="tns:SystemEntryDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Load Date holds the calendar date the Voucher was entered into a system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherExpirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voucherStatus" type="tns:VoucherStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Voucher Status Code holds the current state of the Voucher.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Standard Simple Types-->
+	
+<xs:simpleType name="AuthenticationKeyType">
+		
+<xs:annotation>
+			
+<xs:documentation>Authentication Key (A-Key) for over the air activation. A 26 character key used to authenticate a handset.                              
+The first twenty decimal digits are used for the A-key as converted from the 64 bit A-key.  If the A-key is less than 20 decimal digits, it shall be padded with zero's.  The A-key checksum shall be 6 decimal digits as converted from the 18 bit checksum.  If the checksum is less than 6 decimal digits it shall be padded with zeros.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DealerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Dealer Identifier uniquely identifies the dealer who interacted with the customer on behalf of the enterprise.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DocumentIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Document Identifier is a unique number used to differentiate types of documents used in a business.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FileNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>File Name is a unique name that is assigned to a specific instance of a File.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ManufacturerPartyIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Manufacturer Party Identifier holds a value that uniquely identifies the Manufacturer of the specified PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MerchantIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RemarkTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Remark Text is a NOTE containing textual comment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RetailStoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer  These can be 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Store Identifier identifies the store where the order was placed. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SystemEntryDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>System Entry Date is the date on which the associated object is entered into the system. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Amount is the monetary value of a voucher.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:fractionDigits value="2"/>
+			
+<xs:minInclusive value="0"/>
+			
+<xs:maxInclusive value="10000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Identifier is a unique number that identifies a particular instance of a Voucher.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Status Code holds the current state of the Voucher.
+Valid Values Include:
+hot (H)
+cold (C)
+associated (A) 
+void (V)
+non-existent. (N) </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Type Code designates the type of the voucher being issued.
+Valid Values Include:
+Universal, Rechargeable , VMU </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="VoucherUpdateReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Voucher Update Reason Code designates a reason for the voucher state change.
+Valid Values:
+SY - System Change,
+LO - Voucher Locker,
+ST - Voucher Stolen,
+CA - Voucher Cancelled,
+SA - Voucher Sold,
+UN - Voucher Unlocked,
+RE - Voucher Redeemed...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

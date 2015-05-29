@@ -1,0 +1,30 @@
+sourceSets.main.java.srcDirs = ["src/main/java", "${buildDir}/generated-sources/main"]
+configurations {
+	jaxws
+}
+task wsimport  {
+	ext.sourcesDir = file("${buildDir}/generated-sources/main")
+	ext.classesDir = file("${buildDir}/classes/main")
+	ext.wsdlSrc = file(wsdlfilename)
+	inputs.file wsdlSrc
+	outputs.dir classesDir
+	doLast{
+		ant {
+			sourcesDir.mkdirs()
+			classesDir.mkdirs()
+			taskdef(name:'wsimport',
+				classname:'com.sun.tools.ws.ant.WsImport',
+				classpath:configurations.jaxws.asPath)
+			wsimport(keep:true,
+				destdir: classesDir,
+				sourcedestdir: sourcesDir,
+				wsdl: wsdlSrc)
+		}
+	}
+}
+dependencies {
+	jaxws( group: "com.sun.xml.ws", name: "jaxws-tools", version: "2.2.7" ){
+		exclude group: "org.glassfish.ha"
+	}
+}
+compileJava.dependsOn wsimport

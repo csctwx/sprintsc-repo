@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap 101 Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="css/sprintprepaid-bootstrap.min.css" rel="stylesheet">
+<style>
+.circle {
+	margin: auto;
+	width: 90px;
+	height: 90px;
+	border: 2px solid #A7D603;
+	border-radius: 50px;
+	clip: rect(0px, 50px, 100px, 0px);
+}
+.circle.red {
+	border-color: #F75822;
+}
+.gauge-text {
+	vertical-align: middle;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="panel-body">
+    <div class="row">
+      <div class="navbar pull-right">
+        <div class="navbar-wrapper">
+          <div class="navbar-item "><a href="#">Activate</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Refill</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Coverage Maps</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Find a store</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-xs-12">
+      <div class="col-xs-2"><img src="http://placehold.it/100x60" /></div>
+      <div class="col-xs-10">
+        <div class="navbar navbar-default ">
+          <div class="navbar-btn"> <span class="input-lg"></span>
+            <div class="navbar-item"> <a href="#">
+              <h4>My Sprint</h4>
+              </a> </div>
+            <span class="input-lg">|</span>
+            <div class="navbar-item"> <a href="#">
+              <h4>Shop</h4>
+              </a> </div>
+            <span class="input-lg" >|</span>
+            <div class="navbar-item"> <a href="#">
+              <h4>Plans</h4>
+              </a> </div>
+            <span class="input-lg" >|</span>
+            <div class="navbar-item "> <a href="#">
+              <h4>Support</h4>
+              </a> </div>
+            <div class="pull-right">
+              <button type="button" class="btn btn-primary">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row bottom10">
+      <div class="col-xs-12">
+        <div class="col-xs-6"><strong>
+          <p>
+          <h3>Good Morning Steve</h3>
+          </p>
+          <a href="#">(123) 456-7890</a>
+          <p>Base Plan: &lt;Base Plan Name&gt;</p>
+          </strong> </div>
+        <div class="col-xs-6">
+          <div class="col-xs-3">
+            <div class="circle"  data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"><strong>Talk</strong></div>
+                <div class="col-xs-12">100/300</div>
+                <div class="col-xs-12">mins </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Text</strong></div>
+                <div class="col-xs-12"> Unlimited</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle red" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Data</strong></div>
+                <div class="col-xs-12"> 0.75/1.0 GB</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle red" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Hot Spot</strong></div>
+                <div class="col-xs-12"> 1.25/2.5 GB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row btn-group col-xs-12 bottom10">
+      <button type="button" class="btn btn-default col-xs-2">Home</button>
+      <button type="button" class="btn btn-default col-xs-2">Payments</button>
+      <button type="button" class="btn btn-default col-xs-3">Service & Usage</button>
+      <button type="button" class="btn btn-default col-xs-2">Settings</button>
+      <button type="button" class="btn btn-default col-xs-3">My Device</button>
+    </div>
+    <div class="row col-xs-12">
+      <div class="col-xs-8">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-10 input-lg"><strong>Balance Info</strong></div>
+              <div class="col-xs-2 btn-link">Details</div>
+            </div>
+            <div class="vertical-separator panel"></div>
+            <div class="alert alert-success col-xs-12"> <i class="glyphicon glyphicon-comment col-xs-1"></i>
+              <p class="col-xs-11"><strong>&lt;Attention Message&gt;</strong></p>
+            </div>
+            <div class="row">
+              <div class="col-xs-12"><strong>
+                <div class="col-xs-4">Next month's charge</div>
+                <div class="col-xs-4">Cash balance</div>
+                <div class="col-xs-4">Due by 12/25/14</div>
+                </strong> </div>
+            </div>
+            <div class="vertical-separator panel"></div>
+            <div class="row  input-lg">
+              <div class="col-xs-12"><strong>
+                <div class="col-xs-4">$50.00</div>
+                <div class="col-xs-4">- $17.00</div>
+                <div class="col-xs-4 text-danger">$50.00</div>
+                </strong> </div>
+            </div>
+            <div class="input-sm">
+              <p>If you make payment by the due date, your services will be refreshed on &lt;MRC+1&gt;</p>
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="col-xs-6"></div>
+                <div class="col-xs-3">
+                  <button class="btn btn-default">Change Plan or Add-ons</button>
+                </div>
+                <div class="col-xs-1"></div>
+                <div class="col-xs-2">
+                  <button class="btn btn-default">Refill Now</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-10 input-lg"><strong>Current Plan</strong></div>
+              <div class="col-xs-2 btn-link">Change Plan</div>
+            </div>
+            <div class="vertical-separator panel"></div>
+            <div class="row col-xs-12">
+              <div class="row col-xs-9"><strong>Base Plan:</strong> </div>
+              <div class="col-xs-3 pull-right">
+                <div class="panel panel-success">
+                  <div class="panel-body">
+                    <div class="input-lg text-center"><i class="glyphicon glyphicon-refresh"></i></div>
+                    <div class="text-center">
+                      <p><strong>Your monthly cycle starts on the 25th of every month.</strong></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row col-xs-9">
+                <div class="col-xs-12"> $35 / 300 Minutes / Unlimited Text / 3.5GB Data </div>
+              </div>
+              <div class="row col-xs-9"><strong>Monthly Recurring Add-ons:</strong></div>
+              <div class="row col-xs-9">
+                <div class="col-xs-12"> $10 / 2.0GB Hotspot </div>
+              </div>
+              <div class="row  col-xs-9  bg-info">
+                <div class="col-xs-12"> $10 / Phone Insurance </div>
+              </div>
+              <div class="row col-xs-9"><strong>One-time Add-ons:</strong></div>
+              <div class="row col-xs-9">
+                <div class="col-xs-5"> $10/Intl Min Pack Canada </div>
+                <div class="col-xs-4 text-danger"> Exp 12/29/14 </div>
+              </div>
+              <div class="row  col-xs-9 bg-info">
+                <div class="col-xs-5"> $10/1GB Data Pack </div>
+                <div class="col-xs-4"> Exp 01/15/15 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row input-lg"><strong>My Device</strong></div>
+            <div class="vertical-separator panel"></div>
+            <div class="row col-xs-12">
+              <div class="col-xs-3"><img src="http://placehold.it/50x80" /></div>
+              <div class="col-xs-9">
+                <p>&lt;Device Name&gt;</p>
+                <a href="#">(123)-456-7890</a>
+                <p>&lt;Apple Insurance Message will be shown if applicable&gt;</p>
+                <p>Your phone is not insured</p>
+              </div>
+            </div>
+            <div class="row col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-body"><i class="glyphicon glyphicon-user col-xs-2"></i>
+                  <p class="col-xs-10"><strong>Get Insurance</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-primary">
+          <div class="panel-heading input-lg"><strong>I Want to...</strong></div>
+          <div class="panel-body">
+            <div class="row list list-group"> <a class="list-group-item" href="#">Manage my Plan and Add-ons </a> <a class="list-group-item" href="#">Redeem a Refill Card </a> <a class="list-group-item" href="#">View my Account History </a> <a class="list-group-item" href="#">Edit my Contact Info </a> <a class="list-group-item" href="#">Swap my Device </a> <a class="list-group-item" href="#">Get Device Support </a> </div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-xs-12 text-center"><img src="http://placehold.it/700x100" /></div>
+      <div class="row col-xs-12 text-center">
+        <div class="navbar">
+          <div class="navbar-wrapper">
+            <div class="navbar-item "><a href="#">About Us</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Legal</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Privacy</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Ad Choices</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-xs-12 text-center input-sm">
+        <div class="glyphicon glyphicon-registration-mark col-xs-5 text-right"></div>
+        <div class="col-xs-7 text-left">2014 Sprint prepaid. All rights reserved</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://code.jquery.com/jquery.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/sprintprepaid-bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryLteUsageInfo/v1/queryLteUsageInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryLteUsageInfo/v1/queryLteUsageInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	
+<!-- Date              Author                        Version     Change                                                                                                                                             Rel                      SR# -->
+	
+<!-- 09/18/12        LaRonna Tisdale        1.0            Initial Version                                                                                                                                    GBL13.1              PJ007559  -->
+	
+<!--09/27/2012     Steve Heichelheim     1.0            Added MVM standards and simple types                                                                                         GBL13.1              PJ007559  -->
+	
+<!--10/29/2012     LaRonna Tisdale        1.1            Changed ‘pdpAddress’ and ‘multiOpCoreNtwrkCarrier’from Required to Optional in Response      GBL13.1              PJ007559-->
+	
+<!--02/20/2014     Priscilla Carvalho       1.2            Added four new fields in Response                                                                                         GBL14.3               PJ009882-->
+	
+<!--04/25/2014     Priscilla Carvalho       1.3       Added pGatewayAddress, sGatewayAddress, outboundRoamingPartnerId, inboundRoamingPartnerId, carrierName to response.      GBL14.3         PJ009882-->
+	
+<xs:element name="queryLteUsageInfo" type="tns:QueryLteUsageInfoRequestType"/>
+	
+<xs:element name="queryLteUsageInfoResponse" type="tns:QueryLteUsageInfoResponseType"/>
+	
+<xs:complexType name="QueryLteUsageInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="lteImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>IMSI stands for International Mobile Subscriber Identity.  On the LTE network, it is the LTE IMSI that identifies a device to the network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dateTime" type="tns:EventDateTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The date and time around which BJN is to search for Clearwire LTE data usage records.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryLteUsageInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="lteImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>IMSI stands for International Mobile Subscriber Identity.  On the LTE network, it is the LTE IMSI that identifies a device to the network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pdpAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the IP-address associated with the IP CAN bearer session (public data network, PDN, connection). 
+This is the source IP address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dateTimeStamp" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the date and time at which the data usage was recorded.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userEquipmentType" type="tns:DeviceSerialNumberCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This field determines the type of the identifier of the device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userEquipmentInfoValue" type="tns:DeviceSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This field contains the value of the identifier of the device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trackingAreaIdentMcc" type="tns:MobileCountryCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MCC (Mobile Country Code) in the Tracking Area Identifier.  The Tracking Area Identifier is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trackingAreaIdentMnc" type="tns:MobileNetworkCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MNC (Mobile Network Code) in the Tracking Area Identifier.  The Tracking Area Identifier is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trackingAreaIdentTac" type="tns:TrackingAreaCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The TAC (Tracking Area Code) in the Tracking Area Identifier.  The Tracking Area Identifier is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eCellGlblIdentityMcc" type="tns:MobileCountryCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MCC (Mobile Country Code) in the E-UTRAN Cell Global Identity.  The E-UTRAN Cell Global Identity is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eCellGlblIdentityMnc" type="tns:MobileNetworkCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MNC (Mobile Network Code) in the E-UTRAN Cell Global Identity.  The E-UTRAN Cell Global Identity is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eCellIdentEnodebId" type="tns:EvolvedNodeBIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The eNodeB ID in the E-UTRAN Cell Identity.  The E-UTRAN Cell Identity is part of the ULI (User Location Information).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eCellIdentId" type="tns:EvolvedUtranCellIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Cell Identification in the E-UTRAN Cell Identity.  The E-UTRAN Cell Identity is part of the ULI (User Location Information).
+It is made up of 8 bits:  the first 5 represent a Carrier Index; the last 3, the Sector ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apn" type="tns:AccessPointNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The address to which the user (device) is connected.  It has 5 parts:  the Type, the Business Channel, the APN-NI and the APN-OI.  Type identifies Session-based data usage. APN-NI identifies PAM data usage.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="qosClassIdentifier" type="tns:QualityOfServiceClassIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The QoS Class ID (QCI) identifies a set of IP-CAN specific QoS (quality of service) parameters that define the authorized QoS, excluding the applicable bitrates and ARP (Allocation Retention Priority) for the IP-CAN bearer or service flow.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="multiOpCoreNtwrkCarrier" type="tns:MultiOperatorCoreNetworkCarrierCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MOCN Carrier Name Abbreviation is an alphabetic code representing a Multi-Operator Core Network (MOCN) carrier which Sprint uses for network access when Sprint’s Network elements determine offload to be necessary.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pGatewayAddress" type="tns:NetworkGatewayAddressType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Provisioning Gateway.  The Provisioning Gateway is an interface which provides a bridge between telecom data repository services and external applications to provision data. It handles non-roaming and outbound roaming traffic. (non-roaming and outbound roaming records come to us through these gateways) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sGatewayAddress" type="tns:NetworkGatewayAddressType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>For SGW RF, it is the MME IP Address in LTE. For PGW RF, it is the SGW IP address in LTE and HSGW address in eHRPD. The S-Gateways handles inbound roaming traffic.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="outboundRoamingPartnerId" type="tns:CarrierIdentificationCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Definition:  Carrier ID is typically a numeric code representing a mobile services carrier.  Outbound Roaming Partner Carrier ID represents a mobile services carrier with whom Sprint has entered into a roaming contract to allow Sprint Subscribers to use the carrier’s network when they leave Sprint’s coverage area. 
+Known Value Set:
+•	000 - 999
+•	NULL
+•	Assumption:  The value set for this new data element will be the same as the value set for the current carrier id used in the 3G Legacy world.
+Source:  the ROSE application
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inboundRoamingPartnerId" type="tns:CarrierIdentificationCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Definition:  Carrier ID is typically a numeric code representing a mobile services carrier.  Inbound Roaming Partner Carrier ID represents a mobile services carrier with whom Sprint has entered into a roaming contract to allow the carrier’s Subscribers to use Sprint’s network when they leave the carrier’s coverage area. 
+Known Value Set:
+•	000 - 999
+•	NULL
+•	Assumption:  The value set for this new data element will be the same as the value set for the current carrier id used in the 3G Legacy world.
+Source:  the ROSE application
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="carrierName" type="tns:CarrierNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Definition: Carrier Name is the English name for the Carrier. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AccessPointNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Access Point Name (APN) identifies the packet data network (PDN), that a mobile data user wants to communicate with.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="128"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CarrierIdentificationCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Carrier Identification Code identifies an Interexchange Carrier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CarrierNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Carrier Name designates the a carrier providing the interLATA facility.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number Code is a value that classifies a device serial number.
+
+Possible values for deviceSerialType are:
+E = CDMA Handset (ESN/MEID)
+D = Handset Kit for Dual Mode
+K = IDEN Handset Kit (model #)
+S = Stand-Alone SIM
+M = Stand-Alone Handset (only for handsets which need SIM but dont have as part of this SKU)
+I = IMEI Handset (no need for SIM)
+N = Serialized Accessory (other than SIMs)
+A = Airave MacId</xs:documentation>
+			
+<xs:documentation>Device Serial Number Code is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date Time is the calendar date and time on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EvolvedNodeBIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Evolved Node B (eNodeB) Identifier uniquely identifies an element in Evolved Universal Terrestrial Radio Access (E-UTRA) of Long Term Evolution (LTE) that is the evolution of the element Node B in  UMTS Terrestrial Radio Access (UTRA) of Universal Mobile Telecommunications System (UMTS).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EvolvedUtranCellIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Evolved Universal Mobile Telecommunications System (UMTS) Terrestrial Radio Access Network (E-UTRAN) Cell Identifier uniquely identifies a Cell within a Public Land Mobile Network(PLMN)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="39"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileCountryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Country Code (MCC) holds a three digit number (in the US)  uniquely identifying a given country. 
+
+MCCs are defined in ITU E.212 ("Land Mobile Numbering Plan") for use in identifying mobile stations in wireless telephone networks, particularly GSM and UMTS networks. A MCC is often used in combination with a Mobile Network Code (as a "MCC / MNC tuple") in order to uniquely identify a network operator.
+
+The MCC is part of the International Mobile Subscriber Identity (IMSI) number, which uniquely identifies a particular subscriber, and is stored on a (usually) removable SIM card. The current MCC (i.e. the country in which the modem is now) may also be obtained from a GSM/UMTS wireless modem using the AT command AT+COPS:</xs:documentation>
+			
+<xs:documentation>Mobile Country Code holds a three digit number uniquely identifying a given country. It is utilized within the IMSI (International Mobile Subscriber Identity) and LAI (Location Area Identity).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileNetworkCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Network Code holds a two or three digit number used to uniquely identify a given network from within a specified country (MCC (Mobile Country Code)). The MNC is used as part of the IMSI (International Mobile Subscriber Identity) and LAI (Location Area Identity) etc.</xs:documentation>
+			
+<xs:documentation>Mobile Network COde holds a two or three digit number used to uniquely identify a given network from within a specified country (MCC (Mobile Country Code)). The MNC is used as part of the IMSI (International Mobile Subscriber Identity) and LAI (Location Area Identity) etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MultiOperatorCoreNetworkCarrierCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Multi Operator Core Network (MOCN) Carrier Code designates a carrier used for network access when the Network elements determine offload to be necessary.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkGatewayAddressType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Gateway Address points to a network node equipped for interfacing with another network outside of the current network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="39"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="QualityOfServiceClassIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Quality Of Service Class Identifier (QCI) tells the kind of service that can be supported by the bearer and at implementation level.
+Valid Values:
+1 - Voice call (CBR),
+2 - Video call (CBR),
+3 - Real time Gaming,
+4 - Video on demand,
+5 - IMS Signaling,
+6, 7, 8, 9 - Voice/video over IP, Chat, DL Video streaming, Internet, E-mail etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TrackingAreaCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tracking Area Code a part Tracking Area Identifier and designates a cluster of radio base stations used in Long Term Evolution networks for incoming data connections.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

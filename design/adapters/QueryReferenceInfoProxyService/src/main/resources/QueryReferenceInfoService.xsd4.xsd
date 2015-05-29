@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceAffinityDetailInfo/v1/queryReferenceAffinityDetailInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceAffinityDetailInfo/v1/queryReferenceAffinityDetailInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2008    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceAffinityDetailInfo" type="tns:QueryReferenceAffinityDetailInfoRequest"/>
+	
+<xs:element name="queryReferenceAffinityDetailInfoResponse" type="tns:QueryReferenceAffinityDetailInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceAffinityDetailInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="affinityDetailInfo" type="tns:AffinityDetailInfoResponse" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceAffinityDetailInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="affinityDetailInfo" type="tns:AffinityDetailInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AffinityDetailInfo">
+		
+<xs:choice>
+			
+<xs:element name="affinitySocCode" type="tns:ServiceOrderCode"/>
+			
+<xs:element name="registrationSocCode" type="tns:ServiceOrderCode"/>
+			
+<xs:element name="affinityCode" type="tns:AffinityCode"/>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="AffinityDetailInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="affinityCode" type="tns:AffinityCode"/>
+			
+<xs:element name="affinityDesc" type="tns:AffinityDescription"/>
+			
+<xs:element name="attributeInfoList" type="tns:AttributeInfoList"/>
+			
+<xs:element name="affinitySocList" type="tns:AffinitySocList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AffinitySocInfo">
+		
+<xs:sequence>
+			
+<xs:element name="affinitySocType" type="tns:AffinityServiceOrderCodeTypeCode"/>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCode"/>
+			
+<xs:element name="socDes" type="tns:ServiceOrderDescription" minOccurs="0"/>
+			
+<xs:element name="socLevelCode" type="tns:ServiceOrderLevelCode" minOccurs="0"/>
+			
+<xs:element name="discountCode" type="tns:DiscountTypeCode" minOccurs="0"/>
+			
+<xs:element name="discountDesc" type="tns:DiscountDescription" minOccurs="0"/>
+			
+<xs:element name="effectiveDate" type="tns:DiscountEffectiveDate" minOccurs="0"/>
+			
+<xs:element name="expirationDate" type="tns:DiscountExpirationDate" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AffinitySocList">
+		
+<xs:sequence>
+			
+<xs:element name="affinitySocInfo" type="tns:AffinitySocInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AttributeInfoList">
+		
+<xs:sequence>
+			
+<xs:element name="attributeInfo" type="tns:AttributeInfoResponse" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation> </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AttributeInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="name" type="tns:AffinityAttributeName"/>
+			
+<xs:element name="value" type="tns:AffinityAttributeValueText"/>
+			
+<xs:element name="type" type="tns:AffinityAttributeTypeName"/>
+			
+<xs:element name="size" type="tns:AffinityAttributeSizeQuantity"/>
+			
+<xs:element name="notNullInd" type="tns:AffinityAttributeNotNullFlag"/>
+			
+<xs:element name="pattern" type="tns:AffinityAttributePatternText" minOccurs="0"/>
+			
+<xs:element name="mask" type="tns:AffinityAttributePatternText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="ServiceOrderCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="AffinityCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Code is a unique identifier associated with Affinity program.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Description is text describing an Affinity program.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributeName">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Name designates a specific attribute associated to an affinity program.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributeNotNullFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Not Null Flag indicates whether the attribute is required or optional.
+true - Attribute is required
+false - Attribute is optional</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributePatternText">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Pattern Text is a series of characters used to designate the a pattern of characters to match to the attribute value.  Ex:  XXX-XXXXXX</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributeSizeQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Size Quantity holds the size or length of the attribute value.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributeTypeName">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Type Name holds the type of data in the attribute value.  Ex: string</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityAttributeValueText">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Attribute Value Text is used to provide the ability to view/update the current affinity attribute values via all front ends (CSM, RMS+, FDT, TOES, sVIEW, EAI, WINS).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityServiceOrderCodeTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Service Order Code Type Code indicates whether the SOC is Affinity Registration SOC or Affinity SOC.
+Values:
+R – Registration SOC
+A – Affinity SOC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="R">
+				
+<xs:annotation>
+					
+<xs:documentation>Registration SOC</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="A">
+				
+<xs:annotation>
+					
+<xs:documentation>Affinity SOC</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Description is text describing a specific discount.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountEffectiveDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Effective Date is the first calendar date on which a specfic discount can be applied.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountExpirationDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Expiration Date is the last calendar date on which a specfic discount can be applied.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Type Code designates a specific discount associated with the SOC.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description is a description of the product defined by a service order code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderLevelCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Level Code indicates whether the Price Plan or the SOC is at a MDN level, at a BAN level or at a Product Level.
+Values:
+B - Ban Level
+C - MDN Level
+P - Product Level</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="B">
+				
+<xs:annotation>
+					
+<xs:documentation>Ban Level</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="C">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN Level</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="P">
+				
+<xs:annotation>
+					
+<xs:documentation>Product Level</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,862 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.6">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2008    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<!--05/12/2011  Steve Heichelheim    Added MVM standards and simple types        1.1               GBL11.3           PJ004791-->
+	
+<!--05/12/2011  Steve Heichelheim    Added defaultDeliveryMethod to the response 1.1               GBL11.3           PJ004791-->
+	
+<!--07/28/2011  Tracy Turner  	      Changed maxLength of maxEbillSubscriberCount from 4 to 9            GBL11.3    CS#483344, 483345 -->
+	
+<!--03/20/2014  Cindy Pummil                 Added maxOpenFdp in response     1.5                 GBL14.2    PJ009511-->
+	
+<!--04/14/2014  Adon Powell                 Standarize                                         1.5                 GBL14.2    PJ009511-->
+	
+<!--08/07/2014  Suresh Gundu	Added orderGracePeriod element in the response.	1.6	GBL 14.3	PJ012070.004-->
+	
+<!--08/08/2014  Adon Powell                 Standarize                                         1.6                 GBL 14.3	PJ012070.004-->
+	
+<!---->
+	
+<xs:element name="queryReferenceAccountTypeList" type="tns:QueryReferenceAccountTypeListType"/>
+	
+<xs:element name="queryReferenceAccountTypeListResponse" type="tns:QueryReferenceAccountTypeListResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryReferenceAccountTypeListType"/>
+	
+<xs:complexType name="QueryReferenceAccountTypeListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="accountTypeList" type="tns:AccountTypeListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  accountTypeInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountTypeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Represents the type of account </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriptionNotAllowed" type="tns:SusbscriptionNotAllowedFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>For this type of AT/ST  ,no subscribers can be created
+Ex: if equipment only bans, no subscribers are allowed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="billProductionInd" type="tns:BillProductionFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bill production indicator indicates whether a bill is produced for the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nameFormat" type="tns:NameFormatCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Name Format Code indicates what type of name is associated to an account
+P – Individual
+D – Business</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCheckRequiredInd" type="tns:CreditCheckRequiredFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit check required indicator indicates whether the customer requires a credit check.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="initialCreditClass" type="tns:CreditClassCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If no credit check is done this credit class is assigned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditClassDesc" type="tns:CreditClassDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Class Description is a plain text description of the customer's credit class code which identifies the Customer's level of financial responsibility.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCheckType" type="tns:CreditCheckTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Check Type Code designates a specific type of Customer Acquisition System credit check preformed.
+Ex:  BUSIN - Business, INDIV - Individual</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="defaultApprovedSubscriberCount" type="tns:ApprovedSubscriberCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Approved Subscriber Count is the number of subscribers approved for the associated account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountTypeName" type="tns:BillingAccountTypeNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of account type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubTypeName" type="tns:BillingAccountSubTypeNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of account type/sub type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isChangeAllowed" type="tns:AccountChangeAllowedFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>If a customer can change account type/sub type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isSpecialUfmiAllowed" type="tns:AccountSpecificUfmiFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account type can request the specific Ufmi</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="corpIdInd" type="tns:AccountTypeCorporateLinkFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Type Corporate Link Flag is a boolean flag that indicates If account type should have corporate link.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prepayInd" type="tns:AccountPrepayFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Prepay indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="aslInd" type="tns:AccountSpendingLimitFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>ASL (Account Spending Limit) indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isSsnTaxIdRequired" type="tns:TaxIdentifierRequiredFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>If SSN or TAX ID is must required </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ssnTaxId" type="tns:TaxIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax Identifier Type Code indicates which type of tax identifier will be used.
+S – SSN
+T - Tax id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hierarchyInd" type="tns:AccountHierarchyFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Hierarchy Flag is a boolean flag that indicates if the account is customer hierarchy supported.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fleetStyle" type="tns:FleetTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Fleet style (Fleet Type Code)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxSubscriber" type="tns:ApprovedSubscriberCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Maximum number of subscribers allowed for account type/sub type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="billSuppressionInd" type="tns:BillSuppressionTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Bill Suppression Type Code designates default bill suppression.
+I-suppress Bill
+N-no suppression
+E-Employee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isLatePaymentCharge" type="tns:AccountLatePaymentFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Late Payment Flag is a boolean flag that indicates whether late payment charge is allowed for this account type or sub type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="restrictEquipmentInd" type="tns:EquipmentUseRestrictFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Use Restrict Flag indicates if equipment is used specifically used for this account type/sub type, in this case special serial numbers are defined.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxEbillSubscriberCount" type="tns:AccountMaximumEbillSubscriberCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Maximum Ebill Subscriber Count is the maximum number of subscribers on a ban who can receive  e-mail or fax invoice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowOrderForDelinqent" type="tns:AccountAllowDeliquentFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Allow Delinquent Flag is a boolean flag that indicates a delinquent account is allowed to order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="clinEnabledInd" type="tns:AccountClinEnabledFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Clin Enabled Flag Indicates if CLIN enabled or not - for government invoicing special contract line numbers to be given.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pinRequiredInd" type="tns:PersonalIdentificationNumberRequiredFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal Identification Number Required Flag is a boolean indicator of whether a PIN is required for an account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="commitGracePeriod" type="tns:CommitGracePeriodMonthCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Commit Grace Period Month Count is the number of month Grace Period for AT/ST combination. To determine the end date for a contract extension. Grace period end date = Calculated Commitment start date + Grace Period (in months).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="tinRequiredInd" type="tns:TaxIdentifierRequiredFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax Identifier Required Flag is a boolean indicator of whether a tax ID is reqired for the account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rebateThresholdAmount" type="tns:RebateThresholdAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Rebate Threshold Amount is the ARM threshold amount (the maximum discount amount that will not have to be registered in ARM).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rebateInd" type="tns:AccountRebateFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates a boolean indicator flag that indicates if the account qualifies for Rebate Eligibility process.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="defaultDeliveryMethod" type="tns:BillDeliveryPreferenceCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates the default delivery method of bills. 
+Default value will be based on AT/ST
+Possible values:
+E- email
+P- paper</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxOpenFdp" type="tns:PaymentArrangementMaxInstallmentQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The maximum number of open FDP (future dated payments) allowed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderGracePeriod" type="tns:GracePeriodDayQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Grace period allowed on delinquent orders while comparing with debt Age.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountTypeListType">
+		
+<xs:sequence>
+			
+<xs:element name="accountTypeInfo" type="tns:AccountTypeInfoType" minOccurs="0" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  accountTypeInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="AccountAllowDeliquentFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Allow Delinquent Flag is a boolean flag that indicates a delinquent account is allowed allowed to order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountChangeAllowedFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Change Allowed Flag is a boolean flag that indicates if a customer can change account type/sub type.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountClinEnabledFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Clin Enabled Flag Indicates if CLIN enabled or not - for government invoicing special contract line numbers to be given.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountHierarchyFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Hierarchy Flag is a boolean flag that indicates if the account is customer hierarchy supported.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountLatePaymentFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Late Payment Flag is a boolean flag that indicates whether late payment charge is allowed for this account type or sub type.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountMaximumEbillSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Maximum Ebill Subscriber Count is the maximum number of subscribers on an account who can receive  e-mail or fax invoice</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountPrepayFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Prepay Flag is a boolean flag that indicates if the account is prepay.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountSpecificUfmiFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Specific Ufmi Flag is a boolean flag that indicates if the account type can request the specific Ufmi</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountSpendingLimitFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Spending Limit Flag is a boolean flag that indicates if the account has a spending Limit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountTypeCorporateLinkFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Type Corporate Link Flag is a boolean flag that indicates If account type should have corporate link.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApprovedSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Approved Subscriber Count is the number of subscribers approved for the associated account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Sub Type Name is the plain text name associated to a billing account Sub-type code</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Name is the plain text name associated to a billing account type code</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillDeliveryPreferenceCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Bill Delivery Preference Code identifies the Customers preference regarding how they wan the the Bill delivered.  This could be either: a paper invoice sent via postal mail, PDF file sent via e-mail or transmitted via fax</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillProductionFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Bill Production Flag is a boolean indicator of whether a bill is produced for the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillSuppressionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Bill Suppression Type Code designates a default bill suppression.
+I-suppress Bill
+N-no suppression
+E-Employee</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="I">
+				
+<xs:annotation>
+					
+<xs:documentation>suppress Bill</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="N">
+				
+<xs:annotation>
+					
+<xs:documentation>N-no suppression</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="E">
+				
+<xs:annotation>
+					
+<xs:documentation>E-Employee</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditCheckRequiredFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Check Required Flag indicates whether the Customer Requires a Credit Check.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditCheckTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Check Type Code designates a specific type of Customer Acquisition System credit check preformed.  Ex:  BUSIN - Business, INDIV - Individual</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Code identifies the Customer's level of financial responsibility.  For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required depsoit and the amount of the deposit, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Description is a plain text description of the customer's credit class code which identifies the Customer's level of financial responsibility. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommitGracePeriodMonthCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Commit Grace Period Month Count is the number of month Grace Period for AT/ST combination. To determine the end date for a contract extension. 
+Grace period end date = Calculated Commitment start date + Grace Peroid (in months)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentUseRestrictFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Use Restrict Flag indicates if equipment is used specifically used for this account type/sub type ,in this case special serial numbers are defined.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FleetTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fleet Type Code categorizes the Fleet as a Private, Shared or a Business fleet.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NameFormatCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Name Format Code indicates what type of name is associated to an account.
+Values:
+P - Individual Person
+D - Business</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="P">
+				
+<xs:annotation>
+					
+<xs:documentation>Individual</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="D">
+				
+<xs:annotation>
+					
+<xs:documentation>Business</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberRequiredFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Personal Identification Number Required Flag is a boolean indicator of whether a PIN is required for an account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SusbscriptionNotAllowedFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Not Allowed Flag is a boolean flag that is true if no subscribers can be created for the associated account.  (Ex:  if equipment only bans ,no subscribers are not allowed)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxIdentifierRequiredFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Identifier Required Flag is a boolean indicator of whether a tax ID is reqired for the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PriceType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price represents the amount of money set as consideration for the sale of a specified GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxIdentifierTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Identifier Type Code indicates which type of tax identifier will be used.
+S - SSN
+T - Tax id</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="T">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax ID</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="S">
+				
+<xs:annotation>
+					
+<xs:documentation>SSN</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types  (added 2008)-->
+	
+<xs:simpleType name="AccountRebateFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Rebate Flag is a boolean indicator flag that indicates if the account qualifies for Rebate Eligibility process.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RebateThresholdAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Rebate Threshold Amount is the ARM threshold amount (the maximum discount amount that will not have to be registered in ARM).
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types  (added 2014)-->
+	
+<xs:simpleType name="PaymentArrangementMaxInstallmentQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Arrangement Maximum Payment Quantity is the maximum number of allowed installments for a payment arrangement.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="GracePeriodDayQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Grace Period Day Quantity is the number of days in a grace period.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

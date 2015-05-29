@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Date              Author                 Version   Change                                                                                                Rel                SR#                  -->
+<!-- 11/10/2014     Ibrahim ElKhatib   1.0         Initial revision                                                                                        GBL15.1.0     PJ012171          -->
+<!--  -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://integration.sprint.com/eai/services/EnterpriseWalletService/v1/EnterpriseWalletService.wsdl" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wshdr="http://integration.sprint.com/common/header/WSMessageHeader/v2" xmlns:err="http://integration.sprint.com/common/ErrorDetailsV2.xsd" xmlns:wlt="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd" targetNamespace="http://integration.sprint.com/eai/services/EnterpriseWalletService/v1/EnterpriseWalletService.wsdl">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://integration.sprint.com/eai/services/EnterpriseWalletService/v1/EnterpriseWalletService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/EnterpriseWalletService/v1/EnterpriseWalletService.wsdl">
+			<xs:import namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2" schemaLocation="WSMessageHeaderV2.xsd"/>
+			<xs:import namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd" schemaLocation="ErrorDetailsV2.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd" schemaLocation="encryption.xsd"/>
+			<xs:import namespace="http://api.dc.amdocs.com/SensitiveDetails/" schemaLocation="SensitiveDetails.xsd"/>
+			<xs:import namespace="http://api.dc.amdocs.com/SensitiveDetailsResponse/" schemaLocation="SensitiveDetailsResponse.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletOperationInnerRequestResponseTypes.xsd" schemaLocation="walletOperationInnerRequestResponseTypes.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletOperationRequestResponseTypes.xsd" schemaLocation="walletOperationRequestResponseTypes.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="faultmessage">
+		<wsdl:part name="fault" element="err:errorDetailItem"/>
+	</wsdl:message>
+	<wsdl:message name="wsMessageHeader">
+		<wsdl:part name="head" element="wshdr:wsMessageHeader"/>
+	</wsdl:message>
+	<wsdl:message name="processWalletRequest">
+		<wsdl:part name="processWallet" element="wlt:encryptedMessage"/>
+	</wsdl:message>
+	<wsdl:message name="processWalletResponse">
+		<wsdl:part name="processWalletResponse" element="wlt:encryptedMessage"/>
+	</wsdl:message>
+	<wsdl:portType name="EnterpriseWalletPortType">
+		<wsdl:operation name="ProcessWallet">
+			<wsdl:input message="tns:processWalletRequest"/>
+			<wsdl:output message="tns:processWalletResponse"/>
+			<wsdl:fault name="fault" message="tns:faultmessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EnterpriseWalletBinding" type="tns:EnterpriseWalletPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="ProcessWallet">
+			<soap:operation soapAction="ProcessWallet"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="EnterpriseWalletService">
+		<wsdl:port name="EnterpriseWalletPort" binding="tns:EnterpriseWalletBinding">
+			<soap:address location="http://localhost:7001"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

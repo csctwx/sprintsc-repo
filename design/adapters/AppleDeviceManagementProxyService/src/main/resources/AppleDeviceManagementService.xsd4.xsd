@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAppleDeviceStatus/v1/queryAppleDeviceStatus.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAppleDeviceStatus/v1/queryAppleDeviceStatus.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                   Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--04/03/2014  Ted Burbidge             1.0   Initial Version                                                                                             GBL 14.2 - PJ012211 - S&R - Apple Lock Status Integration-->
+	
+<!--4/13/2014 Adon Powell                 1.0  Standarize                                                                                                  GBL 14.2 - PJ012211 - S&R - Apple Lock Status Integration-->
+	
+<!--5/6/2014  Ted Burbidge                 1.1   Added meidHex, meidDec to request and meidHex to response               GBL14.2 - PJ012211 -->
+	
+<!--05/06/2014 Adon Powell               1.1 Standardize                                                                                                 GBL 14.2 - PJ012211 - S&R - Apple Lock Status Integration-->
+	
+<!---->
+	
+<xs:element name="queryAppleDeviceStatus" type="tns:QueryAppleDeviceStatusRequestType"/>
+	
+<xs:element name="queryAppleDeviceStatusResponse" type="tns:QueryAppleDeviceStatusResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryAppleDeviceStatusRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure to choose search criteria for the query.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAppleDeviceStatusResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceList" type="tns:DeviceListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Device List information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>apple Serial Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imei" type="tns:InternationalMobileStationEquipmentIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>apple IMEI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="meidHex" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>MEID for the device</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:MobileEquipmentIdentifierHexType">
+						
+<xs:minLength value="14"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="meidDec" type="tns:MobileEquipmentIdentifierDecType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Equipment Identifier - Decimal Format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lostInd" type="tns:LostFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>lost flag</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lockedInd" type="tns:LockedFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>locked flag</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceListType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceInfo" type="tns:DeviceInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>1 to many deviceInfo records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the Apple serial number and this number is not stored in Sprint systems.  It is included for possilbe future use.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imei" type="tns:InternationalMobileStationEquipmentIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the Apple IMEI and this number is not stored in Sprint systems.  It is included for possilbe future use.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="meidDec" type="tns:MobileEquipmentIdentifierDecType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Equipment Identifier - Decimal Format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="meidHex">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Equipment Identifier - Hexidecimal Format</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:MobileEquipmentIdentifierHexType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Simple Types-->
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileStationEquipmentIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Station Equipment Identifier (IMEI) identifies a wireless telecommunications term. An equipment identification number, similar to a serial number, used to identify a mobile station</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LockedFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Locked Flag indicates if an item is Locked.
+valid values:
+True - Locked
+False - not Locked</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LoginUserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Login User Identifier holds the system login userid assigned to a PARTY.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LostFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Lost Flag indicates if an item is lost.
+valid values:
+True - Lost
+False - not Lost</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileEquipmentIdentifierDecType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Equipment Identifier Decimal (MEID) is a globally unique number for a physical piece of mobile station equipment in decimal notation. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.   
+
+This is the 18 character decimal representation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileEquipmentIdentifierHexType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Equipment Identifier Hexidecimal (MEID) is a globally unique number for a  physical piece of mobile station equipment in hexidecimal notation. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  This is the 14 character hexidecimal representation which includes a 1 character check digit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="13"/>
+			
+<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

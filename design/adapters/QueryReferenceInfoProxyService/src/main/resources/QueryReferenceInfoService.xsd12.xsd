@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/interfaces/queryReferenceM2hoInfo/v1/queryReferenceM2hoInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceM2hoInfo/v1/queryReferenceM2hoInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:element name="queryReferenceM2hoInfo" type="ns1:QueryReferenceM2hoInfo">
+		
+<xs:annotation>
+			
+<xs:documentation>Input structure for queryReferenceM2HOInfo request validation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryReferenceM2hoInfoResponse" type="ns1:QueryReferenceM2hoInfoResponse">
+		
+<xs:annotation>
+			
+<xs:documentation>Output structure for queryReferenceM2HOInfo request validation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<!---->
+	
+<xs:complexType name="BlockedNumberList">
+		
+<xs:sequence>
+			
+<xs:element name="blockedNumber" type="ns1:Number" maxOccurs="9999"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="Number">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="ns1:NpaNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nxx" type="ns1:NxxNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lineNumber" type="ns1:PhoneLineNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Line Number represents the 4 digits of the 7 digit phone number that follow the Network Numbering Exchange (NXX) Number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="NpaNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NxxNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneLineNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Line Number represents the 4 digits of the 7 digit phone number that follow the Network Numbering Exchange (NXX) Number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="NumberInfo">
+		
+<xs:sequence>
+			
+<xs:element name="fromNumber" type="ns1:Number"/>
+			
+<xs:element name="blockSize" type="ns1:BlockSize" default="1" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This will tell the number of input numbers within the range. If only one number is being checked then the blockSize = 1. Range = (From Number) to (FromNumber + block Size - 1). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="BlockSize">
+		
+<xs:restriction base="xs:integer">
+			
+<xs:maxInclusive value="5000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="NumberInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="fromNumber" type="ns1:Number">
+				
+<xs:annotation>
+					
+<xs:documentation>This will be populated with the same values in the input.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockSize" type="ns1:BlockSize" default="1" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This will tell the number of numbers within the range. Range = From Number to FromNumber + (block Size - 1). On response structure this will be the same as in input.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lineResponseCode" type="ns1:NumberLineBlockResponseCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Unblocked – None of the numbers are blocked
+Blocked – All the numbers are blocked
+PartiallyBlocked  - Some of the numbers are blocked
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockedNumberList" type="ns1:BlockedNumberList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This will contain the list of numbers that are blocked. This structure shall be returned only if the lineResponseCode is "PartiallyBlocked"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="NumberLineBlockResponseCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Unblocked – None of the numbers are blocked
+Blocked – All the numbers are blocked
+PartiallyBlocked  - Some of the numbers are blocked
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="NumberList">
+		
+<xs:sequence>
+			
+<xs:element name="numberInfo" type="ns1:NumberInfo" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NumberListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="numberInfo" type="ns1:NumberInfoResponse" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="QueryReferenceM2hoInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="ns1:ServiceOrderCode" minOccurs="0"/>
+			
+<xs:element name="responseCode" type="ns1:NumberBlockResponseCode">
+				
+<xs:annotation>
+					
+<xs:documentation>The response from the validation for the given Number / Number range.
+
+AllUnblocked – None of the number / number range is blocked
+
+AllBlocked – All the numbers / number ranges are blocked
+
+PartiallyBlocked - At least one of the number/ number ranges in Blocked or PartiallyBlocked
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberList" type="ns1:NumberListResponse">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of NumberInfo records in this list will be same as present in the Input.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="NumberBlockResponseCode">
+		
+<xs:annotation>
+			
+<xs:documentation>The response from the validation for the given Number / Number range.
+
+AllUnblocked – None of the number / number range is blocked
+AllBlocked – All the numbers / number ranges are blocked
+PartiallyBlocked- Atleast one of the number/ number ranges in Blocked or PartiallyBlocked
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="QueryReferenceM2hoInfo">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="ns1:ServiceOrderCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC or Price-Plan Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberList" type="ns1:NumberList">
+				
+<xs:annotation>
+					
+<xs:documentation>The maximum number of NumberInfo structures inside NumberList and the maximum range size is defined for the socCode</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="ProductIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Identifier is a code that uniquely idenfies and instance or group of items offered for sale to the Customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="ns1:ProductIdentifier">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

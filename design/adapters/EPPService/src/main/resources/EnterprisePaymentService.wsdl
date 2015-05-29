@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Date              Author                 Version   Change                                                                                                            Rel                  SR#                  -->
+<!-- -->
+<!-- -->
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://integration.sprint.com/eai/services/EnterprisePaymentService/v1/EnterprisePaymentService.wsdl" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wshdr="http://integration.sprint.com/common/header/WSMessageHeader/v2" xmlns:err="http://integration.sprint.com/common/ErrorDetailsV2.xsd" xmlns:ns="http://integration.sprint.com/interfaces/eppKeyExchange/v1/eppKeyExchange.xsd" xmlns:pymt="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd" targetNamespace="http://integration.sprint.com/eai/services/EnterprisePaymentService/v1/EnterprisePaymentService.wsdl">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://integration.sprint.com/eai/services/EnterprisePaymentService/v1/EnterprisePaymentService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/EnterprisePaymentService/v1/EnterprisePaymentService.wsdl">
+			<xs:import namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2" schemaLocation="WSMessageHeaderV2.xsd"/>
+			<xs:import namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd" schemaLocation="ErrorDetailsV2.xsd"/>
+			<xs:import namespace="http://integration.sprint.com/interfaces/eppKeyExchange/v1/eppKeyExchange.xsd" schemaLocation="eppKeyExchange.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd" schemaLocation="encryption.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentOperationInnerRequestResponseTypes.xsd" schemaLocation="paymentOperationInnerRequestResponseTypes.xsd"/>
+			<xs:import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentOperationRequestResponseTypes.xsd" schemaLocation="paymentOperationRequestResponseTypes.xsd"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="faultmessage">
+		<wsdl:part name="fault" element="err:errorDetailItem"/>
+	</wsdl:message>
+	<wsdl:message name="wsMessageHeader">
+		<wsdl:part name="head" element="wshdr:wsMessageHeader"/>
+	</wsdl:message>
+	<wsdl:message name="eppKeyExchangeRequest">
+		<wsdl:part name="eppKeyExchangeRequest" element="ns:eppKeyExchange"/>
+	</wsdl:message>
+	<wsdl:message name="eppKeyExchangeResponse">
+		<wsdl:part name="eppKeyExchangeResponse" element="ns:eppKeyExchangeResponse"/>
+	</wsdl:message>
+	<wsdl:message name="processPaymentRequest">
+		<wsdl:part name="processPayment" element="pymt:encryptedMessage"/>
+	</wsdl:message>
+	<wsdl:message name="processPaymentResponse">
+		<wsdl:part name="processPaymentResponse" element="pymt:operationResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="EnterprisePaymentPortType">
+		<wsdl:operation name="EppKeyExchange">
+			<wsdl:input message="tns:eppKeyExchangeRequest"/>
+			<wsdl:output message="tns:eppKeyExchangeResponse"/>
+			<wsdl:fault name="fault" message="tns:faultmessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="ProcessPayment">
+			<wsdl:input message="tns:processPaymentRequest"/>
+			<wsdl:output message="tns:processPaymentResponse"/>
+			<wsdl:fault name="fault" message="tns:faultmessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="EnterprisePaymentBinding" type="tns:EnterprisePaymentPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="EppKeyExchange">
+			<soap:operation soapAction="EppKeyExchange"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:fault name="fault" use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="ProcessPayment">
+			<soap:operation soapAction="ProcessPayment"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+			</wsdl:output>
+			<wsdl:fault name="fault">
+				<soap:header message="tns:wsMessageHeader" part="head" use="literal"/>
+				<soap:fault name="fault" use="literal"/>
+			</wsdl:fault>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="EnterprisePaymentService">
+		<wsdl:port name="EnterprisePaymentPort" binding="tns:EnterprisePaymentBinding">
+			<soap:address location="http://localhost:7001"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

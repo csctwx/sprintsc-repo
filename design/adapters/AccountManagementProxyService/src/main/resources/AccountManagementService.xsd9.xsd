@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/addAccountChargeAdjustment/v1/addAccountChargeAdjustment.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/addAccountChargeAdjustment/v1/addAccountChargeAdjustment.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version     Change                                                                           Rel                          SR# -->
+	
+<!--12/08/2014    Amber Peppers         1.0               Initial Version                                                           GBL15.1                   PJ012419-->
+	
+<!--12/09/2014    Adon Powell              1.0               Standardize                                                            GBL15.1                   PJ012419-->
+	
+<!---->
+	
+<xs:element name="addAccountChargeAdjustment" type="tns:AddAccountChargeAdjustmentType">
+		
+<xs:annotation>
+			
+<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="addAccountChargeAdjustmentResponse" type="tns:AddAccountChargeAdjustmentResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="AddAccountChargeAdjustmentType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:InfoType"/>
+			
+<xs:element name="timeStampInfo" type="tns:TimeStampInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This Structure contains last update timeStamp of a specific BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="chargeAdjustmentInfo" type="tns:ChargeAdjustmentInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="InfoType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing. The ID of the BAN that the request is related to</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>'Mobile Directory Number' (MDN) is the actual phone number one would dial to reach a specific mobile phone. Prior to Wireless Number Portability, MDN was the identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carreriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combination of the Urban Area ID, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500-600-700, translates to 600 is the Urban Area ID, 600 is the Fleet, and 700 is the Member. (e.g., 128*301*12331)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network. Equipment Serial Number is one of the following:
+Electronic Serial Number (ESN);
+Mobile Equipment Identifier (MEID);
+International Mobile Equipment Identifier (IMEI);
+Subscriber Identify Module (SIM); Media Access Control ID ( MAC ID).
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use UP Addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the netowkr. It is also used to acquire other details of the mobile iin the Home Location Register (HLR) or a locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead. The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM). An IMSI is usually 15 digits long, but can be shorter (for example MTN Sout-Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code(MNC), either 2 digits (European standard) or 3 digits(Nort American Standard), the remaining digits are the Mobile Subscriber IDentification number (MSIN) within the network's customer base. The IMSI conforms to the Internation Telecommunicaton Union (ITU) E.212 numbering Standard.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. The standard syntax is "user@realm".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional IMSI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizng QChat Push-To-Talk technology. HPPTT id can either be PTN based (eg. 2008107890@domain) or UFMI based (eg. 456*789*001@domain).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="TimeStampInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="lastUpdateDate" type="tns:LastUpdateDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN’s last update date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastUpdateStamp" type="tns:LastUpdateNumericStampType">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN’s last update stamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ChargeAdjustmentInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="reasonCode" type="tns:AdjustmentReasonCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The reason code identifying why the charge adjustment is being created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="chargeSequenceNumber" type="tns:SequenceNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The charge sequence number associated with an existing charge </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isTaxableInd" type="tns:TaxableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field indicates rather this charge should be taxed by the create charge service or not. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentAmount" type="tns:AdjustmentAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Amount of the charge adjustment.
+if not supplied,  the default adjustment amount will be used (as long as it’s not zero amount)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>tas Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="memoText" type="tns:AdjustmentReasonTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Text – comprised of at least 25 characters - for memo generated for the charge adjustment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentLevelCode" type="tns:AdjustmentLevelCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Adjustment level code (RC/OC/BC).
+Adjustment level code = BC is not allowed for Add BAN Charge Adjustment API.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentAmountType" type="tns:AdjustmentTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Adjustment amount type (Exclude tax=’A’, Include Tax=’T’, Period=’P’ or days=’D’) 
+‘P’ and ‘D’ are relevant only for RC charge.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="periodFromDate" type="tns:AdjustmentEffectiveDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Start date of period. Mandatory if adjAmtType=’period’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="periodToDate" type="tns:AdjustmentStopDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>End date of period. Mandatory if adjAmtType=’period’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentDays" type="tns:DayQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Adjustment days. Mandatory if adjAmtType=’days’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sourceCode" type="tns:SourceCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Code identifying the source of the charge adjustment. Valid Values are ‘D’ or ‘R’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="balanceImpactCode" type="tns:AdjustmentBillImmediateTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Code indicating the impact of the credit adjustment on the balance.
+If not supplied, it will be determined according to existing system functionality 
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:AdjustmentEffectiveDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective date of the charge adjustment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="externalTaxList" type="tns:ExternalTaxListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Provides a list of taxes related to a charge. Up to 20 taxes may be supplied as input using this structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExternalTaxInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="taxType" type="tns:TaxTypeIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field has an ID that will determine the type of tax according to Ensemble tables.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:TaxAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field contains the tax Amount value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxRate" type="tns:TaxRateType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field contains the tax Rate value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAuthority" type="tns:TaxingAuthorityIdentifier">
+				
+<xs:annotation>
+					
+<xs:documentation>Tax jurisdiction, e.g., federal, state, city.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExternalTaxListType">
+		
+<xs:sequence>
+			
+<xs:element name="externalTaxInfo" type="tns:ExternalTaxInfoType" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>Taxes related to the credit adjustment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AddAccountChargeAdjustmentResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="adjustmentSequenceNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>The sequence number of the adjustmnet.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="adjustmentAmount" type="tns:AdjustmentAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Amount of the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalTaxAmount" type="tns:TaxAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>The total tax amount for the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalAmount" type="tns:AdjustmentTotalAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>The total amount of the charge including taxes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="followUpId" type="tns:AdjustmentFollowUpIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>ID assigned to the follow-up generated for the credit adjustment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="poolId" type="tns:AdjustmentFollowUpPoolIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Pool id assigned to the follow-up generated for the credit adjustment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockedInd" type="tns:BlockedFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>This will indicate whether or not the BAN is currently blocked for adjustment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     Shared Simple Types-->
+	
+<xs:simpleType name="AdjustmentAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Amount is the amount recorded for the adjustment activity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentBillImmediateTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Bill Immediate Type Code designates whether an adjustment is immediate (current bill) or future (future bill).
+Possible Values:
+I = immediate,
+F = Future
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentLevelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Level Code indicates the default level of debt that can be adjusted according to the Reason code.
+Values:
+M - Message level Adjustment
+C - Charge level Adjustment
+I - invoice Item level Adjustment
+A - BAN level adjustment</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+			
+<xs:enumeration value="M"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="A"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Reson Code Designates the reason for an adjustment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentReasonTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Reason Text is a descriptive comment of an adjustment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentStopDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Stop Date is the last calendar date for which an adjustment is applied to an account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentEffectiveDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Effective Date is the calendar date on which an adjustment is applied to an account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentFollowUpIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Follow Up Identifier uniquely identifies a case where an adjustment that has exceeded the permitted amount which requires the customer service representative to follow-up with information indicating who should approve the adjustment.
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentFollowUpPoolIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Follow Up Pool Identifier designates a special pool that will be created in the reference database that the pending adjustment follow-ups will be assigned to. 
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentTotalAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Total Amount is the sum of related adjustment amounts.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdjustmentTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Adjustment Type Code designates the type of adjustment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BlockedFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Blocked Flag indicates if the account has been blocked (blacklisted).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DayQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Day Quantity is a quantity of days.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is the value of a electronic serial number (ESN) OR Mobile Equipment Identifier(MEID).  This type should be used when it is not known what type the serial number is.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastUpdateDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Update Date is the calendar day on which the last update was made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxTypeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Type Identifier designates a specific type of tax.
+Valid Values Include:
+01 - UTILITY-USERS,
+02 - BQ,
+03 - 911-TAX,
+04 - PUC-04,
+05 - TELEPHONE-SALES,
+06 - STATUTORY-RECEIPTS,
+07 - UTIL-USE-BUSNESS,
+08 - LICENSE,
+09 - SERVICE,
+10 - DISTRICT,
+11 - 911-BUSNESS,
+30 - ALL-TYPES,
+40 - USF-SURCHGE,
+41 - TRS-SURCHGE,
+42 - DEAF-SURCHGE,
+43 - HIGH-COST,
+44 - POISON-CONTROL,
+45 - LIFELINE,
+46 - PICC,
+50 - EXCISE,
+51 - SPECIAL,
+52 - SURCHARGE,
+59 - LICENSE-TAX-2,
+60 - UTIL-USE-BUS-2,
+61 - UTIL-USE-2,
+62 - BQ-2,
+63 - 911-TAX-2,
+64 - GROSS-2,
+65 - USF-SURCHGE-2,
+66 - TRS-SURCHGE-2,
+67 - DEAF-SURCHGE-2,
+68 - HIGH-COST-2,
+
+69 - POISON-CONTROL-2,
+
+70 - FEDERAL,
+
+71 - EUCL,
+90 - ROAM-EXMP,
+99 - SALES.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastUpdateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Update Time is the time of the last update to an object.  It is generally paired with a Last Update Date.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SourceCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Source Code designates what entity provided the related information.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Amount is the monetary amount charged and collected on behalf of a government entity for taxes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastUpdateNumericStampType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Update Numeric Stamp is used in conjunction with the Last Update Date Time to uniquely identify a specific update iteration.
+
+Typically Last Update Date Time and Last Update Numeric Stamp would be used in a psuedo-conversational approach to updates.  A record is read into local storage and the lock on the source record is released.  When the updated record is written back to the database where the source Record ID equals the Update Record ID, Source Last Update Date Time equals the original Update Last Update Date Time and Source Last Update Numeric Stamp equals the original Update Last Update Numeric Stamp.
+
+Both Last UPdate Date Time and Last Update Numeric Stamp are incremented in the update.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxingAuthorityIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>The Taxing Authority Identifier designates which level of taxing authority the tax is collected on behalf of.
+Possible Values:
+0 – federal
+1 – State
+2 – Country
+3 – City
+4 – Secondary country
+5 – Secondary city
+9 – All</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:short">
+			
+<xs:enumeration value="0"/>
+			
+<xs:enumeration value="1"/>
+			
+<xs:enumeration value="2"/>
+			
+<xs:enumeration value="3"/>
+			
+<xs:enumeration value="4"/>
+			
+<xs:enumeration value="5"/>
+			
+<xs:enumeration value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxRateType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Tax Rate is a rate expressed in decimal format and is applied to a charge to determine the amount of tax to be collected from the customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxableFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Taxable Flag indicates whether an associated item or charge is taxable.
+Valid Values:  
+True - Taxable,  
+False - NOT Taxable</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

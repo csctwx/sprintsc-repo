@@ -1,0 +1,1653 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/createAndActivateSubscriber/v1/createAndActivateSubscriber.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/createAndActivateSubscriber/v1/createAndActivateSubscriber.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.1">
+	<!--Date		        Changed by	                Version		        Change description       																	Release 	 							SR-->
+	<!--05/11/2011     Tracy Turner  				1.0            			Initial Draft  																						GBL11.3  							PJ004940-->
+	<!--05/19/2011    Steve Heichelheim    1.0    Added MVM standards and simple types                                 								GBL11.3                     			PJ004940-->
+	<!--05/19/2011    Steve Heichelheim	1.1    Added dacId to request,     											GBL11.3  	           				PJ004940-->
+	<!--06/21/2011    Tracy Turner					1.2    Added activationDate to the request subscriberDetailsInfo structure, errorInfo to response         GBL11.3  	           				PJ004940-->
+	<!--06/22/2011    Tracy Turner					1.3    Removed the list structure for newPpSocInfo, relatedSoc field from otherSocInfo  			GBL11.3  	           				PJ004940-->
+	<!--07/02/2011    Tracy Turner					1.4    Removed imsi from response since it will never be populated, made contractInfo minOccurs zero	GBL11.3  	   	CS#477002-->
+	<!--07/04/2011    Tracy Turner  1.5  added dacId to request, staticIpInfo, added nameFormat to nameInfo.  On response, changed subscriberId to required, removed imsi field and switched some fields from choice to optional	GBL11.3   PJ004940-->
+	<!--07/15/2011  Jocelen Silva		1.6	added back multiple ppInfo structures-->
+	<!--07/21/2011 Tracy Turner		1.7	made subscriberDetailsInfo structure required instead of optional-->
+	<!--09/11/2011 Tracy Turner		1.8	CS#494772 added changedSocList, featureList at the main request level, added waivedReason and reason to substructures, added paramDataInfo to featureInfo, changed deviceInfo, serialType and serialNumber to required.  Replaced resourceType with mdnType-->
+	<!--11/10/2011 Tracy Turner		1.9	CS#507674 changed ngp length from 6 to 10-->
+	<!--1/09/2011 Tracy Turner		2.0	CS#515057 changed restriction base for numberofcontractmonthstype to nonNegativeInteger -->
+	<!--2/10/2011 Tracy Turner		2.1	CS#521282 GBL12.1 PJ004940 added optional warningErrorList structure -->
+	<xs:element name="createAndActivateSubscriber" type="tns:CreateAndActivateSubscriberType"/>
+	<xs:element name="createAndActivateSubscriberResponse" type="tns:CreateAndActivateSubscriberResponseType"/>
+	<xs:complexType name="CreateAndActivateSubscriberType">
+		<xs:sequence>
+			<xs:element name="ban" type="tns:BillingAccountNumberType">
+				<xs:annotation>
+					<xs:documentation>The unique identifier for the new billing account. (BAN)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="networkInd" type="tns:NetworkTypeCodeType" block="restriction">
+				<xs:annotation>
+					<xs:documentation>Identfies the subscribrs network. C for CDMA and I for iDEN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceInfo" type="tns:ResourceInfoType">
+				<xs:annotation>
+					<xs:documentation>Additional resources that may be required for the plan features or device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addressInfo" type="tns:AddressInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure containing detailed address information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nameInfo" type="tns:NameInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This structure contains the contact name of the account.  Only add if differs from billing (won't hurt to add)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberDetailsInfo" type="tns:SubscriberDetailsInfoType">
+				<xs:annotation>
+					<xs:documentation>Contains information about subscriber details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newPricePlanInfo" type="tns:NewPricePlanInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>New Price Plan Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newSocList" type="tns:NewSocListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Information about the new  add-on SOCS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="changedSocInfoList" type="tns:ChangedSocListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies the SOCs existing in the BAN to be excluded from the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureInfoList" type="tns:FeatureListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Features associated with this SOC.  Can only be provided when action = 'A'.  If features are not provided, we will choose default features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractInfo" type="tns:ContractInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Contract information.  Sent if the contract period needs changed with this request.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="callingApplicationInfo" type="tns:CallingApplicationInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure in which to insert calling application and user info.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceList" type="tns:DeviceListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List of device information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dacId" type="tns:DepartmentAccountCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The departmental accounting code (aka parent id) tied to the customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ssitInfo" type="tns:SsitInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This sub-structure provides SSIT Label and Value information.  The SSIT Labels are set at the hierarchy root level.  The SSIT values are the subscriber-specific values that correspond to each Label.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateAndActivateSubscriberResponseType">
+		<xs:sequence>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:PhoneNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobile Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier 
+(UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Internet Protocol Address
+An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Network Access Identifier
+ (NAI) is a standard way of identifying users who request access to a network. 
+The standard syntax is"user@realm".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cdmaProgrammingInfo" type="tns:CdmaProgrammingInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Holds the manual programming resources – Will be returned for CDMA subscribers only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Resource that supports HP-PTT services. The HPPTT ID can either be PTN-based or UFMI based. Will be returned for HPPTT subscribers only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="banPoolInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicate where the CDMA IP was allocated from.
+true – From the BAN pool false – From the common pool
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="securityLockCode" type="tns:PhoneLockCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customers use the Security Lock Code to unlock their handset, for CDMA phones.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationErrorInfo" type="tns:ActivationErrorInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Deposit error information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="warningErrorList" type="tns:WarningErrorListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>List of warning error information structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ActivationErrorInfoType">
+		<xs:sequence>
+			<xs:element name="errorCode" type="tns:ErrorMessageIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The error code received when an error occurred while activating the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorMessage" type="tns:ErrorMessageType">
+				<xs:annotation>
+					<xs:documentation>The error message received when an error occurred while  activating the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddressInfoType">
+		<xs:sequence minOccurs="0">
+			<xs:element name="applyAddress" type="tns:AddressVerificationSystemOverrideCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether the address is accepted even though it cannot be found in the address database.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="addressType" type="tns:AddressTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Type of Address (Military, Rural, PO, Street, Foreign)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetNumber" type="tns:StreetNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address Street Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="line1" type="tns:PrimaryAddressLineType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+For a ‘street address’, Primary Address Line holds the concatenation of the street components of the address.
+For a ‘Post Office Box address’ (PO Box address), Primary Address Line holds the P.O. Box information.
+For a ‘Rural address’, Primary Address Line holds the Rural number.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="line2" type="tns:SecondaryAddressLineType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ruralRoute" type="tns:RuralRouteControlNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rural Route</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ruralRouteBoxNumber" type="tns:RuralRouteBoxNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Rural Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="poBoxNumber" type="tns:PostOfficeBoxNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Post Of Office Box Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetName" type="tns:StreetNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address Street Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetDirection" type="tns:PrecedingStreetDirectionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Street Direction is a USPS Postal Address component that holds the compass direction that appears before the Street Name in some cases.  
+For example in, "North Main Street", "North" would reside in Preceding Direction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetType" type="tns:StreetSuffixType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Address Street Type is a suffix for USPS Postal Address component that holds the trailing part of the street name.  
+For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="apartmentNumber" type="tns:ApartmentNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Apartment Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="apartmentType" type="tns:ApartmentDesignatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Apartment Type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attention" type="tns:AttentionTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Attention Text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="tns:CityNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="state" type="tns:UspsStateAbbreviationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="country" type="tns:IsoCountryCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a sovereign nation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipCode" type="tns:UspsPostalCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digits USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="zipCode4" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>USPS Postal Code Extension contains the last 4 characters of the nine digits USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingApplicationInfoType">
+		<xs:sequence>
+			<xs:element name="associateId" type="tns:AssociateIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Associate identifier. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="storeId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Store identifier.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CdmaProgrammingInfoType">
+		<xs:sequence>
+			<xs:element name="mdn" type="tns:PhoneNumberType">
+				<xs:annotation>
+					<xs:documentation>Mobile Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>MSN/HSN/MEID or other serial number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="msid" type="tns:MobileStationIdentificationNumberType">
+				<xs:annotation>
+					<xs:documentation>Mobile Station Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sidBid" type="tns:SidNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SID – Approved 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your “home” system.
+BID – Approved Identification number administered by CIBERNET for billing purposes only. Separately identifies a portion of a wireless service area used to geographically subdivide System Identification Numbers (SIDs).
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="oneTimeSubsidyLock" type="tns:OneTimeKeySubsidyLockType">
+				<xs:annotation>
+					<xs:documentation>One Time Subsidy Lock (OTKSL)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="alternativeLock" type="tns:MasterSubsidyLockCodeType">
+				<xs:annotation>
+					<xs:documentation>Master Subsidy Lock (MSL)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="manufacturerId" type="tns:ManufacturerPartyIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Phone Manufacturer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modelId" type="tns:ModelNumberType">
+				<xs:annotation>
+					<xs:documentation>Device model number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangedSocListType">
+		<xs:sequence>
+			<xs:element name="changedSocInfo" type="tns:ChangedSocInfoType" maxOccurs="200">
+				<xs:annotation>
+					<xs:documentation>Information about the price plan and add-on SOCS to be excluded</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChangedSocInfoType">
+		<xs:sequence>
+			<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				<xs:annotation>
+					<xs:documentation>SOC code for service to be excluded</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContractInfoType">
+		<xs:sequence>
+			<xs:element name="reason" type="tns:ContractChangeReasonCodeType">
+				<xs:annotation>
+					<xs:documentation>Reason of contract change. “EQU” – Equipment Update.
+“PPD” - Standard (New PP/SOC) “EQP" – New equipment
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="durationInMonths" type="tns:NumberOfContractMonthsType">
+				<xs:annotation>
+					<xs:documentation>Duration of contract in total months from the start date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceInfoType">
+		<xs:sequence>
+			<xs:element name="serialNumber" type="tns:DeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>Serial number of the device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialType" type="tns:DeviceSerialNumberTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Serial type of the device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DeviceListType">
+		<xs:sequence>
+			<xs:element name="deviceInfo" type="tns:DeviceInfoType" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>Information about the device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FeatureInfoType">
+		<xs:sequence>
+			<xs:element name="featureCode" type="tns:FeatureCodeType">
+				<xs:annotation>
+					<xs:documentation>Code for this feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date the feature is to expire (used only to exclude a feature).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paramDataInfo" type="tns:ParamDataInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parameter data Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="m2hoRangeList" type="tns:M2HoRangeListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Structure provides details for a set of M2H/O Numbers/Ranges assigned to a M2H/O PP/SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="staticIpInfo" type="tns:StaticIpInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>CDMA Static IP resource feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FeatureListType">
+		<xs:sequence>
+			<xs:element name="featureInfo" type="tns:FeatureInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Information about the feature codes to be included in or excluded from the SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HomeDomainRestrictionInfoType">
+		<xs:sequence>
+			<xs:element name="homeDomainRestrictionIpPairA" type="tns:InternetProtocolAddressPairType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Header for first pair of IPs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="homeDomainRestrictionIpPairB" type="tns:InternetProtocolAddressPairType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Header for second pair of IPs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="M2HoRangeListType">
+		<xs:sequence>
+			<xs:element name="rangeInfo" type="tns:RangeInfoType" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>The Structure provides details for a set of M2H/O Numbers/Ranges assigned to a M2H/O PP/SOC.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MobileNodeRestrictionInfoType">
+		<xs:sequence>
+			<xs:element name="mobileNodeRestrictionIpA" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First IP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobileNodeRestrictionIpB" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Second IP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobileNodeRestrictionIpC" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Third IP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobileNodeRestrictionIpD" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Fourth IP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameInfoType">
+		<xs:sequence>
+			<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First name of individual customer – in the case of Business customers, this may not exist.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="middleName" type="tns:MiddleNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Middle initial name of individual customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" type="tns:LastNameType">
+				<xs:annotation>
+					<xs:documentation>Last name of individual user or Business Name of Business customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="title" type="tns:TitleType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Title code of individual customer </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="generation" type="tns:GenerationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Generation of customer name (e.g., III)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalLine" type="tns:AdditionalTitleType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Additional line for account Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nameFormat" type="tns:BusinessOrConsumerCodeType">
+				<xs:annotation>
+					<xs:documentation>Format of the name (Business or Individual)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NewSocListType">
+		<xs:sequence>
+			<xs:element name="newSocInfo" type="tns:NewSocInfoType" maxOccurs="200">
+				<xs:annotation>
+					<xs:documentation>Information about the new price plan and add-on SOCS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NewSocInfoType">
+		<xs:sequence>
+			<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				<xs:annotation>
+					<xs:documentation>SOC code for new service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:ContractStartDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Effective date.  If not provided, it will be the time of the transaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date that we should expire this soc.  If action='D' and this is not provided, the soc will be expired today.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="relatedSoc" type="tns:ServiceOrderCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Primary SOC code in case this soc is part of a promotion.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureInfoList" type="tns:FeatureListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Features associated with this SOC.  Can only be provided when action = 'A'.  If features are not provided, we will choose default features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="waivedReason" type="tns:AdjustmentReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One time charge waived off reason code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherSocInfoList" type="tns:OtherSocInfoListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Related Socs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NewPricePlanInfoType">
+		<xs:sequence>
+			<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				<xs:annotation>
+					<xs:documentation>SOC code for new service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureInfoList" type="tns:FeatureListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Features associated with this SOC.  Can only be provided when action = 'A'.  If features are not provided, we will choose default features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="waivedReason" type="tns:AdjustmentReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One time charge waived off reason code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="otherSocInfoList" type="tns:OtherSocInfoListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Related Socs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OtherSocInfoType">
+		<xs:sequence>
+			<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				<xs:annotation>
+					<xs:documentation>SOC code for new service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:ContractStartDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Effective date.  If not provided, it will be the time of the transaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date that we should expire this soc.  If action='D' and this is not provided, the soc will be expired today.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureInfoList" type="tns:FeatureListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Features associated with this SOC.  If features are not provided, billing system will choose default features.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="waivedReason" type="tns:AdjustmentReasonCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One time charge waived off reason code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OtherSocInfoListType">
+		<xs:sequence>
+			<xs:element name="otherSocInfo" type="tns:OtherSocInfoType" maxOccurs="200">
+				<xs:annotation>
+					<xs:documentation>Information about the add-on SOCS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParamDataInfoType">
+		<xs:sequence>
+			<xs:element name="paramValue">
+				<xs:annotation>
+					<xs:documentation>Parameter Value</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm1" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parameter is a variable of data type string that must be given a specific value during the execution of a program, a procedure within a program or an interface transaction.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm2" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 2</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm3" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm3</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm4" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 4</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm5" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 5</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm6" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 6</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm7" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 7</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm8" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 8</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm9" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 9</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="prm10" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Parm 10</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ParameterStringType">
+						<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PdsInfoType">
+		<xs:sequence>
+			<xs:element name="homeDomainRestrictionInfo" type="tns:HomeDomainRestrictionInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PDS Header Fields</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobileNodeRestrictionInfo" type="tns:MobileNodeRestrictionInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>PDS MRN Fields</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RangeInfoType">
+		<xs:sequence>
+			<xs:element name="fromNumber" type="tns:PhoneNumberType">
+				<xs:annotation>
+					<xs:documentation>Initial number in range.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toNumber" type="tns:PhoneNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Last number in range.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceInfoType">
+		<xs:sequence>
+			<xs:element name="mdnInfo" type="tns:ResourceMdnInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobile Directory Number Information
+MDN/PTN info if MSISDN is to be allocated (for circuit data feature)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmiInfo" type="tns:UfmiInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier  Information
+Used in conjunction with dispatchAction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddressType" type="tns:InternetProtocolAddressTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>IP address type required if the resource type is P. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="npaNxxInfo" type="tns:ResourceNpaNxxInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>NPA NXX Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="naiInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates that the user wants to allocate a NAI.  If true, a NAI will be allocated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttResourceCode" type="tns:HighPerformancePushToTalkIdentifierTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The resource indicator ('C' = CDMA UFMI-based SIP URI, 'P' = PTN-based SIP URI, ‘I’ = iDen UFMI based SIP URI)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceMdnInfoType">
+		<xs:sequence>
+			<xs:element name="mdnType" type="tns:PortedNumberIndicatorType">
+				<xs:annotation>
+					<xs:documentation>Type of mdn.  if non-port in, the front-end will send 'RGL'
+if port-in, the front-end will send 'PRI'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portinMdn" type="tns:PortedInMobileDirectoryNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Port in MDN required if the MDN type is PRI and a temporary MDN is required. Only valid if the resource type is C.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reservationId" type="tns:MdnReservationIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An alpha-numeric number that is associated to the PTN number when the number is loaded to the system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceNpaNxxInfoType">
+		<xs:sequence>
+			<xs:element name="npa" type="tns:NpaNumberType">
+				<xs:annotation>
+					<xs:documentation>The NPA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nxx" type="tns:NxxNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Exchange</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ngp" type="tns:NumberGroupType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The NGP (CSA). When a PTN of CDMA subscriber is updated, the user is required to submit NPA-NXX or NGP, NPA. The NGP is identified as CSA by the system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocInfoType">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:complexType name="SsitInfoType">
+		<xs:sequence>
+			<xs:element name="ssit1" type="tns:SubscriberSpecificInformationTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally provided value for new Enterprise subscriber activation order lines, maps to customized Subscriber Specific Information Text (SSIT) values set up for corporate hierarchy</xs:documentation>
+				</xs:annotation>
+				<!--This is for enterprise reference ofr corporate orders only.-->
+			</xs:element>
+			<xs:element name="ssit2" type="tns:SubscriberSpecificInformationTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally provided value for new Enterprise subscriber activation order lines, maps to customized Subscriber Specific Information Text (SSIT) values set up for corporate hierarchy</xs:documentation>
+				</xs:annotation>
+				<!--This is a reference for corporate orders only.-->
+			</xs:element>
+			<xs:element name="ssit3" type="tns:SubscriberSpecificInformationTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally provided value for new Enterprise subscriber activation order lines, maps to customized Subscriber Specific Information Text (SSIT) values set up for corporate hierarchy</xs:documentation>
+				</xs:annotation>
+				<!--This is for enterprise reference ofr corporate orders only.-->
+			</xs:element>
+			<xs:element name="ssit4" type="tns:SubscriberSpecificInformationTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optionally provided value for new Enterprise subscriber activation order lines, maps to customized Subscriber Specific Information Text (SSIT) values set up for corporate hierarchy</xs:documentation>
+				</xs:annotation>
+				<!--This is a reference for corporate orders only.-->
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="StaticIpInfoType">
+		<xs:sequence>
+			<xs:element name="ipNgp" type="tns:InternetProtocolAddressPoolIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>NGP Code for Static IP address allocation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="commonPoolInd" type="tns:IpAddressCommonPoolIndicatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If true, IP will be allocated from the common pool if one is not already available in BAN pool.  If false, it will only be allocated from BAN pool.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberDetailsInfoType">
+		<xs:sequence>
+			<xs:element name="dealerCode" type="tns:DealerIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Designates Dealer Code, which is the agent or dealer who handled the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationDate" type="tns:ActivationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This field should be populated only if the subscriber is to be activated on a future date.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="communicationMethod" type="tns:ContactMethodTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Designates the communication method that may be used to contact the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="communicationEmail" type="tns:EmailAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Designates an email Address on which the customer can be contacted.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="callerIdName" type="tns:CallerIdNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A caller’s name that appears in the equipment screen.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UfmiInfoType">
+		<xs:sequence>
+			<xs:element name="urbanId" type="tns:UrbanAreaIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Urban Area Identifier identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fleetId" type="tns:FleetIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Fleet Identifier is the second element of the DirectConnect UFMI number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningErrorInfoType">
+		<xs:sequence>
+			<xs:element name="errorCode" type="tns:ErrorMessageIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The error code received when an error occurred while creating the subscriber (but the creation was still successful) </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorMessage" type="tns:ErrorMessageType">
+				<xs:annotation>
+					<xs:documentation>The error message received when an error occurred while creating the subscriber (but the creation was still successful) .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WarningErrorListType">
+		<xs:sequence>
+			<xs:element name="warningErrorInfo" type="tns:WarningErrorInfoType" maxOccurs="99">
+				<xs:annotation>
+					<xs:documentation>Information about the warnings generated when creating a subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ActivationDateType">
+		<xs:annotation>
+			<xs:documentation>Activation Date holds the calendar month, day and year Network access is given to a MDN, NAI or piece of equipment.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="AdditionalTitleType">
+		<xs:annotation>
+			<xs:documentation>Additional Title holds additional trailing honorifics attached to a person's name.  For example:"Sr.Vice President","Director","PHD.", etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Address Type Code distinguishes an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressVerificationSystemOverrideCodeType">
+		<xs:annotation>
+			<xs:documentation>If this flag is set to I, accept the address even if it cannot be found in the address database. Otherwise, it will be overridden with ‘S’ (and validated using code1).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AdjustmentReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Adjustment Reason Code Designates the reason for a credit adjustment.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApartmentDesignatorType">
+		<xs:annotation>
+			<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ApartmentNumberType">
+		<xs:annotation>
+			<xs:documentation>Apartment Number is an Address Component that contains the identifier of the apartment within the context of a building's postal address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AssociateIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AttentionTextType">
+		<xs:annotation>
+			<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumberType">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BusinessOrConsumerCodeType">
+		<xs:annotation>
+			<xs:documentation>Business Consumer Customer Code identifies the Customer as a Business Customer or a Consumer Customer.
+
+Values:
+‘B’ for Business
+‘C’ for Consumer</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CallerIdNameType">
+		<xs:annotation>
+			<xs:documentation>Calling Name (CNAM) is an Intelligent Network (IN) service that displays the caller's name on the calling party's digital readout. This is similar to caller ID except that the calling party's name is displayed along with the calling number or instead of the calling number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CityNameType">
+		<xs:annotation>
+			<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactMethodTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Contact Method Type Code uniquely identifies a  method that may be used to contact a PARTY, CUSTOMER ACCOUNT, SUBSCRIPTION, etc.
+
+Values:
+"Electronic Address"
+"Telecommunication Number"
+"USPS Postal Address"</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContractChangeReasonCodeType">
+		<xs:annotation>
+			<xs:documentation>Contract Change Reason Code documents the reason the Contract changed.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+			<xs:enumeration value="EQU"/>
+			<xs:enumeration value="PPD"/>
+			<xs:enumeration value="EQP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContractStartDateType">
+		<xs:annotation>
+			<xs:documentation>Contract Start Date is the first date on which a contract is effective.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="DealerIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DepartmentAccountCodeType">
+		<xs:annotation>
+			<xs:documentation>Department Account Code (DAC) is used within the context of a business customer hierarchy as way to group Billing Account Numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt">
+			<xs:maxInclusive value="999999999"/>
+			<xs:minExclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number Type Code designates a device type: IMEI(I), MSN(M), SIM(S), Kit (K), or ESN (E) for CDMA platform.
+Valid values:
+I - IMEI
+M - MSN
+S - SIM
+K - Kit
+E - ESN
+A - Airave (macId)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddressStringType">
+		<xs:annotation>
+			<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Error Message Identifier uniquely identifies a specific error message from the system that encountered the error.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageType">
+		<xs:annotation>
+			<xs:documentation>Error Message contains textual detail of why a particular transaction failed.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1024"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureCodeType">
+		<xs:annotation>
+			<xs:documentation>The code of the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FirstNameType">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+			<xs:documentation>alias: Given Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FleetIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Fleet Identifier is the second element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id•Fleet Id•Member Id. Example 164•100•3441.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GenerationType">
+		<xs:annotation>
+			<xs:documentation>Generation is the iteration of the name within a family affixed to the end of the name (e.g.: I,II,III or Jr.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIdentifierTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier Type Code identifies the type of HPPTT ID string.
+Values:
+P – CDMA PTN
+C – CDMA UFMI
+I – iDEN UFMI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="P"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="I"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressPairType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address Pair holds a pair of IP Addresses used in Packet Data Switching.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="31"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressPoolIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address Pool Identifier uniqely identifies an IP address pool.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressStringType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address type code designates a type for an internet protocol adderss (usually to distinguish IPv4 from IPv6 addresses).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IpAddressCommonPoolIndicatorType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address Common Pool Indicator designates the pool the Intern Protocol Address will be allocated from.
+
+Values:
+true - The Internet Protocol Address will be allocated from the common pool if one is not available in the Billing Account pool (Default).
+false - The Internet Protocol Address will be allocated from the Billing Account pool only.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="IsoCountryCodeType">
+		<xs:annotation>
+			<xs:documentation>An International Standardization Organization, ISO,  Country Code is the set of characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastNameType">
+		<xs:annotation>
+			<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			<xs:documentation>alias: Surname</xs:documentation>
+			<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ManufacturerPartyIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Manufacturer Party Identifier holds a value that uniquely identifies the Manufacturer of the specified PRODUCT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MasterSubsidyLockCodeType">
+		<xs:annotation>
+			<xs:documentation>Master Subsidy Lock (MSL) is used for programming the handset when the one-time subsidy lock code fails due to error, or when the phone needs to be reprogrammed for any reason.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MdnReservationIdentifierType">
+		<xs:annotation>
+			<xs:documentation>MDN Reservation Identifier identifies the reservation of one or more MDN in NMS.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MiddleNameType">
+		<xs:annotation>
+			<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileStationIdentificationNumberType">
+		<xs:annotation>
+			<xs:documentation>Mobile Station Identity (MSID) is the number that is associated with the home service provider and the wireless phone number. This is reprogrammed when the user changes home service providers.
+
+MSID is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+			<xs:documentation>Mobile Station Identification Number (MSID) is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ModelNumberType">
+		<xs:annotation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>The network type code identifies which network the subscriber is associated to.&#13;
+Possible values:&#13;
+C - CDMA&#13;
+I - IDEN</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkResourceTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Network Resource Type Code identifies the Network Resource type that is allocated to the subscriber. 
+
+Valid Values are:
+
+'B' - Public IP
+'C' - Corporate IP
+'H' - HPPTT NAI
+'I' - IMSI
+'M' - UFMI
+'N' - NAI
+'P' - PTN
+'R' - Private IP
+'T' - Talk Group
+'U' - Urban + Fleet.
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NpaNumberType">
+		<xs:annotation>
+			<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberGroupType">
+		<xs:annotation>
+			<xs:documentation>The NGP (Number Group) is identified as CSA by the Ensemble billing system and groups ranges for a number of resources such as IPs, IMSIs, NPANXXs, and UFs . This grouping represents a geographical zone that includes specific ranges.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NumberOfContractMonthsType">
+		<xs:annotation>
+			<xs:documentation>Number Of Contract Months is the number of months the Customer must commit to to receive Rate plans, Rebates, Discount, etc. under a contract.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger">
+			<xs:maxInclusive value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NxxNumberType">
+		<xs:annotation>
+			<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OneTimeKeySubsidyLockType">
+		<xs:annotation>
+			<xs:documentation>One Time Key Subsidy Lock (OTKSL) is a six-digit code used by CDMA phones as an activation code. It is used to activate a brand new phone onto wireless service, and it works only one time. This code makes it possible for a consumer to purchase the phone anywhere, call up the provider's toll-free number, and then activate the wireless phone from the directions given by the representative on the other end of the line. After the initial programming, the code is no longer valid, and the only way to program the phone is via the MSL (master subsidy lock).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ParameterStringType">
+		<xs:annotation>
+			<xs:documentation>Parameter is a variable of data type string that must be given a specific value during the execution of a program, a procedure within a program or an interface transaction.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneLockCodeType">
+		<xs:annotation>
+			<xs:documentation>Phone Lock Code is used in conjunction with the phone lock feature. When activated, the phone will lock after you switch your phone off and back on. Each time the phone is turned on, it will prompt you to enter a lock code before it will allow a call to be placed, or to access most of the phone's memory and menu features. Calls, such as emergency or other numbers programmed as unlocked phone numbers may be placed without entering a lock code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumberType">
+		<xs:annotation>
+			<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PortedInMobileDirectoryNumberType">
+		<xs:annotation>
+			<xs:documentation>Ported In Mobile Directory Number holds the Mobile DIrectory Number (MDN) ported in from another Carrier.Required if the Ported Number Indicator equals"PRI"and a temporary MDN is required.Only valid if the resource type is"C".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PortedNumberIndicatorType">
+		<xs:annotation>
+			<xs:documentation>Identifies those instances of Mobile Directory NUmber (MDN) ported in from another carrier.
+Values are:
+PRI =&gt; The MDN was ported in 
+RGL =&gt; Regular, the MDN was not ported in.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+			<xs:enumeration value="PRI"/>
+			<xs:enumeration value="RGL"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostOfficeBoxNumberType">
+		<xs:annotation>
+			<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PrecedingStreetDirectionType">
+		<xs:annotation>
+			<xs:documentation>Preceding Direction is a USPS Postal Address component that holds the compass direction that appears before the Street Name in some cases.  For example in, "North Main Street", "North" would reside in Preceding Direction.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PrimaryAddressLineType">
+		<xs:annotation>
+			<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  &#13;
+&#13;
+For a street address, Primary Address Line holds the concatenation of the street components of the address.&#13;
+For a Post Office Box address, Primary Address Line holds the P.O. Box information.&#13;
+For a Rural address, Primary Address Line holds the Rural number.&#13;
+</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="RetailStoreIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.&#13;
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RuralRouteBoxNumberType">
+		<xs:annotation>
+			<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RuralRouteControlNumberType">
+		<xs:annotation>
+			<xs:documentation>Rural Route Control Number holds the rural road or highway control number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SecondaryAddressLineType">
+		<xs:annotation>
+			<xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCodeType">
+		<xs:annotation>
+			<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SidNumberType">
+		<xs:annotation>
+			<xs:documentation>The SID or System Identification Number is a 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your ''home'' system.</xs:documentation>
+			<xs:documentation>The SID or System Identification Number is a 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your ''home'' system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetNameType">
+		<xs:annotation>
+			<xs:documentation>Street Name is a USPS Postal Address component that holds the name of a street.  For example in, "123 Main Street", "Main" would reside in Street Name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetNumberType">
+		<xs:annotation>
+			<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StreetSuffixType">
+		<xs:annotation>
+			<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberSpecificInformationTextType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Specific Information Text is an optionally provided value for new Enterprise subscriber activation order lines, and maps to customized SSIT values set up for corporate hierarchy.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TitleType">
+		<xs:annotation>
+			<xs:documentation>alias: Honorific</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanAreaIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Urban Area Identifier identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. The format of the UFMI number is: Urban Area Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCodeExtensionType">
+		<xs:annotation>
+			<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsPostalCodeType">
+		<xs:annotation>
+			<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UspsStateAbbreviationType">
+		<xs:annotation>
+			<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

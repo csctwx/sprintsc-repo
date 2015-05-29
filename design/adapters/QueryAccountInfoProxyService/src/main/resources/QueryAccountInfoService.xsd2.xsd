@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountDetailInfo/v1/queryAccountDetailInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<!--04/16/2014   Paula Muller           2.1        Removed the MSOInfo structure in response as that is old and from P2K days.              GBL14.2          PJ012047-->
+	
+<!---->
+	
+<xs:element name="queryAccountDetailInfo" type="tns:QueryAccountDetailInfoRequest"/>
+	
+<xs:element name="queryAccountDetailInfoResponse" type="tns:QueryAccountDetailInfoResponse"/>
+	
+<xs:complexType name="QueryAccountDetailInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="banInfo">
+				
+<xs:complexType>
+					
+<xs:choice>
+						
+<xs:element name="subsId" type="SubscriptionId"/>
+						
+<xs:element name="ptn" type="MdnString"/>
+						
+<xs:element name="nai" type="NetworkAccessIdentifierString"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="billingAddressInfo" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="subscriberCountInfo" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAccountDetailInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="basicInfo">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="billingAccountNumber" type="CustomerAccountNumber"/>
+						
+<xs:element name="accountStatus" type="AccountStatusCode"/>
+						
+<xs:element name="accountType" type="BillingAccountType"/>
+						
+<xs:element name="subType" type="SubscriptionTypeCode"/>
+						
+<xs:element name="billingSystemCode" type="BillingSystemCode"/>
+						
+<xs:element name="preferredLanguage" type="CustomerPreferredLanguage"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="billingAddressInfo" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:sequence minOccurs="0">
+						
+<xs:element name="uspsPostalCd" type="UspsPostalCd" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="subscriberCountInfo" type="SubscriberCountInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberCountInfo">
+		
+<xs:sequence minOccurs="0">
+			
+<xs:element name="totalCount" type="xs:integer"/>
+			
+<xs:element name="activeCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="reservedCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="suspendedCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="cancelledCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="idenReservedCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="idenActiveCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="idenCancelledCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="idenSuspendedCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="cdmaReservedCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="cdmaActiveCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="cdmaCancelledCount" type="xs:integer" minOccurs="0"/>
+			
+<xs:element name="cdmaSuspendedCount" type="xs:integer" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="CustomerAccountNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Account Number uniquely identifies an Account that represents ongoing business relationship .</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing System Code is used to specify which Billing System is responsible for providing billing for the specified MDN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionTypeCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingSystemCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing System Code is used to specify which Billing System is responsible for providing billing for the specified MDN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="ENS"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MdnString">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is a dialable 10-digit NANP directory number assigned to address a wireless service subscriber.  The MDN is the access number for the subscriber's access service.  It is also used BILLING.
+
+The MDN is meant to be changeable, as the ownership of the device may change hands, the owner may change telephone numbers, or the owner may change cities.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionId">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCd">
+		
+<xs:annotation>
+			
+<xs:documentation>USPSPostalCd contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountStatusCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Status Code is used to indicate the status of the account. Valid values are:
+P2K:
+A - Active
+F - Final
+N - Non Paid Disconnect
+W - Write Off
+Ensemble:
+O – Open
+S – Suspended
+T – Tentative
+N – Canceled
+C – Closed
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerPreferredLanguage">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer preferred language for communication.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

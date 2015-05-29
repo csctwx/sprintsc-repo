@@ -1,0 +1,1430 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountSecurityInfo/v1/queryAccountSecurityInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountSecurityInfo/v1/queryAccountSecurityInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- E1710.013 - Added fetchRealTimeInfo, concatenateAddress, commMethod and commValue fields - Jocelen-->
+	
+<!-- Date              Author             Version     Change                                                                                                  Rel                          SR# -->
+	
+<!--06/13/2011   LaRonna Tisdale  1.0       Added secEmailValidInd to notificationInfo Response structure             GBL11.4       PJ005462.01-->
+	
+<!--06/13/2011  Steve Heichelheim 1.1      Applied MVM simple type to secEmailValidInd                                         GBL11.4       PJ005462.01-->
+	
+<xs:element name="queryAccountSecurityInfo" type="tns:QueryAccountSecurityInfo"/>
+	
+<xs:element name="queryAccountSecurityInfoResponse" type="tns:QueryAccountSecurityInfoResponse"/>
+	
+<xs:complexType name="QueryAccountSecurityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteria">
+				
+<xs:annotation>
+					
+<xs:documentation>The info structure for search criteria.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="securityInfo" type="tns:SearchSecurityInfo" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer Security Information records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchPrivacyInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not the marketing privacy options list and cpni privacy options list for the BAN should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAccountSecurityInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="securityInfo" type="tns:SecurityInfo" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The securityInfo structure contains the security information about the customers who have opted in for security authentication process. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="privacyInfo" type="tns:PrivacyList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The privacyInfo structure provides a list of the valid fields for the individual marketing privacy information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AddressInfo">
+		
+<xs:sequence>
+			
+<xs:element name="type" type="tns:AddressTypeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Address Type Code differentiates an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetNumber" type="tns:StreetNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="line1" type="tns:PostalAddressLine" minOccurs="0"/>
+			
+<xs:element name="line2" type="tns:PostalAddressLine" minOccurs="0"/>
+			
+<xs:element name="ruralRoute" type="tns:RuralRouteControlNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Rural Route Control Number holds the rural road or highway identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ruralNumber" type="tns:RuralRouteBoxNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pobNumber" type="tns:PostOfficeBoxNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetName" type="tns:StreetName" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'Street Name is the USPS Postal Address component holding the name of a street.  For example in,"123 Main Street","Main"would reside in Street Name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetDirection" type="tns:StreetDirection" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing before or after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetType" type="tns:StreetSuffix" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Street Suffix is the USPS Postal Address component holding the trailing part of the street name.  For example in,"123 Main Street","Street"would reside in Street Suffix.  Other values might be Cir, Vlvd, Rd, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trailingDirection" type="tns:TrailingDirection" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apartment" type="tns:ApartmentNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Apartment Number is the USPS Postal Address component holding the identifier of the apartment within the context of a bilding's postal address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apartmentType" type="tns:ApartmentDesignator" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="attention" type="tns:AttentionTextEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="city" type="tns:CityNameEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="state" type="tns:UspsStateAbbreviation" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="country" type="tns:Iso3CharCountryCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCd" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zip4Code" type="tns:UspsPostalCodeExtension" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="geoCode" type="tns:GeographicCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isGeoCodeOverridden" type="tns:GeoCodeManualOverrideFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to indicate if  geo code was Manually Overridden</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:AddressEffectiveFromDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains the effective date of the address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="concatenateAddress" type="tns:AddressLine" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Concatenate Address contains the security Address returned by Amdocs API.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CpniPrivacyList">
+		
+<xs:sequence>
+			
+<xs:element name="cpniPrivacyInfo" type="tns:PrivacyInfo" minOccurs="0" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>The cpniPrivacyInfo structure provides the cpni privacy information for the customer.
+cpniPrivacyInfo returns 0-20 records.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="Device">
+		
+<xs:sequence>
+			
+<xs:element name="deviceSerialNumber" type="tns:EquipmentSerialNumberString">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.
+
+Equipment Serial Number is one of the following:
+
+Electronic Serial Number (ESN);
+
+Mobile Equipment IDentifier (MEID);
+
+International Mobile Equipment Identfier (IMEI);
+
+Subscriber Identify Module (SIM);
+
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialType" type="tns:EquipmentSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number Type classifies Equipment serial numbers as one of the following:  ESN, MEID, IMEI, SIM, or MSN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketingPrivacyList">
+		
+<xs:sequence>
+			
+<xs:element name="marketingPrivacyInfo" type="tns:PrivacyInfo" minOccurs="0" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>The marketingPrivacyInfo structure provides the marketing privacy information for the customer.
+marketingPrivacyInfo returns 0-20 records.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NotificationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="notificationMethod" type="tns:ContactMethodTypeCodeEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Notification Method to communicate with the customer for security notices (New PIN, PIN Change, address/phone changes etc)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secEmail" type="tns:EmailAddressString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Email address to communicate with the customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secSms" type="tns:PhoneNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Short Message Service (SMS) is a communications protocol allowing the interchange of short messages between mobile telephony devices. The SMS technology has facilitated the development and growth of text messaging. The connection between the phenomenon of text messaging and the underlying technology is so great that in parts of the world the term"SMS"is used colloqially as a synonym for a text message from another person or the act of sending a text message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secFax" type="tns:FaxNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A fax (short for facsimile and sometimes called telecopying) is the telephonic transmission of scanned-in printed material (text or images), usually to a telephone number associated with a printer or other output device. The original document is scanned with a fax machine, which treats the contents (text or images) as a single fixed graphic image, converting it into a bitmap. In this digital form, the information is transmitted as electrical signals through the telephone system. The receiving fax machine reconverts the coded image and prints a paper copy of the document</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secAddressInfo" type="tns:AddressInfo" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The secAddressInfo structure provides the address to communicate with the customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secEmailValidInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to indicate if email address is less than 30 days old.                                     If notificationMethod = ‘E’, then this field is Required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrivacyInfo">
+		
+<xs:sequence>
+			
+<xs:element name="touchPoint" type="tns:ApplicationIdentifierInteger" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies the application that set this attribute.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="channel" type="tns:CustomerContactChannel" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>How customer contacted Sprint.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="code" type="tns:PartyPrivacyPreferenceCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Code identifying the CPNI privacy preference option  (e.g. P1- P3).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="value" type="tns:PartyPrivacyPreferenceValue" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Value of the selected CPNI privacy preference option.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrivacyList">
+		
+<xs:sequence>
+			
+<xs:element name="marketingPrivacyList" type="tns:MarketingPrivacyList">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to 20 Marketing Privacy List records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cpniPrivacyList" type="tns:CpniPrivacyList">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to 20 CPNI Privacy Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteria">
+		
+<xs:choice>
+			
+<xs:element name="ban">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:BillingAccountNumber">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberString">
+				
+<xs:annotation>
+					
+<xs:documentation>'Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="device" type="tns:Device">
+				
+<xs:annotation>
+					
+<xs:documentation>The device structure is used for serial number and/or serial type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UrbanFleetMemberIdentifierString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="ipAddress">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternetProtocolAddressString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="imsi">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternationalMobileSubscriberIdentityString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="nai">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. 
+
+The standard syntax is"user@realm". </xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:NetworkAccessIdentifierString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="hppttId">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk technology. The HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:HighPerformancePushToTalkIDString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SecurityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="pin" type="tns:PersonalIdentificationNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="questionCode" type="tns:SecurityQuestionIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Security Question Code for authentication. This field may be populated if ‘pin’ is populated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="question" type="tns:SecurityQuestionText" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Security Question for authentication. . This field will be populated if ‘questionCode is populated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="answer" type="tns:SecurityAnswer" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Security Answer holds the answer to the Security Question identified by Security Question Identifier.  This value must be supplied by the system user in response to the Security Question before they are allowed to proceed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="securityPlusInd" type="tns:SecurityPlusIndicator" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Security Plus indicator denotes if security plus functionality is enabled.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="securityNotificationSuppressInd" type="tns:SecurityNotificationSuppressionFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This field notifies whether a notification has to be send for an Authentication or Financial activity on the Account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="notificationInfo" type="tns:NotificationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The notificationInfo structure contains the details about the notification to the customer for security information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="commMethod" type="tns:ContactMethodTypeCodeEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Method for contacting (email, phone, letter). Valide values are:
+E – Email
+F – Fax
+L -- Letter
+S - SMS Text
+0 - Default</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="commValue" type="tns:ContactMethodValueEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact Method Value holds the phone number or the eMail address in Ensemble when  Contact Method Type Code identifies a phone number or eMail address as a Contact Method.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchSecurityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="fetchSecurityInfo" type="tns:FetchInformationFlag">
+				
+<xs:annotation>
+					
+<xs:documentation>Fetch information flag</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchRealTimeInfo" type="tns:FetchInformationFlag" default="false" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Fetch Real Time Info is a boolean field that will indicate if EAI will retrieve security information from NOR (fetchRealTimeInfo=false) or Amdocs API (fetchRealTimeInfo=true).
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AccountNumberInt">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AddressEffectiveFromDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Contains the effective date of the address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:EffectiveFromDate"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AddressLine">
+		
+<xs:annotation>
+			
+<xs:documentation>Address Line</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AddressTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Address Type Code distinguishes an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApartmentDesignator">
+		
+<xs:annotation>
+			
+<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApartmentNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Apartment Number is an Address Component that contains the identifier of the apartment within the context of a bilding's postal address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationIdentifierInteger">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AttentionText">
+		
+<xs:annotation>
+			
+<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AttentionTextEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:AttentionText">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CityName">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="49"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CityNameEns">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:CityName">
+			
+<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContactMethodTypeCodeEns">
+		
+<xs:restriction base="tns:TypeCode"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContactMethodValueEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Contact Method Value holds the phone number or the eMail address in Ensemble when  Contact Method Type Code identifies a phone number or eMail address as a Contact Method.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerContactChannel">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Contact Channel identifies how the customer contacted Sprint.
+Examples:
+1 – Business Reply Card, 
+2 -  Phone, 
+3 – Web, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ElectronicAddressString">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressString">
+		
+<xs:restriction base="tns:ElectronicAddressString">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier will contain one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfie (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>EquipmentSerialNumberType is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FaxNumber">
+		
+<xs:restriction base="tns:PhoneNumber"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="GeoCodeManualOverrideFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Flag to indicate if  geo code was Manually Overridden</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="GeographicCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+			
+<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDString">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:UniformResourceIdentifierString">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:ElectronicAddressString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="Iso3CharCountryCode">
+		
+<xs:annotation>
+			
+<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IsoCountryCode">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IsoCountryCode">
+		
+<xs:annotation>
+			
+<xs:documentation>An International Standardization Organization (ISO) is the set of characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+			
+<xs:documentation>An International Standardization Organization, ISO,  Country Code is the set of characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyPrivacyPreferenceCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Privacy Preference Code identifies the preferred privacy for a PARTY.
+
+Values:
+Banner
+Email
+Mail
+Phone
+Popup
+Text Message</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyPrivacyPreferenceValue">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Privacy Preference Value is the value of the selected CPNI privacy preference option.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumber">
+		
+<xs:restriction base="tns:PersonalIdentificationNumberCan">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberCan">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumber">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PostalAddressLine">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PostOfficeBoxNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RuralRouteBoxNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RuralRouteControlNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Rural Route Control Number holds the rural road or highway control number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityAnswer">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityNotificationSuppressionFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>This field notifies whether a notification has to be send for an Authentication or Financial activity on the Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityPlusIndicator">
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityQuestionIdentifier">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityQuestionText">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetDirection">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Direction is the component of a USPS Posatal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing before or after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetName">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Name is a USPS Postal Address component that holds the name of a street.  For example in, "123 Main Street", "Main" would reside in Street Name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetSuffix">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.  Other values might be Cir, Vlvd, Rd, etc.</xs:documentation>
+			
+<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:SubscriptionIdentifier">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TrailingDirection">
+		
+<xs:annotation>
+			
+<xs:documentation>Trailing Direction is a USPS POstal Address component that holds the compass direction that sometimes appears at the end of a street address.  For example in, "123 Main Street East", "East" would reside in Trailing Direction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniformResourceIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>A Uniform Resource Identifier (URI - pronounced YEW-AHR-EYE) is the way you identify any of those points of content, whether it be a page of text, a video or sound clip, a still or animated image, or a program. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsCountyCode">
+		
+<xs:annotation>
+			
+<xs:documentation>United States Postal Service County Code contains the Postal Service 2 character code for identification of a County.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCd">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtension">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsStateAbbreviation">
+		
+<xs:annotation>
+			
+<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

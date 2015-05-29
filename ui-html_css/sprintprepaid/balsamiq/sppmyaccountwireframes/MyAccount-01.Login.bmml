@@ -1,0 +1,358 @@
+<mockup version="1.0" skin="sketch" fontFace="Balsamiq Sans" measuredW="1405" measuredH="1373" mockupW="1394" mockupH="1348">
+  <controls>
+    <control controlID="770" controlTypeID="com.balsamiq.mockups::IconLabel" x="129" y="140" w="-1" h="-1" measuredW="128" measuredH="143" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>16769280</color>
+        <icon>StopIcon%7Cxxlarge</icon>
+        <text>Sprint%20Prepaid%20Logo</text>
+      </controlProperties>
+    </control>
+    <control controlID="775" controlTypeID="com.balsamiq.mockups::LinkBar" x="35" y="520" w="-1" h="-1" measuredW="326" measuredH="19" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>14540253</borderColor>
+        <color>10066329</color>
+        <hrefs>MyAccount-01A.ForgotPIN%26bm%3BMyAccount-01A.ForgotPIN.bmml%26bm%3BMyAccount-01A.ForgotPIN.bmml%26bm%3BMyAccount-01A.ForgotPIN.bmml%2CMyAccount-01C.Login-LostPhone%26bm%3BMyAccount-01C.Login-LostPhone.bmml%26bm%3BMyAccount-01C.Login-LostPhone.bmml%26bm%3BMyAccount-01C.Login-LostPhone.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2224%2C497%2C168%2C510%22%20href%3D%22MyAccount-01A.ForgotPIN.bmml%22%20alt%3D%22MyAccount-01A.ForgotPIN%22%20id%3D%22775%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22186%2C497%2C350%2C510%22%20href%3D%22MyAccount-01C.Login-LostPhone.bmml%22%20alt%3D%22MyAccount-01C.Login-LostPhone%22%20id%3D%22775%22/%3E</map>
+        <size>13</size>
+        <text>Forgot%20your%20account%20PIN%2C%20Report%20device%20lost%20or%20stolen</text>
+      </controlProperties>
+    </control>
+    <control controlID="779" controlTypeID="__group__" x="60" y="317" w="266" h="39" measuredW="266" measuredH="39" zOrder="14" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="266" h="39" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="779">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="11" y="8" w="240" h="-1" measuredW="198" measuredH="22" zOrder="1" locked="false" isInGroup="779">
+          <controlProperties>
+            <size>14</size>
+            <text>Your%20mobile%20or%20account%20number</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="780" controlTypeID="__group__" x="60" y="380" w="266" h="39" measuredW="266" measuredH="39" zOrder="17" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="266" h="39" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="780">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="11" y="8" w="171" h="-1" measuredW="112" measuredH="22" zOrder="1" locked="false" isInGroup="780">
+          <controlProperties>
+            <size>14</size>
+            <text>Your%20account%20PIN</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="808" controlTypeID="__group__" x="156" y="449" w="75" h="43" measuredW="75" measuredH="43" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-04.Home%26bm%3BMyAccount-04.Home.bmml%26bm%3BMyAccount-04.Home.bmml%26bm%3BMyAccount-04.Home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22145%2C424%2C220%2C467%22%20href%3D%22MyAccount-04.Home.bmml%22%20alt%3D%22MyAccount-04.Home%22%20id%3D%22808%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="75" h="43" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="808">
+          <controlProperties>
+            <backgroundAlpha>0</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <borderStyle>square</borderStyle>
+            <color>15658734</color>
+            <value>0</value>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="8" y="11" w="59" h="-1" measuredW="46" measuredH="22" zOrder="1" locked="false" isInGroup="808">
+          <controlProperties>
+            <align>center</align>
+            <color>16769280</color>
+            <size>14</size>
+            <text>Sign%20In</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="809" controlTypeID="com.balsamiq.mockups::Link" x="31" y="717" w="-1" h="-1" measuredW="131" measuredH="19" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-02A.Suspended%26bm%3BMyAccount-02A.Suspended.bmml%26bm%3BMyAccount-02A.Suspended.bmml%26bm%3BMyAccount-02A.Suspended.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C692%2C151%2C711%22%20href%3D%22MyAccount-02A.Suspended.bmml%22%20alt%3D%22MyAccount-02A.Suspended%22%20id%3D%22809%22/%3E</map>
+        <text>View%20suspended%20page</text>
+      </controlProperties>
+    </control>
+    <control controlID="810" controlTypeID="com.balsamiq.mockups::Link" x="31" y="742" w="-1" h="-1" measuredW="168" measuredH="19" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-03.Curing%26bm%3BMyAccount-03.Curing.bmml%26bm%3BMyAccount-03.Curing.bmml%26bm%3BMyAccount-03.Curing.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C717%2C188%2C736%22%20href%3D%22MyAccount-03.Curing.bmml%22%20alt%3D%22MyAccount-03.Curing%22%20id%3D%22810%22/%3E</map>
+        <text>View%20Overdue%20/%20Curing%20Page</text>
+      </controlProperties>
+    </control>
+    <control controlID="811" controlTypeID="com.balsamiq.mockups::Link" x="31" y="770" w="-1" h="-1" measuredW="187" measuredH="19" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-01E.Login-SL-HL-IPBlock%26bm%3BMyAccount-01E.Login-SL-HL-IPBlock.bmml%26bm%3BMyAccount-01E.Login-SL-HL-IPBlock.bmml%26bm%3BMyAccount-01E.Login-SL-HL-IPBlock.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%2220%2C745%2C207%2C764%22%20href%3D%22MyAccount-01E.Login-SL-HL-IPBlock.bmml%22%20alt%3D%22MyAccount-01E.Login-SL-HL-IPBlock%22%20id%3D%22811%22/%3E</map>
+        <text>View%20Softlock/%20Hardlock/IPLock</text>
+      </controlProperties>
+    </control>
+    <control controlID="812" controlTypeID="com.balsamiq.mockups::Canvas" x="11" y="28" w="365" h="645" measuredW="100" measuredH="70" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>4999747</color>
+      </controlProperties>
+    </control>
+    <control controlID="813" controlTypeID="__group__" x="11" y="26" w="364" h="35" measuredW="364" measuredH="35" zOrder="8" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="0" y="0" w="360" h="-1" measuredW="100" measuredH="10" zOrder="0" locked="false" isInGroup="813"/>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="4" y="6" w="360" h="29" measuredW="100" measuredH="70" zOrder="1" locked="false" isInGroup="813">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+            <color>10066329</color>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="322" y="9" w="34" h="-1" measuredW="34" measuredH="22" zOrder="2" locked="false" isInGroup="813">
+          <controlProperties>
+            <size>14</size>
+            <text>15%3A30</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Icon" x="257" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="3" locked="false" isInGroup="813">
+          <controlProperties>
+            <icon>WirelessIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Icon" x="291" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="4" locked="false" isInGroup="813">
+          <controlProperties>
+            <icon>CellBarsIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Icon" x="14" y="8" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="5" locked="false" isInGroup="813">
+          <controlProperties>
+            <icon>GMailIcon%7Csmall</icon>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="823" controlTypeID="com.balsamiq.mockups::SubTitle" x="719" y="234" w="352" h="-1" measuredW="339" measuredH="27" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>16769280</color>
+        <text>Welcome%20To%20My%20Sprint%20Prepaid%21</text>
+      </controlProperties>
+    </control>
+    <control controlID="824" controlTypeID="com.balsamiq.mockups::Label" x="479" y="256" w="832" h="-1" measuredW="733" measuredH="24" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <align>center</align>
+        <color>16769280</color>
+        <size>16</size>
+        <text>Sign%20in%20to%20My%20Sprint%20to%20refill%20minutes%20and%20data%2C%20change%20your%20plan%2C%20view%20your%20account%20history%20and%20more.</text>
+      </controlProperties>
+    </control>
+    <control controlID="828" controlTypeID="__group__" x="858" y="436" w="75" h="43" measuredW="75" measuredH="43" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <href>MyAccount-04.Home%26bm%3BMyAccount-04.Home.bmml%26bm%3BMyAccount-04.Home.bmml%26bm%3BMyAccount-04.Home.bmml</href>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C411%2C922%2C454%22%20href%3D%22MyAccount-04.Home.bmml%22%20alt%3D%22MyAccount-04.Home%22%20id%3D%22828%22/%3E</map>
+      </controlProperties>
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="75" h="43" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="828">
+          <controlProperties>
+            <backgroundAlpha>0</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <borderStyle>square</borderStyle>
+            <color>15658734</color>
+            <href>MyAccount-Home%26bm%3BMyAccount-Home.bmml%26bm%3BMyAccount-Home.bmml%26bm%3BMyAccount-Home.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22847%2C411%2C922%2C454%22%20href%3D%22MyAccount-Home.bmml%22%20alt%3D%22MyAccount-Home%22%20id%3D%220%22/%3E</map>
+            <value>0</value>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="8" y="11" w="59" h="-1" measuredW="43" measuredH="21" zOrder="1" locked="false" isInGroup="828">
+          <controlProperties>
+            <align>center</align>
+            <color>16769280</color>
+            <text>Sign%20In</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="829" controlTypeID="com.balsamiq.mockups::StickyNote" x="11" y="1192" w="234" h="181" measuredW="109" measuredH="123" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>12</size>
+        <text>Colours%20based%20on%20Sprint%20Style%20Guide%0AYellow%23%20ffe100%0ABlack%23%20000000%0AWhite%23%20FFFFF%0ALight%20Grey%23%20D2D2D0%0ADark%20Grey%23%204C4A43%0ARedish%20%23F75822%0ABlue%20%2304C5CC%0AGreen%20%23A7D603</text>
+      </controlProperties>
+    </control>
+    <control controlID="831" controlTypeID="com.balsamiq.mockups::RoundButton" x="464" y="178" w="869" h="409" measuredW="32" measuredH="32" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>4999747</borderColor>
+        <color>4999747</color>
+        <shape>roundRect</shape>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="833" controlTypeID="__group__" x="772" y="770" w="257" h="38" measuredW="257" measuredH="38" zOrder="18" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::LinkBar" x="1" y="0" w="-1" h="-1" measuredW="247" measuredH="19" zOrder="0" locked="false" isInGroup="833">
+          <controlProperties>
+            <text>About%20us%2CLegal%2CPrivacy%2CAd%20choices</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="17" w="257" h="-1" measuredW="247" measuredH="21" zOrder="1" locked="false" isInGroup="833">
+          <controlProperties>
+            <text>%AE%202014%20Sprint%20prepaid.%20All%20rights%20reserved</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="834" controlTypeID="__group__" x="762" y="307" w="266" h="39" measuredW="266" measuredH="39" zOrder="19" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="266" h="39" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="834">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="11" y="8" w="240" h="-1" measuredW="198" measuredH="22" zOrder="1" locked="false" isInGroup="834">
+          <controlProperties>
+            <size>14</size>
+            <text>Your%20mobile%20or%20account%20number</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="835" controlTypeID="__group__" x="762" y="370" w="266" h="39" measuredW="266" measuredH="39" zOrder="20" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="266" h="39" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="835">
+          <controlProperties>
+            <backgroundAlpha>0.5</backgroundAlpha>
+            <borderColor>16769280</borderColor>
+            <color>14540253</color>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="11" y="8" w="171" h="-1" measuredW="112" measuredH="22" zOrder="1" locked="false" isInGroup="835">
+          <controlProperties>
+            <size>14</size>
+            <text>Your%20account%20PIN</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="836" controlTypeID="com.balsamiq.mockups::LinkBar" x="737" y="507" w="-1" h="-1" measuredW="326" measuredH="19" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderColor>14540253</borderColor>
+        <color>10066329</color>
+        <hrefs>MyAccount-01A.ForgotPIN%26bm%3BMyAccount-01A.ForgotPIN.bmml%26bm%3BMyAccount-01A.ForgotPIN.bmml%26bm%3BMyAccount-01A.ForgotPIN.bmml%2CMyAccount-01C.Login-LostPhone%26bm%3BMyAccount-01C.Login-LostPhone.bmml%26bm%3BMyAccount-01C.Login-LostPhone.bmml%26bm%3BMyAccount-01C.Login-LostPhone.bmml</hrefs>
+        <map>%3Carea%20shape%3D%22rect%22%20coords%3D%22726%2C484%2C870%2C497%22%20href%3D%22MyAccount-01A.ForgotPIN.bmml%22%20alt%3D%22MyAccount-01A.ForgotPIN%22%20id%3D%22836%22/%3E%3Carea%20shape%3D%22rect%22%20coords%3D%22888%2C484%2C1052%2C497%22%20href%3D%22MyAccount-01C.Login-LostPhone.bmml%22%20alt%3D%22MyAccount-01C.Login-LostPhone%22%20id%3D%22836%22/%3E</map>
+        <size>13</size>
+        <text>Forgot%20your%20account%20PIN%2C%20Report%20device%20lost%20or%20stolen</text>
+      </controlProperties>
+    </control>
+    <control controlID="837" controlTypeID="__group__" x="409" y="35" w="993" h="87" measuredW="993" measuredH="87" zOrder="22" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::RoundButton" x="145" y="28" w="848" h="45" measuredW="32" measuredH="32" zOrder="0" locked="false" isInGroup="837">
+          <controlProperties>
+            <shape>roundRect</shape>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::LinkBar" x="685" y="0" w="-1" h="-1" measuredW="295" measuredH="19" zOrder="1" locked="false" isInGroup="837">
+          <controlProperties>
+            <color>6710886</color>
+            <text>Activate%2C%20Refill%2C%20Coverage%20Maps%2C%20Find%20a%20Store</text>
+            <underline>false</underline>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Image" x="0" y="14" w="134" h="73" measuredW="1141" measuredH="707" zOrder="2" locked="false" isInGroup="837">
+          <controlProperties>
+            <src>../../../../../Google%2520Drive/Working%2520Documents/Customers%2520RNAM/Speed/MSDP%2520Project/Design/SW%2520Release%25201%2520UI%2520Design/MyAccount/Mobile/v3/assets/Sprint_Prepaid_Logo_FullColor.jpg</src>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::VRule" x="258" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="3" locked="false" isInGroup="837">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="175" y="40" w="-1" h="-1" measuredW="61" measuredH="22" zOrder="4" locked="false" isInGroup="837">
+          <controlProperties>
+            <size>14</size>
+            <text>My%20Sprint</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="291" y="40" w="-1" h="-1" measuredW="32" measuredH="22" zOrder="5" locked="false" isInGroup="837">
+          <controlProperties>
+            <size>14</size>
+            <text>Shop</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::VRule" x="348" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="6" locked="false" isInGroup="837">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Label" x="376" y="39" w="-1" h="-1" measuredW="36" measuredH="22" zOrder="7" locked="false" isInGroup="837">
+          <controlProperties>
+            <size>14</size>
+            <text>Plans</text>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::VRule" x="429" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="8" locked="false" isInGroup="837">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="457" y="40" w="-1" h="-1" measuredW="51" measuredH="22" zOrder="9" locked="false" isInGroup="837">
+          <controlProperties>
+            <size>14</size>
+            <text>Support</text>
+          </controlProperties>
+        </control>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::VRule" x="526" y="28" w="-1" h="45" measuredW="10" measuredH="100" zOrder="10" locked="false" isInGroup="837">
+          <controlProperties>
+            <color>6710886</color>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="__group__" x="872" y="37" w="104" h="28" measuredW="104" measuredH="28" zOrder="11" locked="false" isInGroup="837">
+          <controlProperties>
+            <href>MyAccount-01.Login%26bm%3BMyAccount-01.Login.bmml%26bm%3BMyAccount-01.Login.bmml%26bm%3BMyAccount-01.Login.bmml</href>
+            <map>%3Carea%20shape%3D%22rect%22%20coords%3D%221270%2C47%2C1374%2C75%22%20href%3D%22MyAccount-01.Login.bmml%22%20alt%3D%22MyAccount-01.Login%22%20id%3D%2213%22/%3E</map>
+          </controlProperties>
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="0" y="0" w="104" h="28" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="13">
+              <controlProperties>
+                <borderColor>0</borderColor>
+                <color>16769280</color>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="9" y="3" w="88" h="-1" measuredW="49" measuredH="21" zOrder="1" locked="false" isInGroup="13">
+              <controlProperties>
+                <align>center</align>
+                <color>0</color>
+                <size>13</size>
+                <text>Log%20Out</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="838" controlTypeID="com.balsamiq.mockups::VRule" x="400" y="25" w="-1" h="768" measuredW="10" measuredH="100" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="839" controlTypeID="com.balsamiq.mockups::HRule" x="400" y="25" w="1000" h="-1" measuredW="100" measuredH="10" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+    <control controlID="840" controlTypeID="com.balsamiq.mockups::VRule" x="1395" y="25" w="-1" h="768" measuredW="10" measuredH="100" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <stroke>dashed</stroke>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

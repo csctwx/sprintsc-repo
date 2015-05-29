@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceParameterValues/v1/queryReferenceParameterValues.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceParameterValues/v1/queryReferenceParameterValues.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version  Change                                                                                            Rel                          SR# -->
+	
+<!--07/27/2009   Steve Heichelheim     1.0          Applied MVM standards and simple types                                     GBL10.1.0.0            E4757-->
+	
+<xs:element name="queryReferenceParameterValues" type="tns:QueryReferenceParameterValuesType">
+		
+<xs:annotation>
+			
+<xs:documentation>This interface provides the capability to retrieve Parameter Values from the PARAM_VALUES table in the NOR.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryReferenceParameterValuesResponse" type="tns:QueryReferenceParameterValuesResponseType"/>
+	
+<xs:complexType name="QueryReferenceParameterValuesType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterCodeList" type="tns:ParameterCodeListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceParameterValuesResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterValueList" type="tns:ParameterValueListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains from 1 to many parameterValueInfo Structures.  Parameter Codes provided in the request that are not found in the PARAM_VALUES table will not appear in the response.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterCodeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterCode" type="tns:NextelOnlineRepositoryParameterCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The parameter code for the parameter value to be retrieved (example:  MAX_UAI_CHARS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="parameterApplicationId" type="tns:ApplicationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The parameter application id for the parameter value to be retrieved.  If not provided CSM will be used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterCodeListType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterCodeInfo" type="tns:ParameterCodeInfoType" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterValueInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterCode" type="tns:NextelOnlineRepositoryParameterCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The parameter code (example:  MAX_UAI_CHARS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="parameterValue" type="tns:NextelOnlineRepositoryParameterValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>The value for the parameter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Effective Date for this parameter.  Included in the response when it is not null in the PARAM_VALUES table.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Expiration Date for this parameter.  Included in the response when it is not null in the PARAM_VALUES table.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterValueListType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterValueInfo" type="tns:ParameterValueInfoType" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ApplicationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="NextelOnlineRepositoryParameterCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Nextel Online Repository Parameter Code is the identifies a specific paramter in the NOR database PARAM_VALUES table.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NextelOnlineRepositoryParameterValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Nextel Online Repository Parameter Value is the value of a specific paramter in the NOR database PARAM_VALUES table.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

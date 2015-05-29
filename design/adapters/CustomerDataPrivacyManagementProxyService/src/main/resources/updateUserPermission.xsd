@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 (x64) (http://www.altova.com) by Amber.Peppers@sprint.com (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/updateUserPermission/v1/updateUserPermission.xsd" targetNamespace="http://integration.sprint.com/interfaces/updateUserPermission/v1/updateUserPermission.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                         Version     Change                                                                                               Rel                          SR# -->
+	<!--02/03/2010    J. Silva / G. Silva           1.0             Initial Draft                                                                                        GBL10.3                  PJ002221-->
+	<!--02/03/2010   Steve Heichelheim       1.0           Added MVM standards and simple types                            GBL10.3                  PJ002221-->
+	<xs:element name="updateUserPermission" type="tns:UpdateUserPermissionType"/>
+	<xs:element name="updateUserPermissionResponse" type="tns:UpdateUserPermissionResponseType"/>
+	<xs:complexType name="UpdateUserPermissionType">
+		<xs:sequence>
+			<xs:element name="permissionList" type="tns:PermissionListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateUserPermissionResponseType">
+		<xs:sequence>
+			<xs:element name="message" type="tns:ConfirmMessageTextType">
+				<xs:annotation>
+					<xs:documentation>Successful Message </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PermissionListType">
+		<xs:sequence>
+			<xs:element name="permissionInfo" type="tns:PermissionInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PermissionInfoType">
+		<xs:sequence>
+			<xs:element name="grantorId" type="tns:UserIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The ID of the user making the request to grant or revoke the permission/consent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grantorIdType" type="tns:UserIdentifierTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The grantor Id type. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="granteeId" type="tns:UserIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The user Id of the person permission is being given to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="granteeIdType" type="tns:UserIdentifierTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The grantee Id type. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="permissionId" type="tns:ProtectedResourceIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The resource id that is being protected.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetId" type="tns:UserIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The id of the user that owns the resource/permission.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="targetIdType" type="tns:UserIdentifierTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The target user Id type.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termsAndConditionsVersion" type="tns:VersionStringType">
+				<xs:annotation>
+					<xs:documentation>The terms and conditions version number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="permissionType" type="tns:TransactionTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The action that the grantor is allowing the grantee to perform on the resource/permission.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="grantDate" type="tns:EffectiveFromDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The date that the permission is given.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="revokeDate" type="tns:EffectiveThruDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date that the permission should be revoked – can be future dated. (Format YYYYMMDDHHMM)
+only set if the consent is being revoked.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple types-->
+	<xs:simpleType name="ConfirmMessageTextType">
+		<xs:annotation>
+			<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Effective From Date holds the first calendar month, day, year, hour, minute, second and fraction of a second a Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveThruDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Effective Thru Date Time holds the last calendar day and time the Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="TransactionTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+			<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserIdentifierType">
+		<xs:annotation>
+			<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VersionStringType">
+		<xs:annotation>
+			<xs:documentation>Version Number  identifies a release or iteration of a Service, Header, Trailer, Business Transaction, API, etc.</xs:documentation>
+			<xs:documentation>Version Integer holds a string value that identifies a release or iteration of a Service, Header, Trailer, Business Transaction, API, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!--New Simple Types-->
+	<xs:simpleType name="ProtectedResourceIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Protected Resource Identifier uniquely identifies a resource that is being protected.  The associated resource could be a file, link, directory, folder, database object, etc..</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UserIdentifierTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>User Identifier Type Code designates a specific type of user identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

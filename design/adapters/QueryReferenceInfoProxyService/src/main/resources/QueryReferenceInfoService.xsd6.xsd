@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceBillCycleList/v1/queryReferenceBillCycleList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceBillCycleList/v1/queryReferenceBillCycleList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2008    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceBillCycleList" type="tns:QueryReferenceBillCycleListRequest"/>
+	
+<xs:element name="queryReferenceBillCycleListResponse" type="tns:QueryReferenceBillCycleListResponse"/>
+	
+<xs:complexType name="QueryReferenceBillCycleListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="billCycleList" type="tns:BillCycleList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceBillCycleListRequest"/>
+	
+<xs:complexType name="BillCycleInfo">
+		
+<xs:sequence>
+			
+<xs:element name="cycleCode" type="tns:BillingCycleCode"/>
+			
+<xs:element name="cycleDesc" type="tns:BillingCycleDescription" minOccurs="0"/>
+			
+<xs:element name="currentCycleStartDate" type="tns:BillingCycleStartDate"/>
+			
+<xs:element name="currentCycleCloseDate" type="tns:BillingCycleEndDate"/>
+			
+<xs:element name="currentCycleBillDate" type="tns:BillingCycleBillDate"/>
+			
+<xs:element name="currentCycleDueDate" type="tns:BillingCycleDueDate"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BillCycleList">
+		
+<xs:sequence>
+			
+<xs:element name="billCycleInfo" type="tns:BillCycleInfo" maxOccurs="30"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="IdentifierInteger">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier Integer  holds an Integer value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleCode">
+		
+<xs:restriction base="tns:IdentifierInteger">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Description is a plain text description of the billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleBillDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Bill Date is the bill date of the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleDueDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Due Date is the date payement is due for the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleEndDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle End Date is the last date of the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleStartDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Start Date is the first date of the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 (http://www.altova.com) by Sprint (SPRINT PCS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/createSubscriberCharge/v1/createSubscriberCharge.xsd" targetNamespace="http://integration.sprint.com/interfaces/createSubscriberCharge/v1/createSubscriberCharge.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                      Version     Change                                                                           Rel                          SR# -->
+	<!--7/13/2011       Aline Kawakami, J Silva     1.0            Initial Version.                                                                 GBL11.3.0.0             PJ4940 Chapter 7-->
+	<!--7/14/2011    Steve Heichelheim       1.0      Added MVM standards and simple types                               GBL11.3.0.0             PJ4940 Chapter 7-->
+	<xs:element name="createSubscriberCharge" type="tns:CreateSubscriberChargeType"/>
+	<xs:element name="createSubscriberChargeResponse" type="tns:CreateSubscriberChargeResponseType"/>
+	<xs:complexType name="CreateSubscriberChargeType">
+		<xs:sequence>
+			<xs:element name="info" type="tns:SearchCriteriaType">
+				<xs:annotation>
+					<xs:documentation>This structure contains the choice fields/structures that will identify the subscriber for the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timeStampInfo" type="tns:TimeStampInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This Structure contains last update timeStamp of a specific BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeCreateInfo" type="tns:ChargeCreateInfoType">
+				<xs:annotation>
+					<xs:documentation>Contains the information for which the one-time charge being applied to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateSubscriberChargeResponseType">
+		<xs:sequence>
+			<xs:element name="chargeSequenceNumber" type="tns:SequenceNumberType">
+				<xs:annotation>
+					<xs:documentation>The sequence number of the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeAmount" type="tns:ChargeAmountType">
+				<xs:annotation>
+					<xs:documentation>Amount of the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalTaxAmount" type="tns:TaxAmountType">
+				<xs:annotation>
+					<xs:documentation>The total tax amount for the charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalAmount" type="tns:TotalAmountType">
+				<xs:annotation>
+					<xs:documentation>The total amount of the charge including taxes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="ChargeCreateInfoType">
+		<xs:sequence>
+			<xs:element name="featureCode" type="tns:FeatureCodeType">
+				<xs:annotation>
+					<xs:documentation>The feature code the charge is associated with.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="isTaxableInd" type="tns:BinaryExpressionType">
+				<xs:annotation>
+					<xs:documentation>This field indicates rather this charge should be taxed by the create charge service or not.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeAmount" type="tns:ChargeAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Charge Amount field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxAmount" type="tns:TaxAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Tax Amount field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingComment" type="tns:NoteTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Comment for Billing purposes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date the charge becomes effective.  May be left blank. If this date is in the past, it will be connected to the current billing cycle.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodFromDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>From date for the invoice. Supplied in Rel. 3.1 for IP Billing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodToDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>To Date for the invoice. Supplied in Rel. 3.1 for IP Billing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sourceCode" type="tns:ApplicationIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates whether or not this charge is for a third party (e.g. 3rd party content provider). Required because 3rd party charges appear in a separate section of the invoice.  Supplied in Rel. 3.1. (Must be ‘D’ or ‘R’)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="memoText" type="tns:MemoTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>User supplied text for the memo that Ensemble automatically generates for each charge (Ensemble supplies only the system text for the memo).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderKeyInfo" type="tns:OrderKeyInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure providing the details for the Order Key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="externalTaxList" type="tns:ExternalTaxListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Provides a list of taxes related to a charge. Up to 20 taxes may be supplied as input using this structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="repairLocation" type="tns:ServiceLocationIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The repairLocation is only applicable to subscriber level charge.
+The repairLocation tag represents the RMS_LOCATION_ID field in the RMS_LOCATION table of the repair center (the REPAIR_IND field = ’Y’)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExternalTaxInfoType">
+		<xs:sequence>
+			<xs:element name="taxType" type="tns:TaxTypeIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Type of tax. Valid values: 02, 03, 04, 05, 06, 08, 09, 10, 50, 51, 52, 70, 99, 30, 07, 11, 40, 41, 42, 43, 44, 45, 46, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 71, 90</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxAmount" type="tns:TaxAmountType">
+				<xs:annotation>
+					<xs:documentation>This field contains the tax Amount value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxRate" type="tns:TaxRateType">
+				<xs:annotation>
+					<xs:documentation>This field contains the tax Rate value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxAuthority" type="tns:TaxingAuthorityIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Tax jurisdiction, e.g., federal, state, city. Valid values: 1, 2, 3, 4, 5, 9, 8</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ExternalTaxListType">
+		<xs:sequence>
+			<xs:element name="externalTaxInfo" type="tns:ExternalTaxInfoType" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Provides a list of taxes related to a charge. Up to 20 taxes may be supplied as input using this structure.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrderKeyInfoType">
+		<xs:sequence>
+			<xs:element name="orderKeyId" type="tns:OrderIdentifierType">
+				<xs:annotation>
+					<xs:documentation>This field contains the identification of the orderKey</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subLineSequenceNumber" type="tns:OrderSubLineItemNumberType">
+				<xs:annotation>
+					<xs:documentation>This field contains the subLine Sequence Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchCriteriaType">
+		<xs:choice>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>'Mobile Directory Number' (MDN) is the actual phone number one would dial to reach a specific mobile phone. Prior to Wireless Number Portability, MDN was the identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carreriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combination of the Urban Area ID, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500-600-700, translates to 600 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network. Equipment Serial Number is one of the following:
+Electronic Serial Number (ESN);
+Mobile Equipment Identifier (MEID);
+International Mobile Equipment Identifier (IMEI);
+Subscriber Identify Module (SIM);
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				<xs:annotation>
+					<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use UP Addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				<xs:annotation>
+					<xs:documentation>Internation Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the netowkr. It is also used to acquire other details of the mobile iin the Home Location Register (HLR) or a locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead. The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM). An IMSI is usually 15 digits long, but can be shorter (for example MTN Sout-Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code(MNC), either 2 digits (European standard) or 3 digits(Nort American Standard), the remaining digits are the Mobile Subscriber IDentification number (MSIN) within the network's customer base. The IMSI conforms to the Internation Telecommunicaton Union (ITU) E.212 numbering Standard.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. The standard syntax is "user@realm".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				<xs:annotation>
+					<xs:documentation>Additional IMSI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				<xs:annotation>
+					<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizng QChat Push-To-Talk technology. The HPPTTID is constructed in the username@domain URI format. The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="TimeStampInfoType">
+		<xs:sequence>
+			<xs:element name="lastUpdateDate" type="tns:LastUpdateDateType">
+				<xs:annotation>
+					<xs:documentation>BAN’s last update date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastUpdateStamp" type="tns:LastUpdateNumericStampType">
+				<xs:annotation>
+					<xs:documentation>BAN’s last update stamp</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ApplicationIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="ChargeAmountType">
+		<xs:annotation>
+			<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromDateType">
+		<xs:annotation>
+			<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveThruDateType">
+		<xs:annotation>
+			<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.&#13;
+&#13;
+Elements declared to be of type date must follow this form:  &#13;
+CCYY-MM-DD&#13;
+range for CC is: 00-99&#13;
+range for YY is: 00-99&#13;
+range for MM is: 01-12&#13;
+range for DD is: &#13;
+01-28 if month is 2&#13;
+01-29 if month is 2 and the gYear is a leap gYear&#13;
+01-30 if month is 4, 6, 9, or 11&#13;
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12&#13;
+&#13;
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureCodeType">
+		<xs:annotation>
+			<xs:documentation>Feature Code uniquely identifies the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		<xs:annotation>
+			<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressStringType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastUpdateDateType">
+		<xs:annotation>
+			<xs:documentation>The Last Update Date is the calendar day on which the last update was made.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="LastUpdateNumericStampType">
+		<xs:annotation>
+			<xs:documentation>Last Update Numeric Stamp is used in conjunction with the Last Update Date Time to uniquely identify a specific update iteration.&#13;
+&#13;
+Typically Last Update Date Time and Last Update Numeric Stamp would be used in a psuedo-conversational approach to updates.  A record is read into local storage and the lock on the source record is released.  When the updated record is written back to the database where the source Record ID equals the Update Record ID, Source Last Update Date Time equals the original Update Last Update Date Time and Source Last Update Numeric Stamp equals the original Update Last Update Numeric Stamp.&#13;
+&#13;
+Both Last UPdate Date Time and Last Update Numeric Stamp are incremented in the update.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MemoTextType">
+		<xs:annotation>
+			<xs:documentation>Memo Text is the body of textual content of an Ensemble MEMO.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NoteTextType">
+		<xs:annotation>
+			<xs:documentation>Note Text is the body of the text in the NOTE.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="500"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Order Identifier uniquely identifies an order.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderSubLineItemNumberType">
+		<xs:annotation>
+			<xs:documentation>Order Sub Line Item Number uniquely identifies an instance of Sub Line Item within the scope of an ORDER.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SequenceNumberType">
+		<xs:annotation>
+			<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceLocationIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Service Location Identifier uniquely identifies an equipment service location.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxAmountType">
+		<xs:annotation>
+			<xs:documentation>Tax Amount is the monetary amount charged and collected on behalf of a government entity for taxes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxingAuthorityIdentifierType">
+		<xs:annotation>
+			<xs:documentation>The Taxing Authority Identifier designates which level of taxing authority the tax is collected on behalf of.&#13;
+Possible Values:&#13;
+0 – federal&#13;
+1 – State&#13;
+2 – Country&#13;
+3 – City&#13;
+4 – Secondary country&#13;
+5 – Secondary city&#13;
+9 – All</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxRateType">
+		<xs:annotation>
+			<xs:documentation>The Tax Rate is a rate expressed in decimal format and is applied to a charge to determine the amount of tax to be collected from the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxTypeIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Tax Type Identifier designates a specific type of tax.
+Valid Values Include:
+01 - UTILITY-USERS,
+02 - BQ,
+03 - 911-TAX,
+04 - PUC-04,
+05 - TELEPHONE-SALES,
+06 - STATUTORY-RECEIPTS,
+07 - UTIL-USE-BUSNESS,
+08 - LICENSE,
+09 - SERVICE,
+10 - DISTRICT,
+11 - 911-BUSNESS,
+30 - ALL-TYPES,
+40 - USF-SURCHGE,
+41 - TRS-SURCHGE,
+42 - DEAF-SURCHGE,
+43 - HIGH-COST,
+44 - POISON-CONTROL,
+45 - LIFELINE,
+46 - PICC,
+50 - EXCISE,
+51 - SPECIAL,
+52 - SURCHARGE,
+59 - LICENSE-TAX-2,
+60 - UTIL-USE-BUS-2,
+61 - UTIL-USE-2,
+62 - BQ-2,
+63 - 911-TAX-2,
+64 - GROSS-2,
+65 - USF-SURCHGE-2,
+66 - TRS-SURCHGE-2,
+67 - DEAF-SURCHGE-2,
+68 - HIGH-COST-2,
+
+69 - POISON-CONTROL-2,
+
+70 - FEDERAL,
+
+71 - EUCL,
+90 - ROAM-EXMP,
+99 - SALES.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TotalAmountType">
+		<xs:annotation>
+			<xs:documentation>Total Amount is the sum of associated amounts.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="13"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

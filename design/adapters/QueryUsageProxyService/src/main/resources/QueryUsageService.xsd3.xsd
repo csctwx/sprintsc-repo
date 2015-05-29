@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://integration.sprint.com/interfaces/querySubscriberBilledUsageSummary/v1/querySubscriberBilledUsageSummary.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberBilledUsageSummary/v1/querySubscriberBilledUsageSummary.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	
+<!--08/11/2010  Dweepant Bakshi 1.1         Added optional sharingOfferId in Shared and Individual Usage response                  GBL 11.1   PJ000082-->
+	
+<xsd:element name="querySubscriberBilledUsageSummary" type="QuerySubscriberBilledUsageSummary"/>
+	
+<xsd:element name="querySubscriberBilledUsageSummaryResponse" type="QuerySubscriberBilledUsageSummaryResponse"/>
+	
+<xsd:complexType name="QuerySubscriberBilledUsageSummary">
+		
+<xsd:sequence>
+			
+<xsd:element name="billingAccountNumberInformation" type="BillingAccountNumberInformation"/>
+			
+<xsd:element name="subscriberInformation" type="SubscriberInformation"/>
+			
+<xsd:element name="subscriberUsageInputInfo" type="SubscriberUsageInputInfo"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="QuerySubscriberBilledUsageSummaryResponse">
+		
+<xsd:sequence>
+			
+<xsd:element name="subscriberUsageHeaderInfo" type="SubscriberUsageHeaderInfo"/>
+			
+<xsd:element name="subscriberSharedUsageInfoList" type="SubscriberSharedUsageInfoList" minOccurs="0"/>
+			
+<xsd:element name="subscriberIndividualUsageInfoList" type="SubscriberIndividualUsageInfoList" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="BillingAccountNumberInformation">
+		
+<xsd:sequence>
+			
+<xsd:element name="billingAccountNumber" type="BillingAccountNumberEns"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="RateCardInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="currentTierIndex" type="TierIndex"/>
+			
+<xsd:element name="tierThreshold" type="TierThreshold"/>
+			
+<xsd:element name="tierInfoList" type="TierInfoList"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberIndividualUsageInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="usageCategoryCode" type="UsageCategoryCode"/>
+			
+<xsd:element name="usageCategoryName" type="UsageCategoryName"/>
+			
+<xsd:element name="usageCategoryGroupName" type="UsageCategoryGroupName"/>
+			
+<xsd:element name="soc" type="ServiceOrderCode" minOccurs="0"/>
+			
+<xsd:element name="sharingOfferId" type="OfferIdentifierType" minOccurs="0">
+				
+<xsd:annotation>
+					
+<xsd:documentation>Identifier of the group level offer for 3G Hybrid Sharing plans. 
+Populated for Hybrid Data Sharing soc.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+<xsd:element name="poolingGroupId" type="PoolingGroupIdentifier" minOccurs="0"/>
+			
+<xsd:element name="effectiveDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xsd:element name="expirationDate" type="EffectiveThruDate" minOccurs="0"/>
+			
+<xsd:element name="subsectionId" type="SubsectionId"/>
+			
+<xsd:element name="subsectionName" type="SubsectionName"/>
+			
+<xsd:element name="displayOrder" type="DisplayOrder"/>
+			
+<xsd:element name="unitOfMeasure" type="UnitOfMeasureCode"/>
+			
+<xsd:element name="includedUnits" type="UsageValue"/>
+			
+<xsd:element name="usedUnits" type="UsageValue"/>
+			
+<xsd:element name="remainingUnits" type="UsageValue"/>
+			
+<xsd:element name="additionalUsedUnits" type="UsageValue"/>
+			
+<xsd:element name="additionalCharge" type="AdditionalCharge"/>
+			
+<xsd:element name="rateCardInfo" type="RateCardInfo" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberIndividualUsageInfoList">
+		
+<xsd:sequence>
+			
+<xsd:element name="subscriberIndividualUsageInfo" type="SubscriberIndividualUsageInfo" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberUsageHeaderInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="billPeriodStartDate" type="StartDate"/>
+			
+<xsd:element name="billPeriodEndDate" type="EndDate"/>
+			
+<xsd:element name="billSequenceNo" type="BillSequenceNumber"/>
+			
+<xsd:element name="pricePlanChangeType" type="PricePlanChangeType" minOccurs="0"/>
+			
+<xsd:element name="pricePlanChangeDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xsd:element name="pricePlanCode" type="PricePlanCode"/>
+			
+<xsd:element name="pricePlanName" type="PricePlanName"/>
+			
+<xsd:element name="planType" type="PlanType"/>
+			
+<xsd:element name="shareType" type="ShareType" minOccurs="0"/>
+			
+<xsd:element name="sharedUsageExclusionInd" type="SharedUsageExclusionInd"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberUsageInputInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="callingApplicationId" type="ApplicationIdentifierEns" minOccurs="0"/>
+			
+<xsd:element name="billSequenceNo" type="BillSequenceNumber"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberSharedUsageInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="usageCategoryCode" type="UsageCategoryCode"/>
+			
+<xsd:element name="usageCategoryName" type="UsageCategoryName"/>
+			
+<xsd:element name="usageCategoryGroupName" type="UsageCategoryGroupName"/>
+			
+<xsd:element name="soc" type="ServiceOrderCode" minOccurs="0"/>
+			
+<xsd:element name="sharingOfferId" type="OfferIdentifierType" minOccurs="0">
+				
+<xsd:annotation>
+					
+<xsd:documentation>Identifier of the group level offer for 3G Hybrid Sharing plans. 
+Populated for Hybrid Data Sharing soc.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			
+<xsd:element name="poolingGroupId" type="PoolingGroupIdentifier" minOccurs="0"/>
+			
+<xsd:element name="effectiveDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xsd:element name="expirationDate" type="EffectiveThruDate" minOccurs="0"/>
+			
+<xsd:element name="subsectionId" type="SubsectionId"/>
+			
+<xsd:element name="subsectionName" type="SubsectionName"/>
+			
+<xsd:element name="displayOrder" type="DisplayOrder"/>
+			
+<xsd:element name="unitOfMeasure" type="UnitOfMeasureCode"/>
+			
+<xsd:element name="includedUnits" type="UsageValue"/>
+			
+<xsd:element name="usedUnits" type="UsageValue"/>
+			
+<xsd:element name="remainingUnits" type="UsageValue"/>
+			
+<xsd:element name="additionalUsedUnits" type="UsageValue"/>
+			
+<xsd:element name="additionalCharge" type="AdditionalCharge"/>
+			
+<xsd:element name="rateCardInfo" type="RateCardInfo" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberSharedUsageInfoList">
+		
+<xsd:sequence>
+			
+<xsd:element name="subscriberSharedUsageInfo" type="SubscriberSharedUsageInfo" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="SubscriberInformation">
+		
+<xsd:sequence>
+			
+<xsd:element name="subscriptionId" type="SubscriptionIdentifierEns"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="TierInfo">
+		
+<xsd:sequence>
+			
+<xsd:element name="index" type="TierIndex"/>
+			
+<xsd:element name="tierFrom" type="TierThreshold"/>
+			
+<xsd:element name="tierTo" type="TierThreshold"/>
+			
+<xsd:element name="mrcRate" type="MrcRate" minOccurs="0"/>
+			
+<xsd:element name="overageRate" type="OverageRate" minOccurs="0"/>
+			
+<xsd:element name="inclusiveMinutes" type="FreeMinutesIncluded" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:complexType name="TierInfoList">
+		
+<xsd:sequence>
+			
+<xsd:element name="tierInfo" type="TierInfo" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+<xsd:simpleType name="AccountNumberInt">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="AdditionalCharge">
+		
+<xsd:restriction base="xsd:string">
+			
+<xsd:maxLength value="12"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="ApplicationIdentifier">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Application Identifier uniquely identifies an Application</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="IdentifierString">
+			
+<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="ApplicationIdentifierEns">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Ensemble Application Identifier uniquely identifies an Application in Ensemble inrterfaces.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="ApplicationIdentifier">
+			
+<xsd:maxLength value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="BillingAccountNumberEns">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="AccountNumberInt">
+			
+<xsd:totalDigits value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="BillSequenceNumber">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Contains the Bill Sequence Number of the cycle-month.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:integer">
+			
+<xsd:totalDigits value="3"/>
+			
+<xsd:minInclusive value="1"/>
+			
+<xsd:maxInclusive value="999"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="Charge">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xsd:documentation>
+			
+<xsd:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:decimal"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="DisplayOrder">
+		
+<xsd:restriction base="xsd:integer">
+			
+<xsd:totalDigits value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="EffectiveFromDate">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="EffectiveThruDate">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="EndDate">
+		
+<xsd:annotation>
+			
+<xsd:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="FreeMinutesIncluded">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Free Minutes Included contains the number of free minutes that are included within a Pricing Plan.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:decimal">
+			
+<xsd:totalDigits value="21"/>
+			
+<xsd:fractionDigits value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="IndicatorBoolean">
+		
+<xsd:annotation>
+			
+<xsd:documentation>IndicatorBoolean holds a value that indicators whether a particular situation exists.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="IdentifierString">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="IdentifierName">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Identifier Names holds the common name associated with a unique instance of an Identifer String</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="Index">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Index holds a value that serves to guide, point out or facilitate the location of an object.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="MonthlyRecurringCharge">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xsd:documentation>
+			
+<xsd:documentation>Monthly Recurring Charge holds the base dollar amount billed to the Customer every month for a service.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="Charge">
+			
+<xsd:totalDigits value="7"/>
+			
+<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="MrcRate">
+		
+<xsd:restriction base="TermDollarAmount">
+			
+<xsd:totalDigits value="7"/>
+			
+<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="OverageRate">
+		
+<xsd:restriction base="TermDollarAmount">
+			
+<xsd:totalDigits value="7"/>
+			
+<xsd:fractionDigits value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="PlanType">
+		
+<xsd:restriction base="TypeCode">
+			
+<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="PoolingGroupIdentifier">
+		
+<xsd:restriction base="IdentifierString">
+			
+<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="PricePlanChangeType">
+		
+<xsd:restriction base="xsd:string">
+			
+<xsd:maxLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="PricePlanCode">
+		
+<xsd:restriction base="TypeCode">
+			
+<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="PricePlanName">
+		
+<xsd:restriction base="TypeName">
+			
+<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="QuantityDecimal">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Quantity represents a total amount or number.</xsd:documentation>
+			
+<xsd:documentation>Quantity represents a total amount or number.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:decimal"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="ServiceOrderCode">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Service Order Code - Ensemble</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string">
+			
+<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="SharedUsageExclusionInd">
+		
+<xsd:restriction base="IndicatorBoolean"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="ShareType">
+		
+<xsd:restriction base="TypeCode">
+			
+<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="StartDate">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Case Start Date contains the calendar day the CASE began.  For example, in a Collection Case this would be the calendar day the Billing Account was put into Collections.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:date"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="SubscriptionIdentifier">
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="SubsectionId">
+		
+<xsd:restriction base="xsd:integer">
+			
+<xsd:totalDigits value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="SubsectionName">
+		
+<xsd:restriction base="IdentifierName">
+			
+<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="TermDollarAmount">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Term Dollar Amount provides the dollar amount associated with a specific term of agreement, order, etc.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:decimal"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="TierIndex">
+		
+<xsd:restriction base="Index">
+			
+<xsd:totalDigits value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="TierThreshold">
+		
+<xsd:restriction base="QuantityDecimal">
+			
+<xsd:totalDigits value="13"/>
+			
+<xsd:fractionDigits value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="TypeCode">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="TypeName">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Type Name is the name of a specific instance of a Type Code</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UnitOfMeasureCode">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xsd:documentation>
+			
+<xsd:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string">
+			
+<xsd:maxLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UnitOfMeasureValue">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UsageCategoryCode">
+		
+<xsd:restriction base="TypeCode">
+			
+<xsd:maxLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UsageCategoryName">
+		
+<xsd:restriction base="TypeName">
+			
+<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UsageCategoryGroupName">
+		
+<xsd:restriction base="TypeName">
+			
+<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="UsageValue">
+		
+<xsd:restriction base="UnitOfMeasureValue">
+			
+<xsd:maxLength value="18"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<xsd:simpleType name="SubscriptionIdentifierEns">
+		
+<xsd:restriction base="SubscriptionIdentifier">
+			
+<xsd:maxLength value="20"/>
+			
+<xsd:minLength value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xsd:simpleType name="OfferIdentifierType">
+		
+<xsd:annotation>
+			
+<xsd:documentation>Offer Identifier designates a specific offer.</xsd:documentation>
+		</xsd:annotation>
+		
+<xsd:restriction base="xsd:string">
+			
+<xsd:minLength value="1"/>
+			
+<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/createActivityLog/v1/createActivityLog.xsd" targetNamespace="http://integration.sprint.com/interfaces/createActivityLog/v1/createActivityLog.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	
+<!-- Date              Author                        Change                                                                               Rel                    SR# -->
+	
+<!--05/04/2009    Steve Heichelheim      1.0 Apply standards and simple types                             SDC Rel B         E4637-->
+	
+<!--04/05/2012    Suneel Pathipati          2.0 Added a new structure ActivityTextParameterListType   GBL12.3     PJ007122-->
+	
+<xs:element name="createActivityLog" type="tns:CreateActivityLogRequestType"/>
+	
+<xs:element name="createActivityLogResponse" type="tns:CreateActivityLogResponseType"/>
+	
+<xs:complexType name="CreateActivityLogRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies the BAN for which notification will be created. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activityInfo" type="tns:ActivityInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies the type of notification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationDataInfo" type="tns:ApplicationDataInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CreateActivityLogResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Message indicating transaction is completed successfully</xs:documentation>
+				</xs:annotation>
+				
+<!-- only for ReplyCompCode 4, 8 -->
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="ActivityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="activityReason">
+				
+<xs:annotation>
+					
+<xs:documentation>The regulatory activity code in the REGULATORY_MATRIX table.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ActivityCodeType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="additionalActivityInfo" type="tns:AdditionalActivityInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure that provides info regarding additional activities</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activityTextParameterList" type="tns:ActivityTextParameterListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of activity Text Parameters</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ActivityTextParameterInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterNumber" type="tns:SequenceNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Activity Text Parameter Sequence Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="parameterValue">
+				
+<xs:annotation>
+					
+<xs:documentation>Activity Text Parameter value corresponding to the Parameter Sequence Number</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ParameterValueType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ActivityTextParameterListType">
+		
+<xs:sequence>
+			
+<xs:element name="activityTextParameterInfo" type="tns:ActivityTextParameterInfoType" maxOccurs="99">
+				
+<xs:annotation>
+					
+<xs:documentation>Activity Text Parameter Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AdditionalActivityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="createInteractionInd" type="tns:CreateInteractionIndType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Populated with a 'Y' value by calling applications that create sView interactions.
+All other calling applications can set the field to an 'N' value, leave it empty, or not send it at all.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ApplicationDataInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="associateId" type="tns:AssociateIdentifierRsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ID of the associate who created the notification. If this field is populated, CSM saves it in the ACTIVITY_LOG table, with the notification, so that it will be possible to track who created it.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="storeId" type="tns:ExternalRetailStoreIdType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This value is passed from an external application (Radio Shack, RMS+) to Sprint in the Ensemble Billing system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberEnsType">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone number of any subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Member ID (UrbanId*FleetId*MemberId) of any subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The serial number for any equipment for any subscriber under the BAN. This number can be an IMEI, Sim Card ID, MSN, or ESN. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>IP address of any subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>IMSI /MSID of any subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>NAI of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional IMSI of any iDEN or Dual subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber&#8217;s HPPTT ID. The ID will be constructed from the username@domain field, where the username will be a PTN or UFMI-based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="ActivityCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activity Code uniquely identifies a specific deed, action or function.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AssociateIdentifierRsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Associate Identifier Rs is the Radio Schack Associate Identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberEnsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreateInteractionIndType">
+		
+<xs:annotation>
+			
+<xs:documentation>Create Interactcion Indicator will be set to "T" (true) by calling applications that create sView interactions.  All other calling applications can set the field to a "F"alse value, leave it empty or not send it at all.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExternalRetailStoreIdType">
+		
+<xs:annotation>
+			
+<xs:documentation>External Retail Store Identifier  holds the Facility Identifer that uniquely identifies a store of an external Customer such as Wal Mart or Best Buy.  May be printed on the label when shiping to a Distribution Center.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ParameterValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Parameter Value designates the actual data associated to its identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="0"/>
+			
+<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

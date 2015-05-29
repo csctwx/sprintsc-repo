@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryPromotionalOffers/v1/queryPromotionalOffers.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryPromotionalOffers/v1/queryPromotionalOffers.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<!-- Date              Author                    Version     Change                                                                                                                  Rel                          SR# -->
+	
+<!--07/22/2014  Natalia Silva                1.0          New version                                                                                                     MID14.3                 PJ012676 -->
+	
+<!--08/06/2014  Adon Powell               1.0          Standardize                                                                                                       MID14.3                 PJ012676 -->
+	
+<!---->
+	
+<xs:element name="queryPromotionalOffers" type="tns:QueryPromotionalOffersRequestType">
+		
+<xs:annotation>
+			
+<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryPromotionalOffersResponse" type="tns:QueryPromotionalOffersResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryPromotionalOffersRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="requestType" type="tns:RequestType">
+				
+<xs:annotation>
+					
+<xs:documentation>Request Type L - List or C - Count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelCode" type="tns:SalesChannelCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales channel of requesting user</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="promotionalOffersList">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:PromotionalOffersListType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryPromotionalOffersResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="offerList" type="tns:OfferListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List with offer information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ItemListType">
+		
+<xs:sequence>
+			
+<xs:element name="itemInfo" type="tns:ItemInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ItemInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" type="tns:StockKeepingUnitType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sku/Item ID
+Required when requestType=C
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerCount" type="tns:OfferCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Required when requestType=C</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceType" type="tns:DeviceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>deviceType	Device type, either D-device or A-accessory</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DevicePurchaseReqListType">
+		
+<xs:sequence>
+			
+<xs:element name="devicePurchaseReqInfo" type="tns:DevicePurchaseReqInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DevicePurchaseReqInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="devicePurchaseReq" type="tns:DeviceProcurementCodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferListType">
+		
+<xs:sequence>
+			
+<xs:element name="offerInfo" type="tns:OfferInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Offer information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="offerDescription" type="tns:OfferDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Offer description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerName" type="tns:OfferNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Offer Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerNumber" type="tns:OfferNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Offer Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="combinabilityAttr" type="tns:CombineFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Combinability Atribute Yes or no as part of the offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerType" type="tns:CustomerTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer Type: new existing or both.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="devicePurchaseReqList" type="tns:DevicePurchaseReqListType" minOccurs="0"/>
+			
+<xs:element name="discountPercentage" type="tns:DiscountPercentageType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>percentage of discount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="flatRate" type="tns:FlatRateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>flat rate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Key Numeric Identifier for Offer</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:OfferIdentifierType">
+						
+<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="promotionalOfferType" type="tns:PromotionalOfferType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of promotional offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="talkingPoint1" type="tns:OfferTalkingPointTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Talking points for rep to highlight offer features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="talkingPoint2" type="tns:OfferTalkingPointTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Talking points for rep to highlight offer features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="talkingPoint3" type="tns:OfferTalkingPointTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Talking points for rep to highlight offer features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="talkingPoint4" type="tns:OfferTalkingPointTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Talking points for rep to highlight offer features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="talkingPoint5" type="tns:OfferTalkingPointTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Talking points for rep to highlight offer features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactionTypeList" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:TransactionListType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="startDate" type="tns:StartDateTime" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date offer is active</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="endDate" type="tns:EndDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date offer ends</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="criteriaCompletionCode" type="tns:CriteriaCompletionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Required when requestType=L</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountList" type="tns:AccountListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing account info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditClassList" type="tns:CreditClassListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing credit class list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemList" type="tns:ItemListType"/>
+			
+<xs:element name="socList" type="tns:SocListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing soc list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondarySocList" type="tns:SecondarySocListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing secondary soc list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ServiceListType">
+		
+<xs:sequence>
+			
+<xs:element name="secondarySocInfo" maxOccurs="unbounded">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="service" type="tns:ServiceOrderCodeType">
+							
+<xs:annotation>
+								
+<xs:documentation>Secondary SOCs</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountListType">
+		
+<xs:sequence>
+			
+<xs:element name="accountInfo" type="tns:AccountInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Account information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account sub type code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account Type Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParentOffersListType">
+		
+<xs:sequence>
+			
+<xs:element name="parentOffersInfo">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:ParentOffersInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParentOffersInfoType"/>
+	
+<xs:complexType name="ProductListType">
+		
+<xs:sequence>
+			
+<xs:element name="productInfo" type="tns:ProductInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>product information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProductInfoType">
+		
+<xs:sequence/>
+	</xs:complexType>
+	
+<xs:complexType name="PromotionalOffersListType">
+		
+<xs:sequence>
+			
+<xs:element name="promotionalOffersInfo">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:PromotionalOffersInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PromotionalOffersInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="customerType" type="tns:CustomerTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>New, Existing or Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="promotionalOfferType" type="tns:PromotionalOfferType" minOccurs="0"/>
+			
+<xs:element name="accountInfoList" type="tns:AccountListType" minOccurs="0"/>
+			
+<xs:element name="creditClass" type="tns:CreditClassListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Derived class identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ItemList" type="tns:ItemListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Item List Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socInfoList" type="tns:SocListType" minOccurs="0"/>
+			
+<xs:element name="secondarySocList" type="tns:SecondarySocListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Service List Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="devicePurchaseReqList" type="tns:DevicePurchaseReqListType" minOccurs="0"/>
+			
+<xs:element name="transactionTypeList" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:TransactionListType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CreditClassListType">
+		
+<xs:sequence>
+			
+<xs:element name="creditClassInfo" type="tns:CreditClassInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit class information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CreditClassInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="creditClassCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Class Identifier</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:CreditClassCodeType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListType">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Service Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Primary plan service order code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecondarySocListType">
+		
+<xs:sequence>
+			
+<xs:element name="secondarySocInfo" type="tns:SecondarySocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Secondary soc information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecondarySocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="secondarySoc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Secondary plan code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionType" type="tns:TransactionTypeCodeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionListType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionTypeInfo" maxOccurs="unbounded">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:TransactionInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     Simple Types-->
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account type of the BILLING ACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CombineFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Combine Flag indicates if the referenced items, services, actions can be or are combined with other related similar or dissimilar items.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Code identifies the Customer's level of financial responsibility.   
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required deposit and the amount of the deposit, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CriteriaCompletionType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Type Code provides a mechanism for categorizing Customers within the context of various functionalities.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceProcurementCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Procurement Code indicates a devices procurement source.
+Valid values include: 
+S - Sprint (device purchased by Sprint), 
+O - OEM (device not purchased by Sprint)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceItemIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Item Identifier is the item identifier of the device to be ordered should be authorized according to the dealer’s sales channel. It is equivalent to a handset SKU.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Type Code references or identifies a type of device.
+valid values: 
+P - Primary, 
+C - Companion, 
+D - Device, 
+A - Accessory</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountPercentageType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EndDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FlatRateType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferCountType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Description is a descripton of an offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="800"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Name uniquely names a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferNumberType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Identifier designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Type Code designates a specific type of offer.
+Valid Values:
+A – ARM
+U – UFP
+B – Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferTalkingPointTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Talking Point Text contains a specific talking point related to an offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Code uniquely identifies a promotion used to facilitate the sale of products or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Description is a common language description of a promotion used to facilitate the sale of products or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionalOfferType">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RequestType">
+		
+<xs:annotation>
+			
+<xs:documentation>Request Type is used to indicate the type of Request being made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Code designates a particular dealer sales channel.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code is a package of 1 or more features added at the Billing Account Number (BAN) or subscriber level. Associated with a generic group of features. For example: Bonus minutes, voicemail, and buy-up options. Some SOCs are for bundled services - like price plans. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StockKeepingUnitType">
+		
+<xs:annotation>
+			
+<xs:documentation>Stock Keeping Unit represents the Sprint Inventory Stock Keeping Unit (SKU).  Stock Keeping Unit identifies a group of PRODUCT instances.  It could identify a handset Model and Model Number, a Kit or an accessory. Previously length = 18.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StartDateTime">
+		
+<xs:annotation>
+			
+<xs:documentation>Start Date Time contains the first calendar day of a time duration.  For example, in a Collection Case this would be the calendar day and time the Billing Account was put into Collections.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>TransactionType  Description holds the textual description of the code value in Transaction Type Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Type Code identifies the functionality of the transaction.
+Examples:
+Create, Read, Update or Delete (CRUD)
+(other functionalities are also acceptable)</xs:documentation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QueryUsageService/v1/QueryUsageService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QueryUsageService/v1/QueryUsageService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryUsageService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd4.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryUsageService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryCallDetailRecordInfo/v1/queryCallDetailRecordInfo.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/queryLteUsageInfo/v1/queryLteUsageInfo.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryPrepaidBalanceAndThresholdInfo/v1/queryPrepaidBalanceAndThresholdInfo.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/queryPushToTalkAuditInfo/v1/queryPushToTalkAuditInfo.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryQualityOfServiceInfo/v1/queryQualityOfServiceInfo.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberBilledUsageDetails/v1/querySubscriberBilledUsageDetails.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberBilledUsageSummary/v1/querySubscriberBilledUsageSummary.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageDetails/v1/querySubscriberUnbilledUsageDetails.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageSummary/v1/querySubscriberUnbilledUsageSummary.xsd"/>
+<xsd:import schemaLocation="QueryUsageService.xsd13.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberUsageInfo/v1/querySubscriberUsageInfo.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryCallDetailRecordInfoRequest">
+<wsdl:part name="queryCallDetailRecordInfoRequest" element="xsns:queryCallDetailRecordInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryCallDetailRecordInfo/v1/queryCallDetailRecordInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryCallDetailRecordInfoResponse">
+<wsdl:part name="queryCallDetailRecordInfoResponse" element="xsns:queryCallDetailRecordInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryCallDetailRecordInfo/v1/queryCallDetailRecordInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryLteUsageInfoRequest">
+<wsdl:part name="queryLteUsageInfoRequest" element="xsns:queryLteUsageInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryLteUsageInfo/v1/queryLteUsageInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryLteUsageInfoResponse">
+<wsdl:part name="queryLteUsageInfoResponse" element="xsns:queryLteUsageInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryLteUsageInfo/v1/queryLteUsageInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidBalanceAndThresholdInfoRequest">
+<wsdl:part name="queryPrepaidBalanceAndThresholdInfoRequest" element="xsns:queryPrepaidBalanceAndThresholdInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidBalanceAndThresholdInfo/v1/queryPrepaidBalanceAndThresholdInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidBalanceAndThresholdInfoResponse">
+<wsdl:part name="queryPrepaidBalanceAndThresholdInfoResponse" element="xsns:queryPrepaidBalanceAndThresholdInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidBalanceAndThresholdInfo/v1/queryPrepaidBalanceAndThresholdInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryPushToTalkAuditInfoRequest">
+<wsdl:part name="queryPushToTalkAuditInfoRequest" element="xsns:queryPushToTalkAuditInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryPushToTalkAuditInfo/v1/queryPushToTalkAuditInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryPushToTalkAuditInfoResponse">
+<wsdl:part name="queryPushToTalkAuditInfoResponse" element="xsns:queryPushToTalkAuditInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryPushToTalkAuditInfo/v1/queryPushToTalkAuditInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryQualityOfServiceInfoRequest">
+<wsdl:part name="queryQualityOfServiceInfoRequest" element="xsns:queryQualityOfServiceInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryQualityOfServiceInfo/v1/queryQualityOfServiceInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryQualityOfServiceInfoResponse">
+<wsdl:part name="queryQualityOfServiceInfoResponse" element="xsns:queryQualityOfServiceInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryQualityOfServiceInfo/v1/queryQualityOfServiceInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBilledUsageDetailsRequest">
+<wsdl:part name="querySubscriberBilledUsageDetailsRequest" element="xsns:querySubscriberBilledUsageDetails" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBilledUsageDetails/v1/querySubscriberBilledUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBilledUsageDetailsResponse">
+<wsdl:part name="querySubscriberBilledUsageDetailsResponse" element="xsns:querySubscriberBilledUsageDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBilledUsageDetails/v1/querySubscriberBilledUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBilledUsageSummaryRequest">
+<wsdl:part name="querySubscriberBilledUsageSummaryRequest" element="xsns:querySubscriberBilledUsageSummary" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBilledUsageSummary/v1/querySubscriberBilledUsageSummary.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBilledUsageSummaryResponse">
+<wsdl:part name="querySubscriberBilledUsageSummaryResponse" element="xsns:querySubscriberBilledUsageSummaryResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBilledUsageSummary/v1/querySubscriberBilledUsageSummary.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUnbilledUsageDetailsRequest">
+<wsdl:part name="querySubscriberUnbilledUsageDetailsRequest" element="xsns:querySubscriberUnbilledUsageDetails" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageDetails/v1/querySubscriberUnbilledUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUnbilledUsageDetailsResponse">
+<wsdl:part name="querySubscriberUnbilledUsageDetailsResponse" element="xsns:querySubscriberUnbilledUsageDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageDetails/v1/querySubscriberUnbilledUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUnbilledUsageSummaryRequest">
+<wsdl:part name="querySubscriberUnbilledUsageSummaryRequest" element="xsns:querySubscriberUnbilledUsageSummary" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageSummary/v1/querySubscriberUnbilledUsageSummary.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUnbilledUsageSummaryResponse">
+<wsdl:part name="querySubscriberUnbilledUsageSummaryResponse" element="xsns:querySubscriberUnbilledUsageSummaryResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageSummary/v1/querySubscriberUnbilledUsageSummary.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUsageInfoRequest">
+<wsdl:part name="querySubscriberUsageInfoRequest" element="xsns:querySubscriberUsageInfo" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUsageInfo/v1/querySubscriberUsageInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberUsageInfoResponse">
+<wsdl:part name="querySubscriberUsageInfoResponse" element="xsns:querySubscriberUsageInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberUsageInfo/v1/querySubscriberUsageInfo.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryUsageServicePortType">
+<wsdl:operation name="QueryCallDetailRecordInfo">
+<wsdl:input name="QueryCallDetailRecordInfoRequest" message="ns0:queryCallDetailRecordInfoRequest"/>
+<wsdl:output name="QueryCallDetailRecordInfoResponse" message="ns0:queryCallDetailRecordInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryLteUsageInfo">
+<wsdl:input name="QueryLteUsageInfoRequest" message="ns0:queryLteUsageInfoRequest"/>
+<wsdl:output name="QueryLteUsageInfoResponse" message="ns0:queryLteUsageInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryPrepaidBalanceAndThresholdInfo">
+<wsdl:input name="QueryPrepaidBalanceAndThresholdInfoRequest" message="ns0:queryPrepaidBalanceAndThresholdInfoRequest"/>
+<wsdl:output name="QueryPrepaidBalanceAndThresholdInfoResponse" message="ns0:queryPrepaidBalanceAndThresholdInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryPushToTalkAuditInfo">
+<wsdl:input name="QueryPushToTalkAuditInfoRequest" message="ns0:queryPushToTalkAuditInfoRequest"/>
+<wsdl:output name="QueryPushToTalkAuditInfoResponse" message="ns0:queryPushToTalkAuditInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryQualityOfServiceInfo">
+<wsdl:input name="QueryQualityOfServiceInfoRequest" message="ns0:queryQualityOfServiceInfoRequest"/>
+<wsdl:output name="QueryQualityOfServiceInfoResponse" message="ns0:queryQualityOfServiceInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBilledUsageDetails">
+<wsdl:input name="QuerySubscriberBilledUsageDetailsRequest" message="ns0:querySubscriberBilledUsageDetailsRequest"/>
+<wsdl:output name="QuerySubscriberBilledUsageDetailsResponse" message="ns0:querySubscriberBilledUsageDetailsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBilledUsageSummary">
+<wsdl:input name="QuerySubscriberBilledUsageSummaryRequest" message="ns0:querySubscriberBilledUsageSummaryRequest"/>
+<wsdl:output name="QuerySubscriberBilledUsageSummaryResponse" message="ns0:querySubscriberBilledUsageSummaryResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUnbilledUsageDetails">
+<wsdl:input name="QuerySubscriberUnbilledUsageDetailsRequest" message="ns0:querySubscriberUnbilledUsageDetailsRequest"/>
+<wsdl:output name="QuerySubscriberUnbilledUsageDetailsResponse" message="ns0:querySubscriberUnbilledUsageDetailsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUnbilledUsageSummary">
+<wsdl:input name="QuerySubscriberUnbilledUsageSummaryRequest" message="ns0:querySubscriberUnbilledUsageSummaryRequest"/>
+<wsdl:output name="QuerySubscriberUnbilledUsageSummaryResponse" message="ns0:querySubscriberUnbilledUsageSummaryResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUsageInfo">
+<wsdl:input name="QuerySubscriberUsageInfoRequest" message="ns0:querySubscriberUsageInfoRequest"/>
+<wsdl:output name="QuerySubscriberUsageInfoResponse" message="ns0:querySubscriberUsageInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryUsageServiceSOAPBinding" type="ns0:QueryUsageServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryCallDetailRecordInfo">
+<soap11:operation soapAction="QueryCallDetailRecordInfo" style="document"/>
+<wsdl:input name="QueryCallDetailRecordInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryCallDetailRecordInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryLteUsageInfo">
+<soap11:operation soapAction="QueryLteUsageInfo" style="document"/>
+<wsdl:input name="QueryLteUsageInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryLteUsageInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryPrepaidBalanceAndThresholdInfo">
+<soap11:operation soapAction="QueryPrepaidBalanceAndThresholdInfo" style="document"/>
+<wsdl:input name="QueryPrepaidBalanceAndThresholdInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryPrepaidBalanceAndThresholdInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryPushToTalkAuditInfo">
+<soap11:operation soapAction="QueryPushToTalkAuditInfo" style="document"/>
+<wsdl:input name="QueryPushToTalkAuditInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryPushToTalkAuditInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryQualityOfServiceInfo">
+<soap11:operation soapAction="QueryQualityOfServiceInfo" style="document"/>
+<wsdl:input name="QueryQualityOfServiceInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryQualityOfServiceInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBilledUsageDetails">
+<soap11:operation soapAction="QuerySubscriberBilledUsageDetails" style="document"/>
+<wsdl:input name="QuerySubscriberBilledUsageDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberBilledUsageDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBilledUsageSummary">
+<soap11:operation soapAction="QuerySubscriberBilledUsageSummary" style="document"/>
+<wsdl:input name="QuerySubscriberBilledUsageSummaryRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberBilledUsageSummaryResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUnbilledUsageDetails">
+<soap11:operation soapAction="QuerySubscriberUnbilledUsageDetails" style="document"/>
+<wsdl:input name="QuerySubscriberUnbilledUsageDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberUnbilledUsageDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUnbilledUsageSummary">
+<soap11:operation soapAction="QuerySubscriberUnbilledUsageSummary" style="document"/>
+<wsdl:input name="QuerySubscriberUnbilledUsageSummaryRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberUnbilledUsageSummaryResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberUsageInfo">
+<soap11:operation soapAction="QuerySubscriberUsageInfo" style="document"/>
+<wsdl:input name="QuerySubscriberUsageInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberUsageInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryUsageService">
+<wsdl:port name="QueryUsageServicePortType" binding="ns0:QueryUsageServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryUsageService"/></wsdl:port></wsdl:service></wsdl:definitions>

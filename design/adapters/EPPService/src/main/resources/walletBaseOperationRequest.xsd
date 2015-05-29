@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationRequest.xsd"
+    xmlns:walletCommonTypes="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd"
+    targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationRequest.xsd">
+    
+    <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd" schemaLocation="walletCommonTypes.xsd"/>
+    
+    <complexType name="WalletOperationRequest">
+		<annotation>
+			<documentation>wallet operation request
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseWalletOperationRequest">
+				<sequence>
+					<element name="banInfo" type="walletCommonTypes:BanInfo" nillable="false"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType> 
+	<complexType name="BaseWalletOperationRequest">
+		<annotation>
+			<documentation>Base wallet operation request
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="applicationInfo" type="walletCommonTypes:ActorApp" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="UpdatePaymentOption">
+		<complexContent>
+			<extension base="tns:PaymentOptionDetails">
+				<annotation>
+					<documentation>Required info for updating an existing payment
+						option in wallet
+					</documentation>
+				</annotation>
+				<sequence>
+						<element name="paymentOptionId" type="walletCommonTypes:DefaultStringType"
+							minOccurs="0">
+							<annotation>
+								<documentation>
+									A unique identifier for the payment
+									option in
+									this wallet with max
+									length 36 .
+								</documentation>
+							</annotation>
+						</element>
+						<element name="paymentOptionToken" type="walletCommonTypes:PaymentTokenType"
+							minOccurs="0">
+							<annotation>
+								<documentation>
+									A token identifier for payment option.
+								</documentation>
+							</annotation>
+						</element>
+					<element name="autopayRemovalReason" minOccurs="0">
+						<annotation>
+							<documentation>
+								Describes the reason for removing autopay
+							</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="256"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="paymentMethod" type="walletCommonTypes:PaymentMethod" />
+					<choice>
+						<element name="cardPaymentOption"
+							type="tns:UpdateCardPaymentOption" minOccurs="0"/>
+						<element name="achPaymentOption" type="tns:UpdateAchPaymentOption"
+							minOccurs="0"/>
+					</choice>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="UpdateCardPaymentOption">
+		<sequence>
+		    <element name="displayName" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30">
+							<annotation>
+								<documentation>
+									A nickname may either be system generated or
+									subscriber
+									supplied.
+									Nicknames are only unique within the
+									subscriber\u2019s wallet.
+								</documentation>
+							</annotation>
+						</maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="consumerChoicePreference" type="walletCommonTypes:CardType" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="UpdateAchPaymentOption">
+		<sequence>		    
+			<element name="displayName" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30">
+							<annotation>
+								<documentation>
+									A nickname may either be system generated or
+									subscriber
+									supplied.
+									Nicknames are only unique within the
+									subscriber\u2019s wallet.
+								</documentation>
+							</annotation>
+						</maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="achAccountType" type="walletCommonTypes:AchAccountType" minOccurs="0">
+				<annotation>
+					<documentation>
+						Indicates whether the ACH payment source is
+						CHECKING or SAVINGS.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="PaymentOptionDetails">
+		<sequence>
+			<element name="default" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>
+						Indicates whether the payment source/WalletItem
+						is the default payment method. Default is false.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="autopay" type="boolean" minOccurs="0">
+				<annotation>
+					<documentation>
+						Indicates whether the payment source is to be
+						used for autoPay.
+						Default is false
+					</documentation>
+				</annotation>
+			</element>
+			<element name="autopayInfo" type="walletCommonTypes:AutopayInfo" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="AddWalletPaymentOption">
+		<complexContent>
+			<extension base="tns:PaymentOptionDetails">
+				<sequence>
+					<element name="paymentMethod" type="walletCommonTypes:PaymentMethod"/>					
+					<choice>
+						<element name="cardPaymentOption" type="tns:AddCardPaymentOption"
+							minOccurs="0"/>
+						<element name="achPaymentOption" type="tns:AddAchPaymentOption"
+							minOccurs="0"/>
+						<element name="paypalPaymentOption"
+							type="tns:AddPaypalPaymentOption" minOccurs="0"/>
+					</choice>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="AddCardPaymentOption">
+		<sequence>
+		    <element name="displayName" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30">
+							<annotation>
+								<documentation>
+									A nickname may either be system generated or
+									subscriber
+									supplied.
+									Nicknames are only unique within the
+									subscriber\u2019s wallet.
+								</documentation>
+							</annotation>
+						</maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="consumerChoicePreference" type="walletCommonTypes:CardType" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="AddAchPaymentOption">
+		<sequence>
+			<element name="displayName" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="30">
+							<annotation>
+								<documentation>
+									A nickname may either be system generated or
+									subscriber
+									supplied.
+									Nicknames are only unique within the
+									subscriber\u2019s wallet.
+								</documentation>
+							</annotation>
+						</maxLength>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="achAccountType" type="walletCommonTypes:AchAccountType" minOccurs="0">
+				<annotation>
+					<documentation>
+						ACH account Type can be CHECKING or SAVINGS.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ValidatePaymentOption">
+		<sequence>
+			<element name="paymentMethod" type="walletCommonTypes:PaymentMethod"/>
+		</sequence>
+	</complexType>
+	<complexType name="AddPaypalPaymentOption">
+		<sequence>
+			<element name="paypalTokenId">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+		
+	<complexType name="AddPaymentOptionRequestAdditionalInfo">
+		<sequence>
+			<element name="merchantId" type="walletCommonTypes:MerchantId" minOccurs="1"/>
+		</sequence>
+	</complexType>
+	
+	
+	<complexType name="UpdatePaymentOptionRequestAdditionalInfo">
+		<sequence>
+			<element name="merchantId" type="walletCommonTypes:MerchantId" minOccurs="1"/>
+		</sequence>
+	</complexType>
+</schema>

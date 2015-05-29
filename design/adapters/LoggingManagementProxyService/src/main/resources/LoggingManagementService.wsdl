@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/LoggingManagementService/v1/LoggingManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/LoggingManagementService/v1/LoggingManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="LoggingManagementService.xsd4.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd3.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/createActivityLog/v1/createActivityLog.xsd"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/createBillingAccountAccessLog/v1/createBillingAccountAccessLog.xsd"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryFunctionalActivityLog/v1/queryFunctionalActivityLog.xsd"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryLoginAttemptStatus/v1/queryLoginAttemptStatus.xsd"/>
+<xsd:import schemaLocation="LoggingManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/submitLoginAttempt/v1/submitLoginAttempt.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="createActivityLogRequest">
+<wsdl:part name="createActivityLog" element="xsns:createActivityLog" xmlns:xsns="http://integration.sprint.com/interfaces/createActivityLog/v1/createActivityLog.xsd"/></wsdl:message>
+<wsdl:message name="createActivityLogResponse">
+<wsdl:part name="createActivityLogResponse" element="xsns:createActivityLogResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createActivityLog/v1/createActivityLog.xsd"/></wsdl:message>
+<wsdl:message name="createBillingAccountLog">
+<wsdl:part name="createBillingAccountLog" element="xsns:createBillingAccountAccessLog" xmlns:xsns="http://integration.sprint.com/interfaces/createBillingAccountAccessLog/v1/createBillingAccountAccessLog.xsd"/></wsdl:message>
+<wsdl:message name="createBillingAccountLogResponse">
+<wsdl:part name="createBillingAccountLog" element="xsns:createBillingAccountAccessLogResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createBillingAccountAccessLog/v1/createBillingAccountAccessLog.xsd"/></wsdl:message>
+<wsdl:message name="queryFunctionalActivityLog">
+<wsdl:part name="queryFunctionalActivityLog" element="xsns:queryFunctionalActivityLog" xmlns:xsns="http://integration.sprint.com/interfaces/queryFunctionalActivityLog/v1/queryFunctionalActivityLog.xsd"/></wsdl:message>
+<wsdl:message name="queryFunctionalActivityLogResponse">
+<wsdl:part name="queryFunctionalActivityLogResponse" element="xsns:queryFunctionalActivityLogResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryFunctionalActivityLog/v1/queryFunctionalActivityLog.xsd"/></wsdl:message>
+<wsdl:message name="queryLoginAttemptStatus">
+<wsdl:part name="queryLoginAttemptStatus" element="xsns:queryLoginAttemptStatus" xmlns:xsns="http://integration.sprint.com/interfaces/queryLoginAttemptStatus/v1/queryLoginAttemptStatus.xsd"/></wsdl:message>
+<wsdl:message name="queryLoginAttemptStatusResponse">
+<wsdl:part name="queryLoginAttemptStatusResponse" element="xsns:queryLoginAttemptStatusResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryLoginAttemptStatus/v1/queryLoginAttemptStatus.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="submitLoginAttempt">
+<wsdl:part name="submitLoginAttempt" element="xsns:submitLoginAttempt" xmlns:xsns="http://integration.sprint.com/interfaces/submitLoginAttempt/v1/submitLoginAttempt.xsd"/></wsdl:message>
+<wsdl:message name="submitLoginAttemptResponse">
+<wsdl:part name="submitLoginAttemptResponse" element="xsns:submitLoginAttemptResponse" xmlns:xsns="http://integration.sprint.com/interfaces/submitLoginAttempt/v1/submitLoginAttempt.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="LoggingManagementServicePortType">
+<wsdl:operation name="CreateActivityLog">
+<wsdl:input name="CreateActivityLogRequest" message="ns0:createActivityLogRequest"/>
+<wsdl:output name="CreateActivityLogResponse" message="ns0:createActivityLogResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CreateBillingAccountAccessLog">
+<wsdl:input name="CreateBillingAccountAccessLogRequest" message="ns0:createBillingAccountLog"/>
+<wsdl:output name="CreateBillingAccountAccessLogResponse" message="ns0:createBillingAccountLogResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryFunctionalActivityLog">
+<wsdl:input name="QueryFunctionalActivityLogRequest" message="ns0:queryFunctionalActivityLog"/>
+<wsdl:output name="QueryFunctionalActivityLogResponse" message="ns0:queryFunctionalActivityLogResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryLoginAttemptStatus">
+<wsdl:input name="QueryLoginAttemptStatusRequest" message="ns0:queryLoginAttemptStatus"/>
+<wsdl:output name="QueryLoginAttemptStatusResponse" message="ns0:queryLoginAttemptStatusResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="SubmitLoginAttempt">
+<wsdl:input name="SubmitLoginAttemptRequest" message="ns0:submitLoginAttempt"/>
+<wsdl:output name="SubmitLoginAttemptResponse" message="ns0:submitLoginAttemptResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="LoggingManagementServiceSOAPBinding" type="ns0:LoggingManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="CreateActivityLog">
+<soap11:operation soapAction="CreateActivityLog" style="document"/>
+<wsdl:input name="CreateActivityLogRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CreateActivityLogResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CreateBillingAccountAccessLog">
+<soap11:operation soapAction="CreateBillingAccountAccessLog" style="document"/>
+<wsdl:input name="CreateBillingAccountAccessLogRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CreateBillingAccountAccessLogResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryFunctionalActivityLog">
+<soap11:operation soapAction="QueryFunctionalActivityLog" style="document"/>
+<wsdl:input name="QueryFunctionalActivityLogRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryFunctionalActivityLogResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryLoginAttemptStatus">
+<soap11:operation soapAction="QueryLoginAttemptStatus" style="document"/>
+<wsdl:input name="QueryLoginAttemptStatusRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryLoginAttemptStatusResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SubmitLoginAttempt">
+<soap11:operation soapAction="SubmitLoginAttempt" style="document"/>
+<wsdl:input name="SubmitLoginAttemptRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SubmitLoginAttemptResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="LoggingManagementService">
+<wsdl:port name="LoggingManagementServicePortType" binding="ns0:LoggingManagementServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/LoggingManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

@@ -1,0 +1,910 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp2 (http://www.altova.com) by SHOCK (SHOCK) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/checkActivationStatus/v1/checkActivationStatus.xsd" targetNamespace="http://integration.sprint.com/interfaces/checkActivationStatus/v1/checkActivationStatus.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.5">
+	<!-- Date               Author                         Version    Change                                                                                                                                          Rel           SR# -->
+	<!-- 11/11/2009      Jocelen Silva             1.0           Inital Draft                                                                                                                                        GBL10.2    PJ001210-->
+	<!-- 11/16/2009    Steve Heichelheim      1.0           Applied MVM standards and simple types                                                                                      GBL10.2    PJ001210-->
+	<!-- 12/11/2009    Steve Heichelheim      1.0           added elements and simple types                                                                                                   GBL10.2    PJ001210-->
+	<!-- 12/14/2009    Steve Heichelheim      1.0           added futurePortInMdn and category                                                                                             GBL10.2    PJ001210-->
+	<!-- 12/21/2009    Steve Heichelheim      1.0           added NameInfoType structrure                                                                                                     GBL10.2    PJ001210-->
+	<!--01/07/2010    Steve Heichelheim      1.0           added activationOrderId and oneTimeLockCode to response                                                         GBL10.2    PJ001210-->
+	<!--01/13/2010    Steve Heichelheim      1.0           added callingApplicationInfo structure                                                                                             GBL10.2    PJ001210-->
+	<!--01/20/2010    Steve Heichelheim      1.0    changed socInfo.category to planType, added migrationInd, migrationMdn                                            GBL10.2    PJ001210-->
+	<!--04/02/2010    Jocelen Silva              1.1           added activationErrorCode in response                                                                                            GBL10.2    CS#365869-->
+	<!--02/26/2010    Steve Heichelheim      1.2    change pin in request to maxLen=10                                                                                                        GBL10.2    PJ001210-->
+	<!--03/20/2010    Steve Heichelheim      1.3    change  ActivationOrderIdentifierType to maxLen=10                                                                              GBL10.2    PJ001210-->
+	<!--06/25/2010    Jocelen Silva              1.4           Added modelNumber and previouslyActivatedInd, and changed activation order id to required       GBL10.5   PJ003505-->
+	<!--10/04/2010   Jocelen Silva              1.5           Added  masterSubsidyLock      GBL10.5   PJ003505-->
+	<xs:element name="checkActivationStatus" type="tns:CheckActivationStatusType"/>
+	<xs:element name="checkActivationStatusResponse" type="tns:CheckActivationStatusResponseType"/>
+	<xs:complexType name="CheckActivationStatusType">
+		<xs:sequence>
+			<xs:element name="callingApplicationInfo" type="tns:CallingApplicationInfoType">
+				<xs:annotation>
+					<xs:documentation>Structure in which to insert calling application and user info.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Info" type="tns:InfoType">
+				<xs:annotation>
+					<xs:documentation>Info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pin">
+				<xs:annotation>
+					<xs:documentation>Customer-assigned account PIN used on the Activation API.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:PersonalIdentificationNumberType">
+						<xs:maxLength value="10"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CheckActivationStatusResponseType">
+		<xs:sequence>
+			<xs:element name="activationOrderId" type="tns:ActivationOrderIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Front-end generated unique order identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationStatus" type="tns:ActivationStatusType">
+				<xs:annotation>
+					<xs:documentation>Status of the activation request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesChannel" type="tns:SalesChannelIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Sales channel identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Account Number
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nameInfo" type="tns:NameInfoType" minOccurs="0"/>
+			<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" minOccurs="0"/>
+			<xs:element name="minimumAmount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The minimum amount required to start service</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ChargeAmountType">
+						<xs:totalDigits value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="activationFee" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Total Activation fee applied for the transaction.
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ChargeAmountType">
+						<xs:totalDigits value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="reactivationFee" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reactivation fee applied.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ChargeAmountType">
+						<xs:totalDigits value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="lowBalanceThreshold" type="tns:BalanceAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the value of the low balance threshold.
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestCreationDate" type="tns:CreationDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activation request creation date.
+(format YYYY-MM-DDThh:mm:ss)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationDate" type="tns:NetworkAccessActivationFromDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date of activation
+(format YYYY-MM-DD hh:mm)
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="anniversaryDate" type="tns:AnniversaryDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customers next month due date
+(format YYYY-MM-DD hh:mm)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Logically derived date which is typically 90 days from date of balance.
+(format YYYY-MM-DD hh:mm)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cancellationDate" type="tns:OrderCancelDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Logically derived date which is 60 days from date of Expiration.
+(format YYYY-MM-DD hh:mm)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationErrorCode" type="tns:ErrorMessageIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activation Error Code.     Returned only when activationStatus=FAILED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resultDetails" type="tns:ResponseDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Details or an explanation in more detail of the result</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorReason" type="tns:ErrorMessageTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Describes the reason of the error response. 
+Returned only when activationStatus=FAILED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nextSteps" type="tns:ErrorMessageTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Describes the next steps to be followed after the error message received.
+Returned only when activationStatus=FAILED</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="migrationInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates if the activation request includes migration of the PTN from post paid to pre paid.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="migrationMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Customer provided phone number requested to migrate from post-paid account to pre-paid. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingApplicationInfoType">
+		<xs:sequence>
+			<xs:element name="pin">
+				<xs:annotation>
+					<xs:documentation>Pin Code</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:PersonalIdentificationNumberType"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="vendorCode" type="tns:VendorCodeType">
+				<xs:annotation>
+					<xs:documentation>Application specific identifier unique to the OVM system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="messageId" type="tns:MessageIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Message Identiifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activation Order Identifeir</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ActivationOrderIdentifierType"/>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="messageType" type="tns:MessageTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The type of message sent.  Valid value is:
+CHECK_ACTIVATION_STATUS_REQUEST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="timestamp" type="tns:RequestDateTimeType"/>
+			<xs:element name="returnUrl" type="tns:UniformResourceLocatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The URL to which the response to the request should be sent</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resendNumber" type="tns:MessageAttemptCountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Number of times this message has been attempted</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="brandType" type="tns:BrandCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The type of technology on the order.  Valid values are:
+NX
+SP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="storeId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Store identifier. Tag to indicate what store the order originated from </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="associateId" type="tns:AssociateIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Associate identifier.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InfoType">
+		<xs:choice>
+			<xs:element name="activationOrderId" type="tns:ActivationOrderIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The unique activation Id for the request.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="simId" type="tns:SubscriberIdentityModuleIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Subscriber Identity Module Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="esn" type="tns:EquipmentSerialNumberStringType">
+				<xs:annotation>
+					<xs:documentation>ESN or MEID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SocListType">
+		<xs:sequence>
+			<xs:element name="socInfo" type="tns:SocInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocInfoType">
+		<xs:sequence>
+			<xs:element name="soc" type="tns:ServiceOrderCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Soc Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socDesc" type="tns:ServiceOrderDescriptionType">
+				<xs:annotation>
+					<xs:documentation>Soc Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socType" type="tns:PlanShareTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identify the Soc type – Price Plan or Add On</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planType" type="tns:SubscriberBrandTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>It can be either MBP for monthly or PGO for Pay Go Plans.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recurringCharge" type="tns:ChargeAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Price plan recurring monthly price</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="effectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The start date of the Soc.
+Format (YYYY-MM-DD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The expiration date of the SOC
+Format (YYYY-MM-DD)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubscriberInfoType">
+		<xs:sequence>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="msn" type="tns:ManufacturerSerialNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Manufacturer Serial Number (MSN) is the manufacturer's electronic identifier for IDEN phones.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="simId" type="tns:SubscriberIdentityModuleIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Subscriber Identity Module Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="imei" type="tns:InternationalMobileEquipmentIdentifierStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>International Mobile Equipment Identity of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="meid" type="tns:MobileEquipmentIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>CDMA/PowerSource device serial number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="primaryMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Boost provisioned phone number
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="secondaryMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>iDEN alternate phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>iDEN direct connect number
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The static Internet Protocol Address </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portInMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Temporary assigned phone number for iDEN port in transactions.
+Returned only when activationStatus=SUCCESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portInDate" type="tns:PortInDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Date when the port-in process completes.
+(format YYYY-MM-DDThh:mm:ss)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Designates the subscriber’s primary NAI.
+Network Access Identifier (NAI) (e.g. username@domain) where domain should be of the form str1.str2. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="msid" type="tns:MobileStationIdentificationNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobile Station Identifier .
+Returned only for CDMA activations.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sid" type="tns:SidNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Station Identifier  (Required for CDMA activations)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>High Performance Push-To-Talk Identifier contains the concatenation of a user ID and a domain. The user ID can be 15 chars maximum and the domain can be 24 chars maximum so a total of 40 characters including ‘@’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activationFeeForHandset" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activation fee applied for handset</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ChargeAmountType">
+						<xs:totalDigits value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="oneTimeLockCode" type="tns:OneTimeKeySubsidyLockType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>CDMA device manual programming value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="masterSubsidyLock" type="tns:MasterSubsidyLockCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Master Subsidy Lock (MSL)
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modelNumber" type="tns:ModelNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Device Model Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previouslyActivatedInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicate if the SIM was previously activated.
+true  - activated
+false – not activated </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="futurePortInMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates the MDN that is required to be ported in the future</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="SocList" type="tns:SocListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NameInfoType">
+		<xs:sequence>
+			<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0"/>
+			<xs:element name="lastName" type="tns:LastNameType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ActivationOrderIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Activation Order Identifier is a front-end generated value that uniquely identifies an Activation Order.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+		<!--The activation response for each handset.-->
+	</xs:simpleType>
+	<xs:simpleType name="ActivationStatusType">
+		<xs:annotation>
+			<xs:documentation>Activation Status indicates that current status of the activiation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+			<xs:enumeration value="FAILED">
+				<!--Activation failed.-->
+			</xs:enumeration>
+			<xs:enumeration value="PENDING"/>
+			<xs:enumeration value="QUEUED"/>
+			<xs:enumeration value="SUCCESS">
+				<!--Activation occurred successfully.-->
+			</xs:enumeration>
+		</xs:restriction>
+		<!--The activation response for each handset.-->
+	</xs:simpleType>
+	<xs:simpleType name="AnniversaryDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Anniversary Date Time is the subscriber anniversary date for RC plan standard dateTime format (GMT) yyyy-MM-dd'T'HH:mm:ss.SSS'Z'</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="AssociateIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BalanceAmountType">
+		<xs:annotation>
+			<xs:documentation>Balance Amount is a the dollar value associated to an account at a point in time.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="6"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumberType">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BrandCodeType">
+		<xs:annotation>
+			<xs:documentation>Brand Code indicates which brand the subscriber belongs to. Possible brands represented include;  Sprint, Nextel, Boost, Virgin Mobile, and Clearwire</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChargeAmountType">
+		<xs:annotation>
+			<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="10"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CreationDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Creation Date Time represents a calendar Month, Day,Year, Hour, Minute, Second and Fraction Of A Second an event was created.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EffectiveFromDateType">
+		<xs:annotation>
+			<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSerialNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  &#13;
+&#13;
+Network Device Identifier will contain one of the following: &#13;
+Electronic Serial Number (ESN); &#13;
+Mobile Equipment IDentifier (MEID);&#13;
+International Mobile Equipment Identfie (IMEI);&#13;
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="18"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Unique error message id number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageTextType">
+		<xs:annotation>
+			<xs:documentation>Textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date Time holds the last calendar Date and Time of day an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="FirstNameType">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileEquipmentIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>International Mobile Equipment Identifier String is the string representation of an equipment identification number, similar to a serial numberi, used to identify a wireless network access device.</xs:documentation>
+			<xs:documentation>International Mobile Equipment Identfier is a wireless telecommunications term. An equipment identification number, similar to a serial numberi, used to identify a wireless network access device.
+
+Length 15 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressStringType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastNameType">
+		<xs:annotation>
+			<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			<xs:documentation>alias: Surname</xs:documentation>
+			<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="35"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ManufacturerSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Manufacturer Serial Number is the manufacturer's electronic identifier for IDEN phones. Manufacturer Serial Number is a non-numeric string of alphabetic characters and decimal mumbers.
+
+Length 10 character string.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MasterSubsidyLockCodeType">
+		<xs:annotation>
+			<xs:documentation>Master Subsidy Lock (MSL) is used for programming the handset when the one-time subsidy lock code fails due to error, or when the phone needs to be reprogrammed for any reason.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageAttemptCountType">
+		<xs:annotation>
+			<xs:documentation>Message Attempt Count is the total number of times the message was attempted to send. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:nonNegativeInteger"/>
+	</xs:simpleType>
+	<xs:simpleType name="MessageIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Message Identifier uniquely identifies a message.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Message Type Code identifies the type of message being sent.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileEquipmentIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Device Identifier is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier is one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfier (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+			<xs:documentation>A Mobile Equipment IDentifier (MEID) is a globally unique number for a physical piece of mobile station equipment. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileStationIdentificationNumberType">
+		<xs:annotation>
+			<xs:documentation>Mobile Station Identity (MSID) is the number that is associated with the home service provider and the wireless phone number. This is reprogrammed when the user changes home service providers.
+
+MSID is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+			<xs:documentation>Mobile Station Identification Number (MSID) is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ModelNumberType">
+		<xs:annotation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessActivationFromDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Network Access Activiated From Date Time holds the calendar day and time of day the set of implemented components were active on the network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OneTimeKeySubsidyLockType">
+		<xs:annotation>
+			<xs:documentation>One Time Key Subsidy Lock (OTKSL) is a six-digit code used by CDMA phones as an activation code. It is used to activate a brand new phone onto wireless service, and it works only one time. This code makes it possible for a consumer to purchase the phone anywhere, call up the provider's toll-free number, and then activate the wireless phone from the directions given by the representative on the other end of the line. After the initial programming, the code is no longer valid, and the only way to program the phone is via the MSL (master subsidy lock).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OrderCancelDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Order Cancel Date Time is the calendar date and time of day when the order was cancelled.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="PersonalIdentificationNumberType">
+		<xs:annotation>
+			<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PortInDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Port In Date Time Type is the calendar date and time of day that the port-in actually happened.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="PlanShareTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Plan Share Type code designates the share type for plans that support a primary / add-on sharing model.
+P - Primary 
+A - Add-on</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RequestDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Request Date Time is the Date and time that a reqeust is made.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Response Description is the messege associated to the response status.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RetailStoreIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.&#13;
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SalesChannelIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCodeType">
+		<xs:annotation>
+			<xs:documentation>Service Order Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderLongDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Service Order Long Description is additional descriptive text related to a specific service order(SOC).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="800"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SidNumberType">
+		<xs:annotation>
+			<xs:documentation>The SID or System Identification Number is a 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your ''home'' system.</xs:documentation>
+			<xs:documentation>The SID or System Identification Number is a 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your ''home'' system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberBrandTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Brand Type Code is a 3 byte code denoting which brand type the subscriber belongs to. Current valid values are:
+
+'MBP' - Monthly Bucket Plan
+'PRM' Premium
+'BPP' - Basic Premium Plan
+'PYG' - Pay as You Go</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentityModuleIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identify Module (SIM) Identifier identifies the ''smart'' card installed or inserted into a IDEN mobile telephone containing all subscriber-related data. This facilitates a telephone call from any valid mobile telephone since the subscriber data is used to complete the call rather than the telephone internal serial number.
+
+Length 15 characters.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UniformResourceLocatorType">
+		<xs:annotation>
+			<xs:documentation>Uniform Resource Locator (URL, previously Universal Resource Locator) - usually pronounced by sounding out each letter but, in some quarters, pronounced"Earl"- is the unique address for a file that is accessible on the Internet. A common way to get to a Web site is to enter the URL of its home page file in your Web browser's address line. However, any file within that Web site can also be specified with a URL. Such a file might be any Web (HTML) page other than the home page, an image file, or a program such as a common gateway interface application or Java applet. The URL contains the name of the protocol to be used to access the file resource, a domain name that identifies a specific computer on the Internet, and a pathname, a hierarchical description that specifies the location of a file in that computer.On the Web (which uses the Hypertext Transfer Protocol, or HTTP), an example of a URL is:http://www.ietf.org/rfc/rfc2396.txtwhich specifies the use of a HTTP (Web browser) application, a unique computer named www.ietf.org, and the location of a text file or page to be accessed on that computer whose pathname is /rfc/rfc2396.txt.A URL for a particular image on a Web site might look like this:http://searchnetworking.techtarget.com/WhatIs/images/coaxla.gifA URL for a file meant to be downloaded using the File Transfer Protocol (FTP) would require that the"ftp"protocol be specified like this hypothetical URL:ftp://www.somecompany.com/whitepapers/widgets.psA URL is a type of URI (Uniform Resource Identifier, formerly called Universal Resource Identifier.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:anyURI"/>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VendorCodeType">
+		<xs:annotation>
+			<xs:documentation>Vendor Code in combination with the PIN uniquely differentiates the system
+(channel) calling Order Verification Management (Best Buy, Walmart, RMS, 
+boostmobile, SOTS, OAR’s, BSPs, Telespree, etc). Each partner has its own 
+unique vendor code and pin combination.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!--New Simple Types-->
+	<!---->
+</xs:schema>

@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceCsaInfo/v1/queryReferenceCsaInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceCsaInfo/v1/queryReferenceCsaInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceCsaInfo" type="tns:QueryReferenceCsaInfoRequest"/>
+	
+<xs:element name="queryReferenceCsaInfoResponse" type="tns:QueryReferenceCsaInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceCsaInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="csaInfo" type="tns:CsaInfoResponse" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>select effective record from CSA_SUBMARKET</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceCsaInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="csaInfo" type="tns:CsaInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaInfo">
+		
+<xs:sequence>
+			
+<xs:element name="csa" type="tns:CommunicationServiceArea"/>
+			
+<xs:element name="npaNxxList" type="tns:RequestedNpaNxxList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="businessEntity" type="tns:SprintBusinessEntityIdentifier" minOccurs="0"/>
+			
+<xs:element name="csa" type="tns:CommunicationServiceArea">
+				
+<xs:annotation>
+					
+<xs:documentation>CSA_SUBMARKET.CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csaDesc" type="tns:CommunicationServiceAreaDescription" minOccurs="0"/>
+			
+<xs:element name="subMarketCode" type="tns:SubMarketCode" minOccurs="0"/>
+			
+<xs:element name="subMarketName" type="tns:SubMarketName" minOccurs="0"/>
+			
+<xs:element name="npaNxxList" type="tns:NpaNxxList" minOccurs="0"/>
+			
+<xs:element name="district" type="tns:DistrictName"/>
+			
+<xs:element name="ipNgp" type="tns:StaticInternetProtocolLocation" minOccurs="0"/>
+			
+<xs:element name="ngpDesc" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:StaticInternetProtocolDescription">
+						
+<xs:maxLength value="30"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="csaOwner" type="tns:SprintBusinessEntityIdentifier" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaInfoResponse2">
+		
+<xs:sequence>
+			
+<xs:element name="csa" type="tns:CommunicationServiceArea"/>
+			
+<xs:element name="csaDesc" type="tns:CommunicationServiceAreaDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CsaListResponse2">
+		
+<xs:sequence>
+			
+<xs:element name="csaInfo" type="tns:CsaInfoResponse2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaNxxInfo">
+		
+<xs:sequence>
+			
+<xs:element name="npa" type="tns:NpaNumber"/>
+			
+<xs:element name="nxx" type="tns:NxxNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NpaNxxList">
+		
+<xs:sequence>
+			
+<xs:element name="currentBlock" type="tns:BlockNumber"/>
+			
+<xs:element name="totalBlocks" type="tns:BlockNumber"/>
+			
+<xs:element name="npaNxxInfo" type="tns:NpaNxxInfo" minOccurs="0" maxOccurs="200"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestedNpaNxxList">
+		
+<xs:sequence>
+			
+<xs:element name="fetchNpaNxxList" type="tns:FetchInformationFlag"/>
+			
+<xs:element name="blockNumber" type="tns:BlockNumber" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--MVM Simple Types-->
+	
+<xs:simpleType name="CommunicationServiceArea">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NpaNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NxxNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Numbering Exchange (NXX) Number represents the first three digits of the 7 digit phone number that identifies the specific telephone company central office which serves that number. These digits are referred to as the NXX where N can be any number from 2 to 9 and X can be any number. (NNX once upon a time was used to identify the local central office exchange. Now NNX has been changed to NXX, which allows local central offices to have numbers which look like area codes.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SprintBusinessEntityIdentifier">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StaticInternetProtocolLocation">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Number Group code for Static IP address allocation (for the CDMA Static Public IP resource data feature).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="BlockNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Block Number is an integer that represents the n-th block of results to be returned from the associated request.  For example, in first call, user can get first 200 structures, in second call, user can specify blockNumber=2, then the 2nd block of requested structures (from 201 to 400) will be returned . If the blockNumber is sent and there is not enough number of structures for the given request, no structure will be returned. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Description describes a CSA.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DistrictName">
+		
+<xs:annotation>
+			
+<xs:documentation>District Name is the CSA's related district.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="StaticInternetProtocolDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Static Internet Protocol Description  describes the Internet Protocol Number Group code for Static IP address allocation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketName">
+		
+<xs:annotation>
+			
+<xs:documentation>Sub Market Name is the common name associated to the sub-market code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

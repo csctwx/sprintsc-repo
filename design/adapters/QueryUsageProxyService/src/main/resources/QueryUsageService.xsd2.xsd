@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageSummary/v1/querySubscriberUnbilledUsageSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberUnbilledUsageSummary/v1/querySubscriberUnbilledUsageSummary.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	
+<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	
+<!--08/11/2010  Dweepant Bakshi 1.1         Added optional sharingOfferID in Shared and Individual Usage response                  GBL 11.1   PJ000082-->
+	
+<!--09/17/2010  Steve Heichelheim 1.1        assigned simple type to sharingOfferId, creted querySubscriberUnbilledUsageSummaryV2.xsd with MVM standards.   GBL11.1  PJ000082-->
+	
+<!--01/09/2012   Ace Cineus           1.2        Increased maxLen restriction of SubscriberDeviceSerialNumber from 18 to 20         GBL12.2    PJ006784-->
+	
+<!---->
+	
+<xs:element name="querySubscriberUnbilledUsageSummary" type="QuerySubscriberUnbilledUsageSummary"/>
+	
+<xs:element name="querySubscriberUnbilledUsageSummaryResponse" type="QuerySubscriberUnbilledUsageSummaryResponse"/>
+	
+<xs:complexType name="QuerySubscriberUnbilledUsageSummary">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInformation" type="SubscriberInformation"/>
+			
+<xs:element name="subscriberUsageInputInfo" type="SubscriberUsageInputInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberUnbilledUsageSummaryResponse">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberUsageHeaderInfo" type="SubscriberHeaderInfo"/>
+			
+<xs:element name="subscriberSharedUsageInfoList" type="SubscriberSharedUsageInfoList" minOccurs="0"/>
+			
+<xs:element name="subscriberIndividualUsageInfoList" type="SubscriberIndividualUsageInfoList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RateCardInfo">
+		
+<xs:sequence>
+			
+<xs:element name="currentTierIndex" type="TierIndex"/>
+			
+<xs:element name="tierThreshold" type="TierThreshold"/>
+			
+<xs:element name="tierInfoList" type="TierInfoList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInformation">
+		
+<xs:choice>
+			
+<xs:element name="subscriptionId" type="SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>SubscriptionIdentifier uniquely identifies an instance of SUBSCRIPTION .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mobileDirectoryNumber" type="MobileDirectoryNumberString"/>
+			
+<xs:element name="urbanFleetMemberId" type="UrbanFleetMemberIdentifierString"/>
+			
+<xs:element name="deviceSerialNumber" type="SubscriberDeviceSerialNumber"/>
+			
+<xs:element name="internetProtocolAddressString" type="InternetProtocolAddressString"/>
+			
+<xs:element name="internationalMobileSubscriberIdentityString" type="InternationalMobileSubscriberIdentityString"/>
+			
+<xs:element name="networkAccessIdentifierString" type="SubscriberNetworkAccessIdentifier"/>
+			
+<xs:element name="additionalImsi" type="InternationalMobileSubscriberIdentityString"/>
+			
+<xs:element name="highPerformancePusthToTalkIdString" type="HighPerformancePushToTalkIDString"/>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberIndividualUsageInfo">
+		
+<xs:sequence>
+			
+<xs:element name="usageCategoryCode" type="UsageCategoryCode"/>
+			
+<xs:element name="usageCategoryName" type="UsageCategoryName"/>
+			
+<xs:element name="usageCategoryGroupName" type="UsageCategoryGroupName">
+				
+<xs:annotation>
+					
+<xs:documentation>single</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="soc" type="ServiceOrderCode" minOccurs="0"/>
+			
+<xs:element name="sharingOfferId" type="OfferIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifier of the group level offer for 3G Hybrid Sharing plans. 
+Populated for Hybrid Data Sharing soc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="poolingGroupId" type="PoolingGroupIdentifier" minOccurs="0"/>
+			
+<xs:element name="effectiveDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xs:element name="expirationDate" type="EffectiveThruDate" minOccurs="0"/>
+			
+<xs:element name="subsectionId" type="SubsectionId"/>
+			
+<xs:element name="subsectionName" type="SubsectionName"/>
+			
+<xs:element name="displayOrder" type="DisplayOrder"/>
+			
+<xs:element name="unitOfMeasure" type="UnitOfMeasureCode"/>
+			
+<xs:element name="includedUnits" type="UsageValue"/>
+			
+<xs:element name="usedUnits" type="UsageValue"/>
+			
+<xs:element name="remainingUnits" type="UsageValue"/>
+			
+<xs:element name="additionalUsedUnits" type="UsageValue"/>
+			
+<xs:element name="additionalCharge" type="AdditionalCharge"/>
+			
+<xs:element name="rateCardInfo" type="RateCardInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberIndividualUsageInfoList">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberIndividualUsageInfo" type="SubscriberIndividualUsageInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberHeaderInfo">
+		
+<xs:sequence>
+			
+<xs:element name="billPeriodStartDate" type="StartDate"/>
+			
+<xs:element name="billPeriodEndDate" type="EndDate"/>
+			
+<xs:element name="billSequenceNo" type="BillSequenceNumber"/>
+			
+<xs:element name="pricePlanChangeType" type="PricePlanChangeType" minOccurs="0"/>
+			
+<xs:element name="pricePlanChangeDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xs:element name="pricePlanCode" type="PricePlanCode"/>
+			
+<xs:element name="pricePlanName" type="PricePlanName"/>
+			
+<xs:element name="planType" type="PlanType"/>
+			
+<xs:element name="shareType" type="ShareType" minOccurs="0"/>
+			
+<xs:element name="sharedUsageExclusionInd" type="SharedUsageExclusionInd"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberUsageInputInfo">
+		
+<xs:sequence>
+			
+<xs:element name="callingApplicationId" type="ApplicationIdentifierEns" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberSharedUsageInfo">
+		
+<xs:sequence>
+			
+<xs:element name="usageCategoryCode" type="UsageCategoryCode"/>
+			
+<xs:element name="usageCategoryName" type="UsageCategoryName"/>
+			
+<xs:element name="usageCategoryGroupName" type="UsageCategoryGroupName">
+				
+<xs:annotation>
+					
+<xs:documentation>shareTypeName</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="soc" type="ServiceOrderCode" minOccurs="0"/>
+			
+<xs:element name="sharingOfferId" type="OfferIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifier of the group level offer for 3G Hybrid Sharing plans. 
+Populated for Hybrid Data Sharing soc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="poolingGroupId" type="PoolingGroupIdentifier" minOccurs="0"/>
+			
+<xs:element name="effectiveDate" type="EffectiveFromDate" minOccurs="0"/>
+			
+<xs:element name="expirationDate" type="EffectiveThruDate" minOccurs="0"/>
+			
+<xs:element name="subsectionId" type="SubsectionId">
+				
+<xs:annotation>
+					
+<xs:documentation>serviceCode</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subsectionName" type="SubsectionName">
+				
+<xs:annotation>
+					
+<xs:documentation>serviceName</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="displayOrder" type="DisplayOrder"/>
+			
+<xs:element name="unitOfMeasure" type="UnitOfMeasureCode"/>
+			
+<xs:element name="includedUnits" type="UsageValue"/>
+			
+<xs:element name="usedUnits" type="UsageValue"/>
+			
+<xs:element name="remainingUnits" type="UsageValue"/>
+			
+<xs:element name="additionalUsedUnits" type="UsageValue"/>
+			
+<xs:element name="additionalCharge" type="AdditionalCharge"/>
+			
+<xs:element name="rateCardInfo" type="RateCardInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberSharedUsageInfoList">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberSharedUsageInfo" type="SubscriberSharedUsageInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TierInfo">
+		
+<xs:sequence>
+			
+<xs:element name="index" type="TierIndex"/>
+			
+<xs:element name="tierFrom" type="TierThreshold"/>
+			
+<xs:element name="tierTo" type="TierThreshold"/>
+			
+<xs:element name="mrcRate" type="MrcRate" minOccurs="0"/>
+			
+<xs:element name="overageRate" type="OverageRate" minOccurs="0"/>
+			
+<xs:element name="inclusiveMinutes" type="FreeMinutesIncluded" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TierInfoList">
+		
+<xs:sequence>
+			
+<xs:element name="tierInfo" type="TierInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="AdditionalCharge">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="IdentifierString">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Ensemble Application Identifier uniquely identifies an Application in Ensemble inrterfaces.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="ApplicationIdentifier">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillSequenceNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Contains the Bill Sequence Number of the cycle-month.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+			
+<xs:minInclusive value="1"/>
+			
+<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Charge">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNbr">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DisplayOrder">
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ElectronicAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>ElectronicAddressString represents the character string of the electronic address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="300"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EndDate">
+		
+<xs:annotation>
+			
+<xs:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FreeMinutesIncluded">
+		
+<xs:annotation>
+			
+<xs:documentation>Free Minutes Included contains the number of free minutes that are included within a Pricing Plan.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="21"/>
+			
+<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDString">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="UniformResourceIdentifierString">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierName">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier Names holds the common name associated with a unique instance of an Identifer String</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="Index">
+		
+<xs:annotation>
+			
+<xs:documentation>Index holds a value that serves to guide, point out or facilitate the location of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IndicatorBoolean">
+		
+<xs:annotation>
+			
+<xs:documentation>IndicatorBoolean holds a value that indicators whether a particular situation exists.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+			
+<xs:documentation>International Mobile Subscriber Identity holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="ElectronicAddressString">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MrcRate">
+		
+<xs:restriction base="TermDollarAmount">
+			
+<xs:totalDigits value="7"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OverageRate">
+		
+<xs:restriction base="TermDollarAmount">
+			
+<xs:totalDigits value="7"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumber">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanType">
+		
+<xs:restriction base="TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PoolingGroupIdentifier">
+		
+<xs:restriction base="IdentifierString">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PricePlanCode">
+		
+<xs:restriction base="TypeCode">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PricePlanChangeType">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PricePlanName">
+		
+<xs:restriction base="TypeName">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="QuantityDecimal">
+		
+<xs:annotation>
+			
+<xs:documentation>Quantity represents a total amount or number.</xs:documentation>
+			
+<xs:documentation>Quantity represents a total amount or number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SharedUsageExclusionInd">
+		
+<xs:restriction base="IndicatorBoolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShareType">
+		
+<xs:restriction base="TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StartDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Case Start Date contains the calendar day the CASE began.  For example, in a Collection Case this would be the calendar day the Billing Account was put into Collections.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberDeviceSerialNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Device Serial Number is the Equipment Id – IMEI or Simcard Id or MSN or ESN of any subscriber under the BAN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="DeviceSerialNbr">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberNetworkAccessIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Network Access Identifier holds the concatenation of the a user name and realm for a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="NetworkAccessIdentifier">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="SubscriptionIdentifier">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifier">
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubsectionId">
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubsectionName">
+		
+<xs:restriction base="IdentifierName">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TermDollarAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Term Dollar Amount provides the dollar amount associated with a specific term of agreement, order, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="Threshold">
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierIndex">
+		
+<xs:restriction base="Index">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TierThreshold">
+		
+<xs:restriction base="Threshold">
+			
+<xs:totalDigits value="13"/>
+			
+<xs:fractionDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeName">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Name is the name of a specific instance of a Type Code</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniformResourceIdentifierString">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValue">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="IdentifierString">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryCode">
+		
+<xs:restriction base="TypeCode">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryGroupName">
+		
+<xs:restriction base="TypeName">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryName">
+		
+<xs:restriction base="TypeName">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageValue">
+		
+<xs:restriction base="UnitOfMeasureValue">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="OfferIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Identifier designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

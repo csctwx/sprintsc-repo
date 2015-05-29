@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/updateNaiPasswordInfo/v1/updateNaiPasswordInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/updateNaiPasswordInfo/v1/updateNaiPasswordInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                   Change                                                                                           Rel                  SR# -->
+	
+<!--07/02/2009    Judy Kauffmann     Initial Version                                                                                  GBL09.4            E4686/PJ000126-->
+	
+<!--07/10/2009    Steve Heichelheim 1.0 Added standard simple/complex types                                     GBL09.4            E4686/PJ000126-->
+	
+<xs:element name="updateNaiPasswordInfo" type="tns:UpdateNaiPasswordInfoType"/>
+	
+<xs:element name="updateNaiPasswordInfoResponse" type="tns:UpdateNaiPasswordInfoResponseType"/>
+	
+<xs:complexType name="UpdateNaiPasswordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>NAI for which to reset or update NAI password. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiPassword" type="tns:PasswordStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Specifies the new NAI password to be applied to the subscriber NAI.
+
+Sent only when requesting an NAI password update.  
+
+Not sent when performing an NAI password reset.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdateNaiPasswordInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>indication of success or failure is returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ConfirmMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Password String holds the string characters a PARTy designated as a Password into a system or Customer Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

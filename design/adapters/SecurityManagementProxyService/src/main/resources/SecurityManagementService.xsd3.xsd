@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryNaiPasswordInfo/v1/queryNaiPasswordInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryNaiPasswordInfo/v1/queryNaiPasswordInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                   Change                                                                                            Rel                  SR# -->
+	
+<!--07/02/2009    Judy Kauffmann     Initial Version                                                                                   GBL09.4            E4686/PJ000126-->
+	
+<!--07/10/2009    Steve Heichelheim 1.0 Added standard simple/complex types                                     GBL09.4            E4686/PJ000126-->
+	
+<xs:element name="queryNaiPasswordInfo" type="tns:QueryNaiPasswordInfoType"/>
+	
+<xs:element name="queryNaiPasswordInfoResponse" type="tns:QueryNaiPasswordInfoResponseType"/>
+	
+<xs:complexType name="QueryNaiPasswordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber’s assigned NAI.
+The valid format is USER_NAME@DOMAIN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiModeInfo" type="tns:NaiModeInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure providing the mode info to request current info, history info, or recent password changes info.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryNaiPasswordInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="naiPasswordList" type="tns:NaiPasswordListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List contains NAI password states and the associated date on which the password was changed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="NaiModeInfoType">
+		
+<xs:annotation>
+			
+<xs:documentation>Structure providing the mode info to request current info, history info, or recent password changes info.</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="historyMode" type="tns:SearchHistoryCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Used to specify period of time for search (mode).
+N = Current Mode
+Y = History Mode
+R = Recent Password Changes Mode</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fromDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Start of date range.
+
+Format is: YYYY-MM-DD
+In the Current search mode and in the Recent password changes mode, the From date and To date fields must not be provided in the request.
+In the History search mode, the From date must be less than or equal to the To date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="toDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>End of date range.
+Format is: YYYY-MM-DD
+In the Current search mode and in the Recent password changes mode, the From date and To date fields must not be provided in the request.
+In the History search mode, the From date must be less than or equal to the To date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NaiPasswordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="naiPasswordState" type="tns:NaiPasswordStateCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The NAI password’s state.
+Valid values:
+1 = Generated password
+2 = Modified password
+3 = Reset password</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDateTime" type="tns:EffectiveFromDateTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>NAI password effective date.
+Format:
+YYYY-MM-DD:HH:MM:SS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationId">
+				
+<xs:annotation>
+					
+<xs:documentation>Application id which requested the change.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ApplicationIdentifierType">
+						
+<xs:maxLength value="6"/>
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NaiPasswordListType">
+		
+<xs:sequence>
+			
+<xs:element name="naiPasswordInfo" type="tns:NaiPasswordInfoType" maxOccurs="600"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ApplicationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date holds the first calendar month, day, year, hour, minute, second and fraction of a second a Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Password String holds the string characters a PARTy designated as a Password into a system or Customer Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="NaiPasswordStateCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Nai Password State Code designates the state of the NAI password.
+Valid values:
+1 = Generated password
+2 = Modified password
+3 = Reset password</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="1"/>
+			
+<xs:enumeration value="2"/>
+			
+<xs:enumeration value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SearchHistoryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Search History Code is used to specify period of time for search (mode).
+N = Current Mode
+Y = History Mode
+R = Recent Changes Mode</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="Y"/>
+			
+<xs:enumeration value="N"/>
+			
+<xs:enumeration value="R"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

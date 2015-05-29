@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/isUserAuthorized/v1/isUserAuthorized.xsd" targetNamespace="http://integration.sprint.com/interfaces/isUserAuthorized/v1/isUserAuthorized.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                   Version     Change                                                                                                      Rel                    SR#                -->
+	
+<!--02/27/2012   Dweepant Bakshi      1.0             Initial Revision                                                                                            GBL12.2           PJ006708-->
+	
+<!--02/27/2012  Steve Heichelheim    1.0           Added MVM standards and simple types                                                   GBL12.2           PJ006708-->
+	
+<!--04/12/2012  Dweepant Bakshi   1.0           Added min length restriction on string request elemetns                              GBL12.2           CS# 526662 -->
+	
+<xs:element name="isUserAuthorized" type="tns:IsUserAuthorizedRequestType"/>
+	
+<xs:element name="isUserAuthorizedResponse" type="tns:IsUserAuthorizedResponseType"/>
+	
+<xs:complexType name="IsUserAuthorizedRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="userInfo" type="tns:UserInformationType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint.com User Info. Containes profileId or userName</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountInfo" type="tns:AccountInformationType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains account identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accessInfo" type="tns:AccessType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the access /permissions</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IsUserAuthorizedResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="isUserAuthorized" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>'true' if user is authorized else 'false'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UserInformationType">
+		
+<xs:choice>
+			
+<xs:element name="profileId">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint.com user’s ProfieId</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:WebProfileIdentifierType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="userName">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint.com User’s login user name</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UserNameType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="AccountInformationType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN against which the user will be authorized</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber against which the user will be authorized.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nodeId" type="tns:HierarchyNodeIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>NodeId in the Hierarchy against which the user will be authorized</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="AccessType">
+		
+<xs:sequence>
+			
+<xs:element name="permission" type="tns:PermissionObligationIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>permission field will allow application to authorize a profile for a specific task</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HierarchyNodeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Hierarchy Node Identifier uniquely identfies a Node in the Customer Hierarchy.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PermissionObligationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Permission Obligation Identifier uniquely identifies an obligation represented by an operation specified in a policy or policy set that should be performed by the Privacy Enforcement Point in conjunction with the enforcement of an authorization decision. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="48"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Name is an identifier of the identity associated with a party role which is the public part of a paired identity assertion.  User Name consists of all of the characters preceding the @ sign in a URL identifying a member of the specified Domain. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="33"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WebProfileIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Web Profile Identifier is a unique identifier of a web user who is a registered  customer with a webprofile.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

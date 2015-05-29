@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/createBillingAccountAccessLog/v1/createBillingAccountAccessLog.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/createBillingAccountAccessLog/v1/createBillingAccountAccessLog.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                                                               Rel                    SR# -->
+	
+<!--05/28/2009    Steve Heichelheim      1.0 Apply standards and simple types                             SDC Rel B         E4637-->
+	
+<!--09/18/2009    Suneel Pathipati      1.1 Corrected annotation for AccessViewSecurityProfileIndicator     SDC Rel B         CS#338551 -->
+	
+<!--05/18/2011    Dweepant Bakshi      1.2 Corrected type of AccessViewSecurityProfileIndicator  to boolean and removed enum   CS#463620-->
+	
+<xs:element name="createBillingAccountAccessLog" type="tns:CreateBillingAccountAccessLogType"/>
+	
+<xs:element name="createBillingAccountAccessLogResponse" type="tns:CreateBillingAccountAccessLogResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="CreateBillingAccountAccessLogType">
+		
+<xs:sequence>
+			
+<xs:element name="billingAccountNumberInformation" type="tns:SearchCriteriaType"/>
+			
+<xs:element name="billingAccountAccessLogInfo" type="tns:BillingAccountAccessLogInfoType"/>
+			
+<xs:element name="applicationDataInfo" type="tns:ApplicationDataInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CreateBillingAccountAccessLogResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageText">
+				
+<xs:annotation>
+					
+<xs:documentation>returns a message indicating transaction is successfull</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="ApplicationDataInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="associateId" type="tns:AssociateIdentifierRs" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>from input
+
+External operator ID - passed from external application (Radio Shack, RMS+) to Sprint in the Ensemble Billing system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="storeId" type="tns:RetailStoreIdentifierRs" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>from input if present
+
+Store ID - passed from external application (Radio Shack, RMS+) to Sprint in the Ensemble Billing system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>from input
+
+This field will contain the ipAddress sent as an input.
+Validated for the format by Amdocs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BillingAccountAccessLogInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="bypassReasonCode" type="tns:BypassReasonCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If applications like RMS+ are accessing BAN by bypassing authentication then authentication reason should be provided in this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accessDateTime" type="tns:LastUpdateDateTime" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date and Time when BAN is accessed. If not provided will be defaulted to System Date and Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="windowTitle" type="tns:ActionWindowTitle">
+				
+<xs:annotation>
+					
+<xs:documentation>Window title of which action was performed. 
+Ex: login window/page.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="securityInd" type="tns:AccessViewSecurityProfileIndicator" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the user accessing BAN has security profile or not.
+true - Security profile personnel, false- non-Security group). Default &#8211; 'false'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="billingAccountNumber" type="tns:BillingAccountNumberEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Account number of the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriptionId" type="tns:SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mobileDirectoryNumber" type="tns:MobileDirectoryNumberString">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone number of any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="urbanFleetMemberId" type="tns:UfmiConcatenation">
+				
+<xs:annotation>
+					
+<xs:documentation>Member Id (UrbanId*FleetId*MemberId) of any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:SubscriberDeviceSerialNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Id &#8211; IMEI or Simcard Id or MSN or ESN of any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="internetProtocolAddressString" type="tns:InternetProtocolAddressString">
+				
+<xs:annotation>
+					
+<xs:documentation>IP address of any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="internationalMobileSubscriberIdentityString" type="tns:InternationalMobileSubscriberIdentityString">
+				
+<xs:annotation>
+					
+<xs:documentation>IMSI of any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkAccessIdentifierString" type="tns:NetworkAccessIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>NAI address for any subscriber under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityString">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional IMSI for any subscriber under the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="highPerformancePushToTalkID" type="tns:HighPerformancePushToTalkIDString">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber's HPPTT ID. The ID will be constructed from the username@domain field, where the username will be a PTN or UFMI-based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberDeviceSerialNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Device Serial Number is the Equipment Id &#8211; IMEI or Simcard Id or MSN or ESN of any subscriber under the BAN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UfmiConcatenation">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+			
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is a concatenation of the Urban Area Id, Fleet Id, and Member Id that represent an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500*600*700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDString">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AssociateIdentifierRs">
+		
+<xs:annotation>
+			
+<xs:documentation>Associate Identifier Rs is the Radio Schack Associate Identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RetailStoreIdentifierRs">
+		
+<xs:annotation>
+			
+<xs:documentation>Retail Store Identifier Rs is the Radio Shack Store Identifier.
+
+Valid format: seven characters long, all numeric digits except for the third character, which should be a hyphen (NN-NNNN format, for a given numeric value of N).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BypassReasonCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Bypass Reason Code designates the reason billing account number access was bypassed.  values: AUTH_NOT_REC, AUTH_VIA_IVR, OFFLINE_SUP, PIN_SEC_ANSW_UN</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastUpdateDateTime">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Update Date is the date and time of the last update to an object.  Last Update Date Time is used in conjunction with the Last Update Numeric Stamp to uniquely identify a specific update iteration.  Typically Last Update Date Time and Last Update Numeric Stamp would be used in a psuedo-conversational approach to updates.  A record is read into local storage and the lock on the source record is released.  When the updated record is written back to the database where the source Record ID equals the Update Record ID, Source Last Update Date Time equals the original Update Last Update Date Time and Source Last Update Numeric Stamp equals the original Update Last Update Numeric Stamp.Both Last UPdate Date Time and Last Update Numeric Stamp are incremented in the update.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccessViewSecurityProfileIndicator">
+		
+<xs:annotation>
+			
+<xs:documentation>Access View Security Profile Indicator denotes user BAN_ACCESS_VIEW security profile. 
+true - Security profile personnel
+false - non-Security group
+
+Default &#8211; false</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ActionWindowTitle">
+		
+<xs:annotation>
+			
+<xs:documentation>Action Window Title is the window title of the action that was preformed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageText">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

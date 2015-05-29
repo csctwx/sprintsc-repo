@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd"
+	elementFormDefault="qualified"
+	xmlns:encryption="http://api.mfs.amdocs.com/epp/v1/sprint/encryption.xsd"
+	xmlns="http://www.w3.org/2001/XMLSchema">
+
+	<element name="errorMessage">
+		<complexType>
+			<sequence>
+				<element name="error" >
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+				</element>
+			    <element name="message" type="string"/>
+				<element name="signatureCertificateChain" type="encryption:SignatureCertificateChain"/>
+			</sequence>
+			<attribute name="id" type="string" use="required"/>
+			<attribute name="signature" type="string" use="required"/>
+			<attribute name="created" type="long" use="required"/>
+		</complexType>
+        </element>
+
+	<complexType name="SignatureCertificateChain">
+                <sequence>
+                        <element name="certificate" type="string" minOccurs="1" maxOccurs="unbounded"/>
+                </sequence>
+        </complexType>
+
+	<element name="encryptedMessage">
+		<complexType>
+			<annotation>
+				<documentation>Collection of encryptedPart elements</documentation>
+			</annotation>
+			<sequence>
+				<element ref="encryption:encryptedPart" minOccurs="0"
+					maxOccurs="unbounded" />
+			</sequence>
+			<attribute name="id" type="string" use="required" />
+			<attribute name="created" type="long" use="required" />
+			<attribute name="type" type="string" use="required" />
+		</complexType>
+	</element>
+
+	<element name="operationResponse">
+		<complexType>
+			<choice>
+				<element ref="encryption:errorMessage"/>
+				<element ref="encryption:encryptedMessage"/>	
+			</choice>
+		</complexType>
+        </element>
+
+	<element name="encryptedPart">
+		<complexType>
+			<simpleContent>
+				<extension base="string">
+					<annotation>
+						<documentation>An individual encryptedPart section</documentation>
+					</annotation>
+					<attribute name="id" type="string" use="required" />
+					<attribute name="type" type="string" use="required" />
+					<attribute name="mac" type="string" use="required" />
+					<attribute name="iv" type="string" use="required" />
+					<attribute name="senderKeyId" type="string" use="required" />
+					<attribute name="recipientKeyId" type="string" use="required" />
+					<attribute name="created" type="long" use="required" />
+				</extension>
+			</simpleContent>
+		</complexType>
+	</element>
+
+</schema>

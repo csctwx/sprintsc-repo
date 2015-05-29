@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/v2/public/interfaces/RequestInventoryOrderDetails.xsd" xmlns:ns2="http://integration.sprint.com/v2/public/interfaces/ReplyToInventoryOrderDetails.xsd" xmlns:cdm="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" xmlns:ns3="http://integration.sprint.com/interfaces/QueryInventoryOrderDetails/v1" targetNamespace="http://integration.sprint.com/interfaces/QueryInventoryOrderDetails/v1/QueryInventoryOrderDetails.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:import namespace="http://integration.sprint.com/v2/public/interfaces/RequestInventoryOrderDetails.xsd" schemaLocation="QueryOrderFulfillmentService.xsd12.xsd"/>
+	
+<xs:import namespace="http://integration.sprint.com/v2/public/interfaces/ReplyToInventoryOrderDetails.xsd" schemaLocation="QueryOrderFulfillmentService.xsd13.xsd"/>
+	
+<xs:import namespace="http://integration.sprint.com/v2/common/CanonicalDataModel.xsd" schemaLocation="QueryOrderFulfillmentService.xsd14.xsd"/>
+	
+<xs:element name="queryInventoryOrderDetails">
+		
+<xs:annotation>
+			
+<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		
+<xs:complexType>
+			
+<xs:sequence>
+				
+<xs:element ref="ns1:inventoryOrderDetailsRequest"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	
+<xs:element name="queryInventoryOrderDetailsResponse">
+		
+<xs:complexType>
+			
+<xs:sequence>
+				
+<xs:element ref="ns2:inventoryOrderDetailsReply"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

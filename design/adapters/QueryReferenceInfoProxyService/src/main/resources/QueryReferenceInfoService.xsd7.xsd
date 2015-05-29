@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceCardTypeInfo/v1/queryReferenceCardTypeInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceCardTypeInfo/v1/queryReferenceCardTypeInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 10/21/2008    Girish/Steve H          Removed enums for paymentSubmethod   1.0                                            CS# 295174 -->
+	
+<!-- 06/23/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.1                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceCardTypeInfo" type="tns:QueryReferenceCardTypeInfoRequest"/>
+	
+<xs:element name="queryReferenceCardTypeInfoResponse" type="tns:QueryReferenceCardTypeInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceCardTypeInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="cardTypeInfo" type="tns:CardTypeInfoResponse" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceCardTypeInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="cardTypeInfo" type="tns:CardTypeInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CardTypeInfo">
+		
+<xs:sequence>
+			
+<xs:element name="cardNumber" type="tns:PaymentCardNumber"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CardTypeInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="cardType" type="tns:CreditDebitTypeCode"/>
+			
+<xs:element name="paymentMethodInfo" type="tns:PaymentMethodInfo" maxOccurs="2"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PaymentMethodInfo">
+		
+<xs:sequence>
+			
+<xs:element name="paymentMethod" type="tns:PaymentCardTypeCode"/>
+			
+<xs:element name="paymentSubMethod" type="tns:DefaultPaymentMethodTypeCode"/>
+			
+<xs:element name="paymentSubMethodDesc" type="tns:DefaultPaymentMethodDescription" minOccurs="0"/>
+			
+<xs:element name="cvv2Required" type="tns:PaymentCardVerificationCodeRequiredFlag"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--MVM Simple Types-->
+	
+<xs:simpleType name="CreditDebitTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Debit Type Code identifies a payment card as a credit card or debit card.
+C - Credit
+D - Debit</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="C">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="D">
+				
+<xs:annotation>
+					
+<xs:documentation>Debit</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DefaultPaymentMethodTypeCode">
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardNumber">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="DefaultPaymentMethodDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Default Payment Method Description is a textual description of a defualt payment method.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Type Code designates if the payment card is being processed as a Debit or Credit Card.
+Values:
+CC - Credit Card
+DB - Debit Card</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="CC">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit Card</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="DB">
+				
+<xs:annotation>
+					
+<xs:documentation>Debit Card</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardVerificationCodeRequiredFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Verification Code Required Flag indicates if a payment requires an accompanying CVV2 security code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

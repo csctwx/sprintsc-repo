@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryCallDetailRecordInfo/v1/queryCallDetailRecordInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryCallDetailRecordInfo/v1/queryCallDetailRecordInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date         Author                        Version      Change                                                                                           Rel            SR#      -->
+	
+<!--01/20/2010   Adriana Fernandes    1.0            Initial Draft                                                                                      GBL11.2   PJ000989  -->
+	
+<!--01/21/2010 Steve Heichelheim        1.0  Added MVM Simple Types                                                                          GBL11.2 PJ000989 -->
+	
+<!--01/21/2010 Adriana Fernandes       1.0  Renamed field terminatingCallInfoType.startTime to terminatingCallInfoType.terminateStartTime and  terminatingCallInfoType.stopTime to terminatingCallInfoType.terminateStopTime                                                              GBL11.2 PJ000989 -->
+	
+<!--04/21/2011 Steve Heichelheim      1.1 changed startTime, stopTime, answerStartTime, answerStopTime, terminatestartTime, terminatestopTime to xs:dateTime  GBL11.2 PJ000989 -->
+	
+<xs:element name="queryCallDetailRecordInfo" type="tns:QueryCallDetailRecordInfoType"/>
+	
+<xs:element name="queryCallDetailRecordInfoResponse" type="tns:QueryCallDetailRecordInfoResponseType"/>
+	
+<xs:complexType name="QueryCallDetailRecordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Device Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cdrDateTime" type="tns:RequestDateTimeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryCallDetailRecordInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="recordType" type="tns:ExceptionConditionCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if CDR records contains an error or not.0 good and 1 for error</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recordCount" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>recordCount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callDetailRecordList" type="tns:CallDetailRecordListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing call detail records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CallDetailRecordInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="networkElementId" type="tns:NetworkElementIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Element Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mobileRole" type="tns:MobileRoleIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Role</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mobileRoleDesc" type="tns:MobileRoleDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Role Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="switchType" type="tns:SwitchTypeIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Switch Type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="switchTypeDesc" type="tns:SwitchTypeDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Switch Type Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callingNumber" type="tns:CallingNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Calling Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="calledNumber" type="tns:CalledNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Called Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="overSeasCode" type="tns:OverseasCallTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Overseas Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mac_id" type="tns:MediumAccessControlAddressType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Airave Media Access Control Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureInfo" type="tns:FeatureInfoType" minOccurs="0"/>
+			
+<xs:element name="esn" type="tns:ElectronicSerialNumberDecType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Electronic Serial Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callCode" type="tns:CallStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Call Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callCodeDesc" type="tns:CallStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Call Code Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="terminatingCode" type="tns:CallTerminationStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="terminatingCodeDesc" type="tns:CallTerminationStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Code Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="operatorAssistanceCode" type="tns:OperatorAssistanceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Operator Assistance Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="operatorAssistanceCodeDesc" type="tns:OperatorAssistanceTypeDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Operator Assistance Code Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="anchorSid" type="tns:SidNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Anchor SID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originatingCallInfo" type="tns:OriginationCallInfoType" minOccurs="0"/>
+			
+<xs:element name="terminatingCallInfo" type="tns:TerminatingCallInfoType" minOccurs="0"/>
+			
+<xs:element name="ixc" type="tns:InterexchangeCarrierIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Inter-Exchange Carrier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ixcDesc" type="tns:InterexchangeCarrierDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Inter-Exchange Carrier Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="firstCellSite" type="tns:CellSiteIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First Cell Site</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastCellSite" type="tns:CellSiteIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Last Cell Site</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trunkGroup" type="tns:TrunkGroupNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Trunk Group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trunkMember" type="tns:TrunkGroupNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Trunk Member</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="quickRepollId" type="tns:QuickRepollCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Quick Repoll Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="blockNumber" type="tns:BlockNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Block Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="splitRecordId" type="tns:RowIdentifierStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Split Record Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="splitRecordCount" type="tns:RowCountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Split Record Count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dialedDigits" type="tns:DialedNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Dialed Digits</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="treatmentCode" type="tns:TreatmentCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Treatment Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="treatmentShortDescription" type="tns:TreatmentDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Treatment Short Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="meid" type="tns:MobileEquipmentIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Equipment Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CallDetailRecordListType">
+		
+<xs:sequence>
+			
+<xs:element name="callDetailRecordInfo" type="tns:CallDetailRecordInfoType" maxOccurs="68"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="dataCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Data Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="doNotDisturbCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Do-Not-Disturb Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voipCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Voip Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="selectiveCallAcceptCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Selective-Call-Accept Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="voiceMailRetrievalCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Voice-Mail-Retrieval Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callingNumberPresentationCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Calling-Number-IP-Presentation Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callingNumberRestrictionCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Calling-Number-IP-Restriction Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="threeWayCallCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature 3-Way-Call Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callDeliveryCode" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Delivery Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cancelCallWaiting" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Cancel Call Waiting</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callWaiting" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Waiting</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callForwardDefault" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Forward Default</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callFowardNoAnswer" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Forward No-Answer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callFowardBusy" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Forward Busy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callForwardUnconditional" type="tns:FeatureSupportedFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Feature Call Forward Unconditional</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OriginationCallInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="startTime" type="tns:EventStartDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Originating Call Start Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="stopTime" type="tns:EventEndDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Originating Call Stop Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TerminatingCallInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="answerStartTime" type="tns:EventStartDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Call Answer Start Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="answerStopTime" type="tns:EventEndDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Call Answer Stop Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="terminateStartTime" type="tns:EventStartDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Call Start Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="terminateStopTime" type="tns:EventEndDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminating Call Stop Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BlockNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Block number which will select the nth block of a group of blocks.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CalledNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Called Number is the destination number called (PTN, UFMI, etc). For outgoing calls, this field contains the number of the call recepient. For incoming cellular calls, this field contains the subsciriber's own PTN. For incoming dispatch calls, this field will not be populated.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallingNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Calling Number is he number for the calling party often referenced as caller-id.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Status Code indicates the status of the called number; answered or unanswered.
+Valid Values Include:
+0 - Unanswered
+1 - Answered
+2 - Call related other
+3 - Feature activation</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallStatusDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Status Description is a common language description of the status of the called number; answered or unanswered.
+Valid Values Include:
+0 - Unanswered
+1 - Answered
+2 - Call related other
+3 - Feature activation</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallTerminationStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Termination Status Code indicates the termination status of the call(normal completion or some error terminated the call).
+Valid Values Include:
+0 - Normal completion
+1 - Cutoff call
+2 - Timed-out mobile (loss of SAT, fade out)
+3 - System failure
+4 - Resource error</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallTerminationStatusDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Termination Status Description is a common language description of the termination status of the call(normal completion or some error terminated the call).
+Valid Values Include:
+0 - Normal completion
+1 - Cutoff call
+2 - Timed-out mobile (loss of SAT, fade out)
+3 - System failure
+4 - Resource error</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CellSiteIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Cell Site Identifier is a unique identifier of a cell site, which can be a repeater, femtocell or a site where antennas and electronic communications equipment are placed on a radio mast or tower to create a cell in a cellular network. A cell site is composed of a tower or other elevated structure for mounting antennas, and one or more sets of transmitter/receivers transceivers, digital signal processors, control electronics, a GPS receiver for timing (for CDMA2000 or IS-95 systems), regular and backup electrical power sources, and sheltering. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DialedNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Dialed Number is the telepone number dialed when a call is placed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="31"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ElectronicSerialNumberDecType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Device Identifier is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier is one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfier (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+			
+<xs:documentation>Electronic Serial Number is a unique number that is embedded electronically by the manufacturer into a CDMA wireless communication device that identifies that individual unit. It can be represented in 11-digit decimal or 8-digit hexadecimal (HEX) format. Once ESNs are exhausted, MEIDs are embedded in devices to uniquely identify the device.   This is the 11 digit decimal representation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventStartDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Start Date Time is the date and time at which the event originated (at the time zone of the switch).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionConditionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+
+Values:
+0 = Successful completion, 
+4 = Successful completion, but with a warning as to some unusual circumstance, 
+8 = Error, request was not processed successfully, 
+12 = Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+
+Values:
+0 = Successful completion, 
+4 = Successful completion, but with a warning as to some unusual circumstance, 
+8 = Error, request was not processed successfully, 
+12 = Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureSupportedFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Supported Flag is a boolean indicator of whether the related feature is supported. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InterexchangeCarrierDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Interexchange Carrier Description is a common language description of an Interexchange Carrier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InterexchangeCarrierIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Interexchange Carrier Identifier uniquely Identifies an Interexchange Carrier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MediumAccessControlAddressType">
+		
+<xs:annotation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+			
+<xs:documentation>alias: MAC ID</xs:documentation>
+			
+<xs:documentation>alias: Media Access Control Identifcation</xs:documentation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileEquipmentIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Equipment IDentifier (MEID) is a globally unique number for a physical piece of mobile station equipment. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.   
+
+This is the 18 character decimal representation.</xs:documentation>
+			
+<xs:documentation>A Mobile Equipment IDentifier (MEID) is a globally unique number for a physical piece of mobile station equipment. Equipment identifiers are 'burned' into a CDMA device, and should be resistant to modification.  The ESN will migrate to the MEID with assignments anticipated to begin in the 2004 to 2005 timeframe.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileRoleDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Role Description is a common language description of the mobile number role in a call.
+Valid Values Include:
+0 - The mobile number originated the call
+1 - The call terminated to the mobile number
+2 - The mobile forwarded the call to another number
+3 - Role undefined
+99 - Null Mobile Role</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileRoleIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Role Identifier designates the mobile number role in a call.
+Valid Values Include:
+0 - The mobile number originated the call (69%)
+1 - The call terminated to the mobile number (25%)
+2 - The mobile forwarded the call to another number (5%)
+3 - Role undefined (either no mobile was involved or the record in incomplete. This includes calls that we unanswered and never got to Voice mail (1%), Voicemail Callback and Voice Activated Dialing (VAD). This role includes Switch to Switch traffic - examples are a call that is call-forwarded to an handset (un-answered) and eventually goes to voicemail.
+99 - Null Mobile Role (role not indicated by Network Gateway Software (0%)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MoreRecordsAvailableFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkElementIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Element Identifier uniquely identifies each network element in the SecuriNet network as stored in the DDS reference table known as network_element. It identifies the SPCS network switch that handled the CDR. The numbering scheme is based on Convergys P2K</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OperatorAssistanceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Operator Assistance Type Code indicates the type of operator assistance (OA) provided for the call; none or some type of operator assistance.
+Valid Values Include:
+0 - No Operator Assistance
+1 - Operator Assistance
+2 - 0+ Person to Person
+3 - 0-  Person to Person
+4 - Emergency Call</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OperatorAssistanceTypeDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Operator Assistance Type Descrption is a common language description of the type of operator assistance (OA) provided for the call; none or some type of operator assistance.
+Valid Values Include:
+0 - No Operator Assistance
+1 - Operator Assistance
+2 - 0+ Person to Person
+3 - 0-  Person to Person
+4 - Emergency Call</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OverseasCallTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Overseas Call Type Code indicates if the call was placed to an overseas number.
+Valid Values Include:
+0 - Not an Overseas Call
+1 - An Overseas Call
+99 - An error occurred in Overseas status
+Note: Mexico and Canada as well as countries in the Caribbean are not considered to be overseas.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="QuickRepollCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Quick Repoll Code indicates if the data was from the original stream of data from the PDU or from a repoll source.  The later occurs only if the data was not originally processed by the DDS and the DDS repolled the data from the PDU for reprocessing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RequestDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Request Date Time is the Date and time that a reqeust is made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Identifier is used to identify a row within a result set or a database table.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SidNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>SID Number or System Identification Number is a 5-digit number that has been assigned to identify a particular cellular carrier. This number identifies your ''home'' system.Anchor Switch Identifier(SID) is a five-digit number established by the FCC to represent a city or territory. It's CIBER assigned, used in the industry to identify wireless service providers. SID's are one for one with major trading areas. The SID is the lowest level used to determine traveling or roaming at this time.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SwitchTypeDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Switch Type Description is a common language description of the switch type assigned by the formatter indicating the source switch type.
+Valid Values Include:
+0 - Other switch or network not defined
+1 - Lucent / ATT (all generics)
+2 - Motorola (all generics)
+3 - Nortel MSC (all generics)
+5 - Operator Services Network Element
+6 -  Directory Assistance Network Element
+7 - Aldiscon SMS Message Center (SMS)
+8 - Tcs SMS Message Center (SMS)
+20 - Lucent SWAT
+21 - Airave device
+18 - Voice Activated Dialing (VAD)
+99 - null (not indicated by formatter)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SwitchTypeIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Switch Type Identifier uniquely identifies the switch type assigned by the formatter indicating the source switch type.
+Valid Values Include:
+0 - Other switch or network not defined
+1 - Lucent / ATT (all generics)
+2 - Motorola (all generics)
+3 - Nortel MSC (all generics)
+5 - Operator Services Network Element
+6 -  Directory Assistance Network Element
+7 - Aldiscon SMS Message Center (SMS)
+8 - Tcs SMS Message Center (SMS)
+20 - Lucent SWAT
+21 - Airave device
+18 - Voice Activated Dialing (VAD)
+99 - null (not indicated by formatter)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TreatmentCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Treatment Code indicates the treatment type a call received, such as partial dial, busy or toll denied. The default value in both the CDR logs and the AMA hex dump is 000. This field is captured with a value other than 000, when an unanswered call is routed to a treatment. There are a limited number of treatment codes used by the DMS-MTX.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TreatmentDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Treatment Description is a common language description of the treatment type a call receive, such as partial dial, busy or toll denied.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="27"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TrunkGroupNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Trunk Group Number identifies the group in the digital switch at the A or Z office. This is the number that appears on the toll recording tape if toll records are generated for the traffic on the group.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="EventEndDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event End Date Time is the date and time at which the event ended or finished.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

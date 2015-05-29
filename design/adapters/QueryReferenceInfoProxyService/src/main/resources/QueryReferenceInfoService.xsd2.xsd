@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceDepositRequirementInfo/v1/queryReferenceDepositRequirementInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceDepositRequirementInfo/v1/queryReferenceDepositRequirementInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	
+<!-- Date              Author                        Change                                                                               Rel                  SR# -->
+	
+<!--12/03/2008     J Carlton         Changed approvedSubsciberQty to approvedSubscriberQty       UBP R10         CS#299882-->
+	
+<!-- 12/08/2008    J Silva            Changed fromServicePeriod and toServicePeriod order              UBP R10	      CS#300106 -->
+	
+<!-- 23/06/2008    Sudheer Kukkala      Changed namespace from xsd to xs                              GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceDepositRequirementInfo" type="tns:QueryReferenceDepositRequirementInfo"/>
+	
+<xs:element name="queryReferenceDepositRequirementInfoResponse" type="tns:QueryReferenceDepositRequirementInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceDepositRequirementInfo">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:Info"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceDepositRequirementInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="maxSerialNumber" type="tns:SubscriberAccountSerialNumber"/>
+			
+<xs:element name="aslInd" type="tns:AccountSpendingLimitFlag"/>
+			
+<xs:element name="tclInd" type="tns:TemporaryCreditLimitFlag"/>
+			
+<xs:element name="cdmaDepositList" type="tns:CdmaDepositList" minOccurs="0"/>
+			
+<xs:element name="idenDepositList" type="tns:IdenDepositList" minOccurs="0"/>
+			
+<xs:element name="spendingLimitList" type="tns:SpendingLimitList" minOccurs="0"/>
+			
+<xs:element name="approvedSubscriberQty" type="tns:ApprovedSubscriberCount" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CdmaDepositInfo">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberNumber" type="tns:SubscriberAccountSerialNumber"/>
+			
+<xs:element name="depositAmount" type="tns:SubscriberDepositAmount"/>
+			
+<xs:element name="fromServicePeriod" type="tns:DepositWaiveMinimumMonthQuantity" minOccurs="0"/>
+			
+<xs:element name="toServicePeriod" type="tns:DepositWaiveMaximumMonthQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CdmaDepositList">
+		
+<xs:sequence>
+			
+<xs:element name="cdmaDepositInfo" type="tns:CdmaDepositInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IdenDepositInfo">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberNumber" type="tns:SubscriberAccountSerialNumber"/>
+			
+<xs:element name="depositAmount" type="tns:SubscriberDepositAmount"/>
+			
+<xs:element name="fromServicePeriod" type="tns:DepositWaiveMinimumMonthQuantity" minOccurs="0"/>
+			
+<xs:element name="toServicePeriod" type="tns:DepositWaiveMaximumMonthQuantity" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IdenDepositList">
+		
+<xs:sequence>
+			
+<xs:element name="idenDepositInfo" type="tns:IdenDepositInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="Info">
+		
+<xs:sequence>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeEns"/>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCode"/>
+			
+<xs:element name="creditClass" type="tns:CreditClassCode"/>
+			
+<xs:element name="subMarket" type="tns:SubMarketCode"/>
+			
+<xs:element name="salesChannel" type="tns:SalesChannelId" minOccurs="0"/>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCode" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SpendingLimitInfo">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberNumber" type="tns:SubscriberAccountSerialNumber"/>
+			
+<xs:element name="spendingLimit" type="tns:SpendingLimitAmount"/>
+			
+<xs:element name="suspensionLimit" type="tns:SpendingLimitSuspensionAmount"/>
+			
+<xs:element name="smsSpendingThreshold" type="tns:SpendingLimitSmsAmount"/>
+			
+<xs:element name="secondSmsSpendingThreshold" type="tns:SpendingLimitSmsAmount" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SpendingLimitList">
+		
+<xs:sequence>
+			
+<xs:element name="spendingLimitInfo" type="tns:SpendingLimitInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="BillingAccountSubTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCode">
+		
+<xs:annotation>
+			
+<xs:documentation>"Credit Class Code identifies the Customer's level of financial responsibility.   
+
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required depsoit and the amount of the deposit, ec.."</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.
+Values:
+I - iDEN
+C - CDMA
+B - Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="I">
+				
+<xs:annotation>
+					
+<xs:documentation>iDEN</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="B">
+				
+<xs:annotation>
+					
+<xs:documentation>Both (iDEN and CDMA)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="C">
+				
+<xs:annotation>
+					
+<xs:documentation>CDMA</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyID">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Identifier contains a value that uniquely identifies an INDIVIDUAL or ORGANIZATION Sprint wishes to track for business reasons as a PARTY.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelId">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:PartyID">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="AccountSpendingLimitFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Spending Limit Flag is a boolean flag that indicates if the account has a spending Limit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApprovedSubscriberCount">
+		
+<xs:annotation>
+			
+<xs:documentation>Approved Subscriber Count is the number of subscribers approved for the associated account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DepositWaiveMaximumMonthQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>Deposit Waive Maximum Month Quantity is the maximum Service Period of the BAN in number of months. This value along with fromSvcPeriod is considered to waive off the deposit requirements. If the Service period of ban is in this range, the deposit is required. Usually it is set to 12 or 99. The value of 99 represents deposit is always required.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DepositWaiveMinimumMonthQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>Deposit Waive Minimum Month Quantity is the minimum Service Period of the BAN in number of months. This value along with fromSvcPeriod is considered to waive off the deposit requirements. If the Service period of ban is in this range, the deposit is required. Usually it is set to 12 or 99. The value of 99 represents deposit is always required.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SpendingLimitAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Spending Limit Amount represents a dollar amount set as the spending limit for the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SpendingLimitSmsAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Spending Limit Amount represents a dollar amount set as the SMS spending limit for the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SpendingLimitSuspensionAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Spending Limit Suspension Amount represents a dollar amount set as the suspension spending limit for the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberAccountSerialNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Account Serial Number represents the number/order of the subscriber that is now being added to the BAN based on network technology.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberDepositAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Deposit Amount is the dollar amount of deposit for a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TemporaryCreditLimitFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Temporary Credit Limit is a boolean flag that indicates if the BAN has a TCL (Temporary Credit Limit) or not.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

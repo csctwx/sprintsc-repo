@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://integration.sprint.com/interfaces/preAuthorizeOrder/v1/preAuthorizeOrder.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/preAuthorizeOrder/v1/preAuthorizeOrder.xsd">
+  <!--Date              Author             Version     Change                                                                                                  Rel                          SR#-->
+  <!--04/27/2014      Mitali Handoo    1.0                                                                                                                       GBL 14.2      PJ007526-->
+  <!--05/15/2014      Mitali Handoo    1.0       submitted for standardization                                                                  GBL 14.2      PJ007526-->
+  <!--05/16/2014      Adon Powell     1.0        Add Simple types and Standardize                                                         GBL 14.2      PJ007526-->
+  <!--10/7//2014      Mitali Handoo     1.1       Converted model from Sequence to Choice for  depositPaymentInfo structure elements         GBL 14.2      PJ007526-->
+  <!--10/27//2014      Mitali Handoo    1.1     Removed billingZipCode from  PaymentCardInfo structure       PJ007526-->
+  <!--11/6//2014       Mitali Handoo    1.2     updated paymentCardType enumeration values       PJ007526-->
+  <!--11/14/2014     Paula Muller       1.3     Added PrecashInfo structure with pan, depositAmount and ban in the request.  Added panStatus in the response.       PJ012336 Epic 1C-->
+  <!--11/14/2014     Adon Powell      1.3     standardize       PJ012336 Epic 1C-->
+  <!---->
+  <xs:element name="preAuthorizeOrder" type="tns:PreAuthorizeOrderRequestType"/>
+  <xs:element name="preAuthorizeOrderResponse" type="tns:PreAuthorizeOrderResponseType"/>
+  <!---->
+  <xs:complexType name="PreAuthorizeOrderRequestType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="depositPaymentInfo" type="tns:DepositPaymentInfoType">
+          <xs:annotation>
+            <xs:documentation>Structure of deosit-payment</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="equipmentPaymentInfo" type="tns:EquipmentPaymentInfoType">
+          <xs:annotation>
+            <xs:documentation>Structure of equipment-payment-info</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="cashDeposit" type="tns:DepositPaymentReceivedFlagType">
+          <xs:annotation>
+            <xs:documentation>If deposit payment structure not provided then cash-deposit element should be set to true</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="preCashInfo" type="tns:PreCashInfoType">
+          <xs:annotation>
+            <xs:documentation>PreCash Info Structure</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="handsetCount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Indicates an update of the number of devices requested in the pre-requisite Credit Check request</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:DeviceQuantityType"/>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PreAuthorizeOrderResponseType">
+    <xs:sequence>
+      <xs:element name="success" type="tns:SuccessFlagType">
+        <xs:annotation>
+          <xs:documentation>Indicates whether the pre-auth was successful or not.  
+
+For PreCash calls, if equals success, then panStatus will be populated.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="preAuthorizationCode" type="tns:PreAuthorizationCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Payment vendor transaction number. Code issued by the bank or service establishment.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="paymentCardHandle" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Credit Card Handle, This will be returned only if equipmentPaymentInfo structure is passed in the request . Handle which can be used by OVM/FAST to uniquely identify a  Credit/Debit Card. Handle will be stored in WDM for 7 days from the handle generation date.
+
+Not used for PreCash.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardHandleIdentifierType">
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="panStatus" type="tns:StatusCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The response status description of a Precash request.  If call is successful, then either “VALID” or “NO_ACTION” will be populated in panStatus.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="DepositPaymentInfoType">
+    <xs:choice>
+      <xs:element name="paymentCardInfo" type="tns:PaymentCardInfoType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cloneCreditCard" type="tns:CloneDataFlagType">
+        <xs:annotation>
+          <xs:documentation>clone credit card flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cardHandle">
+        <xs:annotation>
+          <xs:documentation>payment card handle</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardHandleIdentifierType">
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PaymentCardInfoType">
+    <xs:sequence>
+      <xs:element name="paymentCardType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Type
+Values:
+M – MasterCard
+V – Visa
+A – American Express
+D– Discover
+DC – Diner’s Club</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardTypeCodeType">
+            <xs:enumeration value="M"/>
+            <xs:enumeration value="V"/>
+            <xs:enumeration value="A"/>
+            <xs:enumeration value="D"/>
+            <xs:enumeration value="DC"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="paymentCardNumber" type="tns:PaymentCardNumberType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Number
+A valid credit card number with 12, 14, 16 or 18 digits.
+*Need to mask sensitive information when logged</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="paymentCardSecurityCode">
+        <xs:annotation>
+          <xs:documentation>Security code associated with credit card. Must be 3 or 4 digits in length
+American Express CID
+Discover CID
+MasterCard CVC2
+Visa CVV2
+
+American Express code is 4 bytes in length, Discover CID, MasterCard CVC2 and Visa CVV2 are 3 bytes in length</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardSecurityCodeType">
+            <xs:maxLength value="4"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="paymentCardExpirationDate" type="tns:PaymentCardExpirationDateType">
+        <xs:annotation>
+          <xs:documentation>Card expiration date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="addressInfo" type="tns:AddressInfoType">
+        <xs:annotation>
+          <xs:documentation>Address information structure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ignoreAddressErrors" type="tns:OverrideValidationFlagType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Whether to ignore address validation errors when pre-authorizing</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EquipmentPaymentInfoType">
+    <xs:sequence>
+      <xs:element name="equipmentPaymentDetails" type="tns:EquipmentPaymentDetailsType">
+        <xs:annotation>
+          <xs:documentation>Stucture of Equipment Payment details</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="equipmentTotalAmount" type="tns:TotalAmountType">
+        <xs:annotation>
+          <xs:documentation>Pre Authorize Equipment Total Amount
+Payment Amount
+Amount of payment.  Must be positive and in one of the following formats:
+999999999.99
+999999999.9
+999999999
+Minimum payment amount allowed $.01</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EquipmentPaymentDetailsType">
+    <xs:choice>
+      <xs:element name="paymentCardInfo" type="tns:PaymentCardInfoType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cloneCreditCard" type="tns:CloneDataFlagType">
+        <xs:annotation>
+          <xs:documentation>Clone Credit Card Flag</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="cardHandle">
+        <xs:annotation>
+          <xs:documentation>payment card handle</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardHandleIdentifierType">
+            <xs:maxLength value="30"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="AddressInfoType">
+    <xs:choice>
+      <xs:sequence>
+        <xs:element name="streetAddress1" type="tns:PostalAddressLine1Type">
+          <xs:annotation>
+            <xs:documentation>Street Line 1</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="streetAddress2" type="tns:PostalAddressLine2Type" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Street Line 2</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="city" type="tns:CityNameType">
+          <xs:annotation>
+            <xs:documentation>City name</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="stateCode" type="tns:UspsStateAbbreviationType">
+          <xs:annotation>
+            <xs:documentation>state code</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="zipCode" type="tns:UspsPostalCodeType">
+          <xs:annotation>
+            <xs:documentation>zip code</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="countryCode" type="tns:IsoCountryCodeType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>country code</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="updateAddress" type="tns:UpdateFlagType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>update address flag</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+      <xs:element name="cloneAddress" type="tns:AddressCopyFromCodeType">
+        <xs:annotation>
+          <xs:documentation>Clone Address. Same as Billing</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PreAuthorizationRequestType">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="depositPaymentInfo" type="tns:DepositPaymentInfoType"/>
+        <xs:element name="equipmentPaymentInfo" type="tns:EquipmentPaymentInfoType"/>
+        <xs:element name="cashDeposit"/>
+      </xs:choice>
+      <xs:element name="handsetCount" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <!---->
+  <!--MVM/Shared Simple Types-->
+  <xs:simpleType name="AddressCopyFromCodeType">
+    <xs:annotation>
+      <xs:documentation>Address Copy From Code indicates where and address should be copied from.
+Example Values:
+SAME_AS_BILLING</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SAME_AS_BILLING"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CityNameType">
+    <xs:annotation>
+      <xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CloneDataFlagType">
+    <xs:annotation>
+      <xs:documentation>Clone Data Flag indicates if data should be cloned from an existing source.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SAME_AS_BILLING"/>
+      <xs:enumeration value="SAME_AS_DEPOSIT"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DepositPaymentReceivedFlagType">
+    <xs:annotation>
+      <xs:documentation>Deposit Payment Received Flag indicates whether or not a required deposit payment has been received.
+valid values:
+True-deposit payment received
+False-deposit payment not received</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="DeviceQuantityType">
+    <xs:annotation>
+      <xs:documentation>Device Quantity is the number of associated devices.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EventDateTimeType">
+    <xs:annotation>
+      <xs:documentation>Event Date Time is the calendar date and time on which an event occurred.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+  <xs:simpleType name="FirstNameType">
+    <xs:annotation>
+      <xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="35"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="IsoCountryCodeType">
+    <xs:annotation>
+      <xs:documentation>An International Standardization Organization, ISO,  Country Code is the set of characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="LastNameType">
+    <xs:annotation>
+      <xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+      <xs:documentation>alias: Surname</xs:documentation>
+      <xs:documentation>alias: Family Name</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="35"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Order Identifier uniquely identifies an order.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OverrideValidationFlagType">
+    <xs:annotation>
+      <xs:documentation>Override Validation Flag is a boolean indicatore of whether or not validation failures should be ignored and the unvalidated data used regardless.  This is typically used to perform change of address that cannot be formatted into the exact same values as the address validation produces, or to perform a change of address if the address validation system is not available.  
+Valid Values: 
+True - override failed validation, 
+False - do not override failed valiation</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentAmountType">
+    <xs:annotation>
+      <xs:documentation>Payment amount is the amount of an invoice's charges for which payments have been applied.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="11"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardHandleIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Handle Identifier will be used to uniquely identify the credit card, after the successful completion of this transaction corresponding Credit Card data will be purged.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardExpirationDateType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Expiration Date is last calendar date the Credit/Debit Card is valid.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:gYearMonth"/>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardNumberType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Number is the number issued on the card.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:minLength value="12"/>
+      <xs:whiteSpace value="collapse"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardSecurityCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Credit Card Security Code is a 3 - 5 digit code issued by the card issuer as a security feature.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+      <xs:minLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Type Code identifies the Credit/Debit Card provider.
+
+Examples:
+Visa
+MasterCard
+American Express</xs:documentation>
+      <xs:documentation>NOTE: Code values are 2 characters in length.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PostalAddressLine1Type">
+    <xs:annotation>
+      <xs:documentation>Postal Address Line 1 is the first instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PostalAddressLine2Type">
+    <xs:annotation>
+      <xs:documentation>Postal Address Line 2  is the second instance of the Postal Address Line is used in the creation of the Postal Address label. The Postal Address label is usually composed of three lines; 1. addresses, 2. street number and street name, 3. City, State, and Zipcode. In the case where PO Box is used the recipient may choose to insert their physical (aka street) address as line two, expanding the complete address to four lines. Providing both allows a sender to ship via the USPS or via a private carrier.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PreAuthorizationCodeType">
+    <xs:annotation>
+      <xs:documentation>Pre Authorization Code is Issued by the bank or service establishment to pre-authorize a payment.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SalesChannelIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SuccessFlagType">
+    <xs:annotation>
+      <xs:documentation>Success Flag is a boolean flag indicating whether the response or action was successful.
+valid values: 
+True - success, 
+False - failure</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="TotalAmountType">
+    <xs:annotation>
+      <xs:documentation>Total Amount is the sum of associated amounts.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="11"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransactionTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+      <xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="3"/>
+      <xs:enumeration value="DEP"/>
+      <xs:enumeration value="EQP"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UpdateFlagType">
+    <xs:annotation>
+      <xs:documentation>Update Flag is a boolean indicator of whether to update the associated data.
+true - update the associated data
+false - do not update the associated data</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="UspsPostalCodeType">
+    <xs:annotation>
+      <xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+      <xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+      <xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+      <xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UspsStateAbbreviationType">
+    <xs:annotation>
+      <xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <!--added 11/14/2014-->
+  <xs:complexType name="PreCashInfoType">
+    <xs:sequence>
+      <xs:element name="pan" type="tns:ExternalSystemReferenceNumberStringType">
+        <xs:annotation>
+          <xs:documentation>The PreCash account number.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ban" type="tns:BillingAccountNumberEns">
+        <xs:annotation>
+          <xs:documentation>The billing account number.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="paymentAmount" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Represents total cash payment amount to be processed through PreCash to secure a new activation of a new account of sub to an account. PreCash will verify Merchant location has processed, at a minimum, the amount specified by Sprint in this data element. Not needed for deposits.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentAmountType">
+            <xs:totalDigits value="9"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="paymentType" type="tns:TransactionTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>The PreCash payment types
+ 
+DEP - Deposit Payment
+EQP - Equipment Payment</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="BillingAccountNumberEns">
+    <xs:annotation>
+      <xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:totalDigits value="9"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalSystemReferenceNumberStringType">
+    <xs:annotation>
+      <xs:documentation>External System Reference Number is a unique number within the external system that is passed to Sprint and used for cross reference purposes.  This number is passed from Sprint back to the external system to help the external system identify an instance of a particular record in that system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StatusCodeType">
+    <xs:annotation>
+      <xs:documentation>Status Code identifies the state of an object at a particular point in time.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <!--New Simple Types-->
+  <!---->
+  <!---->
+</xs:schema>

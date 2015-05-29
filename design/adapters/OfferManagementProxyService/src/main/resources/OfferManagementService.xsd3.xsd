@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryTargetedSubscriber/v1/queryTargetedSubscriber.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryTargetedSubscriber/v1/queryTargetedSubscriber.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date                      Author                 Version                 Change                                                                                                                          Rel                  SR# -->
+	
+<!--03/01/2011       Steve Whipple            1.0                  Initial Version                                                                                                                  GBL11.3          PJ005472    -->
+	
+<xs:element name="queryTargetedSubscriber" type="tns:QueryTargetedSubscriberType"/>
+	
+<xs:element name="queryTargetedSubscriberResponse" type="tns:QueryTargetedSubscriberResponseType"/>
+	
+<xs:complexType name="QueryTargetedSubscriberType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerList" type="tns:OfferListRequestType">
+				
+<xs:annotation>
+					
+<xs:documentation>list of offers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryTargetedSubscriberResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="offerList" type="tns:OfferListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>list of offer structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="targetedEligibleCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of targeted subscribers for the offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nonTargetedEligibleCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of NonTargeted offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="campaignId" type="tns:CampaignIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each campaign when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerId" type="tns:OfferIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferListRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="offerInfo" type="tns:OfferInfoRequestType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>offer structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="campaignId" type="tns:CampaignIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each campaign when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerId" type="tns:OfferIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>list of subscriber structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="targetedEligibleCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of targeted subscribers for the offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nonTargetedEligibleCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of NonTargeted offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferListType">
+		
+<xs:sequence>
+			
+<xs:element name="offerInfo" type="tns:OfferInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>offer structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each subscriber on an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="enableDisposition" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Used by iCare for the Manual Outbound process</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>subscriber structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Identifier designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Count is the number of subscribers associated to the BAN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="CampaignIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Campaign Identifier uiquely identifies a campaign (such as a marketing campaign).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TargetedSubscriberStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Targeted Subscriber Status Code designates if the subscriber Is targeted, eligible, or Not Targeted.
+Valid Values:
+T - Targeted,
+E - Eligible,
+N - Not Targeted..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="T"/>
+			
+<xs:enumeration value="E"/>
+			
+<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

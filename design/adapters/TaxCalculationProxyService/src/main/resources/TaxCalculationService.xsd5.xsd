@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" targetNamespace="http://integration.sprint.com/interfaces/managePrepaidInvoiceTax/v1/managePrepaidInvoiceTax.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1" vc:minVersion="1.1">
+	
+<!-- Date              Author                 Version     Change                                                                                                                                                   Rel                  SR# -->
+	
+<!--08/04/2014    Cindy Pummill    1.0            Initial revision                                                                                                                                          GBL15.1         PJ012171-->
+	
+<!--08/06/2014   Kathy Zhao        1.0          Standardized          GBL15.1     PJ012171-->
+	
+<!--08/11/2014   Cindy Pummill    1.1          Removed enumeration for ExceptionConditionCode simple type	GBL15.1	PJ012171-->
+	
+<!--08/12/2014   Kathy Zhao        1.1          Standardized          GBL15.1     PJ012171-->
+	
+<!--08/28/2014   Cindy Pummill    1.2          Removed enumeraton of "C" from TransactionCommitCodeType 	GBL15.1	PJ012171-->
+	
+<!---->
+	
+<xs:element name="managePrepaidInvoiceTax" type="tns:ManagePrepaidInvoiceTaxType"/>
+	
+<xs:element name="managePrepaidInvoiceTaxResponse" type="tns:ManagePrepaidInvoiceTaxResponseType"/>
+	
+<xs:complexType name="ManagePrepaidInvoiceTaxType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionId" type="tns:TransactionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique id of the calculation transaction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="actionCode" type="tns:TransactionCommitCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The action that is being requested for the transactionId.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ManagePrepaidInvoiceTaxResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="resultCode" type="tns:ExceptionConditionCode">
+				
+<xs:annotation>
+					
+<xs:documentation>The result of the transaction
+Possible values:  00=Success
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!---->
+	
+<xs:simpleType name="TransactionCommitCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The commit code for a transaction. The example is
+S - save/commit 
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionConditionCode">
+		
+<xs:annotation>
+			
+<xs:documentation>The Transaction exception condition code of this particular transaction. Possible values:  00=Success</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Identifier is a unique string that identifies a transaction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

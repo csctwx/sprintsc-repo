@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/validatePromotionInfo/v1/validatePromotionInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/validatePromotionInfo/v1/validatePromotionInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version     Change                                                                                        Rel                          SR# -->
+	
+<!--02/10/2014 Dweepant Bakshi      1.0      Initial Draft                                    GBL14.2                  PJ009782-->
+	
+<!--02/24/2014 Adon Powell              1.0      simpe type rename itemidquantity to itemquantity  GBL14.2                  PJ009782-->
+	
+<!---->
+	
+<xs:element name="validatePromotionInfo" type="tns:ValidatePromotionInfoRequestType"/>
+	
+<xs:element name="validatePromotionInfoResponse" type="tns:ValidatePromotionInfoResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="ValidatePromotionInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="promotionInfo" type="tns:PromotionInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing promo Code and customerType</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemIdList" type="tns:RequestItemListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of item info structures containing devices and/or accessories in the request. Max 20 can be sent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ValidatePromotionInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="shippingFee" type="tns:ShippingFeeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Amount of shipping fee after discount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemIdList" type="tns:ResponseItemListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of item info structures containing devices and/or accessories in the request. Max 20 can be sent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalOriginalPrice" type="tns:TotalAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sum of( pricePerItemId * quantity) for all the itemIds in the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalDiscountedPrice" type="tns:TotalAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>totalOriginalPrice – Sum(discountAmount for each itemId in the response)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="promoLegalese" type="tns:PromotionDisclaimerTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Legal disclaimer for each promo code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="successMessage">
+				
+<xs:annotation>
+					
+<xs:documentation>Message to be displayed when promo code is applied successfully</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:PromotionSuccessfullyAppliedMessageTextType">
+						
+<xs:maxLength value="250"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PromotionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="promoCode" type="tns:PromotionCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The promo Code identifying the promotion. Can be Alphanumeric</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerType" type="tns:CustomerTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>E - Existing customer
+P – Prospect(New) customer)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestItemListType">
+		
+<xs:sequence>
+			
+<xs:element name="itemIdInfo" type="tns:RequestItemInfoType" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing device and or accessory information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestItemInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" type="tns:EquipmentItemIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>SKU of the device. If itemId is sent then quantity should be sent else it will be defaulted to 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="quantity" type="tns:ItemQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Quantitiy of the itemId being ordered. Required when itemId is sent in equipmentInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePerItemId" type="tns:PriceAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Per Item Id.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResponseItemListType">
+		
+<xs:sequence>
+			
+<xs:element name="itemIdInfo" type="tns:ResponseItemInfoType" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing device and or accessory information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResponseItemInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" type="tns:EquipmentItemIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>ItemId of the device or accessory</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="quantity" type="tns:ItemQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Quantitiy of the itemId being ordered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eligibleQuantity" type="tns:ItemQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligible Quantity for the itemId that are getting the discount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originalPricePerItemId" type="tns:PriceAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Per Item Id.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="discountAmount" type="tns:DiscountAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Discount Amount Per itemid. The discount can be on all itemIds in the list or only on some depending upon the promotion setup .
+Note: This amount will not be sent if the promo code is for shipping
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="promotionName" type="tns:PromotionDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Promotion Name that will be displayed in the Front end against the discount amount.
+Note: This promotionname will not be sent if the promo code is for shipping
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="CustomerTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Type Code provides a mechanism for categorizing Customers within the context of various functionalities.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ItemQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Item Quantity is the number of associated Items.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Amount holds the monetary amount by which the the price charged for a GOOD or SERVICE is decreased.  A percent decrease in the price charged may only be applicable to specific Account Types, Promotions, Products, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingFeeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Amount holds the monetary amount by which the the price charged for a GOOD or SERVICE is decreased.  A percent decrease in the price charged may only be applicable to specific Account Types, Promotions, Products, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionDisclaimerTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Disclaimer Text is the text contained in a disclaimer for a particular promotion.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentItemDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Item Description is text describing an item of equipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentItemIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Item Identiifer is the item identifier of the equipment to be ordered should be authorized according to the dealer’s sales channel.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LanguagePreferenceCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Language Preference Code identifies a language preference.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="ENG"/>
+			
+<xs:enumeration value="SPA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PriceAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price Amount contains the dollar amount of the price component.  Either Price Amount or Percent will contain a value but not both for a given Price Component Indentifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Code uniquely identifies a promotion used to facilitate the sale of products or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Description is a common language description of a promotion used to facilitate the sale of products or services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PromotionSuccessfullyAppliedMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Promotion Successfully Applied Message Text is the message to display when a promotion has been successfuly applied.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TotalAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Total Amount is the sum of associated amounts.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

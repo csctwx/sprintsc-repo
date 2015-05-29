@@ -1,0 +1,1381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/checkPlanServicesEligibility/v1/checkPlanServicesEligibility.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/checkPlanServicesEligibility/v1/checkPlanServicesEligibility.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                   Version     Description                                                                                        Rel                          SR# -->
+	
+<!--09/05/2014  Subha Kannan/Tracy Turner    1.0           Initial Draft                                                                         Mid 14.3.3/ Prodfix               PJ019845-->
+	
+<!--09/09/2014  AdonPowell                               1.0           Standardize/Add Simple types                                         Mid 14.3.3/ Prodfix               PJ019845-->
+	
+<!--09/10/2014  Dweepant Bakshi   1.0           Updated Draft  change xsd name                                                       Mid 14.3.3                     PJ019845-->
+	
+<!--10/01/2014  Adon Powell           1.0           Standardize                                                                                        Mid 14.3.3                      PJ019845-->
+	
+<!--10/03/2014  Adon Powell           1.1           per Dweepant change *eligiblereasoncodes to reasontext 2000      Mid 14.3.3                      PJ019845-->
+	
+<!--11/12/2014  Dweepant Bakshi   1.2           Added salesChannelInfo in request and itemId in response               GBL14.3                     PJ019845 #827267 -->
+	
+<!--11/21/2014  Dweepant Bakshi   1.3           Added transactionId in request and response               GBL14.3                     PJ019845 CR08-->
+	
+<!---->
+	
+<xs:element name="checkPlanServicesEligibility" type="tns:CheckPlanServicesEligibilityType">
+		
+<xs:annotation>
+			
+<xs:documentation>This API will determine whether the customer is eligible for any of the pricing plans submitted on the request based on a set of business rules.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="checkPlanServicesEligibilityResponse" type="tns:CheckPlanServicesEligibilityResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="CheckPlanServicesEligibilityType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionDetailsInfo" type="tns:TransactionDetailsInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction Details Info structure </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CheckPlanServicesEligibilityResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="eligibilityList" type="tns:EligibilityListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligibility List</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountInfoType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountTypeInfo" type="tns:AccountTypeInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the type of account being used for the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="AccountTypeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account subtype</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditClass" type="tns:CreditClassCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Credit class for the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Coverage Service Area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="featureCode" type="tns:FeatureCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Component of the feature (option-id) , For internal use only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureDesc" type="tns:FeatureDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of the feature component, For internal use only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureListType">
+		
+<xs:sequence>
+			
+<xs:element name="featureInfo" type="tns:FeatureInfoResponseType" maxOccurs="20">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure providing feature detail info.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanSocInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanSoc" type="tns:ServiceOrderCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>addOn Soc or an addOn Upcharge soc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:EquipmentItemIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>itemId/SKU of the device being purchased</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:StartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>soc Effective Date if sent in the request. May be set 
+for an upcharge Soc if it has to be future dated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eligibilityCode" type="tns:EligibilityStatusCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Will only be sent for socs that are configured in JRules
+E-Eligible without upcharge
+U-Eligible with Upcharge
+N - Not Eligible to take the plan
+D- Eligible with a discount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eligibilityReasonList" type="tns:EligibilityReasonListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligibility reason for the soc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inEligibilityReasonList" type="tns:IneligibilityReasonListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>INEligibility Reason why sub is not eligble for soc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socList" type="tns:SocListResponseType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC List</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricingPlanEligbilityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="planSocId">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:integer">
+						
+<xs:totalDigits value="2"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="pricePlanSoc">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="discountCode" type="xs:string"/>
+			
+<xs:element name="discountAmount" type="xs:decimal"/>
+			
+<xs:element name="upchargeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Applicable only if the account/sub does not qualify for the price plan without an upcharge</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="9"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="upchargeAmount" type="xs:decimal" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricingPlanEligibilityListType">
+		
+<xs:sequence>
+			
+<xs:element name="pricingPlanEligiblityInfo" type="tns:PricingPlanEligbilityInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Service Order Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceType" type="tns:ServiceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ServiceType of the SOC. Will be returned asis in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:StartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc’s Effective Date. Will be returned as-is from the request for socs sent in the request.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>addOn Soc or an addOn Upcharge soc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceType" type="tns:ServiceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ServiceType of the soc if sent in the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:StartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>soc Effective Date if sent in the request. May be set 
+for an upcharge Soc if it has to be future dated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>May be set for a soc if it needs to be expired on a specified date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eligibilityCode" type="tns:EligibilityStatusCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Will only be sent for socs that are configured in JRules
+E-Eligible
+U-Eligible with Upcharge
+N - Not Eligible to take the plan
+D- Eligible with a discount
+Will not be sent for upcharge socs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="baseSoc" type="tns:ServiceOrderCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>In case soc in the structure is an upchargeSoc this will give the planSoc or the addOn SOc due to which the upcharge is applied</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="actionCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A- Add
+E-Expire
+
+Only will be sent for upcharge socs</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:BusinessActionCodeType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="socSequenceNumber" type="tns:SequenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ONly going to be present for those socs that are going to be expired</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="upchargeSocInd" type="tns:AdditionalChargeFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that tells if the soc in the socInfo structure is an upchargeSoc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="upchargeMrcAmount" type="tns:MonthlyRecurringChargeType" minOccurs="0"/>
+			
+<xs:element name="featureList" type="tns:FeatureListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Reason features associated with the soc that was added by JRules(e.g Upcharge Soc)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eligibilityReasonList" type="tns:EligibilityReasonListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligibility reason for the soc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inEligibilityReasonList" type="tns:IneligibilityReasonListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>INEligibility Reason why sub is not eligble for soc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoResponseType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListType">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanSocListType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanSocInfo" type="tns:PricePlanSocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan SOC Info for checking eligibility</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanSocListResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanSocInfo" type="tns:PricePlanSocInfoResponseType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan SOC Response Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SalesChannelInfoType">
+		
+<xs:choice>
+			
+<xs:element name="salesChannelCode" type="tns:SalesChannelIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales channel code of the caller.
+Sales channel code is based on the dealer. i.e., a Web and RMS dealer using FDT will have different sales channels based on their dealer code though transaction comes from FDT.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Dealer code assigned to the dealer performing the transaction. This dealer code will be used to derive sales channel assigned to the dealer which is used in retrieving pricing info.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:choice>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN of the subscriber </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactingChannelInfoType">
+		
+<xs:choice>
+			
+<xs:element name="dealerCode"/>
+			
+<xs:element name="salesChannel"/>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionType">
+				
+<xs:annotation>
+					
+<xs:documentation>SVC - Service Only
+NEW - Activation
+AAL - Add a line
+UPG - Upgrade
+MIX - MIX</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactingChannelInfo" type="tns:TransactingChannelInfoType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountInfo" type="tns:AccountInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Account information structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactionSubList" type="tns:TransactionSubListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction Subscriber List</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelInfo" type="tns:SalesChannelInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Accepts salesChannelCode or dealerCode as input.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionSubListType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionSubInfo" type="tns:TransactionSubInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains choice of subscriberId or MDN for which transaction is being performed or eligibility is being checked
+Required for (UPGRADE,REPLACE,SERVICE_ONLY)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EligibilityListType">
+		
+<xs:sequence>
+			
+<xs:element name="eligibilityInfo" type="tns:EligibilityInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligibility Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EligibilityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The identidier that will identify the transactionSubinfo for which the eligibilityInfo is returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoResponseType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanSocList">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan SOC Response List</xs:documentation>
+				</xs:annotation>
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:PricePlanSocListResponseType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EligibilityReasonListType">
+		
+<xs:sequence>
+			
+<xs:element name="eligibilityReasonInfo" type="tns:EligibilityReasonInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Eligibility Reason Info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EligibilityReasonInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="eligibilityReason" type="tns:EligibleReasonTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Eligibile due to Installment Billing
+Subscriber Eligibile due to Open Lease
+Subscriber Eligibile due to Closed Loan
+Subscriber Eligibile due to Closed Lease
+Subscriber Eligibile due to Tier 2 Rebate Eligible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IneligibilityReasonListType">
+		
+<xs:sequence>
+			
+<xs:element name="inEligibilityReasonInfo" type="tns:IneligibilityReasonInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Ineligibility Reason Info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IneligibilityReasonInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="inEligibilityReason" type="tns:IneligibleReasonTextType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TransactionSubInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="transactionId" type="tns:TransactionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The identidier that will identify the transactionSubinfo for which the eligibilityInfo is returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="targetBan" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Target Ban in case of subscriber move</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains choice of subscriberId or MDN for which transaction is being performed or eligibility is being checked
+Required for (UPGRADE,REPLACE,SERVICE_ONLY)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="transactionType" type="tns:OrderTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of order to be placed.
+NEW
+ADD_ON
+UPGRADE
+REPLACE
+SERVICE_ONLY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSaleType" type="tns:SubsidyStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates  Device Sale Type  
+S-Subsidized                     
+N-Non Subsidized               
+B- Bring your Own Device   
+I- Installment Billing
+L – Lease
+Required if transactionType !=’SERVICE_TYPE’ or ‘REPLACE’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portInInd" type="tns:PortFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>itemId/SKU of the device being purchased</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="term" type="tns:CommitmentPeriodMonthQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Loan Or Lease term</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:EquipmentItemIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>itemId/SKU of the device being purchased</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanSocList" type="tns:PricePlanSocListType">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan and Or SOC List </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanSocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanSoc" type="tns:ServiceOrderCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PricePlan Soc for which eligibility needs to be checked. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:StartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan Effective Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of socs</xs:documentation>
+				</xs:annotation>
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:SocListType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!---->
+	
+<!--      Shared Simple Types-->
+	
+<xs:simpleType name="AdditionalChargeFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Additional Charge Flag indicates if the associated charge is an additional charge.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account type of the BILLING ACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BusinessActionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Business Action Code indicates the business logic that needs to be applied to the subscriber and service order code combination.
+Example Values:
+PRA - Action code value that will trigger Product Attachables logic to send a text message to the subscriber if the added SOC is associated to a specific vendor.
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommitmentPeriodMonthQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Commitment Period Month Quantity represents the number of months committed to in the Service Agreement (SUBSCRIPTION). </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area (CSA) Description describes a CSA.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditClassCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Class Code identifies the Customer's level of financial responsibility.   
+For example, the Credit Class Code assignment determines what Products the Customer can purchase, how many Subscriptions they can be liable for, whether there is a required deposit and the amount of the deposit, etc..</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EligibleReasonTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Eligible Reason Text describes the reason that a party is eligible for the related treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EligibilityStatusCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Eligibility status code indicates if eligibilty reqirements are met.
+Values:
+Y - Eligible
+N - Not eligible
+U - Undetermined</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="E"/>
+			
+<xs:enumeration value="D"/>
+			
+<xs:enumeration value="N"/>
+			
+<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentItemIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Item Identiifer is the item identifier of the equipment to be ordered should be authorized according to the dealer’s sales channel.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DealerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Dealer Identifier uniquely identifies the dealer who interacted with the customer on behalf of the enterprise.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The code of the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Description is a free text field describing the feature.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IneligibleReasonTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Ineligible Reason Text describes why the party is not eligible for the related treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2000"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MonthlyRecurringChargeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Monthly Recurring Charge holds the base dollar amount billed to the Customer every month for a service.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderValidationModuleOrderTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Validation Module Order Type Code identifies the type of order ORDER in the OVM system
+Values: 
+NEW
+ADD_ON
+UPGRADE
+REPLACE
+BOOST
+FAC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+			
+<xs:enumeration value="NEW">
+				
+<!--New order.  Customer does not have an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="ADD_ON">
+				
+<!--Add on order.  Customer is adding to an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="UPGRADE">
+				
+<!--Upgrade/swap on an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="REPLACE">
+				
+<!--Replacement order for handset that is damaged/lost/stolen.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="SERVICE_ONLY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Type Code designates the category of the ORDER.
+valid values:
+S - Subsidized
+N - Non Subsidize
+N - New
+U - Upgrade
+NEW
+ADD_ON
+UPGRADE
+REPLACE
+SERVICE_ONLY</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+			
+<xs:enumeration value="NEW">
+				
+<!--New order.  Customer does not have an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="ADD_ON">
+				
+<!--Add on order.  Customer is adding to an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="UPGRADE">
+				
+<!--Upgrade/swap on an existing account.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="REPLACE">
+				
+<!--Replacement order for handset that is damaged/lost/stolen.-->
+			</xs:enumeration>
+			
+<xs:enumeration value="SERVICE_ONLY"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Port Flag indicates if the referenced action and or number involved porting.
+Valid Values: 
+True - Porting related, 
+False - Not Porting related</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code is a package of 1 or more features added at the Billing Account Number (BAN) or subscriber level. Associated with a generic group of features. For example: Bonus minutes, voicemail, and buy-up options. Some SOCs are for bundled services - like price plans. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Type Code indicates the type of service being offered. 
+Example Values are:
+C - Cellular 
+D - Dispatch Private
+G - Dispatch Group, 
+S - SMS, 
+
+RFD - Refund
+RPL - Replaced
+
+P - Packet Data, 
+M - M2M, 
+T - Toll </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="StartDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Start Date holds the calendar day an activity, undertaking or participation begins.</xs:documentation>
+			
+<xs:documentation>Case Start Date contains the calendar day the CASE began.  For example, in a Collection Case this would be the calendar day the Billing Account was put into Collections.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubsidyStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subsidy Status Code indicates whether the order is for a subsidized or nonsubsidized sale.
+valid values:
+S- Subscidized 
+N -Non Subscidized 
+B- Bring your Own device 
+I -  Installment Billing  
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="S"/>
+			
+<xs:enumeration value="N"/>
+			
+<xs:enumeration value="B"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="L"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Identifier is a unique string that 
+links transactionSubInfo with eligibilityInfo in the response.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!---->
+</xs:schema>

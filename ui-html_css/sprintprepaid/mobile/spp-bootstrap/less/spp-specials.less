@@ -1,0 +1,196 @@
+@font-face {
+    font-family: 'Sprint Sans Web';
+    src: url('Sprint Sans Web-Bold.eot');
+    src: url('Sprint Sans Web-Bold.eot?#iefix') format('embedded-opentype'), url('Sprint Sans Web-Bold.woff') format('woff'), url('Sprint Sans Web-Bold.ttf') format('truetype'), url('Sprint Sans Web-Bold.svg#Sprint Sans Web') format('svg');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+@font-face {
+    font-family: 'Sprint Sans Web';
+    src: url('Sprint Sans Web-Regular.eot');
+    src: url('Sprint Sans Web-Regular.eot?#iefix') format('embedded-opentype'), url('Sprint Sans Web-Regular.woff') format('woff'), url('Sprint Sans Web-Regular.ttf') format('truetype'), url('Sprint Sans Web-Regular.svg#Sprint Sans Web') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+}
+
+.bg-dark {
+    background-color: #000;
+    color: #fff;
+}
+/*Navigation*/
+
+.navbar-primary {}
+
+.navbar-sidemenu {
+    max-width: 40px;
+}
+
+.navbar-item {
+    display: inline-block;
+}
+
+.navbar-shorcuts {
+    float: right;
+    display: inline;
+}
+
+.navbar-secondary {
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    margin-bottom: 10px;
+}
+
+.navbar-secondary .navbar-wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.navbar-secondary .navbar-item {
+    width: 30%;
+    text-align: center;
+}
+
+.logo {}
+
+.vertical-separator {
+    border-bottom: 1px solid #333;
+}
+/*
+Circles
+
+*/
+@radial-progress-circle-width:  90px;
+@radial-progress-circle-height:  90px;
+@radial-progress-circle-border: 8px;
+@radial-progress-circle-color: #e5e5e5;
+
+.radial-progress,
+.circle-text {
+    width: @radial-progress-circle-width;
+    height: @radial-progress-circle-height;
+}
+
+.radial-progress {
+    margin:auto;
+    display: table;
+    width: @radial-progress-circle-width;
+    height: @radial-progress-circle-height;
+    border-radius: 50%;
+    z-index: 1001;
+    .circle {
+        display: table-row;
+        width: @radial-progress-circle-width;
+        height: @radial-progress-circle-height;
+        margin: auto;
+        position: absolute;
+    }
+}
+
+.radial-progress .circle .fill,
+.radial-progress .circle .mask,
+.radial-progress .circle .clip {
+    display: table-cell;
+    width: @radial-progress-circle-width;
+    height: @radial-progress-circle-height;
+    position: absolute;
+    clip: rect(0px, @radial-progress-circle-width, @radial-progress-circle-height, (@radial-progress-circle-width / 2));
+    -webkit-backface-visibility: hidden;
+    border-radius: 50%;
+    vertical-align: middle;
+    text-align: center;
+    background-color: @radial-progress-circle-color;
+}
+
+.circle-text {
+    display: table;
+    position: absolute;
+    z-index: 1005;
+}
+
+.circle-text-wrapper {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.radial-progress .circle .clip {
+    clip: auto;
+    width: (@radial-progress-circle-width - @radial-progress-circle-border);
+    height: (@radial-progress-circle-height - @radial-progress-circle-border);
+    top: (@radial-progress-circle-border / 2);
+    left: (@radial-progress-circle-border / 2);
+    background: #fff;
+    z-index: 1003;
+}
+
+.radial-progress .circle .fill {
+    z-index: 1002;
+}
+
+.radial-progress .circle .mask {
+    z-index: 1001;
+}
+
+.radial-progress-percentage(100);
+
+.radial-progress-percentage(@n, @i: 0) when (@i <= @n) {
+    & when (@i <= 50) {
+        .radial-progress.p-@{i}.radial-progress-success{
+            background: @brand-success;
+        }
+        .radial-progress.p-@{i}.radial-progress-primary{
+            background: @brand-primary;
+        }
+        .radial-progress.p-@{i}.radial-progress-info{
+            background: @brand-info;
+        }
+        .radial-progress.p-@{i}.radial-progress-warning{
+            background: @brand-warning;
+        }
+        .radial-progress.p-@{i}.radial-progress-danger{
+            background: @brand-danger;
+        }
+        .radial-progress.p-@{i} .circle .fill {
+            transform: rotate(((@i/100)*360deg));
+        }
+        .radial-progress.p-@{i} .circle .mask {
+            transform: rotate(180deg);
+        }
+    }
+    & when (@i > 50) {
+        .radial-progress.p-@{i}{
+            background: @radial-progress-circle-color;
+        }
+        .radial-progress.p-@{i}.radial-progress-success .circle .fill,
+        .radial-progress.p-@{i}.radial-progress-success .circle .mask {
+            background: @brand-success;
+        }
+        .radial-progress.p-@{i}.radial-progress-primary .circle .fill,
+        .radial-progress.p-@{i}.radial-progress-primary .circle .mask {
+           background: @brand-primary;
+        }
+        .radial-progress.p-@{i}.radial-progress-info .circle .fill,
+        .radial-progress.p-@{i}.radial-progress-info .circle .mask {
+            background: @brand-info;
+        }
+        .radial-progress.p-@{i}.radial-progress-warning .circle .fill,
+        .radial-progress.p-@{i}.radial-progress-warning .circle .mask {
+            background: @brand-warning;
+        }
+        .radial-progress.p-@{i}.radial-progress-danger .circle .fill,
+        .radial-progress.p-@{i}.radial-progress-danger .circle .mask {
+            background: @brand-danger;
+        }
+        .radial-progress.p-@{i} .circle .fill {
+            transform: rotate( (( (@i - 50) /100)*360deg) );
+        }
+        .radial-progress.p-@{i} .circle .mask {
+            transform: rotate(0deg);
+        }
+    }
+    .radial-progress-percentage(@n, (@i+ 1));
+}

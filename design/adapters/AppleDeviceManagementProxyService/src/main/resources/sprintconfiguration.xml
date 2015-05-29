@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.ericsson.cac.sprint.adapters" />
+
+    <aop:aspectj-autoproxy />
+
+    <bean id="AppleDeviceManagementServicePortType" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="com.sprint.integration.eai.services.appledevicemanagementservice.v1.appledevicemanagementservice.AppleDeviceManagementServicePortType" />
+        <property name="wsdlDocumentUrl" value="AppleDeviceManagementService.wsdl" />
+        <property name="namespaceUri" value="http://integration.sprint.com/eai/services/AppleDeviceManagementService/v1/AppleDeviceManagementService.wsdl" />
+        <property name="serviceName" value="AppleDeviceManagementServiceService" />
+        <property name="endpointAddress" value="http://localhost:8080/services/AppleDeviceManagementService" />
+    </bean>
+
+    <bean name="configuration" class="org.apache.commons.configuration.PropertiesConfiguration" init-method="load">
+        <property name="fileName" value="masterconfiguration.properties"/>
+        <property name="reloadingStrategy" ref="fileChangedStrategy"/>
+    </bean>
+
+    <bean name="fileChangedStrategy" class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy" />
+
+</beans>

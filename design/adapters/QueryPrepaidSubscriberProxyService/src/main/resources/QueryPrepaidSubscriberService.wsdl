@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QueryPrepaidSubscriberService/v1/QueryPrepaidSubscriberService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QueryPrepaidSubscriberService/v1/QueryPrepaidSubscriberService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd8.xsd" namespace="http://integration.sprint.com/common/ErrorDetails.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd10.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd7.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v1"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd9.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v1/queryBalanceAndCharges.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v2/queryBalanceAndChargesV2.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryPrepaidAllowance/v1/queryPrepaidAllowance.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/queryPrepaidUsageDetails/v1/queryPrepaidUsageDetails.xsd"/>
+<xsd:import schemaLocation="QueryPrepaidSubscriberService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberPrepaidInfo/v1/querySubscriberPrepaidInfo.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="faultmessage">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryBalanceAndChargesRequest">
+<wsdl:part name="queryBalanceAndChargesRequest" element="xsns:queryBalanceAndCharges" xmlns:xsns="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v1/queryBalanceAndCharges.xsd"/></wsdl:message>
+<wsdl:message name="queryBalanceAndChargesResponse">
+<wsdl:part name="queryBalanceAndChargesResponse" element="xsns:queryBalanceAndChargesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v1/queryBalanceAndCharges.xsd"/></wsdl:message>
+<wsdl:message name="queryBalanceAndChargesV2Request">
+<wsdl:part name="queryBalanceAndChargesV2Request" element="xsns:queryBalanceAndChargesV2" xmlns:xsns="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v2/queryBalanceAndChargesV2.xsd"/></wsdl:message>
+<wsdl:message name="queryBalanceAndChargesV2Response">
+<wsdl:part name="queryBalanceAndChargesV2Response" element="xsns:queryBalanceAndChargesV2Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryBalanceAndCharges/v2/queryBalanceAndChargesV2.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidAllowanceRequest">
+<wsdl:part name="queryPrepaidAllowanceRequest" element="xsns:queryPrepaidAllowance" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidAllowance/v1/queryPrepaidAllowance.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidAllowanceResponse">
+<wsdl:part name="queryPrepaidAllowanceResponse" element="xsns:queryPrepaidAllowanceResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidAllowance/v1/queryPrepaidAllowance.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidUsageDetailsRequest">
+<wsdl:part name="queryPrepaidUsageDetailsRequest" element="xsns:queryPrepaidUsageDetails" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidUsageDetails/v1/queryPrepaidUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="queryPrepaidUsageDetailsResponse">
+<wsdl:part name="queryPrepaidUsageDetailsResponse" element="xsns:queryPrepaidUsageDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryPrepaidUsageDetails/v1/queryPrepaidUsageDetails.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberPrepaidInfoRequest">
+<wsdl:part name="querySubscriberPrepaidInfoRequest" element="xsns:querySubscriberPrepaidInfo" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberPrepaidInfo/v1/querySubscriberPrepaidInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberPrepaidInfoResponse">
+<wsdl:part name="querySubscriberPrepaidInfoResponse" element="xsns:querySubscriberPrepaidInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberPrepaidInfo/v1/querySubscriberPrepaidInfo.xsd"/></wsdl:message>
+<wsdl:message name="soapFaultV2">
+<wsdl:part name="faultV2" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v1"/></wsdl:message>
+<wsdl:message name="wsMessageHeaderV2">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryPrepaidSubscriberPortType">
+<wsdl:operation name="QueryBalanceAndCharges">
+<wsdl:input name="QueryBalanceAndChargesRequest" message="ns0:queryBalanceAndChargesRequest"/>
+<wsdl:output name="QueryBalanceAndChargesResponse" message="ns0:queryBalanceAndChargesResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryBalanceAndChargesV2">
+<wsdl:input name="QueryBalanceAndChargesV2Request" message="ns0:queryBalanceAndChargesV2Request"/>
+<wsdl:output name="QueryBalanceAndChargesV2Response" message="ns0:queryBalanceAndChargesV2Response"/>
+<wsdl:fault name="faultV2" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QueryPrepaidAllowance">
+<wsdl:input name="QueryPrepaidAllowanceRequest" message="ns0:queryPrepaidAllowanceRequest"/>
+<wsdl:output name="QueryPrepaidAllowanceResponse" message="ns0:queryPrepaidAllowanceResponse"/>
+<wsdl:fault name="faultV2" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QueryPrepaidUsageDetails">
+<wsdl:input name="QueryPrepaidUsageDetailsRequest" message="ns0:queryPrepaidUsageDetailsRequest"/>
+<wsdl:output name="QueryPrepaidUsageDetailsResponse" message="ns0:queryPrepaidUsageDetailsResponse"/>
+<wsdl:fault name="faultV2" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberPrepaidInfo">
+<wsdl:input name="QuerySubscriberPrepaidInfoRequest" message="ns0:querySubscriberPrepaidInfoRequest"/>
+<wsdl:output name="QuerySubscriberPrepaidInfoResponse" message="ns0:querySubscriberPrepaidInfoResponse"/>
+<wsdl:fault name="faultV2" message="ns0:soapFaultV2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryPrepaidSubscriberSOAPBinding" type="ns0:QueryPrepaidSubscriberPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryBalanceAndCharges">
+<soap11:operation soapAction="QueryBalanceAndCharges" style="document"/>
+<wsdl:input name="QueryBalanceAndChargesRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryBalanceAndChargesResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryBalanceAndChargesV2">
+<soap11:operation soapAction="QueryBalanceAndChargesV2" style="document"/>
+<wsdl:input name="QueryBalanceAndChargesV2Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryBalanceAndChargesV2Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryPrepaidAllowance">
+<soap11:operation soapAction="QueryPrepaidAllowance" style="document"/>
+<wsdl:input name="QueryPrepaidAllowanceRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryPrepaidAllowanceResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryPrepaidUsageDetails">
+<soap11:operation soapAction="QueryPrepaidUsageDetails" style="document"/>
+<wsdl:input name="QueryPrepaidUsageDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryPrepaidUsageDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberPrepaidInfo">
+<soap11:operation soapAction="QuerySubscriberPrepaidInfo" style="document"/>
+<wsdl:input name="QuerySubscriberPrepaidInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberPrepaidInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryPrepaidSubscriberService">
+<wsdl:port name="QueryPrepaidSubscriberPortType" binding="ns0:QueryPrepaidSubscriberSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryPrepaidSubscriberService"/></wsdl:port></wsdl:service></wsdl:definitions>

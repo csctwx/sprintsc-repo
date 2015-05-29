@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/manageIncommPin/v1/manageIncommPin.xsd" targetNamespace="http://integration.sprint.com/interfaces/manageIncommPin/v1/manageIncommPin.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--06/12/2012		Tracy Turner                 1.0         Initial Draft                                                                                          GBL12.3          PJ007445-->
+	
+<!--08/07/2012  Steve Heichelheim    1.0      Added MVM standards and smiple types                                           GBL12.3          PJ007445-->
+	
+<!--06/12/2012		Tracy Turner                 1.0        Made changes to extension fields                                                GBL12.3          PJ007445-->
+	
+<!--01/17/2013   LaRonna Tisdale      1.1  CS#581654  - Removed category Response Enumeration                     GLB13.1         PJ007445-->
+	
+<xs:element name="manageIncommPin" type="tns:ManageIncommPinRequestType"/>
+	
+<xs:element name="manageIncommPinResponse" type="tns:ManageIncommPinResponseType"/>
+	
+<xs:complexType name="ManageIncommPinRequestType">
+		
+<xs:annotation>
+			
+<xs:documentation>Defines the transaction request</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="category" fixed="FastCard">
+				
+<xs:annotation>
+					
+<xs:documentation>Category – fixed as 'FastCard'</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:PaymentMethodDescriptionType">
+						
+<xs:enumeration value="FastCard"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="action" type="tns:TransactionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Incomm action type.  Used to indicate whether the call is being made to inquire about PIN status, redeem a pin or reverse redemption
+
+Redeem, StatInq, or Reverse</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="date" type="tns:TransactionDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="time" type="tns:TransactionTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction time </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="partnerName" type="tns:BrandEntityNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Name of the partner making the call to incomm.  Ex. Virgin</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cardActionInfo" type="tns:CardActionInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing information about the card involved in the transaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="extensionList" type="tns:ExtensionListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing a list of additional information structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ManageIncommPinResponseType">
+		
+<xs:annotation>
+			
+<xs:documentation>Defines the transaction response</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="category" type="tns:PaymentMethodDescriptionType"/>
+			
+<xs:element name="action" type="tns:TransactionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Incomm action type.  Used to indicate whether the call is being made to inquire about PIN status, redeem a pin or reverse redemption
+
+Redeem, StatInq, or Reverse</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="responseCode" type="tns:ExceptionConditionCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Response Code ex '0'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="responseMessage" type="tns:ExceptionMessageType">
+				
+<xs:annotation>
+					
+<xs:documentation>Response Message. Ex 'Success'</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="incommRefNum" type="tns:ExternalSystemReferenceNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Incomm reference number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="date" type="tns:TransactionDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction date. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="time" type="tns:TransactionTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Transaction time </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="productInfo" type="tns:ProductInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Product Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="requestInfo" type="tns:ManageIncommPinRequestType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the request received (the exact request structure)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="extensionList" type="tns:ExtensionListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List additional information structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CardActionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="pin" type="tns:PersonalIdentificationNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Incomm generated pin, enterend by the consumer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountNum" type="tns:AccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>User account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="partnerRefNum" type="tns:ExternalSystemReferenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Reference number from Partner</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExtensionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="name" type="tns:ParameterTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Parameter name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="value" type="tns:ParameterValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Parameter value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExtensionListType">
+		
+<xs:sequence>
+			
+<xs:element name="extensionInfo" type="tns:ExtensionInfoType" minOccurs="0" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing additional information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OriginInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="merchantName" type="tns:MerchantNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Merchant name ex “Walmart”</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="storeId" type="tns:RetailStoreIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Store Id </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="terminalId" type="tns:MerchantTerminalIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Terminal Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="merchantRefNum" type="tns:ExternalSystemReferenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Merchant reference number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProductInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="productDetailInfo" type="tns:ProductDetailInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Detailed information about the product (pin/card information)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originInfo" type="tns:OriginInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Product origin information </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProductDetailInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="denomination" type="tns:CurrencyCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Denomination -- Units, Dollars, etc.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="faceValue" type="tns:PriceAmountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Face Value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="upc" type="tns:UniversalProductCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Universal product code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BrandEntityNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Brand Entity Name is the name of the entity asssociated to a specific Brand.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CurrencyCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionConditionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+Example Values:
+0 - Successful completion, 
+4 - Successful completion, but with a warning as to some unusual circumstance, 
+8 - Error, request was not processed successfully, 
+12 - Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionMessageType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Message contains text provided by the responding application providing user-comprehensible error feedback.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExternalSystemReferenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>External System Reference Number is a unique number within the external system that is passed to Sprint and used for cross reference purposes.  This number is passed from Sprint back to the external system to help the external system identify an instance of a particular record in that system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MerchantNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Merchant Name is a label applied to those instances of PARTY of type MERCHANT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MerchantTerminalIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Merchant Terminal Identifier is the merchant terminal number from which the point of sale occurred. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentMethodDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Method Description is a textual description of the Payment Method Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ParameterTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Parameter Type Code designates the data type of parameter found in the Parameter Value element. These two elements are sent as a matched pair to define various parameters service or feature being provisioned.
+Valid Values Include:
+OPERATIONMODE,
+NAI,
+NAIINDEX,
+REVERSETUNNELINGIND,
+MOBILEIPADDRESS,
+PRIMARYHOMEAGENT,
+SECONDARYHOMEAGENT,
+MNHAAUTHALGORITHM,
+SPIHA,
+MNHASHAREDSECRET,
+MNAAAAUTHALGORITHM,
+SPIAAA,
+MNAAASHAREDSECRET,
+SPIINDAAA,
+SPIINDHA,
+MDN,
+MSID...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ParameterValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Parameter Value designates the actual data associate to the Parameter Type Code element. These two elements are sent as a matched pair to define various parameters service or feature being provisioned.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PersonalIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Personal Identification Number (PIN) is a secret numeric password shared between a user and a system that can be used to authenticate the user to the system. Typically, the user is required to provide a non-confidential user identifier or token (such as a banking card) and a confidential PIN to gain access to the system. Upon receiving the User ID and PIN, the system looks up the PIN based upon the User ID and compares the looked-up PIN with the received PIN. The user is granted access only when the number entered matches with the number stored in the system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PriceAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price Amount contains the dollar amount of the price component.  Either Price Amount or Percent will contain a value but not both for a given Price Component Indentifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:float"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RetailStoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+(Examples: 001859, 1165, 0649)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Date is the date that a transaction occured.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Time holds the hour, minute, second, and fraction of a second the Transaction Request was submitted.  </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+			
+<xs:enumeration value="Reverse"/>
+			
+<xs:enumeration value="StatInq"/>
+			
+<xs:enumeration value="Redeem"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniversalProductCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Universal Product Code (UPC) is a barcode representation of an identifier which is uniquely assigned to each trade item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

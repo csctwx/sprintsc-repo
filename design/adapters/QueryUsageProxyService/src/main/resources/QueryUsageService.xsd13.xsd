@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/querySubscriberUsageInfo/v1/querySubscriberUsageInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberUsageInfo/v1/querySubscriberUsageInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                       Version       Change Reference                                                                                                                                                            Release          SR#/Ticket# -->
+	
+<!--03/06/2013    Steve Heichelheim     1.0              Initial version.  Added MVM standards and simple types                                                                                                  MID13.2.0        PJ007876-->
+	
+<!--03/20/2013    Ibrahim ElKhatib          1.1             Changed usagePeriodStartDate/usagePeriodEndDate data type form "date" to "dateTime" Type                                    MID13.2.0        PJ007876-->
+	
+<xs:element name="querySubscriberUsageInfo" type="tns:QuerySubscriberUsageInfoRequestType"/>
+	
+<xs:element name="querySubscriberUsageInfoResponse" type="tns:QuerySubscriberUsageInfoResponseType"/>
+	
+<xs:complexType name="QuerySubscriberUsageInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>User’s current Account Number.Pay go billing system assigns a unique account number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchUsageStatus" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>The usage information will be returned when the flag is set to ‘true’ </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberUsageInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberType" type="tns:SubscriptionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>pre-paid: Daypass (cambio) subscribers and Retail pre-paid
+post-paid: Retail post-paid and Wholesale subscribers in the Ensemble billing system
+unknown: a status returned when the subscriber’s IMSI is not found or the subscriber’s device is not active</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usagePeriodStartDate" type="tns:BillingCycleStartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The billing cycle start date or pre-paid plan start date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usagePeriodEndDate" type="tns:BillingCycleEndDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The billing cycle end date or pre-paid plan end date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planDescription" type="tns:PricePlanDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Product or Plan Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageInfoList" type="tns:UsageListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A list of usage information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The device serial number (ESN/MEID in decimal of hexadecimal format)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="uiccImsi" type="tns:LongTermEvolutionInternationalMobileSubscriberIdentityType">
+				
+<xs:annotation>
+					
+<xs:documentation>The device International Mobile Subscriber Identity (IMSI) of a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Network Access Identifier (e.g. username@domain) where domain should be of the form str1.str2. No validation will be done on input value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="UsageCategoryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="usageCategoryId" type="tns:SharedPlanUsageTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>1: Total Usage
+2: Roaming Usage</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageCategory" type="tns:UsageCategoryCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Examples:
+V4H - Sprint 4G Data
+VCH - Sprint 3G/4G Data
+VH - Sprint 3G Data
+VI01 - Intl Data Roaming Caribbean
+VI02 - Intl Data Roaming W. Europe
+VI03 - Intl Data Roaming CDMA
+VIR - International Sprint Data Roaming
+VPH - Mobile Hotspot / Phone as Modem
+VR - Sprint 3G Data Roaming</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageCategoryDescription" type="tns:UsageCategoryNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Usage Category Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageCategoryGroupName" type="tns:UsageCategoryGroupNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Usage category group name (Single, Sharing, Pooling)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="displayOrder" type="tns:DisplayOrderSequenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The order of display of the usage categories</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Only applicable for post-paid subscribers and will be populated when there is a mid-cycle plan/service change.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Only applicable for post-paid subscribers and will be populated when there is a mid-cycle plan/service change.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="unitOfMeasure" type="tns:UnitOfMeasureCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>M – Voice usage in Minutes
+KB, MB, GB – Data usage in MB or GB unites
+O – Occurrences of SMS
+S - Direct Connect time in seconds</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="includedUnits" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Populated with total number of Free Units allowed for the usage type
+For unlimited usage categories ‘Unlimited’ will be returned
+For shared usage plans ‘Shared’ will be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usedUnits" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Populated with total number of Units used for the usage type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="remainingUnits" type="tns:UnitOfMeasureValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Populated with the total number of Units remaining for the usage type
+Not returned for subscriberType=’pre-paid’ </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalUsedUnits" type="tns:UnitOfMeasureValueType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total number of overage units used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalCharge" type="tns:AdditionalChargeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This field will contain the additional charge amount for:
+2G sharing usage categories
+2G pooling usage categories
+3G sharing usage categories  
+3G pooling usage categories</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UsageCategoryListType">
+		
+<xs:sequence>
+			
+<xs:element name="usageCategoryInfo" type="tns:UsageCategoryInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>A structure containing the usage category details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UsageInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="usageType" type="tns:UsageSourceTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>1 – Voice
+Not returned for Daypass subscribers (subscriberType=’pre-paid’)
+2 – Direct Connect Push To Talk
+Not returned for Daypass subscribers (subscriberType=’pre-paid’)
+3 – All messaging usage
+Not returned for Daypass subscribers (subscriberType=’pre-paid’)
+4  Data/Others
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberStatus" type="tns:SubscriberStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>subscribed: returned for active subscriber with available remainingUnits.
+not-subscribed: returned when the subscriber is not active
+depleted: returned when the subscriber’s usedUnits have exceeded the plan included unites.
+throttled: not currently supported.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberSubType" type="tns:SubscriberSubTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>‘cambio’: Daypass/Cambio subscriber
+‘not-cambio’: Ensemble Retail pre-paid subscriber
+Only returned for usageType=4 (Data/Others)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planType" type="tns:UsageUnitOfMeasureCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of plan 
+Only returned for usageType=’Data’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="autoRenewInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator whether user opted for auto renewing the plan when time expires
+Only returned for:
+usageType=4 (Data/Others) and
+subscriberType=’pre-paid’ and
+subscriberSubType=’cambio’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planStackInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator whether user opted for a future plan when current plan expires
+Only returned for subscriberType=’pre-paid’ and usageType=4 (Data/Others)
+Will be returned  ‘false’ for post-paid</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="usageCategoryInfoList" type="tns:UsageCategoryListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A list of detailed usage category  information
+Will be returned when fetchUsageStatus flag is set to ‘true’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UsageListType">
+		
+<xs:sequence>
+			
+<xs:element name="usageInfo" type="tns:UsageInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>A structure containing the usage details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AdditionalChargeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Additioinal Charge is the total of additional charges which contributed to the total charge of the event.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleEndDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle End Date holds the current cycle end date for a given account number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingCycleStartDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Cycle Start Date is the first date of the current billing cycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DisplayOrderSequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Display Order Sequence Number designates the order in which the record will be displayed relative to the other records in the set of records.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date Time holds the last calendar day and time the Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier contains the concatenation of a user ID and a domain.The user ID can be 15 chars maximum and the domain can be 24 chars maximum so a total of 40 characters including ‘@’.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LongTermEvolutionInternationalMobileSubscriberIdentityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Long Term Evolution (LTE) International Mobile Subscriber Identity (IMSI) is a unique identification associated with devices connecting to a LTE network and is sent by the phone to the network.  It is comprised of  the mobile country code (MCC), followed by the mobile network code (MNC), followed by the mobile subscription identification number (MSIN) within the network's customer base.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+	Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PricePlanDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price Plan Description contains a textual description of the price plan. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SharedPlanUsageTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Shared Plan Usage Type Code is an identifier for share type plan/soc type.
+FF - Fair and Flex Plan Anytime
+SH - Sharing Plan Anytime
+LA - LTS Anytime
+LB - LTS Bonus Anytime
+LC - LTS Call Credits
+LF - LTS F and F Anytime
+LM - LTS M2M
+LN - LTS N and W
+LR - LTS Roaming
+LT - LTS Text Messages
+LV - LTS Vision Data Home
+LW - LTS Walkie-Talkie HPPTT
+LX - LTS Bonus Text Messages</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber status code is a single character code that represents the status of a subsciber.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:enumeration value="subscribed"/>
+			
+<xs:enumeration value="not-subscribed"/>
+			
+<xs:enumeration value="depleted"/>
+			
+<xs:enumeration value="throttled"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Sub Type Code designates a sub-type category for a subscriber.
+Valid Values:
+cambio - Daypass/Cambio subscriber,
+not-cambio - Ensemble Retail pre-paid subscriber
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+			
+<xs:enumeration value="cambio"/>
+			
+<xs:enumeration value="not-cambio"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subcription Type Code designates the type of subscription for the account.
+Valid Values Include:
+1 - Contract (post-paid)
+2 -  Non-contract (pre-paid)
+3 - Lifeline
+4 -  Free</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Category Code designates a specific usage category.
+Example Values:
+CA - Anytime Minutes
+CMM - Mobile to Mobile
+CNW - Night and Weekend</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryGroupNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Category Group Name the common name of a categorization of usage.
+
+Example Values:
+
+Single, 
+
+F F, 
+
+Sharing, 
+
+Sharing FF, 
+
+Pooling? </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageCategoryNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Category Name, representing a plain English definition of the usage category.
+Example Values:
+Sprint to Sprint SMS
+Anytime Minutes
+Mobile to Mobile</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageUnitOfMeasureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Unit of Measure Code designates  Unit of measurement.
+Note: 'U' is used for 2G-based usage events (e.g., SMS), while 'O' is used for 3G-based usage events (e.g., Picture Mail).
+M - Minutes
+U - Units (counts of event occurrences)
+K – Kilobytes
+S- Seconds
+O - Occurrences</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="255"/>
+			
+<xs:enumeration value="time"/>
+			
+<xs:enumeration value="bucket"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+			
+<xs:enumeration value="M"/>
+			
+<xs:enumeration value="MB"/>
+			
+<xs:enumeration value="GB"/>
+			
+<xs:enumeration value="O"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit of Measure Name is the word or words by which a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), is used as a standard of comparison for others of the same kind.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UsageSourceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Usage Source Type Code is the source of the usage.  </xs:documentation>
+			
+<xs:documentation>The Usage Source Type Code is the source of the usage.  Values:  V = Voice, C = Data, S = Short Message</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+			
+<xs:enumeration value="1"/>
+			
+<xs:enumeration value="2"/>
+			
+<xs:enumeration value="3"/>
+			
+<xs:enumeration value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

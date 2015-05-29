@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryDispositionReason/v1/queryDispositionReason.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryDispositionReason/v1/queryDispositionReason.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date                      Author                 Version                 Change                                                                                                                          Rel                  SR# -->
+	
+<!--03/01/2011       Steve Whipple            1.0                  Initial Version                                                                                                                  GBL11.3          PJ005472    -->
+	
+<!--03/28/2011       Steve Heichelheim   1.0                 Added MVM standards and simple types                                                                           GBL11.3          PJ005472    -->
+	
+<xs:element name="queryDispositionReason" type="tns:QueryDispositionReasonType">
+		
+<xs:annotation>
+			
+<xs:documentation>root tag must be sent in request</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryDispositionReasonResponse" type="tns:QueryDispositionReasonResponseType"/>
+	
+<xs:complexType name="QueryDispositionReasonType">
+		
+<xs:annotation>
+			
+<xs:documentation>No request elements.  Info included in header.</xs:documentation>
+		</xs:annotation>
+	</xs:complexType>
+	
+<xs:complexType name="QueryDispositionReasonResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="dispositionReasonList" type="tns:DispositionReasonListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DispositionReasonInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="declineReasonSet" type="tns:MessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Used by the business to group dispositions and reasons.  They can then be assigned to specific campaigns to identify to the frontend application which dispositions and reason should be available to the agent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="disposition" type="tns:OfferDispositionDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Disposition Description setup in Siebel.  Accept, Decline</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reasonId" type="tns:OfferDispositionReasonIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID setup for each reason when it is created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reason" type="tns:OfferDispositionReasonDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of Reason setup in Siebel.  Assigned to specific Dispositions in Siebel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DispositionReasonListType">
+		
+<xs:sequence>
+			
+<xs:element name="dispositionReasonInfo" type="tns:DispositionReasonInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="MessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation> Message Text represents a natural language communication of information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="OfferDispositionDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Description is a common language description for the disposition of the offer. (ex. Accept, Decline)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionReasonDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Reason Description is a common language description of the reason for the disposition of the offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionReasonIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Reason Identifier uniquely identifies the reason for a specific disposition of an offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

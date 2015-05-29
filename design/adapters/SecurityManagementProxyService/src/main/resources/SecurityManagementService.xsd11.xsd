@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryUserProfileInfoByPtn/v1/queryUserProfileInfoByPtn.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryUserProfileInfoByPtn/v1/queryUserProfileInfoByPtn.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--12/10/2013     Ted Burbidge         1.0         Initial Draft                                                                                              GBL14.1         PJ009515-->
+	
+<!--12/10/2013     Adon Powell          1.0         Standardize                                                                                           GBL14.1         PJ009515-->
+	
+<!---->
+	
+<xs:element name="queryUserProfileInfoByPtn" type="tns:QueryUserProfileInfoByPtnRequestType"/>
+	
+<xs:element name="queryUserProfileInfoByPtnResponse" type="tns:QueryUserProfileInfoByPtnResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryUserProfileInfoByPtnRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="ptn" type="tns:PhoneNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal telephone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryUserProfileInfoByPtnResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="ptn" type="tns:PhoneNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal telephone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="profileItem" type="tns:ProfilItemType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProfilItemType">
+		
+<xs:sequence>
+			
+<xs:element name="emailAddress" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>User's email address</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:EmailAddressStringType">
+						
+<xs:maxLength value="254"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="profileId" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UserProfileIdentifierType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="profileRoleList" type="tns:ProfileRoleListType" minOccurs="0"/>
+			
+<xs:element name="uniqueId" type="tns:UniqueIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>unique identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userName" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Username</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UserNameType">
+						
+<xs:maxLength value="33"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="displayName" type="tns:DisplayNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Name that is displayed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProfileRoleListType">
+		
+<xs:sequence>
+			
+<xs:element name="profileRoleInfo" type="tns:ProfileRoleInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ProfileRoleInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="roleId" type="tns:AccountRoleIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Array of the logging user roles:
+1 = Generic User
+2 = Device User
+4 = Service Admin
+5 = Account Holder
+8 = Wireless Manager
+14 = Account Authorized</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple types-->
+	
+<xs:simpleType name="AccountRoleIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Role Identifier uniquely identifies the user role as it relates to the account.
+Valid Values:
+1 - Generic User
+2 - Device User
+4 - Service Admin
+5 - Account Holder
+8 - Wireless Manager
+14 - Account Authorized
+0 - Not applicable when banInfo is returned part of primaryBanInfo</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:enumeration value="0"/>
+			
+<xs:enumeration value="1"/>
+			
+<xs:enumeration value="2"/>
+			
+<xs:enumeration value="4"/>
+			
+<xs:enumeration value="5"/>
+			
+<xs:enumeration value="8"/>
+			
+<xs:enumeration value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DisplayNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Category Display name is the name that is displayed.  It may not be unique to the named item or person.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="254"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="254"/>
+			
+<xs:minLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniqueIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Unique Identifier is a generic unique identifier for an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="254"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Name is an identifier of the identity associated with a party role which is the public part of a paired identity assertion.  User Name consists of all of the characters preceding the @ sign in a URL identifying a member of the specified Domain. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="125"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserProfileIdentifierIngeterType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Profile Identifier Integer is an integer value associated to a collection of data for a specific or generic user.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="254"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserProfileIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Profile Identifier is associated to a collection of data for a specific or generic user.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="254"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

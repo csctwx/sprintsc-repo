@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/SmsPreferenceManagementService/v1/SmsPreferenceManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/SmsPreferenceManagementService/v1/SmsPreferenceManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="SmsPreferenceManagementService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="SmsPreferenceManagementService.xsd4.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="SmsPreferenceManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/querySmsPreferenceInfo/v1/querySmsPreferenceInfo.xsd"/>
+<xsd:import schemaLocation="SmsPreferenceManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/updateSmsPreferenceInfo/v1/updateSmsPreferenceInfo.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="querySmsPreferenceInfoRequest">
+<wsdl:part name="querySmsPreferenceInfo" element="xsns:querySmsPreferenceInfo" xmlns:xsns="http://integration.sprint.com/interfaces/querySmsPreferenceInfo/v1/querySmsPreferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySmsPreferenceInfoResponse">
+<wsdl:part name="updateSmsPreferenceInfo" element="xsns:querySmsPreferenceInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySmsPreferenceInfo/v1/querySmsPreferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="updateSmsPreferenceInfoRequest">
+<wsdl:part name="updateSmsPreferenceInfo" element="xsns:updateSmsPreferenceInfo" xmlns:xsns="http://integration.sprint.com/interfaces/updateSmsPreferenceInfo/v1/updateSmsPreferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="updateSmsPreferenceInfoResponse">
+<wsdl:part name="updateSmsPreferenceInfoResponse" element="xsns:updateSmsPreferenceInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateSmsPreferenceInfo/v1/updateSmsPreferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="SmsPreferenceManagementServicePortType">
+<wsdl:operation name="QuerySmsPreferenceInfo">
+<wsdl:input name="QuerySmsPreferenceInfoRequest" message="ns0:querySmsPreferenceInfoRequest"/>
+<wsdl:output name="QuerySmsPreferenceInfoResponse" message="ns0:querySmsPreferenceInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateSmsPreferenceInfo">
+<wsdl:input name="UpdateSmsPreferenceInfoRequest" message="ns0:updateSmsPreferenceInfoRequest"/>
+<wsdl:output name="UpdateSmsPreferenceInfoResponse" message="ns0:updateSmsPreferenceInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="SmsPreferenceManagementServiceSOAPBinding" type="ns0:SmsPreferenceManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QuerySmsPreferenceInfo">
+<soap11:operation soapAction="QuerySmsPreferenceInfo" style="document"/>
+<wsdl:input name="QuerySmsPreferenceInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySmsPreferenceInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateSmsPreferenceInfo">
+<soap11:operation soapAction="UpdateSmsPreferenceInfo" style="document"/>
+<wsdl:input name="UpdateSmsPreferenceInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateSmsPreferenceInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="SmsPreferenceManagementService">
+<wsdl:port name="SmsPreferenceManagementServicePortType" binding="ns0:SmsPreferenceManagementServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/SmsPreferenceManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

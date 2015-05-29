@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ericsson.sprint.cac</groupId>
+	<artifactId>sprint-ws-projects</artifactId>
+	<version>1.0.0.0</version>
+	<name>Sprint Self-Care :: Project :: Web Services</name>
+	<packaging>pom</packaging>
+
+	<description>MSDP web services projects for Sprint Self-Care Portal</description>
+	<url>https://eforge.ericsson.se/sf/go/projects.sprint_selfcare</url>
+	<inceptionYear>2015</inceptionYear>
+	<organization>
+		<name>Ericsson Canada Inc</name>
+		<url>http://www.ericsson.com</url>
+	</organization>
+
+	<licenses>
+		
+	</licenses>
+
+	<modules>		
+		<module>msdp-ws-intf</module>
+		<module>msdp-ws-lookup</module>
+			
+  	</modules>
+
+    <scm>
+        <connection>scm:git:ssh://gerritforge.lmera.ericsson.se:29418/sprintsc-repo</connection>
+        
+    </scm>
+</project>

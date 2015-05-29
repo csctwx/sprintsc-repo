@@ -1,0 +1,2813 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/querySubscriberPrepaidInfo/v1/querySubscriberPrepaidInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberPrepaidInfo/v1/querySubscriberPrepaidInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.3">
+	
+<!--03/30/2009    Dweepant Bakshi      1.0        Added basicInfo structure (ban, subscriber ID, subscriber status, network    GBL 9.2.0.0         E1710.013 -->
+	
+<!--                                                                      indicator and language code, otherlanguage) in response                                                   -->
+	
+<!--07/28/2009   Dweepant Bakshi       1.1       Moved prepaidSystem field from prepaidinfo to basicInfo     GBL09.3.0.0    CS#330304   -->
+	
+<!-- 11/03/2009	Priya Logantha 			1.2		prepaidInfo.premiumPlanInfo.monthlyRecurringChargeDay made optional GBL09.4.0.0 CS#344664-->
+	
+<!--05/24/2012   Steve Heichelheim 2.1 added fields for Virgin Mobile, Assurance Wireless and Boost - Added MVM standards           GBL12.3 PJ007442 -->
+	
+<!--07/30/2012   Steve Heichelheim 2.1 added iphoneDscEligibilityLevelCd           GBL12.3 PJ007442 -->
+	
+<!--07/31/2012   Steve Heichelheim 2.1 changed iphoneDscEligibilityLevelCd to  deviceDiscountEligLevelCd. Added autoTopupLbrCode, mrcDiscountAmount          GBL12.3 PJ007442 -->
+	
+<!--08/06/2012   Ishita Biswas        2.2 removed the space at the end of the element  hasDeviceInsuranceInd        GBL12.3 PJ007442 -->
+	
+<!--12/12/2012   Ibrahim ElKhatib      2.3 Added a restriction for ModelNumberType (element itemId, modelId)            MID13.1 PJ007442/CS#574939 (rollforward)-->
+	
+<!--09/17/2014   LaRonna Tisdale     2.4         Changed payPalId length from 100 to 255-->
+	
+<xs:element name="querySubscriberPrepaidInfo" type="tns:QuerySubscriberPrepaidInfoType"/>
+	
+<xs:element name="querySubscriberPrepaidInfoResponse" type="tns:QuerySubscriberPrepaidInfoResponseType"/>
+	
+<xs:complexType name="QuerySubscriberPrepaidInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing choice of subscriber search criteria</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberPrepaidInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="basicInfo" type="tns:BasicInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing basic information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prepaidInfo" type="tns:PrepaidInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing prepaid information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="detailInfo" type="tns:DetailInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing Deatil Info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="equipmentInfo" type="tns:EquipmentInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing equipment info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceInfo" type="tns:ResourceInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing resource info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planInfo" type="tns:PlanInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing plan info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="billingNameInfo" type="tns:BillingNameInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing billing name info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="addressInfo" type="tns:AddressInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing address info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portingInfo" type="tns:PortingInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing porting info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="communicationInfo" type="tns:CommunicationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing communication info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="assuranceWirelessInfo" type="tns:AssuranceWirelessInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing assurance wireless info</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="isCreditCardNotAllowedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates account not allowed to use credit card for payments or purchases. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="topupCardAllowedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates account is allowed to use topup cards ONLY for payments or purchases. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="checkNotAllowedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates account not allowed to use checks for payments or purchases.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paypalNotAllowedInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates account not allowed to use paypal for payments or purchases.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isFraudRestrictedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates that account has fraud restrictions for payments using topup method. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AddressInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="type" type="tns:AddressTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the address type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetNumber" type="tns:StreetNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Address Street Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="line1" type="tns:PrimaryAddressLineType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+For a ‘street address’, Primary Address Line holds the concatenation of the street components of the address.
+For a ‘Post Office Box address’ (PO Box address), Primary Address Line holds the P.O. Box information.
+For a ‘Rural address’, Primary Address Line holds the Rural number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="line2" type="tns:SecondaryAddressLineType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ruralRoute" type="tns:RuralRouteControlNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Rural Route</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ruralNumber" type="tns:RuralRouteBoxNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Rural Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="postOfficeBoxNumber" type="tns:PostOfficeBoxNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Post Of Office Box Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetName" type="tns:StreetNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Address Street Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetDirection" type="tns:StreetDirectionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Street Direction is a USPS Postal Address component that holds the compass direction that appears before the Street Name in some cases.  
+For example in, "North Main Street", "North" would reside in Preceding Direction.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trailingDirection" type="tns:StreetDirectionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Trailing Direction is the same as a Street Direction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="streetType" type="tns:StreetSuffixType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Address Street Type is a suffix for USPS Postal Address component that holds the trailing part of the street name.  
+For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apartment" type="tns:ApartmentNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Apartment Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apartmentType" type="tns:ApartmentDesignatorType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Apartment Type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="attention" type="tns:AttentionTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Attention Text</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="city" type="tns:CityNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="state" type="tns:UspsStateAbbreviationType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="country" type="tns:Iso3CharCountryCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a sovereign nation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zipCode" type="tns:UspsPostalCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digits USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="zip4Code" type="tns:UspsPostalCodeExtensionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>USPS Postal Code Extension contains the last 4 characters of the nine digits USPS Postal Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="geoCode" type="tns:GeocodingTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Geographical Code holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the calendar day on which the address was recorded.
+Format: YYYY-MM-DD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isGeoCodeOverridden" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Geographic Code Override Flag indicates if the geoCode was manually overridden or not.
+If 'true', GeoCode is overridden. If 'false', GeoCode is not overridden.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AssuranceWirelessInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="isLifelineEligibleInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to denote that customer is eligible for lifeline program.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lifelineExpirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Lifeline expiration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lifelineKey" type="tns:ExternalSystemTokenKeyIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Lifeline key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BasicInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>'Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for Customer segmentation in General Ledger reporting and Collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountStatus" type="tns:BillingAccountStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The account status.  
+(active or open), suspended, cancelled, closed or tentative (O, S, N, C or T).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique identifier for a subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberStatus" type="tns:SubscriberStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber status.  
+
+Values:
+A - Active
+S - Suspended
+C - Cancelled
+R - Reserved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusChangeDate" type="tns:BillingAccountStatusEffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the calendar day on which the latest status changed.
+Format: YYYY-MM-DD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusChangeReasonCode" type="tns:BillingAccountStatusChangeReasonCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates change reason code of subscriber status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activationDate" type="tns:ActivationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the calendar date on which the subscriber becomes active in the system.
+Format: YYYY-MM-DD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isInterruptedStatusInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if subscriber is in interrupted status or not.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isFraudInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates that account is a fraud suspect one or not. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCodeType" block="restriction">
+				
+<xs:annotation>
+					
+<xs:documentation>Identfies the subscribrs network. C for CDMA and I for iDEN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="languageCode" type="tns:LanguagePreferenceCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Language Preference Name contains the text specifying a preferred language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="otherLanguage" type="tns:LanguagePreferenceNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Language Preference Name contains the text specifying a preferred language.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prepaidSystem" type="tns:SubscriberPrePayTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Pre Pay Type Code designates a method of pre-payment for a subscriber. Valid values are:
+
+O – Postpaid
+N – Prepaid, handled by Amdocs system
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="BillingNameInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="firstName" type="tns:FirstNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First Name designates the first name of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="middleName" type="tns:MiddleNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Middle Name is effectively a second given name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:LastNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="title" type="tns:TitleType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the title</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="generation" type="tns:GenerationType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Generation holds any affix that may occur at the end of the name of an INDIVIDUAL designating a dignity, honor, distinction, or preeminence attached to the INDIVIDUAL by virtue of rank, office, precedent, privilege, attainment, or lands.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalLine" type="tns:AdditionalTitleType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional Line designates additional individual name information.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CommunicationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="communicationMethod" type="tns:ContactMethodIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the communication method that may be used to contact the subscriber.
+Valid values: ‘E’ for Email, ‘F’ for Fax</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="communicationEmail" type="tns:EmailAddressStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates an email Address on which the customer can be contacted.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="communicationFax" type="tns:FaxNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates fax number which the customer can be contacted.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DetailInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates Dealer Code, which is the agent or dealer who handled the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="submarket" type="tns:SubMarketCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the subscriber’s submarket code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called "leaves."</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csaDesc" type="tns:CommunicationServiceAreaNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area Name the name of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called "leaves."</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="npaSplit" type="tns:NpaNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates the "New" NPA after a split had happened.
+Numbering Plan Area (NPA) number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="timezone" type="tns:TimeZoneStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Time zone is a string representation of a time zone..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mrcDiscountEligLevelCd" type="tns:EligibilityStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>1-character code to denote customer’s level of eligibility for MRC discount.
+‘N’ – No eligibility for discount.
+‘D’ – Device and Plan is eligible for discount, but RPV has not been set up on the account.
+‘Y’ –Device and Plan  is eligible for discount, and  has  been set up for autopay on the account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mrcDiscountAmount" type="tns:DiscountAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Plan, Device and RPV based discount given on the customer’s MRC. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="EquipmentInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="itemId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Item Identifier, which uniquely identifies a device model</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ModelNumberType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="itemDescription" type="tns:ModelNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Long description of the item.  For phones, the model name (display name, ie "SANYO SCP2700 PNK SNG")</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="modelId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Model Id of the device.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ModelNumberType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="manufacturerCode" type="tns:ManufacturerPartyIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Manufacturer code identifier (unique for each manufacturer)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manufacturerName" type="tns:ManufacturerNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Name of the manufacturer, ie "SAMSUNG"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="esn" type="tns:DeviceSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="esnHex" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number Hex</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:DeviceSerialNumberHexType">
+						
+<xs:minLength value="8"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="macId" type="tns:MediumAccessControlAddressType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique Media Access Control Address identifier for all serialType ‘A’ devices, which identify Airave and 4G devices as of GBL10.3</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="iccId" type="tns:UniversalIntegratedCircuitCardIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Integrated Circuit Card Identifier of the LTE removable UICC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isBroadband2GoInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the device on the sub a broadband device or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isBlackberryDeviceInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if  the device on the sub is a blackberry device or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hasDeviceInsuranceInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the customer has device insurance </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceInsuranceEligibilityExpDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>For devices eligible for insurance, this is the last date for purchase of insurance.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketingPreferenceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="isPartnersPromoAllowedInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates that subscriber agreed to receive promotional information from Virgin Mobile and our partners.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isVmuPromoAllowedInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates that subscriber agreed to receive promotional information from Virgin Mobile only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isVmuServiceAnnouncementAllowedind" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates that subscriber agreed to receive Virgin Mobile service announcements only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PlanInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanCode" type="tns:PricePlanCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the subscriber’s price plan.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isAdvancePaymentPlanInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if advance payment can be set up on the plan or not.
+A “true” is returned in this field if the plan allows advance payment to be set up on the account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isSmsBlockedInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if subscriber’s SMS capabilities are barred or not</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isDataThrottlePlanInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the data plan can be throttled or not.
+A “true” is returned in this field if the plan can be throttled.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isDemoPlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if subscriber’s price plan is a demo plan or not. Not applicable for Boost.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isRestartCapablePlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if restarts are allowed on the subscriber’s price plan.
+Not applicable for Boost.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PortingInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnType" type="tns:PortedNumberIndicatorType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the Mobile Dialing Number (MDN) Type.
+Valid values: 'RGL' for Regular, 'PRI' for Port In, 'PRO' for Port Out, 'IPI' for Regular</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portOutInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Port Out Indicator determines whether or not there is a number guard (port out freeze) on this PTN.
+If 'true’, the PTN has a number guard. If ‘false’, the PTN does not have a number guard.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portStatus" type="tns:PortInStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the subscriber’s port in status.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusText" type="tns:PortInStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the port status description.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isMdnPendingPortOutInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether the subscriber's MDN port out is pending.
+If ‘true’, port out is pending. If ‘false’, port out is not pending.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PremiumPlanInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="fundingMethod" type="tns:PaymentMethodTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Payment Method Type Code is a 2 character code that designates the method used to make a payment.
+Possible values:
+CB – Cash
+CC – Credit Card
+VS – Visa
+AM – American Express
+MC – MasterCard
+MB – Mable
+SC – Tmp Credit Card
+OS – One Stop Shop
+DC – Diners Club
+JM – Joint Marketing
+DI – Discover Card
+SD – 16-digit debit card
+EC – Electronic Checks</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="minBalanceRequiredInd" type="tns:MinimumBalanceRequiredIndType">
+				
+<xs:annotation>
+					
+<xs:documentation>Minimum Balance Required Indicator identifies whether a minimum balance is required for the Premium Price Plan.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eCareName" type="tns:EcarePricePlanNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan Name is the common name for a specific price plan as denoted in the eCare application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="monthlyRecurringChargeDay" type="tns:MonthlyRecurringChargeDayType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Monthly Recurring Charge Day indicates the numerical day of the month when the recharge is due.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="premiumInd" type="tns:PremiumTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Premium Type Code indicates the type of premium price plan.  Valid values are:
+'Y' - iDEN BPP (Boost Premium Plan) and CDMA UbB (Unlimited By Boost)
+'M' - iDEN Multi-Bucket Plan (MBP).   
+'N' - All others - but primarily iDEN PAYGO (Pay as You Go)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="brandCode" type="tns:BrandCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Brand Code is a 3 byte code denoting which brand the pre-paid subscriber belongs to. 
+Valid values:
+BST - Boost
+SPR - Sprint
+VMU - Virgin Mobile
+ASW - Assurance Wireless</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rechargeAmount" type="tns:RechargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Recharge Amount is the recharge amount and might include airtime and other charges as applicable. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCardSuffix" type="tns:PaymentCardLast4DigitsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Payment Card Last 4 Digits is the last four digits of the payment card number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCardExpirationDate" type="tns:PaymentCardExpirationDateEnsType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Payment Card Expiration Date is last calendar date the Credit/Debit Card is valid.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="premiumPlanInfo" type="tns:PremiumPlanInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Only if premiumInd = 'Y'.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="messageLevel" type="tns:MessageDetailLevelCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Message Detail Level Code identifies the level of detail of messages sent to Authorized Users.
+Values:
+M for Minimal value
+P for Partial value
+F for Full level value.
+
+Defaults to F. Message Detail Level Code is not applicable to Post-Paid SUBSCRIPTIONS.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriptionBrand" type="tns:SubscriberBrandTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Brand Type Code is a 3 byte code denoting which brand type the subscriber belongs to. 
+Current valid values are:
+'MBP' - Monthly Bucket Plan 'PYG' - Pay as You Go
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dpmId" type="tns:DefaultPaymentMethodLastFourType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The last four digits of the DPM/RPV (Default Payment Method/Registered Payment Vehicle) account number (e.g. the last four digits of the Credit Card).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dpmType" type="tns:DefaultPaymentMethodTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Default Payment Method/ Registered Payment Vehicle Type Code identifies the Payment 
+Method set up as the default.
+Possible Payment Method Types:
+VS - VISA (including VISA branded debit cards)
+MC - MasterCard (including MasterCard branded debit cards)
+AM - American Express
+DI - Discover Card
+SD - 16-digit debit cards (PIN enabled)
+EC - Electronic checks
+PL - Paypal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paypalId" type="tns:ExternalSystemUserIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Paypal  id for VMU customer  set up with a RPV (registered payment vehicle) of paypal.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hasAdvancePaymentInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if advance payment is set up on the account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="autoPayCode" type="tns:AutoTopUpTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>1-character code that indicates the type of auto top-up and LBR (low balance recharge) settings on the account. The following types of auto top-up settings are allowed for VMU/ASW:
+N- Not enrolled for low balance recharge and auto topUp.
+Y – Enrolled in Low Balance Recharge or Monthly Auto topup/auto monthly payments.
+A - 90 days Auto Top-Up. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResourceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number is the method of identifying telephone trunks in the public network of North America called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnStatus" type="tns:SubscriberResourceStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number status code is a single character code that represents the status of a subscriber's service.
+Valid values: ‘A’ for Active, ‘C’ for Canceled, ‘G’ for Aging, ‘R’ for Reserved, ‘S’ for Suspended.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnStatusDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The last time MDN was updated.
+Format: YYYY-MM-DD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portInMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the port in PTN, if the PTN is a temporary PTN and a port in request is pending.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Network Access Identifier (e.g. username@domain) where domain should be of the form str1.str2. No validation will be done on input value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiStatus" type="tns:SubscriberResourceStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the status of a subscriber's primary NAI.
+Valid values: ‘A’ for Active, ‘C’ for Canceled, ‘G’ for Aging, ‘R’ for Reserved, ‘S’ for Suspended.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiStatusDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the calendar day on which the latest primary NAI status occurred.
+Format: YYYY-MM-DD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiStatusChangeReason" type="tns:SubscriberResourceStatusChangeReasonCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the reason why NAI was enabled or disabled.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="naiTemporaryDisableInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates whether an NAI is temporarily disabled.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network.
+For CDMA subscriber this field contains the value of MSID
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberHexType">
+				
+<xs:annotation>
+					
+<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>A Uniform Resource Identifier (URI) is the way you identify any of those points of content, whether it be a page of text, a video or sound clip, a still or animated image, or a program. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ActivationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activation Date holds the calendar month, day and year Network access is given to a MDN, NAI or piece of equipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AdditionalTitleType">
+		
+<xs:annotation>
+			
+<xs:documentation>Additional Title holds additional trailing honorifics attached to a person's name.  For example:"Sr.Vice President","Director","PHD.", etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AddressTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Address Type Code distinguishes an address as either a Military address, Rural address, Street address, PO Box address or a Foreign address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApartmentDesignatorType">
+		
+<xs:annotation>
+			
+<xs:documentation>Apartment Designator is an Address Component that holds a value identifying the address as a type of apartment.Examples:"APT""UNIT"Etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApartmentNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Apartment Number is an Address Component that contains the identifier of the apartment within the context of a building's postal address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AttentionTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Attention Text attached to the mailing address.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AutoTopUpTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Auto Top Up Type Code designates the type of auto top-up settings on the prepaid account.
+Valid Values:
+1 - low balance
+2 - 90-day
+3 - monthly</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountStatusChangeReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Status Change Reason Code identifies the reason for the activity that modified the Billing Account's status.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Status Code holds the current state of the Billing Account in the Ensemble system
+Valid states:
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="O"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="S"/>
+			
+<xs:enumeration value="T"/>
+			
+<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountStatusEffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Status Effective From Date holds the first calendar day the status was assigned to the Billing Account.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account type of the BILLING ACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BrandCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Brand Code indicates which brand the subscriber belongs to. Possible brands represented include;  Sprint, Nextel, Boost, Virgin Mobile, and Clearwire</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CancellationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Cancellation date represents the calendar day on which a cancellation was made. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CityNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="26"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Name the name of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ContactMethodIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Contact Method Identifier uniquely identifies an instance of Contact Method within the context of a PARTY or FACILITY.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DealerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Dealer Identifier uniquely identifies the dealer who interacted with the customer on behalf of the enterprise.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DefaultPaymentMethodLastFourType">
+		
+<xs:annotation>
+			
+<xs:documentation>Default Payment Method Last Four is the last four digits of the payment method, used to help identify the defualt payment method.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DefaultPaymentMethodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Default Payment Method Type Code identifies the Payment Method set up as the default.
+Possible Payment Method Types:
+VS - VISA (including VISA branded debit cards)
+MC - MasterCard (including MasterCard branded debit cards)
+AM - American Express
+DI - Discover Card
+SD - 16-digit debit cards (PIN enabled)
+EC - Electronic checks</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberHexType">
+		
+<xs:annotation>
+			
+<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Amount holds the monetary amount by which the the price charged for a GOOD or SERVICE is decreased.  A percent decrease in the price charged may only be applicable to specific Account Types, Promotions, Products, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EcarePricePlanNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price Plan Name is the common name for a specific price plan as denoted in the eCare application.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EligibilityStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Eligibility status code indicates if eligibilty reqirements are met.
+Values:
+Y - Eligible
+N - Not eligible
+U - Undetermined</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExternalSystemTokenKeyIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>External System Token Key Identifier is token used to validate the identity of a a user in an external system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExternalSystemUserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>External System User Identifier contains the identifier of the person as defined in an external system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FaxNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>A fax (short for facsimile and sometimes called telecopying) is the telephonic transmission of scanned-in printed material (text or images), usually to a telephone number associated with a printer or other output device. The original document is scanned with a fax machine, which treats the contents (text or images) as a single fixed graphic image, converting it into a bitmap. In this digital form, the information is transmitted as electrical signals through the telephone system. The receiving fax machine reconverts the coded image and prints a paper copy of the document.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="GenerationType">
+		
+<xs:annotation>
+			
+<xs:documentation>Generation is the iteration of the name within a family affixed to the end of the name (e.g.: I,II,III or Jr.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="GeocodingTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Geocoding Type Code indicates the type of geocoding to perform. Valid values: ExactAddress, CrossStreet, Zip, CityState, International. </xs:documentation>
+			
+<xs:documentation>Type of geocoding to perform.  Valid values: ExactAddress, CrossStreet, Zip, CityState, International.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Iso3CharCountryCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>An International Standardization Organization (ISO) 3-Character Country Code is the set of three characters assigned by the ISO to identify a soverign nation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LanguagePreferenceCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Language Preference Code identifies a language preference.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="ENG"/>
+			
+<xs:enumeration value="SPA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LanguagePreferenceNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Language Preference Name contains the text specifying a preferred language.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			
+<xs:documentation>alias: Surname</xs:documentation>
+			
+<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ManufacturerNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Manufacturer Name is the full name of the manufacturer.  </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ManufacturerPartyIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Manufacturer Party Identifier holds a value that uniquely identifies the Manufacturer of the specified PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MediumAccessControlAddressType">
+		
+<xs:annotation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+			
+<xs:documentation>alias: MAC ID</xs:documentation>
+			
+<xs:documentation>alias: Media Access Control Identifcation</xs:documentation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MediumAccessControlAddressTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Medium Access Control Address Type Code designates which type of device a MAC addres is assigned to.
+Values:
+FEM_ARV - Airave Phase 1 FEMTO
+FEMARV2 - Airave Phase 2 FEMTO
+ATA_ARV - Airave Phase 2 FEMTO
+4G_CAT1 - 4G SM Category 1
+4G_CAT2 - 4G SM Category 2
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:enumeration value="FEM_ARV"/>
+			
+<xs:enumeration value="FEMARV2"/>
+			
+<xs:enumeration value="ATA_ARV"/>
+			
+<xs:enumeration value="4G_IND"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MessageDetailLevelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Message Detail Level Code identifies the level of detail of messages sent to Authorized Users.
+Values:
+M for Minimal value
+P for Partial value
+F for Full level value.
+
+Defaults to F. Message Detail Level Code is not applicable to Post-Paid SUBSCRIPTIONS.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="F"/>
+			
+<xs:enumeration value="M"/>
+			
+<xs:enumeration value="P"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MiddleNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MinimumBalanceRequiredIndType">
+		
+<xs:annotation>
+			
+<xs:documentation>Minimum Balance Required Indicator identifies whether a minimum balance is required for the Premium Price Plan.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Name holds the Manufacturer's name for the class or model of  PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MonthlyRecurringChargeDayType">
+		
+<xs:annotation>
+			
+<xs:documentation>Monthly Recurring Charge Day indicates the numerical day of the month when the recharge is due.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>A Uniform Resource Identifier (URI -- pronounced YEW-AHR-EYE) is the way you identify any of those points of content, whether it be a page of text, a video or sound clip, a still or animated image, or a program. The most common form of URI is the Web page address, which is a particular form or subset of URI called a Uniform Resource Locator (URL). 
+
+A URI typically describes:
+
+The mechanism used to access the resource
+The specific computer that the resource is housed in
+The specific name of the resource (a file name) on the computer
+For example, this URI:
+http://www.w3.org/Icons/WWW/w3c_main.gif
+identifies a file that can be accessed using the Web protocol application, Hypertext Transfer Protocol, ("http://") that is housed on a computer named "www.w3.org" (which can be mapped to a unique Internet address). In the computer's directory structure, the file is located at the pathname of "/Icons/WWW/w3c_main.gif." Character strings that identify File Transfer Protocol FTP addresses and e-mail addresses are also URIs (and, like the HTTP address, are also the specific subset of URI called a URL).
+
+Another kind of URI is the Uniform Resource Name (URN). A URN is a form of URI that has "institutional persistence," which means that its exact location may change from time to time, but some agency will be able to find it.
+
+The URI rules of syntax, set forth in the Internet Engineering Task Force (IETF) Request for Comments 1630, apply for all Internet addresses. In Tim Berner-Lee's original working document, URI stood for Universal Resource Identifier.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NpaNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Number is one of the geographical divisions of the United States, Canada, Bermuda, the Caribbean, Northwestern Mexico, Alaska, Hawaii, within which no two telephones will have the same seven-digit telephone number. (An NPA is represented by an Area Code.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardExpirationDateEnsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Expiration Date is last calendar date the Credit/Debit Card is valid.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardLast4DigitsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Last 4 Digits is the last four digits of the payment card number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentMethodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Payment Method Type Code is a 2 character code that designates the method used to make a payment.
+
+Possible values:
+CB – Cash
+CC – Credit Card
+VS – Visa
+AM – American Express
+MC – MasterCard
+MB – Mable
+SC – Tmp Credit Card
+OS – One Stop Shop
+DC – Diners Club
+JM – Joint Marketing
+DI – Discover Card
+SD – 16-digit debit card
+EC – Electronic Checks</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+			
+<xs:enumeration value="CB"/>
+			
+<xs:enumeration value="CC"/>
+			
+<xs:enumeration value="VS"/>
+			
+<xs:enumeration value="AM"/>
+			
+<xs:enumeration value="MC"/>
+			
+<xs:enumeration value="MB"/>
+			
+<xs:enumeration value="SC"/>
+			
+<xs:enumeration value="OS"/>
+			
+<xs:enumeration value="DC"/>
+			
+<xs:enumeration value="JM"/>
+			
+<xs:enumeration value="DI"/>
+			
+<xs:enumeration value="SD"/>
+			
+<xs:enumeration value="EC"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortedNumberIndicatorType">
+		
+<xs:annotation>
+			
+<xs:documentation>Ported Number Indicator identifies those instances of Mobile Directory NUmber (MDN) ported in from another carrier.Required if the resource type is`C'.
+
+Values are:
+PRI =&gt; The MDN was ported in 
+RGL =&gt; Regular, the MDN was not ported in.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="PRI"/>
+			
+<xs:enumeration value="RGL"/>
+			
+<xs:enumeration value="PRO"/>
+			
+<xs:enumeration value="IPI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortInStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Port In Status Code represents a status value returned by the external number porting system for a port-in validation request.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+			
+<xs:enumeration value="OP"/>
+			
+<xs:enumeration value="CN"/>
+			
+<xs:enumeration value="IN"/>
+			
+<xs:enumeration value="RN"/>
+			
+<xs:enumeration value="ER"/>
+			
+<xs:enumeration value="CO"/>
+			
+<xs:enumeration value="CC"/>
+			
+<xs:enumeration value="AC"/>
+			
+<xs:enumeration value="CS"/>
+			
+<xs:enumeration value="CP"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortInStatusDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Port In Status Description is a description of the status returned by the external number porting system for a port-in validation request.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:enumeration value="Open"/>
+			
+<xs:enumeration value="Port Cancel"/>
+			
+<xs:enumeration value="Informational"/>
+			
+<xs:enumeration value="Port Range"/>
+			
+<xs:enumeration value="Error"/>
+			
+<xs:enumeration value="Complete"/>
+			
+<xs:enumeration value="Port Concurrent"/>
+			
+<xs:enumeration value="Port Active"/>
+			
+<xs:enumeration value="Cancel Submitted"/>
+			
+<xs:enumeration value="Cancel Pending"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PostOfficeBoxNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Post Office Box Number holds a United States Postal Service Post Office Box Number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PremiumTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Premium Type Code indicates the type of premium price plan.  Valid values are:
+
+'Y' - iDEN BPP (Boost Premium Plan) and CDMA UbB (Unlimited By Boost)
+'M' - iDEN Multi-Bucket Plan (MBP).   
+'N' - All others - but primarily iDEN PAYGO (Pay as You Go)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrimaryAddressLineType">
+		
+<xs:annotation>
+			
+<xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+
+For a street address, Primary Address Line holds the concatenation of the street components of the address.
+For a Post Office Box address, Primary Address Line holds the P.O. Box information.
+For a Rural address, Primary Address Line holds the Rural number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PricePlanCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Price Plan Code is a designator of a specific price plan.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RechargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recharge Amount is the recharge amount and might include airtime and other charges as applicable. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RuralRouteBoxNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Rural Route Box Number holds the number identifying a mail box on a rural route.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RuralRouteControlNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Rural Route Control Number holds the rural road or highway control number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecondaryAddressLineType">
+		
+<xs:annotation>
+			
+<xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetDirectionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Direction is the component of a USPS Postal Address holding the compass bearing (North, East, South, West and various combinations and abbreviations) appearing before or after a Street Name.  e.g.: North Oak, South Oak, NorthWest Barry Road, Barry Road NW, Oak South, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Name is a USPS Postal Address component that holds the name of a street.  For example in, "123 Main Street", "Main" would reside in Street Name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Number is a component of a USPS Posatal Address that holds the house or building number on a street.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StreetSuffixType">
+		
+<xs:annotation>
+			
+<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.  Other values might be Cir, Vlvd, Rd, etc.</xs:documentation>
+			
+<xs:documentation>Street Suffix is a USPS Postal Address component that holds the trailing part of the street name.  For example in, "123 Main Street", "Street" would reside in Street Suffix.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sub Market Code designates a Market Segment which represents a distinct subset or segment of a market that behave in the same way or have similar needs.  Because each segment is fairly homogeneous in their needs and attitudes, they are likely to respond similarly to a given marketing strategy. That is, they are likely to have similar feelings and ideas about a marketing mix comprised of a given product or service, sold at a given price, distributed in a certain way and promoted in a certain way.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberBrandTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Brand Type Code is a 3 byte code denoting which brand type the subscriber belongs to. Current valid values are:
+
+'MBP' - Monthly Bucket Plan
+'PRM' Premium
+'BPP' - Basic Premium Plan
+'PYG' - Pay as You Go
+
+
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+			
+<xs:pattern value="\d*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberPrePayTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Pre Pay Type Code designates a method of pre-payment for a subscriber. Valid values are:
+
+O – Postpaid
+N – Prepaid, handled by Amdocs system
+B – Prepaid, handled by BCGI system
+I – Subscriber currently being migrated from bcgi to NGPP; certain activities are disabled for ‘in flight’ subscribers.
+H -NGPP, however history loading is taking place (generally can be treated as ‘N’, but depends on client’s level-of-granularity needs.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="O"/>
+			
+<xs:enumeration value="N"/>
+			
+<xs:enumeration value="B"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="H"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberResourceStatusChangeReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Resource Status Change Reason Code identifies a specific reason for a change of subscriber resource status.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberResourceStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Resource Status Code is a single character code that represents the status of a subsciber resource.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="A"/>
+			
+<xs:enumeration value="S"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="R"/>
+			
+<xs:enumeration value="G"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber status code is a single character code that represents the status of a subsciber.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="A"/>
+			
+<xs:enumeration value="S"/>
+			
+<xs:enumeration value="C"/>
+			
+<xs:enumeration value="R"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TimeZoneStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Time Zone String is a string reperesentation of a time zone.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TitleType">
+		
+<xs:annotation>
+			
+<xs:documentation>Title is an honorific bestowed to an Individual.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniversalIntegratedCircuitCardIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Universal Integrated Circuit Card Identifier is a unique identifier embedded in the smart card used in mobile terminals in CDMA, GSM and UMTS networks.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+			
+<xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+			
+<xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsPostalCodeExtensionType">
+		
+<xs:annotation>
+			
+<xs:documentation>USPS Posta Code Extension contains the last 4 characters of the nine digit USPS Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UspsStateAbbreviationType">
+		
+<xs:annotation>
+			
+<xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,72 @@
+<definitions name="UserLookupServiceImplService" xmlns="http://schemas.xmlsoap.org/wsdl/"
+ targetNamespace="http://ws.drutt.com/msdp/userlookup" 
+ xmlns:tns="http://ws.drutt.com/msdp/userlookup" 
+ xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="http://ws.drutt.com/msdp/userlookup"> 
+   <xs:element name="WSException" type="tns:WSException"/>
+   <xs:element name="lookupUser" type="tns:lookupUser"/>
+   <xs:element name="lookupUserResponse" type="tns:lookupUserResponse"/>
+   <xs:complexType name="lookupUser">
+    <xs:sequence>
+     <xs:element maxOccurs="1" minOccurs="1" name="identifier" type="xs:string"/>
+     <xs:element maxOccurs="unbounded" minOccurs="0" name="meta" type="tns:metaWs"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="metaWs">
+    <xs:sequence>
+     <xs:element maxOccurs="1" minOccurs="1" name="key" type="xs:string"/>
+     <xs:element maxOccurs="1" minOccurs="1" name="value" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="lookupUserResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="WSException">
+    <xs:sequence>
+     <xs:element name="errorCode" type="xs:int"/>
+     <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name="UserLookupService_lookupUser">
+  <part element="tns:lookupUser" name="lookupUser"/>
+ </message>
+ <message name="UserLookupService_lookupUserResponse">
+  <part element="tns:lookupUserResponse" name="lookupUserResponse"/>
+ </message>
+ <message name="WSException">
+  <part element="tns:WSException" name="WSException"/>
+ </message>
+ <portType name="UserLookupService">
+  <operation name="lookupUser" parameterOrder="lookupUser">
+   <input message="tns:UserLookupService_lookupUser"/>
+   <output message="tns:UserLookupService_lookupUserResponse"/>
+   <fault message="tns:WSException" name="WSException"/>
+  </operation>
+ </portType>
+ <binding name="UserLookupServiceBinding" type="tns:UserLookupService">
+  <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="lookupUser">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:body use="literal"/>
+   </input>
+   <output>
+    <soap:body use="literal"/>
+   </output>
+   <fault name="WSException">
+    <soap:fault name="WSException" use="literal"/>
+   </fault>
+  </operation>
+ </binding>
+ <service name="UserLookupServiceImplService">
+  <port binding="tns:UserLookupServiceBinding" name="UserLookupServiceImplPort">
+   <soap:address location="NOT-SET"/>
+  </port>
+ </service>
+</definitions>

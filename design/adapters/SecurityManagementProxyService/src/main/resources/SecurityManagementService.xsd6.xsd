@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/validateAtlasLogin/v1/validateAtlasLogin.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/validateAtlasLogin/v1/validateAtlasLogin.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date                Changed by          Version    Change description                                                                               Rel         Project-->
+	
+<!--11/23/2009     Beatriz Ferreira     1.0            Draft Interface for validateAtlasLogin-->
+	
+<!--12/01/2009  Steve Heichelheim   1.0    Applied MVM standards and simple types                                                   GBL10.1   PJ003095-->
+	
+<xs:element name="validateAtlasLogin" type="tns:validateAtlasLoginRequestType"/>
+	
+<xs:element name="validateAtlasLoginResponse" type="tns:validateAtlasLoginResponseType"/>
+	
+<xs:complexType name="validateAtlasLoginRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="siteId" type="tns:FacilityIdentifier">
+				
+<xs:annotation>
+					
+<xs:documentation>Site Identification number
+1 to 8 digits</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="techId" type="tns:UserIdentifier">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint Technical resource Identification number
+1 to 8 digits</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="recordAction" type="tns:TransactionTypeCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Record Action, which can be:
+'4' - for "Log In"
+'5' - for "Log Out"
+'6' - for "Log In and Log Out"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="validateAtlasLoginResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageText"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ConfirmMessageText">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FacilityIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Facility Identifier uniquely identifies an instaqnce of FACILITY.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TransactionTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+			
+<xs:documentation>Transaction Type Code identifies the Create, Read, Update or Delete (CRUD) functionality of the transaction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

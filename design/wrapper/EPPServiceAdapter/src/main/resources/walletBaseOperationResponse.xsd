@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationResponse.xsd"
+    xmlns:walletCommonTypes="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd"
+    targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationResponse.xsd">
+
+	<import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd" schemaLocation="walletCommonTypes.xsd"/>
+
+	<complexType name="CardInfo">
+        <sequence>
+            <element name="lastFourDigitsOfCard">
+                <annotation>
+                    <documentation>Last four digits of card number.
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="4"/>
+                        <pattern value="\**\d+"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="cardBrand">
+                <annotation>
+                    <documentation>Brand of the card (Visa, Master, Amex,
+                        Discover, Discover Diners).
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="AMEX"/>
+                        <enumeration value="MASTERCARD"/>
+                        <enumeration value="VISA"/>
+                        <enumeration value="DISCOVER"/>
+                        <enumeration value="DINERS"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="consumerChoicePreference" type="string" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        Indicates whether the user prefers to use
+                        this
+                        card as a credit card or a debit card during
+                        payment.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="isConsumerChoiceCard" type="boolean" minOccurs="0"/>
+            <element name="cardType" type="walletCommonTypes:CardType" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="AchInfo">
+        <sequence>
+            <element name="lastFourDigitsOfAccountNumber">
+                <annotation>
+                    <documentation>Last four digits of account number.
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="4"/>
+                        <pattern value="\**\d+"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="routingNumber" type="string">
+                <annotation>
+                    <documentation>Masked value for display.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="achAccountType" type="walletCommonTypes:AchAccountType" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        ACH payment Type can be CHECKING or SAVINGS.
+                    </documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+    <complexType name="PaypalInfo">
+        <sequence>
+            <element name="paypalEmailId" type="walletCommonTypes:Email">
+                <annotation>
+                    <documentation>
+                        Paypal email Id.
+                    </documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>
+	<complexType name="WalletPaymentOption">
+		<annotation>
+			<documentation>Required info of retrieving payment
+				option in
+				wallet
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="paymentOptionId" type="walletCommonTypes:DefaultStringType">
+				<annotation>
+					<documentation>
+						A unique identifier for the payment option in
+						this wallet with
+						max length 36 .Conditional Element, Mandatory
+						in
+						getWalletInfo Response and AddPaymentOptionResponse
+					</documentation>
+				</annotation>
+			</element>
+            <element name="paymentOptionToken" type="walletCommonTypes:PaymentTokenType" >
+                <annotation>
+                    <documentation>
+                        A token identifier for payment option.
+                        This token should be used by FEs to identify PCI sensitive details from
+                        PCI response.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="displayName" nillable="false">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="30">
+                            <annotation>
+                                <documentation>
+                                    A nickname may either be system generated or
+                                    subscriber
+                                    supplied.
+                                    Nicknames are only unique within the
+                                    subscriber\u2019s wallet.
+                                </documentation>
+                            </annotation>
+                        </maxLength>
+                    </restriction>
+                </simpleType>
+            </element>
+			<element name="displayOrder" minOccurs="0" type="int">
+				<annotation>
+					<documentation>Conditional Element only part of get WalletInfo
+						-payment option details response. The lowest integer item should
+						be displayed first to the customer. Note that the default payment
+						source is always first and the AutoPay source is always second, if
+						they exist\u2022Followed by the other payment methods in the order
+						they
+						were entered into the system
+						(from the newest to the oldest)
+					</documentation>
+				</annotation>
+			</element>
+
+			<element name="default" type="boolean">
+				<annotation>
+					<documentation>
+						Indicates whether the payment source/WalletItem
+						is the default payment method. Default is false.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="autopay" minOccurs="0" type="boolean">
+				<annotation>
+					<documentation>
+						Indicates whether the payment source is to be
+						used for autoPay.
+						Default is false
+					</documentation>
+				</annotation>
+			</element>
+			<element name="autopayInfo" type="walletCommonTypes:AutopayInfo" minOccurs="0">
+				<annotation>
+					<documentation>
+						Indicates the type of prepaid autopay recharge
+						and the autopay amount.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="paymentMethod" type="walletCommonTypes:PaymentMethod"/>
+            <choice>
+                <element name="cardInfo" type="tns:CardInfo" minOccurs="0"/>
+                <element name="achInfo" type="tns:AchInfo" minOccurs="0"/>
+                <element name="paypalInfo" type="tns:PaypalInfo" minOccurs="0"/>
+            </choice>
+		</sequence>
+	</complexType>
+	<!--<complexType name="AutopayInfo">
+        <sequence>
+            <element name="rechargeType" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="MONTHLY"/>
+                        <enumeration value="LOWBALANCE"/>
+                        <enumeration value="RECHARGE90DAY"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="autopayAmount" type="decimal" minOccurs="0"/>
+            <element name="letterSuppression" type="boolean" minOccurs="0"/>
+            <element name="autopayTnC" type="walletCommonTypes:AcceptedTnC" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        Autopay TnC is mandatory, if the payment option is set as autopay, optional in the response.
+                    </documentation>
+                </annotation>
+            </element>
+            <element name="customerReferenceNumber" type="walletCommonTypes:DefaultStringType" minOccurs="0">
+                <annotation>
+                    <documentation>
+                        Unique number of customer printed in customer invoice.
+                    </documentation>
+                </annotation>
+            </element>
+        </sequence>
+    </complexType>-->
+	<complexType name="ValidatedPaymentOptionDetails">
+		<sequence>
+			<element name="validationFailureResponses" type="tns:FailureResponses" minOccurs="0"/>
+			<element name="cardPaymentOption" type="tns:CardPaymentOptionDetails"
+				minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="CardPaymentOptionDetails">
+        <sequence>
+            <element name="cardBrand">
+                <annotation>
+                    <documentation>Brand of the card (Visa, Master, Amex,
+                        Discover, Discover Diners).
+                    </documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="AMEX"/>
+                        <enumeration value="MASTERCARD"/>
+                        <enumeration value="VISA"/>
+                        <enumeration value="DISCOVER"/>
+                        <enumeration value="DINERS"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="isConsumerChoiceCard" type="boolean"/>
+            <element name="cardType" type="walletCommonTypes:CardType"/>
+        </sequence>
+    </complexType>
+	<complexType name="WalletProfile">
+		<sequence>
+			<element name="currentWalletStatus" type="tns:WalletStatus"/>
+			<element minOccurs="0" name="containsAutopay" type="boolean"
+				default="false">
+				<annotation>
+					<documentation>
+						Defaults to false .on a response message,
+						indicates whether the subscriber is enrolled in
+						Autopay.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="walletTnC" type="walletCommonTypes:AcceptedTnC" />
+		</sequence>
+	</complexType>
+	<complexType name="Wallet">
+		<sequence>
+			<element name="profile" type="tns:WalletProfile"/>
+			<element minOccurs="0" name="walletItems"
+				type="tns:WalletPaymentOption" maxOccurs="unbounded">
+				<annotation>
+					<documentation>
+						Returns all the walletPaymentOption.
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="WalletStatus">
+		<sequence>
+			<element name="status" nillable="false">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="E">
+							<annotation>
+								<documentation>
+									\u201cE\u201d \u2013 empty
+									No paymentOptions
+									inside wallet
+								</documentation>
+							</annotation>
+						</enumeration>
+						<enumeration value="P">
+							<annotation>
+								<documentation>\u201cP\u201d \u2013 populated \u2013 wallet
+									has one or more
+									paymentOption items in it
+								</documentation>
+							</annotation>
+						</enumeration>
+						<enumeration value="N">
+							<annotation>
+								<documentation>\u201cN\u201d \u2013 Not Active \u2013 wallet
+									is not active
+								</documentation>
+							</annotation>
+						</enumeration>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="actorId" nillable="false"
+				type="walletCommonTypes:DefaultStringType">
+				<annotation>
+					<documentation>
+						Indicates the person that made the
+						last
+						update
+					</documentation>
+				</annotation>
+			</element>
+			<element name="actorChannel" nillable="false"
+				type="walletCommonTypes:DefaultStringType">
+				<annotation>
+					<documentation>
+						Indicates the channel through which the 
+						last update is requested
+					</documentation>
+				</annotation>
+			</element>
+			<element name="changeTimestamp" type="dateTime"
+				nillable="false">
+				<annotation>
+					<documentation>
+						Date and time stamp of the last change to the
+						wallet.
+						Format: YYYY-MM-DDTHH:MI:SS-ZH:ZM
+					</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Response">
+		<sequence>
+			<element name="responseCode" type="string"/>
+			<element name="responseMessage" type="string"/>
+			<element name="applicationId" type="string" minOccurs="0"/>
+			<element name="responseDescription" type="string" minOccurs="0"/>
+			<element name="sequenceNo" type="string" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="NestedResponses">
+		<sequence>
+			<element name="response" type="tns:Response" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="Responses">
+		<sequence>
+			<element name="response" type="tns:Response"/>
+			<element name="nestedResponses" type="tns:NestedResponses" minOccurs="0"/>
+            <element name="businessRuleFailure" type="tns:RuleFailure" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+    <complexType name="RuleFailure">
+        <sequence>
+            <element name="ruleIdentifier">
+                <annotation>
+                    <documentation>Rule ID of the failed rule</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="reasonCode" minOccurs="0">
+                <annotation>
+                    <documentation>Rule ID of the failed rule</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="128"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="reasonDescription" minOccurs="0">
+                <annotation>
+                    <documentation>Rule ID of the failed rule</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+
+        </sequence>
+    </complexType>
+
+    <complexType name="WalletOperationResponse">
+		<annotation>
+			<documentation>wallet operation response
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="tns:BaseWalletOperationResponse">
+				<sequence>
+					<element name="banInfo" type="walletCommonTypes:BanInfo" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	<complexType name="BaseWalletOperationResponse">
+		<annotation>
+			<documentation>Base wallet operation response
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="responses" type="tns:Responses"/>
+		</sequence>
+	</complexType>
+	   <complexType name="FailureResponses">
+		<sequence>
+			<element name="validationFailure" type="tns:FailureResponse" minOccurs="0" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType name="FailureResponse">
+		<sequence>
+			<element name="errorCode">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="errorMessage">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+    <complexType name="CheckNegativeListReason">
+		<annotation>
+			<documentation>
+        		Reason for BAN to be in the negative list.
+      		</documentation>
+		</annotation>
+		<sequence>
+			<element name="code">
+				<annotation>
+					<documentation>
+						Reason code for BAN to be in negative list.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="comments">
+				<annotation>
+					<documentation>
+						Reason comment for BAN to be in negative list.
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+		<!--  JUNK from channelPolicy -->
+	<complexType name="WalletMaxPOs">
+        <sequence>
+            <element name="walletMaxPO" type="tns:WalletMaxPO" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="WalletMaxPO">
+        <sequence>
+            <element name="customerBrand" type="string">
+             <annotation>
+              <documentation>
+                subscriber brand can be Sprint
+                postpaid,Boost,VMU,ASW,SPP.
+              </documentation>
+        	 </annotation>
+            </element>
+            <element name="customerSubBrand" type="string">
+             <annotation>
+              <documentation>
+                Ban Account Type can be prepaid or postpaid
+              </documentation>
+             </annotation>
+            </element>
+            <element name="maxPOLimit" type="int"/>
+        </sequence>
+    </complexType>
+    <complexType name="WalletAllowedPOs">
+        <sequence>
+            <element name="walletAllowedPO" type="tns:WalletAllowedPO" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="WalletAllowedPO">
+        <sequence>
+            <element name="customerBrand" type="string"/>
+            <element name="customerSubBrand" type="string"/>
+            <element name="allowedPaymentMethod" type="tns:AllowedPaymentMethod" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="PaymentMinMaxAmounts">
+        <sequence>
+            <element name="paymentMinMaxAmount" type="tns:PaymentMinMaxAmount" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="PaymentAllowedPOs">
+        <sequence>
+            <element name="paymentAllowedPO" type="tns:PaymentAllowedPO" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="PaymentAllowedPO">
+        <sequence>
+        	<element name="customerBrand" type="string"/>
+            <element name="customerSubBrand" type="string"/>
+            <element name="transactionFor" type="tns:TransactionFor" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+     <complexType name="TransactionFor">
+        <sequence>
+            <element name="transactionForName" type="tns:TransactionForConstants"/>
+            <element name="paymentTypes" type="tns:AllowedPayMethodPaymentTypes"/>
+        </sequence>
+    </complexType>
+    <complexType name="AllowedPayMethodPaymentTypes">
+        <sequence>
+            <element name="paymentType" type="tns:AllowedPayMethodPaymentType" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="PaymentMinMaxAmount">
+        <sequence>
+            <element name="transactionForName" type="tns:TransactionForConstants"/>
+            <element name="paymentType" type="tns:PayLimitPaymentType" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="AllowedPayMethodPaymentType">
+        <sequence>
+            <element name="paymentTypeName" type="string"/>
+            <element name="allowedPaymentMethod" type="tns:AllowedPaymentMethod" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="PayLimitPaymentType">
+        <sequence>
+            <element name="paymentTypeName" type="string"/>
+            <element name="minAmount" type="decimal"/>
+            <element name="maxAmount" type="decimal"/>
+            <element name="ceilingAmount" type="decimal"/>
+        </sequence>
+    </complexType>
+    <complexType name="AllowedPaymentMethod">
+        <sequence>
+            <element name="paymentMethod" type="string"/>
+            <element name="paymentSubMethod" type="string" minOccurs="0" />
+        </sequence>
+    </complexType>
+    <simpleType name="TransactionForConstants" final="restriction">
+        <restriction base="string">
+            <enumeration value="BILL_PAY" />
+            <enumeration value="ACTIVATION" />
+            <enumeration value="HARD_GOODS" />
+            <enumeration value="MIXEDCART" />
+
+        </restriction>
+    </simpleType>
+</schema>

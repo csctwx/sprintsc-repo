@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/AppleDeviceManagementService/v1/AppleDeviceManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/AppleDeviceManagementService/v1/AppleDeviceManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="AppleDeviceManagementService.xsd3.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="AppleDeviceManagementService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="AppleDeviceManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/queryAppleDeviceStatus/v1/queryAppleDeviceStatus.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="faultmessage">
+<wsdl:part name="parameter" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="queryAppleDeviceStatusRequest">
+<wsdl:part name="parameter" element="xsns:queryAppleDeviceStatus" xmlns:xsns="http://integration.sprint.com/interfaces/queryAppleDeviceStatus/v1/queryAppleDeviceStatus.xsd"/></wsdl:message>
+<wsdl:message name="queryAppleDeviceStatusResponse">
+<wsdl:part name="parameter" element="xsns:queryAppleDeviceStatusResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAppleDeviceStatus/v1/queryAppleDeviceStatus.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="AppleDeviceManagementServicePortType">
+<wsdl:operation name="QueryAppleDeviceStatus">
+<wsdl:input name="QueryAppleDeviceStatusRequest" message="ns0:queryAppleDeviceStatusRequest"/>
+<wsdl:output name="QueryAppleDeviceStatusResponse" message="ns0:queryAppleDeviceStatusResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="AppleDeviceManagementServiceBinding" type="ns0:AppleDeviceManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryAppleDeviceStatus">
+<soap11:operation soapAction="QueryAppleDeviceStatus" style="document"/>
+<wsdl:input name="QueryAppleDeviceStatusRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAppleDeviceStatusResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="AppleDeviceManagementServiceService">
+<wsdl:port name="AppleDeviceManagementServicePortType" binding="ns0:AppleDeviceManagementServiceBinding">
+<soap11:address location="http://144.226.135.45:80/services/AppleDeviceManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

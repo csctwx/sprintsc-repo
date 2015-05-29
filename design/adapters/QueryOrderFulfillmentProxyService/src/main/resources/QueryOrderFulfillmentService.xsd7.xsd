@@ -1,0 +1,2469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountOrders/v1/queryAccountOrders.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountOrders/v1/queryAccountOrders.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="4.5">
+	
+<!-- Date              Author                      Version     Change                                                                           Rel                          SR# -->
+	
+<!--1/26/2008    Jennifer Carlton         1.1        Added version and change log.                                        SAP09.6.0.0          E1710.017-->
+	
+<!--1/26/2008    Jennifer Carlton         1.1        Added minLen 1 to ufmi, ipAddress, imsi, nai, httpttld       SAP09.6.0.0          E1710.017-->
+	
+<!--01/15/2010  Steve Heichelheim     2.0     initial version, added MVM standards and simple types         GBL10.3               PJ002207-->
+	
+<!--07/06/2010  Suneel Pathipati         3.0     Request fields are restructured and added new fields in response  GBL10.5   PJ003310-->
+	
+<!--08/16/2010  Steve Heichelheim     3.1    added device structure under additionalFilteringInfo in request, Added shipmentDate, trackingNumber, multipleShipmentInd, wareHouseFulfillmentInd under orderInfo in response GBL10.5   PJ003310-->
+	
+<!--08/16/2010  Steve Heichelheim     3.2    response added under orderInfo- referenceStoreId, referenceActivity, referenceOrderId GBL10.5   PJ003310-->
+	
+<!--08/25/2010 Suneel Pathipati         3.3  In response orderInfo - orderStatusShortDesc length changed to 100 and orderStatusDesc length increased to 1000                GBL10.5   PJ003310-->
+	
+<!--09/28/2010 Suneel Pathipati           4.0  added indirectSalesChannelInd, errorStatusInd in response under orderInfo  GBL11.1   PJ003599-->
+	
+<!--01/25/2011 Steve Heichelheim       4.1  added shippingVendorUrl and externalShippingVendor to the response       GBL11.1   PJ003599-->
+	
+<!--02/28/2011 Steve Heichelheim       4.2 Added orderFilteringInfo structure, Removed fetchOrderList, Added orderInfo.externalShippingVendor and shippingVendorUrl  GBL11.1   PJ003599-->
+	
+<!--03/10/2011 Steve Heichelheim       4.3 added orderSelectionInfo to orderFilteringInfo                              GBL11.2   PJ003599-->
+	
+<!--08/16/2011 Steve Whipple             4.4      CS#483518  added orderLevel element to orderInfo                GBL11.3   PJ003599-->
+	
+<!--11/07/2012 Azenith Benig              4.5  Added mdn, nameInfo structure, contactPhoneNumber, companyName and alternateMdn in additionalFilteringInfo structure of the request. Added ban in orderInfo of response.              GBL13.2 PJ007044-->
+	
+<!--14/08/2014 Dweepant Bakshi        4.6  Added ssn in the request.              MID14.3.3  PJ008475-->
+	
+<xs:element name="queryAccountOrders" type="tns:QueryAccountOrdersType"/>
+	
+<xs:element name="queryAccountOrdersResponse" type="tns:QueryAccountOrdersResponseType"/>
+	
+<xs:complexType name="QueryAccountOrdersType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains valid BAN identifiers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderList" type="tns:OrderFetchListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>structure to define filter criteria for retrieving orderList.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAccountOrdersResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="orderList" type="tns:OrderListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains 0 to 100 OrderInfo records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AdditionalFilteringInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="includePendingOrdersOnly" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>if set to true, then only pending orders will be retrieved.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="filterByOrderType" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Currently not supported (will be ignored even if provided in the input). For future use.
+E - Equipment Only
+S - Service Only
+U - Upgrade Orders
+A - New Line</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:choice minOccurs="0">
+				
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>if provided, limit the search to this particular subscriberId</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="device" type="tns:DeviceType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If provided the resulted order list will be limited to the orders containing input serialNumber in the order.
+Either subscriberId or device can be provided.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If provided, the resulting list wil be limited to orders having the given mdn.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="nameInfo" type="tns:NameInfoType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If provided, the resulting orders will be filtered with the specified name. Both the first name and last name are required when this is populated.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="companyName" type="tns:BillingAccountNameStringType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If populated, the resulting order will be filtered to orders with the given companyName.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="contactPhoneNumber" type="tns:PhoneNumberType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If provided, the resulting order list will be limited to the specified contactPhoneNumber.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="alternateMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+					
+<xs:annotation>
+						
+<xs:documentation>If provided, the resulting order list will be limited to the orders containing the alternateMdn.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DateRangeType">
+		
+<xs:sequence>
+			
+<xs:element name="fromDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field can be used to query orders with order date less than the date specified for this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="toDate" type="tns:EffectiveThruDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field can be used to query orders with order date greater than the date value specified for this field.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceType">
+		
+<xs:sequence>
+			
+<xs:element name="serialNumber" type="tns:EquipmentSerialNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.
+
+Equipment Serial Number is one of the following:
+
+Electronic Serial Number (ESN);
+
+Mobile Equipment IDentifier (MEID);
+
+International Mobile Equipment Identfier (IMEI);
+
+Subscriber Identify Module (SIM);
+
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialType" type="tns:EquipmentSerialNumberTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Equipment Serial Number Type classifies Equipment serial numbers as one of the following:  ESN, MEID, IMEI, SIM, or MSN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LineDetailInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subLineSequenceNumber" type="tns:OrderSubLineItemNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sub Line Sequence Number
+Sequence number of the sub line within an order line.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subLineStatus" type="tns:OrderStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subline Status
+
+for FAST line status is implied at sub line status.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PRIMARY_SUBSCRIBER_NUM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PRIMARY_PTN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="urbanId" type="tns:UrbanAreaIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>UFMI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fleetId" type="tns:FleetIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Fleet Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="memberId" type="tns:MemberIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Member Identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>IP_ADDRESS</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>NAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="msn" type="tns:ManufacturerSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>MSN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="esn" type="tns:DeviceSerialNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>ESN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialType" type="tns:EquipmentSerialNumberTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Valid values S - Sim, I - IMEI , E-ESN
+
+N/A</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imeiSim" type="tns:EquipmentSerialNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SIM_ID
+
+If IMEI - return IMEI, for MSN return MSN in MSN and SIM here</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>IMEI SIM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subLineStatusDesc" type="tns:OrderProcessingStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sub line status description.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LineDetailListType">
+		
+<xs:sequence>
+			
+<xs:element name="lineDetailInfo" type="tns:LineDetailInfoType" minOccurs="0" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NameInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="firstName" type="tns:FirstNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>First name of the BAN’s owner</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:LastNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Last name of the BAN’s owner</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderFetchListType">
+		
+<xs:sequence>
+			
+<xs:element name="fetchOrderLineDetails" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>if set to true, then orderLineDetails will be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderFilteringInfo" type="tns:OrderFilteringInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure can be used to specify if returned orders should be different than default (ensemble only).  Filter can allow requst to include all orders of specify orders to include by source.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalFilteringInfo" type="tns:AdditionalFilteringInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure can be used to specify the additional filters that need to be applied while querying for orders.
+E.q.,
+Retrieve specific subscriber impacting orders only.
+Retrieve pending orders only.
+Retrieve equipment orders only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paginationInfo" type="tns:PaginationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure can be used for pagination.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderFilteringInfoType">
+		
+<xs:choice>
+			
+<xs:element name="includeAllOrders" type="tns:FetchInformationFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to request Order information from FAST (for Order submitted through Sprint channels like FAST, TOES and Sprint.com) and from NOR for orders submitted through Amdocs Channels (FDT, SNAP).
+includeAllOrders and includeFastOrdersOnly are mutually exclusive.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderSelectionInfo" type="tns:OrderSelectionInfoType"/>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="OrderInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderKey" type="tns:OrderIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Key for Ensemble (STOREID-ACTIVITY_TYPE-ORDER_OID) and FAST.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderId" type="tns:OrderIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Ensemble ORDER_OID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderDate" type="tns:OrderEntryDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Entry Date holds the calendar date data is entered into a system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="estimatedDeliveryDate" type="tns:EstimatedDeliveryDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Estimated Delivery Date holds the calendar date computed by adding the Customer's specified Transit Days to the Estimated Ship Date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="storeId" type="tns:StoreIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Stoe Id identifies the store where the order was placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activityCode" type="tns:ActivityCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Activity code.  This will generally be ‘O’ for Order.
+B - Back Order
+E - Return Order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reason" type="tns:OrderReasonCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The reason of order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusCode" type="tns:OrderStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Status Code identifies the current state of the Order.
+
+ORDER_STATUS_CODE, FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subMarket" type="tns:CommunicationServiceAreaIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dealer" type="tns:DealerIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="location" type="tns:WarehouseFacilityIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The warehouse from which the order will ship.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderType" type="tns:OrderTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Type Code differentiates the various categories or subtypes of an Order.
+
+R - Regular
+B - Back Order
+P - Private
+
+N/A - FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationInd" type="tns:ApplicationCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Application Code indicates the application which was used in creating the order.
+
+F - FDT
+S - SNAP
+T - FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="otherCharge" type="tns:OtherChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Other Charge Amount contains the total charges associated with miscellaneous items.
+
+POS_ORDER.OTC_AMT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:TaxAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total tax amount.
+
+POS_ORDER.ACTV_TAX_AMT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceDepositAmount" type="tns:DepositAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The deposit amount
+
+POS_ORDER.DEPOSIT_AMOUNT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentAmount" type="tns:PaymentAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The amount paid
+
+POS_ORDER.PAY_IN_STR_AMT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalCharge" type="tns:TotalOrderChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total amount of order
+
+POS_ORDER.ACTV_AMT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="amountOnBill" type="tns:BillAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The amount of the bill.
+
+POS_ORDER.PAY_ON_BIL_AMT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="text" type="tns:OrderMessageTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Text, comments, or a message about the ORDER.
+
+POS_ORDER.ORDER_COMMENT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fastOrderInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Will be returned with value 'true' only for FAST orders.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatusId" type="tns:OrderProcessingStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>for Ensemble and FAST, indicates if the order is 
+0 - Pending 
+1 - Closed
+2 - Canceled </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatusShortDesc" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Status Short Messages. (provided by business for CMDS)
+E.g.,
+FDT:
+Activation Requested
+Cancelled
+Completed
+FAST:
+Cancelled. Refund in process.
+Additional info needed
+Cancelled
+In process.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:OrderProcessingStatusDescriptionType">
+						
+<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="orderStatusDesc" type="tns:OrderProcessingStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Status Description provided by business for CMDS.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="enterpriseOrderNumber" type="tns:SourceSystemOrderNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>OMIM Order ID
+Returned for both FAST and Ensemble orders
+
+ORDER_SHIPPING_LINE.THIRD_PARTY_REF_NUM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rmaAuthorizationNumber" type="tns:RmaAuthorizationNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>POS_ORDER.RMA_AUTH_NUM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatusDate" type="tns:EventDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>POS_ORDER.STATUS_DATE
+Latest Order Line Status Date for FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelId" type="tns:SalesChannelIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales Channel Idenifier through which order was placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelName" type="tns:SalesChannelNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SALE_LOCATION.SALE_CHANNEL_NAME</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="wareHouseLocationName" type="tns:WarehouseLocationNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>RMS_LOCATION.LOCATION_NAME</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="wareHouseLocationDesc" type="tns:WarehouseLocationDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>RMS_LOCATION.LOCATION_DESC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="backOrderPendingInd" type="tns:BinaryExpressionType" minOccurs="0"/>
+			
+<xs:element name="subAgent" type="tns:SubAgentNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Name of Sub Agent/Sales Rep who placed the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactFirstName" type="tns:FirstNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First name of contact name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactBusinessName" type="tns:BillingAccountNameStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact last name or business name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="purchaseOrderNumber" type="tns:PurchaseOrderNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>External Purchase Order number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shipmentDate" type="tns:ActualShipDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order shipment date. Returned only if order is shipped all at ones, if order has more than one shipping or no shipping, then this field will not be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="trackingNumber" type="tns:ShipmentTrackingNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order shipment tracking number. Returned only if entire order has single shipment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="multipleShipmentInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This flag will be set to true if order has more than one shipment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="wareHouseFulfillmentInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This flag will be set to true, if Sprint warehouse needs to fulfill the order (i.e., OMIM fulfillment is requested).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="referenceStoreId" type="tns:StoreIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Returned only for return orders if available (e.g., for return orders corresponding to FDT fulfillment orders)
+Part of the Order Identifier – identifies the store where the fulfillment order was placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="referenceActivity" type="tns:ActivityCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Returned only for return orders if available (e.g., for return orders corresponding to FDT fulfillment orders)
+Activity code.  This will generally be ‘O’ for Order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="referenceOrderId" type="tns:OrderIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Returned only for return orders if available (e.g., for return orders corresponding to FDT fulfillment orders)
+A unique order number for a store.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="indirectSalesChannelInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether the sales channel through which order was placed is a direct or indirect saleschannel. Will be set to true for indirect sales channels.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorStatusInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the status represents any error.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="externalShippingVendor" type="tns:ShippingVendorName" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Name of shipping vendor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingVendorUrl" type="tns:UniformResourceLocatorType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Link to vendor tracking</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderLineList" type="tns:OrderLineListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>An array containing the order lines information in the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderLevel" type="tns:ChargeLevelCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>'B' = Account Level
+'S' = Subscriber Level
+
+The orderLevel element is used to classify an order as an “account” order level or a “subscriber” order level. If there is any subscriber associated with an order then the order is considered a subscriber level order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderInfo" type="tns:OrderInfoType" minOccurs="0" maxOccurs="100"/>
+			
+<xs:element name="paginationInfo" type="tns:PaginationInfoResponseType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderLineType">
+		
+<xs:sequence>
+			
+<xs:element name="lineSequenceNumber" type="tns:OrderLineItemNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Sequence number of the line within an order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalSubscriberCount" type="tns:OrderSubscriberCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total number of subscribers to be activated in this order.
+
+number_of_subscribers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lineStatus" type="tns:OrderStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Line Status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:ModelNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Item Id of the equipment.
+
+equipment_id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalQuantity" type="tns:OrderItemQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total quantity of equipment in the order.
+
+quantity_req</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="priceCode" type="tns:EquipmentPriceCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Price code for the equipment
+
+PRICE_CODE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="unitPrice" type="tns:ChargeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unit price of the equipment.
+
+EQUIPMENT_CURR_PRICE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="calculatedPrice" type="tns:ChargeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Calculated price of the equipment.
+
+EQUIPMENT_CURR_PRICE - PROMOTION_AMOUNT</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlan" type="tns:ServiceOrderCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan for the subscriber.
+
+RATE_PLAN_DETAILS.RATE_PLAN_ID
+
+Pending Nitin validation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanDesc" type="tns:ServiceOrderDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Price Plan Description for the subscriber.
+
+RATE_PLAN_DETAILS.RATE_PLAN_NAME</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="commitmentTerm" type="tns:CommitmentMonthCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Commit term for the equipment.
+
+CONTRACT_TERM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Indicator of the Order Line.  'I' - iDEN, 'C' - CDMA
+
+NETWORK_IND</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="rebateCode" type="tns:RebateCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Holds rebate code returned from ARM Get Rebate Eligibility API
+
+REBATE_PLAN_CODE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="upgradeNewLineId" type="tns:UpgradeNewLineTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if line is upgrade or add-on.
+U - Upgrade
+A - Add On</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderServiceType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether order is Service only or Equipment and Service order.
+E - Equipment and Service
+S - Service Only</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ServiceTypeCodeType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="lineStatusId" type="tns:OrderProcessingStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>for NOR and FAST, indicates if the order is 
+0 - Pending 
+1 - Closed
+2 - Canceled </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lineStatusDesc" type="tns:OrderProcessingStatusDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Line Status description.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lineDetailList" type="tns:LineDetailListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing an array of order line details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderLineListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineInfo" type="tns:OrderLineType" minOccurs="0" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderSelectionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="includeEnsembleOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to request order information from Ensemble</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="includeFastOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to request Order information from FAST (for Order submitted through Sprint channels like FAST, TOES and Sprint.com).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="includeEquipmentClaimOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to request equipment claim orders (Asurion).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="includeAdvanceExchangeOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag to include Advance Exchange orders</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PaginationInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="pageNumber" type="tns:PageNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>the current page number of data being returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areMore" type="tns:MoreRecordsAvailableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>set to true indicates there are more pages to retrieve</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PaginationInfoType">
+		
+<xs:sequence minOccurs="0">
+			
+<xs:element name="dateRange" type="tns:DateRangeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing date period.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pageNumber" type="tns:PageNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If more than 100 orders are in system for the input dateRange or for default date range (if dateRange not specified) then areMore in the response will be returned as true, and pageNumber in request can be used to retrieve orders beyond first 100 and so on.
+Will be defaulted to 1. i.e., first 100 in the descending order of the order creation date will be returned if pageNumber is not specified in request.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberEnsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>'Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="device" type="tns:DeviceType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Device structure is used for serial number and/or serial type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UrbanFleetMemberIdentifierStringType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="ipAddress">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternetProtocolAddressStringType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="imsi">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternationalMobileSubscriberIdentityStringType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="nai">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. 
+
+The standard syntax is"user@realm". </xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:NetworkAccessIdentifierStringType">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk technology. The HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ssn" type="tns:SocialSecurityNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Social Security Number of customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ActivityCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activity Code uniquely identifies a specific deed, action or function.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ActualShipDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Actual Ship Date contains the calendar date the shipment actually occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Code indicates the application which was used in creating the order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>The total bill amount.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNameStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Name String holds the name assigned to the billing account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberEnsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeLevelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge Level Code designates which level the charge is applied at.
+B-ban level
+C-subscriber Level</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ChargeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommitmentMonthCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Commitment Month Count is the number of commitment months.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DealerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DepositAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Amount of deposit required.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentPoolCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Pool Code indicates whether a piece of equipment is new or used.
+Values:
+N - New
+U - Used</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="N"/>
+			
+<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentPriceCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Price Code designates the price code associated with the equipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  
+
+Network Device Identifier will contain one of the following: 
+Electronic Serial Number (ESN); 
+Mobile Equipment IDentifier (MEID);
+International Mobile Equipment Identfie (IMEI);
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EquipmentSerialNumberTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>EquipmentSerialNumberType is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EstimatedDeliveryDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Estimated Delivery Date holds the calendar date computed by adding the Customer's specified Transit Days to the Estimated Ship Date.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date is the calendar date on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FleetIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fleet Identifier is the second element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			
+<xs:documentation>alias: Surname</xs:documentation>
+			
+<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ManufacturerSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Manufacturer Serial Number is the manufacturer's electronic identifier for IDEN phones. Manufacturer Serial Number is a non-numeric string of alphabetic characters and decimal mumbers.
+
+Length 10 character string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Member Identifier is the third element of the DirectConnect UFMI number. The format of the UFMI number is: Urban User Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Name holds the Manufacturer's name for the class or model of  PRODUCT.</xs:documentation>
+			
+<xs:documentation>Model Name holds the Manufacturer's name for the class or model of  PRODUCT.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MoreRecordsAvailableFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="B"/>
+			
+<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderEntryDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Entry Date holds the calendar date data is entered into a system.</xs:documentation>
+			
+<xs:documentation>Order Entry Date holds the date the Order was entered into the system.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderItemQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Item Quantity holds the total number of units of the specified Product ID ordered in the ORDER ITEM instance.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderLineItemNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Text, comments, or a message about the ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Identifier uniquely identifies an order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderProcessingStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Processing Status Code designates the status of the order processing.
+Possible values include:  O – complete, X – not complete,  C – cancelled, W – sent to warehouse, P – Pending QA, F – fulfillment in progress, R partially complete, T activation completed,  V – sent to VAD</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderProcessingStatusDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Processing Status Description is a description of the status of the order processing.
+Possible values include:  O – complete, X – not complete,  C – cancelled, W – sent to warehouse, P – Pending QA, F – fulfillment in progress, R partially complete, T activation completed,  V – sent to VAD</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderReasonCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Code representing the reason for the ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Status Code identifies the current state of the Order.
+Values for Regular Orders:
+0  Future
+1  Backorder
+2  Allocated
+3  Pick Ticket Printed
+4  Pick Verified 
+6  Shipped
+C  Cancelled / Closed
+
+Values for RMA Orders:
+0  Authorized
+1  Received</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderSubLineItemNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Sub Line Item Number uniquely identifies an instance of Sub Line Item within the scope of an ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Subscriber Count is the number of subscribers to be activated for the order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+			
+<xs:documentation>Order Type Code identifies the ORDER as one of the following: 
+RG - Regular
+RM - RMA</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OtherChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Other Charge Amount contains the total charges associated with miscellaneous items.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PageNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Page Number of the records being displayed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment amount is the amount of an invoice's charges for which payments have been applied.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PurchaseOrderNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Purchase Order Number is a type of Order Number used to identify an instance of a PURCHASE ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RebateCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Rebate Code identifies a specific rebate.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RmaAuthorizationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>RMA Authorizatioin Number is a number returned from ASI which identifies the RMA authorization. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Name is the common name of a particular dealer sales channel.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Type Code indicates whether order is Service only or Equipment and Service order.
+Valid Values:
+E - Equipment and Service
+S - Service Only</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingVendorName">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Vendor Name is the  name of the shipping vendor.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShipmentTrackingNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Shipment Tracking Number is a unique number used by the shipping company to identify and trace freight shipments as they move through the shipment process to their destination. The shipping company automatically assigns a tracking number to the shipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SocialSecurityNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Social Security number (SSN) is a 9-digit number issued to citizens, permanent residents, and temporary (working) residents under section 205(c)(2) of the Social Security Act, codified as 42 U.S.C.§ 405(c)(2). The number is issued to an individual by the Social Security Administration, an agency of the U.S. Federal Government. Its primary purpose is to track individuals for taxation purposes. In recent years the SSN has become a de facto national identification number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SourceSystemOrderNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Source System Order Number holds the Order Number used in the system that generated the ORDER.  Source System Order Number is used in the source system as a across reference to the OMIM Order Number</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StoreIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Store Identifier identifies the store where the order was placed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubAgentNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sub Agent Name is the name of the Sub Agent for the order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="120"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>The total tax amount.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TotalOrderChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Total Charge Amount contains the total charges associated with the order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniformResourceLocatorType">
+		
+<xs:annotation>
+			
+<xs:documentation>Uniform Resource Locator (URL, previously Universal Resource Locator) - usually pronounced by sounding out each letter but, in some quarters, pronounced"Earl"- is the unique address for a file that is accessible on the Internet. A common way to get to a Web site is to enter the URL of its home page file in your Web browser's address line. However, any file within that Web site can also be specified with a URL. Such a file might be any Web (HTML) page other than the home page, an image file, or a program such as a common gateway interface application or Java applet. The URL contains the name of the protocol to be used to access the file resource, a domain name that identifies a specific computer on the Internet, and a pathname, a hierarchical description that specifies the location of a file in that computer.On the Web (which uses the Hypertext Transfer Protocol, or HTTP), an example of a URL is:http://www.ietf.org/rfc/rfc2396.txtwhich specifies the use of a HTTP (Web browser) application, a unique computer named www.ietf.org, and the location of a text file or page to be accessed on that computer whose pathname is /rfc/rfc2396.txt.A URL for a particular image on a Web site might look like this:http://searchnetworking.techtarget.com/WhatIs/images/coaxla.gifA URL for a file meant to be downloaded using the File Transfer Protocol (FTP) would require that the"ftp"protocol be specified like this hypothetical URL:ftp://www.somecompany.com/whitepapers/widgets.psA URL is a type of URI (Uniform Resource Identifier, formerly called Universal Resource Identifier.)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UpgradeNewLineTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Upgrade New Line Type Code indicates if a line is upgrade or add-on.
+Values:
+U - Upgrade
+A - Add On</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Area Identifier identifies an urban area in the UFMI.  It is the first element of the DirectConnect UFMI number. The format of the UFMI number is: Urban Area Id * Fleet Id * Member Id. Example 164*100*3441.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WarehouseFacilityIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>The warehouse from which the order will ship.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WarehouseLocationDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Warehouse Location Description is text describing a dealer warehouse location.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WarehouseLocationNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Warehouse Location Name is the common name for a dealer warehouse location.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

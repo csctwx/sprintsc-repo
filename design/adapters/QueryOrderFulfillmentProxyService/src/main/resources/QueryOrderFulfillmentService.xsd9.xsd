@@ -1,0 +1,1532 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryOrderList/v1/queryOrderList.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryOrderList/v1/queryOrderList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.5">
+	
+<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	
+<!--05/05/2009    Steve Heichelheim                    Removed enums and added min length 1 to OrderUpgradeCode and OrderPrivateBackorderCode                      CS#319132                -->
+	
+<!--08/12/2009    Suneel Pathipati           1.1        Removed extra layer of type definition for OrderEntryDate (i.e. instead of OrderEntryDate having type as EntryDate, it will have xs:date as type)       GBL9.3               CS#333234                -->
+	
+<!--11/07/2012    Azenith Benig               1.2     Added request fields - nameInfo structure, companyName, alternateMdn, creditCheckApplicationNumber - in info structure and orderSelectionInfo structure. This is for FAST orders only.           GBL13.2 PJ007044 -->
+	
+<!--01/15/2013    Azenith Benig               1.3     Changed PJ007044 from GBL13.1 to MID13.2. Added T (FAST) in applicationInd           GBL13.2 PJ007044 -->
+	
+<!--02/23/2013    Tracy Turner              1.4     Added optional creditCardInfo structure to request          GBL13.2 PJ007935 -->
+	
+<!--02/23/2013    Tracy Turner              1.4     Added optional apptConfirmationNumber to request          GBL13.2 PJ007935 -->
+	
+<!--05/30/2013    Azenith Benig             1.5     Added optional orderKey to response and set storeId,activity and orderId to optional in the response         GBL13.2 PJ007044 CS#607564 -->
+	
+<!--06/19/2013    Tracy Turner              1.6     BAN will always return for Ensemble but not always for FAST.  Making BAN on the response optional.        GBL13.2 PJ007935 CS#609830-->
+	
+<!--08/21/2013    LaRonna Tisdale        1.7     Changed corpId length from 10 to 16                IM1954113                       -->
+	
+<xs:element name="queryOrderList" type="tns:QueryOrderList"/>
+	
+<xs:element name="queryOrderListResponse" type="tns:QueryOrderListResponse"/>
+	
+<xs:complexType name="QueryOrderList">
+		
+<xs:sequence>
+			
+<xs:element name="blockNumber" type="tns:BlockNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Select the nth block of orders.  For example, in first call, user can get first 100 orders, in second call, user can specify blockNumber=2, then the 2nd block of orders (from 101 to 200) will be returned in this. If no blockNumber field is specified in the request then by default first 100 orders should be retrieved. Also, note that the data is dynamic – if in between first call and second call the data is changed in Ensemble, the second call will only give the latest snapshot data.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="info" type="tns:Info">
+				
+<xs:annotation>
+					
+<xs:documentation>info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderSelectionInfo" type="tns:OrderSelectionInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Selection Info Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryOrderListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="totalAvailableBlocks" type="tns:BlockNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Total available blocks of orders are going to be returned (Total No of Orders/100) - (Ceiling it to the next whole number. Ex: 401/100 = 4.01 (5), system should return 5 in totalAvailableBlocks field of response).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentBlock" type="tns:BlockNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Current Block value is going to be returned (Should be equal to the value specified in the blockNumber field of request structure)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderList" type="tns:OrderList">
+				
+<xs:annotation>
+					
+<xs:documentation>orderList structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountHolderName">
+		
+<xs:sequence>
+			
+<xs:element name="firstName" type="tns:FirstNameEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First name of the BAN/account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:BillingAccountNameString">
+				
+<xs:annotation>
+					
+<xs:documentation>Last name or business name of the BAN/Account.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CreditCardInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="cardMemberName" type="tns:PaymentCardHolderNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Name as it appears on credit card</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="last4Digits" type="tns:PaymentCardLast4DigitsType">
+				
+<xs:annotation>
+					
+<xs:documentation>Last 4 digits of credit card number (numeric string)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="Info">
+		
+<xs:sequence>
+			
+<xs:element name="storeId" type="tns:StoreIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifer for the store where the order was placed (part of the orderId).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sfaNumber" type="tns:SalesForceAutomationReferenceNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>External identifier – number tracked in the PeopleSoft system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN Identifer for the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberString" minOccurs="0"/>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Dealer for the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderDate" type="tns:OrderEntryDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date of Order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="purchaseOrderNumber" type="tns:PurchaseOrderNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer PO number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inventoryLocation" type="tns:StoreIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Location code from which order is fulfilled</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatus" type="tns:OrderProcessingStatusCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Current order status (e.g. W – sent to warehouse, F – fulfillment in progress)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderType" type="tns:OrderPrivateBackorderCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of order (R regular, B backorder, P rivate)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ssnTaxId" type="tns:SocialSecurityNumberEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>SSN or tax id of Ban</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactPhone" type="tns:MobileDirectoryNumberString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact Telephone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nameInfo" type="tns:NameInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This nameInfo structure can be used when includeFastOrders is true. The elements firstName and lastName must be populated when searching for orders.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="companyName" type="tns:BillingAccountNameStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Company Name. This must be accompanied by other criterion when used. This is available for FAST orders only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="alternateMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This  secondary MDN can be used when includeFastOrders flag is true.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCheckApplicationNumber" type="tns:CreditApplicationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This Credit Check Application Number field can be used when includeFastOrders is true.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="creditCardInfo" type="tns:CreditCardInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure can be used when includeFastOrders is true. All elements must be populated when searching for orders.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="apptConfirmationNumber" type="tns:ConfirmationNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Appointment Confirmation Number received from TimeTrade.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NameInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="firstName" type="tns:FirstNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact First Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastName" type="tns:LastNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact Last Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderInfo">
+		
+<xs:sequence>
+			
+<xs:element name="orderKey" type="tns:FastOrderKeyIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>FAST order key. This field is populated for FAST orders only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="storeId" type="tns:StoreIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Part of the Order Identifier – identifies the store where the order was placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activity" type="tns:OrderActivityCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Activity code.  This will generally be ‘O’ for Order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderId" type="tns:OrderIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique order number for a store.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="enterpriseOrderNumber" type="tns:SourceSystemOrderNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique order number returned by ASI/OMIM
+Will not be returned for :
+- Non-upgrade RMA second orders. 
+- All RMA first orders since it does not have a Warehouse Order Number.
+- All Motorola orders since they do not have a separate Warehouse Order Number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderDate" type="tns:OrderEntryDate">
+				
+<xs:annotation>
+					
+<xs:documentation>Date when the order was placed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderStatus" type="tns:OrderProcessingStatusCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Status of the order.  Possible values include:  O – complete, X – not complete,  C – cancelled, W – sent to warehouse, P – Pending QA, F – fulfillment in progress, R partially complete, T activation completed,  V – sent to VAD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>BAN Id associated with the order.  Conditional, always returns for Ensemble but not always for FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subMarket" type="tns:SubMarketCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The submarket of the dealer who placed the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dealerCode" type="tns:DealerIdentifierEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The dealer for the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="warehouseId" type="tns:WarehouseFacilityIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The warehouse or location the equipment is shipped from.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sentToWarehouseDate" type="tns:ShipDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The date when order was sent to warehouse </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="saleLocation" type="tns:StoreIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Location where the equipment was sold.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderType" type="tns:OrderPrivateBackorderCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="orderReason" type="tns:OrderReasonCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The reason code associated with the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactBusinessName" type="tns:BillingAccountNameString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact last name or business name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactFirstName" type="tns:FirstNameEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>First name of contact name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactEmail" type="tns:EmailAddressString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contact e-mail address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="contactPhone" type="tns:MobileDirectoryNumberString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone number of contact.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountHolderName" type="tns:AccountHolderName" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>accountHolderName structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="corpId" type="tns:CorporateBillingAccountNumberEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Corporate Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="devicePrice" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total dollar amount for the equipment not including taxes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shipmentCharge" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Shipment charge.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="additionalAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="taxAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total tax amount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subTotalAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sub Total dollar amount of the order including taxes – includes all credits, one time charges, and equipment charges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="depositAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Deposit amount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activationAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total activation charge amount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalCreditAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total credit amount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalAmount" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total dollar amount of the order including taxes – includes all credits, one time charges, and equipment charges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="paymentAmount" type="tns:PaymentAmount" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The payment amount (in store).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="amountOnBill" type="tns:Charge" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The amount transferred to the customer’s bill.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deliveredDate" type="tns:DeliveryDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The equipment delivery date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shippingVendor" type="tns:ShippingVendorIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Shipping vendor for the equipment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="shipmentInstructions" type="tns:ShippingInstructionsText" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Shipping instructions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cancelDate" type="tns:OrderCancelDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>If the order is cancelled, the cancel date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sfaNumber" type="tns:SalesForceAutomationReferenceNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>External Identifier number tracked on the PeopleSoft system.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="purchaseOrderNumber" type="tns:PurchaseOrderNumber" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The external Purchase Order number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalKits" type="tns:TotalNumberOfKitsQuantity" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The total number of kits in the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="workingUser" type="tns:ApplicationUserIdentifierEns" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>User who is working on the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="holdStatus" type="tns:OrderHoldFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether or not the order is on hold.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="backOrderInd" type="tns:BackOrderFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether or not the order is a back order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="backOrderPriority" type="tns:BackOrderPriorityLevel" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The priority of the back order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activationInd" type="tns:ProvisionBeforeShippingFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether or not activation is required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="upgradeInd" type="tns:OrderUpgradeCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates when the order is to be upgraded  (Now/Later).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="takeWithInd" type="tns:OrderTakeWithFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether or not the order is to be taken with the customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationInd" type="tns:OrderCreationApplicationCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sprint Nextel Activation Portal indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceSubmarket" type="tns:SubMarketCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>service submarket at the order level</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="externalShippingVendor" type="tns:ShippingVendorIdentifier" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>asiShippingVendor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="estimatedDeliveryDate" type="tns:EstimatedDeliveryDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>POS_ORDER.ESTIM_DELIVER_DATE </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderList">
+		
+<xs:sequence>
+			
+<xs:element name="orderInfo" type="tns:OrderInfo" minOccurs="0" maxOccurs="100">
+				
+<xs:annotation>
+					
+<xs:documentation>A sequence of 0 to 100 orderInfo structures.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderSelectionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="includeEnsembleOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is a flag to indicate that resulting orders will be from Ensemble.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="includeFastOrders" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is a flag indicating that the order information will contain orders from FAST</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNameStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Name String holds the name assigned to the billing account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confirmation Number is a unique identifier that is assigned for the purpose of confirming an event.  </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="150"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CreditApplicationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Credit Application Identifier is a unique identifier of a specific application for credit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FastOrderKeyIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fast Order Key Identifier is an order identifier provided by FAST Fulfillment and Activation Service Tool.  FAST is a browser-based order processing system designed to service, fulfill, and activate phone and accessory orders generated by various Nextel sales channels. The queue-based workflow allows users in different areas of the country to simultaneously process customer orders that are in different stages of the fulfillment and activation lifecycle.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+			
+<xs:pattern value="[a-z]{2}-[a-z0-9]{4,5}-\d+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LastNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+			
+<xs:documentation>alias: Surname</xs:documentation>
+			
+<xs:documentation>alias: Family Name</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardHolderNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Member Name holds the name that appears on the Payment Card.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentCardLast4DigitsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Card Last 4 Digits is the last four digits of the payment card number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--MVM Simple Types (Not standardized)-->
+	
+<xs:simpleType name="AccountNumberInt">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AccountNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationUserIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Ensemble Application User Identifier uniquely identifies the PARTY invoking the Ensemble interface transaction.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="65"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BackOrderFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Back Order Flag inidcates whether the specified Inventory Item is in stock and available for shipment or out of stock and not available for shipment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BackOrderPriorityLevel">
+		
+<xs:annotation>
+			
+<xs:documentation>Back Order Priority Level indicates the relative priority of a back order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNameString">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Name String holds the name assigned to the billing account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:AccountNumberInt">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BlockNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Block Number is an integer that represents the n-th block of results to be returned from the associated request.  For example, in first call, user can get first 200 structures, in second call, user can specify blockNumber=2, then the 2nd block of requested structures (from 201 to 400) will be returned . If the blockNumber is sent and there is not enough number of structures for the given request, no structure will be returned. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="Charge">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CorporateBillingAccountNumberEns">
+		
+<xs:restriction base="tns:AccountNumberString">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DealerIdentifierEns">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeliveryDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Delivery Date holds the calendar date of the actual delivery.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			
+<xs:documentation>An email address consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EstimatedDeliveryDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Estimated Delivery Date holds the calendar date computed by adding the Customer's specified Transit Days to the Estimated Ship Date.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstName">
+		
+<xs:annotation>
+			
+<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FirstNameEns">
+		
+<xs:restriction base="tns:FirstName">
+			
+<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierInt">
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierInteger">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier Integer  holds an Integer value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xs:documentation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderActivityCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Activity Code identifies a particular activity associated with an order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderCancelDate">
+		
+<xs:annotation>
+			
+<xs:documentation>The date when the order was cancelled.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderCreationApplicationCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Creation Application Code indicates the application which was used in creating the order.
+Values:
+S - SNAP
+F - FDT
+T - FAST</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="S">
+				
+<xs:annotation>
+					
+<xs:documentation>SNAP</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="F">
+				
+<xs:annotation>
+					
+<xs:documentation>FDT</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="T">
+				
+<xs:annotation>
+					
+<xs:documentation>FAST</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderEntryDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Entry Date holds the calendar date data is entered into a system.</xs:documentation>
+			
+<xs:documentation>Order Entry Date holds the date the Order was entered into the system.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderHoldFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Hold Flag is a boolean indicator of whether an order is on hold.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Identifier is a 9 digit integer that uniquely identifies an order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierInteger">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Number uniquely identifies an instance of ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderPrivateBackorderCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Private Backorder Code designates whether the order is private, backorder, or regular.
+Values:
+R - regular
+P – private
+B - Backorder</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderProcessingStatusCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Processing Status Code designates the status of the order processing.
+Possible values include:  O – complete, X – not complete,  C – cancelled, W – sent to warehouse, P – Pending QA, F – fulfillment in progress, R partially complete, T activation completed,  V – sent to VAD</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderReasonCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Reason Code is a unique identifier of an explanation, justification or statement of motive for placement of an order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderTakeWithFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Take With Flag indicates whether or not the customer will take the order with them.
+true - customer will take order with them
+false - customer will NOT take order with them</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderUpgradeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Upgrade Code indicates when the order is to be upgraded (Now/Later).
+Values:
+N - Now
+L - Later</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PaymentAmount">
+		
+<xs:annotation>
+			
+<xs:documentation>Payment Amount represents a dollar amount of funds paid for goods and services.</xs:documentation>
+			
+<xs:documentation>Price represents the amount of money set as consideration for the sale of a specified GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="11"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProvisionBeforeShippingFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Provision Before Shipping Flag identifies orders where the Wireless Network Access Device should be provisioned to the network before they are shipped (Hot Phones)
+
+Values:
+'Y' - Yes, provision Wireless Network Access Device before shipping.
+'N' - No, DO NOT provision Wireless Network Access Device before shipping.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="Y"/>
+			
+<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PurchaseOrderNumber">
+		
+<xs:restriction base="tns:OrderNumber">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesForceAutomationReferenceNumber">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShipDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Ship Date contains the calendar date the shipment leaves the warehouse.
+
+Elements declared to be of type date must follow this form:  CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+			
+<xs:documentation>Ship Date contains the calendar date the shipment leaves the warehouse.
+
+Elements declared to be of type date must follow this form:  CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingInstructionsText">
+		
+<xs:annotation>
+			
+<xs:documentation>Shippig Instructions Text is a free text field which holds any special instructions for shipping. Relevant when the shippingMethod is 'shipping'.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ShippingVendorIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Shipping Vendor Identifier is a unique identifier of the shipping vendor for an order.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SocialSecurityNumberEns">
+		
+<xs:restriction base="tns:IdentifierInt">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SourceSystemOrderNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Source System Order Number holds the Order Number used in the system that generated the ORDER.  Source System Order Number is used in the source system as a across reference to the OMIM Order Number</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:OrderNumber">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StoreIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Store Identifier identifies a specfic retail store, a telesales store, or a virtual store like an Online store, etc. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TotalNumberOfKitsQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>Quantity represents a total amount or number.</xs:documentation>
+			
+<xs:documentation>Total Number Of Kits Quantity holds the number of kits the Inventory Work Order will assemble or disassmble.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="65"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WarehouseFacilityIdentifier">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

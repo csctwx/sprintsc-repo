@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp1 (http://www.altova.com) by LEE VAN AALSBURG (SPRINT) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://integration.sprint.com/interfaces/cancelCashRecharge/v1/cancelCashRecharge.xsd" targetNamespace="http://integration.sprint.com/interfaces/cancelCashRecharge/v1/cancelCashRecharge.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	<!-- Change Log 
+       10/02/2009 - David Fultz - Update - SC #8403393 CS TKT: #340467 - v1.3
+		- rechargeId - changed from required to optional within complexType CancelCashRechargeMethodInfo
+		- removed superfluous/unused complexType cancelCashRechargeInfo
+       05/19/2009 - David Fultz - Update - SC #7689890 CS TKT: #000000 - v1.2
+		- SimpleType, PcnName length changed from 9 to 50.
+       02/12/2009 - David Fultz - Created - CS TKT: #308248 - v1.1
+		- Most of the enumerations have been removed since they are controlled by reference	tables which would change dynamically based on the needs of the business. At any given point in time, the	reference tables must be the sysem-of-record for current value sets.
+-->
+	<xsd:element name="cancelCashRecharge" type="CancelCashRechargeRequest"/>
+	<xsd:element name="cancelCashRechargeResponse" type="CancelCashRechargeResponse"/>
+	<xsd:complexType name="CancelCashRechargeRequest">
+		<xsd:sequence>
+			<xsd:element name="channelInfo" type="ChannelInfo"/>
+			<xsd:element name="cancelCashRechargeMethodInfo" type="CancelCashRechargeMethodInfo"/>
+			<xsd:element name="bucketInfo" type="BucketInfo"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CancelCashRechargeResponse">
+		<xsd:sequence>
+			<xsd:element name="accumulationAmountsInfo" type="AccumulationAmountsInfo" minOccurs="0"/>
+			<xsd:element name="rechargeAmountsInfo" type="RechargeAmountsInfo" minOccurs="0"/>
+			<xsd:element name="rechargeBalanceExpirationInfo" type="RechargeBalanceExpirationInfo" minOccurs="0"/>
+			<xsd:element name="rechargeBucketInfo" type="RechargeBucketInfo" minOccurs="0"/>
+			<xsd:element name="rechargeDatesInfo" type="RechargeDatesInfo" minOccurs="0"/>
+			<xsd:element name="rechargeIdentityInfo" type="RechargeIdentityInfo" minOccurs="0"/>
+			<xsd:element name="rechargeLogInfo" type="RechargeLogInfo" minOccurs="0"/>
+			<xsd:element name="rechargeStatusInfo" type="RechargeStatusInfo" minOccurs="0"/>
+			<xsd:element name="rechargeSubscriberInfo" type="RechargeSubscriberInfo" minOccurs="0"/>
+			<xsd:element name="rechargeTypeInfo" type="RechargeTypeInfo" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ChannelInfo">
+		<xsd:sequence>
+			<xsd:element name="referenceId" type="SalesChannelId">
+				<xsd:annotation>
+					<xsd:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="locationCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Location Code is used to indicate a type of Location.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:string">
+						<xsd:maxLength value="15"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			</xsd:element>
+			<xsd:element name="merchantId" type="MerchantIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="preauthorizationRequestId" type="PreauthorizationId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Preauthorization Id uniquely identifies a specific instance of a Preauthorization Request.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="retailerId" type="RetailStoreIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+Examples: 001859, 1165, 0649)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tspTransactionId" type="TransactionIdentifier">
+				<xsd:annotation>
+					<xsd:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance it is the TSP (cash recharge application) internal transaction ID.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="BucketInfo">
+		<xsd:sequence>
+			<xsd:element name="bucketId" type="BucketId">
+				<xsd:annotation>
+					<xsd:documentation>Bucket ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="CancelCashRechargeMethodInfo">
+		<xsd:sequence>
+			<xsd:element name="paymentSourceId" type="PaymentSourceIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Payment Source Identifier uniquely identifies the PARTY who submitted the Payment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentSourceType" type="PaymentMethodCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Payment Method Code represents the unique identifier used to identify a method used to pay for services or products. Valid values are:
+
+ D – Direct Debit
+C – Credit Card
+O – Online
+R – RPM
+I – Interval
+H – OC_Charge
+B – Billing
+A - AR
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeId" type="RechargeId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Id uniquely identifies this specific cancellation Recharge.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="requestType" type="RequestType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Request Type is used to indicate the type of Cancel Request being made.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AccumulationAmountsInfo">
+		<xsd:sequence>
+			<xsd:element name="additionalBonusAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Additional Bonus Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="createChargeAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Create Charge Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="debitAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Debit Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="installmentAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Installment Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="loanAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Loan Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="reduceAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Reduce Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="regularBonusAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Regular Bonue Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeAmountsInfo">
+		<xsd:sequence>
+			<xsd:element name="inputAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Input Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="inputCurrency" type="CurrencyCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="olcAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Online change amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="olcBalance" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Online Charge Balance</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="olcNewBalance" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Online Charge New Balance</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeChannelAmount" type="MonetaryAmountDouble" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Chanel Amount</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeBalanceExpirationInfo">
+		<xsd:sequence>
+			<xsd:element name="balanceExpirationDateCalculated" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Represents the calculate calendar date and time when the Balance will Expire.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeNumberOfDays" type="RechargeNumberOfDays" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge number of days.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeBucketInfo">
+		<xsd:sequence>
+			<xsd:element name="balanceExpirationDate" type="ExpirationDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Balance Expiration Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="billingAccountNumber" type="BillingAccountNbrEns" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="billingArrangement" type="BillingArrangement" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Billing Arrangement</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="bucketId" type="BucketId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Bucket ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="crmExternalId" type="CrmExternalId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Crm External Id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="currency" type="CurrencyCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="customerId" type="CustomerID" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cancellationDate" type="EndDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cancellation Date holds the calendar date and time of the cancellation.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pcn" type="Pcn" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>The unique reference to the CSM payment account </xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pcnName" type="PcnName" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>PCN Name</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeDatesInfo">
+		<xsd:sequence>
+			<xsd:element name="logicalDate" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Logical Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="processDate" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Process Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeReferenceDate" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Reference Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeRequestDate" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Required Date</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeIdentityInfo">
+		<xsd:sequence>
+			<xsd:element name="bucketKey" type="BucketKey" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Bucket Key</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="periodKey" type="PeriodKey" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Period Key</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeId" type="RechargeId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Id uniquely identifies this specific Recharge.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeLogInfo">
+		<xsd:sequence>
+			<xsd:element name="cdMainId" type="CdMainId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cd Main ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cdUniqueId" type="CdUniqueId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cd Unique Id</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="cdValues" type="CdValues" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cd Values</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="clientTimeStamp" type="xsd:long" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Client Time Stamp</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="adjustmentComment" type="RemarkText" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Comments related to the adjustment.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="csrId" type="CsrId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Uniquely identifes a Client Service Representative.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="merchantId" type="MerchantIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentCardAcknowledgement" type="PaymentCardAcknowledgementCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Payment Card Acknowledgement Code contains the Paymentech acknowleldgement code from the offline credit card settlement response file.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="paymentCardAuthorizationNumber" type="PaymentCardAcknowledgementNumber" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Payment Card Acknowledgment Number contains a unique authorization number generated by the Paymentech online credit card settlement system.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeToSumInd" type="RechargeToSumIndicator" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Indicates if the recharge amount was added in RPL9_RCG_ACC_AMT table by the recharge summary job.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="retailerId" type="RetailStoreIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+Examples: 001859, 1165, 0649)</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="tspTransactionId" type="TransactionIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance it is an internal number generated by the TSP application.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="alternateTransactionId" type="TransactionIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface. In this instance it is an internal number generated by Vesta</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="radTimeStamp" type="xsd:long" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Rad Time Stamp</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rmdMainId" type="RechargeMethodIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Replenishment Method Main ID</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rmdValues" type="RechargeMethodValues" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Replenishment Method values.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rplTimeStamp" type="xsd:long" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Rpl Time Stamp</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="subscriberIdValues" type="SubIdValues" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Sub ID Values</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeStatusInfo">
+		<xsd:sequence>
+			<xsd:element name="cancelRechargeType" type="CancelRechargeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Cancel Recharge Type identifies the type of Recharge. Valid values are:
+
+'F' - Force
+'R' - Request</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="channelDetailsCancelRefId" type="ChannelCancelReferenceId" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Channel Cancel Reference ID uniquely identifies an instance of a Channel details cancel.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="lastStatusUpdate" type="EventDateTime" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Last Status Update contains the calendar date and time when the Status was last updated.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeStatus" type="RechargeStatusCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Status Code identifies the current state of the recharge. Valid values are:
+
+'V' - Valid
+'C' - Cancelled
+''S' - Suspend
+'R' - Restored
+'I' - Internal
+'P' - Pending</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="releaseRechargeId" type="ReleaseRechargeIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Release Recharge Identifer uniquely identifes an instance of a Release Recharge.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="releaseRechargeType" type="ReleaseRechargeType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Release Recharge Type identifies the type of release recharge. Valid values are:
+
+'N' - None
+'M' - Main Recharge
+'P' - Part of Recharge</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeSubscriberInfo">
+		<xsd:sequence>
+			<xsd:element name="subscriberInfo" type="SubscriberInfo" minOccurs="0"/>
+			<xsd:element name="subscriberBrand" type="WirelessDeviceModeCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Wireless Device Mode Code is a code used to identify the wireless network technology used by the device.
+
+Possible values:
+"UbB" - Code Division Multiple Access (CDMA) Prepaid
+"PRM" - Integrated Digital Enhanced Network (IDEN) Prepaid</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="subscriberNumber" type="SubscriberNumber" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Subscriber Number</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="RechargeTypeInfo">
+		<xsd:sequence>
+			<xsd:element name="channelCode" type="ChannelCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Channel Code. Valid values are:
+
+VP
+VB
+VR
+VI
+VS
+OL
+CS</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="methodCode" type="RechargeMethodCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Method Code identifies the method used for the Recharge. Valid values are:
+
+VOT
+VRA
+VASP
+VARC
+VMRC
+VLBE
+PCRC</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="methodGroup" type="RechargeMethodGroupIdentifier" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Method Group Identifier uniquely identifes a grouping of Recharge Methods.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="methodType" type="RechargeMethodType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Identifies the Recharge Method. Valid values are:
+
+IN – Increase
+NN – None
+RD - Reduce
+</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="rechargeType" type="RechargeTypeCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Recharge Type Code identifies the type of Recharge. Valid Values are:
+
+R – Regular
+S – Split</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="splitRechargeSequence" type="SequenceNumber" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Split Recharge Sequence is used to identify a specific portion of a Recharge when it is divided into multiple parts.</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:simpleType name="AccountNumberInt">
+		<xsd:restriction base="xsd:int"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="BillingAccountNbrEns">
+		<xsd:annotation>
+			<xsd:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="AccountNumberInt"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="CustomerID">
+		<xsd:annotation>
+			<xsd:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="EndDateTime">
+		<xsd:annotation>
+			<xsd:documentation>End Date Time holds the calendar date and time of the cessation of a course of action, pursuit, or activity.</xsd:documentation>
+			<xsd:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:dateTime"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="IdentifierInteger">
+		<xsd:annotation>
+			<xsd:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xsd:documentation>
+			<xsd:documentation>Identifier Integer  holds an Integer value that uniquely identifies an instance of an object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="IdentifierString">
+		<xsd:annotation>
+			<xsd:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xsd:documentation>
+			<xsd:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="MerchantIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MobileDirectoryNumberString">
+		<xsd:annotation>
+			<xsd:documentation>North American Numbering Plan (NANP) Telecom Number, is the 10 digit telephone number comprised of the NPA Number, the NXX Number and the Phone Line Number</xsd:documentation>
+			<xsd:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MonetaryAmountDouble">
+		<xsd:restriction base="xsd:double"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="NoteText">
+		<xsd:annotation>
+			<xsd:documentation>Text of the note.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="1000"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PartyID">
+		<xsd:annotation>
+			<xsd:documentation>Party Identifier contains a value that uniquely identifies an INDIVIDUAL or ORGANIZATION Sprint wishes to track for business reasons as a PARTY.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaymentMethodCode">
+		<xsd:annotation>
+			<xsd:documentation>Payment Method Code represents the unique identifier used to identify a method used to pay for services or products.
+</xsd:documentation>
+			<xsd:documentation>Payment Method Code identifies the method used by the customer to pay for services or products.
+
+Values:
+Check By Phone
+Credit Card
+Bill To Account</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaymentSourceIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Payment Source Identifier uniquely identifies the PARTY who submitted the Payment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="240"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RemarkText">
+		<xsd:annotation>
+			<xsd:documentation>Remark Text is a NOTE containing textual comment.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="NoteText">
+			<xsd:maxLength value="250"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SalesChannelId">
+		<xsd:annotation>
+			<xsd:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="PartyID">
+			<xsd:maxLength value="45"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="StatusCode">
+		<xsd:annotation>
+			<xsd:documentation>Status Code</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="TransactionIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Transaction Identifier uniquely identifies a grouping of  records moving across an interface.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TypeCode">
+		<xsd:annotation>
+			<xsd:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="WirelessDeviceModeCode">
+		<xsd:annotation>
+			<xsd:documentation>Wireless Device Mode Code is a code used to identify the wireless network technology used by the device.
+
+Possible values:
+"UbB" - Code Division Multiple Access (CDMA) Prepaid
+"PRM" - Integrated Digital Enhanced Network (IDEN) Prepaid</xsd:documentation>
+			<xsd:documentation>Wireless Device Mode Code is a Sprint defined code used to identify the wireless network technology used by the device.
+
+Possible values:
+"A" - Advanced Mobile Phone Service (AMPS)
+"C" - Code Division Multiple Access (CDMA)
+"D" - CDMA and AMPS
+"T" - Time Division Multiple Access (TDMA)
+"I" - Integrated Digital Enhanced Network (IDEN)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="6"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--Simple Types below were added and not in the MVM or Ensemble Simple Types-->
+	<xsd:simpleType name="BillingArrangement">
+		<xsd:annotation>
+			<xsd:documentation>Billing Arrangement</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="BucketId">
+		<xsd:annotation>
+			<xsd:documentation>Bucket Id uniquely identifes a specific instance of a Bucket.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="BucketKey">
+		<xsd:annotation>
+			<xsd:documentation>Bucket Key</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierShort"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ChannelCancelReferenceId">
+		<xsd:annotation>
+			<xsd:documentation>Channel Cancel Reference ID uniquely identifies an instance of a Channel details cancel.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="45"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CancelRechargeType">
+		<xsd:annotation>
+			<xsd:documentation>Cancel Recharge Type identifies the type of Recharge.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CdMainId">
+		<xsd:annotation>
+			<xsd:documentation>CD Main ID</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="45"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CdUniqueId">
+		<xsd:annotation>
+			<xsd:documentation>CD Unique ID</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="80"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CdValues">
+		<xsd:annotation>
+			<xsd:documentation>CD Values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="400"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ChannelCode">
+		<xsd:annotation>
+			<xsd:documentation>Channel Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:length value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CrmExternalId">
+		<xsd:annotation>
+			<xsd:documentation>CRM External ID</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="CsrId">
+		<xsd:annotation>
+			<xsd:documentation>CSR ID uniquely identifies a specific Customer Service Representative.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="CurrencyCode">
+		<xsd:annotation>
+			<xsd:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="EventDateTime">
+		<xsd:annotation>
+			<xsd:documentation>Event Date is the calendar date and time on which an event occurred.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:dateTime"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ExpirationDateTime">
+		<xsd:annotation>
+			<xsd:documentation>Expiration Date Time holds the last calendar Date and Time an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xsd:documentation>
+			<xsd:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:dateTime"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="IdentifierShort">
+		<xsd:annotation>
+			<xsd:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.</xsd:documentation>
+			<xsd:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:short"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="LocationCode">
+		<xsd:annotation>
+			<xsd:documentation>Location Code is used to indicate a type of Location.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:maxLength value="15"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaymentCardAcknowledgementCode">
+		<xsd:annotation>
+			<xsd:documentation>Payment Card Acknowledgement Code contains the Paymentech acknowleldgement code from the offline credit card settlement response file.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PaymentCardAcknowledgementNumber">
+		<xsd:annotation>
+			<xsd:documentation>Payment Card Acknowledgment Number contains a unique authorization number generated by the Paymentech online credit card settlement system.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Pcn">
+		<xsd:annotation>
+			<xsd:documentation>The unique reference to the CSM payment account </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PcnName">
+		<xsd:annotation>
+			<xsd:documentation>PCN Name</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PeriodKey">
+		<xsd:annotation>
+			<xsd:documentation>PeriodKey</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierShort"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PreauthorizationId">
+		<xsd:annotation>
+			<xsd:documentation>Preauthorization Id uniquely identifies a specific instance of a Preauthorization Request.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="PrimaryResourceType">
+		<xsd:annotation>
+			<xsd:documentation>Primary Resource Type indicates the type of indentifer that is used to identify the Resource.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:maxLength value="4"/>
+			<xsd:enumeration value="MDN"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeId">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Id uniquely identifies this specific Recharge.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeMethodIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Method Identifer identifies the Recharge Method.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="45"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeMethodCode">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Method Code identifies the method used for the Recharge. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:maxLength value="4"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeMethodGroupIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Method Group Identifier uniquely identifes a grouping of Recharge Methods.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierString">
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeMethodType">
+		<xsd:annotation>
+			<xsd:documentation>Identifies the Recharge Method. Valid values are:
+
+IN – Increase
+NN – None
+RD - Reduce
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:maxLength value="2"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeMethodValues">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Method Values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="400"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeNumberOfDays">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Number of Days</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeStatusCode">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Status Code identifies the current state of the recharge. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="StatusCode">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeToSumIndicator">
+		<xsd:annotation>
+			<xsd:documentation>Indicates if the recharge amount was added in RPL9_RCG_ACC_AMT table by the recharge summary job.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RechargeTypeCode">
+		<xsd:annotation>
+			<xsd:documentation>Recharge Type Code identifies the type of Recharge.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ReleaseRechargeIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Release Recharge Identifer uniquely identifes an instance of a Release Recharge.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="IdentifierInteger"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ReleaseRechargeType">
+		<xsd:annotation>
+			<xsd:documentation>Release Recharge Type identifies the type of release recharge.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RequestType">
+		<xsd:annotation>
+			<xsd:documentation>Request Type is used to indicate the type of Request being made.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="TypeCode">
+			<xsd:length value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="RetailStoreIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+
+Examples: 001859, 1165, 0649)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="50"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SequenceNumber">
+		<xsd:annotation>
+			<xsd:documentation>Sequence Number identifies the numeric value that is given to a file or record as it is sequentially created. The first file or record will start with 0001 and continue incrementing until a specified maximum value is reached (if a maximum is defined). One use of this element is to assist in identifying missing files.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SubIdValues">
+		<xsd:annotation>
+			<xsd:documentation>Sub Id Values</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="80"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SubscriberNumber">
+		<xsd:annotation>
+			<xsd:documentation>Subscriber Number</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer"/>
+	</xsd:simpleType>
+	<xsd:complexType name="SubscriberInfo">
+		<xsd:choice>
+			<xsd:element name="mdn" type="MobileDirectoryNumberString">
+				<xsd:annotation>
+					<xsd:documentation>North American Numbering Plan (NANP) Telecom Number, is the 10 digit telephone number comprised of the NPA Number, the NXX Number and the Phone Line Number</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+</xsd:schema>

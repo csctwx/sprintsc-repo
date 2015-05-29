@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/common/header/WSMessageHeader/v1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/common/header/WSMessageHeader/v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<xs:element name="wsMessageHeader">
+		
+<xs:complexType>
+			
+<xs:sequence>
+				
+<xs:element name="trackingMessageHeader" type="TrackingMessageHeaderType">
+					
+<xs:annotation>
+						
+<xs:documentation>SOAP header interface to carry data elements that are relevant to tracking, reporting, troubleshooting, and non-repudiation.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+			
+<xs:anyAttribute namespace="##any" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	
+<xs:complexType name="TrackingMessageHeaderType">
+		
+<xs:sequence>
+			
+<xs:element name="consumerId" type="xs:string">
+				
+<xs:annotation>
+					
+<xs:documentation>The ID of the corporate entity or busines unit from which this message originated (e.g. Corporation code or Portal applId).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationId" type="xs:string">
+				
+<xs:annotation>
+					
+<xs:documentation>The ID of the application within the corporate entity from which this message originated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="messageId" type="xs:string">
+				
+<xs:annotation>
+					
+<xs:documentation>A unique identifier for this message, to enable tracking, reporting, and correlation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="conversationId" type="xs:string" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Each message is part of a conversation between two or more systems in a given session.  The Conversation ID is a UID, which can be used to group all messages exchanged within a session.  This is field is primarily used for tracking, reporting, root-cause-analysis, and non-repudiation.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="timeToLive" type="xs:integer">
+				
+<xs:annotation>
+					
+<xs:documentation>Specifies how long in seconds this message is relevant after the message timestamp. The calling application can time-out after 'timeToLive' seconds.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="messageDateTimeStamp" type="xs:dateTime">
+				
+<xs:annotation>
+					
+<xs:documentation>The dateTimeStamp of when the message was created.  This can be used for tracking and reporting and also by the consuming application to determine if the message is stale.  Timestamp should be in GMT TZ when the caller is unable to format with timezone and offset. e.g. 2007-10-01T14:20:33 is acceptable</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

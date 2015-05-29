@@ -1,0 +1,2079 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.9">
+	
+<xs:include schemaLocation="QuerySubscriberInfoService.xsd12.xsd"/>
+	
+<!-- Date              Author                    Version     Change                                                                      Rel                  SR# -->
+	
+<!--1/30/2009    Suneel Pathipati      1.1               Added version and change log                                May09Gbl          E1710.017 -->
+	
+<!--1/30/2009    Suneel Pathipati      1.1               Added new elements                                               May09Gbl          E1710.017 -->
+	
+<!--The following elements were added:  lbsInd, hpptId, hpptIdType, recurringCharge, specialInd, taxExclusionInd, prepaidPlanPolicySet, addOnSocStatus -->
+	
+<!--04/20/2009  Jocelen Silva            1.2              Changed imsi type in the request                              GBL9.2             CS#317763 -->
+	
+<!--10/02/2009  Suneel Pathipati       1.3              Under ltsList maxOccurence for SubscriberList is changed to 1 and for subscriberInfo max occurence is changed to 50                              GBL9.4             CS#340524 -->
+	
+<!--07/07/2010  Dweepant Bakshi    1.4              FetchSocListType changed extension from FetchInformationFlagType to xs:boolean GBL 10.3 Prod Fix SC#9227591 CS# 397433 -->
+	
+<!--08/18/2010  Dweepant Bakshi    1.5              Added new hybridGroupList submethod                   GBL 11.1   PJ000082-->
+	
+<!--08/27/2010  Steve Heichelheim   1.5      Applied MVM standards to hybridGroupList structure, Created standardized version querySubscriberServicesMVM.xsd    GBL 11.1   PJ000082-->
+	
+<!--11/18/2010  Steve Heichelheim   1.6      modified hybridGroupList structure, updated standardized version querySubscriberServicesV2.xsd    GBL 11.1   PJ000082-->
+	
+<!--02/08/2011  Steve Whipple          1.7               CR11 added billDisplayInd to featureInfo                  GBL 11.2            PJ003013-->
+	
+<!--06/27/2011  Jocelen Silva         1.8               Added fields (universalInd, offerMapLevel, throttleInd, minSeqNumber, initialActivationDate, jvVmSocInd, bundle, universalInd, offerMapLevel, blockAllowListSocInd) in respose to match Real Time API                  GBL 11.3           PJ004940-->
+	
+<!--11/10/2011  Judy Kauffman     1.9            Changed throttleInd to meterCode in FeatureInfoType, changed field type, length, definition, and valid values.       GBL12.1 PJ006389-->
+	
+<!--12/12/2011  Jocelen Silva         2.0            Removed derivedBy extension from pricePlanInfo is response                                                                                 GBL12.1-->
+	
+<!--07/09/2012  Ishita Biswas         2.1            Added fields for prepaid brands Virgin Mobile/Assurance Wireless and Boost    GBL 12.3     PJ007442-->
+	
+<!--08/01/2012  Ishita Biswas         2.2            Added socCategory to the prepaidSocAttributeInfo structure.    GBL 12.3     PJ007442-->
+	
+<!--08/27/2012  Mitali Handoo         2.3            Added durationRcDate to the prepaidSocAttributeInfo structure.    GBL 12.3     PJ007928-->
+	
+<!--03/06/2013  Subha Kannan	        2.4            Added allowanceDataList structure in prepaidPlanAttributeInfo prepaidSocAttributeInfo to the prepaidSocAttributeInfo structure.   IM1617974  -->
+	
+<!--06/24/2013  Steve Heichelheim      2.5           Added new structure subscriberAttributesInfo to the response, to return 911 consent flag.    GBL13.3 PJ008373-->
+	
+<!--10/29/2013  Steve Whipple     2.6      Added sharingGroupId to ltsInfo, pricePlanInfo, socInfo. Added itemIdType to ltsRcInfo. Added minSeqNumber, initialActivationDate to subscriberAttributesInfo     GBL14.1 PJ008620-->
+	
+<!--04/08/2014  Cindy Pummill      2.7           Added new attribute socCode in socList structure in the request.    GBL14.2 PJ009836-->
+	
+<!--05/28/2014  Mitali Handoo      2.8       Added new element discountAmt in the response message.                 GBL14.2                 PJ012569-->
+	
+<!--09/19/2014  Jocelen Silva      2.9      Changed socList.socInfo.offerInfo.offerDesc and pricePlanInfo.offerInfo.offerDesc changed to optional in response                GBL14.3                 ALM#821981-->
+	
+<xs:element name="querySubscriberServices" type="tns:QuerySubscriberServicesRequest"/>
+	
+<xs:element name="querySubscriberServicesResponse" type="tns:QuerySubscriberServicesResponse"/>
+	
+<xs:complexType name="QuerySubscriberServicesRequest">
+		
+<xs:all>
+			
+<xs:element name="info">
+				
+<xs:complexType>
+					
+<xs:choice>
+						
+<xs:element name="banId" type="CustomerAccountNumber"/>
+						
+<xs:element name="subsId" type="SubscriptionId"/>
+						
+<xs:element name="ptn" type="MdnString"/>
+						
+<xs:element name="equipmentId" type="DeviceSerialNbr"/>
+						
+<xs:element name="ufmi" type="UfmiString"/>
+						
+<xs:element name="ip" type="ElectronicAddressString"/>
+						
+<xs:element name="nai" type="NetworkAccessIdentifierString"/>
+						
+<xs:element name="imsi" type="InternationalMobileSubscriberIdentityString"/>
+						
+<xs:element name="hppttId" type="HighPerformancePushToTalkIdString"/>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="featureList" type="tns:FetchFeatureListType" minOccurs="0"/>
+			
+<xs:element name="ltsList" type="tns:FetchInformationFlagType" minOccurs="0"/>
+			
+<xs:element name="m2HONumberInfo" type="tns:FetchM2HONumberInfoType" minOccurs="0"/>
+			
+<xs:element name="socList" type="tns:FetchSocListType" minOccurs="0"/>
+			
+<xs:element name="hybridGroupList" type="tns:FetchHybridGroupListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether response should include the hybridGroupList, which contains info of the hybrid sharing groups under the ban to which the input subscriber belongs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchSubAttributeInfo" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether response should inclue subscriberAttributeInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberServicesResponse">
+		
+<xs:all>
+			
+<xs:element name="pricePlanInfo" type="tns:PricePlanInfoType"/>
+			
+<xs:element name="featureList" type="tns:FeatureListType" minOccurs="0"/>
+			
+<xs:element name="ltsList" type="tns:LtsListType" minOccurs="0"/>
+			
+<xs:element name="m2HONumberInfo" type="tns:M2HONumberInfoType" minOccurs="0"/>
+			
+<xs:element name="socList" type="tns:SocListType" minOccurs="0"/>
+			
+<xs:element name="hybridGroupList" type="tns:HybridGroupListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>hybridGroup Info structure
+contains the hybrid sharing group info under the ban to which the input subscriber belongs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberAttributesInfo" type="tns:SubscriberAttributeInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing subscriber information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceDataInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceType" type="tns:AllowanceTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of allowance
+Sprint 3G Data
+Sprint 4G Data
+Sprint 3G/4G Data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Includes units of allowance for the input subscriber in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceDataListType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceDataInfo" type="tns:AllowanceDataInfoType" maxOccurs="3"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceType" type="tns:AllowanceTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of allowance
+Sprint Data
+Sprint Data Roaming</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subsAllowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Included units of allowance for the input subscriber in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentGroupAllowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Current Hybrid Group Allowance in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nextCycleGroupAllowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Next Cycle Hybrid Group Allowance in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceListType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceInfo" type="tns:AllowanceInfoType" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureListType">
+		
+<xs:sequence minOccurs="0">
+			
+<xs:element name="featureInfo" type="tns:FeatureInfoType" minOccurs="0" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:SocCode"/>
+			
+<xs:element name="socType" type="tns:SocType"/>
+			
+<xs:element name="featureCode" type="tns:FeatureCode"/>
+			
+<xs:element name="serviceType">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="name" type="tns:FeatureDescription" minOccurs="0"/>
+			
+<xs:element name="effectiveDate" type="xs:date"/>
+			
+<xs:element name="expiryDate" type="xs:date" minOccurs="0"/>
+			
+<xs:element name="msisdn" type="tns:MdnString" minOccurs="0"/>
+			
+<xs:element name="freeMinType" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="isUsageType" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="isSwitchType" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="socSeqNumber" type="tns:SocSequenceNumber" minOccurs="0"/>
+			
+<xs:element name="featureSeqNumber" type="tns:FeatureSequenceNumber" minOccurs="0"/>
+			
+<xs:element name="m2hoType" block="restriction" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="pttInd" type="xs:boolean" block="restriction" minOccurs="0"/>
+			
+<xs:element name="pttNaiReq" type="xs:boolean" block="restriction" minOccurs="0"/>
+			
+<xs:element name="pamInd" type="xs:boolean" block="restriction"/>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCode" block="restriction"/>
+			
+<xs:element name="naiPtt" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="naiPam" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="hppttInd" type="xs:boolean"/>
+			
+<xs:element name="spanishFeatureDesc" type="tns:FeatureDescription" minOccurs="0"/>
+			
+<xs:element name="evdoInd" type="xs:boolean"/>
+			
+<xs:element name="evdoRev" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>REV0
+REVA</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="abInd" type="xs:boolean"/>
+			
+<xs:element name="glmsInd" type="xs:boolean"/>
+			
+<xs:element name="winInd" type="xs:boolean"/>
+			
+<xs:element name="hppttId" type="HighPerformancePushToTalkIdString" minOccurs="0"/>
+			
+<xs:element name="hppttType" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="recurringCharge" type="xs:decimal" minOccurs="0"/>
+			
+<xs:element name="billDisplayInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Used to determine if the feature should be presented on customer's invoice.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="meterCode" type="tns:MeterTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Meter SOC indicator
+M= metered
+U= unmetered 
+Subscriber with a suspend as a prevention for bill shock by giving the subscriber the alert with an option to move into overages.
+
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FetchFeatureListType">
+		
+<xs:simpleContent>
+			
+<xs:extension base="xs:boolean">
+				
+<xs:attribute name="includeFutureDated" type="tns:FetchInformationFlagType" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+<xs:complexType name="FetchHybridGroupListType">
+		
+<xs:sequence>
+			
+<xs:element name="fetchHybridGroupList" type="tns:FetchInformationFlagType"/>
+			
+<xs:element name="nextDate" type="tns:NextDate" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Must be in the future
+
+When sent will retrieve the nextDateSubsCount till this date
+
+Default behavior when not sent is to get the nextDateSubsCount at the start of the nextBill Cycle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FetchM2HONumberInfoType">
+		
+<xs:simpleContent>
+			
+<xs:extension base="xs:boolean">
+				
+<xs:attribute name="includeExpired" type="tns:FetchInformationFlagType" use="optional"/>
+				
+<xs:attribute name="includeFutureDated" type="tns:FetchInformationFlagType" use="optional"/>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+<xs:complexType name="HybridGroupInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="sharingGroupId" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Hybrid Group Sharing Plan Id. Id that defines one hybrid group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxSubsAllowed" type="tns:MaximumSubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Maximum subscribers allowed under a Hybrid group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentSubsCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Count of current number of subscribers under the Hybrid group in current Bill Cycle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nextDateSubsCount" type="tns:SubscriberCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Count of number of subscribers belonging to the Hybrid Group till the nextDate if provided in the input. If not provided it gives the subscriber count as start of Next bill cycle</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceList" type="tns:AllowanceListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of allowanceInfo structure
+AllowanceList will contain allowance information for the hybrid sharing group soc of the subscriber.
+For Data, two allowanceInfo structures can be sent, one for “Sprint Data” and second for “Sprint Data Roaming” depending upon the soc setup.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="HybridGroupListType">
+		
+<xs:sequence>
+			
+<xs:element name="hybridGroupInfo" type="tns:HybridGroupInfoType" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LtsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="groupType" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="6"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="soc" type="tns:SocCode"/>
+			
+<xs:element name="socDescription" type="tns:SocDescription" minOccurs="0"/>
+			
+<xs:element name="socType" type="tns:SocType"/>
+			
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The LTS data sharing group identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maxSubsAllowed" type="xs:integer"/>
+			
+<xs:element name="currentRecurringCharge" type="tns:RecurringCharge"/>
+			
+<xs:element name="currentRank" type="xs:integer"/>
+			
+<xs:element name="rankOverriddenFlag" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="serviceEffectiveDate" type="xs:date"/>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListType"/>
+			
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="LtsListType">
+		
+<xs:sequence>
+			
+<xs:element name="ltsInfo" type="tns:LtsInfoType" minOccurs="0" maxOccurs="50"/>
+			
+<xs:element name="nextBillCycleLtsInfo" minOccurs="0" maxOccurs="50">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="groupType" type="xs:string" minOccurs="0"/>
+						
+<xs:element name="soc" type="tns:SocCode"/>
+						
+<xs:element name="socDescription" type="tns:SocDescription" minOccurs="0"/>
+						
+<xs:element name="socType" type="tns:SocType"/>
+						
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>The LTS data sharing group identifier.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="maxSubsAllowed" type="xs:integer"/>
+						
+<xs:element name="recurringCharge" type="tns:RecurringCharge"/>
+						
+<xs:element name="rank" type="xs:integer"/>
+						
+<xs:element name="rankOverriddenFlag" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="serviceEffectiveDate" type="xs:date"/>
+						
+<xs:element name="subscriberList">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="subscriberInfo" maxOccurs="50">
+										
+<xs:complexType>
+											
+<xs:sequence>
+												
+<xs:element name="subsId" type="tns:SubscriptionId">
+													
+<xs:annotation>
+														
+<xs:documentation>SERVICE_AGREEMENT.SUBSCRIBER_NO</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="ptn" type="tns:MdnString">
+													
+<xs:annotation>
+														
+<xs:documentation>SUBSCRIBER_RSOURCE.PTN</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="recurringCharge" type="tns:RecurringCharge">
+													
+<xs:annotation>
+														
+<xs:documentation>SOC_RC_RANK.RC</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="rank" type="xs:integer">
+													
+<xs:annotation>
+														
+<xs:documentation>Rank should be calculated based on the Effectiv Date and Feature Seq Number</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="serviceEffectiveDate" type="xs:date">
+													
+<xs:annotation>
+														
+<xs:documentation>SERVICE_FEATURE.FTR_EFFECTIVE_DATE</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="rankOverriddenFlag" type="xs:boolean" minOccurs="0">
+													
+<xs:annotation>
+														
+<xs:documentation>'True' if SERVICE_FEATURE.RANK  is not null else 'False'</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="minSeqNumber" type="tns:SequenceNumberType" minOccurs="0">
+													
+<xs:annotation>
+														
+<xs:documentation>The subscriber’s minimum sequence number from SUB_RES_HISTORY</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="initialActivationDate" type="tns:InitialSubscriptionActivationDateType" minOccurs="0">
+													
+<xs:annotation>
+														
+<xs:documentation>Initial activation date of the subscriber (for reserved subscribers with no future activation this date will be populated with the creation date).</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="M2HNumberInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="m2HNumberInfo" maxOccurs="unbounded">
+				
+<xs:complexType>
+					
+<xs:sequence minOccurs="0">
+						
+<xs:element name="socCode" type="tns:SocCode"/>
+						
+<xs:element name="socSeqNumber" type="tns:SocSequenceNumber"/>
+						
+<xs:element name="effectiveDate" type="xs:date"/>
+						
+<xs:element name="expirationDate" type="xs:date" minOccurs="0"/>
+						
+<xs:element name="numberList" minOccurs="0">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="numberInfo" maxOccurs="100">
+										
+<xs:complexType>
+											
+<xs:sequence>
+												
+<xs:element name="number" type="tns:MdnString"/>
+												
+<xs:element name="effectiveDate" type="xs:date"/>
+												
+<xs:element name="expirationDate" type="xs:date" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="M2HONumberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="m2HNumberInfoList" type="tns:M2HNumberInfoListType" minOccurs="0"/>
+			
+<xs:element name="m2ONumberInfoList" type="tns:M2ONumberInfoListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="M2ONumberInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="m2ONumberInfo" maxOccurs="unbounded">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="socCode" type="tns:SocCode"/>
+						
+<xs:element name="socSeqNumber" type="tns:SocSequenceNumber"/>
+						
+<xs:element name="effectiveDate" type="xs:date"/>
+						
+<xs:element name="expirationDate" type="xs:date" minOccurs="0"/>
+						
+<xs:element name="numberRangeList" minOccurs="0">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="numberRangeInfo" maxOccurs="100">
+										
+<xs:complexType>
+											
+<xs:sequence>
+												
+<xs:element name="fromNumber" type="tns:MdnString"/>
+												
+<xs:element name="toNumber" type="tns:MdnString" minOccurs="0"/>
+												
+<xs:element name="effectiveDate" type="xs:date"/>
+												
+<xs:element name="expirationDate" type="xs:date" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NextBillCycleLtsInfoType"/>
+	
+<xs:complexType name="PrepaidPlanAttributeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="isDemoPlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if this is a demo plan or not. A demo plan returns a “true” in this field.
+Applicable to Virgin Mobile and Assurance Wireless only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isRestartCapablePlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if restarts are allowed on the plan or not. A restartable plan returns a “true” in this field. Applicable to Virgin Mobile and Assurance Wireless only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isDataThrottlePlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the data plan can be throttled or not. A “true” is returned in this field if the plan can be throttled.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isAdvancePaymentPlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if advance payment can be set up on the plan or not. A “true” is returned in this field if the plan allows advance payment to be set up on the account.
+Applicable to Virgin Mobile and Assurance Wireless only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isFreeStatePlanInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if Assurance Wireless plan offered by the customer’s state is a free one or not..
+Applicable to Assurance Wireless only.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceDataList" type="tns:AllowanceDataListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrepaidSocAttributeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="isSocStackableInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the SOC is stackable or not. A “true” is returned in this field if the SOC is stackable. Applicable to Virgin Mobile and Assurance Wireless only.			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hasAutoRollFwdSetupInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if auto roll forward is set up on the SOC or not. A “true” will be returned in this field if auto roll forward has been set up on the SOC. This field is applicable to Virgin Mobile/Assurance Wireless subscribers only. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isSocRenewableInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This attribute indicates if the add-on can be renewed or not. A “true” is returned in this field if the add-on can be renewed.	Applicable to Virgin Mobile and Assurance Wireless only. 	</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socRenewDate" type="tns:AnniversaryDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date on which the SOC will be renewed each month. This is also referred to as the anniversary date of the SOC. 
+This is applicable for Virgin Mobile and Assurance Wireless subscribers with SOC(s) that are renewable.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="durationRcDate" type="xs:date" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This date will be set as the next RC date when the subscriber changes the price plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="isSocVxlInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the SOC is a VXL SOC or not. A “true” is returned in this field if the SOC is a VXL SOC. Applicable to Virgin Mobile and Assurance Wireless only.
+			</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dailyRecurringCharge" type="tns:RecurringChargeAmountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The daily recurring charge for the SOC. Applicable to daily RC SOCs only.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socCategory" type="tns:ServiceCategoryNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Filterable category of the associated feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceDataList" type="tns:AllowanceDataListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Provide allowanceData for the SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:SocCode"/>
+			
+<xs:element name="socType" type="tns:SocType"/>
+			
+<xs:element name="socLevelCode" type="tns:SocLevelCode" minOccurs="0"/>
+			
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The LTS data sharing group identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="name" type="tns:SocDescription" minOccurs="0"/>
+			
+<xs:element name="spanishSocDesc" type="tns:SocDescription" minOccurs="0"/>
+			
+<xs:element name="startDate" type="xs:date"/>
+			
+<xs:element name="expiryDate" type="xs:date" minOccurs="0"/>
+			
+<xs:element name="recurringCharge" type="tns:RecurringCharge" minOccurs="0"/>
+			
+<xs:element name="dealer" type="tns:DealerCode" minOccurs="0"/>
+			
+<xs:element name="splitDealer" type="tns:DealerCode" minOccurs="0"/>
+			
+<xs:element name="cellularSupport" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="dispatchSupport" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="pdSupport" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="multiTierPlan" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="ffPlanType" minOccurs="0">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="m2hoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile to Home-Office Service Type. Valid Values are H and O, which indicate M2H and M2O Services respectively.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:length value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="networkInd" type="tns:NetworkIndicatorCode" block="restriction">
+				
+<xs:annotation>
+					
+<xs:documentation>I – for iDEN  C– for CDMA B -- for Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="planTypeDesc" type="tns:SocDescription" minOccurs="0"/>
+			
+<xs:element name="spanishPlanTypeDesc" type="tns:SocDescription" minOccurs="0"/>
+			
+<xs:element name="addlPlanTypeDesc" type="tns:SocAdditionalDescription" minOccurs="0"/>
+			
+<xs:element name="spanishAddlPlanTypeDesc" type="tns:SocAdditionalDescription" minOccurs="0"/>
+			
+<xs:element name="longDesc" type="tns:SocLongDescription" minOccurs="0"/>
+			
+<xs:element name="spanishLongDesc" type="tns:SocLongDescription" minOccurs="0"/>
+			
+<xs:element name="offerInfo" type="tns:SocOfferInfo" minOccurs="0"/>
+			
+<xs:element name="multiTierList" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="tierInfo" maxOccurs="5">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="tierNumber" type="xs:integer"/>
+									
+<xs:element name="tierDescription" type="tns:TierDescription" minOccurs="0"/>
+									
+<xs:element name="spanishTierDesc" type="tns:TierDescription" minOccurs="0"/>
+									
+<xs:element name="planUnits" type="xs:integer" minOccurs="0"/>
+									
+<xs:element name="thresholdUnits" type="xs:integer"/>
+									
+<xs:element name="recurringCharge" type="tns:RecurringCharge" minOccurs="0"/>
+									
+<xs:element name="overageRate" type="xs:decimal" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="ltsGroup" type="xs:string" minOccurs="0"/>
+			
+<xs:element name="ltsRcList" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="maxSubsAllowed" type="xs:integer"/>
+						
+<xs:element name="ltsRcInfo" maxOccurs="unbounded">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="fromRank" type="xs:integer"/>
+									
+<xs:element name="toRank" type="xs:integer"/>
+									
+<xs:element name="itemIdType" type="tns:DeviceCategoryIdentifierType" minOccurs="0">
+										
+<xs:annotation>
+											
+<xs:documentation>The item ID type specifies the type of the equipment.
+Possible Values:
+SMRTPH – to specify Smart Phone
+FTRPH – to specify Feature Phone
+TABLET – to specify Tablet
+MBB – to specify Mobile Broadband devices</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									
+<xs:element name="recurringCharge" type="tns:RecurringCharge"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="rateCard" minOccurs="0">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="includedUnits" type="xs:integer"/>
+						
+<xs:element name="tierInfo" maxOccurs="unbounded">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="tierLevel" type="xs:integer"/>
+									
+<xs:element name="tierDescription" type="tns:TierDescription" minOccurs="0"/>
+									
+<xs:element name="spanishTierDesc" type="tns:TierDescription" minOccurs="0"/>
+									
+<xs:element name="fromUnits" type="xs:integer"/>
+									
+<xs:element name="toUnits" type="xs:integer" minOccurs="0"/>
+									
+<xs:element name="recurringCharge" type="tns:RecurringCharge"/>
+									
+<xs:element name="overageRate" type="xs:decimal" minOccurs="0"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prepaidPlanAttributeInfo" type="tns:PrepaidPlanAttributeInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing price plan attributes for prepaid subscribers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FetchSocListType">
+		
+<xs:simpleContent>
+			
+<xs:extension base="xs:boolean">
+				
+<xs:attribute name="includeExpired" type="tns:FetchInformationFlagType"/>
+				
+<xs:attribute name="blockNumber" type="xs:integer" default="1"/>
+				
+<xs:attribute name="includeFutureDated" type="tns:FetchInformationFlagType"/>
+				
+<xs:attribute name="socCode" type="tns:ServiceOrderCodeType">
+					
+<xs:annotation>
+						
+<xs:documentation>Indicates if a search for a specific soc is to be performed.  This should be used in conjunction with the includeExpired and/or includeFutureDated attributres if the search is to include active and non-active socs.  Only records for the provide soc will be returned in the socList response.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:simpleContent>
+	</xs:complexType>
+	
+<xs:complexType name="SocListType">
+		
+<xs:sequence>
+			
+<xs:element name="currentBlock">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="totalBlockSize">
+				
+<xs:simpleType>
+					
+<xs:restriction base="xs:string">
+						
+<xs:maxLength value="4"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="socInfo" minOccurs="0" maxOccurs="50">
+				
+<xs:complexType>
+					
+<xs:sequence>
+						
+<xs:element name="socCode" type="tns:SocCode"/>
+						
+<xs:element name="socType">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="socLevelCode" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>The LTS data sharing group identifier.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="name" type="tns:SocDescription" minOccurs="0"/>
+						
+<xs:element name="spanishSocDesc" type="tns:SocDescription" minOccurs="0"/>
+						
+<xs:element name="startDate" type="xs:date"/>
+						
+<xs:element name="expiryDate" type="xs:date" minOccurs="0"/>
+						
+<xs:element name="recurringCharge" type="tns:RecurringCharge" minOccurs="0"/>
+						
+<xs:element name="dealer" type="tns:DealerCode" minOccurs="0"/>
+						
+<xs:element name="splitDealer" type="tns:DealerCode" minOccurs="0"/>
+						
+<xs:element name="cellularSupport" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="dispatchSupport" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="pdSupport" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="socSeqNumber" type="tns:SocSequenceNumber"/>
+						
+<xs:element name="riscInd" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="multiTierPlan" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="ffPlanType" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="m2hoType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Mobile to Home-Office Service Type. Valid Values are H and O, which indicate M2H and M2O Services respectively.</xs:documentation>
+							</xs:annotation>
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="networkInd" block="restriction">
+							
+<xs:annotation>
+								
+<xs:documentation>I – for iDEN  C– for CDMA B -- for Both</xs:documentation>
+							</xs:annotation>
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="offerInfo" type="tns:SocOfferInfo" minOccurs="0"/>
+						
+<xs:element name="planTypeDesc" type="tns:SocDescription" minOccurs="0"/>
+						
+<xs:element name="spanishPlanTypeDesc" type="tns:SocDescription" minOccurs="0"/>
+						
+<xs:element name="addlPlanTypeDesc" type="tns:SocAdditionalDescription" minOccurs="0"/>
+						
+<xs:element name="spanishAddlPlanTypeDesc" type="tns:SocAdditionalDescription" minOccurs="0"/>
+						
+<xs:element name="longDesc" type="tns:SocLongDescription" minOccurs="0"/>
+						
+<xs:element name="spanishLongDesc" type="tns:SocLongDescription" minOccurs="0"/>
+						
+<xs:element name="ltsGroup" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>LTS_GROUP.ID</xs:documentation>
+							</xs:annotation>
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:maxLength value="6"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="ltsRcList" minOccurs="0">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="maxSubsAllowed" type="xs:integer"/>
+									
+<xs:element name="ltsRcInfo" maxOccurs="unbounded">
+										
+<xs:complexType>
+											
+<xs:sequence>
+												
+<xs:element name="fromRank" type="xs:integer"/>
+												
+<xs:element name="toRank" type="xs:integer"/>
+												
+<xs:element name="itemIdType" type="tns:DeviceCategoryIdentifierType" minOccurs="0">
+													
+<xs:annotation>
+														
+<xs:documentation>The item ID type specifies the type of the equipment.
+Possible Values:
+SMRTPH – to specify Smart Phone
+FTRPH – to specify Feature Phone
+TABLET – to specify Tablet
+MBB – to specify Mobile Broadband devices</xs:documentation>
+													</xs:annotation>
+												</xs:element>
+												
+<xs:element name="recurringCharge" type="tns:RecurringCharge"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						
+<xs:element name="rateCard" minOccurs="0">
+							
+<xs:complexType>
+								
+<xs:sequence>
+									
+<xs:element name="includedUnits" type="xs:integer"/>
+									
+<xs:element name="tierInfo" maxOccurs="unbounded">
+										
+<xs:complexType>
+											
+<xs:sequence>
+												
+<xs:element name="tierLevel" type="xs:integer"/>
+												
+<xs:element name="tierDescription" type="tns:TierDescription" minOccurs="0"/>
+												
+<xs:element name="spanishTierDesc" type="tns:TierDescription" minOccurs="0"/>
+												
+<xs:element name="fromUnits" type="xs:integer"/>
+												
+<xs:element name="toUnits" type="xs:integer" minOccurs="0"/>
+												
+<xs:element name="recurringCharge" type="xs:decimal"/>
+												
+<xs:element name="overageRate" type="xs:decimal" minOccurs="0"/>
+											</xs:sequence>
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						
+<xs:element name="hierarchyCd" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="lbsInd" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="specialInd" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="taxExclusionInd" type="xs:boolean" minOccurs="0"/>
+						
+<xs:element name="prepaidPlanPolicySet" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:maxLength value="9"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="addOnSocStatus" minOccurs="0">
+							
+<xs:simpleType>
+								
+<xs:restriction base="xs:string">
+									
+<xs:length value="1"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:element>
+						
+<xs:element name="jvVmSocInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Calculated From AGREEMENT_ATTR table
+Note: Returned only on Real Time requests</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="bundle" type="tns:PrimarySecondaryTypeCodeType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>SOC.BUNDLE : P - Primary bundled PP/SOC, S - Secondary bundled PP/SOC, no tag for none</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>UPP/SOC indicator (true/false)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Enabler features level (S/F/" ")</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="blockAllowListSocInd" type="tns:BinaryExpressionType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Indicator whether the soc is  Block/Allow PTN  Listl(true/false)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="prepaidSocAttributeInfo" type="tns:PrepaidSocAttributeInfoType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>Structure containing attributes of the SOC</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						
+<xs:element name="discountAmt" type="tns:DiscountAmountType" minOccurs="0">
+							
+<xs:annotation>
+								
+<xs:documentation>The discount amount due to the spotify SOC on the subscription</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberAttributeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="vowifi911ConsentFlag" type="tns:Consent911FlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating if subscriber has given 911 consent</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="minSeqNumber" type="tns:SequenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber’s minimum sequence number from SUB_RES_HISTORY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="initialActivationDate" type="tns:InitialSubscriptionActivationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Initial activation date of the subscriber (for reserved subscribers with no future activation this date will be populated with the creation date)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subsId" type="tns:SubscriptionId"/>
+			
+<xs:element name="ptn" type="tns:MdnString"/>
+			
+<xs:element name="currentRecurringCharge" type="tns:RecurringCharge"/>
+			
+<xs:element name="currentRank" type="xs:integer"/>
+			
+<xs:element name="serviceEffectiveDate" type="xs:date"/>
+			
+<xs:element name="rankOverriddenFlag" type="xs:boolean" minOccurs="0"/>
+			
+<xs:element name="minSeqNumber" type="tns:SequenceNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber’s minimum sequence number from SUB_RES_HISTORY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="initialActivationDate" type="tns:InitialSubscriptionActivationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Initial activation date of the subscriber (for reserved subscribers with no future activation this date will be populated with the creation date).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     MVM Simple Types/Shared Simple Types-->
+	
+<xs:simpleType name="AllowanceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Allowance Type Code designates a type of allowance of units that would be set up for a user, espically in the case of a hybrid sharing group.
+Valid Values Include:
+Sprint Data,
+Sprint Data Roaming...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AnniversaryDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Anniversary Date is the subscriber anniversary date for RC plan standard date format (GMT) yyyy-MM-dd</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="Consent911FlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Consent 911 Flag is a binary indicator of whetther the subscriber has given 911 consent.
+Valid Values:
+true - the subcriber has given 911 consent
+false - the subscriber has not given 911 consent</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceCategoryIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Category Identifier uniquley identifies a category of the deivce.
+Valid Values Include:
+smart phone,
+basic phone,
+usb,
+mbc,
+tablet,
+mobilehotspothandset,
+netbook,
+data card,
+tablet,
+mifi/overdrive...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DiscountAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Discount Amount holds the monetary amount by which the the price charged for a GOOD or SERVICE is decreased.  A percent decrease in the price charged may only be applicable to specific Account Types, Promotions, Products, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlagType">
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InitialSubscriptionActivationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Initial Subscription Activation Date is the calendar month, day and year of the Subscriptions first network activation.  This date never changes.  Initial Subscription Activation Date provides the capability of calculating the total duration of the Subscription's existence regardless of interim deactivation activation events.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="LinesToShareGroupIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Lines To Share Group Identifier uniquely identifies a Lines To Share Group within a Billing Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MaximumSubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Maximum Subscriber Count is the maximum number of subscribers for the associated account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MeterTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Meter Type Code indicates whether the associated product is metered.
+Valid Values:
+M= metered,
+U= unmetered </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="M"/>
+			
+<xs:enumeration value="U"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessActivationFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Activiated From Date holds the first calendar day the set of implemented components were active on the network.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NextDate">
+		
+<xs:annotation>
+			
+<xs:documentation>Deprecate - Use EffectiveThruDate</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferMapLevelType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Map level whether the price plan/SOC has Enabler features that are mapped to Enabler offers. This indicates whether Enabler features can be excluded from or included in the price plan/SOC.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer (Enabler features cannot be excluded from or included in the price plan/SOC)
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers (Enabler features can be excluded from or included in the price plan/SOC)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrimarySecondaryTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Primary Secondary Type Code Type indicates whether the associated item is primary or secondary.
+Valid values:
+P - Primary,
+S - Secondary,
+B - Both...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="P"/>
+			
+<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RecurringChargeAmountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Recurring Charge Amount (RC) is a monthly fee charged for granting access to certain services. The RC is charged for subscribers who have purchased the offer for an unlimited time. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceCategoryNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Cateogory Name is the common name corresponding to the Usage Category Code.
+C - Cellular Voice
+S - SMS
+D - Dispatch
+V - Vision Data
+P - 2G Data</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SequenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code Type Code identifies the various types of Service Order Codes.  Valid values include (not exclusive list):
+B - Buy One Get One SOC
+I - 
+P - Price Plan
+M - Reduced Price Plan
+S - Reduced SOC
+R - Regular SOC
+O - Optional SOC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description is a description of the product defined by a service order code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SpecialServiceOrderCodeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Special Service Order Code Type Code indicates how the given SOC is identified as a Special SOC
+Valid Values:
+L – Loyalty, 
+V – VIP,
+N - None</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="L"/>
+			
+<xs:enumeration value="V"/>
+			
+<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Count is the number of subscribers associated to the BAN.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber status code is a single character code that represents the status of a subsciber.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="A"/>
+			
+<xs:enumeration value="S"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:fractionDigits value="2"/>
+			
+<xs:totalDigits value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

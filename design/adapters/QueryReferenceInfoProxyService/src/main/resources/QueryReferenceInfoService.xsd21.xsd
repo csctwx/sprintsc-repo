@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceInfo/v1/queryReferenceInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd" xmlns:ns2="http://integration.sprint.com/interfaces/queryReferenceIdDefinitionList/v1/queryReferenceIdDefinitionList.xsd" xmlns:ns3="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceInfo/v1/queryReferenceInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<xs:import namespace="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd" schemaLocation="QueryReferenceInfoService.xsd3.xsd"/>
+	
+<xs:import namespace="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd" schemaLocation="QueryReferenceInfoService.xsd13.xsd"/>
+	
+<!-- Date              Author            Version       Change                                                                                Rel                  SR# -->
+	
+<!-- 4/5/2011    Tracy Turner    	1.0              Initial Version                                                                GBL11.3       PJ004940-->
+	
+<!-- 5/31/2011    Tracy Turner     1.1          Added affix information                                                        GBL11.3       PJ004940-->
+	
+<xs:element name="queryReferenceInfo" type="tns:QueryReferenceInfoType"/>
+	
+<xs:element name="queryReferenceInfoResponse" type="tns:QueryReferenceInfoResponseType"/>
+	
+<xs:complexType name="QueryReferenceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="fetchAccountTypeList" type="tns:FetchInformationFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether the list of account type / sub type reference information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchIdDefinitionList" type="tns:FetchInformationFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether the list of identification form reference information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="marketInfo" type="ns3:MarketInfo" minOccurs="0"/>
+			
+<xs:element name="fetchAffixInfo" type="tns:FetchInformationFlag" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether the prefix and suffix reference information should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="accountTypeList" type="ns1:AccountTypeListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  accountTypeInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="idDefinitionList" type="tns:IdentificationDefinitionListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  IdDefinitionInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="marketInfo" type="ns3:MarketInfoResponse" minOccurs="0"/>
+			
+<xs:element name="affixInfo" type="tns:AffixInfoType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IdentificationDefinitionInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="identificationCode" type="tns:PartyOtherIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Represents the type of identification : credit card, passport…
+(ex. USDL)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="idDescription" type="tns:PartyOtherIdentifierTypeDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>ID Description is a plain text description of the form of identification.  (ex. US Driver License)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="idType" type="tns:PrimarySecondaryTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates what type of identification this is:
+P – Primary
+S – Secondary
+B – Both</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDateRequiredInd" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date required indicator indicates whether the identification information captured should include the id expiration date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="firstInfoCode" type="tns:FieldNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Code for first information field needed to validate the ID. 
+(ex. STATE)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="secondInfoCode" type="tns:FieldNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Code for second information field needed to validate the ID. 
+(ex. DRVL#)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IdentificationDefinitionListType">
+		
+<xs:sequence>
+			
+<xs:element name="idDefinitionInfo" type="tns:IdentificationDefinitionInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="AffixInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="prefixList" type="tns:PrefixListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  prefixInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="suffixList" type="tns:SuffixListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>0 to many (unbounded)  suffixInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrefixInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="prefixCode" type="tns:NamePrefixType">
+				
+<xs:annotation>
+					
+<xs:documentation>Prefix to be sent to the billing system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="prefixDescription" type="tns:TitleType">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of the prefix</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PrefixListType">
+		
+<xs:sequence>
+			
+<xs:element name="prefixInfo" type="tns:PrefixInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SuffixListType">
+		
+<xs:sequence maxOccurs="unbounded">
+			
+<xs:element name="suffixCode" type="tns:NameSuffixType">
+				
+<xs:annotation>
+					
+<xs:documentation>Suffix to be sent to the billing system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FieldNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Field Name Type holds the name of a data element in an interface Logical Unit Of Work.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NamePrefixType">
+		
+<xs:annotation>
+			
+<xs:documentation>Name Prefix is something that is attached to, but not usually part of a name, e.g. Miss, Ms., Mr, Sir, Mrs, Dr and My Lord.</xs:documentation>
+			
+<xs:documentation>Name Prefix represents the pre-nominal letters indicating a title of some kind placed placed before the name of a person as distinct from a post-nominal title which is placed after the name. Examples of pre-nominal titles, for instance professional titles.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NameSuffixType">
+		
+<xs:annotation>
+			
+<xs:documentation>Name Suffix holds any affix that may occurr at the end of the name of an INDIVIDUAL designating a dignity, honor, distinction, or preeminence attached to the INDIVIDUAL by virtue of rank, office, precedent, privilege, attainment, or lands.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PartyOtherIdentifierTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Other Identifier Type Code uniquely identifies a PARTY EXTERNAL IDENTIFIER TYPE instance representing a possible type of external identifier of a PARTY.
+
+Possible values:
+U. S. Social Security Number
+Canadian Social Security Number
+Permanent Resident Identifier
+Federal Employer Identification Number
+Dunn and Bradstreet Number
+Passport Number
+Motor Vehicle Operator License Number
+United Airlines Membership Identifier</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--NewSimpleTypes-->
+	
+<xs:simpleType name="PartyOtherIdentifierTypeDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Party Other Identifier Type Code uniquely identifies a PARTY EXTERNAL IDENTIFIER TYPE instance representing a possible type of external identifier of a PARTY.
+
+Possible values:
+U. S. Social Security Number
+Canadian Social Security Number
+Permanent Resident Identifier
+Federal Employer Identification Number
+Dunn and Bradstreet Number
+Passport Number
+Motor Vehicle Operator License Number
+United Airlines Membership Identifier</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PrimarySecondaryTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Primary Secondary Type Code Type indicates whether the associated item is primary or secondary.
+Valid values:
+P - Primary,
+S - Secondary,
+B - Both...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TitleType">
+		
+<xs:annotation>
+			
+<xs:documentation>Title is an honorific bestowed to an Individual.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

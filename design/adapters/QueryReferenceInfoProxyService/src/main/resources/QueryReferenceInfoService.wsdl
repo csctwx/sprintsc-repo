@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/QueryReferenceInfoService/V1/QueryReferenceInfoService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/QueryReferenceInfoService/V1/QueryReferenceInfoService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd25.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd24.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceAffinityDetailInfo/v1/queryReferenceAffinityDetailInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceAffinityList/v1/queryReferenceAffinityList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceBillCycleList/v1/queryReferenceBillCycleList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceCardTypeInfo/v1/queryReferenceCardTypeInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceCorpSocList/v1/queryReferenceCorpSocList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceCsaInfo/v1/queryReferenceCsaInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceDepositRequirementInfo/v1/queryReferenceDepositRequirementInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceHppttDomainInfo/v1/queryReferenceHppttDomainInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd21.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceInfo/v1/queryReferenceInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceLargeBanThresholdInfo/v1/queryReferenceLargeBanThresholdInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceM2hoInfo/v1/queryReferenceM2hoInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd13.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd14.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceMemoTypeList/v1/queryReferenceMemoTypeList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd19.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceParameterValues/v1/queryReferenceParameterValues.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd15.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceSecurityInfo/v1/queryReferenceSecurityInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd20.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceShippingList/v1/queryReferenceShippingList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd22.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceSocGroupingInfo/v1/queryReferenceSocGroupingInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd16.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceSocList/v1/queryReferenceSocList.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd17.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceStaticIpNgpInfo/v1/queryReferenceStaticIpNgpInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd18.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceTinAbaInfo/v1/queryReferenceTinAbaInfo.xsd"/>
+<xsd:import schemaLocation="QueryReferenceInfoService.xsd23.xsd" namespace="http://integration.sprint.com/interfaces/queryReferenceUfpEligibility/v1/queryReferenceUfpEligibility.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="faultmessage">
+<wsdl:part name="parameters" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAccountTypeList">
+<wsdl:part name="parameters" element="xsns:queryReferenceAccountTypeList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAccountTypeListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceAccountTypeListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAccountTypeList/v1/queryReferenceAccountTypeList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAffinityDetailInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceAffinityDetailInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAffinityDetailInfo/v1/queryReferenceAffinityDetailInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAffinityDetailInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceAffinityDetailInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAffinityDetailInfo/v1/queryReferenceAffinityDetailInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAffinityList">
+<wsdl:part name="parameters" element="xsns:queryReferenceAffinityList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAffinityList/v1/queryReferenceAffinityList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceAffinityListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceAffinityListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceAffinityList/v1/queryReferenceAffinityList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceBillCycleList">
+<wsdl:part name="parameters" element="xsns:queryReferenceBillCycleList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceBillCycleList/v1/queryReferenceBillCycleList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceBillCycleListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceBillCycleListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceBillCycleList/v1/queryReferenceBillCycleList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCardTypeInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceCardTypeInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCardTypeInfo/v1/queryReferenceCardTypeInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCardTypeInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceCardTypeInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCardTypeInfo/v1/queryReferenceCardTypeInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCorpSocList">
+<wsdl:part name="parameters" element="xsns:queryReferenceCorpSocList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCorpSocList/v1/queryReferenceCorpSocList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCorpSocListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceCorpSocListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCorpSocList/v1/queryReferenceCorpSocList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCsaInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceCsaInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCsaInfo/v1/queryReferenceCsaInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceCsaInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceCsaInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceCsaInfo/v1/queryReferenceCsaInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceDepositRequirementInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceDepositRequirementInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceDepositRequirementInfo/v1/queryReferenceDepositRequirementInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceDepositRequirementInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceDepositRequirementInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceDepositRequirementInfo/v1/queryReferenceDepositRequirementInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceHppttDomainInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceHppttDomainInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceHppttDomainInfo/v1/queryReferenceHppttDomainInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceHppttDomainInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceHppttDomainInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceHppttDomainInfo/v1/queryReferenceHppttDomainInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceInfo/v1/queryReferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceInfo/v1/queryReferenceInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceLargeBanThresholdInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceLargeBanThresholdInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceLargeBanThresholdInfo/v1/queryReferenceLargeBanThresholdInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceLargeBanThresholdInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceLargeBanThresholdInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceLargeBanThresholdInfo/v1/queryReferenceLargeBanThresholdInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceM2hoInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceM2hoInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceM2hoInfo/v1/queryReferenceM2hoInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceM2hoInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceM2hoInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceM2hoInfo/v1/queryReferenceM2hoInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceMarketInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceMarketInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceMarketInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceMarketInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceMemoTypeList">
+<wsdl:part name="parameters" element="xsns:queryReferenceMemoTypeList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceMemoTypeList/v1/queryReferenceMemoTypeList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceMemoTypeListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceMemoTypeListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceMemoTypeList/v1/queryReferenceMemoTypeList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceParameterValues">
+<wsdl:part name="parameters" element="xsns:queryReferenceParameterValues" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceParameterValues/v1/queryReferenceParameterValues.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceParameterValuesResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceParameterValuesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceParameterValues/v1/queryReferenceParameterValues.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSecurityInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceSecurityInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSecurityInfo/v1/queryReferenceSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSecurityInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceSecurityInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSecurityInfo/v1/queryReferenceSecurityInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceShippingList">
+<wsdl:part name="parameters" element="xsns:queryReferenceShippingList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceShippingList/v1/queryReferenceShippingList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceShippingListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceShippingListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceShippingList/v1/queryReferenceShippingList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSocGroupingInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceSocGroupingInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSocGroupingInfo/v1/queryReferenceSocGroupingInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSocGroupingInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceSocGroupingInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSocGroupingInfo/v1/queryReferenceSocGroupingInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSocList">
+<wsdl:part name="parameters" element="xsns:queryReferenceSocList" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSocList/v1/queryReferenceSocList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceSocListResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceSocListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceSocList/v1/queryReferenceSocList.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceStaticIpNgpInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceStaticIpNgpInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceStaticIpNgpInfo/v1/queryReferenceStaticIpNgpInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceStaticIpNgpInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceStaticIpNgpInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceStaticIpNgpInfo/v1/queryReferenceStaticIpNgpInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceTinAbaInfo">
+<wsdl:part name="parameters" element="xsns:queryReferenceTinAbaInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceTinAbaInfo/v1/queryReferenceTinAbaInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceTinAbaInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceTinAbaInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceTinAbaInfo/v1/queryReferenceTinAbaInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceUfpEligibility">
+<wsdl:part name="parameters" element="xsns:queryReferenceUfpEligibility" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceUfpEligibility/v1/queryReferenceUfpEligibility.xsd"/></wsdl:message>
+<wsdl:message name="queryReferenceUfpEligibilityResponse">
+<wsdl:part name="parameters" element="xsns:queryReferenceUfpEligibilityResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryReferenceUfpEligibility/v1/queryReferenceUfpEligibility.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryReferenceInfoPortType">
+<wsdl:operation name="QueryReferenceAccountTypeList">
+<wsdl:input name="QueryReferenceAccountTypeListRequest" message="ns0:queryReferenceAccountTypeList"/>
+<wsdl:output name="QueryReferenceAccountTypeListResponse" message="ns0:queryReferenceAccountTypeListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceAffinityDetailInfo">
+<wsdl:input name="QueryReferenceAffinityDetailInfoRequest" message="ns0:queryReferenceAffinityDetailInfo"/>
+<wsdl:output name="QueryReferenceAffinityDetailInfoResponse" message="ns0:queryReferenceAffinityDetailInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceAffinityList">
+<wsdl:input name="QueryReferenceAffinityListRequest" message="ns0:queryReferenceAffinityList"/>
+<wsdl:output name="QueryReferenceAffinityListResponse" message="ns0:queryReferenceAffinityListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceBillCycleList">
+<wsdl:input name="QueryReferenceBillCycleListRequest" message="ns0:queryReferenceBillCycleList"/>
+<wsdl:output name="QueryReferenceBillCycleListResponse" message="ns0:queryReferenceBillCycleListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceCardTypeInfo">
+<wsdl:input name="QueryReferenceCardTypeInfoRequest" message="ns0:queryReferenceCardTypeInfo"/>
+<wsdl:output name="QueryReferenceCardTypeInfoResponse" message="ns0:queryReferenceCardTypeInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceCorpSocList">
+<wsdl:input name="QueryReferenceCorpSocListRequest" message="ns0:queryReferenceCorpSocList"/>
+<wsdl:output name="QueryReferenceCorpSocListResponse" message="ns0:queryReferenceCorpSocListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceCsaInfo">
+<wsdl:input name="QueryReferenceCsaInfoRequest" message="ns0:queryReferenceCsaInfo"/>
+<wsdl:output name="QueryReferenceCsaInfoResponse" message="ns0:queryReferenceCsaInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceDepositRequirementInfo">
+<wsdl:input name="QueryReferenceDepositRequirementInfoRequest" message="ns0:queryReferenceDepositRequirementInfo"/>
+<wsdl:output name="QueryReferenceDepositRequirementInfoResponse" message="ns0:queryReferenceDepositRequirementInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceHppttDomainInfo">
+<wsdl:input name="QueryReferenceHppttDomainInfoRequest" message="ns0:queryReferenceHppttDomainInfo"/>
+<wsdl:output name="QueryReferenceHppttDomainInfoResponse" message="ns0:queryReferenceHppttDomainInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceInfo">
+<wsdl:input name="QueryReferenceInfoRequest" message="ns0:queryReferenceInfo"/>
+<wsdl:output name="QueryReferenceInfoResponse" message="ns0:queryReferenceInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceLargeBanThresholdInfo">
+<wsdl:input name="QueryReferenceLargeBanThresholdInfoRequest" message="ns0:queryReferenceLargeBanThresholdInfo"/>
+<wsdl:output name="QueryReferenceLargeBanThresholdInfoResponse" message="ns0:queryReferenceLargeBanThresholdInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceM2hoInfo">
+<wsdl:input name="QueryReferenceM2hoInfoRequest" message="ns0:queryReferenceM2hoInfo"/>
+<wsdl:output name="QueryReferenceM2hoInfoResponse" message="ns0:queryReferenceM2hoInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceMarketInfo">
+<wsdl:input name="QueryReferenceMarketInfoRequest" message="ns0:queryReferenceMarketInfo"/>
+<wsdl:output name="QueryReferenceMarketInfoResponse" message="ns0:queryReferenceMarketInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceMemoTypeList">
+<wsdl:input name="QueryReferenceMemoTypeListRequest" message="ns0:queryReferenceMemoTypeList"/>
+<wsdl:output name="QueryReferenceMemoTypeListResponse" message="ns0:queryReferenceMemoTypeListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceParameterValues">
+<wsdl:input name="QueryReferenceParameterValuesRequest" message="ns0:queryReferenceParameterValues"/>
+<wsdl:output name="QueryReferenceParameterValuesResponse" message="ns0:queryReferenceParameterValuesResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceSecurityInfo">
+<wsdl:input name="QueryReferenceSecurityInfoRequest" message="ns0:queryReferenceSecurityInfo"/>
+<wsdl:output name="QueryReferenceSecurityInfoResponse" message="ns0:queryReferenceSecurityInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceShippingList">
+<wsdl:input name="QueryReferenceShippingListRequest" message="ns0:queryReferenceShippingList"/>
+<wsdl:output name="QueryReferenceShippingListResponse" message="ns0:queryReferenceShippingListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceSocGroupingInfo">
+<wsdl:input name="QueryReferenceSocGroupingInfoRequest" message="ns0:queryReferenceSocGroupingInfo"/>
+<wsdl:output name="QueryReferenceSocGroupingInfoResponse" message="ns0:queryReferenceSocGroupingInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceSocList">
+<wsdl:input name="QueryReferenceSocListRequest" message="ns0:queryReferenceSocList"/>
+<wsdl:output name="QueryReferenceSocListResponse" message="ns0:queryReferenceSocListResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceStaticIpNgpInfo">
+<wsdl:input name="QueryReferenceStaticIpNgpInfoRequest" message="ns0:queryReferenceStaticIpNgpInfo"/>
+<wsdl:output name="QueryReferenceStaticIpNgpInfoResponse" message="ns0:queryReferenceStaticIpNgpInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceTinAbaInfo">
+<wsdl:input name="QueryReferenceTinAbaInfoRequest" message="ns0:queryReferenceTinAbaInfo"/>
+<wsdl:output name="QueryReferenceTinAbaInfoResponse" message="ns0:queryReferenceTinAbaInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation>
+<wsdl:operation name="QueryReferenceUfpEligibility">
+<wsdl:input name="QueryReferenceUfpEligibilityRequest" message="ns0:queryReferenceUfpEligibility"/>
+<wsdl:output name="QueryReferenceUfpEligibilityResponse" message="ns0:queryReferenceUfpEligibilityResponse"/>
+<wsdl:fault name="fault" message="ns0:faultmessage"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryReferenceInfoBinding" type="ns0:QueryReferenceInfoPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryReferenceAccountTypeList">
+<soap11:operation soapAction="QueryReferenceAccountTypeList" style="document"/>
+<wsdl:input name="QueryReferenceAccountTypeListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceAccountTypeListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceAffinityDetailInfo">
+<soap11:operation soapAction="QueryReferenceAffinityDetailInfo" style="document"/>
+<wsdl:input name="QueryReferenceAffinityDetailInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceAffinityDetailInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceAffinityList">
+<soap11:operation soapAction="QueryReferenceAffinityList" style="document"/>
+<wsdl:input name="QueryReferenceAffinityListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceAffinityListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceBillCycleList">
+<soap11:operation soapAction="QueryReferenceBillCycleList" style="document"/>
+<wsdl:input name="QueryReferenceBillCycleListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceBillCycleListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceCardTypeInfo">
+<soap11:operation soapAction="QueryReferenceCardTypeInfo" style="document"/>
+<wsdl:input name="QueryReferenceCardTypeInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceCardTypeInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceCorpSocList">
+<soap11:operation soapAction="QueryReferenceCorpSocList" style="document"/>
+<wsdl:input name="QueryReferenceCorpSocListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceCorpSocListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceCsaInfo">
+<soap11:operation soapAction="QueryReferenceCsaInfo" style="document"/>
+<wsdl:input name="QueryReferenceCsaInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceCsaInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceDepositRequirementInfo">
+<soap11:operation soapAction="QueryReferenceDepositRequirementInfo" style="document"/>
+<wsdl:input name="QueryReferenceDepositRequirementInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceDepositRequirementInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceHppttDomainInfo">
+<soap11:operation soapAction="QueryReferenceHppttDomainInfo" style="document"/>
+<wsdl:input name="QueryReferenceHppttDomainInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceHppttDomainInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceInfo">
+<soap11:operation soapAction="QueryReferenceInfo" style="document"/>
+<wsdl:input name="QueryReferenceInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceLargeBanThresholdInfo">
+<soap11:operation soapAction="QueryReferenceLargeBanThresholdInfo" style="document"/>
+<wsdl:input name="QueryReferenceLargeBanThresholdInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceLargeBanThresholdInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceM2hoInfo">
+<soap11:operation soapAction="QueryReferenceM2hoInfo" style="document"/>
+<wsdl:input name="QueryReferenceM2hoInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceM2hoInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceMarketInfo">
+<soap11:operation soapAction="QueryReferenceMarketInfo" style="document"/>
+<wsdl:input name="QueryReferenceMarketInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceMarketInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceMemoTypeList">
+<soap11:operation soapAction="QueryReferenceMemoTypeList" style="document"/>
+<wsdl:input name="QueryReferenceMemoTypeListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceMemoTypeListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceParameterValues">
+<soap11:operation soapAction="QueryReferenceParameterValues" style="document"/>
+<wsdl:input name="QueryReferenceParameterValuesRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceParameterValuesResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceSecurityInfo">
+<soap11:operation soapAction="QueryReferenceSecurityInfo" style="document"/>
+<wsdl:input name="QueryReferenceSecurityInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceSecurityInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceShippingList">
+<soap11:operation soapAction="QueryReferenceShippingList" style="document"/>
+<wsdl:input name="QueryReferenceShippingListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceShippingListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceSocGroupingInfo">
+<soap11:operation soapAction="QueryReferenceSocGroupingInfo" style="document"/>
+<wsdl:input name="QueryReferenceSocGroupingInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceSocGroupingInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceSocList">
+<soap11:operation soapAction="QueryReferenceSocList" style="document"/>
+<wsdl:input name="QueryReferenceSocListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceSocListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceStaticIpNgpInfo">
+<soap11:operation soapAction="QueryReferenceStaticIpNgpInfo" style="document"/>
+<wsdl:input name="QueryReferenceStaticIpNgpInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceStaticIpNgpInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceTinAbaInfo">
+<soap11:operation soapAction="QueryReferenceTinAbaInfo" style="document"/>
+<wsdl:input name="QueryReferenceTinAbaInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceTinAbaInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryReferenceUfpEligibility">
+<soap11:operation soapAction="QueryReferenceUfpEligibility" style="document"/>
+<wsdl:input name="QueryReferenceUfpEligibilityRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryReferenceUfpEligibilityResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryReferenceInfoService">
+<wsdl:port name="QueryReferenceInfoPort" binding="ns0:QueryReferenceInfoBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryReferenceInfoService"/></wsdl:port></wsdl:service></wsdl:definitions>

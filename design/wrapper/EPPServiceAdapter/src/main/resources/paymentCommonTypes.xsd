@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/paymentCommonTypes.xsd">
+	<simpleType name="BooleanType">
+		<restriction base="string">
+			<enumeration value="true"/>
+			<enumeration value="false"/>
+		</restriction>
+	</simpleType>
+	<simpleType name="StatusTypeConstants" final="restriction">
+		<restriction base="string">
+			<enumeration value="SUCCESS"/>
+			<enumeration value="FAILURE"/>
+		</restriction>
+	</simpleType>
+
+    <simpleType name="ACHAccountType" final="restriction">
+        <restriction base="string">
+            <enumeration value="CHECKING"/>
+            <enumeration value="SAVINGS"/>
+        </restriction>
+    </simpleType>
+
+	<simpleType name="MerchantId">
+		<restriction base="string">
+			<maxLength value="16"/>
+		</restriction>
+	</simpleType>
+
+    <complexType name="Address">
+        <sequence>
+            <element name="AddressLine1" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="AddressLine2" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="100"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="City" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="20"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="State" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="Country" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="ZipCode">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="5"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+
+	<complexType name="AmountInfo">
+		<sequence>
+			<element name="totalAmount" >
+			<simpleType>
+				<restriction base="decimal">
+					<totalDigits value="9" />
+					<fractionDigits value="2" />
+					<minInclusive value="0" />
+				</restriction>
+			</simpleType>
+			</element>
+			<element name="taxAmount" minOccurs="0">
+			<simpleType>
+				<restriction base="decimal">
+					<totalDigits value="9" />
+				    <fractionDigits value="2" />
+					<minInclusive value="0" />
+				</restriction>
+			</simpleType>
+			</element>
+            <element name="taxInfo" type="tns:TaxInfo" minOccurs="0"/>
+			<element name="postableAmount" >
+				<annotation>
+					<documentation>If non-zero, then this value is to be posted to billing system.</documentation>
+				</annotation>
+				<simpleType>
+				<restriction base="decimal">
+						<totalDigits value="9" />
+					<fractionDigits value="2" />
+					<minInclusive value="0" />
+				</restriction>
+			</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+    <complexType name="TaxInfo">
+        <sequence>
+            <element name="taxTransactionIdList" type="tns:taxTransactionIdList"/>
+            <element name="taxInvoiceId" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="40"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="taxInvoiceDate" type="date"/>
+            <element name="zipCode">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="5"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+	<complexType name="taxTransactionIdList">
+		<sequence>
+			<element name="taxTransactionId" maxOccurs="unbounded" type="integer"/>
+		</sequence>
+	</complexType>
+	<complexType name="ActorApp">
+		<annotation>
+			<documentation>Caller Application Info</documentation>
+		</annotation>
+		<sequence>
+			<element name="actorChannel" nillable="false">
+				<annotation>
+					<documentation> Identity of the channel this request is being sent
+						across.
+						Vendors can have multiple channels to access the system. (i.e., two
+						vendors
+						can have an IVR channel, but they are two different channels)
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="sourceTransactionId" minOccurs="0">
+				<annotation>
+					<documentation> This value is optionally provided by the originator
+						system.
+						Although this is optional, it is recommended that the originator system
+						provides a unique ID in this field for troubleshooting purposes
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="actorId">
+				<annotation>
+					<documentation> Identity of the person authorizing the activity for
+						this
+						message. if this is a self care operation then the actorId = userId and
+						can
+						be omitted. (it will default to the userId)
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="36"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="originatorsIP" minOccurs="0">
+				<annotation>
+					<documentation> IP (internet IP address) of the requestor.
+						Implementation policy
+						will determine the optionality. Will be passed to CyberSource based on
+						channel policy rules.
+					</documentation>
+				</annotation>
+				<!-- implementation policy will determine the optionality -->
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="64"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="retailerId" minOccurs="0">
+				<annotation>
+					<documentation> Retailer id which uniquely identifies the retailer
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="256"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="BanInfoAC">
+		<annotation>
+			<documentation>Account type of Ban (postpaid or prepaid)
+			</documentation>
+		</annotation>
+		<sequence>
+			<element name="ban">
+				<simpleType>
+                                        <restriction base="integer">
+                                               <minInclusive value="1"/>
+                                               <totalDigits value="9"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerBrand">
+				<annotation>
+					<documentation>Customer brand of BAN (postpaid or prepaid)
+					</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Prepaid"/>
+						<enumeration value="Postpaid"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerSubBrand">
+				<annotation>
+					<documentation>Customer sub brand BAN belongs to</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Postpaid"/>
+						<enumeration value="Boost"/>
+						<enumeration value="VMU"/>
+						<enumeration value="ASW"/>
+						<enumeration value="SPP"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerAccountType" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerAccountSubType" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="1"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="customerCreditClass" minOccurs="0">
+				<simpleType>
+					<restriction base="string">
+						<maxLength value="5"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="usgBan" type="tns:BooleanType" default="false" nillable="false">
+				<annotation>
+					<documentation>
+						Usg flag indicator based on this, fields will be encrypted.
+					</documentation>
+				</annotation>
+			</element>
+			<element name="isSpendingLimitAccount" type="tns:BooleanType" default="false" minOccurs="0"/>
+			<element name="accountAge" type="integer" minOccurs="0"/>
+		</sequence>
+	</complexType>
+
+    <complexType name="POSTerminalData">
+        <sequence>
+            <element name="terminalId" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="8"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="capabilityCode" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="1"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="entryMode" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="2"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="terminalCategory" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="1"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="merchantCategoryCode" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="4"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="merchantCity" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="25"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="merchantDescriptor" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="merchantPhone" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="15"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="merchantUrl" minOccurs="0">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+        </sequence>
+    </complexType>
+
+    <complexType name="PaymentOptionValidationFailure">
+        <sequence>
+            <element name="responseCode">
+                <simpleType>
+                    <restriction base="string">
+                        <maxLength value="256"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="responseMessage" type="string"/>
+        </sequence>
+    </complexType>
+</schema>

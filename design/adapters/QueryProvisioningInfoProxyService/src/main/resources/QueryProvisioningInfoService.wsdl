@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QueryProvisioningInfoService/v1/QueryProvisioningInfoService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QueryProvisioningInfoService/v1/QueryProvisioningInfoService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryProvisioningInfoService.xsd6.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryProvisioningInfoService.xsd5.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryProvisioningInfoService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/queryDeviceProvisioningEvents/v1/queryDeviceProvisioningEvents.xsd"/>
+<xsd:import schemaLocation="QueryProvisioningInfoService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryProgrammingInfo/v1/queryProgrammingInfo.xsd"/>
+<xsd:import schemaLocation="QueryProvisioningInfoService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryProgrammingInstructions/v1/queryProgrammingInstructions.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryDeviceProvisioningEvents">
+<wsdl:part name="parameters" element="xsns:queryDeviceProvisioningEvents" xmlns:xsns="http://integration.sprint.com/interfaces/queryDeviceProvisioningEvents/v1/queryDeviceProvisioningEvents.xsd"/></wsdl:message>
+<wsdl:message name="queryDeviceProvisioningEventsResponse">
+<wsdl:part name="parameters" element="xsns:queryDeviceProvisioningEventsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryDeviceProvisioningEvents/v1/queryDeviceProvisioningEvents.xsd"/></wsdl:message>
+<wsdl:message name="queryProgrammingInfoRequest">
+<wsdl:part name="queryProgrammingInfoRequest" element="xsns:queryProgrammingInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryProgrammingInfo/v1/queryProgrammingInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryProgrammingInfoResponse">
+<wsdl:part name="queryProgrammingInfoResponse" element="xsns:queryProgrammingInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryProgrammingInfo/v1/queryProgrammingInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryProgrammingInstructions">
+<wsdl:part name="parameters" element="xsns:queryProgrammingInstructions" xmlns:xsns="http://integration.sprint.com/interfaces/queryProgrammingInstructions/v1/queryProgrammingInstructions.xsd"/></wsdl:message>
+<wsdl:message name="queryProgrammingInstructionsResponse">
+<wsdl:part name="parameters" element="xsns:queryProgrammingInstructionsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryProgrammingInstructions/v1/queryProgrammingInstructions.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryProvisioningInfoServicePortType">
+<wsdl:operation name="QueryDeviceProvisioningEvents">
+<wsdl:input name="QueryDeviceProvisioningEventsRequest" message="ns0:queryDeviceProvisioningEvents"/>
+<wsdl:output name="QueryDeviceProvisioningEventsResponse" message="ns0:queryDeviceProvisioningEventsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryProgrammingInfo">
+<wsdl:input name="QueryProgrammingInfoRequest" message="ns0:queryProgrammingInfoRequest"/>
+<wsdl:output name="QueryProgrammingInfoResponse" message="ns0:queryProgrammingInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryProgrammingInstructions">
+<wsdl:input name="QueryProgrammingInstructionsRequest" message="ns0:queryProgrammingInstructions"/>
+<wsdl:output name="QueryProgrammingInstructionsResponse" message="ns0:queryProgrammingInstructionsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryProvisioningInfoServiceSOAPBinding" type="ns0:QueryProvisioningInfoServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryDeviceProvisioningEvents">
+<soap11:operation soapAction="QueryDeviceProvisioningEvents" style="document"/>
+<wsdl:input name="QueryDeviceProvisioningEventsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryDeviceProvisioningEventsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryProgrammingInfo">
+<soap11:operation soapAction="QueryProgrammingInfo" style="document"/>
+<wsdl:input name="QueryProgrammingInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryProgrammingInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryProgrammingInstructions">
+<soap11:operation soapAction="QueryProgrammingInstructions" style="document"/>
+<wsdl:input name="QueryProgrammingInstructionsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryProgrammingInstructionsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryProvisioningInfoService">
+<wsdl:port name="QueryProvisioningInfoServicePortType" binding="ns0:QueryProvisioningInfoServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryProvisioningInfoService"/></wsdl:port></wsdl:service></wsdl:definitions>

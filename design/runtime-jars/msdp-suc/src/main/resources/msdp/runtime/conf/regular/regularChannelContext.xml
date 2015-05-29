@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+             http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd"
+	default-init-method="init">
+	<description>This file contains installation overrides for the
+		'regular' channel.
+	</description>
+
+	<!-- Start: Do not change -->
+	<context:property-placeholder location="file:/opt/drutt/msdp/runtime/conf/runtimeContext.properties" />
+	<import resource="classpath:com/drutt/msdp/runtime/ee/command-regular-context.xml" />
+	<!-- End: Do not change -->
+
+	<!-- Add overrides below -->
+	<bean name="AuthenticateUser" class="com.drutt.pmm.runtime.ee.user.AuthenticateUser">
+		<property name="allowedModules">
+			<description>The UUIDs of the allowed modules</description>
+			<set>
+				<value>authorize</value>
+				<value>authorizeweb</value>
+				<value>registrationsms</value>
+				<value>changepincodesms</value>
+				<!-- ##AllowedModulesPlaceHolder## -->
+			</set>
+		</property>
+	</bean>
+
+	<bean name="SaveBrowserHistory" class="com.drutt.pmm.runtime.ee.portal.SaveBrowserHistory">
+		<property name="maxHistoryEntries" value="5">
+			<description>Max number of history entries to save.</description>
+		</property>
+		<property name="noHistorySaveModules">
+			<description>UUID of modules or pages that should not be saved in
+				history.
+			</description>
+			<set>
+				<value>adult-authorize</value>
+				<value>authorize</value>
+				<value>authorizeweb</value>
+				<value>changepincodesms</value>
+				<value>download</value>
+				<value>download-manager</value>
+				<value>commerce</value>
+				<value>download-notify</value>
+				<value>download-handler</value>
+				<value>install-notify</value>
+				<value>pincode</value>
+				<value>premium</value>
+				<value>registrationsms</value>
+				<value>search</value>
+				<value>OpenSurfRegistration</value>
+				<value>splashPage</value>
+				<value>entry-splash</value>
+				<value>welcome</value>
+			</set>
+		</property>
+	</bean>
+
+	<bean name="ca.setupPhoneCookie" class="com.ericsson.sprint.ca.SetupPhoneCookie">
+		<property name="cookieName" value="phonemsisdn" />
+		<property name="parameterName" value="msisdn" />
+		<property name="guestUserPolicy" ref="GuestUserPolicy" />
+		<property name="secureCookieMaxAgeInSecond">
+			<description>the secure cookie's maxAge in second unit,1 year by default.
+			</description>
+			<!-- Default 1 week in seconds -->
+			<value>36288000</value>
+		</property>
+		<property name="userSecureTokenPolicy" ref="UserSecureTokenPolicy"/>
+	</bean>
+
+	<bean name="ca.SetupUserLoginContext" class="com.ericsson.sprint.ca.SetupLoginContext" scope="prototype">
+		<description>user lookup and suc based on parameter sent in http. if
+			user does not exist, it
+			creates user and setup context
+		</description>
+		<property name="serviceLocator" ref="ServiceLocator" />
+		<property name="guestUserPolicy" ref="GuestUserPolicy"/>
+		<property name="userSecureTokenPolicy" ref="UserSecureTokenPolicy"/>
+		<!-- Note: Those values are default from MSDP. They should not be overwritten. Only Guest Bean is overriden! -->
+		<property name="cookieName" value="portaluser"/>
+    	<property name="headerName" value="X-Drutt-IP"/>
+	</bean>
+
+	<bean name="ca.identifyBrand" class="com.ericsson.sprint.ca.IdentifyBrand">
+	<property name="urlBrandPattern">
+		<set>
+			<value>sprint</value>
+			<value>boost[^\\.]+</value>
+		</set>
+	</property>
+	</bean>
+	
+	<bean name="ca.isDoLogin" class="com.ericsson.sprint.ca.ParameterVerifier" scope="prototype">
+	    <description>check if doLogin comes as true
+	    </description>
+	    <property name="paramName" value="doLogin" />
+	    <property name="paramValue" value="true" />
+  	</bean>
+	
+	<!-- Test Purpose -->
+    <!-- <bean name="test.TestDoLogin" class="com.ericsson.sprint.ca.TestDoLogin">
+    </bean>
+	 -->
+	 <!-- Overriding the RedirectUnAuthorized in order to do error mapping and location should show the Error 
+		Mapping Jsp page -->
+	<bean name="RedirectUnauthorized" parent="abstractRedirectUnauthorized">
+		<property name="location" value="jsp/PMMAuthorize.jsp" />
+	</bean>
+
+	<bean name="ServiceLocator" class="com.ericsson.drutt.ws.client.ServiceLocator">    
+	    <property name="url">
+	      <description>Url to external UserLookupWebService</description>
+	      <value>${userLookup.commandUrl}</value>
+	    </property>
+	    <property name="wsUser">
+	      <description>Username for logon to external UserLookupWebService</description>
+	      <null/>
+	    </property>
+	    <property name="wsPassword">
+	      <description>Password for logon to external UserLookupWebService</description>
+	      <null/>
+	    </property>
+  	</bean>
+  	
+  	<!-- Overriding the Default SetupGuestUser -->
+  	<bean name="abstractSetupGuestUserContext" class="com.ericsson.sprint.ca.SetupGuestUser" abstract="true">
+    	<property name="userPolicy" ref="UserPolicy"/>
+  	</bean>
+  	<!-- Overriding the following default GuestPolicy bean -->
+	<bean name="abstractGuestUserPolicy" class="com.ericsson.sprint.ca.CustomGuestUserPolicy" abstract="true">
+	    <property name="additionalUserMeta">
+	      <map>
+	        <entry key="category" value="guest" />
+	      </map>
+	    </property>
+	    <property name="userPrefix" value="GUEST-"/>
+	    <property name="guestUserMetaIdentifier" value="category" />
+  	</bean>
+
+	<!-- Do we need this?Checking the content-types ? -->
+	<!-- <bean name="IsRefreshDownload" class="com.drutt.pmm.runtime.ee.download.IsRefreshDownload"> <property 
+		name="contentTypes"> <list> <value>application/vnd.ms-cab-compressed</value> <value>application/x-msdownload</value> 
+		<value>text/vnd.sun.j2me.app-descriptor</value> <value>application/vnd.rim.cod</value> <value>application/vnd.android.package-archive</value> 
+		<value>application/zip</value> </list> </property> </bean> -->
+
+</beans>

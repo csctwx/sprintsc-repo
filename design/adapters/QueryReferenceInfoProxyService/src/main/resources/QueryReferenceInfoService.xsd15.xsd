@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceSecurityInfo/v1/queryReferenceSecurityInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceSecurityInfo/v1/queryReferenceSecurityInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	
+<xs:element name="queryReferenceSecurityInfo" type="tns:QueryReferenceSecurityInfoRequest"/>
+	
+<xs:element name="queryReferenceSecurityInfoResponse" type="tns:QueryReferenceSecurityInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceSecurityInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="securityInfo" type="tns:SecurityInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceSecurityInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="securityInfo" type="tns:RequestedSecurityInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ByPassRsnCodeInfo">
+		
+<xs:sequence>
+			
+<xs:element name="byPassReasonCode" type="tns:SecurityBypassReasonCode"/>
+			
+<xs:element name="byPassReason" type="tns:SecurityBypassReasonText"/>
+			
+<xs:element name="salesChannelCode" type="tns:SalesChannelId"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ByPassRsnCodeList">
+		
+<xs:sequence>
+			
+<xs:element name="byPassReasonCodeInfo" type="tns:ByPassRsnCodeInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestedSecurityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeEns" minOccurs="0"/>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCode" minOccurs="0"/>
+			
+<xs:element name="brandCode" type="tns:BrandCode" minOccurs="0"/>
+			
+<xs:element name="salesChannelCode" type="tns:SalesChannelId" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecurityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="securityPlusInd" type="tns:SecurityPlusFlag"/>
+			
+<xs:element name="securityQuestionList" type="tns:SecurityQuestionList"/>
+			
+<xs:element name="byPassReasonCodeList" type="tns:ByPassRsnCodeList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecurityQuestionInfo">
+		
+<xs:sequence>
+			
+<xs:element name="questionCode" type="tns:SecurityQuestionIdentifier"/>
+			
+<xs:element name="question" type="tns:SecurityQuestionText"/>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeEns"/>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCode"/>
+			
+<xs:element name="brandCode" type="tns:BrandCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SecurityQuestionList">
+		
+<xs:sequence>
+			
+<xs:element name="securityQuestionInfo" type="tns:SecurityQuestionInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="BillingAccountSubTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+			
+<xs:documentation>Ensemble Documentation is inadequate.  
+TODO: Get better description.
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelId">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityQuestionIdentifier">
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="BrandCode">
+		
+<xs:annotation>
+			
+<xs:documentation>The Brand Code is a 3 byte code denoting which brand the subscriber belongs to.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityBypassReasonCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Security Bypass Reason Code identifies a reason for bypassing security validation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityBypassReasonText">
+		
+<xs:annotation>
+			
+<xs:documentation>Security Bypass Reason Text is text holding the reason for bypassing security validation.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityPlusFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Security Plus Flag indicates  if security Plus functionality is enabled in Ensemble.  Note. If customer has securityPlus set for itself, the representative authenticating the customer would not be able to bypass the security authentication
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SecurityQuestionText">
+		
+<xs:annotation>
+			
+<xs:documentation>Security Question Text is the actual text of the security question.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

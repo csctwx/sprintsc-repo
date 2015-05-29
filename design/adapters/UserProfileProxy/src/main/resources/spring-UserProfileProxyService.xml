@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.ericsson.cac.sprint.adapters" />
+
+    <aop:aspectj-autoproxy />
+
+    <bean id="queryPrepaidSubscriberPortType" class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceInterface" value="com.drutt.ws.msdp.userprofile_v2.UserProfileService" />
+        <property name="namespaceUri" value="http://ws.drutt.com/msdp/userprofile-v2" />
+        <property name="serviceName" value="UserProfileServiceImplService" />
+        <property name="wsdlDocumentUrl" value="${UserProfileService.wsdl}" />
+        <property name="endpointAddress" value="${UserProfileService.endpoint}" />
+    </bean>
+
+</beans>

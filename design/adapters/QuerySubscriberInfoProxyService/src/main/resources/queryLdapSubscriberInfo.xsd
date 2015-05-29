@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by LEE VAN AALSBURG (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryLdapSubscriberInfo/v1/queryLdapSubscriberInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryLdapSubscriberInfo/v1/queryLdapSubscriberInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                      Version    Change                                                                                                 Rel                   SR# -->
+	<!--10/17/2011   Steve Heichelheim      1.0            Initial version - Added MVM standards and simple types.              GBL12.1          PJ005765-->
+	<xs:element name="queryLdapSubscriberInfo" type="tns:QueryLdapSubscriberInfoType">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="queryLdapSubscriberInfoResponse" type="tns:QueryLdapSubscriberInfoResponseType"/>
+	<xs:complexType name="QueryLdapSubscriberInfoType">
+		<xs:sequence>
+			<xs:element name="subscriberInfo" type="tns:SearchCriteriaType">
+				<xs:annotation>
+					<xs:documentation>Search by choice data elements of subscriber information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryLdapSubscriberInfoResponseType">
+		<xs:sequence>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobile Directory Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>For CDMA platform, this field will be populated with ESN. Accepts hexadecimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="esnMeidHex" type="tns:DeviceSerialNumberHexType">
+				<xs:annotation>
+					<xs:documentation>The ESN/MEID serial number in hexadecimal format</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Network Access Identifier (e.g. username@domain) where domain should be of the form str1.str2. No validation will be done on input value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchCriteriaType">
+		<xs:choice>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>Mobile Directory Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				<xs:annotation>
+					<xs:documentation>For CDMA platform, this field will be populated with ESN. Accepts hexadecimal format.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				<xs:annotation>
+					<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The Network Access Identifier (e.g. username@domain) where domain should be of the form str1.str2. No validation will be done on input value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="DeviceSerialNumberHexType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressStringType">
+		<xs:annotation>
+			<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

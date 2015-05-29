@@ -1,0 +1,245 @@
+<div>
+  <section class="compareHeader">
+    <h2>Compare Phones</h2>
+    <div class="col-xs-12">
+      <a ng-href="{{pathMap._phones._hash}}">Return to Shop Phones</a>
+    </div>
+  </section>
+  <div ng-show="phoneController.compareItems.data.items.length==0" style="padding:50px;padding-top:100px">
+  <h3>No item to compare.</h3>
+  </div>
+  <section class="compare hidden-xs hidden-sm" ng-show="phoneController.compareItems.data.items.length!=0">
+    <div class="col-xs-12 sticker" data-spy="affix">
+      <div class="col-xs-2 variableLabel">
+        <div>
+          <p>Phones</p>
+        </div>
+      </div>
+      <div class="col-xs-10">
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="phoneController.compareItems.getValueById(idx,'id')">
+          <a href="{{pathMap._phoneDetails._hash}}{{phoneController.compareItems.getValueById(idx,'id')}}/features/"><img alt="{{phoneController.compareItems.getValueById(idx,'brand')}} {{phoneController.compareItems.getValueById(idx,'name')}} - Sprint Prepaid" ng-src="{{phoneController.compareItems.getValueById(idx,'compare_img')}}"></img></a>
+          <div>
+            <p class="title"><span class="phoneBrand">{{phoneController.compareItems.getValueById(idx,'brand')}}</span><span class="phoneName">{{phoneController.compareItems.getValueById(idx,'name')}}</span></p>
+            <h4 class="phoneFinalPrice">{{phoneController.compareItems.getValueById(idx,'price')}}</h4>
+            <a class="btn btn-primary" href="{{pathMap._phoneDetails._hash}}{{phoneController.compareItems.getValueById(idx,'id')}}/features/">Learn more</a>
+          </div>
+          <a class="remove" href="javascript:" ng-click="phoneController.compareItems.removeItem(phoneController.compareItems.data.items[idx])"><i class="glyphicon glyphicon-remove-circle"></i></a>
+        </div>
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="!phoneController.compareItems.getValueById(idx,'id')">
+          <a class="addphone" ng-href="{{pathMap._phones._hash}}"><h3>Add a phone</h3></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="col-xs-2 variableLabel">
+        <div>
+          <p>Promotions</p>
+        </div>
+<!--
+        <div>
+          <p>Customer Rating <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="We think our phones are great but don't just take our word for it.  See how actual Sprint Prepaid customers rank and review them all."></span></p>
+        </div>
+-->
+      </div>
+      <div class="col-xs-10">
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="phoneController.compareItems.getValueById(idx,'id')">
+          <div>
+            <p>FREE SHIPPING. All the time. Ship to anywhere in the United States free.</p>
+          </div>
+<!--
+          <div>
+            <p class="rating">
+              <span>
+                {{phoneController.getRateStarClass(phoneController.compareItems.getValueById(idx,'rate'))}}
+              </span>
+              <a class="reviews">{{phoneController.compareItems.getValueById(idx,'review')}}</a>
+            </p>
+          </div>
+-->
+        </div>
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="!phoneController.compareItems.getValueById(idx,'id')">
+          <div><p></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 sub-section">
+      <h2>Features</h2>
+    </div>
+    <div class="col-xs-12">
+      <div class="col-xs-2 variableLabel">
+        <div>
+          <p>Phone Type/OS <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Your phone's operating system is what makes it work. A more advanced OS lets your phone do more - so you can make it work for you."></span></p>
+        </div>
+        <div>
+          <p>Display <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Phone screens come in different sizes.  Backlit display phones use keys and buttons, while touchscreens let you swipe and tap your way around."></span></p>
+        </div>
+        <div>
+          <p>Camera <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Take pictures with your phone. Look for higher megapixels (MP) for better image quality."></span></p>
+        </div>
+        <div>
+          <p>Wi-Fi <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="A Wi-Fi®-enabled phone lets you link to the same high-speed wireless networks used by laptops and tablets."></span></p>
+        </div>
+        <div>
+          <p>Sprint 4G Network <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Connect superfast on the Sprint 4G Network available in select cities."></span></p>
+        </div>
+        <div>
+          <p>Hotspot <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Mobile Hotspot allows you to share your data connection with your laptop, tablet or other devices by turning your phone into a wireless access point.  Currently, mobile hotspot is available on several SPP devices."></span></p>
+        </div>
+        <div>
+          <p>QWERTY Keyboard <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="A QWERTY keyboard looks just like your computer keyboard, but in miniature. With a 'physical' keyboard, you're actually pushing real buttons. With the 'virtual' version, it's a touchscreen."></span></p>
+        </div>
+        <div>
+          <p>Web Browser <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="HTML browsers display websites the same way they'd appear on a computer screen. WAP browsers show those same web pages but in a more phone-friendly version."></span></p>
+        </div>
+        <div>
+          <p>Flash Player <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Some of the coolest videos and online content only work on phones with a Flash Player."></span></p>
+        </div>
+        <div>
+          <p>Email <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Most phones let you send and receive emails - but some make it super easy by linking directly to your email for one-click access."></span></p>
+        </div>
+        <div>
+          <p>Video <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Turn your phone into a mini video camera with the touch of a button."></span></p>
+        </div>
+        <div>
+          <p>Music Player <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Play your music right from your phone. Create playlists and listen through earbuds or even stereo Bluetooth®, depending on the phone."></span></p>
+        </div>
+        <div>
+          <p>Navigation Services <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="GPS navigation gives you interactive maps and turn-by-turn instructions to keep you on the right path."></span></p>
+        </div>
+        <div>
+          <p>Speakerphone <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Put your phone on speaker and free up your hands for other things. Some phones even have voice recognition, so you can make calls just by telling it who to dial."></span></p>
+        </div>
+        <div>
+          <p>Memory <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Portion of memory used by existing content.  A portion of phone memory storage is dedicated to the operating system and required services.  As a result this portion of memory is not usable by applications, pictures, videos or other personal data."></span></p>
+        </div>
+        <div>
+          <p>Processor <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="A good processor makes your phone work fast. A great one lets it work even faster and play cool games and videos."></span></p>
+        </div>
+        <div>
+          <p>Calendar <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="A calendar right on your phone helps you track appointments, tasks and important dates."></span></p>
+        </div>
+        <div>
+          <p>Visual Voicemail <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Get a text version of your voice messages sent right to your phone's screen. This saves you from listening to calls you'd rather skip or replaying messages to hear key details."></span></p>
+        </div>
+        <div>
+          <p>Nationwide Sprint 3G Network <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="3G makes your phone work lightning-fast with high-speed wireless service. Because who has time to wait around?"></span></p>
+        </div>
+      </div>
+      <div class="col-xs-10">
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="phoneController.compareItems.getValueById(idx,'id')">
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'os')}}</p>
+          </div>
+          <div title="{{phoneController.compareItems.getValueById(idx,'compareFeatures.general.display.description')}}">
+            <p>{{phoneController.compareItems.getValueById(idx,['display.value','touchscreen.value'])}}</p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'camera.value')}}</p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'wifi')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'fourG.value')}}</p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'hotspot')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'qwertyKeyboard.value')}}</p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'webBrowser.value')}}</p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'flashPlayer')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'email')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'video')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'musicPlayer')}}</p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'gps')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'speakerphone')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'memory')}}</p>
+          </div>
+          <div>
+            <p>{{phoneController.compareItems.getValueById(idx,'processor.value')}}</p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'calendar')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'voicemail')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+          <div>
+            <p><i class="glyphicon glyphicon-{{phoneController.compareItems.getValueById(idx,'threeG')=='Yes'?'ok':'remove'}}"></i></p>
+          </div>
+        </div>
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="!phoneController.compareItems.getValueById(idx,'id')">
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+          <div><p></p></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 sub-section">
+      <h2>Specifications</h2>
+    </div>
+    <div class="col-xs-12">
+      <div class="col-xs-2 variableLabel">
+        <div>
+          <p>Battery Life <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Varies by model and by how you use your phone. You'll need some for chatting with your friends; more for playing games and video."></span></p>
+        </div>
+        <div class="dimensions">
+          <p>Weight &amp; Dimensions <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right" title="Whether you want light and streamlined or solid and sturdy, we've got the phone for you."></span></p>
+        </div>
+      </div>
+      <div class="col-xs-10">
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="phoneController.compareItems.getValueById(idx,'id')">
+          <div>
+            <p><span>Talk Time:</span>{{phoneController.compareItems.getValueById(idx,'talking_time')}}</p>
+          </div>
+          <div class="dimensions">
+            <p><span>Weight:</span>{{phoneController.compareItems.getValueById(idx,'weight')}},<span>Dimensions:</span>{{phoneController.compareItems.getValueById(idx,'height')}}H x {{phoneController.compareItems.getValueById(idx,'width')}}W x {{phoneController.compareItems.getValueById(idx,'depth')}}D,<span>Screen Size:</span>{{phoneController.compareItems.getValueById(idx,'screen_size')}}</p>
+          </div>
+        </div>
+        <div class="col-xs-3" ng-repeat="idx in [0,1,2,3]" ng-if="!phoneController.compareItems.getValueById(idx,'id')">
+          <div><p></p></div>
+          <div class="dimensions"><p></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="compareFooter hidden-xs hidden-sm">
+    <div class="col-xs-12">
+      <a ng-href="{{pathMap._phones._hash}}">Return to Shop Phones</a>
+    </div>
+  </section>
+  <phone-list-legal></phone-list-legal>
+</div>

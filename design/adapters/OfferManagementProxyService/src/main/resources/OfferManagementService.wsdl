@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/OfferManagementService/v1/OfferManagementService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/OfferManagementService/v1/OfferManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="OfferManagementService.xsd10.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd9.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="OfferManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryDispositionReason/v1/queryDispositionReason.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/queryNonTargetedOffers/v1/queryNonTargetedOffers.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/queryOffersHistory/v1/queryOffersHistory.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryPromotionalOffers/v1/queryPromotionalOffers.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryTargetedOffers/v1/queryTargetedOffers.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryTargetedSubscriber/v1/queryTargetedSubscriber.xsd"/>
+<xsd:import schemaLocation="OfferManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/setOfferDisposition/v1/setOfferDisposition.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryDispositionReason">
+<wsdl:part name="parameters" element="xsns:queryDispositionReason" xmlns:xsns="http://integration.sprint.com/interfaces/queryDispositionReason/v1/queryDispositionReason.xsd"/></wsdl:message>
+<wsdl:message name="queryDispositionReasonResponse">
+<wsdl:part name="parameters" element="xsns:queryDispositionReasonResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryDispositionReason/v1/queryDispositionReason.xsd"/></wsdl:message>
+<wsdl:message name="queryNonTargetedOffers">
+<wsdl:part name="parameters" element="xsns:queryNonTargetedOffers" xmlns:xsns="http://integration.sprint.com/interfaces/queryNonTargetedOffers/v1/queryNonTargetedOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryNonTargetedOffersResponse">
+<wsdl:part name="parameters" element="xsns:queryNonTargetedOffersResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryNonTargetedOffers/v1/queryNonTargetedOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryOffersHistory">
+<wsdl:part name="parameters" element="xsns:queryOffersHistory" xmlns:xsns="http://integration.sprint.com/interfaces/queryOffersHistory/v1/queryOffersHistory.xsd"/></wsdl:message>
+<wsdl:message name="queryOffersHistoryResponse">
+<wsdl:part name="parameters" element="xsns:queryOffersHistoryResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryOffersHistory/v1/queryOffersHistory.xsd"/></wsdl:message>
+<wsdl:message name="queryPromotionalOffers">
+<wsdl:part name="parameters" element="xsns:queryPromotionalOffers" xmlns:xsns="http://integration.sprint.com/interfaces/queryPromotionalOffers/v1/queryPromotionalOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryPromotionalOffersResponse">
+<wsdl:part name="parameters" element="xsns:queryPromotionalOffersResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryPromotionalOffers/v1/queryPromotionalOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryTargetedOffers">
+<wsdl:part name="parameters" element="xsns:queryTargetedOffers" xmlns:xsns="http://integration.sprint.com/interfaces/queryTargetedOffers/v1/queryTargetedOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryTargetedOffersResponse">
+<wsdl:part name="parameters" element="xsns:queryTargetedOffersResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryTargetedOffers/v1/queryTargetedOffers.xsd"/></wsdl:message>
+<wsdl:message name="queryTargetedSubscriber">
+<wsdl:part name="parameters" element="xsns:queryTargetedSubscriber" xmlns:xsns="http://integration.sprint.com/interfaces/queryTargetedSubscriber/v1/queryTargetedSubscriber.xsd"/></wsdl:message>
+<wsdl:message name="queryTargetedSubscriberResponse">
+<wsdl:part name="parameters" element="xsns:queryTargetedSubscriberResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryTargetedSubscriber/v1/queryTargetedSubscriber.xsd"/></wsdl:message>
+<wsdl:message name="setOfferDisposition">
+<wsdl:part name="parameters" element="xsns:setOfferDisposition" xmlns:xsns="http://integration.sprint.com/interfaces/setOfferDisposition/v1/setOfferDisposition.xsd"/></wsdl:message>
+<wsdl:message name="setOfferDispositionResponse">
+<wsdl:part name="parameters" element="xsns:setOfferDispositionResponse" xmlns:xsns="http://integration.sprint.com/interfaces/setOfferDisposition/v1/setOfferDisposition.xsd"/></wsdl:message>
+<wsdl:message name="soapFaultv2">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="OfferManagementServicePortType">
+<wsdl:operation name="QueryDispositionReason">
+<wsdl:input name="QueryDispositionReasonRequest" message="ns0:queryDispositionReason"/>
+<wsdl:output name="QueryDispositionReasonResponse" message="ns0:queryDispositionReasonResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryNonTargetedOffers">
+<wsdl:input name="QueryNonTargetedOffersRequest" message="ns0:queryNonTargetedOffers"/>
+<wsdl:output name="QueryNonTargetedOffersResponse" message="ns0:queryNonTargetedOffersResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryOffersHistory">
+<wsdl:input name="QueryOffersHistoryRequest" message="ns0:queryOffersHistory"/>
+<wsdl:output name="QueryOffersHistoryResponse" message="ns0:queryOffersHistoryResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryPromotionalOffers">
+<wsdl:input name="QueryPromotionalOffersRequest" message="ns0:queryPromotionalOffers"/>
+<wsdl:output name="QueryPromotionalOffersResponse" message="ns0:queryPromotionalOffersResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryTargetedOffers">
+<wsdl:input name="QueryTargetedOffersRequest" message="ns0:queryTargetedOffers"/>
+<wsdl:output name="QueryTargetedOffersResponse" message="ns0:queryTargetedOffersResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryTargetedSubscriber">
+<wsdl:input name="QueryTargetedSubscriberRequest" message="ns0:queryTargetedSubscriber"/>
+<wsdl:output name="QueryTargetedSubscriberResponse" message="ns0:queryTargetedSubscriberResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="SetOfferDisposition">
+<wsdl:input name="SetOfferDispositionRequest" message="ns0:setOfferDisposition"/>
+<wsdl:output name="SetOfferDispositionResponse" message="ns0:setOfferDispositionResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="OfferManagementServiceSOAPBinding" type="ns0:OfferManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryDispositionReason">
+<soap11:operation soapAction="QueryDispositionReason" style="document"/>
+<wsdl:input name="QueryDispositionReasonRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryDispositionReasonResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryNonTargetedOffers">
+<soap11:operation soapAction="QueryNonTargetedOffers" style="document"/>
+<wsdl:input name="QueryNonTargetedOffersRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryNonTargetedOffersResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryOffersHistory">
+<soap11:operation soapAction="QueryOffersHistory" style="document"/>
+<wsdl:input name="QueryOffersHistoryRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryOffersHistoryResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryPromotionalOffers">
+<soap11:operation soapAction="QueryPromotionalOffers" style="document"/>
+<wsdl:input name="QueryPromotionalOffersRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryPromotionalOffersResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryTargetedOffers">
+<soap11:operation soapAction="QueryTargetedOffers" style="document"/>
+<wsdl:input name="QueryTargetedOffersRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryTargetedOffersResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryTargetedSubscriber">
+<soap11:operation soapAction="QueryTargetedSubscriber" style="document"/>
+<wsdl:input name="QueryTargetedSubscriberRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryTargetedSubscriberResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SetOfferDisposition">
+<soap11:operation soapAction="SetOfferDisposition" style="document"/>
+<wsdl:input name="SetOfferDispositionRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SetOfferDispositionResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="OfferManagementService">
+<wsdl:port name="OfferManagementServicePortType" binding="ns0:OfferManagementServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/OfferManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

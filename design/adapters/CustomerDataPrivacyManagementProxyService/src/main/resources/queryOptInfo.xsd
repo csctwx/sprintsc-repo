@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2009 sp1 (http://www.altova.com) by santosh (-) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryOptInfo/v1/queryOptInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryOptInfo/v1/queryOptInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<!-- Date              Author                         Version    Change                                                                               Rel                    SR# -->
+	<!--05/29/2009    Santosh Bharadwaj     Created XSD	                                                                                      SDC Rel B         E4637-->
+	<!--06/03/2009    Santosh Bharadwaj      Changed name of elements                                                              SDC Rel B         E4637-->
+	<!--06/05/2009    Steve Heichelheim      1.0 applied MVM standards                                                                SDC Rel B         E4637-->
+	<xs:element name="queryOptInfo" type="tns:QueryOptInfoType"/>
+	<xs:element name="queryOptInfoResponse" type="tns:QueryOptInfoResponseType"/>
+	<xs:complexType name="QueryOptInfoType">
+		<xs:sequence>
+			<xs:element name="info" type="tns:BanInfoType">
+				<xs:annotation>
+					<xs:documentation>List wrapping the banInfo </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryOptInfoResponseType">
+		<xs:sequence>
+			<xs:element name="boboInd" type="tns:BillingOnBehalfOfOthersOptInFlagType">
+				<xs:annotation>
+					<xs:documentation>This attribute will qualify the nature of a customer's decision to agree or disagree with BOBO OptIn policies.Values are: true - Customer agrees to OptIn   false - Customer does not agree and has chosen to OptOut</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<xs:complexType name="BanInfoType">
+		<xs:choice>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>The field describes the  Mdn for a customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The field describes the Network Access Indicator (e.g. username@domain) where domain should be of the form str1.str2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<!---->
+	<!--MVM / Shared Simple Types-->
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!--New Simple Types-->
+	<xs:simpleType name="BillingOnBehalfOfOthersOptInFlagType">
+		<xs:annotation>
+			<xs:documentation>This attribute will qualify the nature of a customer's decision to agree or disagree with BOBO OptIn policies.Values are: "Y" - Customer agrees to OptIn   "N" - Customer does not agree and has chosen to OptOut
+</xs:documentation>
+			<xs:documentation/>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

@@ -1,0 +1,1754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/querySubscriberData/v1/querySubscriberData.xsd" targetNamespace="http://integration.sprint.com/interfaces/querySubscriberData/v1/querySubscriberData.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.7">
+	
+<!-- Date              Author                     Change                                                                                                                           Rel                  SR# -->
+	
+<!--12/23/2010   Adriana Fernandes/Jocelen Silva    Initial Draft                                                                                               GBL11.2          PJ000989-->
+	
+<!--12/23/2010  Steve Heichelheim        1.1    Applied MVM standards and simple types                                                         GBL11.2         PJ000989-->
+	
+<!--02/23/2011  Steve Heichelheim        1.2    added effectiveTime and expirationTime to DeviceDetailsInfoType                   GBL11.2         PJ000989-->
+	
+<!--06/16/2011  Steve Heichelheim     1.3           Added lteImsi and lteIccId to deviceDetailsInfo in the response                     GBL11.4         PJ004907     -->
+	
+<!--07/20/2011 Jocelen Silva                 1.4    Changed ixcCode, ixcEffectiveDate in response to optional                              Prod               IM457104 -->
+	
+<!--07/21/2011 Steve Heichelheim        1.5    Changed ModelNumber and ManufacturerShortName maxLen to 20                  Prod               IM457104 -->
+	
+<!--11/14/2011 Ibrahim ElKhatib             1.6   Changed passwordType (unencryptedPassword element) restriction to minLen=6, maxLen=32  Prod  SD741309/IM690068-->
+	
+<!--02/08/2012  Steve Heichelheim      1.7   Added serialType to deviceDetailsInfo.                                                                GBL12.2 PJ006784-->
+	
+<xs:element name="querySubscriberData" type="tns:QuerySubscriberDataType"/>
+	
+<xs:element name="querySubscriberDataResponse" type="tns:QuerySubscriberDataResponseType"/>
+	
+<xs:complexType name="QuerySubscriberDataType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>This structure contains the choice fields/structures that will identify the subscriber for the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchDeviceInfo" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether to request Device Information.
+If ‘true’, device data will be included in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fetchFeatureInfo" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether to request Feature Information.
+If ‘true’, feature data will be included in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="historyInd" type="tns:FetchInformationFlagType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator that specifies if historical data is needed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QuerySubscriberDataResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing subscriber details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="CurrentNaiInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="naiDetailsInfo" type="tns:NaiDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's NAI details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DataLinkDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="userType" type="tns:SystemGeneratedTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Data Link user type:
+Valid values are:
+S – System Generated
+U – User Provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="passwordType" type="tns:SystemGeneratedTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Data Link password type:
+Valid values are:
+S – System Generated
+U – User Provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="password" type="tns:PasswordEncryptedType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Data Link password (encrypted)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="unencryptedPassword" type="tns:PasswordType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Data Link password (un-encrypted)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The serial number of the equipment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serialType" type="tns:DeviceSerialNumberTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The type of device.
+E - ESN/MEID
+U - LTE removable UICC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="esnHex" type="tns:DeviceSerialNumberHexType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Hexadecimal representation of the ESN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lteImsi" type="tns:InternationalMobileSubscriberIdentityString" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The device-level International Mobile Subscriber Identity (IMSI) of a subscriber.
+
+Only returned for LTE-capable devices.
+
+Not to be confused with the IMSI/MSID resource assigned to the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lteIccId" type="tns:UniversalIntegratedCircuitCardIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique Integrated Circuit Card Identifier (ICCID) of a SIM card. The ICCID uniquely identifies a SIM card.
+
+Only returned for LTE-capable devices</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveTime" type="tns:EffectiveFromTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date- Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationTime" type="tns:ExpirationTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration Time - Will be empty if no expiration time exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceFrequencyType" type="tns:WirelessDeviceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>HandSet Type
+Possible Values:
+'C' = CELLULAR
+'D' = PCS and CELLULAR
+'K' = PCS WITH EVRC
+'L' = PCS and CELLULAR WITH EVRC
+'M' = HYBRID
+'P' = PCS
+'S' = ACCESSORY</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="modelNumber" type="tns:ModelNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Model Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manufacturerShortName" type="tns:ManufacturerShortNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Manufacturer Short Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceDetailsInfo" type="tns:DeviceDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's device details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FutureNaiInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="naiDetailsInfo" type="tns:NaiDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's NAI details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExpiredNaiInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="expiredNaiDetailsInfo" type="tns:ExpiredNaiDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's NAI details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The SOC or Price Plan Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureCode" type="tns:FeatureCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Feature Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="name" type="tns:FeatureNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The feature name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The effective date of the feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The expiration date of the feature.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="FeatureListType">
+		
+<xs:sequence>
+			
+<xs:element name="featureInfo" type="tns:FeatureInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the feature details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="IxcInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="ixcCode" type="tns:InterexchangeCarrierId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The inter exchange carrier ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ixcEffectiveDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The inter exchange carrier effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MdnInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnDetailsInfo" type="tns:MdnDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's device details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MdnDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>The PTN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveTime" type="tns:EffectiveFromTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date - will be empty  if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationTime" type="tns:EffectiveThruTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration time - will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="msid" type="tns:MobileStationIdentificationNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>MSID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portDueDateTime" type="tns:PortDueDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Port due date - will be empty if no port-in exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="portState" type="tns:PortingStatusCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>PIP – Port-in is not yet completed, but provisioning has been completed.
+PINP – Port-in is not yet completed and not yet provisioned.
+PSP – Port Swap is in progress, and provisioning has been completed.
+PSNP – Port Swap is in progress but not provisioned.
+Empty – No port-in</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="statusInSwitch" type="tns:SubscriberResourceStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The switch status code. A-Active, R-Reserved, C-Cancelled, S-Suspened</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnReservationId" type="tns:MdnReservationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MDN's reservation ID - Will be populated with the values from NMS for reserved subscribers only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reserveDateTime" type="tns:EffectiveFromDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The MDN's reservation date and time - Will be populated with the values from NMS for reserved subscribers only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MdnReservationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnReservationId" type="tns:MdnReservationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The PTN's reservation ID - Will be populated with the values from NMS for reserved subscribers only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="reserveDateTime" type="tns:EffectiveFromDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The PTN's reservation date and time -Will be populated with the values from NMS for reserved subscribers only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NaiDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierEnsType">
+				
+<xs:annotation>
+					
+<xs:documentation>The NAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveTime" type="tns:EffectiveFromTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date - Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationTime" type="tns:EffectiveThruTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration time - Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="status" type="tns:SubscriberResourceStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Status code: A-Active, R-Reserved, C-Cancelled, S-Suspended</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceAttributeTypeCode" type="tns:ServiceAttributeTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field will be populated with the constant value NAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dataLinkDetailsInfo" type="tns:DataLinkDetailsInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>A structure that holds the Data Link NAI details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ExpiredNaiDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierEnsType">
+				
+<xs:annotation>
+					
+<xs:documentation>The NAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveTime" type="tns:EffectiveFromTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date - Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationTime" type="tns:EffectiveThruTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration time - Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="status" type="tns:SubscriberResourceStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Status code: A-Active, R-Reserved, C-Cancelled, S-Suspended</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="serviceAttributeTypeCode" type="tns:ServiceAttributeTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>This field will be populated with the constant value NAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanDetailsInfo" type="tns:PricePlanDetailsInfo" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's price plan details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PricePlanDetailsInfo">
+		
+<xs:sequence>
+			
+<xs:element name="pricePlanCode" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The PP code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanDesc" type="tns:ServiceOrderDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>The PP description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:NetworkAccessActivationFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Effective Date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ProductDeploymentEffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Expiration date - Will be empty if no expiration date exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callForwardingNumber" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The PP call forwarding number. Will be empty if no call forwarding number exists</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone number of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>ESN of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoListType">
+		
+<xs:sequence>
+			
+<xs:element name="socDetailsInfo" type="tns:SocDetailsInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the subscriber's soc details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocDetailsInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="socCode" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The SOC code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socDesc" type="tns:ServiceOrderDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>The SOC description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:NetworkAccessActivationFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The SOC effective date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ProductDeploymentEffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The SOC expiration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="callForwardingNumber" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The service call forwarding number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="deviceInfoList" type="tns:DeviceInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's equipment details in descending order (from the most recent to the earliest)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areMoreDevices" type="tns:MoreRecordsAvailableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>true - if there are more equipments than can be returned in equipmentApiInfoList.
+
+false - if there are not more equipments than can be returned in equipmentApiInfoList</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnInfoList" type="tns:MdnInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's PTN details in descending order (from the most recent to the earliest)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areMoreMdns" type="tns:MoreRecordsAvailableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>true - if there are more PTNs than can be returned in
+
+false - if there are not more PTNs than can be returned in ptnInfoList</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnReservationInfo" type="tns:MdnReservationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the Mdn reservation details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activationDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The first time the subscriber was active</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaIdType">
+				
+<xs:annotation>
+					
+<xs:documentation>The communication service area</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="msid" type="tns:MobileStationIdentificationNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber's MSID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="currentNaiInfoList" type="tns:CurrentNaiInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's current NAI details. This list will contain only one record because only one NAI is allowed on a subscriber. Only one will be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="futureNaiInfoList" type="tns:FutureNaiInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures that hold the subscriber's future Data Link NAI details. If the subscriber has a future Data Link NAI this list will contain one record. If the subscriber does not have a future Data Link NAI this list will not be returned. Only one will be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expiredNaiInfoList" type="tns:ExpiredNaiInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's expired NAI details in descending order (from the most recent to the earliest).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ixcInfo" type="tns:IxcInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing the inter exchange carrier details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pricePlanInfoList" type="tns:PricePlanInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's price plan details in descending order (from the most recent to the earliest)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areMorePricePlans" type="tns:MoreRecordsAvailableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>true - if there are more PPs than can be returned in ppInfoList
+
+false - if there are not more PPs than can be returned in ppInfoList</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="earliestSocEffectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>The earliest effective date of all the subscriber's SOC and PP's</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="latestSocExpirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The latest expiration date of all the subscriber's SOCs and PPs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberType" type="tns:SubscriptionTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Account sub type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socInfoList" type="tns:SocInfoListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the subscriber's Soc details (including future-dated Soc’s) in descending order (from the most recent to the earliest)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="areMoreSocs" type="tns:MoreRecordsAvailableFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>true - if there are more SOCs than can be returned in socInfoList</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="featureList" type="tns:FeatureListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of structures containing the Features details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resellerPartnerId" type="tns:ResellerIdType">
+				
+<xs:annotation>
+					
+<xs:documentation>The subscriber's reseller</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberStatus" type="tns:SubscriberStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber Status
+A-Active
+R-Reserved
+S-Suspended
+C-Cancelled
+H-Hotline</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="futureActivationDate" type="tns:EffectiveFromDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber's future activation date(if one exists)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="futureExpirationDate" type="tns:EffectiveThruDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber's future expiration date(if one exists)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The technical BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Technical BAN Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resellerName" type="tns:ResellerNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Reseller name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account typeof the BILLING_QACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaIdType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberHexType">
+		
+<xs:annotation>
+			
+<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number Type Code designates a device type: IMEI(I), MSN(M), SIM(S), Kit (K), or ESN (E) for CDMA platform.
+Valid values:
+E - ESN
+U - UICC</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date holds the first calendar month, day, year, hour, minute, second and fraction of a second a Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Time holds the first hour, minute, and second that something was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date holds the last calendar day Role, Preference, Assignment, etc. was in effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Time holds the last hour, minute, and second that something was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Time is the time of day on the expiration date that something expires or becomes inactive.</xs:documentation>
+			
+<xs:documentation>The time of day on the expiration date that something expires or becomes inactive.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:time"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The code of the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureGroupCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Group Code groups all the different features according to the requirements of the processes.  By using this grouping, it is possible to view the features in the context of the process. Possible values are: Service feature, One-time charge, Usage fee, Penalty and Miscellaneous.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FeatureNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Feature Name is the name of the feature.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InterexchangeCarrierId">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifies an Interexchange Carrier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ManufacturerShortNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Manufacturer Short Name is a shortened name of the device manufacturer.  In cases where the manufacturer name is short, the short name is the same as the name.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MdnReservationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>The MDN Reservation ID identifies the reservation of one or more MDN in NMS.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileStationIdentificationNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Station Identity (MSID) is the number that is associated with the home service provider and the wireless phone number. This is reprogrammed when the user changes home service providers.
+
+MSID is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+			
+<xs:documentation>Mobile Station Identification Number (MSID) is the internal identifying number for a CDMA handset's phone number under Local Number Portability.  Mobile Station Identification Number stays with the carrier while the MDN stays with the customer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MoreRecordsAvailableFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessActivationFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Activiated From Date holds the first calendar day the set of implemented components were active on the network.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierEnsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordType">
+		
+<xs:annotation>
+			
+<xs:documentation>Password holds the text string specified by a PARTY as credential to be used with a Login Userid to uniquely identify them to a system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="32"/>
+			
+<xs:minLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordEncryptedType">
+		
+<xs:annotation>
+			
+<xs:documentation>Encrypted user password</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortDueDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Port Due Date Time is the calendar date and time on which the Port is Due.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="PortingStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Porting Status Code is used to indicate the status of a porting request for a specific MDN. If a PAI cannot be found spaces will be returned. 
+
+Valid values are:
+PIP
+PINP
+POND
+PCP
+PCNP
+PSP
+PSNP
+PSCP
+PSCNP
+PNDS
+NCPA</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProductDeploymentEffectiveThruDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Product Deployment Effective Thru Date holds the last calendar day the PRODUCT is assigned to the specified SUBSCRIPTION.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+			
+<xs:documentation>Product Deployment Effective Thru Date holds the last calendar day the PRODUCT is assigned to the specified SUBSCRIPTION.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ResellerIdType">
+		
+<xs:annotation>
+			
+<xs:documentation>String identifier for the reseller that brands and markets the Device.  This value is present only if device is sold through a reseller. This value SHOULD be indexed in the SPS-DS.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ResellerNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Reseller name is the organization name of the reseller.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceAttributeTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Indicates if the access channel assignment is an NAI service attribute that requires special processing.</xs:documentation>
+			
+<xs:documentation>Indicates if the access channel assignment is an NAI service attribute that requires special processing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberResourceStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Resource Status Code is a single character code that represents the status of a subsciber resource.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber status code is a single character code that represents the status of a subsciber.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionTypeCodeType">
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SwitchServiceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Switch Service Type Code uniquely identifies a specific service type that is utilize through the switch.
+Example Values:
+CLI - CALLER-ID
+WIMAX - WIMAX
+CW - CALL-WAITING
+CFC - CF-CONDITIONAL
+CFI - CFI - CF-IMMEDIATE
+COS - CLASS-OF-SERVICE
+FP - FREEDOM-PLUS
+IC - INTERNATIONAL-CALLS
+LSA - LSA
+MN - MESSAGE-NOTIFICATION
+PA - PAGER-ALERT
+PAC - PROJECT-ACCOUNTING
+RSS - ROAD-SIDE-SERVICE</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SystemGeneratedTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>System Generated Type Code Type designates how the associated item is generated by the system or if the associated item is generated outsideof the system.
+Valid Values Include:
+S – System Generated
+U – User Provided...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniversalIntegratedCircuitCardIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Universal Integrated Circuit Card Identifier is a uniqe identifier embedded in the smart card used in mobile terminals in CDMA, GSM and UMTS networks.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="WirelessDeviceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+			
+<xs:documentation>Wireless Device Type Code is a Sprint defined code used to identify the type of Wireless Network Access Device.
+
+Possible Device Types:
+"C" - CELLULAR
+"D" - Personal Communication Service (PCS) and CELLULAR
+"K" - Personal Communication Service (PCS) with Enhanced Variable Rate Coding (EVRC)
+"L" - Personal Communication Service (PCS) and CELLULAR with Enhanced Variable Rate Coding (EVRC)
+"M" - HYBRID
+"P" - Personal Communication Service (PCS)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<!---->
+</xs:schema>

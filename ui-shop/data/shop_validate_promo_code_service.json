@@ -1,0 +1,19 @@
+{  
+   "shippingFee":"null",
+   "discounts":[  
+      {  
+         "itemId":"SPHL710ASB",
+         "quantity":1,
+         "eligibleQuantity":1,
+         "originalPricePerItemId":499.99,
+         "discountAmount":10,
+         "promotionName":"$10 off"
+      }
+   ],
+   "totalOriginalPrice":"499.99",
+   "totalDiscountedPrice":"489.99",
+   "promoLegalese":"OFFER VALID ON VIRGINMOBILEUSA.COM FOR A LIMITED TIME OR WHILE SUPPLIES LAST.",
+   "successMessage":"Thanks! Your discount has been applied",
+   "status":0,
+   "description":"SUCCESS"
+}

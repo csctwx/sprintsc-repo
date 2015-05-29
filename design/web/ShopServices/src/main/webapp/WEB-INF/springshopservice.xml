@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop
+	    http://www.springframework.org/schema/aop/spring-aop.xsd
+	    http://www.springframework.org/schema/context
+	    http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<context:annotation-config/>
+     <context:component-scan base-package="com.ericsson.cac.sprint" />
+
+	<bean 
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+ 
+		<property name="location">
+			<value>file:${confdir}/shopservices.properties</value>
+		</property>
+	</bean>
+
+	<!--<bean name="configuration" class="org.apache.commons.configuration.PropertiesConfiguration" init-method="load">
+        <property name="fileName" value="config.properties"/>
+        <property name="reloadingStrategy" ref="fileChangedStrategy"/>
+    </bean>
+<bean name="fileChangedStrategy" class="org.apache.commons.configuration.reloading.FileChangedReloadingStrategy" />
+-->
+	<!--<bean id="springApplicationContext" class="com.ericsson.sprint.adapters.context.SpringApplicationContext"/>
+
+	<bean id="testBean" class="com.ericsson.sprint.adapters.bean.TestBean">
+		<property name="testBean" value="test" />
+	</bean>-->
+
+</beans>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap 101 Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link href="css/sprintprepaid-bootstrap.min.css" rel="stylesheet">
+<style>
+.circle {
+	margin: auto;
+	width: 90px;
+	height: 90px;
+	border: 2px solid #A7D603;
+	border-radius: 50px;
+	clip: rect(0px, 50px, 100px, 0px);
+}
+.circle.red {
+	border-color: #F75822;
+}
+.gauge-text {
+	vertical-align: middle;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+  <div class="panel-body">
+    <div class="row">
+      <div class="navbar pull-right">
+        <div class="navbar-wrapper">
+          <div class="navbar-item "><a href="#">Activate</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Refill</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Coverage Maps</a></div>
+          <span >|</span>
+          <div class="navbar-item"><a href="#">Find a store</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="row col-xs-12">
+      <div class="col-xs-2"><img src="http://placehold.it/100x60"/></div>
+      <div class="col-xs-10">
+        <div class="navbar navbar-default ">
+          <div class="navbar-btn"> <span class="input-lg"></span>
+            <div class="navbar-item"> <a href="#">
+              <h4>My Sprint</h4>
+              </a> </div>
+            <span class="input-lg">|</span>
+            <div class="navbar-item"> <a href="#">
+              <h4>Shop</h4>
+              </a> </div>
+            <span class="input-lg" >|</span>
+            <div class="navbar-item"> <a href="#">
+              <h4>Plans</h4>
+              </a> </div>
+            <span class="input-lg" >|</span>
+            <div class="navbar-item "> <a href="#">
+              <h4>Support</h4>
+              </a> </div>
+            <div class="pull-right">
+              <button type="button" class="btn btn-primary">Log Out</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row bottom10">
+      <div class="col-xs-12">
+        <div class="col-xs-6"><strong>
+          <p>
+          <h3>Good Morning Steve</h3>
+          </p>
+          <a href="#">(123) 456-7890</a>
+          <p>Base Plan: &lt;Base Plan Name&gt;</p>
+          </strong> </div>
+ <div class="col-xs-6">
+          <div class="col-xs-3">
+            <div class="circle"  data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"><strong>Talk</strong></div>
+                <div class="col-xs-12">100/300</div>
+                <div class="col-xs-12">mins </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Text</strong></div>
+                <div class="col-xs-12"> Unlimited</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle red" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Data</strong></div>
+                <div class="col-xs-12"> 0.75/1.0 GB</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="circle red" data-anim="base left">
+              <div class="gauge-text text-center">
+                <div class="col-xs-12 bottom10">
+                  <p></p>
+                </div>
+                <div class="col-xs-12"> <strong>Hot Spot</strong></div>
+                <div class="col-xs-12"> 1.25/2.5 GB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row btn-group col-xs-12 bottom10">
+      <button type="button" class="btn btn-default col-xs-2">Home</button>
+      <button type="button" class="btn btn-default col-xs-2">Payments</button>
+      <button type="button" class="btn btn-default col-xs-3">Service & Usage</button>
+      <button type="button" class="btn btn-default col-xs-2">Settings</button>
+      <button type="button" class="btn btn-default col-xs-3">My Device</button>
+    </div>
+    <div class="row col-xs-12">
+      <div class="col-xs-8">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-10 input-lg"><strong>Profile Information</strong></div>
+              <div class="col-xs-2 btn-link">Details</div>
+            </div>
+            <div class="vertical-separator panel row"></div>
+            <div class="list-group"> <a class="list-group-item" href="my-account-settings-contact-info"> View/Update Contact info <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> <a class="list-group-item" href="my-account-settings-cc"> Manage Payment Method <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> </div>
+            <div class="row">
+              <div class="col-xs-10 input-lg"><strong>Services Settings</strong></div>
+              <div class="col-xs-2 btn-link">Details</div>
+            </div>
+            <div class="vertical-separator panel row"></div>
+            <div class="list-group"> <a class="list-group-item" href="my-account-settings-security"> Account PIN &amp; Secret Q&amp;A <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> <a class="list-group-item" href="my-account-settings-reset-voicemail"> Reset Voicemail Password <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> <a class="list-group-item" href="my-account-settings-block-text"> Block Text Messages <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> <a class="list-group-item" href="my-account-settings-change-phonenumber"> Change Phone Number <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> <a class="list-group-item" href="my-account-settings-content-call"> Content and Call Settings <span class="glyphicon glyphicon-menu-right pull-right"></span> </a> </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading input-lg"><strong>I Want to...</strong></div>
+          <div class="panel-body">
+            <div class="row list list-group"> <a class="list-group-item" href="#">Option 1 </a> <a class="list-group-item" href="#">Option 2 </a> </div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="row col-xs-12"><img src="http://placehold.it/300x260"/></div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-xs-12 text-center">
+        <div class="navbar">
+          <div class="navbar-wrapper">
+            <div class="navbar-item "><a href="#">About Us</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Legal</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Privacy</a></div>
+            <span >|</span>
+            <div class="navbar-item"><a href="#">Ad Choices</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="row col-xs-12 text-center input-sm">
+      <div class="glyphicon glyphicon-registration-mark col-xs-5 text-right"></div>
+      <div class="col-xs-7 text-left">2014 Sprint prepaid. All rights reserved</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="https://code.jquery.com/jquery.js"></script> 
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/sprintprepaid-bootstrap.js"></script>
+</body>
+</html>

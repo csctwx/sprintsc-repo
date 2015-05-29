@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                    Version     Change                                                                                                                  Rel                          SR# -->
+	
+<!--07/22/2014  Natalia Silva                1.0          New version                                                                                                     MID14.3                 PJ012676 -->
+	
+<!--07/30/2014  Adon Powell               1.0          Standardize                                                                                                       MID14.3                 PJ012676 -->
+	
+<!---->
+	
+<xs:element name="queryMdnInfo" type="tns:QueryMdnInfoRequestType"/>
+	
+<xs:element name="queryMdnInfoResponse" type="tns:QueryMdnInfoResponseType"/>
+	
+<!---->
+	
+<xs:complexType name="QueryMdnInfoRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnList" type="tns:RequestMdnListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of MDNs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestMdnListType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnInfo" type="tns:RequestMdnInfoType" maxOccurs="10">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestMdnInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number for which the port status update was requested.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryMdnInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnList" type="tns:ResponseMdnListType">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN List Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResponseMdnListType">
+		
+<xs:sequence>
+			
+<xs:element name="mdnInfo" type="tns:ResponseMdnInfoType" maxOccurs="10">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN information structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResponseMdnInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number for which the port status update was requested</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="newMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>New MDN if NPA split has occurred</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="oldMdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>MDN with old NPA if input MDN was created due to an NPA Split</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csa" type="tns:CommunicationServiceAreaIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Communication Service Area associated to MDN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberLocation" type="tns:NumberLocationCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Number Location associated to the MDN.
+Foreign MDNs that have not yet been ported-in to SPCS will not have a Number Location.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="npaSplitInd" type="tns:NumberingPlanAreaSplitFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator denoting whether MDN is involved in an NPA Split.
+Valid values:true or false</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="locationRoutingNumber" type="tns:CustomerLocationRoutingCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Location Routing Number will be returned for Foreign MDNs.  
+This will not be returned for Domestic MDNs.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="foreignDomesticCode" type="tns:AddressTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator denoting whether the MDN is owned by SPCS (Domestic) or another carrier (Foreign).  
+ Valid values are F (Foreign) or D (Domestic).
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdnStatus" type="tns:MobileDirectoryNumberStatusCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Status of the MDN.
+Not returned for foreign MDNs that have not yet been assigned in the MDN inventory
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="internalLrn" type="tns:CustomerLocationRoutingCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Internal Location Routing Number will be returned for MDNs which have defined in NMS DB. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--     Simple Types-->
+	
+<xs:simpleType name="AddressTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Address Type Code identifies a type of address.
+valid values:
+S-Street, 
+F-Foreign, 
+R-Rural, 
+P-Post Office Box, 
+M-Military</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceAreaIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerLocationRoutingCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Location Routing Code identifies the format of the Design Layout Report for this directory delivery request. The Customer Location Routing Code can represent the following  information:
+Company,
+Street,
+Floor,
+Room,
+City,
+State/Province,
+ZIP/Postal Code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStatusCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number Status code designates the status of the MDN in NMS (current values should be either AI (Assigned In Use) or AR (Assigned Reserved)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberingPlanAreaSplitFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Numbering Plan Area (NPA) Split Flag is a boolean flag to indicate if the referenced data is part of or related to an NPA Split.
+value values: 
+True - NPA Split Related, 
+False - Not NPA Split Related</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberLocationCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Location Code identifies a pool of Mobile Directory Numbers (MDNs) to which the MDN is assigned.  This pool can be used by one or more store locations.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

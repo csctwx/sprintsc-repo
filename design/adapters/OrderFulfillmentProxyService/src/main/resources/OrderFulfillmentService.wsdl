@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/OrderFulfillmentService/v1/OrderFulfillmentService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/OrderFulfillmentService/v1/OrderFulfillmentService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="OrderFulfillmentService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetails.xsd"/>
+<xsd:import schemaLocation="OrderFulfillmentService.xsd6.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="OrderFulfillmentService.xsd4.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="OrderFulfillmentService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryEquipmentAvailability/v1/queryEquipmentAvailability.xsd"/>
+<xsd:import schemaLocation="OrderFulfillmentService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/submitFulfillmentOrder/v1/submitFulfillmentOrder.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="faultmessage">
+<wsdl:part name="parameters" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetails.xsd"/></wsdl:message>
+<wsdl:message name="faultmessageV2">
+<wsdl:part name="parameters" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="queryEquipmentAvailability">
+<wsdl:part name="parameters" element="xsns:queryEquipmentAvailability" xmlns:xsns="http://integration.sprint.com/interfaces/queryEquipmentAvailability/v1/queryEquipmentAvailability.xsd"/></wsdl:message>
+<wsdl:message name="queryEquipmentAvailabilityResponse">
+<wsdl:part name="parameters" element="xsns:queryEquipmentAvailabilityResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryEquipmentAvailability/v1/queryEquipmentAvailability.xsd"/></wsdl:message>
+<wsdl:message name="submitFulfillmentOrder">
+<wsdl:part name="parameters" element="xsns:submitFulfillmentOrder" xmlns:xsns="http://integration.sprint.com/interfaces/submitFulfillmentOrder/v1/submitFulfillmentOrder.xsd"/></wsdl:message>
+<wsdl:message name="submitFulfillmentOrderResponse">
+<wsdl:part name="parameters" element="xsns:submitFulfillmentOrderResponse" xmlns:xsns="http://integration.sprint.com/interfaces/submitFulfillmentOrder/v1/submitFulfillmentOrder.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="OrderFulfillmentServicePortType">
+<wsdl:operation name="QueryEquipmentAvailability">
+<wsdl:input name="QueryEquipmentAvailabilityRequest" message="ns0:queryEquipmentAvailability"/>
+<wsdl:output name="QueryEquipmentAvailabilityResponse" message="ns0:queryEquipmentAvailabilityResponse"/>
+<wsdl:fault name="faultV2" message="ns0:faultmessageV2"/></wsdl:operation>
+<wsdl:operation name="SubmitFulfillmentOrder">
+<wsdl:input name="SubmitFulfillmentOrderRequest" message="ns0:submitFulfillmentOrder"/>
+<wsdl:output name="SubmitFulfillmentOrderResponse" message="ns0:submitFulfillmentOrderResponse"/>
+<wsdl:fault name="faultV2" message="ns0:faultmessageV2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="OrderFulfillmentServiceBinding" type="ns0:OrderFulfillmentServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryEquipmentAvailability">
+<soap11:operation soapAction="queryEquipmentAvailability" style="document"/>
+<wsdl:input name="QueryEquipmentAvailabilityRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryEquipmentAvailabilityResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SubmitFulfillmentOrder">
+<soap11:operation soapAction="submitFulfillmentOrder" style="document"/>
+<wsdl:input name="SubmitFulfillmentOrderRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SubmitFulfillmentOrderResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="faultV2">
+<soap11:fault name="faultV2" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="OrderFulfillmentService">
+<wsdl:port name="OrderFulfillmentPort" binding="ns0:OrderFulfillmentServiceBinding">
+<soap11:address location="http://144.226.135.45:80/services/OrderFulfillmentService"/></wsdl:port></wsdl:service></wsdl:definitions>

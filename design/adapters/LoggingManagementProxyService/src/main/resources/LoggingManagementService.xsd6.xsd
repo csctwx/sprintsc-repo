@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryLoginAttemptStatus/v1/queryLoginAttemptStatus.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryLoginAttemptStatus/v1/queryLoginAttemptStatus.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                   Version     Change                                                                                                      Rel                    SR#                -->
+	
+<!--10/08/2012   Steve Heichelheim   1.0             Initial Version -  Added MVM standards and simple types                  GBL12.3   PJ007217-->
+	
+<xs:element name="queryLoginAttemptStatus" type="tns:QueryLoginAttemptStatusRequestType"/>
+	
+<xs:element name="queryLoginAttemptStatusResponse" type="tns:QueryLoginAttemptStatusResponseType"/>
+	
+<xs:complexType name="QueryLoginAttemptStatusRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryLoginAttemptStatusResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberOfFailedAttempts" type="tns:MessageAttemptCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Number of times the customer tried to access the system without success.Will be zero in case of successful login attempt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="loginDateTime" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Last successful login date and time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lastFailedAttempt" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Last failed login attempt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="lockedUntil" type="tns:EffectiveThruDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date and time when the lock on the customer will expire.
+Note: This field is required when status is L
+
+Note: EAI will purge any record in the table with lockedUntil older than 24 hours.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="clearOnLock" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Date/Time at which the user successfully logged after the lock expired.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="status" type="tns:AccountStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer login status after last login attempt.
+In case lockedUntil date/time field value is current or a future date/time, EAI will return status &#8220;L&#8221;(Locked), else will return &#8220;F&#8221;(Free).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AccountStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Account Status Code is used to indicate the status of the account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="L"/>
+			
+<xs:enumeration value="F"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveThruDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective Thru Date Time holds the last calendar day and time the Role, Preference, Assignment, etc. was in effect.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date Time is the calendar date and time on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MessageAttemptCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Message Attempt Count is the total number of times the message was attempted to send. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

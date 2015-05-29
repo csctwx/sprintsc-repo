@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" 
+  xmlns:tns="http://api.dc.amdocs.com/SensitiveDetailsResponse/"
+  targetNamespace="http://api.dc.amdocs.com/SensitiveDetailsResponse/">
+
+  <xs:element name="SensitiveDetailsList">
+    <xs:annotation>
+      <xs:documentation>Zero or more sensitive payment account details elements related to payment accounts.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>Sensitive details related to a payment account. Note that a payment account can be a of type Card,
+            ACH or PayPal.</xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+          <xs:element name="CardSensitiveDetails" type="tns:CardSensitiveDetailsType"/>
+          <xs:element name="ACHSensitiveDetails" type="tns:ACHSensitiveDetailsType"/>
+          <xs:element name="PayPalSensitiveDetails" type="tns:PayPalSensitiveDetailsType"/> 
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="CardSensitiveDetails">
+    <xs:annotation>
+      <xs:documentation>Sensitive payment account details elements related to a card payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+      <xs:extension base="tns:CardSensitiveDetailsType"/>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ACHSensitiveDetails">
+    <xs:annotation>
+      <xs:documentation>Sensitive payment account details elements related to an ACH payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+      <xs:extension base="tns:ACHSensitiveDetailsType"/>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  
+  <xs:element name="PayPalSensitiveDetails">
+    <xs:annotation>
+      <xs:documentation>Sensitive payment account details elements related to a PayPal payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+      <xs:extension base="tns:PayPalSensitiveDetailsType"/>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element> 
+
+  <xs:complexType name="PaymentAccountDetailsType" abstract="true">
+    <xs:annotation>
+      <xs:documentation>Payment account generic, common details.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Token" type="xs:string" maxOccurs="1" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Internal token identifier for the payment account. Mandatory.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="CardSensitiveDetailsType">
+    <xs:annotation>
+      <xs:documentation>Contains sensitive card information for a card payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:PaymentAccountDetailsType">
+        <xs:sequence>
+          <xs:element name="NameOnCard" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Name of the account holder as it is printed on the card. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="FirstName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>First name of card holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MiddleName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Middle name of the card holder.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="LastName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Last name of the card holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="ExpirationDate" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Expiration date as printed on the card, using a MM/yy format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="BillingAddress" type="tns:AddressType" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Billing address associated with the card payment account.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="ACHSensitiveDetailsType">
+    <xs:annotation>
+      <xs:documentation>Account holder information for ACH payment accounts. </xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:PaymentAccountDetailsType">
+        <xs:sequence>
+          <xs:element name="AccountHolderName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Name of the account holder as it is listed on the bank account.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="FirstName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>First name of the account holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="MiddleName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Middle name of the account holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="LastName" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Last name of the account holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="PayPalSensitiveDetailsType">
+    <xs:annotation>
+      <xs:documentation>Contains sensitive information related to a consumer's PayPal payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="tns:PaymentAccountDetailsType">
+        <xs:sequence>
+          <xs:element name="ConsumerAddress" type="tns:AddressType" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Consumer address associated with the consumer having the PayPal payment account.
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="NameOnAccount" type="xs:string" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Name of the PayPal account holder. It is the concatenation of firstName + " " + lastName of the PayPal account holder. </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="AddressType">
+    <xs:annotation>
+      <xs:documentation>Contains address information associated with the payment account.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="AddressLine1" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address line 1 for the address. For example this might be a physical street
+            address.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="AddressLine2" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Address line 2 for the address. For example, this might be a suite or apartment
+            number.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="City" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The city associated with address line 1 and address line 2 of the address.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="State" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The state in which the city is located. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Country" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The country code in which the address is located, using a 2- or 3-letter ISO-3166 formatted
+            country code. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ZipCode" type="xs:string" maxOccurs="1" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The zip code associated with the address. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

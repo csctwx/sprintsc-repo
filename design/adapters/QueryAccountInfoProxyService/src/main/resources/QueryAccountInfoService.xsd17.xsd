@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryAccountSharingGroupDetails/v1/queryAccountSharingGroupDetails.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryAccountSharingGroupDetails/v1/queryAccountSharingGroupDetails.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	
+<!--Date		        Author           Version	Change description				Rel.			SR#-->
+	
+<!--6/6/2011       Tracy Turner             1.0	Initial Draft					GBL11.3       PJ004940-->
+	
+<!--8/17/2011       Tracy Turner             1.1	 Initial Draft (APi was moved to 11.4				GBL11.4       PJ004940-->
+	
+<!--8/18/2011     Steve Heichelheim     1.1  Added MVM standards and simple types                                     GBL11.4       PJ004940-->
+	
+<!--10/01/2013   Jocelen Silva             1.2   Changed allowanceInfoList to optional in the response, added ffPlanType in request  GBL14.1       PJ008620-->
+	
+<!--11/13/2013   Jocelen Silva             1.3   Changed effectiveDate to required and socDesc to optional in the response GBL14.1       CS#637672 -->
+	
+<xs:element name="queryAccountSharingGroupDetails" type="tns:QueryAccountSharingGroupDetailsRequestType"/>
+	
+<xs:element name="queryAccountSharingGroupDetailsResponse" type="tns:QueryAccountSharingGroupDetailsResponseType"/>
+	
+<xs:complexType name="QueryAccountSharingGroupDetailsRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="accountInfo" type="tns:SearchCriteriaType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing account information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sharingGroupDataInfo" type="tns:SharingGroupDataInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the sharing group data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryAccountSharingGroupDetailsResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="currentPage" type="tns:PageNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The sharing group id related to this billing account.  Used for hybrid plans.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="totalSize" type="tns:PageCountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Total number of pages for this call. This will be returned only when the API is called for the first page (pageNumber = 1 or not sent)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sharingSubscriberList" type="tns:SharingSubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of sharing group ids associated with the account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceType" type="tns:AllowanceTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Type of allowance
+Sprint Data
+Sprint Data Roaming</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subsAllowance" type="tns:UnitOfMeasureValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Included units of allowance for the subscriber in MB</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="unitOfMeasure" type="tns:UnitOfMeasureCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unit of Measure from 
+B – Byte
+K – Kilobyte
+H – Megabyte
+G – Gigabyte
+T – Terabyte
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AllowanceListType">
+		
+<xs:sequence>
+			
+<xs:element name="allowanceInfo" type="tns:AllowanceInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>allowance information for the hybrid sharing group soc of the subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResourceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDN’s can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier
+ (NAI) is a standard way of identifying users who request access to a network. 
+The standard syntax is"user@realm".</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The unique identifier for the new billing account. (BAN)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="SharingGroupDataInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="sharingGroupId" type="tns:LinesToShareGroupIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The sharing group id related to this billing account.  Used for hybrid plans.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sharingTypeCode" type="tns:PlanTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sharing type identifier. 
+Valid values:
+H - Hybrid
+Q - LTS Data
+Default value is H</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pageNumber" type="tns:PageNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Page Number.  Send 1 or leave blank for the initial call..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SharingSubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="status" type="tns:SubscriberResourceStatusCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Designates the status of a subscriber. Statuses that will be returned in this API include:
+A – Active
+S – Suspended
+R – Reserved
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="resourceInfo" type="tns:ResourceInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional resources that may be required for the plan features or device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socInfoList" type="tns:SocListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of SOC information structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="allowanceInfoList" type="tns:AllowanceListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of allowances for given SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SharingSubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="sharingSubscriberInfo" type="tns:SharingSubscriberInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the subscriber in the sharing group</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="soc" type="tns:ServiceOrderCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>soc code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="socDesc" type="tns:ServiceOrderDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Soc name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="effectiveDate" type="tns:EffectiveFromDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Plan effective date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="expirationDate" type="tns:ExpirationDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Plan expiration date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SocListType">
+		
+<xs:sequence>
+			
+<xs:element name="socInfo" type="tns:SocInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>SOC information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AllowanceTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Allowance Type Code designates a type of allowance of units that would be set up for a user, espically in the case of a hybrid sharing group.
+Valid Values Include:
+Sprint Data,
+Sprint Data Roaming...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EffectiveFromDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Effective From Date Type holds the first calendar day  a Role, preference, assignment, etc. the PARTY's preference went into effect.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExpirationDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+			
+<xs:documentation>Expiration Date holds the last calendar Date an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LinesToShareGroupIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Lines To Share Group Identifier uniquely identifies a Lines To Share Group within a Billing Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PageCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Page Count number is used when requesting multiple pages and data.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PageNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Page Number of the records being displayed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PlanTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Plan Type Code denotes the primary price plan.
+R - Regular 
+F - Fair and Flexible Shared
+I - Fair and Flexible Individual
+L - LTS
+S - Sharing
+G - Auto Adjust Guarantee Plan (formally known as Flex Plan)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="Q"/>
+			
+<xs:enumeration value="H"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceOrderDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Service Order Description.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriberResourceStatusCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscriber Resource Status Code is a single character code that represents the status of a subsciber resource.
+
+Possible values
+A - Active
+S - Suspended
+C - Canceled
+R - Reserved</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+			
+<xs:documentation>Unit Of Measurement Code represents the set of characters that represents a kind of unit (as of length, surface, volume, dry measure, liquid measure, money, weight, time, etc.), used as a standard of comparison for others of the same kind, in assigning to them numerical values, as 1 foot, 1 yard, 1 mile, 1 square foot, 1 square yard, 1 cubic foot, 1 peck, 1 bushel, 1 gallon, 1 cent, 1 ounce, 1 pound, 1 hour, and the like.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UnitOfMeasureValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Unit Of Measure Value contains the numeric value of the actual item or instance as specified by the unit of measure code.  For example, if the unit of measure code contains 'Volume', then the unit of measure value would contain the value '16' that represents the volume of a specified item or instance, etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:fractionDigits value="2"/>
+			
+<xs:totalDigits value="13"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

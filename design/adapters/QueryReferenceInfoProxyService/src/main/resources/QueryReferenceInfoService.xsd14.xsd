@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceMemoTypeList/v1/queryReferenceMemoTypeList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceMemoTypeList/v1/queryReferenceMemoTypeList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 24/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	    CS#325358 -->
+	
+<xs:element name="queryReferenceMemoTypeList" type="tns:QueryReferenceMemoTypeListRequest"/>
+	
+<xs:element name="queryReferenceMemoTypeListResponse" type="tns:QueryReferenceMemoTypeListResponse"/>
+	
+<xs:complexType name="QueryReferenceMemoTypeListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="memoTypeList" type="tns:MemoTypeList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceMemoTypeListRequest">
+		
+<xs:sequence>
+			
+<xs:element name="memoTypeList" type="tns:RequestedMemoTypeList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MemoTypeInfo">
+		
+<xs:sequence>
+			
+<xs:element name="autoManualCd" type="tns:MemoAutoManualTypeCode">
+				
+<xs:annotation>
+					
+<xs:documentation>if MEMTP_MANUAL_IND is ‘Y’ set to M else set to ‘A’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="type" type="tns:MemoTypeCode"/>
+			
+<xs:element name="description" type="tns:MemoDescription"/>
+			
+<xs:element name="category" type="tns:MemoCategory"/>
+			
+<xs:element name="systemText" type="tns:MemoText" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MemoTypeList">
+		
+<xs:sequence>
+			
+<xs:element name="memoTypeInfo" type="tns:MemoTypeInfo" maxOccurs="250"/>
+			
+<xs:element name="areMoreMemoTypes" type="tns:MoreRecordsAvailableFlag"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestedMemoTypeList">
+		
+<xs:sequence>
+			
+<xs:element name="fetchMemoTypeList" type="tns:FetchInformationFlag"/>
+			
+<xs:element name="lastMemoType" type="tns:MemoTypeCode" minOccurs="0"/>
+			
+<xs:element name="includeSystemMemo" type="tns:FetchInformationFlag" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="MemoText">
+		
+<xs:annotation>
+			
+<xs:documentation>Memo Text is the body of textual content of an Ensemble MEMO.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemoTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Memo Type Code categorizes memos in the Ensemble system.
+
+Valid Values:
+
+The Ensemble documentaion is inadequate.  It does not provide a list of valid Memo Type Codes. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:TypeCode">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="TypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemoAutoManualTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Memo Auto Manual Type Code indicates whether this memoType can be used with a memo that is manually created upon a user's request or whether it is used with a memo that is automatically created by the system as a result of certain activities.
+Values:
+A - Auto
+M - Manual</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="A">
+				
+<xs:annotation>
+					
+<xs:documentation>Auto</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="M">
+				
+<xs:annotation>
+					
+<xs:documentation>Manual</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemoCategory">
+		
+<xs:annotation>
+			
+<xs:documentation>Memo Category is entity/context of the memo.
+Ex:Ban,Coll,Srv
+</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MemoDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Memo Description is descriptive text associated to a memo.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MoreRecordsAvailableFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

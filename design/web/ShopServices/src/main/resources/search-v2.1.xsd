@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:tns="http://ws.drutt.com/msdp/media/search/v2" 
+  targetNamespace="http://ws.drutt.com/msdp/media/search/v2" 
+  version="1.0">
+  <xs:element name="searchAssetsRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="queryString" type="xs:string" />
+        <xs:element name="deviceId" type="xs:string" minOccurs="0" />
+        <xs:element name="langCode" type="xs:string" />
+        <xs:element name="type" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="startNum" type="xs:int" minOccurs="0" />
+        <xs:element name="pageSize" type="xs:int" minOccurs="0" />
+        <xs:element name="sortItem" type="tns:sortItem" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="includeItems" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="searchAssetsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="result" type="tns:asset" minOccurs="0" maxOccurs="unbounded">
+        </xs:element>
+        <xs:element name="lastRow" type="xs:int">
+        </xs:element>
+        <xs:element name="totalRows" type="xs:int">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getAssetsByTicketIdRequest">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ticketId" type="xs:string" />
+        <xs:element name="deviceId" type="xs:string" minOccurs="0" />
+        <xs:element name="langCode" type="xs:string" />
+        <xs:element name="startNum" type="xs:int" minOccurs="0" />
+        <xs:element name="pageSize" type="xs:int" minOccurs="0" />
+        <xs:element name="sortItem" type="tns:sortItem" minOccurs="0" maxOccurs="unbounded" />
+        <xs:element name="includeItems" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="getAssetsByTicketIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="assets" type="tns:asset" minOccurs="0" maxOccurs="unbounded">
+        </xs:element>
+        <xs:element name="lastRow" type="xs:int">
+        </xs:element>
+        <xs:element name="totalRows" type="xs:int">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="WSException">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="errorCode" type="xs:int" />
+        <xs:element name="message" type="xs:string" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="sortItem">
+    <xs:sequence>
+      <xs:element name="fieldName" type="xs:string" />
+      <xs:element name="reverse" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="asset">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="assetId" type="xs:string" minOccurs="0" />
+          <xs:element name="type" type="xs:string" />
+          <xs:element name="ownerAssetId" type="xs:string" minOccurs="0" />
+          <xs:element name="providerId" type="xs:string" />
+          <xs:element name="serviceId" type="xs:string" />
+          <xs:element name="created" type="xs:dateTime" />
+          <xs:element name="modified" type="xs:dateTime" />
+          <xs:element name="startTime" type="xs:dateTime" minOccurs="0" />
+          <xs:element name="state" type="xs:string" />
+          <xs:element name="validUntil" type="xs:dateTime" minOccurs="0" />
+          <xs:element name="category" type="tns:category" minOccurs="0" maxOccurs="unbounded" />
+          <xs:element name="group" type="tns:group" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+        <xs:attribute name="score" type="xs:float" use="required" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="group">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="type" type="xs:string" />
+          <xs:element name="deviceFiltered" type="xs:boolean" />
+          <xs:element name="deviceCompatible" type="xs:boolean" />
+          <xs:element name="preferredItem" type="tns:item" minOccurs="0" />
+          <xs:element name="item" type="tns:item" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="item">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="type" type="xs:string" minOccurs="0" />
+          <xs:element name="uri" type="xs:string" />
+          <xs:element name="contentType" type="xs:string" />
+          <xs:element name="filename" type="xs:string" />
+          <xs:element name="size" type="xs:long" />
+          <xs:element name="downloadUri" type="xs:string" />
+          <xs:element name="accessUri" type="xs:string" />
+          <xs:element name="giftUri" type="xs:string" />
+          <xs:element name="devicePreferred" type="xs:boolean" minOccurs="0" />
+          <xs:element name="referencedItem" type="tns:item" minOccurs="0" />
+          <xs:element name="device" type="tns:device" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="metaAssociated" abstract="true">
+    <xs:sequence>
+      <xs:element name="meta" type="tns:meta" nillable="true" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="meta">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string" />
+      <xs:element name="value" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="device">
+    <xs:sequence>
+      <xs:element name="deviceId" type="xs:string" />
+      <xs:element name="brand" type="xs:string" />
+      <xs:element name="model" type="xs:string" />
+      <xs:element name="userAgent" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="category">
+    <xs:complexContent>
+      <xs:extension base="tns:metaAssociated">
+        <xs:sequence>
+          <xs:element name="categoryId" type="xs:string" />
+          <xs:element name="name" type="xs:string" />
+          <xs:element name="created" type="xs:dateTime" minOccurs="0"/>
+          <xs:element name="modified" type="xs:dateTime" minOccurs="0"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+</xs:schema>

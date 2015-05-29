@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/createPrepaidPromotion/v1/createPrepaidPromotion.xsd" targetNamespace="http://integration.sprint.com/interfaces/createPrepaidPromotion/v1/createPrepaidPromotion.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	<!-- Date           Author                    Version     Change                                                                                  Rel                          SR# -->
+	<!-- 05/13/2013    Priscilla Carvalho      1.0            Initial version                   GBL13.1        PJ007253    -->
+	<!-- 05/14/2013  Steve Heichelheim  1.0           Initial Version.  Added MVM standards and simple types.     SAP13.4            PJ007253-->
+	<!-- 05/24/2013    Priscilla Carvalho      1.1           Changed the subscriptionIdentifier lenght                         MID13.2           PJ007253    -->
+	<!-- 05/28/2013    Priscilla Carvalho      1.2           Removed the subscriptionIdentifier and added the MDN     MID13.2           PJ007253    -->
+	<xs:element name="createPrepaidPromotion" type="tns:CreatePrepaidPromotionRequestType"/>
+	<xs:element name="createPrepaidPromotionResponse" type="tns:CreatePrepaidPromotionResponseType"/>
+	<xs:complexType name="CreatePrepaidPromotionRequestType">
+		<xs:sequence>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>A dialable 10-digit NANP directory number assigned to address a wireless service subscriber. Within P2K, MDN will be represented in the NPA-NXX-XXXX format. The MDN is the access number for the subscriber's access service.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accessId" type="tns:SystemIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Requestor System</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="agentId" type="tns:DealerAgentIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Requestor ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="promotionId" type="tns:PromotionalPackageIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Configured name of Promotion to buy</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreatePrepaidPromotionResponseType">
+		<xs:sequence>
+			<xs:element name="message" type="tns:ExceptionMessageType">
+				<xs:annotation>
+					<xs:documentation>Additional information about the ReturnCode.
+When ReturnCode is 1 (missing mandatory input field(s)) or 3 (invalid input field(s)), contains the name(s) of the field(s) that were missing or invalid in the input message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="DealerAgentIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Dealer Agent Identifier uniquely identifies a PARTY representing a Dealer in a business transaction.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ExceptionMessageType">
+		<xs:annotation>
+			<xs:documentation>Exception Message contains text provided by the responding application providing user-comprehensible error feedback.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PromotionalPackageIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Promotional Package Identifier uniquely identifies a promotional package.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SystemIdentifierType">
+		<xs:annotation>
+			<xs:documentation>System Identifier uniquely identifies a System.  For example, a Billing System.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

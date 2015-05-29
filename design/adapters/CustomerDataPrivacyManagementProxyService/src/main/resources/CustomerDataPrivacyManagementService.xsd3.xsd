@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/updateOptInfo/v1/updateOptInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/updateOptInfo/v1/updateOptInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                                                                                                             Rel                    SR# -->
+	
+<!--06/01/2009    Santosh Bharadwaj     Created XSD				                                                                   SDC Rel B         E4637-->
+	
+<!--06/03/2009    Santosh Bharadwaj    Incorporated changes to element and xsd names		          	                   SDC Rel B         E4637-->
+	
+<!--06/05/2009    Steve Heichelheim      1.0 applied MVM standards                                                                                              SDC Rel B         E4637-->
+	
+<xs:element name="updateOptInfo" type="tns:UpdateOptInfoType"/>
+	
+<xs:element name="updateOptInfoResponse" type="tns:UpdateOptInfoResponseType"/>
+	
+<xs:complexType name="UpdateOptInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="Info" type="tns:BanInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>List wrapping the banInf </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="boboOptInd" type="tns:BillingOnBehalfOfOthersOptInFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>This attribute will qualify the nature of a customer's decision to agree or disagree with BOBO OptIn policies. 
+Values are:
+       true - Customer agrees to OptIn
+       false - Customer does not agree and has chosen to OptOut</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdateOptInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageText">
+				
+<xs:annotation>
+					
+<xs:documentation>Message indicating transaction is completed successfully</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<xs:complexType name="BanInfoType">
+		
+<xs:choice>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>The field describes the  Mdn for a customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>The field describes the Network Access Indicator (e.g. username@domain) where domain should be of the form str1.str2</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="ConfirmMessageText">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="BillingOnBehalfOfOthersOptInFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>This attribute will qualify the nature of a customer's decision to agree or disagree with BOBO OptIn policies.Values are: "Y" - Customer agrees to OptIn   "N" - Customer does not agree and has chosen to OptOut
+</xs:documentation>
+			
+<xs:documentation/>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryResourcePoolInfo/v1/queryResourcePoolInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryResourcePoolInfo/v1/queryResourcePoolInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<xs:element name="queryResourcePoolInfo" type="tns:QueryResourcePoolInfo"/>
+	
+<xs:element name="queryResourcePoolInfoResponse" type="tns:QueryResourcePoolInfoResponse"/>
+	
+<xs:complexType name="QueryResourcePoolInfo">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:Info"/>
+			
+<xs:element name="staticIpPoolInfo" type="tns:RequestStaticIpPoolInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryResourcePoolInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="staticIpPoolInfo" type="tns:StaticIpPoolInfo" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="Info">
+		
+<xs:choice>
+			
+<xs:element name="ban">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:BillingAccountNumber">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumber">
+				
+<xs:annotation>
+					
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="mdn">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:PhoneNumber">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="ufmi">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UrbanFleetMemberIdentifierString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="ipAddress">
+				
+<xs:annotation>
+					
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternetProtocolAddressString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="nai">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:NetworkAccessIdentifierEns">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="imsi">
+				
+<xs:annotation>
+					
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:InternationalMobileSubscriberIdentityString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="hppttId">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:HighPerformancePushToTalkIDString">
+						
+<xs:minLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="StaticIpPoolInfo">
+		
+<xs:sequence>
+			
+<xs:element name="ipPoolAvailableInd" type="tns:BinaryExpression">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag that determines if there is an IP pool available for the input BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberOfIpsAvailable" type="tns:InternetProtocolAddressAvailableQuantity" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of free static IPs available for the given input BAN. Will only be returned if the ipPoolAvailableInd is true. Can return 0 if there are no IPs available on the IpPool for the NGP under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ngpStaticIpPoolList" type="tns:NgpStaticIpPoolList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NgpStaticIpPoolList">
+		
+<xs:sequence minOccurs="0">
+			
+<xs:element name="ngpStaticIpPoolInfo" type="tns:NgpStaticIpPoolInfo" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NgpStaticIpPoolInfo">
+		
+<xs:sequence>
+			
+<xs:element name="ngp" type="tns:NumberGroup">
+				
+<xs:annotation>
+					
+<xs:documentation>The NGP (Number Group) is identified as CSA by the Ensemble billing system and groups ranges for a number of resources such as IPs, IMSIs, NPANXXs, and UFs . This grouping represents a geographical zone that includes specific ranges.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ngpDesc" type="tns:NumberGroupDescription">
+				
+<xs:annotation>
+					
+<xs:documentation>Number Group Description is a description of a specific number group (NGP).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="numberOfIpsAvailable" type="tns:InternetProtocolAddressAvailableQuantity">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of free static IPs available for the given input BAN. Will only be returned if the ipPoolAvailableInd is true. Can return 0 if there are no IPs available on the IpPool for the NGP under the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="RequestStaticIpPoolInfo">
+		
+<xs:sequence>
+			
+<xs:element name="fetchStaticIpPoolInfo" type="tns:BinaryExpression">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating whether or not the StaticIpPoolInfo should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="filterByNgp" type="tns:NumberGroup" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Flag indicating in which particular NGP’s Static IP Pool information should be retrieved for a BAN in addition to number of all free IPs on the BAN. If this field is not populated number of free IPs for each NGP under that BAN will be returned.
+If this field is populated and data is not found for that particular ngp, empty tags will be returned for NgpStaticIpPoolList structure in response.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--The following Simple Types were sourced from the Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpression">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+			
+<xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDString">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		
+<xs:annotation>
+			
+<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InternetProtocolAddressString">
+		
+<xs:annotation>
+			
+<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberGroup">
+		
+<xs:annotation>
+			
+<xs:documentation>The NGP (Number Group) is identified as CSA by the Ensemble billing system and groups ranges for a number of resources such as IPs, IMSIs, NPANXXs, and UFs . This grouping represents a geographical zone that includes specific ranges.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NumberGroupDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Number Group Description is a description of a specific number group (NGP).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!--The following Simple Types were added.-->
+	
+<xs:simpleType name="InternetProtocolAddressAvailableQuantity">
+		
+<xs:annotation>
+			
+<xs:documentation>Internet Protocol Address Available Quantity contains the number of free static IPs available for a specific Billing Account Number (BAN).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,18 @@
+<jboss-deployment-structure
+    xmlns="urn:jboss:deployment-structure:1.1">
+
+    <deployment>
+
+        <!-- <exclusions>
+                <module name="org.apache.log4j" />
+                        <module name="org.slf4j" />
+                            </exclusions> -->
+	<resources>
+
+            <resource-root path="WEB-INF/lib/bcprov-jdk15on-1.52.jar"
+                use-physical-code-source="true" />
+
+        </resources>
+
+    </deployment>
+</jboss-deployment-structure> 

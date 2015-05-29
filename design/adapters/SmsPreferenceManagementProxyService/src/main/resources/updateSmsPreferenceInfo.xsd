@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 sp1 (http://www.altova.com) by Sprint Employee (SPRINT PCS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/updateSmsPreferenceInfo/v1/updateSmsPreferenceInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/updateSmsPreferenceInfo/v1/updateSmsPreferenceInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	<!--
+		7/21/2009 Pramodh Narayan 1.1 Initial version GBL09.3.0.0 E4637
+	-->
+	<!--07/29/2009 Steve Heichelheim  1.1         Applied simple types and MVM standards                                                               SDC         Rel B E4637-->
+	<!--07/30/2009 Steve Heichelheim  1.1         waiting on complete definitions before publishing                                                    SDC         Rel B E4637-->
+	<!--08/08/2009 Pramodh Narayan   1.2         Removed allowWeb, allowMail, allowTap and delivery override elements                                                     SDC          Rel B E4637-->
+	<!--08/08/2009 Pramodh Narayan   1.2         Removed allowWeb, allowMail, allowTap and delivery override elements                                                     SDC          Rel B E4637-->
+	<!--05/03/2010 Tom Woodard         1.3         Added whiteListActive to the request                                                        GBL10.4   PJ001745-->
+	<!--05/03/2010 Tom Woodard         1.3        Changed resourcId length to 320                                                              GBL10.4   PJ001745-->
+	<!--06/02/2010 Tom Woodard         1.3        Changed whiteListActive to activateWhiteListInd                                       GBL10.4   PJ001745-->
+	<!--06/02/2010 Tom Woodard         1.3        Changed whiteList and blockList to required.  Changed resourceInfo in both lists from 1 to many to 0 to many,   GBL10.4   PJ001745-->
+	<!--06/02/2010 Tom Woodard         1.3        Changed the name of the mdnInfo structure to info,                                                               GBL10.4   PJ001745-->
+	<!--06/10/2010 Tom Woodard         1.3        resourceId max length changed from 320 to 255.                                                               GBL10.4   PJ001745-->
+	<!--06/10/2010 Tom Woodard         1.3        resourceInfo changed for zero to many to zero to 50                                                                 GBL10.4   PJ001745-->
+	<!--09/29/2010 Dweepant Bakshi   2.0        Added networkInd field in 'info' structure in request                                                                 GBL11.1   PJ002528-->
+	<xs:element name="updateSmsPreferenceInfo" type="tns:UpdateSmsPreferenceInfoRequestType"/>
+	<xs:element name="updateSmsPreferenceInfoResponse" type="tns:UpdateSmsPreferenceInfoResponseType"/>
+	<xs:complexType name="UpdateSmsPreferenceInfoRequestType">
+		<xs:annotation>
+			<xs:documentation>
+					MDN: The phone number of the subscriber whose block list or
+						white lists are being retrieved.
+					
+					Block list is the list of
+						phone numbers that are being set as blocked to send or receive Sms text messages.
+					White list is the list of phone number that are being
+						set as the only ones that are allowed to send or receive Sms text messages from the subscriber.
+					response code: This is the success/error code for the update during the update process. An int is returned from a MAG
+						but 76S should send back a more meaningful message as a String.
+				</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="info" type="tns:InfoType">
+				<xs:annotation>
+					<xs:documentation>This element holds the mdn element for which the preferences information are retrieved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="activateWhiteListInd" type="tns:WhiteListActiveFlagType">
+				<xs:annotation>
+					<xs:documentation>If true, the whiteList is active.   If false, the blockList is active.  Only one list can be active.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockList" type="tns:ResourceListType">
+				<xs:annotation>
+					<xs:documentation>List of phone numbers, URLs and email addresses that are set as blocked to send SMS messages to the subscriber. 0 to many.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="whiteList" type="tns:ResourceListType">
+				<xs:annotation>
+					<xs:documentation>List of phone numbers, URLs and email addresses that are set as only allowed to send SMS messages to the subscriber. 0 to many</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateSmsPreferenceInfoResponseType">
+		<xs:annotation>
+			<xs:documentation>
+					This is the success/error code for the update
+					during the update process
+				</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="confirmationMessage" type="tns:ConfirmMessageTextType">
+				<xs:annotation>
+					<xs:documentation>A confirmation message confirming update made in the 2 Way SMS gateway server</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InfoType">
+		<xs:sequence>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				<xs:annotation>
+					<xs:documentation>mdn for a customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="networkInd" type="tns:NetworkIndicatorCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>C-CDMA
+I-iDEN
+
+Default will be CDMA if not provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceInfoType">
+		<xs:sequence>
+			<xs:element name="resourceId">
+				<xs:annotation>
+					<xs:documentation>The URL, email address or MDN that are blocked from sending SMS to the subscriber in the case of a block list or allowed to send SMS to the subscriber in the case of a white list.</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="tns:ShortMessagingServiceResourceIdentifierType">
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceListType">
+		<xs:sequence>
+			<xs:element name="resourceInfo" type="tns:ResourceInfoType" minOccurs="0" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>List of zero-to-50 URL, email address or MDN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="ConfirmMessageTextType">
+		<xs:annotation>
+			<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="99"/>
+			<xs:minLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberStringType">
+		<xs:annotation>
+			<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ShortMessagingServiceResourceIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Short Messaging Service Resource Identifier is the source or origin of an SMS message.  It can be a URL, email address, or MDN.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="320"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!--New Simple Types-->
+	<xs:simpleType name="WhiteListActiveFlagType">
+		<xs:annotation>
+			<xs:documentation>White List Active Flag is a boolean indicator of whether the White List is active. Only one list can be active.
+Values:
+true - the whiteList is active
+false - the blockList is active</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkIndicatorCode">
+		<xs:annotation>
+			<xs:documentation>The network type code identifies which network the subscriber is associated to</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="I"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

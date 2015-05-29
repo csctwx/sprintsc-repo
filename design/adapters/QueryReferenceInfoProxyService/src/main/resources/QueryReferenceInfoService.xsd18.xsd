@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceTinAbaInfo/v1/queryReferenceTinAbaInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceTinAbaInfo/v1/queryReferenceTinAbaInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 24/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	    CS#325358 -->
+	
+<xs:element name="queryReferenceTinAbaInfo" type="tns:QueryReferenceTinAbaInfoRequest"/>
+	
+<xs:element name="queryReferenceTinAbaInfoResponse" type="tns:QueryReferenceTinAbaInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceTinAbaInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="tinAbaList" type="tns:TinAbaList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceTinAbaInfoRequest"/>
+	
+<xs:complexType name="TinAbaInfo">
+		
+<xs:sequence>
+			
+<xs:element name="tinNumber" type="tns:TaxIdentificationNumber"/>
+			
+<xs:element name="abaNumber" type="tns:AbaRoutingNumberString"/>
+			
+<xs:element name="brandEntityEnglish" type="tns:BrandEntityName"/>
+			
+<xs:element name="brandEntitySpanish" type="tns:BrandEntityName"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="TinAbaList">
+		
+<xs:sequence>
+			
+<xs:element name="tinAbaInfo" type="tns:TinAbaInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="AbaRoutingNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>American Bankers Association Routing Number primary purposes are:
+
+(a) to identify the bank which is responsible to either pay or give credit or is
+entitled to receive payment or credit for a financial transaction, and
+
+(b) to provide a reference to a designated presentment point of the bank at
+which the transaction can be delivered or presented.
+
+The Routing Number is intended primarily to serve the needs of sending or collecting
+institutions by providing the capability for transactions to be transmitted and delivered for settlement in an efficient and timely manner with minimal processing and float costs to sending or collecting banks and payment system participants in general. In certain cases, special classes of routing numbers have been defined to facilitate either the presentment or processing of certain payment transactions.
+
+Receiving or paying banks may use the routing number to enhance the efficiency of their payment processing operations or services provided to their customers so long as these enhancements do not significantly increase check collection costs or delay collection of a significant number of items or dollars.
+
+The routing number serves a secondary purpose for most items/transactions by
+identifying the Federal Reserve office serving the presentment point of the bank.
+Therefore, the selection of the routing number to be assigned will be based on the location of the presentment point within a Federal Reserve district, territory or availability zone.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BrandEntityName">
+		
+<xs:annotation>
+			
+<xs:documentation>Brand Entity Name is the name of the entity asssociated to a specific Brand.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="TaxIdentificationNumber">
+		
+<xs:annotation>
+			
+<xs:documentation>Tax Identification Number is a Business Identification number issued by the Federal Government for tax purposes.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

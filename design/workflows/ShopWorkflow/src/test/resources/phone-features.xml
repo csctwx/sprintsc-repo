@@ -1,0 +1,3666 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<features>
+	  <feature id="8gb-extended" type="">
+		<title><![CDATA[8GB extended USB Storage]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	  </feature>
+	<feature id="cpo" type="cpo">
+		<title><![CDATA[Certified pre-owned]]></title>
+		<description><![CDATA[Get a phone that looks - and works - just like new. Boost certified pre-owned phones are inspected, tested and equipped with the latest software. <a href="/certifiedpreowned/?camp=INTC_cpo_bullet">Learn more</a>]]></description>
+		<compare-title><![CDATA[Certified pre-owned]]></compare-title>
+	</feature>
+	<feature id="3g" type="3g">
+		<title><![CDATA[Nationwide Sprint<sup>&reg;</sup> 3G Network]]></title>
+		<description><![CDATA[Fast surfing, messaging, downloading&#151;that&#39;s the power of 3G.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="3g-title" type="3g">
+		<title><![CDATA[Nationwide Sprint<sup>&reg;</sup> 3G Network]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="3g-4g" type="3g">
+		<title><![CDATA[Nationwide Sprint&reg; 3G Network and Nationwide Sprint&reg; 4G LTE Network]]></title>
+		<description><![CDATA[Live fast on 4G with network power that will set your hair on fire.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+
+	<feature id="dualmode-3g-4g" type="3g">
+		<title><![CDATA[Dual Mode 3G/4G]]></title>
+		<description><![CDATA[With dual mode, switch seamlessly to the quickest data coverage available on Sprint&#39;s reliable 3G Nationwide Network and over 70 markets with Sprint&#39;s 4G (WiMAX).]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="4g" type="4g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="accelerometer">
+		<title><![CDATA[Accelerometer]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	<feature id="activated-dialing">
+		<title><![CDATA[Voice-activated dialing]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	<feature id="advanced-voice">
+		<title><![CDATA[Advanced Voice]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	
+	<!-- two new feature 3/31 HD Voice-enabled-->
+	<feature id="hd-voice" type="voice">  
+		<title><![CDATA[HD Voice<sup>+</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	
+	<feature id="hd-voice-enabled" type="voice">  
+		<title><![CDATA[HD Voice<sup>++</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	
+	<feature id="hd-voice-enabled-3cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	<feature id="hd-voice-3cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	<feature id="hd-voice-enabled-1cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+
+	<feature id="hd-voice-1cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	
+	<feature id="hd-voice-enabled-2cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	<feature id="hd-voice-2cross" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[HD Voice]]></compare-title>
+	</feature>
+	
+	<feature id="blackberry-app-world">
+		<title><![CDATA[BlackBerry<sup>&reg;</sup> App World&trade;]]></title>
+		<description><![CDATA[Use BlackBerry App World to find advanced apps specially designed for your BlackBerry smartphone - shopping, weather, radio, and more.]]></description>
+	</feature>
+	<feature id="blackberry-maps">
+		<title><![CDATA[BlackBerry<sup>&reg;</sup> Maps]]></title>
+		<description><![CDATA[Find your way to businesses, addresses, &amp; more with BlackBerry Maps. View maps and get step-by-step directions.]]></description>
+	</feature>
+	<feature id="blackberry-messenger">
+		<title><![CDATA[BlackBerry<sup>&reg;</sup> Messenger]]></title>
+		<description><![CDATA[Have the freedom to switch your BBM&#8482; text chat to a call, to virtually anywhere in the world and for free with BBM&#8482; Voice<sup>1</sup>.]]></description>
+	</feature>
+	<feature id="bluetooth2" type="bluetooth">
+		<title><![CDATA[Bluetooth<sup>&reg;</sup>]]></title>
+		<description><![CDATA[No wires? No worries. Wirelessly connect your earpiece, share files and more.]]></description>
+		<compare-title><![CDATA[Stereo]]></compare-title>
+	</feature>
+	<feature id="bluetooth-mono" type="bluetooth">
+		<title><![CDATA[Bluetooth<sup>&reg;</sup>]]></title>
+		<description><![CDATA[Take calls and listen to music without wires, share files over the air and more.]]></description>
+		<compare-title><![CDATA[Mono]]></compare-title>
+	</feature>
+	<feature id="camera">
+		<title><![CDATA[Camera]]></title>
+		<description><![CDATA[Snap and share pix, right from your phone, with resolutions up to 3MP.]]></description>
+	</feature>
+
+	<feature id="cameras-2_3mp" type="">
+		<title><![CDATA[Two Cameras]]></title>
+		<description><![CDATA[Double your fun: front-facing camera lets you video chat, while 3MP rear-facing camera shoots clear photos and videos.]]></description>
+	</feature>
+	<feature id="camera-1point3">
+		<title><![CDATA[1.3 MP Camera]]></title>
+		<description><![CDATA[Vivid picture power brings your life to, well, life.]]></description>
+	</feature>
+	<feature id="camera-1point3-front">
+		<title><![CDATA[1.3 MP Camera Front facing camera]]></title>
+		<description><![CDATA[1.3 MP Camera Front facing camera]]></description>
+	</feature>
+	<feature id="camera-640-by-480">
+		<title><![CDATA[640 x 480 Camera]]></title>
+		<description><![CDATA[See it, snap it, share it with the built-in camera with resolutions up to 640x480.]]></description>
+	</feature>
+	<feature id="camera-2mp">
+		<title><![CDATA[2.0 MP Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+	</feature>
+	<feature id="camera-3mp" type="camera">
+		<title><![CDATA[2.0 MP Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+		<compare-title><![CDATA[3MP Rear-facing camera with video; front-facing VGA camera]]></compare-title>
+	</feature>
+	<feature id="cdma-1x">
+		<title><![CDATA[Network: CDMA 1X Single band]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	<feature id="chat-and-date">
+		<title><![CDATA[Chat and Date]]></title>
+		<description><![CDATA[Meet new people, share your thoughts, and more. Choose from some of the most popular chat services out there. There's even one specially for Spanish speakers. Or choose from millions of potential mates through services like Match.com<sup>&reg;</sup> Mobile, Lavalife<sup>&reg;</sup>, and Mobilove. There's even a site specially for Spanish speakers.]]></description>
+	</feature>
+	<feature id="connect">
+		<title><![CDATA[Connect]]></title>
+		<description><![CDATA[It's all your social connections, all in one place. Link to Facebook<sup>&reg;</sup>, MySpace&trade;, YouTube&trade;, Flickr<sup>&reg;</sup>, and more all at the same time. Get updates, alerts, photos, and invites delivered to your phone instantly, all in one place.]]></description>
+	</feature>
+	<feature id="contact-backup">
+		<title><![CDATA[Contact Backup]]></title>
+		<description><![CDATA[Back yourself up. Store your contacts online for safekeeping and easy transfer between phones.]]></description>
+	</feature>
+	<feature id="display-262k-tft">
+		<title><![CDATA[Display: Main - 262K TFT - 1.8" (128x160 pixels), Sub - 65K CSTN - 1" (96x64 pixels)]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	<feature id="display-96x64">
+		<title><![CDATA[Display: External - 96x64 pixels, 65k-color STN, Internal - 128x160 pixels, 262k-color TFT]]></title>
+		<description><![CDATA[]]></description>
+	</feature>
+	<feature id="email-and-instant-messaging">
+		<title><![CDATA[Email]]></title>
+		<description><![CDATA[Get the message - wherever you are. Receive your emails and IMs on the go so you can connect with friends even when you&#39;re not by your computer. Access all the major instant message and webmail providers.]]></description>
+	</feature>
+	<feature id="multimedia-im-text-messaging">
+		<title><![CDATA[Multimedia, IM and text messaging]]></title>
+		<description><![CDATA[Stay in the loop with friends, family and co-workers any which way you like.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="multilanguage">
+		<title><![CDATA[Multi language settings]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="multimedia-im-text-messaging-capable">
+		<title><![CDATA[Multimedia, IM and text messaging capable]]></title>
+		<description><![CDATA[Stay in the loop with friends, family and co-workers any which way you like.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="expandable-memory" type="">
+		<title><![CDATA[Expandable Memory]]></title>
+		<description><![CDATA[Swap out the included 2GB microSD&trade; card to store more pics or music - up to 32GB.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="home-search-menu-keys" type="">
+		<title><![CDATA[Dedicated Home, Search and Menu Keys]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="home-menu-camera-keys" type="">
+		<title><![CDATA[Dedicated Home, Menu and Camera Keys]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="f7-home-search-menu-keys" type="">
+		<title><![CDATA[Dedicated Home, Menu and QuickMemo Keys]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="caller-id" type="">
+		<title><![CDATA[Caller ID]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="one-click-access" type="">
+		<title><![CDATA[One-click access to Facebook<sup>&reg;</sup>, Twitter<sup>&reg;</sup> and more]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="facebook" type="">
+		<title><![CDATA[Facebook<sup>&reg;</sup>]]></title>
+		<description><![CDATA[Whatever you&#39;re doing, wherever you go, share it all on the social media sensation.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="facebook-twitter" type="">
+		<title><![CDATA[Facebook<sup>&reg;</sup> and Twitter]]></title>
+		<description><![CDATA[Surf the web from the palm of your hand. Connect instantly to sites like Twitter, Facebook<sup>&reg;</sup> and countless others.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="flickr" type="">
+		<title><![CDATA[Flickr<sup>&reg;</sup>]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="flip-form-factor" type="">
+		<title><![CDATA[Flip form factor with dual color LCD]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="full-keyboard">
+		<title><![CDATA[Full QWERTY Keyboard]]></title>
+		<description><![CDATA[Text, email, and browse with ease, using a full QWERTY keyboard.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="games" type="">
+		<title><![CDATA[Games]]></title>
+		<description><![CDATA[Get your game on. We&#39;ve got a huge selection for you to choose from - puzzlers, racing and action games, shoot-em-up's, classics, and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-integration" type="">
+		<title><![CDATA[Google<sup>&reg;</sup> accounts integration]]></title>
+		<description><![CDATA[Sync your Gmail<sup>&reg;</sup>, Google Calendar, Google Documents and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-maps" type="">
+		<title><![CDATA[Google Maps&trade; with Turn-by-Turn GPS Navigation]]></title>
+		<description><![CDATA[The one feature you can't do without. Traffic, directions, local search and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-play" type="">
+		<title><![CDATA[Google Play&trade;]]></title>
+		<description><![CDATA[Apps, games, movies, music and books &#151; your one-stop shop for everything awesome.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-play-title" type="">
+		<title><![CDATA[Access to Google Play&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="web-gps" type="">
+		<title><![CDATA[Wireless Web & GPS Enabled]]></title>
+		<description><![CDATA[Surf the web and get satellite-guided navigation, all from the palm of your hand.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="gps" type="">
+		<title><![CDATA[GPS/Navigation]]></title>
+		<description><![CDATA[Blaze new trails with satellite-guided, turn-by-turn directions.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="gps-enabled" type="">
+		<title><![CDATA[GPS/Navigation]]></title>
+		<description><![CDATA[Blaze new trails with satellite-guided, turn-by-turn directions.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="graphics" type="">
+		<title><![CDATA[Graphics]]></title>
+		<description><![CDATA[Ready to upgrade your mobile wardrobe? Your phone should never go naked. Dress it up with your favorite wallpapers and screensavers. Choose from celebs, hot girls, hot guys, sports, TV & movies, one-of-a-kind designs, and a lot more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screensavers" type="">
+		<title><![CDATA[Screensavers]]></title>
+		<description><![CDATA[Screensavers]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wallpapers" type="">
+		<title><![CDATA[Wallpapers]]></title>
+		<description><![CDATA[Wallpapers]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="internal-antenna" type="">
+		<title><![CDATA[Internal antenna]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="large-keypad-display-texting" type="">
+		<title><![CDATA[Large keypad, display and texting fonts]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="large-keypad-for-easy-operation" type="">
+		<title><![CDATA[Large keypad for easy operation]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="luxurious-red-finish" type="">
+		<title><![CDATA[Luxurious red soft touch finish]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="microsd-2gb-card-included" type="">
+		<title><![CDATA[2GB microSD&trade; card included]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="microsd-32gb-card-support" type="">
+		<title><![CDATA[32GB microSD&trade; card support (card not included)]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="microsd-64gb-card-support" type="">
+		<title><![CDATA[64GB microSD&trade; card support (card not included)]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="microsd-up-to-32gb" type="">
+		<title><![CDATA[32GB microSD&trade; card support (card not included)]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mobile-alerts" type="">
+		<title><![CDATA[Mobile Alerts]]></title>
+		<description><![CDATA[Entertainment headlines, sports scores, hot pix, and other fun stuff - sent right to your phone. Sign up to receive alerts on your phone. Real-time sports scores, Comedy Central's Joke of the Day, MTV News, our hunk/babe of the week, and many more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mobile-search" type="">
+		<title><![CDATA[Mobile Search]]></title>
+		<description><![CDATA[Instantly search for stuff on the web or on your phone. News, weather, sports, directions... even games and ringtones.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mobile-web" type="web-browser">
+		<title><![CDATA[Mobile Web]]></title>
+		<description><![CDATA[Go anywhere on the web with this sleek browser optimized for mobile use.]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="mp3" type="">
+		<title><![CDATA[MP3]]></title>
+		<description><![CDATA[Turn it up and take your favorite tracks along for the ride.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mp3-animated-tones" type="">
+		<title><![CDATA[MP3 animated and "real music" tones]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="picture-video-sharing" type="">
+		<title><![CDATA[Picture and video sharing]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mypix" type="">
+		<title><![CDATA[MyPix]]></title>
+		<description><![CDATA[See. Snap. Share. MyPix is your place on the web to store, organize, and share the photos and videos you take with your Virgin Mobile phone. From MyPix Online, you can send pictures directly to Facebook<sup>&reg;</sup>, Flickr<sup>&reg;</sup>, Photobucket, Blogger, MobileMe, and lots of other blogs and photo-sharing sites.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="myspace" type="">
+		<title><![CDATA[MySpace&trade;]]></title>
+		<description><![CDATA[Take your friends with you wherever you go. Don't miss out on a single comment with MySpace on your phone. Keep up on your comments and messages around the clock or update your photos, blogs and more, right from your phone.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="opera-mini" type="">
+		<title><![CDATA[Opera Mini&trade;]]></title>
+		<description><![CDATA[Enjoy a faster, fuller web experience with a free download of Opera Mini which optimizes each webpage for your phone. That means faster page downloads and speedier scrolling.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="preloaded-apps" type="">
+		<title><![CDATA[Pre-loaded Apps]]></title>
+		<description><![CDATA[Jumpstart Android&trade; with pre-loaded YouTube, Facebook, Twitter and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="picture-messaging" type="">
+		<title><![CDATA[Picture Messaging]]></title>
+		<description><![CDATA[Share your favorite mobile snapshots through text or email.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="qvga-display" type="">
+		<title><![CDATA[Impressive 2.4" QVGA display]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="real-music-ringtones" type="">
+		<title><![CDATA[Real music ringtones]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="reloaded-demo-games" type="">
+		<title><![CDATA[Reloaded demo games]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="games-apps" type="">
+		<title><![CDATA[Games &amp; Apps]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="ringtones" type="">
+		<title><![CDATA[Ringtones]]></title>
+		<description><![CDATA[Choose from thousands of 'tones for your phone. Everything from the latest releases to the greatest hits - we've got it all. Songs, voices, sounds, and more. You can even choose different ringtones for different callers.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="custom-ringtones" type="">
+		<title><![CDATA[Customizable ringtones]]></title>
+		<description><![CDATA[Rock out and know who's calling by setting theme music for all your friends.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="robust-sound-quality" type="">
+		<title><![CDATA[Robust sound quality]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size" type="">
+		<title><![CDATA[Screen Size]]></title>
+		<description><![CDATA[Our phones feature vivid, full-color screens ranging in size up to a massive 2.6" in length.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point0" type="">
+		<title><![CDATA[2.0" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point4" type="display">
+		<title><![CDATA[2.4" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point4-lcd" type="">
+		<title><![CDATA[2.4" LCD Screen]]></title>
+		<description><![CDATA[Surf, watch videos and take pictures with clarity, thanks to the big screen on this slim phone.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point44" type="display">
+		<title><![CDATA[2.44" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title><![CDATA[2.44" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point54-amoled" type="display">
+		<title><![CDATA[4.52&#34; Super AMOLED&#8482; Plus Touchscreen]]></title>
+		<description><![CDATA[With this crisp, over-sized screen and rich color display, enjoy all your brightest photos and full HD video on the go.]]></description>
+		<compare-title><![CDATA[4.52" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point44-notouch" type="display">
+		<title><![CDATA[2.44" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title><![CDATA[2.44" non-Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point46" type="display">
+		<title><![CDATA[2.46" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title><![CDATA[2.46" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-1point8" type="">
+		<title><![CDATA[1.8 Screen Size]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point2" type="">
+		<title><![CDATA[2.2" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-2point46" type="">
+		<title><![CDATA[2.46 Screen Size]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="sleek-design" type="">
+		<title><![CDATA[Sleek streamlined design]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="spanish-support" type="">
+		<title><![CDATA[Spanish Language Support]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="dual-language-settings" type="">
+		<title><![CDATA[Dual Language Settings]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hearing-device-enabled" type="">
+		<title><![CDATA[Hearing aid device compatibility]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hearing-aid-device-enabled" type="">
+		<title><![CDATA[Hearing aid device compatibility]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="speakerphone" type="speakerphone">
+		<title><![CDATA[Speakerphone]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="speakerphone-voice-activated-dialing" type="">
+		<title><![CDATA[Speakerphone with voice activated dialing]]></title>
+		<description><![CDATA[Just speak up to dial contacts then speak your mind with hands-free calling.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="phonebook-600" type="">
+		<title><![CDATA[600-entry phonebook]]></title>
+		<description><![CDATA[600 entry phonebook]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="phonebook-1000" type="">
+		<title><![CDATA[1000-entry phonebook]]></title>
+		<description><![CDATA[1000 entry phonebook]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="email-igmya" type=""> 
+		<title><![CDATA[Access to email and IM from Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup> & more]]></title>
+		<description><![CDATA[Access to email and IM from Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup> & more]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="games-wallpaper" type="">
+		<title><![CDATA[Downloadable games, wallpapers & real music ringtones]]></title>
+		<description><![CDATA[Downloadable games, wallpapers & real music ringtones]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="im-yagw" type="">
+		<title><![CDATA[Instant messaging capable (Yahoo!<sup>&reg;</sup>, AIM<sup>&reg;</sup>, Google Talk&#153; & Windows Live&#153; Messenger)]]></title>
+		<description><![CDATA[Instant messaging capable (Yahoo!<sup>&reg;</sup>, AIM<sup>&reg;</sup>, Google Talk&#153; & Windows Live&#153; Messenger)]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="picture-id" type="">
+		<title><![CDATA[Picture caller ID]]></title>
+		<description><![CDATA[Picture caller ID]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="statusbar" type="">
+		<title><![CDATA[Status bar with icons]]></title>
+		<description><![CDATA[Status bar with icons]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="tty" type="">
+		<title><![CDATA[TTY]]></title>
+		<description><![CDATA[TTY]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="broadcast-tv" type="">
+		<title><![CDATA[Broadcast mobile TV]]></title>
+		<description><![CDATA[Broadcast mobile TV]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="picture-sharing" type="">
+		<title><![CDATA[Picture sharing]]></title>
+		<description><![CDATA[Picture sharing]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="multimedia-text" type="">
+		<title><![CDATA[Multimedia & text messaging]]></title>
+		<description><![CDATA[Multimedia & text messaging]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="fb-tw" type="">
+		<title><![CDATA[Facebook<sup>&reg;</sup> & Twitter<sup>&reg;</sup> access]]></title>
+		<description><![CDATA[Facebook<sup>&reg;</sup> & Twitter<sup>&reg;</sup> access]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="vibrate-mode" type="">
+		<title><![CDATA[Vibrate mode]]></title>
+		<description><![CDATA[Don&#146;t be that guy whose phone goes off in the movie. Just don&#146;t.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="sporty-design" type="">
+		<title><![CDATA[Sporty, simple design]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="studio-v" type="">
+		<title><![CDATA[Studio V]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="stylish-curves" type="">
+		<title><![CDATA[Stylish curves in a flip form factor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="surf-the-web" type="">
+		<title><![CDATA[Surf the Web]]></title>
+		<description><![CDATA[Grab the internet and take it with you. No computer necessary. Browse the web right from your phone. Connect instantly to sites like Google<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, Facebook<sup>&reg;</sup>, MySpace&trade;, and more. Get the latest headlines and hotlinks from Virgin Mobile, do a search, or type in your own web address and surf away.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="text-messaging" type="">
+		<title><![CDATA[Text Messaging]]></title>
+		<description><![CDATA[Say it all without saying a word.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="twitter" type="">
+		<title><![CDATA[Twitter<sup>&reg;</sup>]]></title>
+		<description><![CDATA[Twitter rules the world and now you can rule Twitter.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="video" type="video">
+		<title><![CDATA[Video]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="hd-video" type="video">
+		<title><![CDATA[Full HD (1080p) video]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="virgin-mobile-navigator" type="">
+		<title><![CDATA[Virgin Mobile Navigator]]></title>
+		<description><![CDATA[From now on, get lost only when you want to. Turn your phone into a GPS-enabled navigation device with turn-by-turn voice directions, local business search, weather updates, and a whole lot more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="virgin-mobile-ui" type="">
+		<title><![CDATA[New enhanced Virgin Mobile UI]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="virgin-mobile-ui-spanish" type="">
+		<title><![CDATA[New enhanced Virgin Mobile UI w/Spanish Language option]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="voice-activated-dialing" type="">
+		<title><![CDATA[Voice activated dialing]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="youtube" type="">
+		<title><![CDATA[YouTube&trade;]]></title>
+		<description><![CDATA[Now all those clumsy kittens and cute babies stream right to your phone.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="full-qwerty-optical" type="">
+		<title><![CDATA[Full QWERTY keypad with Optical Navigation]]></title>
+		<description><![CDATA[The classic keyboard layout you know, the physical keys you love.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wifi-enabled" type="wifi">
+		<title><![CDATA[Wi-Fi<sup>&reg;</sup> enabled]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="wifi" type="wifi">
+		<title><![CDATA[Wi-Fi]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="wifi-capable" type="wifi">
+		<title><![CDATA[Wi-Fi<sup>&reg;</sup> capable]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="text2speech" type="">
+		<title><![CDATA[Text-to-Speech]]></title>
+		<description><![CDATA[With Text to Speech, your phone can announce the names of incoming callers.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="voice-recognition" type="">
+		<title><![CDATA[Voice recognition]]></title>
+		<description><![CDATA[Voice recognition]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="digital-camera" type="">
+		<title><![CDATA[Digital camera ]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[0.3MP VGA Rear-facing camera]]></compare-title>
+	</feature>
+	<feature id="rear-camera" type="camera">
+		<title><![CDATA[Rear facing camera]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[Rear facing camera]]></compare-title>
+	</feature>
+	<feature id="speakerphone-voice" type="">
+		<title><![CDATA[Speakerphone with voice-activated dialing]]></title>
+		<description><![CDATA[Just speak up to dial contacts then speak your mind with hands-free calling.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="camera-3point0" type="">
+		<title><![CDATA[3.0MP front-facing camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-camcorder-2point0" type="">
+		<title><![CDATA[2MP Camera-Camcorder]]></title>
+		<description><![CDATA[With the 2MP camera and VGA camcorder you can take spontaneous photos and videos and upload to your favorite social networking site. ]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-3point0Rear" type="">
+		<title><![CDATA[3.0MP rear-facing camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-3point2" type="camera">
+		<title><![CDATA[3.2MP Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+		<compare-title><![CDATA[3.2 MP Rear-facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-3point2-front" type="camera">
+		<title><![CDATA[3.2MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it]]></description>
+		<compare-title><![CDATA[3.2MP Front-facing camera with video]]></compare-title>
+	</feature>
+	<feature id="camera-1point3-feature" type="camera">
+		<title><![CDATA[1.3 MP Camera]]></title>
+		<description><![CDATA[Vivid picture power brings your life to, well, life.]]></description>
+		<compare-title><![CDATA[1.3MP Rear-facing camera with video and digital zoom]]></compare-title>
+	</feature>
+	<feature id="camera-8point-1080" type="camera">
+		<title><![CDATA[8MP Camera with 1080P Full HD Video]]></title>
+		<description><![CDATA[Capture vivid detail with sharp photos and amazing high quality video. Save every memory and share with friends and family.]]></description>
+		<compare-title><![CDATA[8MP Rear-facing (/w 4x zoom) - 2MP front-facing camera ]]></compare-title>
+	</feature>
+	<feature id="camera-2point-front" type="">
+		<title><![CDATA[2MP Front Facing Camera]]></title>
+		<description><![CDATA[It's a video-chat dream! Take advantage of this phone's flexibility and get ready for your profile shot.]]></description>
+		<compare-title>2MP</compare-title>
+	</feature>
+
+
+	<feature id="tv-enabled" type="">
+		<title><![CDATA[TV enabled]]></title>
+		<description><![CDATA[Leave your favorite shows when you go out? Never.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="external-touch-keyboard" type="">
+		<title><![CDATA[External touch-sensitive keypad]]></title>
+		<description><![CDATA[An external glow-through keypad lets you dial in style.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="enhanced-mp3" type="">
+		<title><![CDATA[Enhanced MP3 music player]]></title>
+		<description><![CDATA[Keep all your classic cuts and new favorites close at hand.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-3point2" type="">
+		<title><![CDATA[3.2MP Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-3point2-mp-zoom-video" type="camera">
+		<title><![CDATA[3.2MP Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+		<compare-title><![CDATA[3.2MP Rear-facing camera with video]]></compare-title>
+	</feature>
+	<feature id="camera-3point2-still" type="camera">
+		<title><![CDATA[3.2MP Camera]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[3.2MP Rear-facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-3point2-flash" type="camera">
+		<title><![CDATA[3.2MP camera with flash and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[3.2MP Rear-facing camera with video]]></compare-title>
+	</feature>
+	<feature id="5point0-camera-video" type="">
+		<title><![CDATA[5.0MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="5point0-camera-zoom-video" type="">
+		<title><![CDATA[5.0MP camera with zoom and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="5point0-camera-flash-video" type="">
+		<title><![CDATA[5.0MP camera with flash and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="touchscreen" type="">
+		<title><![CDATA[Touchscreen]]></title>
+		<description><![CDATA[Glide your finger across a large 3.2-inch touchscreen for easy navigation. Pinch &amp; zoom when looking at pictures or surfing the web.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wireless-emergency-alert" type="">
+		<title><![CDATA[Wireless Emergency Alert Capable]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="not-wireless-emergency-alert" type="">
+		<title><![CDATA[Not Wireless Emergency Alert Capable]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wireless-web" type="">
+		<title><![CDATA[Wireless web]]></title>
+		<description><![CDATA[Check all your favorite sites even when you&#146;re out seeing the sights.]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="wifi-hotspot" type="hotspot">
+		<title><![CDATA[Wi-Fi & Mobile Hotspot Capability]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds or add Mobile Hotspot to create your own Wi-Fi network wherever you go. Connect your tablet, laptop and other devices for an additional monthly service.]]></description>
+		<compare-title><![CDATA[Available for additional $10/mo]]></compare-title>
+	</feature>
+	<feature id="bb-wireless-web" type="">
+		<title><![CDATA[Wireless web with BlackBerry<sup>&reg;</sup> 7 OS]]></title>
+		<description><![CDATA[Check all your favorite sites even when you&#146;re out seeing the sights.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wireless-web-enabled" type="web-browser">
+		<title><![CDATA[Wireless web enabled]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="nfc-enabled" type="web-browser">
+		<title><![CDATA[NFC enabled]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="wireless-web-enabled-wap" type="web-browser">
+		<title><![CDATA[Wireless web enabled]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[WAP]]></compare-title>
+	</feature>
+	<feature id="three-way-calling" type="">
+		<title><![CDATA[3-way calling]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="processor" type="processor">
+		<title><![CDATA[800 MHz Processor]]></title>
+		<description><![CDATA[800 MHz Processor]]></description>
+		<compare-title><![CDATA[800 MHz]]></compare-title>
+	</feature>
+	<feature id="dual-1point2ghz" type="processor">
+		<title><![CDATA[Dual Core 1.2GHz Processor]]></title>
+		<description><![CDATA[Get it all done — fast. This powerful processor lets you run multiple apps without sacrificing speed.]]></description>
+		<compare-title><![CDATA[1.2 GHz Dual core, Exynos processor]]></compare-title>
+	</feature>
+	<feature id="dual-1point5ghz" type="processor">
+		<title><![CDATA[Dual Core 1.5GHz]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Dual Core 1.5GHz]]></compare-title>
+	</feature>	
+	
+	
+	<feature id="operating-system" type="os">
+		<title><![CDATA[Android 2.1 Operating System]]></title>
+		<description><![CDATA[Android 2.1 Operating System]]></description>
+		<compare-title><![CDATA[Android&trade; OS 2.1]]></compare-title>
+	</feature>
+	<feature id="android-app-market" type="">
+		<title><![CDATA[Android Market]]></title>
+		<description><![CDATA[Choose from over 250,000 apps to browse and download. Games, social networking, news &amp; weather, productivity, and lots more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="corporate-email" type="">
+		<title><![CDATA[Corporate Email]]></title>
+		<description><![CDATA[Wirelessly sync with your company&#39;s Outlook Exchange server and get your email, contacts, and task information on the go.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="amazon-mp3-store" type="">
+		<title><![CDATA[Amazon MP3 Store]]></title>
+		<description><![CDATA[Download songs directly from the Amazon MP3 store while you&#39;re on the go.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="vm-live" type="">
+		<title><![CDATA[Virgin Mobile Live]]></title>
+		<description><![CDATA[Stream music 24/7 from past &amp; present Virgin Mobile Festival artists. Studio tracks, exclusive Festival performances, and more. It&#39;s free!]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="android-browser" type="web-browser">
+		<title><![CDATA[Android&trade; Web Browser]]></title>
+		<description><![CDATA[See the web the way it was meant to be seen, including Flash animation.]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="android-2point3" type="os">
+		<title><![CDATA[Android&trade; 2.3]]></title>
+		<description><![CDATA[Gingerbread for faster texting and streaming rich content.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 2.3]]></compare-title>
+	</feature>
+	<feature id="android-2point3point7" type="os">
+		<title><![CDATA[Android&trade; 2.3.7]]></title>
+		<description><![CDATA[Gingerbread with enhanced gaming and processing performance.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 2.3.7]]></compare-title>
+	</feature>
+	<feature id="android-4point0" type="os">
+		<title><![CDATA[Android&trade; 4.0]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.0]]></compare-title>
+	</feature>
+	<feature id="android-4point1" type="os">
+		<title><![CDATA[Android&trade; 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.1]]></compare-title>
+	</feature>
+	<feature id="android-4point3" type="os">
+		<title><![CDATA[Android&trade; OS 4.3 (Jelly Bean)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity. ]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.3]]></compare-title>
+	</feature>
+	<feature id="android-4point0-or-higher" type="os">
+		<title><![CDATA[Android&trade; 4.0 or higher]]></title>
+		<description><![CDATA[Loaded with OS Ice Cream Sandwich,  you can enjoy  the upgrade to Jelly Bean, the newest and most advanced Android OS available. 
+]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.1]]></compare-title>
+	</feature>
+	<feature id="voice-search" type="">
+		<title><![CDATA[Voice Search]]></title>
+		<description><![CDATA[Google search with voice. Just speak and you shall find, for example: "falafel lower east side" or "pictures of dogs that look like their owners."]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hands-free-speakerphone" type="">
+		<title><![CDATA[Hands-free speakerphone]]></title>
+		<description><![CDATA[Talk without touching. You&#146;ll use it more than you think.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="high-speed-3g" type="">
+		<title><![CDATA[3G high-speed data ]]></title>
+		<description><![CDATA[3G high-speed data ]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="bbm-apps" type="">
+		<title><![CDATA[Access to BlackBerry<sup>&reg;</sup> apps, BlackBerry<sup>&reg;</sup> Messenger, games & more]]></title>
+		<description><![CDATA[Access to BlackBerry<sup>&reg;</sup> apps, BlackBerry<sup>&reg;</sup> Messenger, games & more]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="optical-trackpad" type="">
+		<title><![CDATA[Optical Trackpad]]></title>
+		<description><![CDATA[Optical Trackpad]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="enhanced-web" type="web-browser">
+		<title><![CDATA[Enhanced Web browser (7 OS)]]></title>
+		<description><![CDATA[Enhanced Web browser (7 OS)]]></description>
+		<compare-title><![CDATA[HTML]]></compare-title>
+	</feature>
+	<feature id="call-forwarding" type="">
+		<title><![CDATA[Call forwarding]]></title>
+		<description><![CDATA[Call forwarding]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-navigation" type="">
+		<title><![CDATA[Google Navigation]]></title>
+		<description><![CDATA[Search for addresses, businesses, and landmarks and get detailed directions to your destination. View real-time traffic conditions and navigate hands-free using spoken, turn-by-turn driving instructions.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-wallet" type="">
+		<title><![CDATA[Google Wallet&trade;]]></title>
+		<description><![CDATA[Goodbye, wallet. The phone will take it from here.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="expandable-memory-upto-32gb" type="">
+		<title><![CDATA[Expandable Memory (up to 32 GB)]]></title>
+		<description><![CDATA[Swap out the included 2GB microSD&trade; card to store more pics or music - up to 32GB.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="poynt" type="">
+		<title><![CDATA[Poynt]]></title>
+		<description><![CDATA[Find local restaurants, weather, offers and more, all in one easy-to-use app.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="twidroyd" type="">
+		<title><![CDATA[Twidroyd App]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="voice-commands" type="">
+		<title><![CDATA[Voice commands]]></title>
+		<description><![CDATA[Speak to dial phone numbers, type emails or texts, even search the web.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="swype-text-input" type="">
+		<title><![CDATA[Swype Keyboard]]></title>
+		<description><![CDATA[Enter words super fast by just gliding your finger over the keys. Amazing.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="os-android-2point2" type="">
+		<title><![CDATA[Android&trade; 2.2]]></title>
+		<description><![CDATA[Froyo includes everything that made Android the #1 mobile OS.]]></description>
+		<compare-title><![CDATA[Android 2.2]]></compare-title>
+	</feature>
+
+	<feature id="processor-600mhz" type="processor">
+		<title><![CDATA[600 MHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[600 MHz]]></compare-title>
+	</feature>
+	<feature id="processor-528mhz" type="processor">
+		<title><![CDATA[528 MHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[528 MHz]]></compare-title>
+	</feature>
+	<feature id="processor-192mhz" type="processor">
+		<title><![CDATA[192 MHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[192 MHz]]></compare-title>
+	</feature>
+
+	<feature id="processor-480mhz" type="processor">
+		<title><![CDATA[480 MHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[480 MHz]]></compare-title>
+	</feature>
+	<feature id="processor-1point2ghz" type="processor">
+		<title><![CDATA[1.2 GHz Processor]]></title>
+		<description><![CDATA[1.2 GHz processor]]></description>
+		<compare-title><![CDATA[1.2 GHz]]></compare-title>
+	</feature>
+	<feature id="processor-528mhz" type="processor">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[528 MHz]]></compare-title>
+	</feature>
+
+	<feature id="ringback-tones" type="">
+		<title><![CDATA[Ringback Tones]]></title>
+		<description><![CDATA[Ringback Tones]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="speech-to-text" type="">
+		<title><![CDATA[Speech To Text]]></title>
+		<description><![CDATA[Speak your mind, and have it converted to text. It&#39;s like magic, but better.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="scvngr" type="">
+		<title><![CDATA[SCVNGR&#153; App]]></title>
+		<description><![CDATA[Victory is yours. Conquer challenges, earn and redeem points for real-world rewards.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="xt9-input" type="">
+		<title><![CDATA[XT9 smart input]]></title>
+		<description><![CDATA[XT9 smart input]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="16gb-internal-memory" type="">
+		<title><![CDATA[16GB Internal Memory]]></title>
+		<description><![CDATA[Store music, video, photos and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="expandable-memory" type="">
+		<title><![CDATA[Expandable memory]]></title>
+		<description><![CDATA[Swap out the included 2GB microSD&trade; card to store more pics or music - up to 32GB.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	
+	
+	
+	<feature id="screen-size-1point5" type="">
+		<title><![CDATA[1.5" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="easy-parental-controls" type="">
+		<title><![CDATA[Easy parental controls]]></title>
+		<description><![CDATA[Super family-friendly features like GPS phone locator.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="dedicated-text" type="">
+		<title><![CDATA[Dedicated text messaging key]]></title>
+		<description><![CDATA[Get texting faster with one speedy click.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="alarm-clock" type="">
+		<title><![CDATA[Alarm clock]]></title>
+		<description><![CDATA[alarm Clock]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="im" type="">
+		<title><![CDATA[Instant messaging]]></title>
+		<description><![CDATA[Chat in real-time with Google Talk&#153;, Yahoo! <sup>&reg;</sup> Messenger, AIM<sup>&reg;</sup>, and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-1point8-internal-1-external" type="">
+		<title><![CDATA[Dual Screens]]></title>
+		<description><![CDATA[Personalize your phone inside and out with 1.8" internal and 1" external screens.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-vga" type="">
+		<title><![CDATA[VGA Camera]]></title>
+		<description><![CDATA[See it, snap it, share it with the built-in VGA camera.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="threaded-msg" type="">
+		<title><![CDATA[Threaded Text Messaging]]></title>
+		<description><![CDATA[Keep up the conversation. See your back-and-forth texts as a single stream.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-modes-2point4" type="">
+		<title><![CDATA[Screen Size]]></title>
+		<description><![CDATA[Size: 2.4&#34; LCD Screen with Portrait and Landscape modes]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="auto-rotate" type="">
+		<title><![CDATA[Portrait to Landscape auto-rotate]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="earth-friendly" type="">
+		<title><![CDATA[Recyclable Materials]]></title>
+		<description><![CDATA[Smartly sustainable with 80% recyclable materials, minus the battery.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="slide-out-qwerty" type="">
+		<title><![CDATA[Slide-Out QWERTY Keyboard]]></title>
+		<description><![CDATA[Now you see it, now you don&#39;t full QWERTY keyboard.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="slider-qwerty" type="">
+		<title><![CDATA[Slider QWERTY]]></title>
+		<description><![CDATA[Bang out texts lightning fast on a slider QWERTY keyboard.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camcorder" type="">
+		<title><![CDATA[Camcorder]]></title>
+		<description><![CDATA[Record video and share with friends.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-2-mp" type="camera">
+		<title><![CDATA[2.0MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[2MP Rear-facing camera with video]]></compare-title>
+	</feature>
+	<feature id="camera-2-mp-zoom" type="camera">
+		<title><![CDATA[2.0MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[2MP Rear-facing camera with video and digital zoom]]></compare-title>
+	</feature>
+	<feature id="camera-2-mp-zoom-novideo" type="camera">
+		<title><![CDATA[2.0MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[2MP Rear-facing camera with digital optical zoom]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point2" type="">
+		<title><![CDATA[2.2" Screen]]></title>
+		<description><![CDATA[Everything you need to see made clear in eye-popping color.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="voice-dialing" type="">
+		<title><![CDATA[Voice Dialing]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="full-qwerty-keyboard" type="">
+		<title><![CDATA[Full QWERTY keyboard]]></title>
+		<description><![CDATA[The classic keyboard layout you know, the physical keys you love.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="full-qwerty-keyboard-bb" type="">
+		<title><![CDATA[Full QWERTY keyboard]]></title>
+		<description><![CDATA[The classic keyboard layout you know, the physical keys you love.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="virtual-qwerty-keyboard">
+		<title><![CDATA[Virtual QWERTY keyboard]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="full-and-virtual-qwerty-keyboard" type="">
+		<title><![CDATA[Full and Virtual QWERTY keyboard]]></title>
+		<description><![CDATA[Get two ways to type &#151; on a physical QWERTY keypad or right on the touchscreen.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="voicemail" type="">
+		<title><![CDATA[Voicemail]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="standard-phone-features" type="">
+		<title><![CDATA[Voicemail, caller ID, call waiting and 3-way calling]]></title>
+		<description><![CDATA[A ton of calling features let you talk to who you want, when you want.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="email" type="">
+		<title><![CDATA[Email]]></title>
+		<description><![CDATA[Connect to all the major webmail providers and never miss a message.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="instant-messaging" type="">
+		<title><![CDATA[Instant Messaging]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="messaging-sms" type="">
+		<title><![CDATA[Messaging: SMS, MMS, Email]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="airG" type="">
+		<title><![CDATA[airG App]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="qualcomm-chipset" type="">
+		<title><![CDATA[Qualcomm / MSM8655L Chipset]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="chipset-qualcomm" type="">
+		<title><![CDATA[Chipset: Qualcomm / MSM8655]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="chipset-msm" type="">
+		<title><![CDATA[MSM 8655 Chipset]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="service-vm" type="">
+		<title><![CDATA[Service - Virgin Mobile ID and My Account]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="threaded-txt-messaging" type="">
+		<title><![CDATA[Threaded Text Messaging]]></title>
+		<description><![CDATA[Keep up the conversation. See your back-and-forth texts as a single stream.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="activesync-contact-and-calendar-sync" type="">
+		<title><![CDATA[ActiveSync Contact and Calendar Sync]]></title>
+		<description><![CDATA[Sync your phone with existing contacts and calendar events so it&#39;s always in your pocket and available on-the-go.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="calendar" type="calendar">
+		<title><![CDATA[Calendar]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="call-waiting" type="">
+		<title><![CDATA[Call waiting]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mp3-media-player" type="">
+		<title><![CDATA[MP3 Media Player]]></title>
+		<description><![CDATA[Turn it up and take your favorite tracks along for the ride.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="512-internal-memory" type="">
+		<title><![CDATA[Internal Memory: 512]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="screen-size-4point3" type="display">
+		<title><![CDATA[4.3" touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[4.3" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-4point0-hd" type="display">
+		<title><![CDATA[4" HD touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[4" HD Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point5-hvga" type="display">
+		<title><![CDATA[3.5" HVGA IPS Touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3.5" HVGA IPS Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-4point0" type="display">
+		<title><![CDATA[4.0" touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[4.0" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point7" type="display">
+		<title><![CDATA[3.7" Touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3.7" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point5" type="display">
+		<title><![CDATA[3.5" Touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3.5" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point2" type="display">
+		<title><![CDATA[3.2" touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3.2" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point1" type="display">
+		<title><![CDATA[3.1" touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3.1" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-3point0" type="display">
+		<title><![CDATA[3.0" Touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games. ]]></description>
+		<compare-title><![CDATA[3.0" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point8" type="display">
+		<title><![CDATA[2.8" touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[2.8" Touchscreen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point8-notouch" type="display">
+		<title><![CDATA[2.8" screen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2.8" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point5-notouch" type="display">
+		<title><![CDATA[2.5" screen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2.5" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2point4-notouch" type="display">
+		<title><![CDATA[2.4" screen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2.4" Screen]]></compare-title>
+	</feature>
+	<feature id="screen-size-2-notouch" type="display">
+		<title><![CDATA[2" screen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2" Screen]]></compare-title>
+	</feature>
+        <feature id="screen-size-2point2" type="display">
+		<title><![CDATA[2.2" QVGA LCD]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2.2" QVGA LCD]]></compare-title>
+	</feature>
+	<feature id="1point2-ghz-processor" type="processor">
+		<title><![CDATA[MSM 8655 Chipset - 1.2GHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1.2 GHz]]></compare-title>
+	</feature>
+	<feature id="hd-video-capture" type="">
+		<title><![CDATA[HD Video Capture]]></title>
+		<description><![CDATA[Record and share videos in high quality 720p.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="bluetooth" type="bluetooth">
+		<title><![CDATA[Bluetooth&#174;]]></title>
+		<description><![CDATA[Take calls and listen to music without wires, and share files over the air and more.]]></description>
+		<compare-title><![CDATA[Bluetooth&#174;]]></compare-title>
+	</feature>
+	<feature id="stereo-bluetooth" type="bluetooth">
+		<title><![CDATA[Stereo Bluetooth&#174;]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth&#174; headset (sold separately).]]></description>
+		<compare-title><![CDATA[Stereo]]></compare-title>
+	</feature>
+	<feature id="processor-1ghz" type="processor">
+		<title><![CDATA[1GHz Processor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1 GHz]]></compare-title>
+	</feature>
+	<feature id="processor-1ghz-qc" type="processor"> 
+		<title><![CDATA[1GHz Dual Core Processor]]></title>
+		<description><![CDATA[1GHz Dual Core Processor]]></description>
+		<compare-title><![CDATA[1GHz Dual Core Processor]]></compare-title>
+	</feature>
+	<feature id="processor-1ghz-qc-test" type="processor"> 
+		<title><![CDATA[1GHz Snapdragon Processor]]></title>
+		<description><![CDATA[1GHz QUALCOMM Snapdragon Processor]]></description>
+		<compare-title><![CDATA[1 GHz QUALCOMM Snapdragon Processor]]></compare-title>
+	</feature>
+	<feature id="dual-camera-5mp" type="camera">
+		<title><![CDATA[Dual Camera &amp; HD Video]]></title>
+		<description><![CDATA[Awesome VGA front and 5.0MP rear camera, plus 720p HD video capture.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="where" type="">
+		<title><![CDATA[WHERE&#174; App]]></title>
+		<description><![CDATA[Join 4+ million users to hook up with offers for local shops, events &amp; more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="corporate-email-no-task" type="">
+		<title><![CDATA[Corporate Email]]></title>
+		<description><![CDATA[Wirelessly sync with your company&#39;s Outlook Exchange server and get your email and contact  information on the go.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="2gb-internal-memory" type="">
+		<title><![CDATA[Internal Memory: 2GB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="512mb-ram" type="">
+		<title><![CDATA[RAM: 512MB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="internal-512mb-ram" type="">
+		<title><![CDATA[Internal Memory: 512MB RAM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="memory1" type="">
+		<title><![CDATA[Memory: 512 MB RAM / 4 GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="32gb-expandable-memory" type="">
+		<title><![CDATA[Expandable Memory]]></title>
+		<description><![CDATA[Swap out the included 2GB microSD&trade; card to store more pics or music - up to 32GB.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="vmdownloads" type="">
+		<title><![CDATA[Virgin Mobile Downloads App]]></title>
+		<description><![CDATA[Get your favorite ringtones and graphics, surf the web, and access your Account and personal Wishlist all from your home screen with this new &amp; improved Downloads app for Android&trade;.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="places" type="">
+		<title><![CDATA[Google Places]]></title>
+		<description><![CDATA[Get access to more than 50 million shops and businesses around the world, including coffee shops, bars, hotels, attractions, and even ATMs, in this convenient Google&trade; app.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="world-phone-capable" type="">
+		<title><![CDATA[World Phone Capable]]></title>
+		<description><![CDATA[World Phone Capable]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="light-sensor" type="">
+		<title><![CDATA[Light Sensor]]></title>
+		<description><![CDATA[Light Sensor]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="android2point3" type="">
+		<title><![CDATA[Android&trade; OS 2.3]]></title>
+		<description><![CDATA[Gingerbread for faster texting and streaming rich content.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="android4point0" type="">
+		<title><![CDATA[Android&trade; OS 4.0]]></title>
+		<description><![CDATA[Ice Cream Sandwich for powerful multitasking and customizable interface.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="gmail-google-talk" type="">
+		<title><![CDATA[Access to Gmail<sup>&reg;</sup> and Google Talk&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="gmail-google-hangout" type="">
+		<title><![CDATA[Access to Gmail<sup>&reg;</sup> and Google Hangouts]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="boost-id" type="">
+		<title><![CDATA[Access to Boost ID]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mobile-id" type="">
+		<title><![CDATA[Access to Mobile ID]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+
+	<feature id="proximity-sensor" type="">
+		<title><![CDATA[Proximity Sensor]]></title>
+		<description><![CDATA[Disables the keys when the device is close to your face, so you don&#39;t cheek-dial someone else.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="oneclick-access" type="">
+		<title><![CDATA[One-click access to favorites ]]></title>
+		<description><![CDATA[One-click access to favorites ]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="bbm-im-text" type="">
+		<title><![CDATA[Multimedia, BBM&#153;, IM and text messaging]]></title>
+		<description><![CDATA[Stay in the loop with friends, family and co-workers any which way you like.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="mobile-hotspot" type="hotspot">
+		<title><![CDATA[Mobile Hotspot Available]]></title>
+		<description><![CDATA[Turn your phone into a Wi-Fi<sup>&reg;</sup> hotspot and share your connection. Now that's hot. (Additonal fees required)]]></description>
+		<compare-title><![CDATA[Available for additional $10/mo]]></compare-title>
+	</feature>
+	<feature id="news-and-weather" type="">
+		<title><![CDATA[News and Weather]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-talk" type="">
+		<title><![CDATA[Google Talk&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-latitude" type="">
+		<title><![CDATA[Google Latitude&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-music" type="">
+		<title><![CDATA[Google Music&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="google-search" type="">
+		<title><![CDATA[Google Search&trade;]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="latitude" type="">
+		<title><![CDATA[Google&trade; Latitude]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="calculator" type="">
+		<title><![CDATA[Calculator]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="clock" type="">
+		<title><![CDATA[Clock]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="myaccount" type="">
+		<title><![CDATA[My Account]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="bluetooth3" type="bluetooth">
+		<title><![CDATA[Bluetooth&#174; 3.0]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="touchscreen3point2" type="">
+		<title><![CDATA[3.2" Touchscreen]]></title>
+		<description><![CDATA[Puts your fingers fully in control of web surfing, picture viewing and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="touchscreen2point8" type="">
+		<title><![CDATA[2.8" Touchscreen]]></title>
+		<description><![CDATA[Puts your fingers fully in control of web surfing, picture viewing and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="audiojack3point5mm" type="">
+		<title><![CDATA[3.5mm headset jack]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="audio-recorder" type="">
+		<title><![CDATA[Audio Recorder]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="beats-audio" type="">
+		<title><![CDATA[Beats Audio&trade;]]></title>
+		<description><![CDATA[Hear music just like the artist intended.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="tty-support" type="">
+		<title><![CDATA[TTY Support]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="tty-mode" type="">
+		<title><![CDATA[TTY mode]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="thinkfree" type="">
+		<title><![CDATA[ThinkFree Office]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="512-internal-memory-limit" type="">
+		<title><![CDATA[Internal Memory Size Limit: *ROM 512MB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wvga-resolution" type="">
+		<title><![CDATA[800 X 480 WVGA Resolution]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="3g-evdo" type="">
+		<title><![CDATA[EVDO Rev A / WiMAX / Wi-Fi]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="evdo" type="">
+		<title><![CDATA[EVDO Rev A Data Network]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="chipset-sqn" type="">
+		<title><![CDATA[SQN1210 Chipset for WiMAX]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hac-rating" type="">
+		<title><![CDATA[HAC Rating: M4/T4]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="file-transfer" type="">
+		<title><![CDATA[File Transfer]]></title>
+		<description><![CDATA[Securely and safely transfer files right from your phone to your computer (and back again).]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="books" type="">
+		<title><![CDATA[Google eBooks]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="phone-data-bluetooth" type="bluetooth">
+		<title><![CDATA[Phone Data Bluetooth Transfer]]></title>
+		<description><![CDATA[Securely and safely send data from your phone to your computer (and back again) using state-of-the-art Bluetooth&trade; technology.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="music-player">
+		<title><![CDATA[Music player]]></title>
+		<description><![CDATA[Keep all your classic cuts and new favorites as close as your pocket.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="friendstream" type="">
+		<title><![CDATA[FriendStream]]></title>
+		<description><![CDATA[Never miss a beat. See all the social media activity of your contacts in one place.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-5-mp" type="camera">
+		<title><![CDATA[5.0MP Flash Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Capture more detail day or night, still or video.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-5-mp-led-flash" type="camera">
+		<title><![CDATA[5.0MP LED Flash Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Capture more detail day or night, still or video.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-5-mp-rear" type="camera">
+		<title><![CDATA[5MP rear facing camera]]></title>
+		<description><![CDATA[5MP rear facing camera]]></description>
+		<compare-title><![CDATA[5MP rear facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-5-mp-zoom-video" type="camera">
+		<title><![CDATA[5MP camera with zoom and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[5MP Rear-facing camera with zoom and video; 2MP front-facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-5-mp-zoom-video2" type="camera">
+		<title><![CDATA[5MP camera with zoom and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[5MP Rear-facing camera with video; 1.3MP front-facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-5-mp-zoom-video3" type="camera">
+		<title><![CDATA[5MP camera with zoom and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[5MP Rear-facing camera with video]]></compare-title>
+	</feature>
+	<feature id="camera-1point3-zoom" type="camera">
+		<title><![CDATA[1.3MP camera with zoom]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title></compare-title>
+	</feature>
+        <feature id="camera-1point3" type="camera">
+		<title><![CDATA[1.3MP camera]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[1.3MP camera]]></compare-title>
+	</feature>
+	<feature id="mms-text" type="">
+		<title><![CDATA[MMS and text messaging]]></title>
+		<description><![CDATA[You can have it all: send and receive text, picture, video and audio messages.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="email-im" type="">
+		<title><![CDATA[IM]]></title>
+		<description><![CDATA[Stay connected with real-time IM.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="camera-2-mp-zoom-bb" type="camera">
+		<title><![CDATA[2MP camera with 5x zoom and video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[2MP Rear-facing camera]]></compare-title>
+	</feature>
+	<feature id="camera-5-mp-video" type="camera">
+		<title><![CDATA[5MP camera with video]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[5MP Rear-facing camera with LED flash and video]]></compare-title>
+	</feature>
+	<feature id="led-flash" type="camera">
+		<title><![CDATA[LED Flash]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="led-flash-camera" type="camera">
+		<title><![CDATA[3.0MP LED Flash Camera &amp; Camcorder]]></title>
+		<description><![CDATA[Vivid picture and video power bring your life to, well, life.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="led-indicator" type="">
+		<title><![CDATA[LED indicator]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="status-notification-icons" type="">
+		<title><![CDATA[Status and notification icons]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="msm7627T" type="">
+		<title><![CDATA[MSM7627T Chipset]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="memo" type="">
+		<title><![CDATA[Memo]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="htc-sense" type="">
+		<title><![CDATA[HTC Sense&trade;]]></title>
+		<description><![CDATA[So cool. See Facebook status when friends call, share video on TV and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="touchscreen3point2-v2" type="">
+		<title><![CDATA[3.2" Touchscreen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="personalize-button" type="">
+		<title><![CDATA[Personalize Button]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="internal-memory-512mb" type="">
+		<title><![CDATA[Internal Memory: 512MB RAM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="internal-memory-512mb-4grom" type="">
+		<title><![CDATA[Internal Memory: 512MB RAM / 4GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="expandable-memory-32gb" type="">
+		<title><![CDATA[Expandable Memory: 32GB (sold separately)]]></title>
+		<description><![CDATA[Swap out the included 2GB microSD&trade; card to store more pics or music - up to 32GB.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hac-rating-v2" type="">
+		<title><![CDATA[HAC Rating: M3/T3]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hac-rating-v3" type="">
+		<title><![CDATA[HAC Rating: M4/T3]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="hac-rating-v4" type="">
+		<title><![CDATA[HAC Rating: T3/M3]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="memory-1gb" type="">
+		<title><![CDATA[Memory: 1GB RAM / 4GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="waterproof" type="">
+		<title><![CDATA[Waterproof<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Certified waterproof for IPX5 and IPX7. Stop worrying about losing your contacts.  Start breathing a sigh of relief.]]></description>
+		<compare-title></compare-title>
+	</feature>
+
+	<feature id="flash-player" type="flash-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="email-gmye" type="email">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, MSN&amp;<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, Microsoft<sup>&reg;</sup> Exchange Active Sync<sup>&reg;</sup>]]></compare-title>
+	</feature>
+	<feature id="email-ge" type="email">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, Microsoft<sup>&reg;</sup> Exchange Active Sync<sup>&reg;</sup>]]></compare-title>
+	</feature>
+	<feature id="email-g" type="email">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>]]></compare-title>
+	</feature>
+	<feature id="email-yghb" type="email">
+		<title><![CDATA[Yahoo!&#174;, Gmail&#174;, Hotmail&#174;]]></title>
+		<description><![CDATA[Get your email on the go and stay connected with real-time IM. Works with Gmail&#174;, Hotmail&#174;, Yahoo!&#174; and more. ]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, Hotmail<sup>&reg;</sup> and more]]></compare-title>
+	</feature>
+	<feature id="email-myapib" type="email">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup>, POP3, IMAP, BlackBerry<sup>&reg;</sup> Messenger]]></compare-title>
+	</feature>
+	<feature id="email-gyh" type="email">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, Hotmail<sup>&reg;</sup> and more]]></compare-title>
+	</feature>
+	<feature id="email-gmya" type="email">
+		<title><![CDATA[Access to email and IM from Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup> & more]]></title>
+		<description><![CDATA[Access to email and IM from Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup> & more]]></description>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo!<sup>&reg;</sup>, AOL<sup>&reg;</sup> and more]]></compare-title>
+	</feature>
+
+	<feature id="basic-player" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="mp3-player" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[MP3 player]]></compare-title>
+	</feature>
+	<feature id="android-player" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Android&trade; Music Player]]></compare-title>
+	</feature>
+	<feature id="android-player-with-sprint" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Android&trade; Music Player & Sprint&reg; Radio and more]]></compare-title>
+	</feature>
+	<feature id="file-player-aac-mp3" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Compatible music files: AAC+, MP3 and more.]]></compare-title>
+	</feature>
+	<feature id="file-player-mp4-mp3-m4a" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Compatible music files: MP4, MP3, M4a, MIDI and more.]]></compare-title>
+	</feature>
+	<feature id="file-player-mp3-aac-mp4" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Compatible music files: MP3, AAC, AAC+ and MP4.]]></compare-title>
+	</feature>
+	<feature id="file-player-aac-mp3-wav" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Compatible music files: AAC+, MP3, WAV and more.]]></compare-title>
+	</feature>
+	<feature id="file-player-aac-mp3-wma9" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Compatible music files: AAC+, MP3, WMA9 and more.]]></compare-title>
+	</feature>
+	<feature id="android-music" type="music-player">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Android&trade; Music Player]]></compare-title>
+	</feature>
+	
+	<feature id="visual-voicemail" type="">
+		<title><![CDATA[Visual Voicemail]]></title>
+		<description><![CDATA[Find the message you&#39;re looking for without having to listen to all those calls you ignored.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	<feature id="visual-voicemail-compare" type="visual-voicemail">
+		<title><![CDATA[Visual Voicemail]]></title>
+		<description><![CDATA[Find the message you&#39;re looking for without having to listen to all those calls you ignored.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="memory-384" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[384MB RAM / 512MB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-512" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM / 512MB ROM
+]]></compare-title>
+	</feature>
+	<feature id="memory-512" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB internal storage<br />32GB microSD&#153; card support<br />2GB microSD&#153; card included]]></compare-title>
+	</feature>
+	<feature id="memory-512kyocera" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[RAM: 512MB, ROM: 512GB]]></compare-title>
+	</feature>
+	<feature id="memory-hydro" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM / 2GB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-design" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[768MB RAM / 4GB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-marquee" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM / 4GB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-warp" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM / 4GB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-reflex" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[256MB RAM / 512MB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-128" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[128MB RAM / 256MB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-148" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[128MB RAM/256MB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-64" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[RAM: 64MB; ROM: 128MB]]></compare-title>
+	</feature>
+	<feature id="memory-256" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[RAM: 128MB; ROM: 256MB]]></compare-title>
+	</feature>
+	<feature id="memory-512bb" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM, 512MB ROM<br />microSD&#153; card slot (not included)]]></compare-title>
+	</feature>
+	<feature id="memory-32gbnot_included" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Supports microSD&#153; card up to 32GB (microSD card not included)]]></compare-title>
+	</feature>
+	<feature id="memory-transformultra" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB RAM / 2GB ROM]]></compare-title>
+	</feature>
+	<feature id="memory-64" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Supports microSD&#153; card up to 32GB (microSD card not included)]]></compare-title>
+	</feature>
+	<feature id="memory-256bb" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[memory-256bb]]></compare-title>
+	</feature>
+	<feature id="memory-1point3" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1.3GB internal storage<br />32GB microSD&#153; card support<br />2GB microSD&#153; card included]]></compare-title>
+	</feature>
+	<feature id="memory-4gb" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[4GB internal storage<br />32GB microSD&#153; card support<br />2GB microSD&#153; card included]]></compare-title>
+	</feature>
+	<feature id="memory-32gb" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[32GB microSD&#153; card support]]></compare-title>
+	</feature>
+	<feature id="memory-52" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[512MB internal storage]]></compare-title>
+	</feature>
+	
+	<feature id="1-click-keys" type="">
+		<title><![CDATA[dedicated 1-click keys]]></title>
+		<description><![CDATA[Dedicated text and .com softkeys give you one touch access to texting and adding flair to your message.]]></description>
+		<compare-title><![CDATA[1-click keys]]></compare-title>
+	</feature>
+	
+	
+        <feature id="keyboard-physical-nonfull" type="qwerty-keyboard">
+		<title><![CDATA[QWERTY keypad]]></title>
+		<description><![CDATA[The intuitive QWERTY keyboard with .com and direct-to-text and pix button camera keys allow for fast, efficient texting.]]></description>
+		<compare-title><![CDATA[QWERTY physical keyboard]]></compare-title>
+	</feature>
+	<feature id="keyboard-physical" type="qwerty-keyboard">
+		<title><![CDATA[Full QWERTY keypad]]></title>
+		<description><![CDATA[The intuitive full QWERTY keyboard with .com and direct-to-text and pix button camera keys allow for fast, efficient texting.]]></description>
+		<compare-title><![CDATA[Physical]]></compare-title>
+	</feature>
+	<feature id="keyboard-virtual" type="qwerty-keyboard">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Virtual]]></compare-title>
+	</feature>
+	<feature id="keyboard-physical-and-virtual" type="qwerty-keyboard">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Physical and Virtual]]></compare-title>
+	</feature>
+	
+	<feature id="digital-camera-1.3mp" type="camera">
+		<title><![CDATA[Digital Camera]]></title>
+		<description><![CDATA[With the 1.3MP camera you can take spntaneous photos and upload to your favorite social networking site. You can also print photos directly to a printer using PictBridge.]]></description>
+		<compare-title><![CDATA[1.3MP camera]]></compare-title>
+	</feature>
+	
+	<feature id="blackberry-os-7" type="os">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[BlackBerry<sup>&reg;</sup> 7 OS]]></compare-title>
+	</feature>
+	<feature id="blackberry-os" type="os">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[BlackBerry<sup>&reg;</sup> OS]]></compare-title>
+	</feature>
+	<feature id="feature-phone" type="os">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Basic Phone]]></compare-title>
+	</feature>
+	
+	<feature id="navigation" type="gps">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	
+	<!-- ZTE WARP SEQUENT -->
+	<feature id="sequent-4point3-touchscreen" type="display">
+		<title><![CDATA[4.3&#34; Durable qHD Touchscreen]]></title>
+		<description><![CDATA[Everything's better on the big screen — and this big, scratch-resistant screen delivers. Experience videos, apps, and pictures like never before.]]></description>
+		<compare-title><![CDATA[4.3&#34; qHD Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="sequent-5mp-cam-video" type="camera">
+		<title><![CDATA[5MP Camera with Flash & Video camera]]></title>
+		<description><![CDATA[Capture memorable moments in 5MP detail. Then upload to the web or send them to friends.]]></description>
+		<compare-title><![CDATA[1.3MP Front Camera / 5MP Rear-facing camera with video]]></compare-title>
+	</feature>
+	
+	
+	<feature id="sequent-5mp-cam-video-full-feature" type="camera">
+		<title><![CDATA[5MP Camera with Flash & Video camera]]></title>
+		<description><![CDATA[Capture memorable moments in 5MP detail. Then upload to the web or send them to friends.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="sequent-1point3-camera" type="camera">
+		<title><![CDATA[1.3MP Front Facing Camera]]></title>
+		<description><![CDATA[Score some quality face time over video chat thanks to an integrated, front-facing camera.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="sequent-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi & GPS Enabled]]></title>
+		<description><![CDATA[Surf the web and get satellite-guided navigation from the palm of your hand. Hop on your nearest available Wi-Fi network to do it all, even faster, with the superior speed of Wi-Fi.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="sequent-1point4-ghz" type="processor">
+		<title><![CDATA[1.4 GHz Processor]]></title>
+		<description><![CDATA[A fast 1.4 GHz processor lets you surf the web and run multiple apps at top speed.]]></description>
+		<compare-title><![CDATA[1.4 GHz]]></compare-title>
+	</feature>
+	
+	<feature id="sequent-bluetooth-4point0" type="bluetooth">
+		<title><![CDATA[Stereo Bluetooth 4.0 Capable]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth&#174; headset (sold separately).]]></description>
+		<compare-title><![CDATA[Stereo]]></compare-title>
+	</feature>
+	
+	<feature id="sequent-visual-voicemail" type="">
+		<title><![CDATA[Visual Voicemail]]></title>
+		<description><![CDATA[Keep on top of your messages, no matter where you are. See who called and when and choose which to respond to with visual voicemail.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="sequent-memory" type="memory">
+		<title><![CDATA[768MB RAM/4GB ROM]]></title>
+		<description><![CDATA[768MB RAM/4GB ROM]]></description>
+		<compare-title><![CDATA[768MB RAM/4GB ROM]]></compare-title>
+	</feature>
+	
+	<!-- END - ZTE WARP SEQUENT -->
+	
+	<!-- Galaxy Sii 4G -->
+	
+	<feature id="galaxys2-google-play" type="">
+		<title><![CDATA[Get Android Apps on Google Play&trade;]]></title>
+		<description><![CDATA[Choose from hundreds of thousands of apps in Google Play to customize your phone and expand its potential.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="galaxys2-android-4point0" type="os">
+		<title><![CDATA[Android&trade; 4.0]]></title>
+		<description><![CDATA[Loaded with OS Ice Cream Sandwich, you can enjoy the upgrade to Jelly Bean, the newest and most advance Android OS available.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.0]]></compare-title>
+	</feature>
+	
+	<feature id="galaxys2-memory-32gb" type="memory">
+		<title></title>
+		<description></description>
+		<compare-title><![CDATA[1GB RAM / 16GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="galaxys2-processor-1point2ghz" type="processor">
+		<title><![CDATA[1.2 GHz Dual core, Exynos processor]]></title>
+		<description><![CDATA[1.2 GHz Dual core, Exynos processor]]></description>
+		<compare-title><![CDATA[1.2 GHz Dual core, Exynos processor]]></compare-title>
+	</feature>
+	
+	<!-- END Galaxy Sii 4G -->
+	
+	
+	<!-- GALAXY RUSH -->
+	
+	<feature id="rush-android-4point1" type="os">
+		<title><![CDATA[Android&#8482; 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[Experience the convenience and adaptability of the world&#39;s &#35;1 smartphone platform. Choose from hundreds of thousands of apps in Google Play to customize your phone and expand its potential.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.1]]></compare-title>
+	</feature>
+	
+	<feature id="rush-3point5-touch" type="display">
+		<title><![CDATA[3.5&#34; Touch Screen]]></title>
+		<description><![CDATA[Speed through menus and websites with simple, intuitive navigation that response to your touch.]]></description>
+		<compare-title><![CDATA[3.5&#34; Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="rush-3mp-camera" type="camera">
+		<title><![CDATA[3MP Camera with Flash & Video camera]]></title>
+		<description><![CDATA[Capture memorable moments in 3MP detail. Then upload to the web or send them to friends.]]></description>
+		<compare-title><![CDATA[1.3 MP Front Camera / 3MP  Rear-facing camera with video]]></compare-title>
+	</feature>
+	
+	<feature id="rush-3mp-camera-full-feature" type="camera">
+		<title><![CDATA[3MP Camera with Flash & Video camera]]></title>
+		<description><![CDATA[Capture memorable moments in 3MP detail. Then upload to the web or send them to friends.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="rush-1point3-front-camera" type="camera">
+		<title><![CDATA[1.3MP Front Facing Camera]]></title>
+		<description><![CDATA[Score that perfect profile shot or some quality face time over video chat thanks to an integrated, front-facing camera.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+
+	<feature id="rush-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi & GPS Enabled]]></title>
+		<description><![CDATA[Surf the web and get satellite-guided navigation from the palm of your hand. Hop on your nearest available Wi-Fi network to do it all, even faster, with the superior speed of Wi-Fi.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="rush-1ghz" type="processor">
+		<title><![CDATA[1GHz Processor]]></title>
+		<description><![CDATA[A fast 1GHz processor lets you surf the web and run multiple apps at top speed.]]></description>
+		<compare-title><![CDATA[1GHz]]></compare-title>
+	</feature>
+	
+	<feature id="rush-bluetooth-4point0" type="bluetooth">
+		<title><![CDATA[Stereo Bluetooth 4.0 Capable]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth&#174; headset (sold separately)]]></description>
+		<compare-title><![CDATA[Stereo]]></compare-title>
+	</feature>
+	
+	<feature id="rush-memory" type="memory">
+		<title><![CDATA[768MB RAM/4GB ROM]]></title>
+		<description><![CDATA[768MB RAM/4GB ROM]]></description>
+		<compare-title><![CDATA[768MB RAM/4GB ROM]]></compare-title>
+	</feature>
+	
+	
+	<!-- END GALAXY RUSH -->
+	
+	<!-- GREEN HANDSETS -->
+	
+	<feature id="green-certified" type="ule">
+		<title><![CDATA[Environmental Certification]]></title>
+		<description><![CDATA[Certified by the independent UL Environment, this phone contains environmentally-preferable materials with a minimal environmental impact. <a class="inline-ule" href="#ule">More info.</a>]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="green-certified-platinum" type="">
+		<title><![CDATA[Environmental Certification]]></title>
+		<description><![CDATA[Platinum certified by the UL Environment, this phone contains environmentally preferable materials with a minimal environmental impact. <a class="inline-ule" href="#ule">More info.</a>]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	
+	<!-- LG VENICE -->
+	
+	<feature id="venice-android-4point1" type="os">
+		<title><![CDATA[Android&trade; OS 4.2 (Jelly Bean)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity. ]]></description>
+		<compare-title><![CDATA[Android&#8482; OS 4.2]]></compare-title>
+	</feature>
+	<feature id="warp-android-4point0" type="os">
+		<title><![CDATA[Android&trade; OS 4.0 (Ice Cream Sandwich)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity. ]]></description>
+		<compare-title><![CDATA[Android&#8482; OS 4.1]]></compare-title>
+	</feature>
+	
+	<feature id="venice-4point3-touch" type="display">
+		<title><![CDATA[4.3&#34; Durable Touchscreen]]></title>
+		<description><![CDATA[Everything's better on the big screen — and this big, scratch-resistant screen delivers. Experience videos, apps, and pictures like never before.]]></description>
+		<compare-title><![CDATA[4.3&#34; Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="venice-quick-memo" type="">
+		<title><![CDATA[QuickMemo&#8482; to Capture, Create & Share Notes]]></title>
+		<description><![CDATA[Snap a shot of any screen and use QuickMemo to take notes, doodle and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="venice-4point3-touchscreen" type="display">
+		<title><![CDATA[4.3&#34; Durable Touch Screen]]></title>
+		<description><![CDATA[Everything's better on the big screen — and this big, scratch-resistant screen delivers. Experience videos, apps, and pictures like never before.]]></description>
+		<compare-title><![CDATA[4.3&#34; Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="venice-720p-video" type="">
+		<title><![CDATA[720p HD Video Recording]]></title>
+		<description><![CDATA[Capture the moment in high-def 720p to share with your social network.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="venice-5mp-front" type="camera">
+		<title><![CDATA[5MP Camera with LED Flash & VGA Front Facing]]></title>
+		<description><![CDATA[Double your fun: front-facing camera lets you video chat, while 5MP rear-facing camera shoots crisp photos and videos.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="venice-5mp-front-compare" type="camera">
+		<title></title>
+		<description></description>
+		<compare-title><![CDATA[5MP Rear-facing camera; VGA front-facing camera]]></compare-title>
+	</feature>
+	
+	
+	<feature id="venice-thin-light" type="">
+		<title><![CDATA[Super Thin & Light (only 0.34&#34; & 4.41oz)]]></title>
+		<description><![CDATA[At only .34 inches thick and 4.41 oz., you&#39;ll wonder how they packed the power of Android&#8482; 4.1 into this bad boy.]]></description>
+		<compare-title></compare-title> 
+	</feature>
+	
+	<feature id="venice-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi & GPS Enabled]]></title>
+		<description><![CDATA[Surf the web and get satellite-guided navigation from the palm of your hand. Hop on your nearest available Wi-Fi network to do it all, even faster, with the superior speed of Wi-Fi.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="venice-bluetooth" type="bluetooth">
+		<title><![CDATA[Stereo Bluetooth 3.0 Capable]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth® headset (sold separately).]]></description>
+		<compare-title><![CDATA[Stereo]]></compare-title>
+	</feature>
+	
+	<feature id="venice-boostzone-mobileid" type="">
+		<title><![CDATA[Services: Boost Zone, Mobile ID]]></title>
+		<description><![CDATA[Make your phone a reflection of who you are. Choose ID packs featuring apps, ringtones, wallpaper and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="venice-memory" type="memory">
+		<title><![CDATA[768MB RAM/4GB ROM]]></title>
+		<description><![CDATA[768MB RAM/4GB ROM]]></description>
+		<compare-title><![CDATA[768MB RAM/4GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="venice-1ghz" type="processor">
+		<title><![CDATA[1GHz Processor]]></title>
+		<description></description>
+		<compare-title><![CDATA[1GHz]]></compare-title>
+	</feature>
+	
+	
+	<!-- END LG VENICE -->
+	
+	<!-- BOOST FORCE -->
+	
+	<feature id="force-android-4point0" type="os">
+		<title><![CDATA[Android&#8482; 4.0 (Ice Cream Sandwich)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.0]]></compare-title>
+	</feature>
+	
+	<feature id="force-dualmode-3g-4g" type="3g">
+		<title><![CDATA[Dual Mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="force-1.5ghz" type="processor">
+		<title><![CDATA[1.5GHz Dual-Core Processor]]></title>
+		<description><![CDATA[Get a powerful Internet experience in a flash with our fastest processor yet.]]></description>
+		<compare-title><![CDATA[1.5GHz Dual-Core Processor]]></compare-title>
+	</feature>
+	
+	<feature id="force-wga-widescreen" type="display">
+		<title><![CDATA[4" WVGA Touchscreen]]></title>
+		<description><![CDATA[See everything in vibrant display on the crisp 4-inch screen.]]></description>
+		<compare-title><![CDATA[4" Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="force-5mp-camera" type="camera">
+		<title><![CDATA[5MP Camera (1MP Front Facing)]]></title>
+		<description><![CDATA[Capture all of life's fun and funny moments with a dual cameras.]]></description>
+		<compare-title><![CDATA[5MP Camera / 1MP Front Facing]]></compare-title>
+	</feature>
+	
+	<feature id="force-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi &#38; GPS Enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi &amp; GPS Enabled]]></compare-title>
+	</feature>
+	
+	<feature id="force-google-play" type="">
+		<title><![CDATA[Get Android Apps on Google Play&#8482;]]></title>
+		<description><![CDATA[Download apps, games, movies, music and books — it's your one-stop shop for everything awesome.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="force-memory" type="memory">
+		<title><![CDATA[1GB RAM/4GB ROM]]></title>
+		<description><![CDATA[1GB RAM/4GB ROM]]></description>
+		<compare-title><![CDATA[1GB RAM/4GB ROM]]></compare-title>
+	</feature>
+
+	<feature id="force-camera2" type="">
+		<title><![CDATA[5MP Rear-facing camera with video; 1MP front-facing camera]]></title>
+		<description><![CDATA[5MP Rear-facing camera with video; 1MP front-facing camera]]></description>
+	</feature>
+
+	<feature id="force-network" type="">
+		<title><![CDATA[Nationwide Sprint<sup>&#174;</sup> 3G Network and Nationwide Sprint<sup>&#174;</sup> 4G LTE Network]]></title>
+		<description><![CDATA[Nationwide Sprint<sup>&#174;</sup> 3G Network and Nationwide Sprint<sup>&#174;</sup> 4G LTE Network]]></description>
+	</feature>
+
+	<feature id="force-cpu" type="">
+		<title><![CDATA[1.5GHz Dual Core Processor]]></title>
+		<description><![CDATA[1.5GHz Dual Core Processor]]></description>
+	</feature>
+
+	<feature id="force-4g" type="4g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>LTE</compare-title>
+	</feature>
+	
+	<!-- END BOOST FORCE -->
+	
+	<!-- HTC ONE SV -->
+	
+	<feature id="htc-one-android-4point0" type="os">
+		<title><![CDATA[Android&#8482; 4.0]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.0]]></compare-title>
+	</feature>
+	
+	<feature id="htc-one-google-play" type="">
+		<title><![CDATA[Get Android Apps on Google Play&#8482;]]></title>
+		<description><![CDATA[Download apps, games, movies, music and books — it's your one-stop shop for everything awesome.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="htc-one-beats-audio" type="">
+		<title><![CDATA[Beats Audio&#8482;]]></title>
+		<description><![CDATA[Hear deeper and richer sound for music, movies and media with one of the most respected audio brands in consumer electronics.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="htc-one-wga-touchscreen" type="display">
+		<title><![CDATA[4.3” WVGA Super LCD2 Touchscreen]]></title>
+		<description><![CDATA[See everything in vibrant display on the crisp 4.3-inch screen.]]></description>
+		<compare-title><![CDATA[4.3” Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="htc-one-1.2ghz" type="processor">
+		<title><![CDATA[1.2GHZ Dual Core Processor]]></title>
+		<description><![CDATA[Get the complete Internet experience in a flash.]]></description>
+		<compare-title><![CDATA[1.2GHZ Dual Core Processor]]></compare-title>
+	</feature>
+	
+	<feature id="htc-one-5mp" type="camera">
+		<title><![CDATA[Enhanced 5MP Camera with HD Video]]></title>
+		<description><![CDATA[Score the perfect shot with dual cameras and record all of your victories in high definition.]]></description>
+		<compare-title><![CDATA[5MP Camera / 1.3 MP Front Facing]]></compare-title>
+	</feature>
+	
+	<feature id="htc-one-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi & GPS Enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi & GPS Enabled]]></compare-title>
+	</feature>
+	
+	<feature id="htc-one-memory" type="memory">
+		<title><![CDATA[1GB RAM/8GB ROM]]></title>
+		<description><![CDATA[1GB RAM/8GB ROM]]></description>
+		<compare-title><![CDATA[1GB RAM/8GB ROM]]></compare-title>
+	</feature>
+
+	<feature id="htc-one-network" type="">
+		<title><![CDATA[Nationwide Sprint<sup>&#174;</sup> 3G Network and Nationwide Sprint<sup>&#174;</sup> 4G LTE Network]]></title>
+		<description><![CDATA[Nationwide Sprint<sup>&#174;</sup> 3G Network and Nationwide Sprint<sup>&#174;</sup> 4G LTE Network]]></description>
+	</feature>
+
+	<feature id="htc-one-dual-mode" type="">
+		<title><![CDATA[Dual Mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+	</feature>
+
+	<feature id="htc-one-email" type="email">
+		<title><![CDATA[]]></title>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, Yahoo<sup>&reg;</sup>, Hotmail<sup>&reg;</sup>, Microsoft<sup>&reg;</sup> Exchange Active Sync<sup>&reg;</sup>]]></compare-title>
+	</feature>
+
+	<feature id="htc-one-cam2" type="">
+		<title><![CDATA[5MP Rear-facing camera with video AND 1.3MP front-facing camera]]></title>
+		<compare-title><![CDATA[5MP Rear-facing camera with video AND 1.3MP front-facing camera]]></compare-title>
+	</feature>
+
+	<feature id="htc-one-4g" type="4g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>LTE</compare-title>
+	</feature>
+	
+		<!-- END HTC ONE SV -->
+		
+		<!-- Kyocera Milano -->
+	
+	<feature id="milano-gingerbread" type="os">
+		<title><![CDATA[Android&#8482; 2.3.6]]></title>
+		<description><![CDATA[Gingerbread for faster texting and streaming rich content.]]></description>
+		<compare-title><![CDATA[Android&#8482; 2.3.6]]></compare-title>
+	</feature>
+	
+	<feature id="milano-3-inch-touchscreen-display" type="display">
+		<title><![CDATA[3" Touchscreen Display]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it. Great for apps and games.]]></description>
+		<compare-title><![CDATA[3" Touchscreen Display]]></compare-title>
+	</feature>
+	
+	<feature id="milano-QWERTY-keyboard" type="">
+		<title><![CDATA[Slide-Out QWERTY Keyboard]]></title>
+		<description><![CDATA[Bang out texts, IM and email lightning fast, on a slider QWERTY keyboard.]]></description>
+		<compare-title><![CDATA[QWERTY Keyboard]]></compare-title>
+	</feature>
+	
+	<feature id="milano-3point2mp-camera" type="camera">
+		<title><![CDATA[3.2MP Rear-facing camera]]></title>
+		<description><![CDATA[Your life, captured in pictures and video. Now share it.]]></description>
+		<compare-title><![CDATA[3.2MP Rear-facing camera]]></compare-title>
+	</feature>
+
+	
+	<feature id="milano-wifi-gps" type="gps">
+		<title><![CDATA[Wi-Fi &#38; GPS Enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi &amp; GPS Enabled]]></compare-title>
+	</feature>
+	
+	
+	<feature id="milano-mobileid" type="">
+		<title><![CDATA[Mobile ID]]></title>
+		<description><![CDATA[Make your phone a reflection of who you are with ID packs featuring apps, ringers, widgets and more.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	
+	
+	<!-- END Kyocera Milano -->
+	
+	<!-- Kyocera Coast -->
+	
+	<feature id="coast-2mp-camera" type="camera">
+		<title><![CDATA[2 MP Rear-facing camera]]></title>
+		<description><![CDATA[Your life, captured in pictures. Now share it.]]></description>
+		<compare-title><![CDATA[2 MP Rear-facing camera]]></compare-title>
+	</feature>
+	
+	<feature id="coast-dual-displays" type="">
+		<title><![CDATA[Dual displays]]></title>
+		<description><![CDATA[Two screens for your viewing pleasure – a 2.4-inch internal screen and a 1.44-inch external screen, perfect for caller ID.]]></description>
+		<compare-title><![CDATA[Dual displays]]></compare-title>
+	</feature>
+
+	
+	<feature id="coast-mms-and-text-messaging" type="">
+		<title><![CDATA[MMS and text messaging]]></title>
+		<description><![CDATA[You can have it all – send and receive text, picture and audio messages.]]></description>
+		<compare-title><![CDATA[MMS and Text Messaging]]></compare-title>
+	</feature>
+	
+	<feature id="coast-speakerphone" type="">
+		<title><![CDATA[Speakerphone with voice-activated dialing]]></title>
+		<description><![CDATA[Just speak up to call your contacts, then speak your mind with hands-free calling.]]></description>
+		<compare-title><![CDATA[Speakerphone with voice-activated dialing]]></compare-title>
+	</feature>
+
+	
+	<feature id="coast-bluetooth" type="bluetooth">
+		<title><![CDATA[Bluetooth&reg;]]></title>
+		<description><![CDATA[Take calls and listen to music without wires, and share files over the air.]]></description>
+		<compare-title><![CDATA[Bluetooth&reg]]></compare-title>
+	</feature>
+	
+	
+	<feature id="coast-wireless-web" type="">
+		<title><![CDATA[Wireless Web]]></title>
+		<description><![CDATA[Check all your favorite sites, even when you're out seeing the sights.]]></description>
+		<compare-title><![CDATA[Wireless Web]]></compare-title>
+	</feature>
+	
+	<!--Galaxy S3-->
+	
+	<feature id="s3-dualmode" type="">
+		<title><![CDATA[<sup>&#134;</sup>Dual mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title><![CDATA[Dual mode 3G/4G LTE]]></compare-title>
+	</feature>
+	
+	<feature id="s3-4oint8-screen" type="">
+		<title><![CDATA[4.8-inch Super AMOLED&trade; HD touchscreen]]></title>
+		<description><![CDATA[Enjoy bright photos and full HD video on the go with this crisp, oversized screen and rich color display.]]></description>
+		<compare-title><![CDATA[4.8-inch Super AMOLED&trade; HD touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="s3-8mpcamera-1080video" type="">
+		<title><![CDATA[8 MP camera with 1080p HD video]]></title>
+		<description><![CDATA[Capture vivid detail with sharp photos and amazing high-quality video. Save every memory and share with friends and family.]]></description>
+		<compare-title><![CDATA[8 MP camera with 1080p HD video]]></compare-title>
+	</feature>
+
+	<feature id="s3-camera-2point-front" type="">
+		<title><![CDATA[2MP Front Facing Camera]]></title>
+		<description><![CDATA[It's all you, baby. Take all the selfies you want and video chat to your heart's content.]]></description>
+		<compare-title><![CDATA[2MP Front Facing Camera]]></compare-title>
+	</feature>
+	
+	<feature id="s3-shareshot" type="">
+		<title><![CDATA[Share instantly with Share Shot and S Beam]]></title>
+		<description><![CDATA[Share your videos, pics, music and contacts with friends instantly. Just tap the phones together. ]]></description>
+		<compare-title><![CDATA[Share instantly with Share Shot and S Beam]]></compare-title>
+	</feature>
+	
+	<feature id="s3-1point5ghz-dualcore-processor" type="processor">
+		<title><![CDATA[1.5 GHz dual-core processor]]></title>
+		<description><![CDATA[Get the complete Internet experience in a flash.]]></description>
+		<compare-title><![CDATA[1.5 GHz dual-core processor]]></compare-title>
+	</feature>
+
+	<feature id="s3-wifi-gps" type="">
+		<title><![CDATA[Wi-Fi and GPS enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi and GPS enabled]]></compare-title>
+	</feature>
+
+	<feature id="s3-4point8" type="display">
+		<title><![CDATA[4.8" Touchscreen]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[4.8" Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="s3-camera" type="camera">
+		<title><![CDATA[8MP rear-facing camera with 1080P HD video; 2MP front-facing camera]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[8MP rear-facing camera with 1080P HD video; 2MP front-facing camera]]></compare-title>
+	</feature>
+	
+	<feature id="s3-4g" type="">
+		<title><![CDATA[4G LTE]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[4G LTE]]></compare-title>
+	</feature>
+	
+	<feature id="s3-bluetooth" type="bluetooth">
+		<title><![CDATA[Bluetooth&reg;]]></title>
+		<description><![CDATA[]]>  </description>
+		<compare-title><![CDATA[Bluetooth&reg]]></compare-title>
+	</feature>
+	
+	<feature id="s3-memory" type="memory">
+		<title><![CDATA[2GB RAM / 16GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2GB RAM / 16GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="s3-3g-4g" type="">
+		<title><![CDATA[Nationwide Sprint&reg; 3G Network and Nationwide Sprint&reg; 4G LTE Network]]></title>
+		<description><![CDATA[Live fast on 4G with network power that will set your hair on fire.]]></description>
+		<compare-title><![CDATA[Nationwide Sprint&reg; 3G Network and Nationwide Sprint&reg; 4G LTE Network]]></compare-title>
+	</feature>
+	
+	<feature id="s3-dropbox" type="">
+		<title><![CDATA[Free 50GB of Dropbox]]></title>
+		<description><![CDATA[Bring your photos, docs and videos anywhere. Never email yourself a file again. Get Dropbox for two years - a $200 value.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<!--F7-->
+	
+	<feature id="f7-android-4point1" type="os">
+		<title><![CDATA[Android&trade; OS 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[Jelly Bean improves on the simplicity of 4.0 and introduces a new Google search experience.]]></description>
+		<compare-title><![CDATA[Android&#8482; OS 4.1]]></compare-title>
+	</feature>
+	
+	<feature id="f7-dualmode-3g-4g" type="3g">
+		<title><![CDATA[Dual Mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="/coverage/">Check coverage</a>.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+
+	<feature id="f3-dualmode-3g-4g" type="3g">
+		<title><![CDATA[Dual Mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="/coverage/">Check coverage</a>.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="f7-touchscreen" type="display">
+		<title><![CDATA[4.7" True HD IPS touchscreen with Corning® Gorilla&reg; Glass 2]]></title>
+		<description><![CDATA[Everything's better on the big screen — and this scratch-resistant screen delivers. Experience videos, apps, and pictures like never before.]]></description>
+		<compare-title><![CDATA[4.7 Touchscreen]]></compare-title>
+	</feature>
+
+	<feature id="f3-touchscreen" type="display">
+		<title><![CDATA[4-inch display with Corning® Gorilla® Glass 2]]></title>
+		<description><![CDATA[Experience videos, apps and pictures like never before. Everything's better on the big screen - and this scratch-resistant touchscreen delivers.]]></description>
+		<compare-title><![CDATA[4" Touchscreen]]></compare-title>
+	</feature>
+
+
+
+	<feature id="f7-1point5ghz-dualcore-processor" type="processor">
+		<title><![CDATA[1.5 GHz dual-core processor]]></title>
+		<description><![CDATA[Multitask at max speed with the 1.5 GHz dual-core processor.]]></description>
+		<compare-title><![CDATA[1.5 GHz dual-core processor]]></compare-title>
+	</feature>
+	
+	<feature id="f7-quickmemo" type="">
+		<title><![CDATA[QuickMemo&trade;]]></title>
+		<description><![CDATA[Snap a shot of your screen, take notes, doodle and more.]]></description>
+		<compare-title><![CDATA[QuickMemo&trade;]]></compare-title>
+	</feature>
+	
+	<feature id="f7-8mp-camera" type="camera">
+		<title><![CDATA[8 MP Camera with 1080p full HD video]]></title>
+		<description><![CDATA[Score a win with dual cameras. Share your celebration with the 1.3 MP front-facing camera.]]></description>
+		<compare-title><![CDATA[8MP rear-facing camera with 1080p Full HD Video; 1.3 MP front-facing camera]]></compare-title>
+	</feature>
+	
+	<feature id="f3-5mp-camera" type="camera">
+		<title><![CDATA[5 MP LED camera]]></title>
+		<description><![CDATA[Score the perfect shot with features including panorama. Take all the videos and selfies you want with the full HD (1080p) camcorder and front-facing 1.3 MP camera.]]></description>
+		<compare-title><![CDATA[5MP Rear-facing camera with video; front-facing VGA camera]]></compare-title>
+	</feature>
+
+	<feature id="f3-5mp-camera-feature" type="">
+		<title><![CDATA[5MP BSI camera ]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="f7-wifi-gps" type="wifi">
+		<title><![CDATA[Wi-Fi and GPS enabled]]></title>
+		<description><![CDATA[Connect to Wi-Fi to browse the Web even faster. Use the built-in GPS to navigate across town or across the country.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="f7-4point7display" type="">
+		<title><![CDATA[4.7" HD Display]]></title>
+		<description><![CDATA[4.7" HD Display]]></description>
+		<compare-title><![CDATA[4.7" HD Display]]></compare-title>
+	</feature>
+
+	<feature id="force-4g" type="4g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>LTE</compare-title>
+	</feature>
+	
+	<feature id="f7-processor-1ghz" type="processor">
+		<title><![CDATA[Dual Core Krait 1.5 GHz Processor]]></title>
+		<description><![CDATA[Dual Core Krait 1.5 GHz Processor]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-memory" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM/8GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="f3-memory" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM/4GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="f7-8mp-rear-camera" type="camera">
+		<title><![CDATA[8MP Rear-Facing Camera]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-q-translator" type="camera">
+		<title><![CDATA[Quick Translator]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-quick-memo" type="camera">
+		<title><![CDATA[Quick Memo]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-vu-talk" type="camera">
+		<title><![CDATA[VuTalk]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f3-vu-talk" type="">
+		<title><![CDATA[VuTalk™]]></title>
+		<description><![CDATA[Share real-time drawings, notes and photos with friends who have VuTalk.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="f3-qslide" type="">
+		<title><![CDATA[Qslide 2.0™]]></title>
+		<description><![CDATA[View multiple screens at the same time and adjust window sizes to switch between apps in a flash.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="f3-battery" type="">
+		<title><![CDATA[Long-lasting battery<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Enjoy up to 16 hours of talk time thanks to the long-lasting 2,460 mAh Li-ION battery.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-bluetooth" type="camera">
+		<title><![CDATA[Stereo Bluetooth&reg; 4.0 capable]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth&reg; headset (sold separately).]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="f7-video-wiz" type="">
+		<title><![CDATA[Video Wiz Editor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="f7-qslide" type="">
+		<title><![CDATA[Qslide]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="android-beam" type="">
+		<title><![CDATA[Direct/Android Beam with NFC]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="boost-zone" type="">
+		<title><![CDATA[Access to Boost Zone]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+
+	<!--Prevail 2-->	 
+	
+	<feature id="prevail2-android-4point1" type="os">
+		<title><![CDATA[Android&trade; 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[This platform builds on the most loved features of Android - easy multitasking, rich notifications, customizable home screens, resizable widgets and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.1]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-processor" type="processor">
+		<title><![CDATA[1.4 GHz processor]]></title>
+		<description><![CDATA[Get the complete Internet experience and run multiple apps at top speed.]]></description>
+		<compare-title><![CDATA[1.4 GHz processor ]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-display" type="display">
+		<title><![CDATA[4” WVGA Touchscreen display]]></title>
+		<description><![CDATA[Watch the world come alive in vibrant display on the crisp 4-inch screen.]]></description>
+		<compare-title><![CDATA[4” WVGA Touchscreen]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-front-camera" type="camera">
+		<title><![CDATA[Enhanced 1.3 MP front-facing camera ]]></title>
+		<description><![CDATA[It's a video-chat dream! Take advantage of this phone's flexibility, and get ready for your profile pic.]]></description>
+		<compare-title><![CDATA[Enhanced 1.3 MP front-facing camera ]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-5mpcamera" type="camera">
+		<title><![CDATA[5 MP camera with HD video]]></title>
+		<description><![CDATA[Freeze your memories with the perfect shot, and record victories in high definition.]]></description>
+		<compare-title><![CDATA[5 MP camera with HD video]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-wifi" type="">
+		<title><![CDATA[Wi-Fi and GPS enabled]]></title>
+		<description><![CDATA[Surf the Web and get satellite-guided navigation from the palm of your hand. Hop on your nearest available Wi-Fi network to do it all even faster.]]></description>
+		<compare-title><![CDATA[Wi-Fi and GPS enabled]]></compare-title>
+	</feature>
+	
+	<feature id="prevail-memory" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM / 4GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="prevail2-64" type="">
+		<title><![CDATA[64GB microSD&trade; card support (card not included)]]></title>
+		<description><![CDATA[64GB microSD&trade; card support (card not included)]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="prevail2-alarm" type="">
+		<title><![CDATA[Alarm]]></title>
+		<description><![CDATA[Alarm]]></description>
+		<compare-title></compare-title>
+	</feature>	
+	<feature id="prevail2-googlevoice-typing" type="">
+		<title><![CDATA[Google Voice Typing]]></title>
+		<description><![CDATA[Google Voice Typing]]></description>
+		<compare-title></compare-title>
+	</feature>	
+	
+	<feature id="prevail2-bluetooth" type="">
+		<title><![CDATA[Stereo Bluetooth&reg;]]></title>
+		<description><![CDATA[Stereo Bluetooth&reg;]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<!--Hydro EDGE-->
+	
+	<feature id="edge-android-4point1" type="os">
+		<title><![CDATA[Android&trade; 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity – with Jelly Bean.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.1]]></compare-title>
+	</feature>
+	
+	<feature id="edge-waterproof" type="">
+		<title><![CDATA[Waterproof<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Certified waterproof rated to IPx5 and IPx7. It's protected up to 30 minutes in 3.28 feet of water.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="edge-smart-sonic" type="">
+		<title><![CDATA[Smart Sonic&trade; Receiver: Crisp, Clear Sound]]></title>
+		<description><![CDATA[Hear crisp, clear sound without a traditional speaker, even in very noisy environments.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	 <feature id="edge-touchscreen" type="display">
+		<title><![CDATA[4-inch IPS impact-resistant touchscreen]]></title>
+		<description><![CDATA[Touch, tap and swipe like you mean it on the big, durable display.]]></description>
+		<compare-title><![CDATA[4" Touchscreen]]></compare-title>
+	</feature> 
+	
+	<feature id="edge-camera" type="camera">
+		<title><![CDATA[5MP camera with auto focus and flash]]></title>
+		<description><![CDATA[Capture the vivid details of your life with sharp photos.]]></description>
+		<compare-title><![CDATA[5MP camera with auto focus and flash]]></compare-title>
+	</feature>
+
+	<feature id="edge-video-camera" type="">
+		<title><![CDATA[720p HD video camera]]></title>
+		<description><![CDATA[Save every memory in high definition and share with friends and family.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="edge-processor" type="processor">
+		<title><![CDATA[1 GHz dual-core processor]]></title>
+		<description><![CDATA[Get the complete Internet experience in a flash with the Qualcomm Snapdragon Processor.]]></description>
+		<compare-title><![CDATA[1 GHz dual-core processor]]></compare-title>
+	</feature>
+	
+	<feature id="edge-wifi" type="">
+		<title><![CDATA[Wi-Fi and GPS enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi and GPS enabled]]></compare-title>
+	</feature>
+	
+		
+	<feature id="edge-memory" type="memory">
+		<title><![CDATA[2GB RAM / 16GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM / 4GB ROM]]></compare-title>
+	</feature>	
+	<feature id="1080-hd-video" type="video">
+		<title><![CDATA[1080p Full HD Video]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+<!--LG Mach-->
+	<feature id="lg-mach-android-4point0" type="os">
+		<title><![CDATA[Android&trade; 4.0 (Ice Cream Sandwich) ]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.0]]></compare-title>
+	</feature>
+
+	<feature id="mach-video" type="video">
+		<title><![CDATA[1080p HD video ]]></title>
+		<description><![CDATA[Capture vivid detail with sharp photos and amazing high-quality video. Save your memories and share with friends and family.]]></description>
+		<compare-title></compare-title>
+	</feature>	
+	<feature id="mach-touchscreen" type="display">
+		<title><![CDATA[4-inch touchscreen display with Corning&reg; Gorilla&reg; Glass ]]></title>
+		<description><![CDATA[Everything's better on the big screen — and this scratch-resistant screen delivers. Experience videos, apps, and pictures like never before.]]></description>
+		<compare-title><![CDATA[4" Touchscreen]]></compare-title>
+	</feature>	
+
+	<feature id="mach-camera" type="camera">
+		<title><![CDATA[5 MP camera]]></title>
+		<description><![CDATA[Score great pictures with features including panorama and continuous shots.]]></description>
+		<compare-title><![CDATA[5 MP camera]]></compare-title>
+	</feature>
+	
+	<feature id="mach-processor" type="processor">
+		<title><![CDATA[1.2 GHz dual-core processor]]></title>
+		<description><![CDATA[Get the complete Internet experience in a flash.]]></description>
+		<compare-title><![CDATA[1.2 GHz dual-core processor]]></compare-title>
+	</feature>
+	<feature id="mach-keyboard" type="">
+		<title><![CDATA[Slim QWERTY keyboard ]]></title>
+		<description><![CDATA[Bang out texts, IM and email easily on the sleek QWERTY keyboard.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="mach-android-beam" type="">
+		<title><![CDATA[Android Beam]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="mach-email" type="email">
+		<title><![CDATA[]]></title>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, Yahoo<sup>&reg;</sup>, Hotmail<sup>&reg;</sup>, Microsoft<sup>&reg;</sup> Exchange Active Sync<sup>&reg;</sup>, MSN]]></compare-title>
+	</feature>
+	
+<!-- Boost Warp 4G -->
+
+	<feature id="warp4g-android" type="os">
+		<title><![CDATA[Android&trade; 4.1 (Jelly Bean) ]]></title>
+		<description><![CDATA[Jelly Bean builds on the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity.]]></description>
+		<compare-title><![CDATA[Android&trade; 4.1 (Jelly Bean)]]></compare-title>
+	</feature>
+	<feature id="warp4g-dualmode" type="">
+		<title><![CDATA[Dual-mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title><![CDATA[Dual-mode 3G/4G LTE]]></compare-title>
+	</feature>
+	<feature id="warp-display" type="display">
+		<title><![CDATA[4.5" HD Durable Touchscreen]]></title>
+		<description><![CDATA[Everything's better on the big screen - and this durable, high-definition screen delivers. Experience the Web, apps and pictures like never before. ]]></description>
+		<compare-title><![CDATA[4.5" HD Durable Touchscreen]]></compare-title>
+	</feature>
+	<feature id="warp-camera" type="camera">
+		<title><![CDATA[8MP Camera with 1MP Front Facing Camera ]]></title>
+		<description><![CDATA[Capture vivid detail with sharp photos and take all the selfies you want.]]></description>
+		<compare-title><![CDATA[8MP Camera with 1MP Front Facing Camera ]]></compare-title>
+	</feature>
+	<feature id="warp-processor" type="processor">
+		<title><![CDATA[1.2GHz Dual-Core Processor]]></title>
+		<description><![CDATA[Get the complete Internet experience in a flash.]]></description>
+		<compare-title><![CDATA[1.2GHz Dual-Core Processor]]></compare-title>
+	</feature>
+	<feature id="warp-wifi" type="">
+		<title><![CDATA[Wi-Fi & GPS Enabled]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi & GPS Enabled]]></compare-title>
+	</feature>
+	<feature id="warp-bluetooth" type="">
+		<title><![CDATA[Stereo Bluetooth 4.0 Capable ]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth headset (sold separately).]]></description>
+		<compare-title><![CDATA[Stereo Bluetooth 4.0 Capable ]]></compare-title>
+	</feature>
+	<feature id="warp-rear-camera" type="">
+		<title><![CDATA[8MP Rear-Facing Camera]]></title>
+		<description><![CDATA[8MP Rear-Facing Camera]]></description>
+		<compare-title><![CDATA[8MP Rear-Facing Camera]]></compare-title>
+	</feature>
+	<feature id="warp-wifi-enabled" type="wifi">
+		<title><![CDATA[Wi-Fi&#174; enabled]]></title>
+		<description><![CDATA[Wi-Fi&#174; enabled]]></description>
+		<compare-title><![CDATA[true]]></compare-title>
+	</feature>
+	<feature id="warp-4glte" type="4g">
+		<title><![CDATA[LTE]]></title>
+		<description><![CDATA[LTE]]></description>
+		<compare-title><![CDATA[LTE]]></compare-title>
+	</feature>
+	<feature id="warp-email" type="email">
+		<title><![CDATA[]]></title>
+		<compare-title><![CDATA[Gmail&#174;, MSN&#174;, Yahoo&#174;, Hotmail&#174;, Microsoft&#174; Exchange Active Sync&#174;]]></compare-title>
+	</feature>
+	<feature id="warp-music" type="music-player">
+		<title><![CDATA[]]></title>
+		<compare-title><![CDATA[WAV, AMR, AAC, AAC+, eAAC+, MPEG, OGG]]></compare-title>
+	</feature>
+	
+	<feature id="accolades" type="">
+		<title><![CDATA[Phone Accolades]]></title>
+		<description><![CDATA["Rated best selection of hardware specs for pre-paid LTE smartphones $199 or below" <br>- Current Analysis, Oct. 2013.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	<feature id="a5-processor" type="processor">
+		<title><![CDATA[A5 Chip]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[A5 Chip]]></compare-title>
+	</feature>
+	<feature id="a6-processor" type="processor">
+		<title><![CDATA[A6 Chip]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[A6 Chip]]></compare-title>
+	</feature>
+	<feature id="a7-processor" type="processor">
+		<title><![CDATA[A7 Chip]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[A7 Chip]]></compare-title>
+	</feature>
+		<feature id="a5-processor" type="processor">
+		<title><![CDATA[A5 Chip]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[A5 Chip]]></compare-title>
+	</feature>
+	<feature id="ios7" type="os">
+		<title><![CDATA[iOS]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[iOS]]></compare-title>
+	</feature>
+		<feature id="ios6" type="os">
+		<title><![CDATA[iOS]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[iOS]]></compare-title>
+	</feature>
+	<feature id="5s_display" type="display">
+		<title><![CDATA[4-inch Retina display]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[4-inch Retina display]]></compare-title>
+	</feature>
+		<feature id="4s_display" type="display">
+		<title><![CDATA[3.5-inch Retina display]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[3.5-inch Retina display]]></compare-title>
+	</feature>
+	
+	<feature id="5s_camera" type="camera">
+		<title><![CDATA[8MP camera with 1080 HD video recording]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[8MP camera with 1080 HD video recording]]></compare-title>
+	</feature>
+	<feature id="5s_email" type="email">
+		<title><![CDATA[Access to all major webmail providers]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Access to all major webmail providers]]></compare-title>
+	</feature>
+	
+	<feature id="5s_music" type="music-player">
+		<title><![CDATA[iTunes & iCloud]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[iTunes & iCloud]]></compare-title>
+	</feature>
+	<feature id="5s_memory" type="memory">
+		<title><![CDATA[16GB/32GB/64GB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[16GB/32GB/64GB]]></compare-title>
+	</feature>
+	<feature id="4s_memory" type="memory">
+		<title><![CDATA[8GB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[8GB]]></compare-title>
+	</feature>	
+	<feature id="5c_memory" type="memory">
+		<title><![CDATA[16GB/32GB]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[16GB/32GB]]></compare-title>
+	</feature>
+	
+	<feature id="os-gs3" type="os">
+		<title><![CDATA[Android&trade; 4.3 (Jelly Bean) ]]></title>
+		<description><![CDATA[Enjoy easy-to-use features and compatibility with the Samsung Galaxy Gear&trade;, the first in a new category of wearable technology.]]></description>
+		<compare-title><![CDATA[Android&trade; 4.3 (Jelly Bean)]]></compare-title>
+	</feature>
+	
+<!-- Moto G -->
+
+	<feature id="os-motog" type="os">
+		<title><![CDATA[Android&trade; 4.4 (KitKat)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – sleek simplicity and speed.]]></description>
+		<compare-title><![CDATA[Android&trade; 4.4 (KitKat)]]></compare-title>
+	</feature>
+	<feature id="display-motog" type="display">
+		<title><![CDATA[4.5-inch 720p HD display with Corning&reg; Gorilla&reg; Glass]]></title>
+		<description><![CDATA[Experience videos, apps, and pictures like never before. This sizable screen is sharp, stunning and scratch-resistant. ]]></description>
+		<compare-title><![CDATA[4.5-inch 720p HD display with Corning&reg; Gorilla&reg; Glass]]></compare-title>
+	</feature>
+	<feature id="processor-motog" type="processor">
+		<title><![CDATA[1.2 GHz Quad Core Processor]]></title>
+		<description><![CDATA[Do more of the things you love. The Qualcomm Snapdragon&trade; 400 processor gives you breathtaking speed, jaw-dropping graphics and long battery life.]]></description>
+		<compare-title><![CDATA[1.2 GHz Quad Core Processor]]></compare-title>
+	</feature>	
+	<feature id="battery-motog" type="">
+		<title><![CDATA[Long-lasting battery<sup>&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Talk, text and play longer with the built-in rechargeable lithium-ion, 2070 mAh battery.]]></description>
+		<compare-title><![CDATA[Long-lasting battery** ]]></compare-title>
+	</feature>
+	<feature id="bluetooth-motog" type="bluetooth">
+		<title><![CDATA[Bluetooth&reg; 4.0 capable ]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair your Moto G with a Bluetooth&reg; headset (sold separately).]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	<feature id="wifi-motog" type="">
+		<title><![CDATA[Wi-Fi and GPS enabled ]]></title>
+		<description><![CDATA[Connect to your local Wi-Fi network for even faster speeds and find where you need to go around town or across the country with GPS access.]]></description>
+		<compare-title><![CDATA[Wi-Fi and GPS enabled ]]></compare-title>
+	</feature>	
+	<feature id="fm-radio-motog" type="">
+		<title><![CDATA[FM radio ]]></title>
+		<description><![CDATA[Listen to your favorite FM radio station.  Also, compatible with the pre-loaded interactive FM radio application <a href="http://www.nextradioapp.com/" target="_blank">NextRadio&reg;</a>. Wired headphones (sold separately) are required for use.]]></description>
+		<compare-title><![CDATA[FM radio ]]></compare-title>
+	</feature>		
+	<feature id="water-repellent-motog" type="">
+		<title><![CDATA[Water repellent nano-coating ]]></title>
+		<description><![CDATA[Get an added layer of protection. Moto G features liquid repellent nano-coating technology, which prevents water from being absorbed onto the phone's surfaces.]]></description>
+		<compare-title><![CDATA[Water repellent nano-coating ]]></compare-title>
+	</feature>		
+	<feature id="visual-voicemail-motog" type="">
+		<title><![CDATA[Visual voicemail ]]></title>
+		<description><![CDATA[Find the message you're looking for without having to listen to all those calls you ignored.]]></description>
+		<compare-title><![CDATA[Visual voicemail ]]></compare-title>
+	</feature>	
+	<feature id="camera-motog" type="camera">
+		<title><![CDATA[5 megapixel camera ]]></title>
+		<description><![CDATA[Touch anywhere to snap the perfect picture, capture panoramic pictures or record high-definition videos.]]></description>
+		<compare-title><![CDATA[5 megapixel camera ]]></compare-title>
+	</feature>	
+	<feature id="motog-camera-full-list" type="">
+		<title><![CDATA[5MP camera with panoramic & continuous shot]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="ambient-light" type="">
+		<title><![CDATA[Ambient light]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="fm-radio-receiver" type="">
+		<title><![CDATA[FM radio receiver]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="fm-radio" type="">
+		<title><![CDATA[FM Radio]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="magnetometer" type="">
+		<title><![CDATA[Magnetometer]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="wifi" type="">
+		<title><![CDATA[Wi-Fi&reg; enabled]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="motog-memory" type="memory">
+		<title><![CDATA[1GB RAM/8GB ROM]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM / 8GB ROM]]></compare-title>
+	</feature>
+
+
+<!-- Boost Max -->
+
+	<feature id="os-boostmax" type="os">
+		<title><![CDATA[Android&trade; 4.1 (Jelly Bean)]]></title>
+		<description><![CDATA[Jelly Bean builds on the most-loved features of Android - easy multitasking, customizable home screens and deep interactivity. ]]></description>
+		<compare-title><![CDATA[Android&trade; 4.1]]></compare-title>
+	</feature>
+	<feature id="boostmax-dualmode-3g-4g" type="3g">
+		<title><![CDATA[Dual Mode 3G/4G LTE]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's reliable 3G nationwide network, which reaches more than 276 million people, and Sprint's blazing-fast 4G LTE network, reaching 340 million people and counting. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title></compare-title>
+	</feature>
+	<feature id="boostmax-touchscreen" type="display">
+		<title><![CDATA[5.7-inch HD IPS Display with Corning&reg; Gorilla&reg; Glass]]></title>
+		<description><![CDATA[Everything's better on the big screen - and this durable, HD screen delivers. Experience the Web, apps and pictures like never before.]]></description>
+		<compare-title><![CDATA[5.7" HD IPS Touchscreen]]></compare-title>
+	</feature>	
+	
+	<feature id="cameras-2" type="camera">
+		<title><![CDATA[8 MP rear-facing camera with 1 MP front-facing camera]]></title>
+		<description><![CDATA[Capture vivid detail in almost any situation with sharp photos. The front-facing camera features 720p HD capabilities.]]></description>
+	</feature>	
+
+
+	<feature id="max-dolby" type="">
+		<title><![CDATA[Available with Dolby Digital&reg; Plus]]></title>
+		<description><![CDATA[Expect a more realistic, immersive experience. Movies and videos come to life with a powerful, virtual surround sound experience.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="boost-max-camera" type="camera">
+		<title><![CDATA[8 MP rear-facing camera with 1 MP front-facing camera]]></title>
+		<description><![CDATA[Capture vivid detail in almost any situation with sharp photos. The front-facing camera features 720p HD capabilities.]]></description>
+		<compare-title><![CDATA[8MP Rear-facing camera with 1MP front facing]]></compare-title>
+	</feature>
+	<feature id="boost-max-smart-view" type="">
+		<title><![CDATA[Smart Viewer for multi-tasking]]></title>
+		<description><![CDATA[Superior usability means running two apps together. Text AND tweet without changing screens.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="max-dolby" type="">
+		<title><![CDATA[Available with Dolby Digital&reg; Plus]]></title>
+		<description><![CDATA[Expect a more realistic, immersive experience. Movies and videos come to life with a powerful, virtual surround sound experience.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="boost-max-camera" type="camera">
+		<title><![CDATA[Capture vivid detail in almost any situation with sharp photos. The front-facing camera features 720p HD capabilities.]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[8 MP rear-facing camera with 1 MP front-facing camera]]></compare-title>
+	</feature>
+	<feature id="boost-max-smart-view" type="camera">
+		<title><![CDATA[Smart Viewer for multi-tasking]]></title>
+		<description><![CDATA[Superior usability means running two apps together. Text AND tweet without changing screens.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="boost-max-camera-full" type="">
+		<title><![CDATA[8MP camera]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="boost-max-smartview-full" type="">
+		<title><![CDATA[Smart Viewer]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	<feature id="max-memory" type="memory">
+		<title><![CDATA[Smartview]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM/8 GB ROM]]></compare-title>
+	</feature>
+	<feature id="max-processor" type="processor">
+		<title><![CDATA[1.2GHz Dual Core Processor]]></title>
+		<description><![CDATA[1.2GHz Dual Core Processor]]></description>
+		<compare-title><![CDATA[1.2GHz Dual Core Processor]]></compare-title>
+	</feature>
+<!-- END Boost Max -->
+
+<!-- DuraShock -->
+	<feature id="dura-tough" type="">
+		<title><![CDATA[Military-grade toughness]]></title>
+		<description><![CDATA[Worry less. The DuraShock meets military standard 810G for dust, shock and vibration.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-grip" type="">
+		<title><![CDATA[Dura-Grip&reg; exterior]]></title>
+		<description><![CDATA[Hold on to your phone. Rubber, non-slip Dura-Grip material offers extra durability.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-dual" type="">
+		<title><![CDATA[Dual displays]]></title>
+		<description><![CDATA[See the time, who's calling and how much battery you have left with the 2-inch QVCA internal display and 1-inch external display.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="dura-web" type="">
+		<title><![CDATA[Wireless Web]]></title>
+		<description><![CDATA[Check all your favorite sites, even when you’re out seeing the sights.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="dura-blue" type="">
+		<title><![CDATA[Bluetooth&reg; capable]]></title>
+		<description><![CDATA[Answer calls wirelessly when you pair your Kyocera DuraShock with a Bluetooth headset (sold separately).]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-speaker" type="">
+		<title><![CDATA[Bi-directional speakerphone]]></title>
+		<description><![CDATA[Hear everything clearly with large front- and rear-ported speakers.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-social" type="">
+		<title><![CDATA[Social networking ]]></title>
+		<description><![CDATA[Update your status, check your notifications and change your profile wherever you are.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-calendar" type="">
+		<title><![CDATA[Calendar]]></title>
+		<description><![CDATA[Don't miss a meeting, access your calendar and get reminders on the go.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="dura-call" type="">
+		<title><![CDATA[Call waiting and three-way calling ]]></title>
+		<description><![CDATA[Enjoy a ton of calling features that let you talk to who you want, when you want.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+
+	<feature id="dura-headset" type="">
+		<title><![CDATA[2.5mm headset jack, 5 pole]]></title>
+		<description><![CDATA[]]></description>		
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	
+	<feature id="memory-durashock" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[RAM: 128 MB / ROM: 256 MB]]></compare-title>
+	</feature>
+
+	<feature id="dura-browser" type="web-browser">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[Access Netfront 4.1]]></compare-title>
+	</feature>
+	
+<!-- END DuraShock -->
+	
+		<!-- Verve -->
+	<feature id="verve-qvga-display" type="display">
+		<title><![CDATA[2.4" TN-TFT QVGA Display]]></title>
+		<description><![CDATA[Surf the web and take pictures with clarity, thanks to the big screen on this slim phone.]]></description>
+		<compare-title><![CDATA[2.4” Screen ]]></compare-title>
+	</feature>
+	
+	<feature id="verve-camera" type="camera">
+		<title><![CDATA[2MP Camera with 2X Digital Zoom]]></title>
+		<description><![CDATA[Capture life's images up close with two times the zoom to remember for a lifetime.]]></description>
+		<compare-title><![CDATA[2MP Camera with 2X Digital Zoom]]></compare-title>
+	</feature>
+	
+	<feature id="verve-bluetooth" type="">
+		<title><![CDATA[Bluetooth&reg; Capable]]></title>
+		<description><![CDATA[Listen to music and answer calls wirelessly, in stereo, when you pair with a Bluetooth&reg; headset (sold separately).]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="verve-speakerphone" type="">
+		<title><![CDATA[Speakerphone]]></title>
+		<description><![CDATA[Go hands-free and use the speakerphone to talk when you have your hands full.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="verve-keyboard" type="qwerty-keyboard">
+		<title><![CDATA[Slide-out QWERTY Keypad]]></title>
+		<description><![CDATA[Bang out texts lightning fast on a slider QWERTY keyboard.]]></description>
+		<compare-title><![CDATA[Physical]]></compare-title>
+	</feature>
+	
+	<feature id="verve-web-gps" type="">
+		<title><![CDATA[Wireless Web & GPS Enabled]]></title>
+		<description><![CDATA[The built-in Web access provides real-time updates for everything you need. And, you'll always know where you are, where you're going and how to get there with GPS.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="verve-social" type="">
+		<title><![CDATA[Facebook and Twitter]]></title>
+		<description><![CDATA[Stay connected to all your favorite social media outlets around the clock with quick easy access.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	
+
+<feature id="verve-headset" type="">
+		<title><![CDATA[3.5mm headset jack]]></title>
+		<description><![CDATA[]]></description>		
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="dura-calendar" type="">
+		<title><![CDATA[Calendar]]></title>
+		<description><![CDATA[Don't miss a meeting, access your calendar and get reminders on the go.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="dura-call" type="">
+		<title><![CDATA[Call waiting and three-way calling ]]></title>
+		<description><![CDATA[Enjoy a ton of calling features that let you talk to who you want, when you want.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+		
+	
+	<feature id="verve-web" type="web-browser">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[WAP]]></compare-title>
+	</feature>
+	
+	<feature id="memory-verve" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[RAM: 256 MB/ ROM: 512 MB]]></compare-title>
+	</feature>
+
+<!-- END Verve -->
+
+<!-- LG Volt -->
+
+    <feature id="volt-4point1" type="os">
+		<title><![CDATA[Android&trade; 4.4 (KitKat)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – sleek simplicity and speed.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.4]]></compare-title>
+	</feature>
+	
+	<feature id="volt-3g-4g" type="3g">
+		<title><![CDATA[3G/4G LTE/Enhanced LTE<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's nationwide 3G and 4G LTE networks and the all-new Enhanced LTE network, where available. Check coverage. <a href="/coverage/">Check coverage</a>.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+
+	<feature id="volt-touchscreen" type="display">
+		<title><![CDATA[4.7-inch qHD IPS display with Corning® Gorilla® Glass 2]]></title>
+		<description><![CDATA[Everything's better on the big screen - and this durable, qHD screen delivers. Experience the Web, apps and pictures like never before.]]></description>
+		<compare-title><![CDATA[4.7-inch qHD IPS display with Corning® Gorilla® Glass 2]]></compare-title>
+	</feature>
+
+
+	<feature id="volt-8mp-camera" type="camera">
+		<title><![CDATA[8 megapixel camera]]></title>
+		<description><![CDATA[Capture vivid detail in almost any situation with sharp photos. Shoot your own masterpiece with 1080p full HD video.]]></description>
+		<compare-title><![CDATA[8MP Camera with 1080p Full HD Video]]></compare-title>
+	</feature>
+
+	<feature id="f3-qslide" type="">
+		<title><![CDATA[Qslide 2.0™]]></title>
+		<description><![CDATA[View multiple screens at the same time and adjust window sizes to switch between apps in a flash.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+
+	<feature id="volt-battery" type="">
+		<title><![CDATA[Long-lasting battery<sup>&#134;&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Talk, text and play longer with the 3000 mAh battery.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+		
+	<feature id="boost-zone" type="">   <!-- full feature -->
+		<title><![CDATA[Access to Boost Zone]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="volt-processor" type="processor">
+		<title><![CDATA[1.2 GHz quad-core processor]]></title>
+		<description><![CDATA[Do more of the things you love. This processor gives you breathtaking speed, jaw-dropping graphics and long battery life.]]></description>
+		<compare-title><![CDATA[1.2 GHz Quad Core Processor]]></compare-title>
+	</feature>
+	
+	<feature id="volt-hd-video" type="">
+		<title><![CDATA[Full HD (1080p) video capture]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title></compare-title>
+	</feature>
+	
+	<feature id="volt-4g" type="4g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>Tri-Mode 3G/4G LTE/Enhanced LTE</compare-title>
+	</feature>
+	
+	<feature id="volt-video" type="video">
+		<title><![CDATA[Nationwide Sprint<sup>&reg;</sup> 3G Network]]></title>
+		<description><![CDATA[Fast surfing, messaging, downloading&#151;that&#39;s the power of 3G.]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="volt-hotspot" type="hotspot">
+		<title><![CDATA[Nationwide Sprint<sup>&reg;</sup> 3G Network]]></title>
+		<description><![CDATA[Fast surfing, messaging, downloading&#151;that&#39;s the power of 3G.]]></description>
+		<compare-title>No</compare-title>
+	</feature>
+	
+	<feature id="volt-memory" type="memory">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[1GB RAM/8GB ROM]]></compare-title>
+	</feature>
+	
+	<feature id="volt-8mp-camera-feature" type="camera">
+		<title><![CDATA[8MP camera]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="volt-hd-voice" type="voice">  
+		<title><![CDATA[HD Voice<sup>&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Experience crystal-clear call quality with reduced background noise while calling another HD Voice-enabled phone on the Sprint network.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+		
+<!-- End LG Volt -->
+
+
+<!-- Start Galaxy S5 -->
+	<feature id="s5-android" type="os">  
+		<title><![CDATA[Android 4.4.2 (KitKat)]]></title>
+		<description><![CDATA[Experience the most-loved features of Android – sleek simplicity and speed.]]></description>
+		<compare-title><![CDATA[Android&trade; OS 4.4]]></compare-title>
+	</feature>
+	
+	<feature id="s5-display" type="display">  
+		<title><![CDATA[5.1-inch HD Super AMOLED&trade; display]]></title>
+		<description><![CDATA[Enjoy bright images and full HD video on the go with this crisp, oversized screen and rich color display with resolution of 1920 x 1080. ]]></description>
+		<compare-title><![CDATA[5.1" HD Super AMOLED&trade; display]]></compare-title>
+	</feature>	
+
+	<feature id="s5-camera" type="camera">  
+		<title><![CDATA[16 megapixel camera]]></title>
+		<description><![CDATA[Capture high-resolution pictures with the rear-facing camera and take all the selfies you want, plus video chat to your heart's content with the 2 megapixel front-facing camera.]]></description>
+		<compare-title><![CDATA[16MP Camera with Real Time HDR and Fast Auto-Focus]]></compare-title>
+	</feature>	
+
+	<feature id="s5-lte" type="3g">  
+		<title><![CDATA[3G/4G LTE/Enhanced LTE<sup>&#134;</sup>]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's nationwide 3G and 4G LTE networks and the all-new Enhanced LTE network, where available. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	
+	<feature id="s5-processor" type="processor">  
+		<title><![CDATA[2.5 GHz quad-core processor]]></title>
+		<description><![CDATA[Do more of the things you love. The Qualcomm Snapdragon&trade; processor gives you breathtaking speed, jaw-dropping graphics and long battery life.]]></description>
+		<compare-title><![CDATA[2.5 GHz Quad Core Processor]]></compare-title>
+	</feature>	
+	
+	<feature id="realm-processor" type="processor">  
+		<title><![CDATA[1.2 GHz Dual Core Processor]]></title>
+		<description><![CDATA[Do more of the things you love. The Qualcomm Snapdragon&trade; processor gives you breathtaking speed, jaw-dropping graphics and long battery life.]]></description>
+		<compare-title><![CDATA[1.2 GHz Dual Core Processor]]></compare-title>
+	</feature>	
+	
+	<feature id="s5-s-health" type="">  
+		<title><![CDATA[Heart Rate Sensor, S Health&trade;]]></title>
+		<description><![CDATA[Measure your heart rate from your phone with the built-in Heart Rate Sensor. Chart your workouts, calories and more with the S Health fitness tracker.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+
+	<feature id="s5-health" type="">  
+		<title><![CDATA[Health Rate Monitor]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	
+	<feature id="s5-resistant" type="">  
+		<title><![CDATA[IP67 water and dust resistant]]></title>
+		<description><![CDATA[Don't sweat the small stuff. With an IP67 certification, the Galaxy S5 is resistant to sweat, rain, liquids, sand and dust.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	<feature id="s5-hdrecording" type="">  
+		<title><![CDATA[Full HD Recording and Playback]]></title>
+		<description><![CDATA[Full HD Recording and Playback]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>		
+
+	<feature id="s5-s-health-full" type="">  
+		<title><![CDATA[S Health]]></title>
+		<description><![CDATA[S Health]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+
+	<feature id="s5-smartremote" type="">  
+		<title><![CDATA[Smart Remote]]></title>
+		<description><![CDATA[Smart Remote]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>
+	
+	<feature id="s5-processor" type="">  
+		<title><![CDATA[2.5 GHz Quad Core Processor]]></title>
+		<description><![CDATA[2.5 GHz Quad Core Processor]]></description>
+		<compare-title><![CDATA[2.5 GHz Quad Core Processor]]></compare-title>
+	</feature>	
+
+	<feature id="s5-memory" type="memory">  
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title><![CDATA[2GB RAM/16GB ROM ]]></compare-title>
+	</feature>	
+	
+	<feature id="s5-3g" type="3g">
+		<title><![CDATA[]]></title>
+		<description><![CDATA[]]></description>
+		<compare-title>true</compare-title>
+	</feature>
+	
+	<feature id="s5-email" type="email">
+		<title><![CDATA[]]></title>
+		<compare-title><![CDATA[Gmail<sup>&reg;</sup>, MSN<sup>&reg;</sup>, Yahoo<sup>&reg;</sup>, Hotmail<sup>&reg;</sup>, Microsoft<sup>&reg;</sup> Exchange Active Sync<sup>&reg;</sup>]]></compare-title>
+	</feature>
+<!-- End Galaxy S5 -->	
+
+<!-- Start Hydro Icon -->		
+	<feature id="icon-android" type="os">  
+		<title><![CDATA[Android 4.3 (Jelly Bean)]]></title>
+		<description><![CDATA[Enjoy the most-loved features of Android – easy multitasking, customizable home screens and deep interactivity – with Jelly Bean.]]></description>
+		<compare-title><![CDATA[Android 4.3 (Jelly Bean)]]></compare-title>
+	</feature>
+	
+	<feature id="icon-display" type="display">  
+		<title><![CDATA[Edge-to-Edge 4.5" qHD Impact Resistant Display]]></title>
+		<description><![CDATA[Touch, tap and swipe with purpose on this big, durable display.]]></description>
+		<compare-title><![CDATA[Edge-to-Edge 4.5" qHD Impact Resistant Display]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-waterproof" type="">  
+		<title><![CDATA[Certified Water Resistant & Dust Resistant&#134;]]></title>
+		<description><![CDATA[Certified waterproof for IPx5 and IPx7. It's protected up to 30 minutes in 3.28 feet of water.]]></description>
+		<compare-title><![CDATA[Certified Water Resistant & Dust Resistant&#134;]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-processor" type="processor">  
+		<title><![CDATA[1.2 GHz Quad Core Processor]]></title>
+		<description><![CDATA[Plenty of power to deliver what you want, when you want it.]]></description>
+		<compare-title><![CDATA[1.2 GHz Quad Core Processor]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-shock" type="">  
+		<title><![CDATA[Military Grade Shock Protection]]></title>
+		<description><![CDATA[Built to Military Standard 810G (MilSpec), the ICON is designed to take whatever you can throw at it.]]></description>
+		<compare-title><![CDATA[Military Grade Shock Protection]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-camera" type="camera">  
+		<title><![CDATA[8MP Back Facing &amp; 2MP Front Facing Cameras]]></title>
+		<description><![CDATA[Built to Military Standard 810G (MilSpec), the ICON is designed to take whatever you can throw at it.]]></description>
+		<compare-title><![CDATA[8MP Back Facing &amp; 2MP Front Facing Cameras]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-lte" type="3g">  
+		<title><![CDATA[3G/4G LTE/Enhanced LTE<sup>&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Switch seamlessly between Sprint's nationwide 3G and 4G LTE networks and the all-new Enhanced LTE network, where available. <a href="http://www.boostmobile.com/coverage/" style="color:#E7781D">Check coverage</a>.]]></description>
+		<compare-title><![CDATA[]]></compare-title>
+	</feature>	
+	
+	<feature id="icon-receiver" type="3g">  
+		<title><![CDATA[Smart Sonic Receiver Technology<sup>&#134;&#134;&#134;</sup>]]></title>
+		<description><![CDATA[Hear crisp, clear sound without a traditional speaker, even in noisy environments.]]></description>
+		<compare-title><![CDATA[Smart Sonic Receiver Technology<sup>&#134;&#134;&#134;</sup>]]></compare-title>
+	</feature>		
+
+<!-- End Hydro Icon -->		
+</features>

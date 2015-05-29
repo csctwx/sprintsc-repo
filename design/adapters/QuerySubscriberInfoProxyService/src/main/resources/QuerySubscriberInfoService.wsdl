@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QuerySubscriberInfoService/v1/QuerySubscriberInfoService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QuerySubscriberInfoService/v1/QuerySubscriberInfoService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd3.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/checkSubscriberUfpEligibility/v1/checkSubscriberUfpEligibility.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/queryAslAccountAdminList/v1/queryAslAccountAdminList.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryConsentedCustomerInfo/v1/queryConsentedCustomerInfo.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/queryLdapSubscriberInfo/v1/queryLdapSubscriberInfo.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberAttributes/v1/querySubscriberAttributes.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberBasicInfo/v1/querySubscriberBasicInfo.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberData/v1/querySubscriberData.xsd"/>
+<xsd:import schemaLocation="QuerySubscriberInfoService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="checkSubscriberUfpEligibilityRequest">
+<wsdl:part name="checkSubscriberUfpEligibilityRequest" element="xsns:checkSubscriberUfpEligibility" xmlns:xsns="http://integration.sprint.com/interfaces/checkSubscriberUfpEligibility/v1/checkSubscriberUfpEligibility.xsd"/></wsdl:message>
+<wsdl:message name="checkSubscriberUfpEligibilityResponse">
+<wsdl:part name="checkSubscriberUfpEligibilityResponse" element="xsns:checkSubscriberUfpEligibilityResponse" xmlns:xsns="http://integration.sprint.com/interfaces/checkSubscriberUfpEligibility/v1/checkSubscriberUfpEligibility.xsd"/></wsdl:message>
+<wsdl:message name="queryAslAccountAdminListRequest">
+<wsdl:part name="queryAslAccountAdminListRequest" element="xsns:queryAslAccountAdminList" xmlns:xsns="http://integration.sprint.com/interfaces/queryAslAccountAdminList/v1/queryAslAccountAdminList.xsd"/></wsdl:message>
+<wsdl:message name="queryAslAccountAdminListResponse">
+<wsdl:part name="queryAslAccountAdminListResponse" element="xsns:queryAslAccountAdminListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAslAccountAdminList/v1/queryAslAccountAdminList.xsd"/></wsdl:message>
+<wsdl:message name="queryConsentedCustomerInfoRequest">
+<wsdl:part name="queryConsentedCustomerInfoRequest" element="xsns:queryConsentedCustomerInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryConsentedCustomerInfo/v1/queryConsentedCustomerInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryConsentedCustomerInfoResponse">
+<wsdl:part name="queryConsentedCustomerInfoResponse" element="xsns:queryConsentedCustomerInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryConsentedCustomerInfo/v1/queryConsentedCustomerInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryLdapSubscriberInfoRequest">
+<wsdl:part name="queryLdapSubscriberInfoRequest" element="xsns:queryLdapSubscriberInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryLdapSubscriberInfo/v1/queryLdapSubscriberInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryLdapSubscriberInfoResponse">
+<wsdl:part name="queryLdapSubscriberInfoResponse" element="xsns:queryLdapSubscriberInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryLdapSubscriberInfo/v1/queryLdapSubscriberInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberAttributesRequest">
+<wsdl:part name="querySubscriberAttributesRequest" element="xsns:querySubscriberAttributes" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberAttributes/v1/querySubscriberAttributes.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberAttributesResponse">
+<wsdl:part name="querySubscriberAttributesResponse" element="xsns:querySubscriberAttributesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberAttributes/v1/querySubscriberAttributes.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBasicInfoRequest">
+<wsdl:part name="querySubscriberBasicInfoRequest" element="xsns:querySubscriberBasicInfo" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBasicInfo/v1/querySubscriberBasicInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberBasicInfoResponse">
+<wsdl:part name="querySubscriberBasicInfoResponse" element="xsns:querySubscriberBasicInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberBasicInfo/v1/querySubscriberBasicInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberDataRequest">
+<wsdl:part name="querySubscriberDataRequest" element="xsns:querySubscriberData" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberData/v1/querySubscriberData.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberDataResponse">
+<wsdl:part name="querySubscriberDataResponse" element="xsns:querySubscriberDataResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberData/v1/querySubscriberData.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberServicesRequest">
+<wsdl:part name="querySubscriberServicesRequest" element="xsns:querySubscriberServices" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberServicesResponse">
+<wsdl:part name="querySubscriberServicesResponse" element="xsns:querySubscriberServicesResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberServices/v1/querySubscriberServices.xsd"/></wsdl:message>
+<wsdl:message name="soapFaultV2">
+<wsdl:part name="faultV2" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeaderV2">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QuerySubscriberInfoPortType">
+<wsdl:operation name="CheckSubscriberUfpEligibility">
+<wsdl:input name="CheckSubscriberUfpEligibilityRequest" message="ns0:checkSubscriberUfpEligibilityRequest"/>
+<wsdl:output name="CheckSubscriberUfpEligibilityResponse" message="ns0:checkSubscriberUfpEligibilityResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QueryAslAccountAdminList">
+<wsdl:input name="QueryAslAccountAdminListRequest" message="ns0:queryAslAccountAdminListRequest"/>
+<wsdl:output name="QueryAslAccountAdminListResponse" message="ns0:queryAslAccountAdminListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QueryConsentedCustomerInfo">
+<wsdl:input name="QueryConsentedCustomerInfoRequest" message="ns0:queryConsentedCustomerInfoRequest"/>
+<wsdl:output name="QueryConsentedCustomerInfoResponse" message="ns0:queryConsentedCustomerInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QueryLdapSubscriberInfo">
+<wsdl:input name="QueryLdapSubscriberInfoRequest" message="ns0:queryLdapSubscriberInfoRequest"/>
+<wsdl:output name="QueryLdapSubscriberInfoResponse" message="ns0:queryLdapSubscriberInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberAttributes">
+<wsdl:input name="QuerySubscriberAttributesRequest" message="ns0:querySubscriberAttributesRequest"/>
+<wsdl:output name="QuerySubscriberAttributesResponse" message="ns0:querySubscriberAttributesResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBasicInfo">
+<wsdl:input name="QuerySubscriberBasicInfoRequest" message="ns0:querySubscriberBasicInfoRequest"/>
+<wsdl:output name="QuerySubscriberBasicInfoResponse" message="ns0:querySubscriberBasicInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberData">
+<wsdl:input name="QuerySubscriberDataRequest" message="ns0:querySubscriberDataRequest"/>
+<wsdl:output name="QuerySubscriberDataResponse" message="ns0:querySubscriberDataResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberServices">
+<wsdl:input name="QuerySubscriberServicesRequest" message="ns0:querySubscriberServicesRequest"/>
+<wsdl:output name="QuerySubscriberServicesResponse" message="ns0:querySubscriberServicesResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QuerySubscriberInfoSOAPBinding" type="ns0:QuerySubscriberInfoPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="CheckSubscriberUfpEligibility">
+<soap11:operation soapAction="CheckSubscriberUfpEligibility" style="document"/>
+<wsdl:input name="CheckSubscriberUfpEligibilityRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CheckSubscriberUfpEligibilityResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAslAccountAdminList">
+<soap11:operation soapAction="QueryAslAccountAdminList" style="document"/>
+<wsdl:input name="QueryAslAccountAdminListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAslAccountAdminListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryConsentedCustomerInfo">
+<soap11:operation soapAction="QueryConsentedCustomerInfo" style="document"/>
+<wsdl:input name="QueryConsentedCustomerInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryConsentedCustomerInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryLdapSubscriberInfo">
+<soap11:operation soapAction="QueryLdapSubscriberInfo" style="document"/>
+<wsdl:input name="QueryLdapSubscriberInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryLdapSubscriberInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberAttributes">
+<soap11:operation soapAction="QuerySubscriberAttributes" style="document"/>
+<wsdl:input name="QuerySubscriberAttributesRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberAttributesResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberBasicInfo">
+<soap11:operation soapAction="QuerySubscriberBasicInfo" style="document"/>
+<wsdl:input name="QuerySubscriberBasicInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberBasicInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberData">
+<soap11:operation soapAction="QuerySuscriberData" style="document"/>
+<wsdl:input name="QuerySubscriberDataRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberDataResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberServices">
+<soap11:operation soapAction="QuerySubscriberServices" style="document"/>
+<wsdl:input name="QuerySubscriberServicesRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberServicesResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderV2" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QuerySubscriberInfoService">
+<wsdl:port name="QuerySubscriberInfoPortType" binding="ns0:QuerySubscriberInfoSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QuerySubscriberInfoService"/></wsdl:port></wsdl:service></wsdl:definitions>

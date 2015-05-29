@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ <property resource="logpaths.properties" />
+	<statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+	<appender name="dailyRollingFileAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${SPRINT_LOG_HOME}/sprint.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			daily rollover
+			<FileNamePattern>sprint.%d{yyyy-MM-dd}.log</FileNamePattern>
+
+			keep 30 days' worth of history
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>%date{yyyy-MM-dd HH:mm:ss:SSS} [%thread] %-5level %logger{26}.%M %L - %msg
+				%n
+			</Pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="dailyRollingFileAppenderHibernate"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${COD_LOG_HOME}/sprintAdapter.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			daily rollover
+			<FileNamePattern>sprintAdapter.%d{yyyy-MM-dd}.log</FileNamePattern>
+
+			keep 30 days' worth of history
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{26}.%M %L - %msg
+				%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<appender name="dailyRollingFileAppenderSpring"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${COD_LOG_HOME}/sprintSpring.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			daily rollover
+			<FileNamePattern>sprintSpring.%d{yyyy-MM-dd}.log</FileNamePattern>
+
+			keep 30 days' worth of history
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{26}.%M %L - %msg
+				%n
+			</Pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.ericsson.cac.sprint" level="DEBUG" additivity="false">
+		<appender-ref ref="dailyRollingFileAppender" />
+	</logger>
+
+	<logger name="org.jsmpp" level="DEBUG" additivity="false">
+		<appender-ref ref="dailyRollingFileAppenderCamel" />
+	</logger>
+	<logger name="org.hibernate" level="ALL" additivity="false">
+		<appender-ref ref="dailyRollingFileAppenderHibernate" />
+	</logger>
+	<logger name="org.springframework" level="DEBUG" additivity="false">
+		<appender-ref ref="dailyRollingFileAppenderSpring" />
+	</logger>
+
+</configuration>
+

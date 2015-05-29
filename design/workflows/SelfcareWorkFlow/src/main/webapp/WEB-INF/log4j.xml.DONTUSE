@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+<appender name="FILE" class="org.apache.log4j.RollingFileAppender">
+   <param name="File" value="/tmp/log.txt"/>
+   <param name="ImmediateFlush" value="true"/>
+   <param name="Threshold" value="DEBUG"/>
+   <param name="Append" value="true"/>
+   <param name="MaxFileSize" value="10MB"/>
+   
+   <layout class="org.apache.log4j.PatternLayout">
+      <param name="conversionPattern" value="%m%n"/>
+   </layout>
+</appender>
+
+<!--
+<logger name="log4j.rootLogger">
+   <level value="DEBUG"/>
+   <appender-ref ref="FILE"/>
+</logger>
+-->
+
+<root>
+   <priority value ="DEBUG" /> 
+    <appender-ref ref="FILE" /> 
+  </root>
+
+</log4j:configuration>

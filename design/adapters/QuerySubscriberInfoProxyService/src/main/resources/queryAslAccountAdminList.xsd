@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 (http://www.altova.com) by LEE VAN AALSBURG (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryAslAccountAdminList/v1/queryAslAccountAdminList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryAslAccountAdminList/v1/queryAslAccountAdminList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Date	                  Author 	             Version 	Change	                                                                                                                                                   Rel	SR#-->
+	<!--01/09/12                 	Ace Cineus           1.0	  Increased maxLen restriction of DeviceSerialNumberHex from 18 to 20	                                        GBL12.2	PJ006784    -->
+	<!---->
+	<xs:element name="queryAslAccountAdminList" type="tns:QueryAslAccountAdminList"/>
+	<xs:element name="queryAslAccountAdminListResponse" type="tns:QueryAslAccountAdminListResponse"/>
+	<xs:complexType name="AdminAccountInfo">
+		<xs:sequence>
+			<xs:element name="ban" type="tns:BillingAccountNumberEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountStatus" type="tns:BillingAccountStatusCodeEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Status Code Ens holds the current state of the Billing Account in the Ensemble system
+
+Valid states:
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountType" type="tns:BillingAccountTypeCodeEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCode">
+				<xs:annotation>
+					<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="tns:FirstNameEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastBusinessName" type="tns:LastName">
+				<xs:annotation>
+					<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="aslLastActivity" type="tns:LastActivityCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activity Code uniquely identifies a specific deed, action or function.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalDue" type="tns:TotalPaymentDue" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Total Payment Due contains the total monetary amount that is due for this subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdminAccountList">
+		<xs:sequence>
+			<xs:element name="adminAccountInfo" type="tns:AdminAccountInfo" minOccurs="0" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Info">
+		<xs:choice>
+			<xs:element name="ban" type="tns:BillingAccountNumber">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberId" type="tns:SubscriberIdentifier">
+				<xs:annotation>
+					<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:PhoneNumber">
+				<xs:annotation>
+					<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumber">
+				<xs:annotation>
+					<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierString">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressString">
+				<xs:annotation>
+					<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityString">
+				<xs:annotation>
+					<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifier">
+				<xs:annotation>
+					<xs:documentation>A Uniform Resource Identifier (URI) is the way you identify any of those points of content, whether it be a page of text, a video or sound clip, a still or animated image, or a program.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIDString">
+				<xs:annotation>
+					<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="QueryAslAccountAdminList">
+		<xs:sequence>
+			<xs:element name="info" type="tns:Info"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryAslAccountAdminListResponse">
+		<xs:sequence>
+			<xs:element name="adminAccountList" type="tns:AdminAccountList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Added from Shared Simple Types-->
+	<xs:simpleType name="AccountNumberInt">
+		<xs:annotation>
+			<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="AccountNumberString">
+		<xs:annotation>
+			<xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ActivityCode">
+		<xs:annotation>
+			<xs:documentation>Activity Code uniquely identifies a specific deed, action or function.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumber">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:AccountNumberString">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountNumberEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:AccountNumberInt">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountStatusCodeEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Status Code Ens holds the current state of the Billing Account in the Ensemble system
+Valid states:
+O - open (active) 
+C - cancelled
+S - suspended
+T  -tentative
+N – closed</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:StatusCode">
+			<xs:enumeration value="O"/>
+			<xs:enumeration value="C"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="T"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountSubTypeCode">
+		<xs:annotation>
+			<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+			<xs:documentation>Ensemble Documentation is inadequate.  &#13;
+TODO: Get better description.&#13;
+TODO: Get list of values for possible enumeration.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:TypeCode">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BillingAccountTypeCodeEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Type Code categorizes BILLING_ACCOUNT instances into pre-defined segments used primarily for segregation of General Ledger reporting and Collection treatment.</xs:documentation>
+			<xs:documentation>Ensemble Documentation is inadequate.  &#13;
+TODO: Get better description.&#13;
+TODO: Get list of enumeration values.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:TypeCode">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumber">
+		<xs:annotation>
+			<xs:documentation>A Device Serial Number is the value of a electronic serial number OR Mobile Equipment Identifier(MEID).  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ElectronicAddressString">
+		<xs:annotation>
+			<xs:documentation>ElectronicAddressString represents the character string of the electronic address.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FirstName">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FirstNameEns">
+		<xs:annotation>
+			<xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+			<xs:documentation>alias: Given Name</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:FirstName">
+			<xs:maxLength value="32"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIDString">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:UniformResourceIdentifierString">
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="IdentifierString">
+		<xs:annotation>
+			<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		<xs:annotation>
+			<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+			<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressString">
+		<xs:annotation>
+			<xs:documentation>Electronic Address represents the character string of the electronic address.</xs:documentation>
+			<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:ElectronicAddressString">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LastActivityCode">
+		<xs:restriction base="tns:ActivityCode"/>
+	</xs:simpleType>
+	<xs:simpleType name="LastName">
+		<xs:annotation>
+			<xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifier">
+		<xs:annotation>
+			<xs:documentation>A Uniform Resource Identifier (URI -- pronounced YEW-AHR-EYE) is the way you identify any of those points of content, whether it be a page of text, a video or sound clip, a still or animated image, or a program. The most common form of URI is the Web page address, which is a particular form or subset of URI called a Uniform Resource Locator (URL). 
+
+A URI typically describes:
+
+The mechanism used to access the resource
+The specific computer that the resource is housed in
+The specific name of the resource (a file name) on the computer
+For example, this URI:
+http://www.w3.org/Icons/WWW/w3c_main.gif
+identifies a file that can be accessed using the Web protocol application, Hypertext Transfer Protocol, ("http://") that is housed on a computer named "www.w3.org" (which can be mapped to a unique Internet address). In the computer's directory structure, the file is located at the pathname of "/Icons/WWW/w3c_main.gif." Character strings that identify File Transfer Protocol FTP addresses and e-mail addresses are also URIs (and, like the HTTP address, are also the specific subset of URI called a URL).
+
+Another kind of URI is the Uniform Resource Name (URN). A URN is a form of URI that has "institutional persistence," which means that its exact location may change from time to time, but some agency will be able to find it.
+
+The URI rules of syntax, set forth in the Internet Engineering Task Force (IETF) Request for Comments 1630, apply for all Internet addresses. In Tim Berner-Lee's original working document, URI stood for Universal Resource Identifier.</xs:documentation>
+			<xs:documentation>alias: URI</xs:documentation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+			<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumber">
+		<xs:annotation>
+			<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StatusCode">
+		<xs:annotation>
+			<xs:documentation>Status Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifier">
+		<xs:annotation>
+			<xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="20"/>
+			<xs:minLength value="8"/>
+			<xs:pattern value="\d*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TotalPaymentDue">
+		<xs:annotation>
+			<xs:documentation>Total Payment Due contains the total monetary amount that is due for this subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="11"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TypeCode">
+		<xs:annotation>
+			<xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="UniformResourceIdentifierString">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="tns:IdentifierString">
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

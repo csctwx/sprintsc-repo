@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE commands SYSTEM "commands.dtd">
+<!-- Command overrides for the 'regular' (WAP) channel -->
+<commands>
+	<!-- Start: Do not change -->
+	<import source="classpath:com/drutt/msdp/runtime/ee/command-regular.xml" />
+	<!-- End: Do not change -->
+
+	<!-- Add overrides below -->
+	<command name="SetupUserContext">
+		<choose>
+			<when name="ca.isDoLogin">
+				<!-- This part should follow the flow of the Login Procedure -->
+				<and>
+				    <!-- We need to be sure that user is coming with cookie and GuestUser -->
+<!-- 				    <command name="IsGuestUser" />  Do we really need this ? -->
+				    <command name="SetupUserContextViaSecureCookie" />
+					<command name="ca.SetupUserLoginContext" />
+					<command name="ca.setupPhoneCookie" />
+					<command name="SetupUserSecureCookie" />
+				</and>
+			</when>
+			<otherwise>
+				<or>
+					<command name="SetupUserContextViaSecureCookie" />
+					<!-- Create a Guest User and set cookie -->
+					<and>
+						<command name="ca.identifyBrand" />
+						<command name="SetupGuestUser" />
+						<command name="SetupUserSecureCookie" />
+					</and>
+				</or>
+			</otherwise>
+		</choose>
+	</command>
+</commands>

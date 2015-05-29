@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryResourceCharacteristics/v1/queryResourceCharacteristics.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryResourceCharacteristics/v1/queryResourceCharacteristics.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- 11/07/2008 | Jocelen Silva     | Version 1.0 |  MAY09GBL E1710.013 - Added fetchRealTimeInfo, concatenateAddress, commMethod and commValue fields-->
+	
+<!-- 12/23/2008 | Ibrahim ElKhatib | Version 1.1 |  MAY09GBL E3495 - Added errorCode, errorText fields to queryResourceCharacteristicsResponse-->
+	
+<!-- 12/23/2008 | Lynn Reddick    | Version 1.1 |  MAY09GBL E3495 - Added corresponding Simple Types for above fields and modified all Simple Types to current standard with Type suffix-->
+	
+<xs:element name="queryResourceCharacteristics" type="tns:QueryResourceCharacteristics"/>
+	
+<xs:element name="queryResourceCharacteristicsResponse" type="tns:QueryResourceCharacteristicsResponse"/>
+	
+<xs:complexType name="QueryResourceCharacteristics">
+		
+<xs:sequence>
+			
+<xs:element name="resourceList" type="tns:SearchResourceList"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchResourceList">
+		
+<xs:sequence>
+			
+<xs:element name="resourceInfo" type="tns:SearchResourceInfo" maxOccurs="600"/>
+			
+<xs:element name="checkHppttInd" type="tns:BinaryExpressionType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryResourceCharacteristicsResponse">
+		
+<xs:sequence>
+			
+<xs:element name="resourceList" type="tns:ResourceList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchResourceInfo">
+		
+<xs:choice>
+			
+<xs:element name="mdn">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:PhoneNumberType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="ufmi">
+				
+<xs:annotation>
+					
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UrbanFleetMemberIdentifierStringType"/>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="hppttId">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:HighPerformancePushToTalkIDStringType"/>
+				</xs:simpleType>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="ResourceList">
+		
+<xs:sequence>
+			
+<xs:element name="resourceInfo" type="tns:ResourceInfo" maxOccurs="600"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ResourceInfo">
+		
+<xs:sequence>
+			
+<xs:choice minOccurs="0">
+				
+<xs:element name="mdn" type="tns:PhoneNumberType">
+					
+<xs:annotation>
+						
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				
+<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+					
+<xs:annotation>
+						
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			
+<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIDStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="hppttInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This element is used to indicate whether the requested resource is a High Perofrmance Push To Talk Identifier (HPPTID).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorCode" type="tns:ErrorTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains the standard fault code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorText" type="tns:ErrorMessageTextType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Contains the standard fault string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--Following are sourced from the Shared Simple Types-->
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Error Type Code identifies the type of error transaction being processed.
+For example:
+Order
+OrderItem
+ESN
+MEID
+etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIDStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

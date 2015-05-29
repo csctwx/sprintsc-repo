@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryOffersHistory/v1/queryOffersHistory.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryOffersHistory/v1/queryOffersHistory.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!--Date                      Author                 Version                 Change                                                                                                                          Rel                  SR# -->
+	
+<!--03/09/2011       Steve Whipple            1.0                  Initial Version                                                                                                                  GBL11.3          PJ005472    -->
+	
+<!--03/24/2011       Steve Heichelheim   1.0                 Added MVM standards and simple types                                                                           GBL11.3          PJ005472    -->
+	
+<!--06/24/2011       Steve Whipple            1.1                 CS #475228 - changed interactionId length to 30                                                            GBL11.3          PJ005472    -->
+	
+<xs:element name="queryOffersHistory" type="tns:QueryOffersHistoryType"/>
+	
+<xs:element name="queryOffersHistoryResponse" type="tns:QueryOffersHistoryResponseType"/>
+	
+<xs:complexType name="QueryOffersHistoryType">
+		
+<xs:sequence>
+			
+<xs:element name="info" type="tns:SearchCriteriaType"/>
+			
+<xs:element name="offerId" type="tns:OfferIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assign to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="campaignId" type="tns:CampaignIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assign to each campaign when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="programId" type="tns:ProgramIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assign to each program when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each subscriber on an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="fromDate" type="tns:StartDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Used to identify the date range which will be used to determine the records that will be included in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="toDate" type="tns:EndDateType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Used to identify the date range which will be used to determine the records that will be included in the response</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="maximumRecords" type="tns:RowCountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Used to limit the number of records that will be included in response.  Controled by the requesting application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryOffersHistoryResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="offersHistoryList" type="tns:offersHistoryListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SearchCriteriaType">
+		
+<xs:choice>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="interactionId" type="tns:InteractionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier that is assigned to each interaction with a customer in the frontend application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ApplicationNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Name is the common name of an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EndDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>End Date holds the calendar date of the cessation of a course of action, pursuit, or activity.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date is the calendar date on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Description is a descripton of an offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="400"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Identifier designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProgramIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Program Identifier uiquely identifies a Program (such as a marketing program).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="StartDateType">
+		
+<xs:annotation>
+			
+<xs:documentation>Start Date holds the calendar day an activity, undertaking or participation begins.</xs:documentation>
+			
+<xs:documentation>Case Start Date contains the calendar day the CASE began.  For example, in a Collection Case this would be the calendar day the Billing Account was put into Collections.
+
+Elements declared to be of type date must follow this form:  
+CCYY-MM-DD
+range for CC is: 00-99
+range for YY is: 00-99
+range for MM is: 01-12
+range for DD is: 
+01-28 if month is 2
+01-29 if month is 2 and the gYear is a leap gYear
+01-30 if month is 4, 6, 9, or 11
+01-31 if month is 1, 3, 5, 7, 8, 10, or 12
+
+Example: 1999-05-31 represents May 31, 1999</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="CampaignIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Campaign Identifier uiquely identifies a campaign (such as a marketing campaign).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CampaignNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Campaign Name is a common name for a specific campaign (such as a marketing campaign).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InteractionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Interaction Identifier is a value assigned by another system that uniquely identifies the interaction from the other system.</xs:documentation>
+			
+<xs:documentation>Sales Representative Name holds the Individual Name Components of the individual who generated a sale concatentated into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Code designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Identifier uniquely identifies a specific disposition of an offer. (dispositions include Accept, Decline) </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Description is a common language description for the disposition of the offer. (ex. Accept, Decline)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionReasonDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Reason Description is a common language description of the reason for the disposition of the offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="250"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferShortDescriptionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Short Description is a concise descripton of an offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProgramNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Program Name is a common name for a specific Program (such as a marketing program).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<xs:complexType name="offersHistoryListType">
+		
+<xs:sequence>
+			
+<xs:element name="offersHistoryInfo" type="tns:offersHistoryInfoType" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="offersHistoryInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="offerId" type="tns:OfferIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="campaignId" type="tns:CampaignIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each campaign when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="programId" type="tns:ProgramIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each program when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each subscriber on an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ptn" type="tns:PhoneNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Personal Telephone Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerDescription" type="tns:OfferDescriptionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Detail description of the offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerName" type="tns:OfferShortDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Short Description for the offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="offerCode" type="tns:OfferCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Free Text field.  Currently used by the dialer process.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="campaignName" type="tns:CampaignNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Campaign description provided at the time the campaign is created in Siebel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="programName">
+				
+<xs:annotation>
+					
+<xs:documentation>The name assigned to a program when it is created in Siebel</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ProgramNameType">
+						
+<xs:maxLength value="20"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="changeDate" type="tns:EventDateType">
+				
+<xs:annotation>
+					
+<xs:documentation>Date provided in the disposition request from the frontend application at the time of the action for the offer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID assign to each user in the frontend application</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="applicationName" type="tns:ApplicationNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Application Name - RMS, TOES, iCare, Web</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionDescription" type="tns:OfferDispositionDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Disposition Description setup in Siebel.  Accept, Decline</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionReason" type="tns:OfferDispositionReasonDescriptionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Description of Reason setup in Siebel.  Assigned to specific Dispositions in Siebel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionCode" type="tns:OfferDispositionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID setup for each reason when it is created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="interactionId" type="tns:InteractionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier that is assigned to each interaction with a customer in the frontend application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

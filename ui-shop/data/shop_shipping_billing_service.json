@@ -1,0 +1,26 @@
+{  
+   "addressValid":true,
+   "paymentValid":true,
+   "equipments":[  
+      {  
+         "orderLineId":"1",
+         "modelId":"SPHL710ASB",
+         "modelPrice":499.99,
+         "equipmentTaxAmt":41.24,
+         "accessoryInd":false,
+         "taxTransactionId":1000494542,
+         "invoiceDate":"2015-05-25",
+         "quantity":1,
+         "subTotalAmt":541.23,
+         "isPreOrder":false
+      }
+   ],
+   "transactionId":"SPP_SALES_6377435331",
+   "orderId":"SPP_ORDER_8972778491",
+   "status":0,
+   "description":"SUCCESS",
+   "CardType":"CREDIT",
+   "paymentCardType":"VISA",
+   "shippingFee":"0",
+   "totalAmt":541.23
+}

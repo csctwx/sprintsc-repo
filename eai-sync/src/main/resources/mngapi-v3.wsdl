@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<definitions name="MediaManagementService" targetNamespace="http://ws.drutt.com/msdp/media/management/v3" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.drutt.com/msdp/media/management/v3">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://ws.drutt.com/msdp/media/management/v3" schemaLocation="mngapi-v3.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="WSException">
+    <part name="WSException" element="tns:WSException"/>
+  </message>
+  <message name="MediaAsset_createAssets">
+    <part name="createAssets" element="tns:createAssets"/>
+  </message>
+  <message name="MediaAsset_createAssetsResponse">
+    <part name="createAssetsResponse" element="tns:createAssetsResponse"/>
+  </message>
+  <message name="MediaAsset_createGroups">
+    <part name="createGroups" element="tns:createGroups"/>
+  </message>
+  <message name="MediaAsset_createGroupsResponse">
+    <part name="createGroupsResponse" element="tns:createGroupsResponse"/>
+  </message>
+  <message name="MediaAsset_createItems">
+    <part name="createItems" element="tns:createItems"/>
+  </message>
+  <message name="MediaAsset_createItemsResponse">
+    <part name="createItemsResponse" element="tns:createItemsResponse"/>
+  </message>
+  <message name="MediaAsset_createCategories">
+    <part name="createCategories" element="tns:createCategories"/>
+  </message>
+  <message name="MediaAsset_createCategoriesResponse">
+    <part name="createCategoriesResponse" element="tns:createCategoriesResponse"/>
+  </message>
+  <message name="MediaAsset_deleteAssets">
+    <part name="deleteAssets" element="tns:deleteAssets"/>
+  </message>
+  <message name="MediaAsset_deleteAssetsResponse">
+    <part name="deleteAssetsResponse" element="tns:deleteAssetsResponse"/>
+  </message>
+  <message name="MediaAsset_deleteGroups">
+    <part name="deleteGroups" element="tns:deleteGroups"/>
+  </message>
+  <message name="MediaAsset_deleteGroupsResponse">
+    <part name="deleteGroupsResponse" element="tns:deleteGroupsResponse"/>
+  </message>
+  <message name="MediaAsset_deleteItems">
+    <part name="deleteItems" element="tns:deleteItems"/>
+  </message>
+  <message name="MediaAsset_deleteItemsResponse">
+    <part name="deleteItemsResponse" element="tns:deleteItemsResponse"/>
+  </message>
+  <message name="MediaAsset_deleteCategories">
+    <part name="deleteCategories" element="tns:deleteCategories"/>
+  </message>
+  <message name="MediaAsset_deleteCategoriesResponse">
+    <part name="deleteCategoriesResponse" element="tns:deleteCategoriesResponse"/>
+  </message>
+  <message name="MediaAsset_getAssetsByAssetId">
+    <part name="getAssetsByAssetId" element="tns:getAssetsByAssetId"/>
+  </message>
+  <message name="MediaAsset_getAssetsByExternalAssetId">
+    <part name="getAssetsByExternalAssetId" element="tns:getAssetsByExternalAssetId"/>
+  </message>
+  <message name="MediaAsset_getAssetsByIdKey">
+    <part name="getAssetsByIdKey" element="tns:getAssetsByIdKey"/>
+  </message>
+  <message name="MediaAsset_getAssetsResponse">
+    <part name="getAssetsResponse" element="tns:getAssetsResponse"/>
+  </message>
+  <message name="MediaAsset_getCategoriesByCategoryId">
+    <part name="getCategoriesByCategoryId" element="tns:getCategoriesByCategoryId"/>
+  </message>
+  <message name="MediaAsset_getCategoriesByIdKey">
+    <part name="getCategoriesByIdKey" element="tns:getCategoriesByIdKey"/>
+  </message>
+  <message name="MediaAsset_getCategoriesResponse">
+    <part name="getCategoriesResponse" element="tns:getCategoriesResponse"/>
+  </message>
+  <message name="MediaAsset_searchItems">
+    <part name="searchItems" element="tns:searchItems"/>
+  </message>
+  <message name="MediaAsset_searchItemsResponse">
+    <part name="searchItemsResponse" element="tns:searchItemsResponse"/>
+  </message>
+  <message name="MediaAsset_updateAssets">
+    <part name="updateAssets" element="tns:updateAssets"/>
+  </message>
+  <message name="MediaAsset_updateAssetsResponse">
+    <part name="updateAssetsResponse" element="tns:updateAssetsResponse"/>
+  </message>
+  <message name="MediaAsset_updateGroups">
+    <part name="updateGroups" element="tns:updateGroups"/>
+  </message>
+  <message name="MediaAsset_updateGroupsResponse">
+    <part name="updateGroupsResponse" element="tns:updateGroupsResponse"/>
+  </message>
+  <message name="MediaAsset_updateItems">
+    <part name="updateItems" element="tns:updateItems"/>
+  </message>
+  <message name="MediaAsset_updateItemsResponse">
+    <part name="updateItemsResponse" element="tns:updateItemsResponse"/>
+  </message>
+  <message name="MediaAsset_updateCategories">
+    <part name="updateCategories" element="tns:updateCategories"/>
+  </message>
+  <message name="MediaAsset_updateCategoriesResponse">
+    <part name="updateCategoriesResponse" element="tns:updateCategoriesResponse"/>
+  </message>
+  <portType name="MediaManagementApi">
+    <operation name="createAssets" parameterOrder="createAssets">
+      <input message="tns:MediaAsset_createAssets"/>
+      <output message="tns:MediaAsset_createAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="createGroups" parameterOrder="createGroups">
+      <input message="tns:MediaAsset_createGroups"/>
+      <output message="tns:MediaAsset_createGroupsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="createItems" parameterOrder="createItems">
+      <input message="tns:MediaAsset_createItems"/>
+      <output message="tns:MediaAsset_createItemsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="createCategories">
+      <input message="tns:MediaAsset_createCategories"/>
+      <output message="tns:MediaAsset_createCategoriesResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="deleteAssets" parameterOrder="deleteAssets">
+      <input message="tns:MediaAsset_deleteAssets"/>
+      <output message="tns:MediaAsset_deleteAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="deleteGroups" parameterOrder="deleteGroups">
+      <input message="tns:MediaAsset_deleteGroups"/>
+      <output message="tns:MediaAsset_deleteGroupsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="deleteItems" parameterOrder="deleteItems">
+      <input message="tns:MediaAsset_deleteItems"/>
+      <output message="tns:MediaAsset_deleteItemsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="deleteCategories">
+      <input message="tns:MediaAsset_deleteCategories"/>
+      <output message="tns:MediaAsset_deleteCategoriesResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="getAssetsByAssetId" parameterOrder="getAssetsByAssetId">
+      <input message="tns:MediaAsset_getAssetsByAssetId"/>
+      <output message="tns:MediaAsset_getAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="getAssetsByExternalAssetId" parameterOrder="getAssetsByExternalAssetId">
+      <input message="tns:MediaAsset_getAssetsByExternalAssetId"/>
+      <output message="tns:MediaAsset_getAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="getAssetsByIdKey" parameterOrder="getAssetsByIdKey">
+      <input message="tns:MediaAsset_getAssetsByIdKey"/>
+      <output message="tns:MediaAsset_getAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="getCategoriesByCategoryId">
+      <input message="tns:MediaAsset_getCategoriesByCategoryId"/>
+      <output message="tns:MediaAsset_getCategoriesResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="getCategoriesByIdKey">
+      <input message="tns:MediaAsset_getCategoriesByIdKey"/>
+      <output message="tns:MediaAsset_getCategoriesResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="searchItems" parameterOrder="searchItems">
+      <input message="tns:MediaAsset_searchItems"/>
+      <output message="tns:MediaAsset_searchItemsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="updateAssets" parameterOrder="updateAssets">
+      <input message="tns:MediaAsset_updateAssets"/>
+      <output message="tns:MediaAsset_updateAssetsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="updateGroups" parameterOrder="updateGroups">
+      <input message="tns:MediaAsset_updateGroups"/>
+      <output message="tns:MediaAsset_updateGroupsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="updateItems" parameterOrder="updateItems">
+      <input message="tns:MediaAsset_updateItems"/>
+      <output message="tns:MediaAsset_updateItemsResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+    <operation name="updateCategories">
+      <input message="tns:MediaAsset_updateCategories"/>
+      <output message="tns:MediaAsset_updateCategoriesResponse"/>
+      <fault name="WSException" message="tns:WSException"/>
+    </operation>
+  </portType>
+  <binding name="MediaManagementBinding" type="tns:MediaManagementApi">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="createAssets">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="createGroups">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="createItems">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="createCategories">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="deleteAssets">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="deleteGroups">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="deleteItems">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="deleteCategories">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getAssetsByAssetId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getAssetsByExternalAssetId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getAssetsByIdKey">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getCategoriesByCategoryId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="getCategoriesByIdKey">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="searchItems">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="updateAssets">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="updateGroups">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="updateItems">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="updateCategories">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSException">
+        <soap:fault name="WSException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="MediaManagementService">
+    <port name="MediaMngServiceImplPort" binding="tns:MediaManagementBinding">
+      <soap:address location="http://144.229.209.145:8081/repository/service"/>
+      <!-- <soap:address location="http://localhost:port/service"/> -->
+    </port>
+  </service>
+</definitions>

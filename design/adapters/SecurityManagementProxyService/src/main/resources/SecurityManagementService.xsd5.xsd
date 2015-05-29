@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="http://integration.sprint.com/interfaces/updateEmailPassword/v1/updateEmailPassword.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/updateEmailPassword/v1/updateEmailPassword.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!--Date                                        Changed by             Version    Change description                                                          Project-->
+	
+<!--05/04/2009                              Ibrahim ElKhatib       1.0            Draft Interface for SMTP set/change Password             E4418-->
+	
+<!--05/04/2009                             Steve Heichelheim    1.0           Apply standards and simple types                                  E4418-->
+	
+<xs:element name="updateEmailPassword" type="UpdateEmailPasswordType"/>
+	
+<xs:element name="updateEmailPasswordResponse" type="UpdateEmailPasswordResponseType"/>
+	
+<xs:complexType name="UpdateEmailPasswordType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nai" type="NetworkAccessIdentifier">
+				
+<xs:annotation>
+					
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="password" type="PasswordString">
+				
+<xs:annotation>
+					
+<xs:documentation>Email Password</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdateEmailPasswordResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="ConfirmMessageTextType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+			
+<xs:documentation>alias: URI</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+			
+<xs:minLength value="1"/>
+			
+<xs:pattern value=".+@.+\..+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PasswordString">
+		
+<xs:annotation>
+			
+<xs:documentation>Password String holds the string characters a Party designated as a Password into a system or Customer Account.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Msg Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

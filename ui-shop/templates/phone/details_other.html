@@ -1,0 +1,20 @@
+<section class="tabs">
+  <div role="tabpanel" class="maintabs">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="{{phoneController.details.selectedTab=='features'?'active':''}}"><a href="{{pathMap._phoneDetails._hash}}{{phoneController.details.data.id}}/features/">Features &amp; Specs</a></li>
+      <li role="presentation" class="{{phoneController.details.selectedTab=='plans'?'active':''}}"><a href="{{pathMap._phoneDetails._hash}}{{phoneController.details.data.id}}/plans/">Plans</a></li>
+      <li role="presentation" class="{{phoneController.details.selectedTab=='Reviews'?'active':''}}"></li>
+    </ul>
+    <div class="tab-content">
+      <phone-details-features></phone-details-features>
+      <div class="tab-pane {{phoneController.details.selectedTab=='plans'?'active':''}}" ng-bind-html="phoneController.details.planPage"></div> 
+      <div class="tab-pane {{phoneController.details.selectedTab=='reviews'?'active':''}}">
+        <div class="col-md-12" style="padding-left:30px;padding-top:10px;padding-bottom:10px">
+          <div style="display:none" id="detailId">{{phoneController.details.data.selectedVariant.sku}}</div>
+          <iframe style="width:100%;height:100%;border:0;" src="templates/phone/review.html?id=MOT1526BBB" id="reviewFrame" frameborder="0" scrolling="no" onload="this.ready=true"></iframe>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

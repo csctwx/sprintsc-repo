@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryBillingSystemCode/v1/queryBillingSystemCode.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://integration.sprint.com/interfaces/queryBillingSystemCode/v4/queryBillingSystemCodeV4.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryBillingSystemCode/v4/queryBillingSystemCodeV4.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version=" 1.0">
+	
+<!-- Date              Author                   Change                                                                                                                     Rel                  SR# -->
+	
+<!--10/09/2009  Steve Heichelheim  1.0  applied MVM standards and simple types                                                         GBL 10.2   E4433/PJ000173-->
+	
+<xs:element name="queryBillingSystemCodeV4" type="ns1:QueryBillingSystemCodeTypeV4"/>
+	
+<xs:element name="queryBillingSystemCodeV4Response" type="ns1:QueryBillingSystemCodeResponseTypeV4"/>
+	
+<xs:complexType name="QueryBillingSystemCodeTypeV4">
+		
+<xs:choice>
+			
+<xs:element name="mdn" type="ns1:MobileDirectoryNumberString">
+				
+<xs:annotation>
+					
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="ns1:BillingAccountNumberEns"/>
+			
+<xs:element name="nai" type="ns1:NetworkAccessIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Any valid NAI for subscriber that represent CDMA platform. NAI validation rules should be there. Validate NAI to be of username@domain syntax. Domain should be of form "str1.str2" .</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberId" type="ns1:SubscriptionIdentifierEns">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="deviceInfo" type="ns1:DeviceInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>IMEI, SIM, MSN, ESN or macId (Airave) number of subscriber. Can be esn decimal or esn in hexadecimal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="QueryBillingSystemCodeResponseTypeV4">
+		
+<xs:sequence>
+			
+<xs:element name="billingSystemCode" type="ns1:BillingSystemCode">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicator denoting which billing system a customer resides in</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="networkCode" type="ns1:NetworkIndicatorCode" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifier denoting the type of network on which the subscription is provisioned. 
+Valid values:
+‘C’ – CDMA
+‘I’ – iDEN
+
+Will not be returned if queried by acctNbr</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="inFlight" type="ns1:InFlightTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>The indicator to indicate whether the account/subscription is in-flight during conversion. 
+Valid values
+Y – in-flight
+N – not in-flight. 
+Will be defaulted to N</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="DeviceInfoType">
+		
+<xs:choice>
+			
+<xs:element name="esnMeidHex" type="ns1:DeviceSerialNumberHex">
+				
+<xs:annotation>
+					
+<xs:documentation>Serial number of the device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="esnMeidDec" type="ns1:DeviceSerialNumberDec">
+				
+<xs:annotation>
+					
+<xs:documentation>Serial number of the device.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="macId" type="ns1:MediumAccessControlAddressType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique Media Access Control Address identifier for Airave devices (Femtocell)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingSystemCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing System Code is a 3 byte indicator denoting which billing system is initiating the transaction
+Valid values:
+ENS - Ensemble
+ENW - Ensemble Wholesale
+P2W - Convergys Wholesale</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="ENS"/>
+			
+<xs:enumeration value="ENW"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberDec">
+		
+<xs:annotation>
+			
+<xs:documentation>A Device Serial Number Decimal is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in decimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="11"/>
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DeviceSerialNumberHex">
+		
+<xs:annotation>
+			
+<xs:documentation>A Device Serial Number Hex is the value of a electronic serial number OR Mobile Equipment Identifier(MEID) in hexidecimal format.  This type should be used when it is not known what type the serial number is.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="8"/>
+			
+<xs:maxLength value="14"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MediumAccessControlAddressType">
+		
+<xs:annotation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+			
+<xs:documentation>alias: MAC ID</xs:documentation>
+			
+<xs:documentation>alias: Media Access Control Identifcation</xs:documentation>
+			
+<xs:documentation>Medium Access Control Address (MAC Address) contains a 12 byte hexadecimal value used to identify a device used in the IEEE sublayer of a network which controls access to the shared medium by network-attached devices. 
+
+In the context of the OSI reference model, the Medium Access Control (MAC) layer extends above to the Data Link Layer and below to the Physical Layer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="12"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberString">
+		
+<xs:annotation>
+			
+<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkAccessIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NetworkIndicatorCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+			
+<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="I"/>
+			
+<xs:enumeration value="B"/>
+			
+<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierEns">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<xs:simpleType name="InFlightTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>In Flight Type Code designates the state of the associated account or subscription's in flight status during conversion.
+true - account or subscription is in flight during conversion
+false - account or subscrption is not in flight during conversion</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+			
+<xs:enumeration value="Y"/>
+			
+<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

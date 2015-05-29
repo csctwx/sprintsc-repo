@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceAffinityList/v1/queryReferenceAffinityList.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceAffinityList/v1/queryReferenceAffinityList.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2008    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceAffinityList" type="tns:QueryReferenceAffinityListRequest"/>
+	
+<xs:element name="queryReferenceAffinityListResponse" type="tns:QueryReferenceAffinityListResponse"/>
+	
+<xs:complexType name="QueryReferenceAffinityListResponse">
+		
+<xs:sequence>
+			
+<xs:element name="affinityList" type="tns:AffinityList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceAffinityListRequest"/>
+	
+<xs:complexType name="AffinityInfo">
+		
+<xs:sequence>
+			
+<xs:element name="affinityCode" type="tns:AffinityCode"/>
+			
+<xs:element name="affinityDesc" type="tns:AffinityDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AffinityList">
+		
+<xs:sequence>
+			
+<xs:element name="affinityInfo" type="tns:AffinityInfo" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="AffinityCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Code is a unique identifier associated with Affinity program.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="AffinityDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Affinity Description is text describing an Affinity program.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceUfpEligibility/v1/queryReferenceUfpEligibility.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceUfpEligibility/v1/queryReferenceUfpEligibility.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!--4/2/2012   Amber Peppers                  Initial                                                 1.0                        MID12.2	          PJ006747 -->
+	
+<!--04/04/2012   Steve Heichelheim    1.0 Added MVM standards and simple types                      MID12.2          PJ006747 -->
+	
+<xs:element name="queryReferenceUfpEligibility" type="tns:QueryReferenceUfpEligibilityType">
+		
+<xs:annotation>
+			
+<xs:documentation>UFP - Upgrade Frequency Program</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	
+<xs:element name="queryReferenceUfpEligibilityResponse" type="tns:QueryReferenceUfpEligibilityResponseType"/>
+	
+<xs:complexType name="QueryReferenceUfpEligibilityType"/>
+	
+<xs:complexType name="QueryReferenceUfpEligibilityResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="ufpEligibilityList" type="tns:AccountTypeListType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>1 to many (unbounded)  ufpEligibilityInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountTypeInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Represents the type of account </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Code further categorizes the Billing Account within the context of the assigned Billing Account Type </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="corpId" type="tns:CorporationIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique corporation ID.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="noOfMonths" type="tns:UpgradeRemainingMonthsType">
+				
+<xs:annotation>
+					
+<xs:documentation>The number of months until customer UFP eligibility.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AccountTypeListType">
+		
+<xs:sequence>
+			
+<xs:element name="ufpEligibilityInfo" type="tns:AccountTypeInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>1 to many (unbounded)  ufpEligibilityInfo structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountSubTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BillingAccountTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Type Code identifies the account type of the BILLING ACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CorporationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Corporation Identifer uniquely identifies a corporate entity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UpgradeRemainingMonthsType">
+		
+<xs:annotation>
+			
+<xs:documentation>Upgrade Remaining Months is the number of months remaining until the upgrade frequency period is over. </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

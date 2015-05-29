@@ -1,0 +1,138 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.ericsson.sprint</groupId>
+  <artifactId>eai-sync</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Sprint Self-Care :: Project</name>
+  
+  
+  <description>EAI Syncronization part of Sprint Self-Care Portal</description>
+	<url>https://eforge.ericsson.se/sf/go/projects.sprint_selfcare</url>
+	<inceptionYear>2015</inceptionYear>
+	<organization>
+		<name>Ericsson Canada Inc</name>
+		<url>http://www.ericsson.com</url>
+	</organization>
+	
+	
+	<build>
+	    <resources>
+	      <resource>
+	        <directory>src/main/resources</directory>
+	        <excludes>
+	          <exclude>**/*.xml</exclude>
+	          <exclude>**/*.properties</exclude>
+	        </excludes>
+	      </resource>
+   		 </resources>
+		<defaultGoal>install</defaultGoal>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.2</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<!-- Build an executable JAR -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+				<excludes>
+            		<exclude>**/resources/*</exclude>
+          		</excludes>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.ericsson.cac.sprint.eai.sync.EaiSyncManager</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+		   </plugin>
+			<plugin> 
+                    <artifactId>maven-dependency-plugin</artifactId> 
+                        <executions> 
+                            <execution> 
+                                <phase>install</phase> 
+                                <goals> 
+                                    <goal>copy-dependencies</goal> 
+                                </goals> 
+                                <configuration> 
+                                    <outputDirectory>${project.build.directory}/lib</outputDirectory> 
+                                </configuration> 
+                            </execution> 
+                        </executions> 
+                </plugin> 
+			<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxws-maven-plugin</artifactId>
+                <version>1.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wsimport</goal>
+                        </goals>
+                        <configuration>
+							<wsdlDirectory>${basedir}/src/main/resources</wsdlDirectory>
+                            <wsdlFiles>
+                                <wsdlFile>mngapi-v3.wsdl</wsdlFile>
+                                <wsdlFile>search-v2.1.wsdl</wsdlFile>
+                            </wsdlFiles>
+<!-- 							<packageName>com.ericsson.sprint.cac</packageName> -->
+                            <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                            <destDir>${basedir}/src/main/java</destDir>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin> 
+		</plugins>		
+	</build>
+	<repositories>
+		<repository>
+			<id>apache-snapshots</id>
+			<name>Apache SNAPSHOT Repository</name>
+			<url>http://repository.apache.org/snapshots/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>com.ericsson.cac.sprint.adapters</groupId>
+  			<artifactId>order-fulfillment-proxy</artifactId>
+  			<version>0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>4.1.1.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.7</version>
+		</dependency>
+	</dependencies>
+	
+	
+</project>

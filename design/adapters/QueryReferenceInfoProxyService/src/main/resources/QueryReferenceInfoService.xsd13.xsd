@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceMarketInfo/v1/queryReferenceMarketInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	    CS#325358 -->
+	
+<xs:element name="queryReferenceMarketInfo" type="tns:QueryReferenceMarketInfoRequest"/>
+	
+<xs:element name="queryReferenceMarketInfoResponse" type="tns:QueryReferenceMarketInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceMarketInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="marketInfo" type="tns:MarketInfoResponse" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceMarketInfoRequest">
+		
+<xs:sequence>
+			
+<xs:element name="marketInfo" type="tns:MarketInfo"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketCsaInfo">
+		
+<xs:sequence>
+			
+<xs:element name="csa" type="tns:CommunicationServiceArea">
+				
+<xs:annotation>
+					
+<xs:documentation>CSA_SUBMARKET.CSA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="csaDesc" type="tns:CommunicationServiceAreaDescription" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>CSA_SUBMARKET.CSA_DESCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketCsaList">
+		
+<xs:sequence>
+			
+<xs:element name="csaInfo" type="tns:MarketCsaInfo" minOccurs="0" maxOccurs="100">
+				
+<xs:annotation>
+					
+<xs:documentation>select effective record from CSA_SUBMARKET where SUB_MARKET is input submarket</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketInfo">
+		
+<xs:sequence>
+			
+<xs:element name="marketCode" type="tns:SubMarketCode"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="MarketInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="businessEntity" type="tns:SprintBusinessEntityIdentifier" minOccurs="0"/>
+			
+<xs:element name="marketCode" type="tns:SubMarketCode"/>
+			
+<xs:element name="marketName" type="tns:SubMarketName"/>
+			
+<xs:element name="marketType" type="tns:MarketTypeCode"/>
+			
+<xs:element name="subMarketList" type="tns:SubMarketList" minOccurs="0"/>
+			
+<xs:element name="csaList" type="tns:MarketCsaList" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Return this list only if marketType above is S - Sub Market</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubMarketInfo">
+		
+<xs:sequence>
+			
+<xs:element name="subMarketCode" type="tns:SubMarketCode" minOccurs="0"/>
+			
+<xs:element name="subMarketName" type="tns:SubMarketName" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubMarketList">
+		
+<xs:sequence>
+			
+<xs:element name="subMarketInfo" type="tns:SubMarketInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="Charge">
+		
+<xs:annotation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+			
+<xs:documentation>Charge represents a dollar amount billed to the Customer for a GOOD or SERVICE.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:decimal">
+			
+<xs:totalDigits value="9"/>
+			
+<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CommunicationServiceArea">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Identifier uniquely identifies an instance of a geographic area (CSA) served by a communication service provider, which can be broken down into regional, metropolitan, district and smaller sections called ''leaves.''</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SprintBusinessEntityIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation/>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketCode">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!--     New Simple Types-->
+	
+<xs:simpleType name="CommunicationServiceAreaDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>Communication Service Area Description describes a CSA.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MarketTypeCode">
+		
+<xs:annotation>
+			
+<xs:documentation>Market Type Code designates whether the associated market is a market or sub-market.
+M - Market
+S - Sub Market</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:enumeration value="M">
+				
+<xs:annotation>
+					
+<xs:documentation>Market</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			
+<xs:enumeration value="S">
+				
+<xs:annotation>
+					
+<xs:documentation>Sub-Market</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubMarketName">
+		
+<xs:annotation>
+			
+<xs:documentation>Sub Market Name is the common name associated to the sub-market code.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

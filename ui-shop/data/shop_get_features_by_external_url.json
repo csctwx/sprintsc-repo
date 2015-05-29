@@ -1,0 +1,333 @@
+{
+	"responses": {
+		"response": [{
+			"@uuid": "123845b8-b51b-4343-be90-3200d774cf58",
+			"@class": "",
+			"@name": "Section 19029",
+			"@code": "0",
+			"getFeaturesResponse": {
+				"phoneFeatures": {
+					"generalFeatures": [{
+						"title": {
+							"$": "AndroidT 4.0"
+						},
+						"description": {
+							"$": "AndroidT 4.0 Ice Cream Sandwich platform including access to Android MarketT with thousands of the hottest apps, games and widgets. Plus seamless integration with Google apps like GmailT, Contacts, Calendar and Google MapsT."
+						},
+						"type": {
+							"$": "android"
+						}
+					},
+					{
+						"title": {
+							"$": "4.5\" Display w\/Gorilla Glass 3"
+						},
+						"description": {
+							"$": "Featuring the sharpest display in its class, you'll experience the Web, apps and pictures like never before."
+						},
+						"type": {
+							"$": "display"
+						}
+					},
+					{
+						"title": {
+							"$": "3.2MP LED Flash Camera & Camcorder"
+						},
+						"description": {
+							"$": "Capture amazing pictures and video power with this 3.2 megapixel camera and camcorder. "
+						},
+						"type": {
+							"$": "camera"
+						}
+					},
+					{
+						"title": {
+							"$": "Nationwide Sprint® 3G Network"
+						},
+						"description": {
+							"$": "Fast surfing, messaging, downloading—that's the power of 3G."
+						},
+						"type": {
+							"$": "3g"
+						}
+					},
+					{
+						"title": {
+							"$": "Bluetooth®"
+						},
+						"description": {
+							"$": "Enables hands-free, short-range wireless communication using a Bluetooth headset and wireless uploading\/downloading to or from a computer and more."
+						},
+						"type": {
+							"$": "bluetooth"
+						}
+					},
+					{
+						"title": {
+							"$": "Video"
+						},
+						"description": {
+							"$": "Interesting things happen when you least expect them. You can capture these unexpected moments with short video clips that you can view, store and send to friends and family.  "
+						},
+						"type": {
+							"$": "video"
+						}
+					},
+					{
+						"title": {
+							"$": "Mobile Hotspot"
+						},
+						"description": {
+							"$": "This is hot! Your phone doubles as a personal portable hotspot and lets you connect to any Wi-Fi device. Additional fee required for hotspot functionality."
+						},
+						"type": {
+							"$": "mobilehotspot"
+						}
+					},
+					{
+						"title": {
+							"$": "Messaging (Text & Email)"
+						},
+						"description": {
+							"$": "Silent, fast and easy communication is at your fingertips on this text and email-capable device"
+						},
+						"type": {
+							"$": "messaging"
+						}
+					},
+					{
+						"title": {
+							"$": "Environmental Certification"
+						},
+						"description": {
+							"$": "Certified by the independent UL Environment, this phone contains environmentally-preferable materials with a minimal environmental impact. <a href=\"javascript:appUtil.showDialog({title:'ULE Environment Score',contentTag:'#uleContent'})\">More info<\/a>"
+						},
+						"type": {
+							"$": "ule"
+						},
+						"ule": {
+							"average": {
+								"$": "3"
+							},
+							"items": {
+								"entry": [{
+									"key": {
+										"$": "manufacturing"
+									},
+									"value": {
+										"$": "3"
+									}
+								},
+								{
+									"key": {
+										"$": "packaging"
+									},
+									"value": {
+										"$": "3.5"
+									}
+								},
+								{
+									"key": {
+										"$": "eol"
+									},
+									"value": {
+										"$": "3.5"
+									}
+								},
+								{
+									"key": {
+										"$": "health"
+									},
+									"value": {
+										"$": "0.5"
+									}
+								},
+								{
+									"key": {
+										"$": "energy"
+									},
+									"value": {
+										"$": "4"
+									}
+								},
+								{
+									"key": {
+										"$": "material"
+									},
+									"value": {
+										"$": "1.5"
+									}
+								}]
+							}
+						}
+					}],
+					"technicalFeatures": {
+						"os": {
+							"$": "Android™ 4.0"
+						},
+						"processor": {
+							"$": "1.0 Ghz Dual Core"
+						},
+						"memory": {
+							"$": "4GB ROM \/ 512MB RAM"
+						},
+						"group": [{
+							"@id": "dimensions",
+							"order": {
+								"$": "1"
+							},
+							"specs": {
+								"spec": [{
+									"@order": "1",
+									"@type": "height",
+									"$": "4.5\""},{"@order":"2","@type":"depth","$":"0.4\""
+								},
+								{
+									"@order": "3",
+									"@type": "width",
+									"$": "2.4\""},{"@order":"4","@type":"weight","$":"4.1oz."},{"@order":"5","@type":"screen_size","$":"3.5\" Capacitive Touchscreen Display"
+								}]
+							}
+						},
+						{
+							"@id": "battery",
+							"order": {
+								"$": "2"
+							},
+							"specs": {
+								"spec": [{
+									"@order": "2",
+									"@type": "talking_time",
+									"$": "8.7 Hours"
+								},
+								{
+									"@order": "1",
+									"@type": "battery_type",
+									"$": "1500 mAH Lithium Ion Battery"
+								},
+								{
+									"@order": "3",
+									"@type": "removable",
+									"$": "N\/A"
+								}]
+							}
+						},
+						{
+							"@id": "whats_included",
+							"order": {
+								"$": "3"
+							},
+							"specs": {
+								"spec": [{
+									"@order": "1",
+									"@type": "regular",
+									"$": "Kyocera Event Handset"
+								},
+								{
+									"@order": "2",
+									"@type": "regular",
+									"$": "1500 mAH Lithium Ion Battery"
+								},
+								{
+									"@order": "3",
+									"@type": "regular",
+									"$": "Wall Charger"
+								},
+								{
+									"@order": "4",
+									"@type": "regular",
+									"$": "Printed Materials"
+								}]
+							}
+						}]
+					},
+					"specialFeatures": [{
+						"title": {
+							"$": "GPS Navigation"
+						},
+						"description": {
+							"$": "Blaze new trails with satellite-guided, turn-by-turn directions."
+						}
+					},
+					{
+						"title": {
+							"$": "Apps & Social Networking"
+						},
+						"type": {
+							"$": "appsandsocial"
+						}
+					},
+					{
+						"title": {
+							"$": "Wi-Fi® enabled"
+						}
+					},
+					{
+						"title": {
+							"$": "Web"
+						},
+						"type": {
+							"$": "web-browser"
+						}
+					},
+					{
+						"title": {
+							"$": "Eco-Mode"
+						},
+						"description": {
+							"$": "Eco-Mode"
+						}
+					},
+					{
+						"title": {
+							"$": "Swype Keyboard"
+						},
+						"description": {
+							"$": "Enter words super fast by just gliding your finger over the keys. Amazing."
+						}
+					},
+					{
+						"title": {
+							"$": "MagniFont"
+						},
+						"description": {
+							"$": "MagniFont"
+						}
+					},
+					{
+						"title": {
+							"$": "Linked Contacts"
+						}
+					},
+					{
+						"title": {
+							"$": "Hearing Aid Compatibility"
+						}
+					},
+					{
+						"title": {
+							"$": "Commercial Mobile Alert System"
+						},
+						"description": {
+							"$": "Commercial Mobile Alert System"
+						}
+					}],
+					"specifationImage": {
+						"fileName": {
+							"$": "specifications"
+						},
+						"uRI": {
+							"$": "http:\/\/media-vip:8081\/repository\/store\/P-d0avx1PuX34\/j\/d\/g\/specifications.png?action=access&assetId=A-Xbg6XVKM1TW"
+						}
+					}
+				},
+				"status": {
+					"$": "0"
+				},
+				"description": {
+					"$": "SUCCESS"
+				}
+			}
+		}]
+	}
+}

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/queryReferenceHppttDomainInfo/v1/queryReferenceHppttDomainInfo.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/queryReferenceHppttDomainInfo/v1/queryReferenceHppttDomainInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                           Version                         Rel                  SR# -->
+	
+<!-- 23/06/2009    Sudheer Kukkala      Changed namespace from xsd to xs         1.0                        GBL09.2	      CS#325358 -->
+	
+<xs:element name="queryReferenceHppttDomainInfo" type="tns:QueryReferenceInfoHppttDomainRequest"/>
+	
+<xs:element name="queryReferenceHppttDomainInfoResponse" type="tns:QueryReferenceHppttDomainInfoResponse"/>
+	
+<xs:complexType name="QueryReferenceHppttDomainInfoResponse">
+		
+<xs:sequence>
+			
+<xs:element name="hppttDomainList" type="tns:HppttDomainList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryReferenceInfoHppttDomainRequest"/>
+	
+<xs:complexType name="HppttDomainInfo">
+		
+<xs:sequence>
+			
+<xs:element name="domainCode" type="tns:HighPerformancePushToTalkDomainCode"/>
+			
+<xs:element name="domainName" type="tns:HighPerformancePushToTalkDomainName"/>
+			
+<xs:element name="internationalInd" type="tns:HighPerformancePushToTalkInternationalFlag"/>
+			
+<xs:element name="restrictionNumber" type="tns:RestrictionIdentifier"/>
+			
+<xs:element name="domainDesc" type="tns:HighPerformancePushToTalkDomainDescription"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="HppttDomainList">
+		
+<xs:sequence>
+			
+<xs:element name="hppttDomainInfo" type="tns:HppttDomainInfo" maxOccurs="600"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!--     MVM Simple Types-->
+	
+<xs:simpleType name="FetchInformationFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkDomainCode">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Domain Code is an abbreviated identifier of a HPPTT Domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkDomainDescription">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Domain Description is text describing a specific HPPTTdomain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkDomainName">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk domain name is the name associated with a HPPTT domain.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkInternationalFlag">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk International Flag indicates whether the HPPTT domain is international or domestic.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="tns:IdentifierString">
+			
+<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RestrictionIdentifier">
+		
+<xs:annotation>
+			
+<xs:documentation>Restiction Identifier is the serial number for the order in which the restriction will be processed.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="IdentifierString">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://integration.sprint.com/interfaces/submitEquipmentPurchaseOrder/v1/submitEquipmentPurchaseOrder.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/submitEquipmentPurchaseOrder/v1/submitEquipmentPurchaseOrder.xsd">
+  <!--Date              Author                   Version    Change                                                                                                 Rel                   SR#-->
+  <!--08/06/2012  Steve Heichelheim    1.0      Initial version.  Added MVM standards and simple types.                      GBL12.3 PJ007442-->
+  <!--10/29/2012  Subha Kannan    1.1      Added new structure lifeLineInfo in orderInfo  to support GBL13.1 PJ007219-->
+  <!--06/02/2014  Nayanika Dey     1.2      Added new element "shippingTypeCode" in shippingInfo to fix Prod issue IM2394400 (Incorrect shipping type/vendor used for VMU Web orders).-->
+  <!--Updated the paymentCardHolderName min length from 5 to 2.-->
+  <!--06/03/2014 Adon Powell        1.2  standardize  add shipmentmethodidentifiertype, update cardholdername length              IM2394400 MAINT-->
+  <!--06/10/2014 Adon Powell        1.2  change PaymentCardHolderNameType min length back to 5             IM2394400 MAINT-->
+  <!--10/27/2014 Suresh Gundu     1.3  Added eppPaymentInfo structure, eppPaymentId and informationalRuleFailureReason element to authorizationInfo structure and taxTransactionInfo structure to the equipmentOrderLineInfo structure in the Request.		GBL 15.1	PJ012171-->
+  <!--11/13/2014 Adon Powell        1.3  standardize GBL 15.1 PJ012171-->
+  <!--11/17/2014 Suresh Gundu     1.4  Made paymentCardNumber and paymentCardSecurityCode optional, renamed informationalRuleFailureReason structure to businessRuleFailureList and businessRuleFailures strutcure to businessRuleFailureInfo.		GBL 15.1	PJ012171-->
+  <!--11/18/2014 Suresh Gundu     1.5  Made the paymentCardNumber and paymentCardSecurityCode elements optional.		GBL 15.1	PJ012171-->
+  <!--12/04/2014 Suresh Gundu     1.5  Added optional elements externalOrderId and globalTokenId to the eppPaymentInfo strutcure.		GBL 15.1	PJ012171-->
+  <!--12/04/2014 Adon Powell        1.5  standardize GBL 15.1 PJ012171-->
+  <!---->
+  <xs:element name="submitEquipmentPurchaseOrder" type="tns:SubmitEquipmentPurchaseOrderRequestType"/>
+  <xs:element name="submitEquipmentPurchaseOrderResponse" type="tns:SubmitEquipmentPurchaseOrderResponseType"/>
+  <!---->
+  <xs:complexType name="SubmitEquipmentPurchaseOrderRequestType">
+    <xs:sequence>
+      <xs:element name="callingApplicationInfo" type="tns:CallingApplicationInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure provide calling application informatiom</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orderInfo" type="tns:OrderInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure contains Order information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="shippingInfo" type="tns:ShippingInfoType">
+        <xs:annotation>
+          <xs:documentation>Customer Shipping information including name, address, phone numbers, email address, etc</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="billinginfo" type="tns:BillingInfoType">
+        <xs:annotation>
+          <xs:documentation>Customer billing information including name, address, phone numbers, email address, etc</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="devicePaymentInfo" type="tns:DevicePaymentInfoType">
+        <xs:annotation>
+          <xs:documentation>This structure defines the fields for the device Payments</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <!--Email Address for eBill option.-->
+      <xs:element name="orderLineInfo" type="tns:OrderLineInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing orderLines. each orderline can be device or accessory</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <!--Activation request message.-->
+  </xs:complexType>
+  <xs:complexType name="SubmitEquipmentPurchaseOrderResponseType">
+    <xs:sequence>
+      <xs:element name="fastOrderkey" type="tns:FastOrderKeyIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Fast order key – returned for an asynchronous response</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!---->
+  <xs:complexType name="AccountInfoType">
+    <xs:choice>
+      <xs:element name="ban" type="tns:BillingAccountNumberType">
+        <xs:annotation>
+          <xs:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+        <xs:annotation>
+          <xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Subscriber Identifier</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="AccountTypeInfoType">
+    <xs:sequence>
+      <xs:element name="accountType" type="tns:BillingAccountTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>Describes the account type.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="accountSubType" type="tns:BillingAccountSubTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>Describes the account subtype.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddressInfoType">
+    <xs:sequence>
+      <xs:element name="streetAddress1" type="tns:PrimaryAddressLineType">
+        <xs:annotation>
+          <xs:documentation>Street Address1</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="streetAddress2" type="tns:SecondaryAddressLineType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Street Address 2</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="city" type="tns:CityNameType">
+        <xs:annotation>
+          <xs:documentation>City</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="state" type="tns:UspsStateAbbreviationType">
+        <xs:annotation>
+          <xs:documentation>State</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="zipCode" type="tns:UspsPostalCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>zipCode</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AuthorizationInfoType">
+    <xs:sequence>
+      <xs:element name="authorizationCode" type="tns:PaymentCardAuthorizationCodeType">
+        <xs:annotation>
+          <xs:documentation>Provide the successfull payment authorization code for device purchase</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="authorizationResponseDate" type="tns:AuthorizationDateType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Provide the authorizarion approval date,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="eppPaymentId" type="tns:ExternalSystemReferenceNumberType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Payment ID returned by EPP during an Authorization.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="businessRuleFailureList" type="tns:BusinessRuleFailureList" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>business rule failure List</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BillingInfoType">
+    <xs:sequence>
+      <xs:element name="nameInfo" type="tns:NameInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing Customer Name inforamtion</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="emailAddress" type="tns:EmailAddressStringType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Customers email Address</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="phoneNumberInfo" type="tns:PhoneNumberInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure containing Phone Number informatiom</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:element name="addressInfo" type="tns:AddressInfoType">
+          <xs:annotation>
+            <xs:documentation>Structure Containing Customer Address information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="cloneShippingAddressInd" type="tns:BinaryExpressionType">
+          <xs:annotation>
+            <xs:documentation>Indicate that billing Address is the same as shipping address</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CallingApplicationInfoType">
+    <xs:sequence>
+      <xs:element name="vendorCode" type="tns:VendorCodeType">
+        <xs:annotation>
+          <xs:documentation>Combination of vendorCode and pin is used to differentiate the calling system (channel).</xs:documentation>
+        </xs:annotation>
+        <!--Vendor code is a 2 letter code.-->
+      </xs:element>
+      <xs:element name="orderId" type="tns:PurchaseOrderNumberType">
+        <xs:annotation>
+          <xs:documentation>Order Identifier uniquely identifies a Equipmemt Purchase Order.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="salesChannel" type="tns:SalesChannelIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Channel identifier. Indicates which sales channel the order originated from</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="storeId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Retail Store Identifer is the store ID passed from the retailer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="associateId" type="tns:AssociateIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DevicePaymentInfoType">
+    <xs:sequence>
+      <xs:element name="paymentType" type="tns:PaymentMethodTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>Payment  Type  for which the customer wishes to pay for the equipment purchase.
+CC
+PP
+RPV
+AB</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="paymentAccountInfo" type="tns:PaymentAccountInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure Containing Payment Card Inforamtion or Paypal Info</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="authorizationInfo" type="tns:AuthorizationInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure contains payment authorization info</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="registeredPaymentInfo" type="tns:RegisteredPaymentInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure containing Registered Payment Vehicle information for VMU</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="eppPaymentInfo" type="tns:EppPaymentInfoType" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EquipmentOrderLineInfoType">
+    <xs:sequence>
+      <xs:element name="orderLineId" type="tns:OrderLineItemNumberType">
+        <xs:annotation>
+          <xs:documentation>Uniquely identifies each distinct order line. The order Line Id should start with value ‘1’</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="modelId" type="tns:ModelNumberType">
+        <xs:annotation>
+          <xs:documentation>Ensemble item id (model sku), required for equipment purchase order lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="modelPrice" type="tns:PriceAmountType">
+        <xs:annotation>
+          <xs:documentation>Required for equipment purchase order lines.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="equipmentTaxAmt" type="tns:TaxAmountType">
+        <xs:annotation>
+          <xs:documentation>Required tax amount at order line</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="accessoryInd" type="tns:BinaryExpressionType">
+        <xs:annotation>
+          <xs:documentation>Indicate the orderLine is device or accessory.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="taxTransactionInfo" type="tns:TaxTransactionInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>tax transaction info structure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EquipmentOrderLineListType">
+    <xs:sequence>
+      <xs:element name="equipmentOrderLineInfo" type="tns:EquipmentOrderLineInfoType" maxOccurs="50">
+        <xs:annotation>
+          <xs:documentation>Equipment Order Line Structure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NameInfoType">
+    <xs:sequence>
+      <xs:element name="firstName" type="tns:FirstNameType">
+        <xs:annotation>
+          <xs:documentation>First Name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="middleInitial" type="tns:MiddleInitialType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Middle Initial</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="lastName" type="tns:LastNameType">
+        <xs:annotation>
+          <xs:documentation>Last Name</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderInfoType">
+    <xs:sequence>
+      <xs:element name="orderTypeCode" type="tns:OrderTypeCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Order Type Code identifies what  type of order. The  default value will be EQP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orderDate" type="tns:OrderEntryDateTimeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Order Entry Date holds the date the Order was entered into the system.</xs:documentation>
+        </xs:annotation>
+        <!--The date/time that the order was created by the customer.  
+					Format is "CCYY-MM-DDThh:mm:ss"  (T is the date/time separator).-->
+      </xs:element>
+      <xs:element name="dealerCode" type="tns:DealerIdentifierType">
+        <xs:annotation>
+          <xs:documentation>The agent code identifies specific area specific “dealer” both external or internal that is responsible and should get credit for the associated transaction.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="accountInfo" type="tns:AccountInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Account Information for existing customer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="accountTypeInfo" type="tns:AccountTypeInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containg account  type and sub type</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="preOrderInd" type="tns:BinaryExpressionType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>This represent  if the order is preOrder.  Pre-order equipment  and non-pre order equipment cannot be combined in a single order``</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="lifeLineInfo" type="tns:LifeLineInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure containing Assurance Wireless Customers lifeline pin and the handset choice</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderLineInfoType">
+    <xs:sequence>
+      <xs:element name="orderLineList" type="tns:EquipmentOrderLineListType">
+        <xs:annotation>
+          <xs:documentation>List of Equipment Order Lines</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orderSubTotalAmount" type="tns:TotalAmountType">
+        <xs:annotation>
+          <xs:documentation>Order Sub Total Amount includes atotal equipment price</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orderTaxAmount" type="tns:TotalAmountType">
+        <xs:annotation>
+          <xs:documentation>Tax amount on the order</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="orderTotalAmount" type="tns:TotalAmountType">
+        <xs:annotation>
+          <xs:documentation>Includes total equipment price and shipping price and tax amount</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PaymentAccountInfoType">
+    <xs:choice>
+      <xs:element name="paymentCardInfo" type="tns:PaymentCardInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure Containing Payment Card Inforamtion</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="paypalInfo" type="tns:PayPalInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing PayPal Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="PaymentCardInfoType">
+    <xs:sequence>
+      <xs:element name="paymentCardType" type="tns:PaymentCardTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Type Code identifies the Credit/Debit Card provider.
+Values:  V - Visa, M - MasterCard, A - Amex, D - Discover, DC - Diners Club</xs:documentation>
+        </xs:annotation>
+        <!--Credit card type.-->
+      </xs:element>
+      <xs:element name="paymentCardHolderName">
+        <xs:annotation>
+          <xs:documentation>Contains name of the Card Holder</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:PaymentCardHolderNameType"/>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="paymentCardNumber" type="tns:PaymentCardNumberType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Payment Card Number is the unique identifier assigned to the Payment Card by the issuing financial institution.</xs:documentation>
+        </xs:annotation>
+        <!--Credit card number is no longer encrypted when sent in a request.-->
+      </xs:element>
+      <xs:element name="paymentCardSecurityCode" type="tns:PaymentCardSecurityCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Payment Card Security Code holds the 3 - 5 digit code located on the back of the Credit/Debit Card.</xs:documentation>
+        </xs:annotation>
+        <!--Security code is no longer encrypted.-->
+      </xs:element>
+      <xs:element name="paymentCardExpirationDate" type="tns:PaymentCardExpirationDateType">
+        <xs:annotation>
+          <xs:documentation>Payment Card Expiration Date is last calendar date the Credit/Debit Card is valid.</xs:documentation>
+        </xs:annotation>
+        <!--Format for expiration date is "CCYY-MM"-->
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PayPalInfoType">
+    <xs:sequence>
+      <xs:element name="paypalAccountName" type="tns:AccountNameConcatenationStringType">
+        <xs:annotation>
+          <xs:documentation>Provide the  paypal account name of the csutomer.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PhoneNumberInfoType">
+    <xs:sequence>
+      <xs:element name="homeNumber" type="tns:PhoneNumberType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The customer’s home phone number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="workNumber" type="tns:WorkPhoneNumberType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>The customer’s work phone number</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegisteredPaymentInfoType">
+    <xs:sequence>
+      <xs:element name="rpvId" type="tns:RegisteredPaymentVehicleIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Provide the information on registered payment vehicle id.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="rpvPaymentType" type="tns:PaymentMethodDescriptionType">
+        <xs:annotation>
+          <xs:documentation>Provide the payment type  CC, PP</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShippingInfoType">
+    <xs:sequence>
+      <xs:element name="nameInfo" type="tns:NameInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing the name information.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="addressInfo" type="tns:AddressInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing the address information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="emailAddress" type="tns:EmailAddressStringType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>email Address</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="phoneNumberInfo" type="tns:PhoneNumberInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Phone Number Inforamation</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="shippingMethod" type="tns:ShipmentMethodCodeType">
+        <xs:annotation>
+          <xs:documentation>Shipping Method Description</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="shippingTypeCode" type="tns:ShipmentMethodIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Shipping Type is numeric code that uniquely determines the shipping method used.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="shippingFee" type="tns:ChargeAmountType">
+        <xs:annotation>
+          <xs:documentation>Shipping Fee</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LifeLineInfoType">
+    <xs:sequence>
+      <xs:element name="lifeLinePin" type="tns:LifeLinePinType">
+        <xs:annotation>
+          <xs:documentation>Assurance Wirless Customer LifeLine Pin provide by Solix.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="handsetChoice" type="tns:HandsetChoiceType" default="P">
+        <xs:annotation>
+          <xs:documentation>Handset Choice . Defaulted to 'P' for preimum handset</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!---->
+  <!--MVM/Shared Simple Types-->
+  <xs:simpleType name="AccountNameConcatenationStringType">
+    <xs:annotation>
+      <xs:documentation>Account Name Concatenation String is the concatenation of FIRST_NAME and LAST_BUSINESS_NAME from Billing Account database, with trailing spaces removed.  If the first name is blank or contains spaces, these will also be trimmed.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="5"/>
+      <xs:maxLength value="64"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AssociateIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AuthorizationDateType">
+    <xs:annotation>
+      <xs:documentation>Authorization Date represents a calendar Month, Day and Year on which the authorization took place.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+  <xs:simpleType name="BillingAccountNumberType">
+    <xs:annotation>
+      <xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BillingAccountSubTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Billing Account SubType Code further categorizes the Billing Account within the context of the assigned Billing Account Type Code used primarily for Customer segmentation in General Ledger reporting and collection treatment.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BillingAccountTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Billing Account Type Code identifies the account type of the BILLING ACCOUNT. It is used mainly for segregation of the G/L reporting and Collection treatment.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BinaryExpressionType">
+    <xs:annotation>
+      <xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="ChargeAmountType">
+    <xs:annotation>
+      <xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="4"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="CityNameType">
+    <xs:annotation>
+      <xs:documentation>City Name holds the textual string identifying a City.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DealerIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Dealer Identifier uniquely identifies the dealer who interacted with the customer on behalf of the enterprise.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EmailAddressStringType">
+    <xs:annotation>
+      <xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="100"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FastOrderKeyIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Fast Order Key Identifier is an order identifier provided by FAST Fulfillment and Activation Service Tool.  FAST is a browser-based order processing system designed to service, fulfill, and activate phone and accessory orders generated by various Nextel sales channels. The queue-based workflow allows users in different areas of the country to simultaneously process customer orders that are in different stages of the fulfillment and activation lifecycle.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="FirstNameType">
+    <xs:annotation>
+      <xs:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="32"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="InvoiceDateType">
+    <xs:annotation>
+      <xs:documentation>Invoice Date is the date on which the invoice is produced.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+  <xs:simpleType name="LastNameType">
+    <xs:annotation>
+      <xs:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xs:documentation>
+      <xs:documentation>alias: Surname</xs:documentation>
+      <xs:documentation>alias: Family Name</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+      <xs:minLength value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MiddleInitialType">
+    <xs:annotation>
+      <xs:documentation>Middle Name is effectively a second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+      <xs:documentation>Middle Initial is effectively the first letter of the second given name.  Many INDIVIDUAL PARTY's names include one or more Middle Names, placed between the first given name and the surname.   In the United States there is usually only one middle name, abbreviated by its possessor.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MobileDirectoryNumberStringType">
+    <xs:annotation>
+      <xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ModelNumberType">
+    <xs:annotation>
+      <xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+      <xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderEntryDateTimeType">
+    <xs:annotation>
+      <xs:documentation>Order Entry Date Time holds the date and time of day the Order was entered into the system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:dateTime"/>
+  </xs:simpleType>
+  <xs:simpleType name="OrderLineItemNumberType">
+    <xs:annotation>
+      <xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Order Type Code identifies the ORDER as one of the following: 
+RG - Regular
+RM - RMA</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="16"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardAuthorizationCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Authorization Code is a code issued from the Payment Card issuer that the card is valid.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="12"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardExpirationDateType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Expiration Date is last calendar date the Credit/Debit Card is valid.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:gYearMonth"/>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardHolderNameType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Member Name holds the name that appears on the Payment Card.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="64"/>
+      <xs:minLength value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardNumberType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Number is the number issued on the card.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:minLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardSecurityCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Security Code is a 3 -5  digit code issued by the card issuer as a security feature.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="5"/>
+      <xs:minLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentCardTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Card Type Code identifies the Credit/Debit Card provider.
+Examples:
+Visa
+MasterCard
+American Express</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentMethodDescriptionType">
+    <xs:annotation>
+      <xs:documentation>Payment Method Description is a textual description of the Payment Method Code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PaymentMethodTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Payment Method Code represents the unique identifier used to identify a method used to pay for services or products.
+Example values:
+CC - Credit Card
+CP  -  Check over the phone
+SP  -  Saving over the phone
+MO  -  Money order
+CK  -  Check
+CD  -  Cash on delivery
+DB  -  Debit Card
+CA - Cash
+RPV - Registered Payment Vehicle</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PhoneNumberType">
+    <xs:annotation>
+      <xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line NUmber into a single string.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PriceAmountType">
+    <xs:annotation>
+      <xs:documentation>Price Amount contains the dollar amount of the price component.  Either Price Amount or Percent will contain a value but not both for a given Price Component Indentifier.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="10"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PrimaryAddressLineType">
+    <xs:annotation>
+      <xs:documentation>The content of Primary Address Line is dependent upon the type of street.  
+
+For a street address, Primary Address Line holds the concatenation of the street components of the address.
+For a Post Office Box address, Primary Address Line holds the P.O. Box information.
+For a Rural address, Primary Address Line holds the Rural number.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PurchaseOrderNumberType">
+    <xs:annotation>
+      <xs:documentation>Purchase Order Number is a type of Order Number used to identify an instance of a PURCHASE ORDER.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="24"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RegisteredPaymentVehicleIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Registered Payment Vechile (RPV) Identifier uniquely identifies a Registered Payment Vehicle which provides prepaid customers the ability to maintain a credit/debit card or PayPal account with Sprint.  Customers can choose to keep the RPV on file to use when they choose or the customer can set up auto-payments.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:totalDigits value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RetailStoreIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+(Examples: 001859, 1165, 0649)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="7"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SalesChannelIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SecondaryAddressLineType">
+    <xs:annotation>
+      <xs:documentation>Secondary Address Line holds free text describing additional address information. Usually used for business customers.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ShipmentMethodCodeType">
+    <xs:annotation>
+      <xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.
+
+Possible types:
+"Next Day Air"</xs:documentation>
+      <xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ShipmentMethodIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Shipment Method Identifier numerically identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+      <xs:documentation>Shipment Method Code identifies the method the Carrier uses to ship the Inventory.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+      <xs:totalDigits value="3"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SubscriberIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:minLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TaxAmountType">
+    <xs:annotation>
+      <xs:documentation>Tax Amount is the monetary amount charged and collected on behalf of a government entity for taxes.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="5"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TotalAmountType">
+    <xs:annotation>
+      <xs:documentation>Total Amount is the sum of associated amounts.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransactionIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Transaction Identifier is a unique string that identifies a transaction.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:integer"/>
+  </xs:simpleType>
+  <xs:simpleType name="UspsPostalCodeType">
+    <xs:annotation>
+      <xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+      <xs:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xs:documentation>
+      <xs:documentation>alias: Ensemble: ADDR_DATA.ADR_ZIP</xs:documentation>
+      <xs:documentation>Ensemble: ADDR_DATA.ADR_ZIP
+
+The first 5 characters or digits of the address zip code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="5"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UspsStateAbbreviationType">
+    <xs:annotation>
+      <xs:documentation>United States Postal Service (USPS) State Abbreviation Code is the set of characters that are selected from a State or Protectorate name and specified by the USPS to represent the name of a State or US Protectorate for the purpose of mail delivery.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="VendorCodeType">
+    <xs:annotation>
+      <xs:documentation>Vendor Code in combination with the PIN uniquely differentiates the system
+(channel) calling Order Verification Management (Best Buy, Walmart, RMS, 
+boostmobile, SOTS, OAR’s, BSPs, Telespree, etc). Each partner has its own 
+unique vendor code and pin combination.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="WorkPhoneNumberType">
+    <xs:annotation>
+      <xs:documentation>Work Phone Number holds the telephone number given by a Party as the phone number that should be used to contact their place of employment.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LifeLinePinType">
+    <xs:annotation>
+      <xs:documentation>Assurance Wireless Customers LifeLine Pin generated by Solix.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="12"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="HandsetChoiceType">
+    <xs:annotation>
+      <xs:documentation>Assurance Wireless Handset Choice.P- Premium or F- Free Handset</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+  <!--Added 11/13/2014-->
+  <xs:complexType name="EppPaymentInfoType">
+    <xs:sequence>
+      <xs:element name="channelId" type="tns:ExternalSystemReferenceNumberType">
+        <xs:annotation>
+          <xs:documentation>EPP Channel ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="actorId" type="tns:ExternalSystemUserIdentifierType">
+        <xs:annotation>
+          <xs:documentation>EPP Actor ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tokenId" type="tns:ExternalSystemTokenKeyIdentifierType">
+        <xs:annotation>
+          <xs:documentation>EPP Token ID. Can be either the  Global Token ID or Payment Option ID or Paypal Token ID.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="tokenType" type="tns:TransactionTypeCodeType">
+        <xs:annotation>
+          <xs:documentation>EPP Token Type. Valid values are PAYPAL, WALLET or TOKEN.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="externalOrderId" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>External Order Id passed to EPP during generatePreOrderToken request.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:ExternalSystemReferenceNumberType">
+            <xs:maxLength value="36"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="globalTokenId" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>EPP Global Token ID for a credit card or bank account.</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="tns:ExternalSystemTokenKeyIdentifierType">
+            <xs:maxLength value="16"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessRuleFailureInfo">
+    <xs:sequence>
+      <xs:element name="ruleIdentifier" type="tns:RuleIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Rule ID of the failed rule</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="reasonCode" type="tns:ReasonCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Reason Code of the failed rule</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="reasonDescription" type="tns:ReasonDescriptionType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Reason Description of the failed rule</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BusinessRuleFailureList">
+    <xs:sequence>
+      <xs:element name="businessRuleFailureInfo" type="tns:BusinessRuleFailureInfo" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>business rule failure info structure</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TaxTransactionInfoType">
+    <xs:sequence>
+      <xs:element name="taxTransactionId" type="tns:TransactionIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Tax transaction ID received from ETSI response.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="invoiceDate" type="tns:InvoiceDateType">
+        <xs:annotation>
+          <xs:documentation>The date of the invoice or the current date if invoice date is not available.
+For refunds, provide the invoiceDate that was sent in the previous calculatePrepaidInvoice tax call for the payment that is being refunded.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="ExternalSystemReferenceNumberType">
+    <xs:annotation>
+      <xs:documentation>External System Reference Number is a unique number within the external system that is passed to Sprint and used for cross reference purposes.  This number is passed from Sprint back to the external system to help the external system identify an instance of a particular record in that system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="36"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalSystemTokenKeyIdentifierType">
+    <xs:annotation>
+      <xs:documentation>External System Token Key Identifier is token used to validate the identity of a a user in an external system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="36"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ExternalSystemUserIdentifierType">
+    <xs:annotation>
+      <xs:documentation>External System User Identifier contains the identifier of the person as defined in an external system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="36"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TransactionTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Transaction Type Code identifies the functionality of the transaction.
+Examples:
+Create, Read, Update or Delete (CRUD)
+(other functionalities are also acceptable)</xs:documentation>
+      <xs:documentation>Type Code differentiates the various  categories or subtypes of an Object.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="TOKEN"/>
+      <xs:enumeration value="PAYPAL"/>
+      <xs:enumeration value="WALLET"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RuleIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Rule Identifier uniquely identifies a specific rule.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ReasonCodeType">
+    <xs:annotation>
+      <xs:documentation>Reason Code represents the unique identifier of an explanation, justification or statement of motive.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="128"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ReasonDescriptionType">
+    <xs:annotation>
+      <xs:documentation>Reason Description is a natural language definition of an explanation, justification or statement of motive represented by a Reason Code.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="256"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

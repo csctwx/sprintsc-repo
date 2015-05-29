@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" targetNamespace="http://ws.drutt.com/msdp/userprofile-v2" xmlns:tns="http://ws.drutt.com/msdp/userprofile-v2" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="WSException" type="tns:WSException"/>
+
+  <xs:element name="createUserProfile" type="tns:createUserProfile"/>
+
+  <xs:element name="createUserProfileResponse" type="tns:createUserProfileResponse"/>
+
+  <xs:element name="deleteUserProfile" type="tns:deleteUserProfile"/>
+
+  <xs:element name="deleteUserProfileResponse" type="tns:deleteUserProfileResponse"/>
+
+  <xs:element name="getMeta" type="tns:getMeta"/>
+
+  <xs:element name="getMetaAsString" type="tns:getMetaAsString"/>
+
+  <xs:element name="getMetaAsStringResponse" type="tns:getMetaAsStringResponse"/>
+
+  <xs:element name="getMetaAsStrings" type="tns:getMetaAsStrings"/>
+
+  <xs:element name="getMetaAsStringsResponse" type="tns:getMetaAsStringsResponse"/>
+
+  <xs:element name="getMetaResponse" type="tns:getMetaResponse"/>
+
+  <xs:element name="getMsisdn" type="tns:getMsisdn"/>
+
+  <xs:element name="getMsisdnResponse" type="tns:getMsisdnResponse"/>
+
+  <xs:element name="getUserId" type="tns:getUserId"/>
+
+  <xs:element name="getUserIdResponse" type="tns:getUserIdResponse"/>
+
+  <xs:element name="getUserProfileInformation" type="tns:getUserProfileInformation"/>
+
+  <xs:element name="getUserProfileInformationResponse" type="tns:getUserProfileInformationResponse"/>
+
+  <xs:element name="setMeta_String" type="tns:setMeta_String"/>
+
+  <xs:element name="setMeta_StringResponse" type="tns:setMeta_StringResponse"/>
+
+  <xs:element name="setMeta_Strings" type="tns:setMeta_Strings"/>
+
+  <xs:element name="setMeta_StringsResponse" type="tns:setMeta_StringsResponse"/>
+
+  <xs:element name="setMetas" type="tns:setMetas"/>
+
+  <xs:element name="setMetasResponse" type="tns:setMetasResponse"/>
+
+  <xs:element name="setMsisdn" type="tns:setMsisdn"/>
+
+  <xs:element name="setMsisdnResponse" type="tns:setMsisdnResponse"/>
+
+  <xs:element name="setPincode" type="tns:setPincode"/>
+
+  <xs:element name="setPincodeResponse" type="tns:setPincodeResponse"/>
+
+  <xs:element name="userProfileExist" type="tns:userProfileExist"/>
+
+  <xs:element name="userProfileExistResponse" type="tns:userProfileExistResponse"/>
+  
+  
+  <!-- v2 new element start -->
+  
+  <xs:element name="deleteUserProfileById" type="tns:deleteUserProfileById"/>
+  
+  <xs:element name="deleteUserProfileByIdResponse" type="tns:deleteUserProfileByIdResponse"/>
+  
+  <xs:element name="getUserProfileInformationById" type="tns:getUserProfileInformationById"/>
+  
+  <xs:element name="getUserProfileInformationByIdResponse" type="tns:getUserProfileInformationByIdResponse"/>
+  
+  <xs:element name="updateUserProfile" type="tns:getUserProfileInformationByIdResponse"/>
+  
+  <xs:element name="updateUserProfileResponse" type="tns:updateUserProfileResponse"/>
+  
+  <!-- v2 new element end -->
+  
+
+  <xs:complexType name="createUserProfile">
+    <xs:sequence>
+      <xs:element name="userProfileInformation" type="tns:userProfileInformation" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="createUserProfileResponse">
+    <xs:sequence>
+    	<xs:element name="uid" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="WSException">
+    <xs:sequence>
+      <xs:element minOccurs='1' maxOccurs="1" name='errorCode' type='xs:int'/>
+      <xs:element minOccurs='1' maxOccurs="1" name='message' type='xs:string'/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userProfileInformation">
+    <xs:sequence>
+      <xs:element name="meta" type="tns:metaWs" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="msisdn" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="pincode" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="userId" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="uid" type="xs:string" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="metaWs">
+    <xs:sequence>
+      <xs:element name="key" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="value" type="xs:string" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserProfileInformation">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="key" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserProfileInformationResponse">
+    <xs:sequence>
+      <xs:element name="userProfileInformation" type="tns:userProfileInformation" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMeta_String">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="key" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMeta_StringResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="setMsisdn">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMsisdnResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getMsisdn">
+    <xs:sequence>
+      <xs:element name="userId" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMsisdnResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setPincode">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="pincode" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setPincodeResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="deleteUserProfile">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="deleteUserProfileResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="userProfileExist">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="userProfileExistResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMetas">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="meta" type="tns:metaWs" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMetasResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getMetaAsStrings">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="key" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMetaAsStringsResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMeta">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="keys" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMetaResponse">
+    <xs:sequence>
+      <xs:element name="metaWs" type="tns:metaWs" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMeta_Strings">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="key" type="xs:string" minOccurs="0"/>
+      <xs:element name="value" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="setMeta_StringsResponse">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="getUserId">
+    <xs:sequence>
+      <xs:element name="msisdn" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getUserIdResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMetaAsString">
+    <xs:sequence>
+      <xs:element name="userURI" type="xs:string" minOccurs="0"/>
+      <xs:element name="key" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getMetaAsStringResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  
+  
+  <!-- v2 new complexType start -->
+  
+	<xs:complexType name="deleteUserProfileById">
+	  <xs:sequence>
+	    <xs:element name="uid" type="xs:string" minOccurs="1" maxOccurs="1"/>
+	  </xs:sequence>
+	</xs:complexType>
+  
+	<xs:complexType name="deleteUserProfileByIdResponse">
+	    <xs:sequence/>
+	  </xs:complexType>
+	  
+	<xs:complexType name="getUserProfileInformationById">
+	  <xs:sequence>
+	    <xs:element name="uid" type="xs:string" minOccurs="1" maxOccurs="1"/>
+	    <xs:element name="key" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+	  </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getUserProfileInformationByIdResponse">
+	  <xs:sequence>
+	    <xs:element name="userProfileInformation" type="tns:userProfileInformation" minOccurs="0"/>
+	  </xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="updateUserProfile">
+	  <xs:sequence>
+	    <xs:element name="userProfileInformation" type="tns:userProfileInformation" minOccurs="1" maxOccurs="1"/>
+	  </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="updateUserProfileResponse">
+	  <xs:sequence/>
+	</xs:complexType>
+  
+  <!-- v2 new complexType end -->
+  
+</xs:schema>
+

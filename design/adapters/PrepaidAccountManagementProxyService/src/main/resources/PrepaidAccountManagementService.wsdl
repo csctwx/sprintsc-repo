@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/PrepaidAccountManagementService/v1/PrepaidAccountManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/PrepaidAccountManagementService/v1/PrepaidAccountManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd20.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd19.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/cancelCashRecharge/v1/cancelCashRecharge.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/cancelReversibleRecharge/v1/cancelReversibleRecharge.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/checkActivationStatus/v1/checkActivationStatus.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd18.xsd" namespace="http://integration.sprint.com/interfaces/createPrepaidPromotion/v1/createPrepaidPromotion.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd15.xsd" namespace="http://integration.sprint.com/interfaces/manageAdvancedPayment/v1/manageAdvancedPayment.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd13.xsd" namespace="http://integration.sprint.com/interfaces/manageContentPurchase/v1/manageContentPurchase.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/preauthorizeRecharge/v1/preauthorizeRecharge.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/rechargeAccountByCash/v1/rechargeAccountByCash.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd17.xsd" namespace="http://integration.sprint.com/interfaces/rechargeAccountByVoucher/v1/rechargeAccountByVoucher.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/removeAutoRefillEnrollment/v1/removeAutoRefillEnrollment.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/removePrepaidEnrollmentInfo/v1/removePrepaidEnrollmentInfo.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd14.xsd" namespace="http://integration.sprint.com/interfaces/restartPlan/v1/restartPlan.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/reversibleRecharge/v1/reversibleRecharge.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/setAutoRefillEnrollment/v1/setAutoRefillEnrollment.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/setPrepaidEnrollmentInfo/v1/setPrepaidEnrollmentInfo.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd16.xsd" namespace="http://integration.sprint.com/interfaces/updateAutoRollForward/v1/updateAutoRollForward.xsd"/>
+<xsd:import schemaLocation="PrepaidAccountManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/voidRealtimeReplenishment/v1/voidRealtimeReplenishment.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="cancelCashRechargeRequest">
+<wsdl:part name="cancelCashRechargeRequest" element="xsns:cancelCashRecharge" xmlns:xsns="http://integration.sprint.com/interfaces/cancelCashRecharge/v1/cancelCashRecharge.xsd"/></wsdl:message>
+<wsdl:message name="cancelCashRechargeResponse">
+<wsdl:part name="cancelCashRechargeResponse" element="xsns:cancelCashRechargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/cancelCashRecharge/v1/cancelCashRecharge.xsd"/></wsdl:message>
+<wsdl:message name="cancelReversibleRechargeRequest">
+<wsdl:part name="cancelReversibleRechargeRequest" element="xsns:cancelReversibleRecharge" xmlns:xsns="http://integration.sprint.com/interfaces/cancelReversibleRecharge/v1/cancelReversibleRecharge.xsd"/></wsdl:message>
+<wsdl:message name="cancelReversibleRechargeResponse">
+<wsdl:part name="cancelReversibleRechargeResponse" element="xsns:cancelReversibleRechargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/cancelReversibleRecharge/v1/cancelReversibleRecharge.xsd"/></wsdl:message>
+<wsdl:message name="checkActivationStatusRequest">
+<wsdl:part name="checkActivationStatusRequest" element="xsns:checkActivationStatus" xmlns:xsns="http://integration.sprint.com/interfaces/checkActivationStatus/v1/checkActivationStatus.xsd"/></wsdl:message>
+<wsdl:message name="checkActivationStatusResponse">
+<wsdl:part name="checkActivationStatusResponse" element="xsns:checkActivationStatusResponse" xmlns:xsns="http://integration.sprint.com/interfaces/checkActivationStatus/v1/checkActivationStatus.xsd"/></wsdl:message>
+<wsdl:message name="createPrepaidPromotionRequest">
+<wsdl:part name="createPrepaidPromotionRequest" element="xsns:createPrepaidPromotion" xmlns:xsns="http://integration.sprint.com/interfaces/createPrepaidPromotion/v1/createPrepaidPromotion.xsd"/></wsdl:message>
+<wsdl:message name="createPrepaidPromotionResponse">
+<wsdl:part name="createPrepaidPromotionResponse" element="xsns:createPrepaidPromotionResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createPrepaidPromotion/v1/createPrepaidPromotion.xsd"/></wsdl:message>
+<wsdl:message name="manageAdvancedPaymentRequest">
+<wsdl:part name="manageAdvancedPaymentRequest" element="xsns:manageAdvancedPayment" xmlns:xsns="http://integration.sprint.com/interfaces/manageAdvancedPayment/v1/manageAdvancedPayment.xsd"/></wsdl:message>
+<wsdl:message name="manageAdvancedPaymentResponse">
+<wsdl:part name="manageAdvancedPaymentResponse" element="xsns:manageAdvancedPaymentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/manageAdvancedPayment/v1/manageAdvancedPayment.xsd"/></wsdl:message>
+<wsdl:message name="manageContentPurchaseRequest">
+<wsdl:part name="manageContentPurchaseRequest" element="xsns:manageContentPurchase" xmlns:xsns="http://integration.sprint.com/interfaces/manageContentPurchase/v1/manageContentPurchase.xsd"/></wsdl:message>
+<wsdl:message name="manageContentPurchaseResponse">
+<wsdl:part name="manageContentPurchaseResponse" element="xsns:manageContentPurchaseResponse" xmlns:xsns="http://integration.sprint.com/interfaces/manageContentPurchase/v1/manageContentPurchase.xsd"/></wsdl:message>
+<wsdl:message name="preauthorizeRechargeRequest">
+<wsdl:part name="preauthorizeRechargeRequest" element="xsns:preauthorizeRecharge" xmlns:xsns="http://integration.sprint.com/interfaces/preauthorizeRecharge/v1/preauthorizeRecharge.xsd"/></wsdl:message>
+<wsdl:message name="preauthorizeRechargeResponse">
+<wsdl:part name="preauthorizeRechargeResponse" element="xsns:preauthorizeRechargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/preauthorizeRecharge/v1/preauthorizeRecharge.xsd"/></wsdl:message>
+<wsdl:message name="rechargeAccountByCashRequest">
+<wsdl:part name="rechargeAccountByCashRequest" element="xsns:rechargeAccountByCash" xmlns:xsns="http://integration.sprint.com/interfaces/rechargeAccountByCash/v1/rechargeAccountByCash.xsd"/></wsdl:message>
+<wsdl:message name="rechargeAccountByCashResponse">
+<wsdl:part name="rechargeAccountByCashResponse" element="xsns:rechargeAccountByCashResponse" xmlns:xsns="http://integration.sprint.com/interfaces/rechargeAccountByCash/v1/rechargeAccountByCash.xsd"/></wsdl:message>
+<wsdl:message name="rechargeAccountByVoucherRequest">
+<wsdl:part name="rechargeAccountByVoucherRequest" element="xsns:rechargeAccountByVoucher" xmlns:xsns="http://integration.sprint.com/interfaces/rechargeAccountByVoucher/v1/rechargeAccountByVoucher.xsd"/></wsdl:message>
+<wsdl:message name="rechargeAccountByVoucherResponse">
+<wsdl:part name="rechargeAccountByVoucherResponse" element="xsns:rechargeAccountByVoucherResponse" xmlns:xsns="http://integration.sprint.com/interfaces/rechargeAccountByVoucher/v1/rechargeAccountByVoucher.xsd"/></wsdl:message>
+<wsdl:message name="removeAutoRefillEnrollmentRequest">
+<wsdl:part name="removeAutoRefillEnrollmentRequest" element="xsns:removeAutoRefillEnrollment" xmlns:xsns="http://integration.sprint.com/interfaces/removeAutoRefillEnrollment/v1/removeAutoRefillEnrollment.xsd"/></wsdl:message>
+<wsdl:message name="removeAutoRefillEnrollmentResponse">
+<wsdl:part name="removeAutoRefillEnrollmentResponse" element="xsns:removeAutoRefillEnrollmentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/removeAutoRefillEnrollment/v1/removeAutoRefillEnrollment.xsd"/></wsdl:message>
+<wsdl:message name="removePrepaidEnrollmentInfoRequest">
+<wsdl:part name="removePrepaidEnrollmentInfoRequest" element="xsns:removePrepaidEnrollmentInfo" xmlns:xsns="http://integration.sprint.com/interfaces/removePrepaidEnrollmentInfo/v1/removePrepaidEnrollmentInfo.xsd"/></wsdl:message>
+<wsdl:message name="removePrepaidEnrollmentInfoResponse">
+<wsdl:part name="removePrepaidEnrollmentInfoResponse" element="xsns:removePrepaidEnrollmentInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/removePrepaidEnrollmentInfo/v1/removePrepaidEnrollmentInfo.xsd"/></wsdl:message>
+<wsdl:message name="restartPlanRequest">
+<wsdl:part name="restartPlanRequest" element="xsns:restartPlan" xmlns:xsns="http://integration.sprint.com/interfaces/restartPlan/v1/restartPlan.xsd"/></wsdl:message>
+<wsdl:message name="restartPlanResponse">
+<wsdl:part name="restartPlanResponse" element="xsns:restartPlanResponse" xmlns:xsns="http://integration.sprint.com/interfaces/restartPlan/v1/restartPlan.xsd"/></wsdl:message>
+<wsdl:message name="reversibleRechargeRequest">
+<wsdl:part name="reversibleRechargeRequest" element="xsns:reversibleRecharge" xmlns:xsns="http://integration.sprint.com/interfaces/reversibleRecharge/v1/reversibleRecharge.xsd"/></wsdl:message>
+<wsdl:message name="reversibleRechargeResponse">
+<wsdl:part name="reversibleRechargeResponse" element="xsns:reversibleRechargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/reversibleRecharge/v1/reversibleRecharge.xsd"/></wsdl:message>
+<wsdl:message name="setAutoRefillEnrollmentRequest">
+<wsdl:part name="setAutoRefillEnrollmentRequest" element="xsns:setAutoRefillEnrollment" xmlns:xsns="http://integration.sprint.com/interfaces/setAutoRefillEnrollment/v1/setAutoRefillEnrollment.xsd"/></wsdl:message>
+<wsdl:message name="setAutoRefillEnrollmentResponse">
+<wsdl:part name="setAutoRefillEnrollmentResponse" element="xsns:setAutoRefillEnrollmentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/setAutoRefillEnrollment/v1/setAutoRefillEnrollment.xsd"/></wsdl:message>
+<wsdl:message name="setPrepaidEnrollmentInfoRequest">
+<wsdl:part name="setPrepaidEnrollmentInfoRequest" element="xsns:setPrepaidEnrollmentInfo" xmlns:xsns="http://integration.sprint.com/interfaces/setPrepaidEnrollmentInfo/v1/setPrepaidEnrollmentInfo.xsd"/></wsdl:message>
+<wsdl:message name="setPrepaidEnrollmentInfoResponse">
+<wsdl:part name="setPrepaidEnrollmentInfoResponse" element="xsns:setPrepaidEnrollmentInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/setPrepaidEnrollmentInfo/v1/setPrepaidEnrollmentInfo.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="updateAutoRollForwardRequest">
+<wsdl:part name="updateAutoRollForwardRequest" element="xsns:updateAutoRollForward" xmlns:xsns="http://integration.sprint.com/interfaces/updateAutoRollForward/v1/updateAutoRollForward.xsd"/></wsdl:message>
+<wsdl:message name="updateAutoRollForwardResponse">
+<wsdl:part name="updateAutoRollForwardResponse" element="xsns:updateAutoRollForwardResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateAutoRollForward/v1/updateAutoRollForward.xsd"/></wsdl:message>
+<wsdl:message name="voidRealtimeReplenishmentRequest">
+<wsdl:part name="voidRealtimeReplenishmentRequest" element="xsns:voidRealtimeReplenishment" xmlns:xsns="http://integration.sprint.com/interfaces/voidRealtimeReplenishment/v1/voidRealtimeReplenishment.xsd"/></wsdl:message>
+<wsdl:message name="voidRealtimeReplenishmentResponse">
+<wsdl:part name="voidRealtimeReplenishmentResponse" element="xsns:voidRealtimeReplenishmentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/voidRealtimeReplenishment/v1/voidRealtimeReplenishment.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="PrepaidAccountManagementPortType">
+<wsdl:operation name="CancelCashRecharge">
+<wsdl:input name="CancelCashRechargeRequest" message="ns0:cancelCashRechargeRequest"/>
+<wsdl:output name="CancelCashRechargeResponse" message="ns0:cancelCashRechargeResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CancelReversibleRecharge">
+<wsdl:input name="CancelReversibleRechargeRequest" message="ns0:cancelReversibleRechargeRequest"/>
+<wsdl:output name="CancelReversibleRechargeResponse" message="ns0:cancelReversibleRechargeResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CheckActivationStatus">
+<wsdl:input name="CheckActivationStatusRequest" message="ns0:checkActivationStatusRequest"/>
+<wsdl:output name="CheckActivationStatusResponse" message="ns0:checkActivationStatusResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CreatePrepaidPromotion">
+<wsdl:input name="CreatePrepaidPromotionRequest" message="ns0:createPrepaidPromotionRequest"/>
+<wsdl:output name="CreatePrepaidPromotionResponse" message="ns0:createPrepaidPromotionResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="ManageAdvancedPayment">
+<wsdl:input name="ManageAdvancedPaymentRequest" message="ns0:manageAdvancedPaymentRequest"/>
+<wsdl:output name="ManageAdvancedPaymentResponse" message="ns0:manageAdvancedPaymentResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="ManageContentPurchase">
+<wsdl:input name="ManageContentPurchaseRequest" message="ns0:manageContentPurchaseRequest"/>
+<wsdl:output name="ManageContentPurchaseResponse" message="ns0:manageContentPurchaseResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="PreauthorizeRecharge">
+<wsdl:input name="PreauthorizeRechargeRequest" message="ns0:preauthorizeRechargeRequest"/>
+<wsdl:output name="PreauthorizeRechargeResponse" message="ns0:preauthorizeRechargeResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RechargeAccountByCash">
+<wsdl:input name="RechargeAccountByCashRequest" message="ns0:rechargeAccountByCashRequest"/>
+<wsdl:output name="RechargeAccountByCashResponse" message="ns0:rechargeAccountByCashResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RechargeAccountByVoucher">
+<wsdl:input name="RechargeAccountByVoucherRequest" message="ns0:rechargeAccountByVoucherRequest"/>
+<wsdl:output name="RechargeAccountByVoucherResponse" message="ns0:rechargeAccountByVoucherResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RemoveAutoRefillEnrollment">
+<wsdl:input name="RemoveAutoRefillEnrollmentRequest" message="ns0:removeAutoRefillEnrollmentRequest"/>
+<wsdl:output name="RemoveAutoRefillEnrollmentResponse" message="ns0:removeAutoRefillEnrollmentResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RemovePrepaidEnrollmentInfo">
+<wsdl:input name="RemovePrepaidEnrollmentInfoRequest" message="ns0:removePrepaidEnrollmentInfoRequest"/>
+<wsdl:output name="RemovePrepaidEnrollmentInfoResponse" message="ns0:removePrepaidEnrollmentInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RestartPlan">
+<wsdl:input name="RestartPlanRequest" message="ns0:restartPlanRequest"/>
+<wsdl:output name="RestartPlanResponse" message="ns0:restartPlanResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="ReversibleRecharge">
+<wsdl:input name="ReversibleRechargeRequest" message="ns0:reversibleRechargeRequest"/>
+<wsdl:output name="ReversibleRechargeResponse" message="ns0:reversibleRechargeResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="SetAutoRefillEnrollment">
+<wsdl:input name="SetAutoRefillEnrollmentRequest" message="ns0:setAutoRefillEnrollmentRequest"/>
+<wsdl:output name="SetAutoRefillEnrollmentResponse" message="ns0:setAutoRefillEnrollmentResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="SetPrepaidEnrollmentInfo">
+<wsdl:input name="SetPrepaidEnrollmentInfoRequest" message="ns0:setPrepaidEnrollmentInfoRequest"/>
+<wsdl:output name="SetPrepaidEnrollmentInfoResponse" message="ns0:setPrepaidEnrollmentInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateAutoRollForward">
+<wsdl:input name="UpdateAutoRollForwardRequest" message="ns0:updateAutoRollForwardRequest"/>
+<wsdl:output name="UpdateAutoRollForwardResponse" message="ns0:updateAutoRollForwardResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="VoidRealtimeReplenishment">
+<wsdl:input name="VoidRealtimeReplenishmentRequest" message="ns0:voidRealtimeReplenishmentRequest"/>
+<wsdl:output name="VoidRealtimeReplenishmentResponse" message="ns0:voidRealtimeReplenishmentResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="PrepaidAccountManagementBinding" type="ns0:PrepaidAccountManagementPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="CancelCashRecharge">
+<soap11:operation soapAction="CancelCashRecharge" style="document"/>
+<wsdl:input name="CancelCashRechargeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CancelCashRechargeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CancelReversibleRecharge">
+<soap11:operation soapAction="CancelReversibleRecharge" style="document"/>
+<wsdl:input name="CancelReversibleRechargeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CancelReversibleRechargeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CheckActivationStatus">
+<soap11:operation soapAction="checkActivationStatus" style="document"/>
+<wsdl:input name="CheckActivationStatusRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CheckActivationStatusResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CreatePrepaidPromotion">
+<soap11:operation soapAction="createPrepaidPromotion" style="document"/>
+<wsdl:input name="CreatePrepaidPromotionRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CreatePrepaidPromotionResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ManageAdvancedPayment">
+<soap11:operation soapAction="manageAdvancedPayment" style="document"/>
+<wsdl:input name="ManageAdvancedPaymentRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ManageAdvancedPaymentResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ManageContentPurchase">
+<soap11:operation soapAction="manageContentPurchase" style="document"/>
+<wsdl:input name="ManageContentPurchaseRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ManageContentPurchaseResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="PreauthorizeRecharge">
+<soap11:operation soapAction="PreauthorizeRecharge" style="document"/>
+<wsdl:input name="PreauthorizeRechargeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="PreauthorizeRechargeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RechargeAccountByCash">
+<soap11:operation soapAction="RechargeAccountByCash" style="document"/>
+<wsdl:input name="RechargeAccountByCashRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RechargeAccountByCashResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RechargeAccountByVoucher">
+<soap11:operation soapAction="RechargeAccountByVoucher" style="document"/>
+<wsdl:input name="RechargeAccountByVoucherRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RechargeAccountByVoucherResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RemoveAutoRefillEnrollment">
+<soap11:operation soapAction="removeAutoRefillEnrollment" style="document"/>
+<wsdl:input name="RemoveAutoRefillEnrollmentRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RemoveAutoRefillEnrollmentResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RemovePrepaidEnrollmentInfo">
+<soap11:operation soapAction="removePrepaidEnrollmentInfo" style="document"/>
+<wsdl:input name="RemovePrepaidEnrollmentInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RemovePrepaidEnrollmentInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RestartPlan">
+<soap11:operation soapAction="restartPlan" style="document"/>
+<wsdl:input name="RestartPlanRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RestartPlanResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ReversibleRecharge">
+<soap11:operation soapAction="ReversibleRecharge" style="document"/>
+<wsdl:input name="ReversibleRechargeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ReversibleRechargeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SetAutoRefillEnrollment">
+<soap11:operation soapAction="setAutoRefillEnrollment" style="document"/>
+<wsdl:input name="SetAutoRefillEnrollmentRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SetAutoRefillEnrollmentResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="SetPrepaidEnrollmentInfo">
+<soap11:operation soapAction="setPrepaidEnrollmentInfo" style="document"/>
+<wsdl:input name="SetPrepaidEnrollmentInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="SetPrepaidEnrollmentInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateAutoRollForward">
+<soap11:operation soapAction="updateAutoRollForward" style="document"/>
+<wsdl:input name="UpdateAutoRollForwardRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateAutoRollForwardResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="VoidRealtimeReplenishment">
+<soap11:operation soapAction="VoidRealtimeReplenishment" style="document"/>
+<wsdl:input name="VoidRealtimeReplenishmentRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="VoidRealtimeReplenishmentResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="PrepaidAccountManagementService">
+<wsdl:port name="PrepaidAccountManagementPort" binding="ns0:PrepaidAccountManagementBinding">
+<soap11:address location="http://144.226.135.45:80/services/PrepaidAccountManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

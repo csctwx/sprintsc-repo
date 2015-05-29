@@ -1,0 +1,2 @@
+Manifest-Version: 1.0
+Class-Path: lib/loggingmanagementproxyservice-1.0.0.jar lib/queryPlansAndOptionsService-1.0.0.jar lib/querysubscriberinfoproxyservice-1.0.0.jar  lib/SelfcareWorkFlow-1.0.0.jar lib/queryaccountinfoproxyservice-1.0.0.jar   queryprepaidsubscriberproxyservice-1.0.0.jar  lib/queryUsageProxyService-1.0.0.jar lib/subscribermanagementproxyservice-1.0.0.jar lib/queryDeviceInfoService-1.0.0.jar         lib/queryReferenceInfoProxyService-1.0.0.jar      lib/securityManagementProxyService-1.0.0.jar

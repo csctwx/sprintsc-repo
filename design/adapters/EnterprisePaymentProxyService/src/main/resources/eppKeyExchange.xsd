@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 (http://www.altova.com) by LEE VAN AALSBURG (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/eppKeyExchange/v1/eppKeyExchange.xsd" targetNamespace="http://integration.sprint.com/interfaces/eppKeyExchange/v1/eppKeyExchange.xsd" elementFormDefault="qualified" version="1.2">
+	<!--Date            Author                   Version                  Change                                                                                      Rel            SR#-->
+	<!--10/02/14     LaRonna Tisdale    1.0                         Intial Version                                                                             GBL15.1    PJ12171-->
+	<!--10/23/14     Adon Powell           1.0                         Intial Version                                                                             GBL15.1    PJ12171-->
+	<!--01/12/14     LaRonna Tisdale     1.1                        rename from KeyExchange.xsd, Increased 'recipient' field length to 40                                      GBL15.1    PJ12171-->
+	<!--01/13/15     LaRonna Tisdale     1.2                        Modified schema to include added Error Message structure for Transit Errors GBL15.1 PJ12171-->
+	<!--01/15/15     Adon Powell           1.2                         Standardize                                                                             GBL15.1    PJ12171-->
+	<!--01/22/15     LaRonna Tisdale     1.3                        Updated the keyId, signature, and created annotations in ErrorMessageResponse         GBL15.1    PJ12171-->
+	<!---->
+	<xs:element name="eppKeyExchange" type="tns:EppKeyExchangeRequestType"/>
+	<xs:element name="eppKeyExchangeResponse" type="tns:EppKeyExchangeResponseType"/>
+	<!---->
+	<!---->
+	<xs:complexType name="EppKeyExchangeRequestType">
+		<xs:sequence>
+			<xs:element name="keyId" type="tns:PublicKeyIdentifierType">
+				<xs:annotation>
+					<xs:documentation>ID of the Ephemeral public key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recipient" type="tns:PublicKeyZoneIdentifierType">
+				<xs:annotation>
+					<xs:documentation>Subject or certificate name of the intended zone. This will be used by the channel or EAI to identify different zones</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="tns:PublicKeySignatureTextType">
+				<xs:annotation>
+					<xs:documentation>Signature of the Ephemeral public key, a base64-encoded string of the byte array returned by the SDK</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="created" type="tns:CreationDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The number of milliseconds between the time the Ephemeral public key was generated and midnight, January 1, 1970 UTC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expires" type="tns:ExpirationDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The number of milliseconds between the time the Ephemeral public key expired and midnight, January 1, 1970 UTC. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ephemeralPublicKey" type="tns:PublicKeyTextType">
+				<xs:annotation>
+					<xs:documentation>The channel/EAI public key.  A base64-encoded string of the ephemeral public key byte array provided by the SDK</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signatureCertificateList" type="tns:SignatureCertificateListType">
+				<xs:annotation>
+					<xs:documentation>List of certificate information </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EppKeyExchangeResponseType">
+		<xs:choice>
+			<xs:element name="ErrorMessageResponse" type="tns:ErrorMessageResponseType">
+				<xs:annotation>
+					<xs:documentation>To be used in cases of transit error messages</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="KeyExchangeResponse" type="tns:KeyExchangeResponseType">
+				<xs:annotation>
+					<xs:documentation>To be used for normal application responses</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="ErrorMessageResponseType">
+		<xs:sequence>
+			<xs:element name="keyId" type="tns:PublicKeyIdentifierType">
+				<xs:annotation>
+					<xs:documentation>ID of the Ephemeral public key </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="tns:PublicKeySignatureTextType">
+				<xs:annotation>
+					<xs:documentation>Signature of the Ephemeral public key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="created" type="tns:CreationDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The number of milliseconds between the time the Ephemeral public key was generated and midnight, January 1, 1970 UTC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorInfo" type="tns:ErrorInfoType">
+				<xs:annotation>
+					<xs:documentation>Error Information Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signatureCertificateList" type="tns:SignatureCertificateListType">
+				<xs:annotation>
+					<xs:documentation>list of signature certificates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="KeyExchangeResponseType">
+		<xs:sequence>
+			<xs:element name="keyId" type="tns:PublicKeyIdentifierType">
+				<xs:annotation>
+					<xs:documentation>ID of the Ephemeral public key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signature" type="tns:PublicKeySignatureTextType">
+				<xs:annotation>
+					<xs:documentation>Signature of the Ephemeral public key</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="created" type="tns:CreationDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The number of milliseconds between the time the Ephemeral public key was generated and midnight, January 1, 1970 UTC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expires" type="tns:ExpirationDateTimeType">
+				<xs:annotation>
+					<xs:documentation>The number of milliseconds between the time the Ephemeral public key expired and midnight, January 1, 1970 UTC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseInfo" type="tns:ResponseInfoType">
+				<xs:annotation>
+					<xs:documentation>Response Info Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ephemeralPublicKey" type="tns:PublicKeyTextType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The public key (Recipients public key based on who FE sent it to (EPP, EPP PCI, EAI)) A base64-encoded string of the ephemeral public key byte array.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="signatureCertificateList" type="tns:SignatureCertificateListType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>list of signature certificates</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResponseInfoType">
+		<xs:sequence>
+			<xs:element name="responseCode" type="tns:ResponseStatusCodeType">
+				<xs:annotation>
+					<xs:documentation>A code that represents the outcome of the operation on a particular system or subsystem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseMessage" type="tns:ResponseDescriptionType">
+				<xs:annotation>
+					<xs:documentation>A short message that describes the outcome of the operation on a particular system or subsystem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ErrorInfoType">
+		<xs:sequence>
+			<xs:element name="errorCode" type="tns:ErrorTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Code that representsing the fault condition</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="errorMessage" type="tns:ErrorMessageTextType">
+				<xs:annotation>
+					<xs:documentation>Description of the fault condition</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SignatureCertificateInfoType">
+		<xs:sequence>
+			<xs:element name="certificate" type="tns:PublicKeyCertificateTextType">
+				<xs:annotation>
+					<xs:documentation>Base64-encoded string of the byte array representing an X509Certificate</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SignatureCertificateListType">
+		<xs:sequence>
+			<xs:element name="signatureCertificateInfo" type="tns:SignatureCertificateInfoType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Certificate Info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--     Shared Simple Types-->
+	<xs:simpleType name="CreationDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Creation Date Time represents a calendar Month, Day,Year, Hour, Minute, Second and Fraction Of A Second the associated item was created.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="ExpirationDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Expiration Date Time holds the last calendar Date and Time of day an object, relationship, privilege, etc. is valid or in force.  After this date the object is no longervalid or in force.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorMessageTextType">
+		<xs:annotation>
+			<xs:documentation>Error Message Text is a textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>The Error Type Code identifies the type of error transaction being processed.
+For example:
+Order
+OrderItem
+ESN
+MEID
+etc.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PublicKeyIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Public Key Identifier uniquely identifies a public key.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PublicKeyTextType">
+		<xs:annotation>
+			<xs:documentation>Public Key Text is a A base64-encoded string of the ephemeral public key byte array.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="PublicKeyZoneIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Public Key Zone Identifier uniquely identifies a public key target zone.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PublicKeySignatureTextType">
+		<xs:annotation>
+			<xs:documentation>Public Key Signature is the signature of a public key.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="PublicKeyCertificateTextType">
+		<xs:annotation>
+			<xs:documentation>Public Key Certificate Text is a Base64-encoded string of the byte array representing an X509Certificate</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:base64Binary"/>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Response Description is the messege associated to the response status.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ResponseStatusCodeType">
+		<xs:annotation>
+			<xs:documentation>Response Status Code identifies the result of the requested API or operation.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+			<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+	<!---->
+</xs:schema>

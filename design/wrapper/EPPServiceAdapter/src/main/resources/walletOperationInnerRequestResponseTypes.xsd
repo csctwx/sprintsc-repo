@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    xmlns:tns="http://api.mfs.amdocs.com/epp/v1/sprint/walletOperationInnerRequestResponseTypes.xsd"
+    targetNamespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletOperationInnerRequestResponseTypes.xsd"
+    xmlns:walletBaseOperationResponse="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationResponse.xsd"
+	xmlns:walletBaseOperationRequest="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationRequest.xsd"
+    xmlns:walletCommonTypes="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd">
+  
+    <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletCommonTypes.xsd" schemaLocation="walletCommonTypes.xsd"/>
+    <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationRequest.xsd" schemaLocation="walletBaseOperationRequest.xsd"/>
+    <import namespace="http://api.mfs.amdocs.com/epp/v1/sprint/walletBaseOperationResponse.xsd" schemaLocation="walletBaseOperationResponse.xsd"/>
+    
+    <element name="createWalletRequest">
+     <complexType>
+		<annotation>
+			<documentation>Create wallet Request , will be used for
+				Provisioning a wallet w/o PaymentOption in Wallet
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+				<sequence>
+					<element name="walletTnC" type="walletCommonTypes:AcceptedTnC">
+						<annotation>
+							<documentation>
+								Accepted Terms and Conditions for Wallet.
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="createWalletResponse">
+     <complexType>
+		<annotation>
+			<documentation>Create Wallet Response</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="walletDetails" type="walletBaseOperationResponse:WalletProfile" minOccurs="0">
+						<annotation>
+							<documentation>Wallet Details i.e. profile and status.
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="addPaymentOptionRequest">
+     <complexType>
+		<annotation>
+			<documentation>Add paymentOption to wallet. if wallet does not
+				exist, then create a wallet and adds paymentOption to it.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+				<sequence>
+					<element name="walletTnC" type="walletCommonTypes:AcceptedTnC" minOccurs="0">
+						<annotation>
+							<documentation>
+						Accepted Terms and Conditions for Wallet.
+					</documentation>
+						</annotation>
+					</element>
+					<element name="walletItem" type="walletBaseOperationRequest:AddWalletPaymentOption"/>
+					<element name="isCardPresent" type="boolean" default="false" minOccurs="0"/>
+					<element name="isRetail" type="boolean" default="false" minOccurs="0"/>
+		      <element name="posTerminalData" type="walletCommonTypes:POSTerminalData" minOccurs="0"/>
+					<element name="addPaymentOptionRequestAdditionalInfo" type="walletBaseOperationRequest:AddPaymentOptionRequestAdditionalInfo" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    <element name="addPaymentOptionResponse">
+     <complexType>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="existingPaymentOptionId" type="walletCommonTypes:DefaultStringType" minOccurs="0">
+						<annotation>
+							<documentation>
+							A unique identifier for the existing
+							payment option in this
+							wallet with max length 36 .
+						</documentation>
+						</annotation>
+					</element>
+                    <element name="existingPaymentOptionToken" type="walletCommonTypes:PaymentTokenType" minOccurs="0">
+                        <annotation>
+                            <documentation>
+                                The token for the existing
+                                payment option in this
+                                wallet with max length 16 .
+                            </documentation>
+                        </annotation>
+                    </element>
+					<element name="isWalletCreated" type="boolean" minOccurs="0"/>
+					<element name="walletTnC" type="walletCommonTypes:AcceptedTnC" minOccurs="0"/>
+					<element name="walletItem" type="walletBaseOperationResponse:WalletPaymentOption" minOccurs="0"/>
+					<element name="addPaymentOption" type="walletBaseOperationResponse:ValidatedPaymentOptionDetails" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+   <element name="updatePaymentOptionRequest">
+     <complexType>
+		<annotation>
+			<documentation>For updating payment option for e.g. to set
+				paymentOption item as autoPay or default or update existing
+				information
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+				<sequence>
+					<element name="walletItem" type="walletBaseOperationRequest:UpdatePaymentOption"/>
+					<element name="updatePaymentOptionRequestAdditionalInfo" type="walletBaseOperationRequest:UpdatePaymentOptionRequestAdditionalInfo"  minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    <element name="updatePaymentOptionResponse">
+     <complexType>
+		<annotation>
+			<documentation>Update paymentOption response</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="walletItem" type="walletBaseOperationResponse:WalletPaymentOption" minOccurs="0"/>
+					<element name="updatePaymentOption" type="walletBaseOperationResponse:ValidatedPaymentOptionDetails" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="getWalletInfoRequest">
+     <complexType>
+		<annotation>
+			<documentation>Request for retrieving wallet details.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest"/>
+		</complexContent>
+	 </complexType>
+    </element>
+    <element name="getWalletInfoResponse">
+     <complexType>
+		<annotation>
+			<documentation>getWallet Response : wallet details
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="walletDetails" type="walletBaseOperationResponse:Wallet" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="removePaymentOptionRequest">
+     <complexType>
+		<annotation>
+			<documentation>Request for removing existing payment option in
+				Wallet given existing paymentOptionId
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+				<sequence>
+						<element name="paymentOptionId" type="walletCommonTypes:DefaultStringType" minOccurs="0"/>
+						<element name="paymentOptionToken" type="walletCommonTypes:PaymentTokenType"
+							minOccurs="0">
+							<annotation>
+								<documentation>
+									A token identifier for payment option.
+								</documentation>
+							</annotation>
+						</element>
+					<element name="autopayRemovalReason" minOccurs="0">
+						<annotation>
+							<documentation>
+								Describes the reason for removing autopay
+							</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="256"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="removePaymentOptionResponse">
+     <complexType>
+		<annotation>
+			<documentation>Remove Payment Option Response</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="paymentOptionId" type="walletCommonTypes:DefaultStringType" minOccurs="0">
+						<annotation>
+							<documentation>
+								A unique identifier for payment option. Max length 36 .
+							</documentation>
+						</annotation>
+					</element>
+					<element name="paymentOptionToken" type="walletCommonTypes:PaymentTokenType" minOccurs="0">
+						<annotation>
+							<documentation>
+								A unique token identifier for payment option. Max length 16 .
+							</documentation>
+						</annotation>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="removeWalletRequest">
+     <complexType>
+		<annotation>
+			<documentation>Request to remove Wallet</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest"/>
+		</complexContent>
+	 </complexType>
+    </element>
+    <element name="removeWalletResponse">
+     <complexType>
+		<annotation>
+			<documentation>Response to remove Wallet</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse"/>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="getPaypalTokenRequest">
+     <complexType>
+		<annotation>
+			<documentation>Request for retrieving paypal token.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+			<sequence>				
+				<element name="redirectUrl">
+					<simpleType>
+						<restriction base="string">
+							<maxLength value="400"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="cancelUrl">
+					<simpleType>
+						<restriction base="string">
+							<maxLength value="400"/>
+						</restriction>
+					</simpleType>
+				</element>
+                <element name="amount" type="decimal" minOccurs="0" />
+			</sequence>
+			</extension>		
+		</complexContent>
+	 </complexType>
+    </element>
+
+    <element name="getPaypalTokenResponse">
+     <complexType>
+		<annotation>
+			<documentation>getPaypalToken Response: token
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="paypalToken" minOccurs="0">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="20"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="addFromTransactionRequest">
+     <complexType>
+		<annotation>
+			<documentation>The addFromTransaction operation is used to add a
+				new source of payment to a Subscriber\u2019s eWallet based on the
+				information used to make the payment on a previous transaction
+				identified by the provided Transaction ID.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest">
+				<sequence>
+					<element name="walletTnC" type="walletCommonTypes:AcceptedTnC" minOccurs="0">
+						<annotation>
+							<documentation>
+								Accepted Terms and Conditions for Wallet.
+							</documentation>
+						</annotation>
+					</element>
+					<element name="walletItem" type="walletBaseOperationRequest:PaymentOptionDetails" minOccurs="0"/>
+					<element name="displayName" minOccurs="0">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="30">
+									<annotation>
+										<documentation>
+											A nickname may either be system generated or
+											subscriber
+											supplied.
+											Nicknames are only unique within the
+											subscriber\u2019s wallet.
+										</documentation>
+									</annotation>
+								</maxLength>
+							</restriction>
+						</simpleType>
+					</element> 
+					<element name="paymentId" minOccurs="0">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="36"/>
+							</restriction>
+						</simpleType>
+					</element>
+					<element name="referenceId" minOccurs="0">
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="36"/>
+							</restriction>
+						</simpleType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    <element name="addFromTransactionResponse">
+     <complexType>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="existingPaymentOptionId" minOccurs="0">
+						<annotation>
+							<documentation>
+							A unique identifier for the existing
+							payment option in this
+							wallet with max length 36 .
+						</documentation>
+						</annotation>
+						<simpleType>
+							<restriction base="string">
+								<maxLength value="36"/>
+							</restriction>
+						</simpleType>
+					</element>
+                    <element name="existingPaymentOptionToken" type="walletCommonTypes:PaymentTokenType" minOccurs="0">
+                        <annotation>
+                            <documentation>
+                                The token for the existing
+                                payment option in this
+                                wallet with max length 16 .
+                            </documentation>
+                        </annotation>
+                    </element>
+					<element name="isWalletCreated" type="boolean" minOccurs="0"/>
+					<element name="walletTnC" type="walletCommonTypes:AcceptedTnC" minOccurs="0"/>
+					<element name="walletItem" type="walletBaseOperationResponse:WalletPaymentOption" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+
+    
+    <element name="validatePaymentOptionRequest">
+     <complexType>
+        <annotation>
+            <documentation>Request for validating payment option.
+            </documentation>
+        </annotation>
+        <complexContent>
+            <extension base="walletBaseOperationRequest:BaseWalletOperationRequest">
+                <sequence>
+                    <element name="banInfo" type="walletCommonTypes:BanInfo" nillable="false" minOccurs="0"/>
+                    <element name="walletItem" type="walletBaseOperationRequest:ValidatePaymentOption"/>
+                </sequence>
+            </extension>
+        </complexContent>
+     </complexType>
+    </element>
+    <element name="validatePaymentOptionResponse">
+     <complexType>
+		<annotation>
+			<documentation>validate paymentOption response
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:BaseWalletOperationResponse">
+				<sequence>
+				    <element name ="banInfo" type="walletCommonTypes:BanInfo" minOccurs="0"/>
+					<element name="validatePaymentOption" type="walletBaseOperationResponse:ValidatedPaymentOptionDetails" minOccurs="0"/>
+				</sequence>
+			</extension>			
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="queryChannelPolicyRequest">
+     <complexType>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:BaseWalletOperationRequest"/>
+		</complexContent>		
+	 </complexType>
+    </element>
+    
+    <element name="queryChannelPolicyResponse">
+     <complexType>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:BaseWalletOperationResponse">
+				<sequence>
+					<element name="walletMaxPOs" type="walletBaseOperationResponse:WalletMaxPOs" minOccurs="0"/>
+					<element name="walletAllowedPOs" type="walletBaseOperationResponse:WalletAllowedPOs" minOccurs="0"/>
+					<element name="paymentAllowedPOs" type="walletBaseOperationResponse:PaymentAllowedPOs" minOccurs="0"/>
+					<element name="paymentMinMaxAmounts" type="walletBaseOperationResponse:PaymentMinMaxAmounts" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="checkNegativeListRequest">
+     <complexType>
+		<annotation>
+			<documentation>Request for checking whether ban is in negative list.
+			</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationRequest:WalletOperationRequest"/>
+		</complexContent>
+	 </complexType>
+    </element>
+    
+    <element name="checkNegativeListResponse">
+     <complexType>
+		<annotation>
+			<documentation>Check Negative List Response</documentation>
+		</annotation>
+		<complexContent>
+			<extension base="walletBaseOperationResponse:WalletOperationResponse">
+				<sequence>
+					<element name="isNegativeListed" type="boolean" nillable="false" minOccurs="0">
+						<annotation>
+							<documentation>
+						Ban status indicator.True if ban is in negative list, false if it's not
+					</documentation>
+						</annotation>
+					</element>
+					<element name="reason" type="walletBaseOperationResponse:CheckNegativeListReason" nillable="false" minOccurs="0"/>
+				</sequence>
+			</extension>
+		</complexContent>
+	 </complexType>
+    </element>
+
+    <element name="banInfo">
+        <complexType>
+            <complexContent>
+                <extension base="walletCommonTypes:BanInfo"/>
+            </complexContent>
+        </complexType>
+    </element>
+</schema>

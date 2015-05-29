@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountServices/v1/queryAccountServices.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountServices/v1/queryAccountServices.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+	<!-- Date              Author                   Version     Change                                                                           Rel                          SR# -->
+	<!--1/26/2008    Jennifer Carlton         1.1        Added version and change log.                                        SAP09.6.0.0          E1710.017-->
+	<!--1/26/2008    Jennifer Carlton         1.1        Added minLen 1 to ufmi, ipAddress, imsi, nai, httpttld       SAP09.6.0.0          E1710.017-->
+	<!--3/3/2009      Jennifer Carlton         1.2      R10, rollforward change, Changed socName to type socName    SAP09.6.0.0    CS#311915-->
+	<!--06/07/2011 Jocelen Silva               1.3      Added universalInd and offerMapLevel in the response              GBL11.3      PJ004940-->
+	<!--10/23/2011 Tracy Turner	            1.4      Flattened simple datatypes              								GBL11.4      PJ004940-->
+	<xs:element name="queryAccountServices" type="tns:QueryAccountServices"/>
+	<xs:element name="queryAccountServicesResponse" type="tns:QueryAccountServicesResponse"/>
+	<xs:complexType name="QueryAccountServices">
+		<xs:sequence>
+			<xs:element name="info" type="tns:SearchCriteria"/>
+			<xs:element name="socList" type="tns:FetchSocListType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="QueryAccountServicesResponse">
+		<xs:sequence>
+			<xs:element name="socList" type="tns:SocList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Device">
+		<xs:sequence>
+			<xs:element name="serialNumber" type="tns:EquipmentSerialNumberString">
+				<xs:annotation>
+					<xs:documentation>Equipment Serial Number is an identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.
+
+Equipment Serial Number is one of the following:
+
+Electronic Serial Number (ESN);
+
+Mobile Equipment IDentifier (MEID);
+
+International Mobile Equipment Identfier (IMEI);
+
+Subscriber Identify Module (SIM);
+
+Manufacturer Serial Number (MSN).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialType" type="tns:EquipmentSerialNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment Serial Number Type classifies Equipment serial numbers as one of the following:  ESN, MEID, IMEI, SIM, or MSN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FetchSocListType">
+		<xs:sequence>
+			<xs:element name="fetchSocList" type="tns:FetchInformationFlag">
+				<xs:annotation>
+					<xs:documentation>Flag indicating whether or not a list of the BAN’s price plan and SOCs should be returned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="blockNumber" type="tns:BlockNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Block number which will select the nth block of SocInfo</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OfferInfo">
+		<xs:sequence>
+			<xs:element name="offerId" type="tns:OfferIdentifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Offer Id of this SOC.  
+
+Offer Identifer is a unique way of identifying something for sale or retention purposes that can be either accepted or rejected.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerDesc" type="tns:OfferDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Offer Description of this SOC.
+
+Offer Description is a textual description of something being presented for sale or retention purposes.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PlanInfo">
+		<xs:sequence>
+			<xs:element name="planTypeDesc" type="tns:PlanTypeDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Plan Type Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalDesc" type="tns:PlanAdditionalDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Plan Additional Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="longDesc" type="tns:ProductLongDescription" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Long Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchCriteria">
+		<xs:choice>
+			<xs:element name="ban" type="tns:BillingAccountNumberEns">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberId" type="tns:SubscriptionIdentifierEns">
+				<xs:annotation>
+					<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mdn" type="tns:MobileDirectoryNumberString">
+				<xs:annotation>
+					<xs:documentation>'Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="device" type="tns:Device"/>
+			<xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierString">
+				<xs:annotation>
+					<xs:documentation>Urban Fleet Member Identifier (UFMI) is the combinaiton of the Urban Area Id, Fleet Id, and Member Id representing an address in a format recognized within iDEN Push-To-Talk (PTT) or Direct Connect. For example, a UFMI number of 500•600•700, translates to 500 is the Urban Area ID, 600 is the Fleet, and 700 is the Member.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ipAddress" type="tns:InternetProtocolAddressString">
+				<xs:annotation>
+					<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityString">
+				<xs:annotation>
+					<xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nai" type="tns:NetworkAccessIdentifierString">
+				<xs:annotation>
+					<xs:documentation>Network Access Identifier (NAI) is a standard way of identifying users who request access to a network. The standard syntax is"user@realm". </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hppttId" type="tns:HighPerformancePushToTalkIDString">
+				<xs:annotation>
+					<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk technology. The HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SocList">
+		<xs:sequence>
+			<xs:element name="currentBlock" type="tns:CurrentBlock">
+				<xs:annotation>
+					<xs:documentation>Current Block value should be returned (Should be equal to the value specified in the blockNumber field of the request structure)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="totalBlocks" type="tns:TotalBlocks">
+				<xs:annotation>
+					<xs:documentation>Total available block of the SocInfo should be returned (Total No of SocInfo/50) Rounded to next whole number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socInfo" type="tns:SocInfo" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocInfo">
+		<xs:sequence>
+			<xs:element name="socSeqNumber" type="tns:ServiceAgreementLineItemIdentifier">
+				<xs:annotation>
+					<xs:documentation>Soc sequence number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="soc" type="tns:ServiceOrderCode">
+				<xs:annotation>
+					<xs:documentation>SOC or Price-plan Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socType" type="tns:ServiceTypeCode">
+				<xs:annotation>
+					<xs:documentation>Soc type 
+BUY-ONE-GET-ONE-SOC(B)
+OPTIONAL-SOC(O)
+PRICE-PLAN(P)
+REDUCED-PRICE-PLAN(M)
+REDUCED-SOC(S)
+REGULAR-SOC(R)
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socProductClass" type="tns:ProductClassCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SOC Product class. This will be used to identify the SOC product class like the airave SOCs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socName" type="tns:SocName" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SOC Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="tns:ServiceAgreementLineItemEffectiveFromDate">
+				<xs:annotation>
+					<xs:documentation>Start Date of SOC/Price-plan for subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="expirationDate" type="tns:ServiceAgreementLineItemEffectiveThruDate" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Expiry Date of SOC/Price-plan for subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recurringCharge" type="tns:RecurringCharge" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Recurring charge of the price-plan/SOC for each subscriber using the plan</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dealer" type="tns:DealerIdentifierEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Dealer Code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="splitDealer" type="tns:DealerIdentifierEns" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Split Dealer code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cellularSupport" type="tns:FeatureSupportedFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Does this SOC has cellular features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dispatchSupport" type="tns:FeatureSupportedFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Does this SOC has dispatch features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="packetDataSupport" type="tns:FeatureSupportedFlag" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Does this SOC has packet data features</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="riscInd" type="tns:RiscIndicator">
+				<xs:annotation>
+					<xs:documentation>RISC Indicator</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="networkInd" type="tns:NetworkIndicatorCode">
+				<xs:annotation>
+					<xs:documentation>Network Indicator – identify network for which the SOC  is designated</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="socLevelCode" type="tns:ProductChargeLevelCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SOC level code for front-end’s to identify Product, BAN and Subscriber level SOCs.
+
+Value of ‘B’ means it is binding and it is inherited by subscriber. Also for SOC Level code ‘B’, the subscriber can not remove it from its agreement. Value of ‘C’ means it is not binding. ‘C’ also means that if this soc is attached at ban level subscriber will inherit it but can remove it from their agreement.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hierarchyCode" type="tns:HierarchyAttachmentCode" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The Customer Hierarchy indicator at customer level will be used for the SOC/PP list filter when attaching SOCs/PPs to a subscriber or BAN.
+H = A SOC/PP with an H code will be available only for BANs or subscribers in a hierarchy.
+N = A SOC/PP with an N code will be available only for BANs or subscribers that are not in a hierarchy.
+B = A SOC/PP with a B code will be available for both.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceFeatureQty" type="tns:ServiceFeatureQuantity">
+				<xs:annotation>
+					<xs:documentation>The quantity of features of this type attached to the BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="universalInd" type="tns:BinaryExpressionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Will indicate whether the price plan/SOC is a Universal price plan
+Valid values:
+true – Universal price plan/SOC
+False or not returned – Non-Universal price plan/SOC
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerMapLevel" type="tns:OfferMapLevelType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>indicate whether the price plan/SOC has Enabler features that are mapped to Enabler offers.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer 
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers 
+N  – Price plan/SOC is not mapped to an Enabler offer
+Note: Returned only on Real Time Requests</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerInfo" type="tns:OfferInfo" minOccurs="0"/>
+			<xs:element name="planInfo" type="tns:PlanInfo" minOccurs="0"/>
+			<xs:element name="socAttributeList" type="tns:SocAttributeList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocAttributeInfo">
+		<xs:sequence>
+			<xs:element name="socAttributeCode" type="tns:ServiceOrderCodeAttributeCode">
+				<xs:annotation>
+					<xs:documentation>SOC attribute code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SocAttributeList">
+		<xs:sequence>
+			<xs:element name="socAttributeInfo" type="tns:SocAttributeInfo" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="BillingAccountNumberEns">
+		<xs:annotation>
+			<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="BlockNumber">
+		<xs:annotation>
+			<xs:documentation>Block number which will select the nth block of FleetInfo</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="CurrentBlock">
+		<xs:annotation>
+			<xs:documentation>Current Block value should be returned (Should be equal to the value specified in the blockNumber field of the request structure)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DealerIdentifierEns">
+		<xs:annotation>
+			<xs:documentation>Dealer Identifier uniquely identifies the the agent or dealer who handled the customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSerialNumberString">
+		<xs:annotation>
+			<xs:documentation>Equipment Serial Number holds the identifier used by the device to communicate (broadcast) its identity to the wireless mobile network.  &#13;
+&#13;
+Network Device Identifier will contain one of the following: &#13;
+Electronic Serial Number (ESN); &#13;
+Mobile Equipment IDentifier (MEID);&#13;
+International Mobile Equipment Identfie (IMEI);&#13;
+Subscriber Identify Module (SIM).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EquipmentSerialNumberType">
+		<xs:annotation>
+			<xs:documentation>EquipmentSerialNumberType is a value that classifies a device serial number as being an ESN, MEID, MSN, IMEI, or SIM.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureSupportedFlag">
+		<xs:annotation>
+			<xs:documentation>Feature supported flag is a boolean flag that indicates whether a specific feature is supported or not.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="FetchInformationFlag">
+		<xs:annotation>
+			<xs:documentation>Fetch Information Flag is a boolean flag that indicates whether for the api to request the information associated to the request structure.
+true - the API will perform request for the associated information
+false - the API will request the assoociated information</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="HierarchyAttachmentCode">
+		<xs:annotation>
+			<xs:documentation>The Hierarchy Attachment Code indicates what level a SOC/PricePlan can be attached to, subscriber, account, or both.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+			<xs:enumeration value="H"/>
+			<xs:enumeration value="N"/>
+			<xs:enumeration value="B"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HighPerformancePushToTalkIDString">
+		<xs:annotation>
+			<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternationalMobileSubscriberIdentityString">
+		<xs:annotation>
+			<xs:documentation>International Mobile Subscriber Identity (IMSI) holds a unique identifier allocated to each mobile subscriber in a GSM and UMTS network. It consists of a MCC (Mobile Country Code), a MNC (Mobile Network Code) and a MSIN (Mobile Station Identification Number).</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="InternetProtocolAddressString">
+		<xs:annotation>
+			<xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MobileDirectoryNumberString">
+		<xs:annotation>
+			<xs:documentation>The method of identifying telephone trunks in the public network of North America, called World Numbering Zone 1 by the ITU-T. the Plan has 3 ways of identifying phone numbers in North America -- a 3-digit area code, a 3-digit exchange or central office code, and 4-digit subscriber code.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkAccessIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Network Access Identifier holds the concatenation of the a user name and realm.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="NetworkIndicatorCode">
+		<xs:annotation>
+			<xs:documentation>Network Indicator Code specifies the network being used.  I -&gt; iDEN; C -&gt; CDMA; B -&gt; Both</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="I"/>
+			<xs:enumeration value="B"/>
+			<xs:enumeration value="C"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferDescription">
+		<xs:annotation>
+			<xs:documentation>Offer Description is a textual description of something being presented for sale or retention purposes.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferIdentifier">
+		<xs:annotation>
+			<xs:documentation>Offer Identifer is a unique way of identifying something for sale or retention purposes that can be either accepted or rejected.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OfferMapLevelType">
+		<xs:annotation>
+			<xs:documentation>Offer Map level whether the price plan/SOC has Enabler features that are mapped to Enabler offers. This indicates whether Enabler features can be excluded from or included in the price plan/SOC.
+Valid values:
+S – Price plan/SOC itself is mapped to Enabler offer (Enabler features cannot be excluded from or included in the price plan/SOC)
+F – Price plan/SOC’s Enabler features are mapped to Enabler offers (Enabler features can be excluded from or included in the price plan/SOC)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+			<xs:enumeration value="S"/>
+			<xs:enumeration value="F"/>
+			<xs:enumeration value="N"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PlanTypeDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PlanAdditionalDescription">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PriceComponentAmount">
+		<xs:annotation>
+			<xs:documentation>Price Component Amount contains the dollar amount or the price component.  Either Price Amount or Percent will contain a value but not both for a given Price Component Indentifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="14"/>
+			<xs:fractionDigits value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductChargeLevelCode">
+		<xs:annotation>
+			<xs:documentation>Product Charge level code identifies the level, account or subscription, that a charge is applied to.
+Value of ‘B’ means it is binding and it is inherited by subscriber. 
+Also for SOC Level code ‘B’, the subscriber can not remove it from its agreement. 
+Value of ‘C’ means it is not binding. 
+‘C’ also means that if this soc is attached at ban level subscriber will inherit it but can remove it from their agreement.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductClassCode">
+		<xs:annotation>
+			<xs:documentation>Product Class Code is used to identify the SOC product class like the airave SOCs.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductLongDescription">
+		<xs:annotation>
+			<xs:documentation>Product Long Description contains an extended textual description of the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="800"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RecurringCharge">
+		<xs:annotation>
+			<xs:documentation>Recurring Charge (RC) is a monthly fee charged for granting access to certain services. The RC is charged for subscribers who have purchased the offer for an unlimited time.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="11"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RiscIndicator">
+		<xs:annotation>
+			<xs:documentation>RISC Indicator</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="SequenceNumber">
+		<xs:annotation>
+			<xs:documentation>Sequence Number identifies the numeric value that is given to a file or record as it is sequentially created. The first file or record will start with 0001 and continue incrementing until a specified maximum value is reached (if a maximum is defined). </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceAgreementLineItemEffectiveFromDate">
+		<xs:annotation>
+			<xs:documentation>Service Agreement Line Item Effective From Date holds the first calendar day the assignment of the Product specified in the Service Agreeement Line Item instance is available to the SUBSCRIPTION or BILLING ACCOUNT. Format: CCYY-MM-DD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceAgreementLineItemEffectiveThruDate">
+		<xs:annotation>
+			<xs:documentation>Service Agreement Line Item Effective Thru Date holds the last calendar day the assignment of the Product specified in the Service Agreeement Line Item instance is available to the SUBSCRIPTION or BILLING ACCOUNT. Format: CCYY-MM-DD</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceAgreementLineItemIdentifier">
+		<xs:restriction base="xs:double"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceFeatureQuantity">
+		<xs:annotation>
+			<xs:documentation>Service Feature Quantity contains a count of the features of this type attached to the account.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCode">
+		<xs:annotation>
+			<xs:documentation>Service Order Code - Ensemble</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceOrderCodeAttributeCode">
+		<xs:annotation>
+			<xs:documentation>Service Order Code Attribute Code</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="7"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceTypeCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SocName">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriptionIdentifierEns">
+		<xs:annotation>
+			<xs:documentation>Subscription Identifier Ensemble uniquely identifies an instance of SUBSCRIPTION in the Ensemble system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="8"/>
+			<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TotalBlocks">
+		<xs:annotation>
+			<xs:documentation>Total available blocks of Fleets /20 Rounded to the next whole number.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrbanFleetMemberIdentifierString">
+		<xs:annotation>
+			<xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="23"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

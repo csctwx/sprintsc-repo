@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/checkEquipmentInventoryAvailability/v1/checkEquipmentInventoryAvailability.xsd" targetNamespace="http://integration.sprint.com/interfaces/checkEquipmentInventoryAvailability/v1/checkEquipmentInventoryAvailability.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	
+<!-- Date              Author                        Change                                                                               Rel                    SR# -->
+	
+<!--08/11/2011   Tracy Turner           1.0 initial version                                                      				GBL11.4		      PJ004940-->
+	
+<!--08/15/2011 Steve Heichelheim     1.0 Added MVM standards and simple types                                                                  GBL11.4                   PJ004940-->
+	
+<xs:element name="checkEquipmentInventoryAvailability" type="tns:CheckEquipmentInventoryAvailabilityRequestType"/>
+	
+<xs:element name="checkEquipmentInventoryAvailabilityResponse" type="tns:CheckEquipmentInventoryAvailabilityResponseType"/>
+	
+<xs:complexType name="CheckEquipmentInventoryAvailabilityRequestType">
+		
+<xs:sequence>
+			
+<xs:element name="orderItemList" type="tns:OrderItemListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of order item identification structures</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="CheckEquipmentInventoryAvailabilityResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="orderItemAvailabilityList" type="tns:OrderItemAvailabilityListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of order item availability details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ErrorMessageInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="errorTypeCode" type="tns:ErrorTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Tpe of error.  Will usually be  ‘SKU’ or ‘GEN’</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorValueId" type="tns:ErrorMessageReferenceNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>If the errorTypeCode is SKU, populate the corresponding SKU value here. If it is a general error (GEN), populate ‘General Error’.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorText" type="tns:ErrorMessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>The message text for the particular error at record level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderItemAvailabilityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineItemNumber" type="tns:OrderLineItemNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerId" type="tns:CustomerIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:ModelNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The item id or the SKU number of the item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="availableQuantity" type="tns:AvailableQuantityType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Available Quantity represents the Onhand Quantity minus the Restricted Quantity minus the Allocated Quantity.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="availableForSaleInd" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates whether the item is still available for sale or if it has been discontinued.
+Will be "true" if it is available for sale.
+Will be "false" if it is NOT available for sale.
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="requestedFreightCarrierCode" type="tns:FreightCarrierNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested Freight Carrier Code identifies a Freight Carrier requested by the Customer other than the default Freight Carrier in the Order Management System..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="errorMessageInfo" type="tns:ErrorMessageInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing information about any problems encountered checking equipment inventory.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderItemAvailabilityListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderItemAvailabilityInfo" type="tns:OrderItemAvailabilityInfoType" maxOccurs="100">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the order item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderItemInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="orderLineItemNumber" type="tns:OrderLineItemNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="customerId" type="tns:CustomerIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.  </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="itemId" type="tns:ModelNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>The inventory item id or the SKU number of the item.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="requestedFreightCarrierCode" type="tns:FreightCarrierNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Requested Freight Carrier Code identifies a Freight Carrier requested by the Customer other than the default Freight Carrier in the Order Management System..</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OrderItemListType">
+		
+<xs:sequence>
+			
+<xs:element name="orderItemInfo" type="tns:OrderItemInfoType" maxOccurs="100">
+				
+<xs:annotation>
+					
+<xs:documentation>Information about the order item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM / Shared Simple Types-->
+	
+<xs:simpleType name="AvailableQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Available Quantity represents the Onhand Quantity minus the Restricted Quantity minus the Allocated Quantity.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:integer">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CustomerIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Customer Identifier is a type of Party Identifier.  It uniquely identifies those PARTIES Sprint views as either a current purchaser of equipment and services or a potential purchaser of equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageReferenceNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Identifier holds a value that uniquely identifies an instance of an object within the context of a System, Database or a Model.
+
+For example:
+(1) An identifier is information that uniquely identifies a party 
+(2) An identifier is a signifier for an identity ; it is one or more data items that distinguishes a party from other parties. Examples of identifiers: name, id-number, username, IP-address.</xs:documentation>
+			
+<xs:documentation>System generated error reference number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Error Message Text is a textual description of the error message.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="60"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ErrorTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>The Error Type Code identifies the type of error transaction being processed.
+For example:
+Order
+OrderItem
+ESN
+MEID
+etc.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="FreightCarrierNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Freight Carrier Name contains the name of a PARTY who transports shipments. Examples would be: UPS and USPS.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ModelNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+			
+<xs:documentation>Model Number contains a unique value within the class of PRODUCT identified by Model Name used to identify the type of equipment being shipped by the Manufacturer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="18"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OrderLineItemNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Order Line Item Number uniquely identifies an instance of ORDER ITEM within the scope of an ORDER.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>

@@ -1,0 +1,26 @@
+<div style="min-height:80px">
+  <h2 ng-show="checkoutController.data.equipments.length!=0">Your Cart<span><i class="glyphicon glyphicon glyphicon-chevron-left"></i><a href="{{pathMap._phones._hash}}">Continue Shopping</a></span></h2>
+  <form name="itemsForm">
+    <div class="cart-item alert alert-dismissible fade in" role="alert" ng-repeat="item in checkoutController.data.equipments">
+      <div class="pull-left col-xs-6">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="checkoutController.removeItem(item)"><span aria-hidden="true">×</span></button>
+        <a style="color:#000" ng-href="{{pathMap._phoneDetails._hash}}{{item.deviceId}}/features/">
+        <img alt="{{item.brand}} {{item.name}} - Sprint Prepaid" ng-src="{{item.image}}"></img>
+        <h4>{{item.brand}} {{item.name}} {{item.color}} {{item.memory}}</h4>
+        </a>
+      </div>
+      <div class="quantity" style="padding-right:20px">
+        <select ng-model="item.quantity" ng-change="checkoutController.save()" ng-disabled="checkoutController.step!=1" required="required" ng-options="o as o for o in cartController.getQuantityOptions(item)">
+        </select>
+      
+       
+      </div>
+      <p style="width:120px" class="price pull-right">{{item.modelPrice|currency}}</p>
+      <span class="appliedPromo">
+        <ul>
+          <li ng-show="item.discountEligibleQuantity"><span>{{item.discountName}}</span><p>-{{item.discountTotal|currency}}</p></li>
+        </ul>
+      </span>
+    </div>
+  </form>
+</div>

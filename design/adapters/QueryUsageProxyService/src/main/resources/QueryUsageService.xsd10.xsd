@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryPushToTalkAuditInfo/v1/queryPushToTalkAuditInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryPushToTalkAuditInfo/v1/queryPushToTalkAuditInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.3">
+	
+<!-- Date           Author           Version   Change  Sel SR# -->
+	
+<!--12/23/2009 Gustavo Silva 1.0 Initial Draft GBL10.3 PJ000989 -->
+	
+<!--12/29/2009 Steve Heichelheim 1.0  Added MVM Simple Types      GBL10.3 PJ000989 -->
+	
+<!--01/25/2011 Steve Heichelheim 1.1  re-mapped the response elements                                        GBL11.2 PJ000989 -->
+	
+<!--03/24/2011 Steve Heichelheim 1.2  changed cdrDateTime field in request to dateTime                GBL11.2 PJ000989 CS#454347-->
+	
+<!--04/21/2011 Steve Heichelheim 1.3  changed sipResquestTime, sipResponseTime to dateTime                GBL11.2 PJ000989 CS#454347-->
+	
+<xs:element name="queryPushToTalkAuditInfo" type="tns:QueryPushToTalkAuditInfoType"/>
+	
+<xs:element name="queryPushToTalkAuditInfoResponse" type="tns:QueryPushToTalkAuditInfoResponseType"/>
+	
+<xs:complexType name="QueryPushToTalkAuditInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="userName" type="tns:HighPerformancePushToTalkIdentifierStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mapped to Calling-Party-Address(HPPTT ID)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="cdrDateTime" type="tns:RequestDateTimeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryPushToTalkAuditInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="recordType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if CDR records contains an error or not.
+0 = success
+1= failure</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ExceptionConditionCodeType">
+						
+<xs:maxLength value="1"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="recordCount" type="tns:RowCountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Count of CDR records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pushtoTalkAuditInfoList" type="tns:pushToTalkAuditListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing push to talk information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="pushToTalkAuditListType">
+		
+<xs:sequence>
+			
+<xs:element name="pushToTalkAuditInfo" type="tns:pushToTalkAuditInfoType" maxOccurs="68">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing push to talk records</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="pushToTalkAuditInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="sessionId" type="tns:SessionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The Session-Id AVP is used to uniquely identify a specific session.  All messages pertaining to a specific session must include only one Session-Id AVP and the same value must be used throughout the life of a charging session</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountRecordType" type="tns:AccountingRecordTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP contains the type of accounting record being sent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountRecordNumber" type="tns:RowIdentifierStringType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP identifies this record within one session.  As Session-Id AVP are globally unique, the combination of Session-Id and Accounting Record Number AVP is also globally unique, and can be used in matching accounting records with confirmations.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originalHostName" type="tns:DomainNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP identifies the endpoint that originated the Diameter message, and must be present in all Diameter messages.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="originalRealmName" type="tns:RealmType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP contains the Realm of the originator of any Diameter message and must be present in all messages.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="destinationRealmName" type="tns:RealmType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP contains the realm the message is to be routed to. The value is the default ID of the terminating User. The PSC use the same value for incoming call leg and all outgoing call legs.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="destinationHostName" type="tns:DomainNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The AVP is provided from the Origin-Host AVP in the ACA Start message, and points out the diameter server address to be used for this charging session and therefore included in the subsequent ACR messages.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="accountAppId" type="tns:ApplicationIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The value of this AVP is set to 3, which is the Diameter base accounting application ID used by the Rf interface</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userName" type="tns:UserNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This contains the private user identity, assigned by the home network. If the user’s private identity is not known in the PSC node in question, then this attribute will not be sent.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="eventTimeStamp" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is a timestamp recorded when the event that caused the ACR message to be sent was received in the PSC.
+(Format HH:MM:SS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sipMethodName" type="tns:SessionInitiationProtocolMethodTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the name of the SIP Method (INVITE, UPDATE etc.) causing an accounting request to be sent to the CDF</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nodeRoleName" type="tns:NodeRoleNameType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This specifies the role of the PSC node.
+The identifier can be one of the following:
+ORIGINATING_ROLE 0: The PSC is applying an originating role, at the outgoing call leg
+TERMINATING_ROLE 1: The PSC is applying a terminating role, at the incoming call leg</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userSessionId" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the session identifier. For a SIP session it contains the SIP Call ID</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:SessionIdentifierType">
+						
+<xs:maxLength value="64"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="originatingAddress" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This identifies the originating user of the session. For a SIP session it is a SIP URI.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UniformResourceIdentifierStringType">
+						
+<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="terminatingAddress" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This identifies the terminating user of the session. For a SIP session it is a SIP URI.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UniformResourceIdentifierStringType">
+						
+<xs:maxLength value="100"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="sipResquestTime" type="tns:RequestDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Holds the time of the initial SIP request.
+(Format HH:MM:SS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sipResponseTime" type="tns:EventDateTimeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The time of the response to the initial SIP Request.
+(Format HH:MM:SS)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="causeCode" type="tns:ExceptionConditionCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is the cause code value from PSC. It is used in ACR Stop and/or ACR Event messages.
+
+Within the cause codes, values less than or equal to 0 are reserved for successful causes while values greater than or equal to 1 are used for failure causes. In case of errors where the session has been terminated as a result of a specific known SIP error code, then the SIP error code is also used as the cause code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="nodeFunctionalityId" type="tns:NodeFunctionTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This includes the functionality identifier of the node where the cause code was generated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="pscSessionType" type="tns:HighPerformancePushToTalkCallTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The PoC-Session-Type AVP specifies the type of the PSC session.
+Pre-Arranged 0
+Chat               1
+Adhoc            2
+1 to 1             3
+Call Alert       4</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="participantCount" type="tns:HighPerformancePushToTalkParticipantCountType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Holds the number of invited parties of the PTT session.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="sipUriAddress" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This AVP holds the SIP URI addresses of the parties whom are involved into the PTT session.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:UniformResourceIdentifierStringType">
+						
+<xs:maxLength value="128"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="accountServiceTypeCode" type="tns:ServiceTypeCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>This is an indication of the type of GW node involved for the leg of the session represented by the ACR message.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="amsProcessedDate" type="tns:EventProcessDateTime" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>The timestamp of when AMS processed the record.
+Format YYYY-MM-DDThh:mm:ss
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AccountingRecordTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Accounting Record Type Code designates a specific type of accounting record.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ApplicationIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Application Identifier uniquely identifies an Application</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="DomainNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Domain Name is a name used in the Domain Name System (DNS), for example the special name which follows the @ sign in an email address, or the Top-level domain names like .com, or the names used by the Session Initiation Protocol (VoIP), or DomainKeys.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Date Time is the calendar date and time on which an event occurred.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="EventProcessDateTime">
+		
+<xs:annotation>
+			
+<xs:documentation>Event Process Date Time is the event's GMT time.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ExceptionConditionCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+
+Example Values:
+0 = Successful completion, 
+4 = Successful completion, but with a warning as to some unusual circumstance, 
+8 = Error, request was not processed successfully, 
+12 = Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+			
+<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+
+Values:
+0 = Successful completion, 
+4 = Successful completion, but with a warning as to some unusual circumstance, 
+8 = Error, request was not processed successfully, 
+12 = Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkCallTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Call Type Code is a code to designate the type of call start or call end.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="HighPerformancePushToTalkParticipantCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>High Performance Push To Talk Participant Count is the number of participants in an HPPTT session.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MoreRecordsAvailableFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+			
+<xs:documentation>More Records Available Flag indicates that there are more records available for retrieval.  
+
+Values:
+TRUE = 1 (there are more records available for retrieval) 
+FALSE = 0 (there are no more records available for retrieval)</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="NodeFunctionTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Node Function Type Code designates the functionality type of the node where the cause code was generated.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NodeRoleNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Node Role Name specifies the role of the PSC node. 
+Valid Values:
+0 - ORIGINATING_ROLE, The PSC is applying an originating role, at the outgoing call leg
+1 - TERMINATING_ROLE 1, The PSC is applying a terminating role, at the incoming call leg
+		</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+			
+<xs:enumeration value="AccountHolder"/>
+			
+<xs:enumeration value="Subscriber"/>
+			
+<xs:enumeration value="ThirdPartyApplication"/>
+			
+<xs:enumeration value="ApplicationProvider"/>
+			
+<xs:enumeration value="TrustedBusinessPartner"/>
+			
+<xs:enumeration value="DataMiner"/>
+			
+<xs:enumeration value="TroubleShooter"/>
+			
+<xs:enumeration value="DatabaseAdministrator"/>
+			
+<xs:enumeration value="InternalApplication"/>
+			
+<xs:enumeration value="LawEnforcement"/>
+			
+<xs:enumeration value="EnterpriseCustomer"/>
+			
+<xs:enumeration value="TPA"/>
+			
+<xs:enumeration value="TelecomMgrAdmin"/>
+			
+<xs:enumeration value="TelecomMgr"/>
+			
+<xs:enumeration value="CustomerCareAdvocate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RealmType">
+		
+<xs:annotation>
+			
+<xs:documentation>The realm is the portion of the URL that occurs after the @ sign.</xs:documentation>
+			
+<xs:documentation>The realm is the portion of the URL that occurs after the @ sign.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="50"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RequestDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Request Date Time is the Date and time that a reqeust is made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowCountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Count Number is the total number of rows returned or transmitted.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RowIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Row Identifier is used to identify a row within a result set or a database table.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ServiceTypeCodeType">
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SessionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Session Identifier is used to uniquely identify a specific session.  All messages pertaining to a specific session must include only one Session Identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="75"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SessionInitiationProtocolMethodTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Session Initiation Protocol Uniform Method Type Code designates the SIP Method (INVITE, UPDATE etc.) causing an accounting request to be sent.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UniformResourceIdentifierStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Uniform Resource Identifier String is one of the generic set of all names and addresses which are short strings which refer to objects (typically on the Internet). The most common kinds of URI are URLs and relative URLs.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="200"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Name consists of all of the characters preceding the @ sign in a URL.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<!---->
+</xs:schema>

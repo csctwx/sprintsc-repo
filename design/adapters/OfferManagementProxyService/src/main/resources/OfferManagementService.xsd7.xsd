@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/setOfferDisposition/v1/setOfferDisposition.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/setOfferDisposition/v1/setOfferDisposition.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.2">
+	
+<!--Date                      Author                 Version                 Change                                                                                                                                 Rel                  SR# -->
+	
+<!--03/01/2011       Steve Whipple            1.0                  Initial Version                                                                                                                           GBL11.3          PJ005472    -->
+	
+<!--03/28/2011       Steve Heichelheim      1.0                Applied MVM standards and simple types                                                                               GBL11.3          PJ005472    -->
+	
+<!--06/24/2011       Steve Whipple            1.1               CS #475228 - changed interactionId length to 30                                                                      GBL11.3          PJ005472    -->
+	
+<!--08/03/2011       Steve Whipple            1.2               CR15 - Added localBillingAccountId, employeeBillingAccountId, salesChannelId to request    GBL11.3          PJ005472    -->
+	
+<xs:element name="setOfferDisposition" type="tns:SetOfferDispositionType"/>
+	
+<xs:element name="setOfferDispositionResponse" type="tns:SetOfferDispositionResponseType"/>
+	
+<xs:complexType name="SetOfferDispositionType">
+		
+<xs:sequence>
+			
+<xs:element name="offerList" type="tns:OfferListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of offers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionDate" type="tns:RequestDateTimeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Date and Time Stamp that the request is sent to Siebel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SetOfferDispositionResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="message" type="tns:ConfirmMessageText">
+				
+<xs:annotation>
+					
+<xs:documentation>set offer disposition response message from Siebel</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="offerId" type="tns:OfferIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="campaignId" type="tns:CampaignIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each offer when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="programId" type="tns:ProgramIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each program when they are created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="level" type="tns:OfferLevelCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies if the offer is BAN or Subscriber Level.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ban" type="tns:BillingAccountNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="interactionId" type="tns:InteractionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier that is assigned to each interaction with a customer in the frontend application.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userId" type="tns:UserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID assigned to each user in the frontend application</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionCode" type="tns:OfferDispositionIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID setup for each reason when it is created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manualTargeting" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies if this offer was dispositioned for a subscriber that was not actually targeted.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionAll" type="tns:BinaryExpressionType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies if the offer was accept for every targeted subscriber in the campaign</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="localBillingAccountId" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Local Billing Account Identifier (Commission account identifier for account). This field will be stored in OMS to be used in Commissions reporting.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="employeeBillingAccountId" type="tns:BillingAccountNumberType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Employee Billing Account Identifier (defines employee executing transaction).  This field will be stored in OMS to be used in Commissions reporting.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="salesChannelId" type="tns:SalesChannelIdentifierType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Sales Channel assigned to the Agent. This field will be stored in OMS to be used for future reporting.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="subscriberList" type="tns:SubscriberListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>List of subscribers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="OfferListType">
+		
+<xs:sequence>
+			
+<xs:element name="offerInfo" type="tns:OfferInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>offer info structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberId" type="tns:SubscriptionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique identifier assigned to each subscriber on an account</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="manualTargeting" type="tns:BinaryExpressionType">
+				
+<xs:annotation>
+					
+<xs:documentation>Identifies if this offer was dispositioned for a subscriber that was not actually targeted.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="dispositionCode" type="tns:OfferDispositionIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Unique ID setup for each reason when it is created in Siebel.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="SubscriberListType">
+		
+<xs:sequence>
+			
+<xs:element name="subscriberInfo" type="tns:SubscriberInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Subscriber info Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="BillingAccountNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Billing Account Number uniquely identifies an instance of Billing Account used to accrue charges for invoicing.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="BinaryExpressionType">
+		
+<xs:annotation>
+			
+<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="CampaignIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Campaign Identifier uiquely identifies a campaign (such as a marketing campaign).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageText">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="InteractionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Interaction Identifier is a value assigned by another system that uniquely identifies the interaction from the other system.</xs:documentation>
+			
+<xs:documentation>Sales Representative Name holds the Individual Name Components of the individual who generated a sale concatentated into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferDispositionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Disposition Identifier uniquely identifies a specific disposition of an offer. (dispositions include Accept, Decline) </xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="4"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Identifier designates a specific offer.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="OfferLevelCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Offer Level Code indicates whether the offer is at at the BAN level or at the Subscriber Level.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ProgramIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Program Identifier uiquely identifies a Program (such as a marketing program).</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:int">
+			
+<xs:totalDigits value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RequestDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Request Date Time is the Date and time that a reqeust is made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="SalesChannelIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Sales Channel Identifier uniquely identifies a PARTY, internal to Sprint or external, that sells Sprint equipment and services.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:minLength value="1"/>
+			
+<xs:maxLength value="20"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="SubscriptionIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Subscription Identifier uniquely identifies an instance of SUBSCRIPTION</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="20"/>
+			
+<xs:minLength value="8"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<!---->
+</xs:schema>

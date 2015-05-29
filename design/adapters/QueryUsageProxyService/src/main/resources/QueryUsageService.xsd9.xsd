@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryQualityOfServiceInfo/v1/queryQualityOfServiceInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryQualityOfServiceInfo/v1/queryQualityOfServiceInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.1">
+	
+<!-- Date           Author                Version      Change                                                                                           Rel            SR#      -->
+	
+<!--1/05/2010   Gustavo Silva        1.0            Initial Draft                                                                                      GBL10.3   PJ000989  -->
+	
+<!--01/05/2011 Steve Heichelheim 1.0  Added MVM Simple Types      GBL10.3 PJ000989 -->
+	
+<!--02/09/2011 Steve Heichelheim 1.1  renamed from queryQosInfo to queryQualityOfServiceInfo                    GBL11.2     PJ000989 -->
+	
+<!--03/25/2011 Steve Heichelheim 1.2  removed cdrDateTime field from Request                  GBL11.2     PJ000989 -->
+	
+<xs:element name="queryQualityOfServiceInfo" type="tns:QueryQualityOfServiceInfoType"/>
+	
+<xs:element name="queryQualityOfServiceInfoResponse" type="tns:QueryQualityOfServiceInfoResponseType"/>
+	
+<xs:complexType name="QueryQualityOfServiceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Mobile number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="QueryQualityOfServiceInfoResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="totalNumberCalls" type="tns:CallCountType">
+				
+<xs:annotation>
+					
+<xs:documentation>Total Number Calls</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="percentOfAbnormalCalls" type="tns:AbnormalCallPercentQuantityType">
+				
+<xs:annotation>
+					
+<xs:documentation>Percent Abnormal Calls</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="AbnormalCallPercentQuantityType">
+		
+<xs:annotation>
+			
+<xs:documentation>Abnormal Call Percent Quantity is the ratio of the number calls that are considered abnormal to the total number of calls.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="CallCountType">
+		
+<xs:annotation>
+			
+<xs:documentation>Call Count is the number of calls returned or counted in a given time period.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="MobileDirectoryNumberStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RequestDateTimeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Request Date Time is the Date and time that a reqeust is made.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	
+<!---->
+	
+<!--New Simple Types-->
+	
+<!---->
+</xs:schema>

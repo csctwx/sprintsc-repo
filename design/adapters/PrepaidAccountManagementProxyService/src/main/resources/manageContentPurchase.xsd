@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 (x64) (http://www.altova.com) by Amber.Peppers@sprint.com (SPRINT) -->
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/manageContentPurchase/v1/manageContentPurchase.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/manageContentPurchase/v1/manageContentPurchase.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.0">
+	<!--Date	            Author             	          Version  Change description   	                                                                     Rel.	         SR#-->
+	<!--05/17/2012        Adriana Fernandes                   1.0         Intial Version                                                                                     GBL12.3       PJ006296  -->
+	<!--05/21/2012     Steve Heichelheim                1.0        Applied MVM standards and simple types.                                              GBL12.3       PJ006296  -->
+	<!--06/06/2012     Adriana Fernandes                1.1        Removed  reservedAmountPrecision, chargeAmountPrecision, balanceAmountPrecision fields from request and response          GBL12.3       PJ006296  -->
+	<!--08/01/2012    Steve Heichelheim     1.2      Changed amount data types from long to decimal  GBL12.3       PJ006296  -->
+	<!--09/24/2012    Steve Heichelheim     1.3      Changed StartDateTime datatype from unsignedInt to dateTime  GBL12.3       PJ006296  -->
+	<!--09/25/2012    Priscilla Carvalho       1.4      CS#555323/555276 Changed SessionStartDate field to optional and SessionInfo structure   GBL 12.3  PJ006296 -->
+	<!--09/27/2012    Adriana Fernandes     1.5      CS# 556453/556455   Changed retransmitInd field to required   GBL 12.3  PJ006296 -->
+	<!--09/28/2012    Priscilla Carvalho       1.6      CS# 556453/556455   Changed ContentProvideInfo field to required   GBL 12.3  PJ006296 -->
+	<!--10/24/2013    Amber Peppers         2.0     Added url, tollFreeNumber, featureCode, shortCode, settlmentId to the request  PJ008720-->
+	<xs:element name="manageContentPurchase" type="tns:ManageContentPurchaseRequestType"/>
+	<xs:element name="manageContentPurchaseResponse" type="tns:ManageContentPurchaseResponseType"/>
+	<xs:complexType name="ManageContentPurchaseRequestType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element name="reserveAndDebitFundInd" type="tns:BinaryExpressionType">
+					<xs:annotation>
+						<xs:documentation>Indicates if call wil be done for both Reserve and Debit functions</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="reserveFundInd" type="tns:BinaryExpressionType">
+					<xs:annotation>
+						<xs:documentation>Indicates if amount needs to reserved</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="debitFundInd" type="tns:BinaryExpressionType">
+					<xs:annotation>
+						<xs:documentation>Indicates if debits needs to be deducted from available reserved amount </xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="creditFundInd" type="tns:BinaryExpressionType">
+					<xs:annotation>
+						<xs:documentation>Indicates if amount needs to be credited</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="messageId" type="tns:MessageIdentifierType">
+				<xs:annotation>
+					<xs:documentation>A unique message identifier used by the client to synchronize request and response message. Can be optionally used as unique transaction identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sessionInfo" type="tns:SessionInfoType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Structure containing session data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceInfo" type="tns:ResourceInfoType">
+				<xs:annotation>
+					<xs:documentation>Structure containing resource data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fundInfo" type="tns:FundInfoType">
+				<xs:annotation>
+					<xs:documentation>Structure containing fund amount data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contentProviderInfo" type="tns:ContentProviderInfoType"/>
+			<xs:element name="merchantId" type="tns:MerchantIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identification of the Merchant</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="retransmitInd" type="tns:TransmisionTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Indicates whether to perform a duplicate.
+0 – regular (Regular event)
+1- retransmitted event (An event retransmitted due to an error or response timeout.)
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="referenceNumber" type="tns:ExternalSystemReferenceNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>A unique reference identifier 
+Informational parameter
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="url" type="tns:UniformResourceLocatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Website of content provider</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="tollFreeNumber" type="tns:PhoneNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The contact information associated with the content provider.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureCode" type="tns:FeatureCodeType">
+				<xs:annotation>
+					<xs:documentation>Attribute that defines a content purchase as Sprint, Third3rd Party Tax Exclusive, or Third3rd Party Tax Inclusive in AmdocsAMDOCs. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="settlementId" type="tns:SettlementTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Defines categories of on-line purchases and whether or not they are Sprint charges, third 3rd party tax inclusive charges, or third3rd party tax exclusive charges.
+
+Alpha numeric characters will be stripped off before passing this field to Amdocs shortContentType</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="shortCode" type="tns:PremiumShortMessageServiceProductIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>a five to nine digital numerical string for a premium SMS charge that identifies a premium SMS product. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManageContentPurchaseResponseType">
+		<xs:sequence>
+			<xs:element name="responseCode" type="tns:ExceptionConditionCodeType">
+				<xs:annotation>
+					<xs:documentation>Return Code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sessionId" type="tns:SessionIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The unique session or transaction identifier from the request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sessionRequestNumber" type="tns:SequenceNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Initial (0) and interim requests
+Default: 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currencyCode" type="tns:CurrencyCodeType">
+				<xs:annotation>
+					<xs:documentation>Currency code in accordance with ISO 4217.
+Default: USD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reservedAmountValue" type="tns:TotalReservedAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The reserved Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeAmountValue" type="tns:ChargeAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The charge amount value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="balanceAmountValue" type="tns:BalanceAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The remaining balance amount.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentProviderInfoType">
+		<xs:sequence>
+			<xs:element name="contentProviderName" type="tns:ContentMediaProviderNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Content Provider Name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contentProviderId" type="tns:ContentMediaProviderIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Content Provider ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contentProductId" type="tns:ProductIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Content Provider Product ID Informational parameter</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contentProductName" type="tns:ProductNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Product Name
+Informational parameter
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contentProductDesc" type="tns:ProductDescriptionType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Product Description</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="finActivityType" type="tns:FinancialEventTypeCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Valid values for Fin_activity_type in Debit/Credit API used:
+Purchase
+RecurringCharge
+Refund
+Reversal</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FundInfoType">
+		<xs:sequence>
+			<xs:element name="reserveAmountValue" type="tns:TotalReservedAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The reserved Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeAmountValue" type="tns:ChargeAmountType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The charge amount value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currencyCode" type="tns:CurrencyCodeType">
+				<xs:annotation>
+					<xs:documentation>Currency code in accordance with ISO 4217.
+Default: USD</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargeTime" type="tns:ChargeDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies charge time.
+The format is ‘Day Mon DD hh:mm:ss ZZZ YYYY’
+For example, ‘Wed Aug 09 08:32:11 PDT 2006’
+The time zone is the time zone of the server that QSMP is running on.
+Informational parameter
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="releaseSessionId" type="tns:YesNoIndicatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Indicates last debit. Reserved amount is freed and the session is closed. 
+Values: Yes, No
+Default: Y
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceInfoType">
+		<xs:sequence>
+			<xs:element name="resourceIdType" type="tns:DeviceSerialNumberTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>The subscriber identifier (resource) type. 
+1-ESN CDMA 
+2-IMSI iDEN 
+3-MSISDN
+4-MIN 
+5 -PTN 
+Default: 4,5</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resourceId" type="tns:SubscriberIdentifierType">
+				<xs:annotation>
+					<xs:documentation>The subscriber identifier (resource) value</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceType" type="tns:ServiceTypeCodeType">
+				<xs:annotation>
+					<xs:documentation>Identifies the executed service
+1-2WM iDEN
+2- SMS CDMA
+3- MMS iDEN
+4- MMS CDMA
+5- Content (will it be default value)
+6- Celebrity Voicemail
+Default: 5</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SessionInfoType">
+		<xs:sequence>
+			<xs:element name="sessionId" type="tns:SessionIdentifierType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique session or transaction identifier. 
+This value will be generated by EAI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sessionRequestNumber" type="tns:SequenceNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The request number within the session
+Initial (0) and interim requests
+Default: 0</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sessionStartDate" type="tns:StartDateTimeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Session start date and time.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!---->
+	<!--MVM/Shared Simple Types-->
+	<xs:simpleType name="BalanceAmountType">
+		<xs:annotation>
+			<xs:documentation>Balance Amount is a the dollar value associated to an account at a point in time.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="BinaryExpressionType">
+		<xs:annotation>
+			<xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	<xs:simpleType name="ChargeAmountType">
+		<xs:annotation>
+			<xs:documentation>Charge Amount is the dollar amount charged for goods or services.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="ChargeDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Charge Date Time is the calendar month, day, year, hour, minute, second and fraction of a second on which a charge was made.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="28"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContentMediaProviderIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Content Media Provider Identifier uniquely identifies the provider of content media.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="36"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContentMediaProviderNameType">
+		<xs:annotation>
+			<xs:documentation>Content Media Provider Name is the natural language name of the provider of content media.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CurrencyCodeType">
+		<xs:annotation>
+			<xs:documentation>Currency Code is the ISO format of currency. Ex: USD - U.S. dollar.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeviceSerialNumberTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Device Serial Number Type Code designates a device type: IMEI(I), MSN(M), SIM(S), Kit (K), or ESN (E) for CDMA platform.
+Valid values:
+I - IMEI
+M - MSN
+S - SIM
+K - Kit
+E - ESN
+A - Airave (macId)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="ExceptionConditionCodeType">
+		<xs:annotation>
+			<xs:documentation>Exception Condition Code is the provider’s declaration of its success or failure in processing the submitted request.
+Example Values:
+0 - Successful completion, 
+4 - Successful completion, but with a warning as to some unusual circumstance, 
+8 - Error, request was not processed successfully, 
+12 - Severe error, represents a failure that could indicate a major system irregularity</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="ExternalSystemReferenceNumberType">
+		<xs:annotation>
+			<xs:documentation>External System Reference Number is a unique number within the external system that is passed to Sprint and used for cross reference purposes.  This number is passed from Sprint back to the external system to help the external system identify an instance of a particular record in that system.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="24"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeatureCodeType">
+		<xs:annotation>
+			<xs:documentation>Feature Code uniquely identifies the feature being granted in this service feature</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FinancialEventTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Financial Event Type Code designates a specific type of financial event.
+Valid values for Fin_activity_type in Debit/Credit API used:
+Purchase,
+RecurringCharge,
+Refund,
+Reversal...</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MerchantIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Merchant Identifier holds a value the uniquely indenties an instance of a MERCHANT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="5"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MessageIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Message Identifier uniquely identifies a message.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="PhoneNumberType">
+		<xs:annotation>
+			<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PremiumShortMessageServiceProductIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Premium Short Message Service (SMS) Product Identifier uniquley identifies premium SMS product.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductDescriptionType">
+		<xs:annotation>
+			<xs:documentation>Product Description contains a brief textual description of the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Product Identifier is a code that uniquely idenfies and instance or group of items offered for sale to the Customer.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+			<xs:minLength value="2"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ProductNameType">
+		<xs:annotation>
+			<xs:documentation>Product Name contains a common name for the PRODUCT.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="2"/>
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SequenceNumberType">
+		<xs:annotation>
+			<xs:documentation>Sequence Number is a unique positive integer assigned to an item in a list of items.  It is used to determine order in a list of items or to identify a specific item.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="ServiceTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Service Type Code indicates the type of service being offered. 
+Example Values are:
+C - Cellular 
+D - Dispatch Private
+G - Dispatch Group, 
+S - SMS, 
+P - Packet Data, 
+M - M2M, 
+T - Toll </xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:unsignedInt"/>
+	</xs:simpleType>
+	<xs:simpleType name="SessionIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Session Identifier is used to uniquely identify a specific session.  All messages pertaining to a specific session must include only one Session Identifier.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="SettlementTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Settlement Type Code categorizes on-line purchases by whether or not they are Sprint charges, third 3rd party tax inclusive charges, or third3rd party tax exclusive charges.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="9"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StartDateTimeType">
+		<xs:annotation>
+			<xs:documentation>Start Date Time contains the first calendar day of a time duration.  For example, in a Collection Case this would be the calendar day and time the Billing Account was put into Collections.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:dateTime"/>
+	</xs:simpleType>
+	<xs:simpleType name="SubscriberIdentifierType">
+		<xs:annotation>
+			<xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:simpleType name="TotalReservedAmountType">
+		<xs:annotation>
+			<xs:documentation>Total Reserved Amount contains the monetary amount of the total reserved amounts in all open sessions.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal"/>
+	</xs:simpleType>
+	<xs:simpleType name="TransmisionTypeCodeType">
+		<xs:annotation>
+			<xs:documentation>Transmission Type Code designates whether the event is a duplicate transmission or a regular event.
+0 - regular (Regular event)
+1- retransmitted event (An event retransmitted due to an error or response timeout.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:long"/>
+	</xs:simpleType>
+	<xs:simpleType name="UniformResourceLocatorType">
+		<xs:annotation>
+			<xs:documentation>Uniform Resource Locator (URL, previously Universal Resource Locator) - usually pronounced by sounding out each letter but, in some quarters, pronounced"Earl"- is the unique address for a file that is accessible on the Internet. A common way to get to a Web site is to enter the URL of its home page file in your Web browser's address line. However, any file within that Web site can also be specified with a URL. Such a file might be any Web (HTML) page other than the home page, an image file, or a program such as a common gateway interface application or Java applet. The URL contains the name of the protocol to be used to access the file resource, a domain name that identifies a specific computer on the Internet, and a pathname, a hierarchical description that specifies the location of a file in that computer.On the Web (which uses the Hypertext Transfer Protocol, or HTTP), an example of a URL is:http://www.ietf.org/rfc/rfc2396.txtwhich specifies the use of a HTTP (Web browser) application, a unique computer named www.ietf.org, and the location of a text file or page to be accessed on that computer whose pathname is /rfc/rfc2396.txt.A URL for a particular image on a Web site might look like this:http://searchnetworking.techtarget.com/WhatIs/images/coaxla.gifA URL for a file meant to be downloaded using the File Transfer Protocol (FTP) would require that the"ftp"protocol be specified like this hypothetical URL:ftp://www.somecompany.com/whitepapers/widgets.psA URL is a type of URI (Uniform Resource Identifier, formerly called Universal Resource Identifier.)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="30"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="YesNoIndicatorType">
+		<xs:annotation>
+			<xs:documentation>DEPRECATE (Use Binary Expression) Yes No Indicator binary expression where Y represents the True state and N represents the False state.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!---->
+</xs:schema>

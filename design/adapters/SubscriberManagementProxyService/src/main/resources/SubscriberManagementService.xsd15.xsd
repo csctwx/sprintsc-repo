@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema targetNamespace="http://integration.sprint.com/interfaces/cancelSubscriber/v1/cancelSubscriber.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/cancelSubscriber/v1/cancelSubscriber.xsd">
+  <!--Date              Author                      Version     Change                                                                           Rel                          SR#-->
+  <!--7/18/2012      LaRonna Tisdale        1.0            Initial Version                                                                SCRUM              PJ007505-->
+  <!--7/19/2012   Steve Heichelheim    1.0          Added MVM standards and simple types                           SCRUM              PJ007505-->
+  <xs:element name="cancelSubscriber" type="tns:CancelSubscriberRequestType">
+    <xs:annotation>
+      <xs:documentation>Comment describing your root element</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="cancelSubscriberResponse" type="tns:CancelSubscriberResponseType"/>
+  <xs:complexType name="CancelSubscriberRequestType">
+    <xs:sequence>
+      <xs:element name="subscriberInfo" type="tns:SearchCriteriaType">
+        <xs:annotation>
+          <xs:documentation>Contains the subscriber identifier.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="changeSubStatusInfo" type="tns:ChangeSubStatusInfoType">
+        <xs:annotation>
+          <xs:documentation>Contains information about the contact associated with the case.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="applicationDataInfo" type="tns:ApplicationDataInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Identifies the source application and user</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelSubscriberResponseType">
+    <xs:sequence>
+      <xs:element name="message" type="tns:ConfirmMessageTextType">
+        <xs:annotation>
+          <xs:documentation>If Reply Code is 0 or 4 return “Success”</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ActivityInfoType">
+    <xs:sequence>
+      <xs:element name="activityReason" type="tns:ActivityReasonCodeType">
+        <xs:annotation>
+          <xs:documentation>Reason</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="activityDate" type="tns:ActivityDateType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Activity Date</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="penaltyWavInd" type="tns:BinaryExpressionType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Penalty Waive Indicator</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="penaltyWavReason" type="tns:PenaltyWaiveReasonTypeCodeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Penalty Waive Reason. The value is retrieved from the reason_code field in the ADJUSTMENT_REASON reference table, where adj_actv_code = ‘FEW’’ and man_adj_ind = ‘Y’</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="overwriteEtfAmount" type="tns:EarlyContractTerminationFeeType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Overwrite ETF amount to be applied when cancelling the subscriber</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="overwriteEtfInd" type="tns:BinaryExpressionType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Indicator that the ETF amount for the subscriber should be overwritten. Valid values are Y/N. When set to Y, ETF for the subscriber will be set to overwriteETFAmount.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ApplicationDataInfoType">
+    <xs:sequence>
+      <xs:element name="associateId" type="tns:AssociateIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Passed from external application (Radio Shack, RMS+) to Sprint in the Ensemble Billing system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="storeId" type="tns:RetailStoreIdentifierType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Passed from external application (Radio Shack, RMS+) to Sprint in the Ensemble Billing system</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeSubStatusInfoType">
+    <xs:sequence>
+      <xs:element name="activityInfo" type="tns:ActivityInfoType">
+        <xs:annotation>
+          <xs:documentation>Structure containing the Activity Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="memoInfo" type="tns:MemoInfoType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Structure containing the Memo Information</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SearchCriteriaType">
+    <xs:choice>
+      <xs:element name="subscriberId" type="tns:SubscriberIdentifierType">
+        <xs:annotation>
+          <xs:documentation>The Subscriber Identifier is a string that uniquely identifies a subscriber</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="mdn" type="tns:MobileDirectoryNumberStringType">
+        <xs:annotation>
+          <xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ufmi" type="tns:UrbanFleetMemberIdentifierStringType">
+        <xs:annotation>
+          <xs:documentation>Urban Fleet Member Identifier
+ufmi of a subscriber – a structure containing Urban Id, Fleet Id, Member Id (e.g., 128*301*12331)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="deviceSerialNumber" type="tns:DeviceSerialNumberType">
+        <xs:annotation>
+          <xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ipAddress" type="tns:InternetProtocolAddressStringType">
+        <xs:annotation>
+          <xs:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="imsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+        <xs:annotation>
+          <xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nai" type="tns:NetworkAccessIdentifierType">
+        <xs:annotation>
+          <xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="additionalImsi" type="tns:InternationalMobileSubscriberIdentityStringType">
+        <xs:annotation>
+          <xs:documentation>Additional IMSI for any subscriber under the BAN</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="hppttId" type="tns:HighPerformancePushToTalkIdentifierStringType">
+        <xs:annotation>
+          <xs:documentation>Value of the HPPTT (High Performance Push-To-Talk) resource. HPPTT ID will have a user ID and a domain.The user ID can be 15 chars maximum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="MemoInfoType">
+    <xs:sequence>
+      <xs:element name="memoSource" type="tns:MemoSourceCodeType">
+        <xs:annotation>
+          <xs:documentation>Memo source</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="userText" type="tns:MemoTextType" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Memo text</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!---->
+  <!--MVM/Shared Simple Types-->
+  <xs:simpleType name="ActivityDateType">
+    <xs:annotation>
+      <xs:documentation>Activity Date is the calendar day the activity completed.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:date"/>
+  </xs:simpleType>
+  <xs:simpleType name="ActivityReasonCodeType">
+    <xs:annotation>
+      <xs:documentation>Reason Code represents the unique identifier of an explanation, justification or statement of motive.</xs:documentation>
+      <xs:documentation>Reason Code String represents the unique identifier of an explanation, justification or statement of motive where the identifying value is a String.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="4"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AssociateIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Associate Identifier is the Retail Store Associate Identifier.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="BinaryExpressionType">
+    <xs:annotation>
+      <xs:documentation>Binary Expression is a type of an expression with two possible states,"true"and"false".</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:boolean"/>
+  </xs:simpleType>
+  <xs:simpleType name="ConfirmMessageTextType">
+    <xs:annotation>
+      <xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="99"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DeviceSerialNumberType">
+    <xs:annotation>
+      <xs:documentation>Device Serial Number is a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+      <xs:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:minLength value="8"/>
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="EarlyContractTerminationFeeType">
+    <xs:annotation>
+      <xs:documentation>Early Contract Termination Fee is the amount a Customer will owe if a contract or agreement is canceled before the fulfillment date.</xs:documentation>
+      <xs:documentation>Early Contract Termination Fee is the amount a Customer will owe if a contract or agreement is canceled before the fulfillment date.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+      <xs:totalDigits value="11"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="HighPerformancePushToTalkIdentifierStringType">
+    <xs:annotation>
+      <xs:documentation>High Performance Push To Talk Identifier (HPPTTID) is the identifier of a Subscription utilizing the QChat  Push-To-Talk techniology. HPPTTID is constructed in the username@domain URI format.  The username will be a MDN or UFMI based number.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="40"/>
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="InternationalMobileSubscriberIdentityStringType">
+    <xs:annotation>
+      <xs:documentation>International Mobile Subscriber Identity (IMSI) is a unique number associated with all GSM and Universal Mobile Telecommunications System (UMTS) network mobile phone users. It is stored in the Subscriber Identity Module (SIM) inside the phone and is sent by the phone to the network. It is also used to acquire other details of the mobile in the Home Location Register (HLR) or as locally copied in the Visitor Location Register. In order to avoid the subscriber being identified and tracked by eavesdroppers on the radio interface, the IMSI is sent as rarely as possible and a randomly generated TMSI is sent instead.
+
+The IMSI is used in any mobile network that interconnects with other networks, in particular CDMA and EVDO networks as well as GSM nets. This number is provisioned in the phone directly or in the R-UIM card (a CDMA analogue equivalent to a SIM card in GSM)
+
+An IMSI is usually 15 digits long, but can be shorter (for example MTN South Africa's IMSIs are 14 digits). The first 3 digits are the Mobile Country Code (MCC), and is followed by the Mobile Network Code (MNC), either 2 digits (European standard) or 3 digits (North American standard). The remaining digits are the Mobile Subscriber Identification Number (MSIN) within the network's customer base.
+
+The IMSI conforms to the International Telecommunication Union (ITU) E.212 numbering standard.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="InternetProtocolAddressStringType">
+    <xs:annotation>
+      <xs:documentation>Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="15"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MemoSourceCodeType">
+    <xs:annotation>
+      <xs:documentation>Memo Source Code designates the source of a memo.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MemoTextType">
+    <xs:annotation>
+      <xs:documentation>Memo Text is the body of textual content of a MEMO.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="2000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="MobileDirectoryNumberStringType">
+    <xs:annotation>
+      <xs:documentation>Mobile Directory Number (MDN) is the actual phone number one would dial to reach a specific mobile phone.
+
+
+
+Prior to Wireless Number Portability, MDN was the same number as the Mobile Identification Number (MIN) for many mobile phones. But now that MDNs can be ported (moved) to other carriers, MDN and MIN will be different for ported numbers.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:length value="10"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="NetworkAccessIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xs:documentation>
+      <xs:documentation>alias: URI</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="64"/>
+      <xs:pattern value=".+@.+\..+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="PenaltyWaiveReasonTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>Penalty Waive Reason Type Code contains the value that represents the reason the penality was waived.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="6"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RetailStoreIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Retail Store Identifer is the store ID passed from the retailer to inComm.  These are 4 to 6 characters in length sometimes padded with zeros.  Leading 0s should not be stripped off.
+(Examples: 001859, 1165, 0649)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="7"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="SubscriberIdentifierType">
+    <xs:annotation>
+      <xs:documentation>Subscriber Identifier is a string that uniquely identifies a subscriber.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+      <xs:minLength value="8"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UrbanFleetMemberIdentifierStringType">
+    <xs:annotation>
+      <xs:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="UserIdentifierType">
+    <xs:annotation>
+      <xs:documentation>User Identifier represents an identifier of a PARTY used in logging into a computerized system.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="9"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <!---->
+</xs:schema>

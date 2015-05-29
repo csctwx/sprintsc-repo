@@ -1,0 +1,80 @@
+subprojects {
+	apply plugin: 'maven-publish'
+	sourceSets.main.java.srcDirs = ["src/main/java", "${buildDir}/generated-sources/main"]
+	jar.baseName=jarfilename
+	jar.version=version
+	configurations {
+		jaxws
+	}
+	task wsimport  {
+		ext.sourcesDir = file("${buildDir}/generated-sources/main")
+        ext.classesDir = file("${buildDir}/classes/main")
+		ext.wsdlSrc = file(wsdlfilename)
+		inputs.file wsdlSrc
+		outputs.dir classesDir
+		doLast{
+			ant {
+				sourcesDir.mkdirs()
+				classesDir.mkdirs()
+				taskdef(name:'wsimport',
+					classname:'com.sun.tools.ws.ant.WsImport',
+					classpath:configurations.jaxws.asPath)
+				wsimport(keep:true, 
+					extension:true,
+					XadditionalHeaders:true,
+					destdir: classesDir,
+					sourcedestdir: sourcesDir,
+					wsdllocation:wsdlLocation,
+					wsdl: wsdlSrc)
+			}
+		}
+	}
+	task sourcesJar(type: Jar) {
+		baseName jarfilename
+		version version
+		classifier 'sources'
+		from sourceSets.main.allSource
+	}
+	artifacts {
+		archives sourcesJar
+	}
+	ext {
+		artifactoryBaseUrl = rootProject.artifactory_contextUrl
+		artifactorySnapshotRepoUrl = "$artifactoryBaseUrl/proj-rnam_cac-dev-local"
+		artifactoryReleaseRepoUrl = "$artifactoryBaseUrl/proj-rnam_cac-release-local"
+	}
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				from components.java
+				groupId "com.ericsson.cac.sprint.adapters"
+				artifactId jarfilename
+				version version
+				artifact sourcesJar
+			}
+		}
+		repositories {
+			maven {
+				name 'ericssonArtifactory'
+				url project.version.endsWith('-SNAPSHOT') ?	artifactorySnapshotRepoUrl : artifactoryReleaseRepoUrl
+				credentials {
+					username = rootProject.artifactory_user
+					password = rootProject.artifactory_password
+				}
+			}
+		}		
+	}
+	dependencies {
+		testCompile 'org.mockito:mockito-all:1.9.5'
+		compile(
+			[group: 'org.springframework', name: 'spring-remoting', version: '2.0.8']
+		)
+		jaxws( group: "com.sun.xml.ws", name: "jaxws-tools", version: "2.2.7" ){
+			exclude group: "org.glassfish.ha"
+		}
+	}
+	wsimport.onlyIf { !(new File(buildDir, 'generated-sources/main').exists()) }
+	compileJava.dependsOn wsimport
+}
+
+

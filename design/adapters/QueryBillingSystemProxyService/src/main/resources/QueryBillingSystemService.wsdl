@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/interfaces/QueryBillingSystemService/v1/QueryBillingSystemService.wsdl" targetNamespace="http://integration.sprint.com/interfaces/QueryBillingSystemService/v1/QueryBillingSystemService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryBillingSystemService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryBillingSystemService.xsd4.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryBillingSystemService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/queryBillingSystemCode/v4/queryBillingSystemCodeV4.xsd"/>
+<xsd:import schemaLocation="QueryBillingSystemService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/queryBillingSystemCode/v5/queryBillingSystemCodeV5.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryBillingSystemCodeV4Request">
+<wsdl:part name="queryBillingSystemCodeV4" element="xsns:queryBillingSystemCodeV4" xmlns:xsns="http://integration.sprint.com/interfaces/queryBillingSystemCode/v4/queryBillingSystemCodeV4.xsd"/></wsdl:message>
+<wsdl:message name="queryBillingSystemCodeV4Response">
+<wsdl:part name="queryBillingSystemCodeV4Response" element="xsns:queryBillingSystemCodeV4Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryBillingSystemCode/v4/queryBillingSystemCodeV4.xsd"/></wsdl:message>
+<wsdl:message name="queryBillingSystemCodeV5Request">
+<wsdl:part name="queryBillingSystemCodeV5" element="xsns:queryBillingSystemCodeV5" xmlns:xsns="http://integration.sprint.com/interfaces/queryBillingSystemCode/v5/queryBillingSystemCodeV5.xsd"/></wsdl:message>
+<wsdl:message name="queryBillingSystemCodeV5Response">
+<wsdl:part name="queryBillingSystemCodeV5Response" element="xsns:queryBillingSystemCodeV5Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryBillingSystemCode/v5/queryBillingSystemCodeV5.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="QueryBillingSystemPortType">
+<wsdl:operation name="QueryBillingSystemCodeV4">
+<wsdl:input name="QueryBillingSystemCodeV4Request" message="ns0:queryBillingSystemCodeV4Request"/>
+<wsdl:output name="QueryBillingSystemCodeV4Response" message="ns0:queryBillingSystemCodeV4Response"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QueryBillingSystemCodeV5">
+<wsdl:input name="QueryBillingSystemCodeV5Request" message="ns0:queryBillingSystemCodeV5Request"/>
+<wsdl:output name="QueryBillingSystemCodeV5Response" message="ns0:queryBillingSystemCodeV5Response"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="queryBillingSystemCodeSOAPBinding" type="ns0:QueryBillingSystemPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryBillingSystemCodeV4">
+<soap11:operation soapAction="queryBillingSystemCodeV4" style="document"/>
+<wsdl:input name="QueryBillingSystemCodeV4Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryBillingSystemCodeV4Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryBillingSystemCodeV5">
+<soap11:operation soapAction="queryBillingSystemCodeV5" style="document"/>
+<wsdl:input name="QueryBillingSystemCodeV5Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryBillingSystemCodeV5Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryBillingSystemService">
+<wsdl:port name="queryBillingSystemCodePortType" binding="ns0:queryBillingSystemCodeSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryBillingSystemService"/></wsdl:port></wsdl:service></wsdl:definitions>

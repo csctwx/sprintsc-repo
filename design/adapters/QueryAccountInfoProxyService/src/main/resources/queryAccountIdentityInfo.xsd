@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by Sprint Employee (SPRINT) -->
+<!-- edited with XML Spy v4.2 U (http://www.xmlspy.com) by Bramh Gupta (Amdocs) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://integration.sprint.com/interfaces/queryAccountIdentityInfo/v1/queryAccountIdentityInfo.xsd" targetNamespace="http://integration.sprint.com/interfaces/queryAccountIdentityInfo/v1/queryAccountIdentityInfo.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Date 	                         Author 	                           Version 	Change	                                                                                                                           Rel	SR#-->
+	<!--01/09/2012                      Ace Cineus                                 1.0              Increased maxLen restriction of SubscriberDeviceSerialNumber from 18 to 20               GBL 12.2         PJ006784-->
+	<!---->
+	<xsd:element name="queryAccountIdentityInfo" type="tns:QueryAccountIdentityInfo"/>
+	<xsd:element name="queryAccountIdentityInfoResponse" type="tns:QueryAccountIdentityInfoResponse"/>
+	<xsd:complexType name="QueryAccountIdentityInfo">
+		<xsd:sequence>
+			<xsd:element name="info" type="tns:InputInfo"/>
+			<xsd:element name="billingSystemCode" type="tns:BillingSystemCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>billing system that should be searched. This should be sent in only if excludeBillingSysInd is NOT sent in</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="excludeBillingSystemCode" type="tns:BillingSystemCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>billing system that should not be searched. This should be sent in only if billingSysInd is NOT sent in</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="QueryAccountIdentityInfoResponse">
+		<xsd:sequence>
+			<xsd:element name="accountIdentityInfo" type="tns:AcctIdentityInfo"/>
+			<xsd:element name="subscriberIdentityInfo" type="tns:SubscriberIdentityInfo" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Will be returned when input is subsId, equipmentId or a subscriber resource</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="AcctIdentityInfo">
+		<xsd:sequence>
+			<xsd:element name="ssn" type="tns:SocialSecurityNumberStringEns" minOccurs="0"/>
+			<xsd:element name="taxId" type="tns:TaxAuthorityId" minOccurs="0"/>
+			<xsd:element name="ban" type="tns:AccountIdentifier" minOccurs="0"/>
+			<xsd:element name="passCode" type="tns:BillingAcctPassword" minOccurs="0"/>
+			<xsd:element name="zipCode" type="tns:USPSPostalCd" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Optional for P2W</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="firstName" type="tns:FirstNameEns" minOccurs="0"/>
+			<xsd:element name="lastName" type="tns:LastNameEns" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Optional for P2W</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="activeInd" type="tns:AccountActiveFlag"/>
+			<xsd:element name="billingSystemCode" type="tns:BillingSystemCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Not returned when  AcctIdentityInfo.activeInd = false</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="pinInd" type="tns:PinSecurityFlag" minOccurs="0"/>
+			<xsd:element name="securityInfo" type="tns:SecurityInfo" minOccurs="0"/>
+			<xsd:element name="rebateInd" type="tns:AccountRebateFlag" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="InputInfo">
+		<xsd:choice>
+			<xsd:element name="ban" type="tns:AccountIdentifier"/>
+			<xsd:element name="subscriberId" type="tns:SubscriptionIdentifier"/>
+			<xsd:element name="mdn" type="tns:MobileDirectoryNumberString"/>
+			<xsd:element name="deviceSerialNumber" type="tns:SubscriberDeviceSerialNumber"/>
+			<xsd:element name="ipAddress" type="tns:InternetProtocolAddressString"/>
+			<xsd:element name="ufmi" type="tns:UrbanFleetMemberIdentifierString"/>
+			<xsd:element name="nai" type="tns:NetworkAccessIdentifierEns"/>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="SecurityInfo">
+		<xsd:sequence>
+			<xsd:element name="pin" type="tns:PasswordPin"/>
+			<xsd:element name="questionCode" type="tns:SecurityQuestionIdentifier" minOccurs="0"/>
+			<xsd:element name="question" type="tns:SecurityQuestionText" minOccurs="0"/>
+			<xsd:element name="answer" type="tns:SecurityAnswer" minOccurs="0"/>
+			<xsd:element name="securityPlusInd" type="tns:SecurityPlusFlag" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="SubscriberIdentityInfo">
+		<xsd:sequence>
+			<xsd:element name="activeInd" type="tns:AccountActiveFlag"/>
+			<xsd:element name="networkInd" type="tns:NetworkIndicatorCode" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Not returned when SubscriberIdentityInfo.activeInd = false</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<!--     MVM Simple Types-->
+	<xsd:simpleType name="BillingAcctPassword">
+		<xsd:annotation>
+			<xsd:documentation>Password holds the string of characters a PARTY designated as a credential into a system, network or Customer Account.  Password is something only the PARTY knows and the authenticator can confirm.  Also see OTP and Secret Q&amp;A.</xsd:documentation>
+			<xsd:documentation>Billing Account Password contains the system access password the Account Holder or the External  Account Administrator used to gain entry into the system  in order to make changes to the Billing Account.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:PasswordString">
+			<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="BillingSystemCode">
+		<xsd:annotation>
+			<xsd:documentation>Billing System Code is used to specify which Billing System is responsible for providing billing for the specified MDN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ENS"/>
+			<xsd:enumeration value="ENW"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="ElectronicAddressString">
+		<xsd:annotation>
+			<xsd:documentation>Electronic Address represents the character string of the electronic address.</xsd:documentation>
+			<xsd:documentation>ElectronicAddressString represents the character string of the electronic address.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FirstName">
+		<xsd:annotation>
+			<xsd:documentation>First Name or "Given Name" is a name which specifies and differentiates between members of a group of individuals, especially a family, all of whose members usually share the same family name.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="40"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FirstNameEns">
+		<xsd:restriction base="tns:FirstName">
+			<xsd:maxLength value="32"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="IdentifierString">
+		<xsd:annotation>
+			<xsd:documentation>Identifier String  holds a String value that uniquely identifies an instance of an object.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="InternetProtocolAddressString">
+		<xsd:annotation>
+			<xsd:documentation>Electronic Address represents the character string of the electronic address.</xsd:documentation>
+			<xsd:documentation>An Internet Protocol Address is the numerical address by which a location in the Internet is identified. Computers on the Internet use IP addresses to route traffic and establish connections among themselves.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:ElectronicAddressString">
+			<xsd:maxLength value="15"/>
+			<xsd:minLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LastName">
+		<xsd:annotation>
+			<xsd:documentation>Last Name represents the family name or surname is the part of an INDIVIDUAL PARTY's name that identifies what family the individual belongs to.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="60"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="LastNameEns">
+		<xsd:restriction base="tns:LastName">
+			<xsd:maxLength value="60"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MobileDirectoryNumberString">
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NetworkAccessIdentifierEns">
+		<xsd:restriction base="tns:NetworkAccessIdentifierString">
+			<xsd:maxLength value="64"/>
+			<xsd:minLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NetworkAccessIdentifierString">
+		<xsd:annotation>
+			<xsd:documentation>Network Access Identifier holds the concatenation of the a user name and domain.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="250"/>
+			<xsd:pattern value=".+@.+\..+"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NetworkIndicatorCode">
+		<xsd:annotation>
+			<xsd:documentation>Network Indicator Code specifies the network being used.
+Values:
+I - iDEN
+C - CDMA</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="I">
+				<xsd:annotation>
+					<xsd:documentation>iDEN</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="C">
+				<xsd:annotation>
+					<xsd:documentation>CDMA</xsd:documentation>
+				</xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PasswordString">
+		<xsd:annotation>
+			<xsd:documentation>Password holds the string of characters a PARTY designated as a credential into a system, network or Customer Account.  Password is something only the PARTY knows and the authenticator can confirm.  Also see OTP and Secret Q&amp;A.</xsd:documentation>
+			<xsd:documentation>Password String holds the string characters a PARTy designated as a Password into a system or Customer Account.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SecurityAnswer">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SecurityQuestionIdentifier">
+		<xsd:restriction base="tns:IdentifierString">
+			<xsd:maxLength value="3"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SubscriptionIdentifier">
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="15"/>
+			<xsd:minLength value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="TaxAuthorityId">
+		<xsd:annotation>
+			<xsd:documentation>Tax Authority ID is a sequence number concatenated to VertexGeographicCityCode, VertexGeographicCountyCode and VertexGeographicStateCode to produce the unique identifier of a Taxing jurisdiction.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="UrbanFleetMemberIdentifierString">
+		<xsd:annotation>
+			<xsd:documentation>Urban Fleet Member Identifier String contains the concatenation of the Urban Identifier,'*' Fleet Identifier, '*' and Member IDentifier used to identify the Direct Connect Subscriber in the iDen network. </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:IdentifierString">
+			<xsd:maxLength value="23"/>
+			<xsd:minLength value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="USPSPostalCd">
+		<xsd:annotation>
+			<xsd:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xsd:documentation>
+			<xsd:documentation>USPS Postal Code contains the first 5 characters of the nine digit USPS Postal Code.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:length value="5"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<!--     New Simple Types-->
+	<xsd:simpleType name="AccountActiveFlag">
+		<xsd:annotation>
+			<xsd:documentation>Account Active Flag is a boolean indicator of whether the BAN/account is Active or Not Active.
+true - active
+false - not active</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="AccountIdentifier">
+		<xsd:annotation>
+			<xsd:documentation>The Account Identifier is a string that uniquely identifies an account.&#13;
+&#13;
+Required for activating a reseller ESN/MEID to verify the ESN/MEID and the account are both reseller specific.&#13;
+Required for Ensemble accounts&#13;
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:AccountNumberString">
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AccountNumberString">
+		<xsd:annotation>
+			<xsd:documentation>Account Number uniquely identifies an Account.  The Account may be a Financial Account, a Customer Account, Billing Account, etc.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="30"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="AccountRebateFlag">
+		<xsd:annotation>
+			<xsd:documentation>Account Rebate Flag is a boolean indicator flag that indicates if the account qualifies for Rebate Eligibility process.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="DeviceSerialNbr">
+		<xsd:annotation>
+			<xsd:documentation>Device Serial Number a unique number that is embedded electronically by the manufacturer into a wireless communication device that identifies that individual unit.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value="8"/>
+			<xsd:maxLength value="20"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PasswordPin">
+		<xsd:annotation>
+			<xsd:documentation>Password Pin holds the personal identification number of the account.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:PasswordString">
+			<xsd:maxLength value="10"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="PinSecurityFlag">
+		<xsd:annotation>
+			<xsd:documentation>Pin Security Flag indicates account is set up on the new pin based security architecture.
+True - account is set up on the new pin based security architecture.
+False - account still on the legacy security architecture.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SecurityPlusFlag">
+		<xsd:annotation>
+			<xsd:documentation>Security Plus Flag indicates  if security Plus functionality is enabled in Ensemble.  Note. If customer has securityPlus set for itself, the representative authenticating the customer would not be able to bypass the security authentication
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:boolean"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SecurityQuestionText">
+		<xsd:annotation>
+			<xsd:documentation>Security Question Text is the actual text of the security question.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="100"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SocialSecurityNumberStringEns">
+		<xsd:annotation>
+			<xsd:documentation>Ssn represents the string of characters and/or numbers of the PARTY OTHER IDENTIFIER with PartyOtherIdTypeCode of U. S. Social Security Number in string format WITHOUT hyphens. (xxxxxxxxx)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:IdentifierString">
+			<xsd:maxLength value="9"/>
+			<xsd:minLength value="9"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="SubscriberDeviceSerialNumber">
+		<xsd:annotation>
+			<xsd:documentation>Subscriber Device Serial Number is the Equipment Id – IMEI or Simcard Id or MSN or ESN of any subscriber under the BAN.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="tns:DeviceSerialNbr">
+			<xsd:maxLength value="20"/>
+			<xsd:minLength value="8"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+</xsd:schema>

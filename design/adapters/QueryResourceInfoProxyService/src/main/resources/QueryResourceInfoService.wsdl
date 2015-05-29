@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/QueryResourceInfoService/v1/QueryResourceInfoService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/QueryResourceInfoService/v1/QueryResourceInfoService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd5.xsd" namespace="http://integration.sprint.com/common/ErrorDetails.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd4.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd3.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v1"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd2.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/queryAvailableMdn/v3/queryAvailableMdnV3.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd13.xsd" namespace="http://integration.sprint.com/interfaces/queryAvailableNpaCsa/v1/queryAvailableNpaCsa.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/queryAvailableNpaNxx/v1/queryAvailableNpaNxx.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd14.xsd" namespace="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd12.xsd" namespace="http://integration.sprint.com/interfaces/queryResourceCharacteristics/v1/queryResourceCharacteristics.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/queryResourceHistoryByDevice/v1/queryResourceHistoryByDevice.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd11.xsd" namespace="http://integration.sprint.com/interfaces/queryResourcePoolInfo/v1/queryResourcePoolInfo.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd"/>
+<xsd:import schemaLocation="QueryResourceInfoService.xsd10.xsd" namespace="http://integration.sprint.com/interfaces/querySubscriberResourceHistoryList/v1/querySubscriberResourceHistoryList.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="queryAvailableMdnV3">
+<wsdl:part name="parameters" element="xsns:queryAvailableMdnV3" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableMdn/v3/queryAvailableMdnV3.xsd"/></wsdl:message>
+<wsdl:message name="queryAvailableMdnV3Response">
+<wsdl:part name="parameters" element="xsns:queryAvailableMdnV3Response" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableMdn/v3/queryAvailableMdnV3.xsd"/></wsdl:message>
+<wsdl:message name="queryAvailableNpaCsa">
+<wsdl:part name="parameters" element="xsns:queryAvailableNpaCsa" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableNpaCsa/v1/queryAvailableNpaCsa.xsd"/></wsdl:message>
+<wsdl:message name="queryAvailableNpaCsaResponse">
+<wsdl:part name="parameters" element="xsns:queryAvailableNpaCsaResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableNpaCsa/v1/queryAvailableNpaCsa.xsd"/></wsdl:message>
+<wsdl:message name="queryAvailableNpaNxx">
+<wsdl:part name="parameters" element="xsns:queryAvailableNpaNxx" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableNpaNxx/v1/queryAvailableNpaNxx.xsd"/></wsdl:message>
+<wsdl:message name="queryAvailableNpaNxxResponse">
+<wsdl:part name="parameters" element="xsns:queryAvailableNpaNxxResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryAvailableNpaNxx/v1/queryAvailableNpaNxx.xsd"/></wsdl:message>
+<wsdl:message name="queryMdnInfo">
+<wsdl:part name="parameters" element="xsns:queryMdnInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryMdnInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryMdnInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryMdnInfo/v1/queryMdnInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryResourceCharacteristics">
+<wsdl:part name="parameters" element="xsns:queryResourceCharacteristics" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourceCharacteristics/v1/queryResourceCharacteristics.xsd"/></wsdl:message>
+<wsdl:message name="queryResourceCharacteristicsResponse">
+<wsdl:part name="parameters" element="xsns:queryResourceCharacteristicsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourceCharacteristics/v1/queryResourceCharacteristics.xsd"/></wsdl:message>
+<wsdl:message name="queryResourceHistoryByDevice">
+<wsdl:part name="parameters" element="xsns:queryResourceHistoryByDevice" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourceHistoryByDevice/v1/queryResourceHistoryByDevice.xsd"/></wsdl:message>
+<wsdl:message name="queryResourceHistoryByDeviceResponse">
+<wsdl:part name="parameters" element="xsns:queryResourceHistoryByDeviceResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourceHistoryByDevice/v1/queryResourceHistoryByDevice.xsd"/></wsdl:message>
+<wsdl:message name="queryResourcePoolInfo">
+<wsdl:part name="parameters" element="xsns:queryResourcePoolInfo" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourcePoolInfo/v1/queryResourcePoolInfo.xsd"/></wsdl:message>
+<wsdl:message name="queryResourcePoolInfoResponse">
+<wsdl:part name="parameters" element="xsns:queryResourcePoolInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/queryResourcePoolInfo/v1/queryResourcePoolInfo.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberHppttDomainListRequest">
+<wsdl:part name="parameters" element="xsns:querySubscriberHppttDomainList" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberHppttDomainListResponse">
+<wsdl:part name="parameters" element="xsns:querySubscriberHppttDomainListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberHppttDomainList/v1/querySubscriberHppttDomainList.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberResourceHistoryList">
+<wsdl:part name="parameters" element="xsns:querySubscriberResourceHistoryList" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberResourceHistoryList/v1/querySubscriberResourceHistoryList.xsd"/></wsdl:message>
+<wsdl:message name="querySubscriberResourceHistoryListResponse">
+<wsdl:part name="parameters" element="xsns:querySubscriberResourceHistoryListResponse" xmlns:xsns="http://integration.sprint.com/interfaces/querySubscriberResourceHistoryList/v1/querySubscriberResourceHistoryList.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetails.xsd"/></wsdl:message>
+<wsdl:message name="soapFaultv2">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:message name="wsMessageHeaderv1">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v1"/></wsdl:message>
+<wsdl:portType name="QueryResourceInfoPortType">
+<wsdl:operation name="QueryAvailableMdnV3">
+<wsdl:input name="QueryAvailableMdnV3Request" message="ns0:queryAvailableMdnV3"/>
+<wsdl:output name="QueryAvailableMdnV3Response" message="ns0:queryAvailableMdnV3Response"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAvailableNpaCsa">
+<wsdl:input name="QueryAvailableNpaCsaRequest" message="ns0:queryAvailableNpaCsa"/>
+<wsdl:output name="QueryAvailableNpaCsaResponse" message="ns0:queryAvailableNpaCsaResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryAvailableNpaNxx">
+<wsdl:input name="QueryAvailableNpaNxxRequest" message="ns0:queryAvailableNpaNxx"/>
+<wsdl:output name="QueryAvailableNpaNxxResponse" message="ns0:queryAvailableNpaNxxResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryMdnInfo">
+<wsdl:input name="QueryMdnInfoRequest" message="ns0:queryMdnInfo"/>
+<wsdl:output name="QueryMdnInfoResponse" message="ns0:queryMdnInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryResourceCharacteristics">
+<wsdl:input name="QueryResourceCharacteristicsRequest" message="ns0:queryResourceCharacteristics"/>
+<wsdl:output name="QueryResourceCharacteristicsResponse" message="ns0:queryResourceCharacteristicsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryResourceHistoryByDevice">
+<wsdl:input name="QueryResourceHistoryByDeviceRequest" message="ns0:queryResourceHistoryByDevice"/>
+<wsdl:output name="QueryResourceHistoryByDeviceResponse" message="ns0:queryResourceHistoryByDeviceResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QueryResourcePoolInfo">
+<wsdl:input name="QueryResourcePoolInfoRequest" message="ns0:queryResourcePoolInfo"/>
+<wsdl:output name="QueryResourcePoolInfoResponse" message="ns0:queryResourcePoolInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberHppttDomainList">
+<wsdl:input name="QuerySubscriberHppttDomainListRequest" message="ns0:querySubscriberHppttDomainListRequest"/>
+<wsdl:output name="QuerySubscriberHppttDomainListResponse" message="ns0:querySubscriberHppttDomainListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="QuerySubscriberResourceHistoryList">
+<wsdl:input name="QuerySubscriberResourceHistoryListRequest" message="ns0:querySubscriberResourceHistoryList"/>
+<wsdl:output name="QuerySubscriberResourceHistoryListResponse" message="ns0:querySubscriberResourceHistoryListResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultv2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="QueryResourceInfoSOAPBinding" type="ns0:QueryResourceInfoPortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="QueryAvailableMdnV3">
+<soap11:operation soapAction="QueryAvailableMdnV3" style="document"/>
+<wsdl:input name="QueryAvailableMdnV3Request">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAvailableMdnV3Response">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAvailableNpaCsa">
+<soap11:operation soapAction="QueryAvailableNpaCsa" style="document"/>
+<wsdl:input name="QueryAvailableNpaCsaRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAvailableNpaCsaResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryAvailableNpaNxx">
+<soap11:operation soapAction="QueryAvailableNpaNxx" style="document"/>
+<wsdl:input name="QueryAvailableNpaNxxRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryAvailableNpaNxxResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryMdnInfo">
+<soap11:operation soapAction="QueryMdnInfo" style="document"/>
+<wsdl:input name="QueryMdnInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryMdnInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryResourceCharacteristics">
+<soap11:operation soapAction="QueryResourceCharacteristics" style="document"/>
+<wsdl:input name="QueryResourceCharacteristicsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryResourceCharacteristicsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryResourceHistoryByDevice">
+<soap11:operation soapAction="QueryResourceHistoryByDevice" style="document"/>
+<wsdl:input name="QueryResourceHistoryByDeviceRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryResourceHistoryByDeviceResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QueryResourcePoolInfo">
+<soap11:operation soapAction="QueryResourcePoolInfo" style="document"/>
+<wsdl:input name="QueryResourcePoolInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QueryResourcePoolInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberHppttDomainList">
+<soap11:operation soapAction="QuerySubscriberHppttDomainList" style="document"/>
+<wsdl:input name="QuerySubscriberHppttDomainListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderv1" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberHppttDomainListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeaderv1" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="QuerySubscriberResourceHistoryList">
+<soap11:operation soapAction="QuerySubscriberResourceHistoryList" style="document"/>
+<wsdl:input name="QuerySubscriberResourceHistoryListRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="QuerySubscriberResourceHistoryListResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="QueryResourceInfoService">
+<wsdl:port name="QueryResourceInfoPortType" binding="ns0:QueryResourceInfoSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/QueryResourceInfoService"/></wsdl:port></wsdl:service></wsdl:definitions>

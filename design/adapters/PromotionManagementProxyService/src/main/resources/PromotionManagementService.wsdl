@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/PromotionManagementService/v1/PromotionManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/PromotionManagementService/v1/PromotionManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="PromotionManagementService.xsd4.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="PromotionManagementService.xsd3.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="PromotionManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/validatePromotionInfo/v1/validatePromotionInfo.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="soapFaultV2">
+<wsdl:part name="faultV2" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="validatePromotionInfo">
+<wsdl:part name="parameters" element="xsns:validatePromotionInfo" xmlns:xsns="http://integration.sprint.com/interfaces/validatePromotionInfo/v1/validatePromotionInfo.xsd"/></wsdl:message>
+<wsdl:message name="validatePromotionInfoResponse">
+<wsdl:part name="parameters" element="xsns:validatePromotionInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/validatePromotionInfo/v1/validatePromotionInfo.xsd"/></wsdl:message>
+<wsdl:message name="WsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="PromotionManagementServicePortType">
+<wsdl:operation name="ValidatePromotionInfo">
+<wsdl:input name="ValidatePromotionInfoRequest" message="ns0:validatePromotionInfo"/>
+<wsdl:output name="ValidatePromotionInfoResponse" message="ns0:validatePromotionInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFaultV2"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="PromotionManagementServiceBinding" type="ns0:PromotionManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="ValidatePromotionInfo">
+<soap11:operation soapAction="validatePromotionInfo" style="document"/>
+<wsdl:input name="ValidatePromotionInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ValidatePromotionInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:WsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="PromotionManagementService">
+<wsdl:port name="PromotionManagementServicePortType" binding="ns0:PromotionManagementServiceBinding">
+<soap11:address location="http://144.226.135.45:80/services/PromotionManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

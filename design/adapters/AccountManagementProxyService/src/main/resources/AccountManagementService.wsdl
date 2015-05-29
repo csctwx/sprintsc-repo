@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsp200409="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsp200607="http://www.w3.org/2006/07/ws-policy" xmlns:ns0="http://integration.sprint.com/eai/services/AccountManagementService/v1/AccountManagementService.wsdl" targetNamespace="http://integration.sprint.com/eai/services/AccountManagementService/v1/AccountManagementService.wsdl">
+<wsdl:types xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:schema>
+<xsd:import schemaLocation="AccountManagementService.xsd11.xsd" namespace="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd10.xsd" namespace="http://integration.sprint.com/common/header/WSMessageHeader/v2"/>
+<xsd:import schemaLocation="AccountManagementService.xsd9.xsd" namespace="http://integration.sprint.com/interfaces/addAccountChargeAdjustment/v1/addAccountChargeAdjustment.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd4.xsd" namespace="http://integration.sprint.com/interfaces/addAccountSoc/v1/addAccountSoc.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd3.xsd" namespace="http://integration.sprint.com/interfaces/createAccount/v1/createAccount.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd5.xsd" namespace="http://integration.sprint.com/interfaces/createAccountCharge/v1/createAccountCharge.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd6.xsd" namespace="http://integration.sprint.com/interfaces/openAccount/v1/openAccount.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd8.xsd" namespace="http://integration.sprint.com/interfaces/restoreCollectionsAccount/v1/restoreCollectionsAccount.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd2.xsd" namespace="http://integration.sprint.com/interfaces/updateAccountDetails/v1/updateAccountDetails.xsd"/>
+<xsd:import schemaLocation="AccountManagementService.xsd7.xsd" namespace="http://integration.sprint.com/interfaces/validateAccountInfo/v1/validateAccountInfo.xsd"/></xsd:schema></wsdl:types>
+<wsdl:message name="addAccountChargeAdjustment">
+<wsdl:part name="addAccountChargeAdjustment" element="xsns:addAccountChargeAdjustment" xmlns:xsns="http://integration.sprint.com/interfaces/addAccountChargeAdjustment/v1/addAccountChargeAdjustment.xsd"/></wsdl:message>
+<wsdl:message name="addAccountChargeAdjustmentResponse">
+<wsdl:part name="addAccountChargeAdjustmentResponse" element="xsns:addAccountChargeAdjustmentResponse" xmlns:xsns="http://integration.sprint.com/interfaces/addAccountChargeAdjustment/v1/addAccountChargeAdjustment.xsd"/></wsdl:message>
+<wsdl:message name="addAccountSoc">
+<wsdl:part name="addAccountSoc" element="xsns:addAccountSoc" xmlns:xsns="http://integration.sprint.com/interfaces/addAccountSoc/v1/addAccountSoc.xsd"/></wsdl:message>
+<wsdl:message name="addAccountSocResponse">
+<wsdl:part name="addAccountSocResponse" element="xsns:addAccountSocResponse" xmlns:xsns="http://integration.sprint.com/interfaces/addAccountSoc/v1/addAccountSoc.xsd"/></wsdl:message>
+<wsdl:message name="createAccount">
+<wsdl:part name="createAccount" element="xsns:createAccount" xmlns:xsns="http://integration.sprint.com/interfaces/createAccount/v1/createAccount.xsd"/></wsdl:message>
+<wsdl:message name="createAccountCharge">
+<wsdl:part name="createAccountCharge" element="xsns:createAccountCharge" xmlns:xsns="http://integration.sprint.com/interfaces/createAccountCharge/v1/createAccountCharge.xsd"/></wsdl:message>
+<wsdl:message name="createAccountChargeResponse">
+<wsdl:part name="createAccountChargeResponse" element="xsns:createAccountChargeResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createAccountCharge/v1/createAccountCharge.xsd"/></wsdl:message>
+<wsdl:message name="createAccountResponse">
+<wsdl:part name="createAccountResponse" element="xsns:createAccountResponse" xmlns:xsns="http://integration.sprint.com/interfaces/createAccount/v1/createAccount.xsd"/></wsdl:message>
+<wsdl:message name="openAccount">
+<wsdl:part name="openAccount" element="xsns:openAccount" xmlns:xsns="http://integration.sprint.com/interfaces/openAccount/v1/openAccount.xsd"/></wsdl:message>
+<wsdl:message name="openAccountResponse">
+<wsdl:part name="openAccountResponse" element="xsns:openAccountResponse" xmlns:xsns="http://integration.sprint.com/interfaces/openAccount/v1/openAccount.xsd"/></wsdl:message>
+<wsdl:message name="restoreCollectionsAccount">
+<wsdl:part name="restoreCollectionsAccount" element="xsns:restoreCollectionsAccount" xmlns:xsns="http://integration.sprint.com/interfaces/restoreCollectionsAccount/v1/restoreCollectionsAccount.xsd"/></wsdl:message>
+<wsdl:message name="restoreCollectionsAccountResponse">
+<wsdl:part name="restoreCollectionsAccountResponse" element="xsns:restoreCollectionsAccountResponse" xmlns:xsns="http://integration.sprint.com/interfaces/restoreCollectionsAccount/v1/restoreCollectionsAccount.xsd"/></wsdl:message>
+<wsdl:message name="soapFault">
+<wsdl:part name="fault" element="xsns:errorDetailItem" xmlns:xsns="http://integration.sprint.com/common/ErrorDetailsV2.xsd"/></wsdl:message>
+<wsdl:message name="updateAccountDetailsRequest">
+<wsdl:part name="updateAccountDetails" element="xsns:updateAccountDetails" xmlns:xsns="http://integration.sprint.com/interfaces/updateAccountDetails/v1/updateAccountDetails.xsd"/></wsdl:message>
+<wsdl:message name="updateAccountDetailsResponse">
+<wsdl:part name="updateAccountDetailsResponse" element="xsns:updateAccountDetailsResponse" xmlns:xsns="http://integration.sprint.com/interfaces/updateAccountDetails/v1/updateAccountDetails.xsd"/></wsdl:message>
+<wsdl:message name="validateAccountInfo">
+<wsdl:part name="validateAccountInfo" element="xsns:validateAccountInfo" xmlns:xsns="http://integration.sprint.com/interfaces/validateAccountInfo/v1/validateAccountInfo.xsd"/></wsdl:message>
+<wsdl:message name="validateAccountInfoResponse">
+<wsdl:part name="validateAccountInfoResponse" element="xsns:validateAccountInfoResponse" xmlns:xsns="http://integration.sprint.com/interfaces/validateAccountInfo/v1/validateAccountInfo.xsd"/></wsdl:message>
+<wsdl:message name="wsMessageHeader">
+<wsdl:part name="head" element="xsns:wsMessageHeader" xmlns:xsns="http://integration.sprint.com/common/header/WSMessageHeader/v2"/></wsdl:message>
+<wsdl:portType name="AccountManagementServicePortType">
+<wsdl:operation name="AddAccountChargeAdjustment">
+<wsdl:input name="AddAccountChargeAdjustmentRequest" message="ns0:addAccountChargeAdjustment"/>
+<wsdl:output name="AddAccountChargeAdjustmentResponse" message="ns0:addAccountChargeAdjustmentResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="AddAccountSoc">
+<wsdl:input name="AddAccountSocRequest" message="ns0:addAccountSoc"/>
+<wsdl:output name="AddAccountSocResponse" message="ns0:addAccountSocResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CreateAccount">
+<wsdl:input name="CreateAccountRequest" message="ns0:createAccount"/>
+<wsdl:output name="CreateAccountResponse" message="ns0:createAccountResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="CreateAccountCharge">
+<wsdl:input name="CreateAccountChargeRequest" message="ns0:createAccountCharge"/>
+<wsdl:output name="CreateAccountChargeResponse" message="ns0:createAccountChargeResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="OpenAccount">
+<wsdl:input name="OpenAccountRequest" message="ns0:openAccount"/>
+<wsdl:output name="OpenAccountResponse" message="ns0:openAccountResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="RestoreCollectionsAccount">
+<wsdl:input name="RestoreCollectionsAccountRequest" message="ns0:restoreCollectionsAccount"/>
+<wsdl:output name="RestoreCollectionsAccountResponse" message="ns0:restoreCollectionsAccountResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="UpdateAccountDetails">
+<wsdl:input name="UpdateAccountDetailsRequest" message="ns0:updateAccountDetailsRequest"/>
+<wsdl:output name="UpdateAccountDetailsResponse" message="ns0:updateAccountDetailsResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation>
+<wsdl:operation name="ValidateAccountInfo">
+<wsdl:input name="ValidateAccountInfoRequest" message="ns0:validateAccountInfo"/>
+<wsdl:output name="ValidateAccountInfoResponse" message="ns0:validateAccountInfoResponse"/>
+<wsdl:fault name="fault" message="ns0:soapFault"/></wsdl:operation></wsdl:portType>
+<wsdl:binding name="AccountManagementServiceSOAPBinding" type="ns0:AccountManagementServicePortType">
+<soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="AddAccountChargeAdjustment">
+<soap11:operation soapAction="AddAccountChargeAdjustment" style="document"/>
+<wsdl:input name="AddAccountChargeAdjustmentRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="AddAccountChargeAdjustmentResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="AddAccountSoc">
+<soap11:operation soapAction="AddAccountSoc" style="document"/>
+<wsdl:input name="AddAccountSocRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="AddAccountSocResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CreateAccount">
+<soap11:operation soapAction="CreateAccount" style="document"/>
+<wsdl:input name="CreateAccountRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CreateAccountResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="CreateAccountCharge">
+<soap11:operation soapAction="urn:CreateAccountCharge" style="document"/>
+<wsdl:input name="CreateAccountChargeRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="CreateAccountChargeResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="OpenAccount">
+<soap11:operation soapAction="OpenAccount" style="document"/>
+<wsdl:input name="OpenAccountRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="OpenAccountResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="RestoreCollectionsAccount">
+<soap11:operation soapAction="RestoreCollectionsAccount" style="document"/>
+<wsdl:input name="RestoreCollectionsAccountRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="RestoreCollectionsAccountResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="UpdateAccountDetails">
+<soap11:operation soapAction="UpdateAccountDetails" style="document"/>
+<wsdl:input name="UpdateAccountDetailsRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="UpdateAccountDetailsResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation>
+<wsdl:operation name="ValidateAccountInfo">
+<soap11:operation soapAction="ValidateAccountInfo" style="document"/>
+<wsdl:input name="ValidateAccountInfoRequest">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:input>
+<wsdl:output name="ValidateAccountInfoResponse">
+<soap11:body use="literal"/>
+<soap11:header message="ns0:wsMessageHeader" part="head" use="literal"/></wsdl:output>
+<wsdl:fault name="fault">
+<soap11:fault name="fault" use="literal"/></wsdl:fault></wsdl:operation></wsdl:binding>
+<wsdl:service name="AccountManagementService">
+<wsdl:port name="AccountManagementServicePortType" binding="ns0:AccountManagementServiceSOAPBinding">
+<soap11:address location="http://144.226.135.45:80/services/AccountManagementService"/></wsdl:port></wsdl:service></wsdl:definitions>

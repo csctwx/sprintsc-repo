@@ -1,0 +1,15 @@
+repositories {
+   flatDir {
+       dirs 'libs'
+   }
+}
+
+dependencies {
+    compile project(":adapters:EnterpriseWalletProxyService")
+	compile project(":adapters:EnterprisePaymentProxyService")
+	compile name: 'axis-1.4'
+	compile name: 'bcpkix-jdk15on-1.51'
+	compile name: 'bcprov-jdk15on-1.51'
+	compile name: 'transit-1.4'
+	
+}

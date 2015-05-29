@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://integration.sprint.com/interfaces/updateUserPreferencesInfo/v2/updateUserPreferencesInfoV2.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://integration.sprint.com/interfaces/updateUserPreferencesInfo/v2/updateUserPreferencesInfoV2.xsd" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.6">
+	
+<!--Date            Author                   Version  Change                                                                                                                          Rel           SR#-->
+	
+<!--07/23/2009 Pramodh Narayan                Created XSD                                                                                                             SDC         Rel B E4637-->
+	
+<!--07/24/2009 Steve Heichelheim  1.0         Applied simple types and MVM standards                                                               SDC         Rel B E4637-->
+	
+<!--07/26/2009 Steve Heichelheim  1.1         renamed from updateWebControlInfo to updateUserPreferencesInfo                     SDC         Rel B E4637-->
+	
+<!--07/26/2009 Steve Heichelheim  1.1         added assertionList, userPreferences and roleInfo level                                        SDC         Rel B E4637-->
+	
+<!--05/20/2013 Steve Heichelheim   1.2       Changed userPreferenceInfo to userPreferenceList. Added userIdentitiyInfo   GBL13.3    PJ008600-->
+	
+<!--07/02/2013 Steve Heichelheim   1.2       Added notificationInfo structure.                                                                             GBL13.3    PJ008600-->
+	
+<!--11/6/2013   Lucia T Hyppolito    1.6       Added notificationInfo structure.                                                                             GBL13.3    PJ008600-->
+	
+<!--11/11/2013 Adon Powell           1.6       Standardization                                                                                                        GBL13.3    PJ008600-->
+	
+<xs:element name="updateUserPreferencesInfoV2" type="tns:UpdateUserPreferencesInfoV2Type"/>
+	
+<xs:element name="updateUserPreferencesInfoV2Response" type="tns:UpdateUserPreferencesInfoV2ResponseType"/>
+	
+<xs:complexType name="UpdateUserPreferencesInfoV2Type">
+		
+<xs:annotation>
+			
+<xs:documentation>This is the parent element for setting the web control preference for a subscriber. This value is stored in CDPM.
+				This lets the subscriber to either browse within the "walled garden" or the "open" internet
+				on their wireless device browser.
+			</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="userIdentityInfo" type="tns:UserIdentityInfoType">
+				
+<xs:annotation>
+					
+<xs:documentation>This elements holds the ownerId mdn and nai elements for which the preferences information are retrieved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="authentication" type="tns:AuthenticationType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Data for Security and Privacy.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="userPreferencesList" type="tns:UserPreferenceListType">
+				
+<xs:annotation>
+					
+<xs:documentation>List of preferences to be updated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="notificationInfo" type="tns:NotificationInfoType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Notification Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UpdateUserPreferencesInfoV2ResponseType">
+		
+<xs:sequence>
+			
+<xs:element name="confirmationMessage" type="tns:ConfirmMessageTextType">
+				
+<xs:annotation>
+					
+<xs:documentation>Indicates if the preference was added successfully. Only returned if call is successful.
+Possible Values: 
+“Successful”
+“Successful. Memo not added” 
+“Successful. Notification not sent”
+“Successful. Memo not added. Notification not sent”
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AssertionInfoType">
+		
+<xs:annotation>
+			
+<xs:documentation>Takes in either a Assertion Name or a value. Either assertionName or assertionValue or both is required.			</xs:documentation>
+		</xs:annotation>
+		
+<xs:sequence>
+			
+<xs:element name="assertionName" type="tns:ActiveDirectoryAssertionNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional info provided to evaluate privacy  policy
+Condition:
+Assertion Name is required if Assertion Value is not provided.
+Both Assertion Name and Assertion Value may be provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="assertionValue" type="tns:ActiveDirectoryAssertionValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Additional info provided to evaluate privacy  policy
+Condition:
+Assertion Value is required if Assertion Name is not provided.
+Both Assertion Name and Assertion Value may be provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AssertionListType">
+		
+<xs:sequence>
+			
+<xs:element name="assertionInfo" type="tns:AssertionInfoType" maxOccurs="unbounded">
+				
+<xs:annotation>
+					
+<xs:documentation>Holds the Assertion Name or a value. Either assertionName or assertionValue or both is required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="AuthenticationType">
+		
+<xs:sequence>
+			
+<xs:element name="loginId" type="tns:LoginUserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>Login Id could be MDN, NAI and telecom Manager Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="role">
+				
+<xs:annotation>
+					
+<xs:documentation>Can take one of the following values:
+AccountHolder          
+Subscriber             
+ThirdPartyApplication, 
+ApplicationProvider    
+TrustedBusinessPartner,
+DataMiner              
+TroubleShooter         
+DatabaseAdministrator  
+InternalApplication    
+LawEnforcement         
+EnterpriseCustomer     
+TPA                    
+TelecomMgrAdmin        
+TelecomMgr             
+CustomerCareAdvocate</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:RoleNameType">
+						
+<xs:maxLength value="25"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			
+<xs:element name="assertionList" type="tns:AssertionListType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Takes in either a Assertion Name or a value. Either assertionName or assertionValue or both is required.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NotificationInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="notificationInd" type="tns:NotificationFlagType">
+				
+<xs:annotation>
+					
+<xs:documentation>Notification flag. If set to true send a notification to customer.
+Default value: false
+Obs: Notification will only be sent if CDS Database notification is set to Y.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="activityCode" type="tns:ActivityCodeType" minOccurs="0">
+				
+<xs:annotation>
+					
+<xs:documentation>Amdocs activity code. If set override activity code stored in CDS database.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="parameterList" type="tns:ParameterListType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NotificationMethodType">
+		
+<xs:choice>
+			
+<xs:element name="email" type="tns:EmailAddressStringType">
+				
+<xs:annotation>
+					
+<xs:documentation>Email address used to send notification to customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="phoneNumber" type="tns:PhoneNumberType">
+				
+<xs:annotation>
+					
+<xs:documentation>Phone number used to send notification to customer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	
+<xs:complexType name="NotificationParameterInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterName" type="tns:ParameterTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>Parameter name of value replaced in the notification sent to customer.
+Possible values:
+BrandId
+SubBrandId
+FirstName
+LastName
+PlanId</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="parameterValue" type="tns:ParameterValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Value to be replaced in costumer’s notification.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterListType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterInfo" maxOccurs="16">
+				
+<xs:complexType>
+					
+<xs:complexContent>
+						
+<xs:extension base="tns:ParameterInfoType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="ParameterInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="parameterValue">
+				
+<xs:annotation>
+					
+<xs:documentation>Parameter sent in customer notification.</xs:documentation>
+				</xs:annotation>
+				
+<xs:simpleType>
+					
+<xs:restriction base="tns:ParameterValueType">
+						
+<xs:maxLength value="1000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="NotificationParameterListType">
+		
+<xs:sequence>
+			
+<xs:element name="notificationParametersInfo" type="tns:NotificationParameterInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Notification Parameter Detail Structure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PreferenceValueInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="value" type="tns:UserPreferenceValueType">
+				
+<xs:annotation>
+					
+<xs:documentation>Preference value.
+Possible values (Content Filtering):
+ON
+OFF</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="PreferenceValueListType">
+		
+<xs:sequence>
+			
+<xs:element name="preferenceValueInfo" type="tns:PreferenceValueInfoType" maxOccurs="1000">
+				
+<xs:annotation>
+					
+<xs:documentation>Preference Value  Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UserIdentityInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="ownerId" type="tns:LoginUserIdentifierType">
+				
+<xs:annotation>
+					
+<xs:documentation>List owner identifier. 
+This element can contain mdn, nai, Subscription Id, Account Id, Domain Admin Id, Corporate Customer Admin Id and Third Party Application Id.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="ownerType" type="tns:UserIdentifierTypeCodeType">
+				
+<xs:annotation>
+					
+<xs:documentation>List Owner Type:
+Possible Values:
+MDN
+NAI
+SUBSCRIPTION
+ACCOUNT
+ADMIN DOMAIN
+CORPORATE CUSTOMER ADMIN
+THIRD PARTY APPLICATION
+WIMAX_NAI
+PAM_NAI
+LTE_IMSI</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UserPreferenceInfoType">
+		
+<xs:sequence>
+			
+<xs:element name="contextName" type="tns:UserPreferenceContextNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>The context in which the
+preference is applied to. The
+default value if not set is
+common
+Possible values (Content Filtering)
+nwpolicy
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="preferenceName" type="tns:UserPreferenceNameType">
+				
+<xs:annotation>
+					
+<xs:documentation>The name of the preference
+Possible values (Content Filtering):
+CIPA</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			
+<xs:element name="preferenceValueList" type="tns:PreferenceValueListType">
+				
+<xs:annotation>
+					
+<xs:documentation>An array of values for this
+Preference</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<xs:complexType name="UserPreferenceListType">
+		
+<xs:sequence>
+			
+<xs:element name="preferenceInfo" type="tns:UserPreferenceInfoType" maxOccurs="50">
+				
+<xs:annotation>
+					
+<xs:documentation>Structure containing preference details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	
+<!---->
+	
+<!--MVM/Shared Simple Types-->
+	
+<xs:simpleType name="ActiveDirectoryAssertionNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Active Directory Assertion Name is used to name a value of additional info provided to evaluate privacy policy.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ActiveDirectoryAssertionValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Active Directory Assertion Value is yhe value of additional info provided to evaluate privacy policy.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ActivityCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Activity Code designates specific activity associated to a specific deed, action or function.
+Example Value:
+RFS - Resume from Suspend</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="3"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ConfirmMessageTextType">
+		
+<xs:annotation>
+			
+<xs:documentation>Confrim Message Text is a string with a confirmation message returned from the called API.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="99"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="EmailAddressStringType">
+		
+<xs:annotation>
+			
+<xs:documentation>Email Address String consists of two parts, a username and a domain (or host) name with an at symbol ('@') separating them. The domain specifies which server the email should be delivered to and the username tells the server at that domain which mailbox to deposit the email into.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="100"/>
+			
+<xs:minLength value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="PhoneNumberType">
+		
+<xs:annotation>
+			
+<xs:documentation>Phone Number holds the concatenation of the NPA Number, NXX Number and Line Number into a single string.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="10"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LanguagePreferenceCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Language Preference Code identifies a language preference.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:length value="3"/>
+			
+<xs:enumeration value="ENG"/>
+			
+<xs:enumeration value="SPA"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="LoginUserIdentifierType">
+		
+<xs:annotation>
+			
+<xs:documentation>Login User Identifier holds the system login userid assigned to a PARTY.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="NotificationFlagType">
+		
+<xs:annotation>
+			
+<xs:documentation>Notification Flag is a boolean indicator of whether the notification is to be sent.
+Valid Values:
+true - notification is sent
+false - no notification is sent</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:boolean"/>
+	</xs:simpleType>
+	
+<xs:simpleType name="ParameterTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>Parameter Type Code designates the data type of parameter found in the Parameter Value element. These two elements are sent as a matched pair to define various parameters service or feature being provisioned.
+Valid Values Include:
+OPERATIONMODE,
+NAI,
+NAIINDEX,
+REVERSETUNNELINGIND,
+MOBILEIPADDRESS,
+PRIMARYHOMEAGENT,
+SECONDARYHOMEAGENT,
+MNHAAUTHALGORITHM,
+SPIHA,
+MNHASHAREDSECRET,
+MNAAAAUTHALGORITHM,
+SPIAAA,
+MNAAASHAREDSECRET,
+SPIINDAAA,
+SPIINDHA,
+MDN,
+MSID...</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="255"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="ParameterValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>Parameter Value designates the actual data associate to the Parameter Type Code element. These two elements are sent as a matched pair to define various parameters service or feature being provisioned.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="1000"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="RoleNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>Role Name is the name of a role that a party assumes or is assigned such as accountHolder, Subscriber, ThirdPartyApplication, ApplicationProvider, TrustedBusinessPartner, DataMiner, TroubleShooter, DtabaseAdministrator, InternalApplication, LawEnforcement, EnterpriseCustomer, TPA, TelecomMgrAdmin, TelecomMgr, CustomerCareAdvocate etc.			</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="25"/>
+			
+<xs:enumeration value="AccountHolder"/>
+			
+<xs:enumeration value="Subscriber"/>
+			
+<xs:enumeration value="ThirdPartyApplication"/>
+			
+<xs:enumeration value="ApplicationProvider"/>
+			
+<xs:enumeration value="TrustedBusinessPartner"/>
+			
+<xs:enumeration value="DataMiner"/>
+			
+<xs:enumeration value="TroubleShooter"/>
+			
+<xs:enumeration value="DatabaseAdministrator"/>
+			
+<xs:enumeration value="InternalApplication"/>
+			
+<xs:enumeration value="LawEnforcement"/>
+			
+<xs:enumeration value="EnterpriseCustomer"/>
+			
+<xs:enumeration value="TPA"/>
+			
+<xs:enumeration value="TelecomMgrAdmin"/>
+			
+<xs:enumeration value="TelecomMgr"/>
+			
+<xs:enumeration value="CustomerCareAdvocate"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserIdentifierTypeCodeType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Identifier Type Code designates a specific type of user identifier.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="30"/>
+			
+<xs:enumeration value="MDN"/>
+			
+<xs:enumeration value="NAI"/>
+			
+<xs:enumeration value="SUBSCRIPTION"/>
+			
+<xs:enumeration value="ACCOUNT"/>
+			
+<xs:enumeration value="ADMIN DOMAIN"/>
+			
+<xs:enumeration value="CORPORATE CUSTOMER ADMIN"/>
+			
+<xs:enumeration value="THIRD PARTY APPLICATION"/>
+			
+<xs:enumeration value="WIMAX_NAI"/>
+			
+<xs:enumeration value="PAM_NAI"/>
+			
+<xs:enumeration value="LTE_IMSI"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserPreferenceContextNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Preference Context Name designates the context that the user preference is used in.  This is arbitrarily defined by the user.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserPreferenceNameType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Preference Name is a common name for the user preference.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="64"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<xs:simpleType name="UserPreferenceValueType">
+		
+<xs:annotation>
+			
+<xs:documentation>User Preference Value is one of the possible values of the preference defined by the user.</xs:documentation>
+		</xs:annotation>
+		
+<xs:restriction base="xs:string">
+			
+<xs:maxLength value="512"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+<!---->
+</xs:schema>
